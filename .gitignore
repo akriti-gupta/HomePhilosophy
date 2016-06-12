@@ -1,0 +1,4 @@
+*.jpg
+.DS_Store
+Documents/*
+public/images/*

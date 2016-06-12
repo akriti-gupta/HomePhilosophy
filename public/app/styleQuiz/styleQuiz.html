@@ -1,0 +1,118 @@
+<div ng-controller="QuizController">
+{{quizResult.getStyle()}}
+
+<div id="stylePageMain" ng-hide="hideMain">
+      <a href="/styleQuiz" ng-click="nextPage(0)"> <button type="button" class="btn btn-primary">Find your Style </button> </a>
+</div>
+
+
+<a href ="/"> Retake Quiz </a>
+
+<div ng-show="progress">
+Question {{pageCount}} of 6
+	<div class="progress">
+
+  		<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{progressRate}}%;">
+    		<span class="sr-only">{{progressRate}}% Complete</span>
+  		</div>
+	</div>
+</div>
+
+	 <div ng-repeat="styles in styleQuest1 track by $index" ng-hide="hidePage1" ng-animate="box'" > 
+        <div class="row" id="div{{pageCount}}" >
+        	<div class="col-xs-6 col-md-3" ng-repeat="style in styles" >
+    			<a href="/styleQuiz" id="{{style.image_id}}" class="thumbnail"  ng-click="nextPage(style.image_id)"> 
+      				<img ng-src="{{style.image_style}}" alt="{{style.image_id}}" width="100%" height="100%"> 
+      			</a>
+  			</div>
+    	</div>
+	 </div>
+
+
+	 <div ng-repeat="styles in styleQuest2	 track by $index" ng-hide="hidePage2" ng-animate="'box'" > 
+        <div class="row" id="div{{pageCount}}">
+        	<div class="col-xs-6 col-md-3" ng-repeat="style in styles">
+    			<a href="/styleQuiz" id="{{style.image_id}}" class="thumbnail"  ng-click="nextPage(style.image_id)"> 
+      				<img ng-src="{{style.image_style}}" alt="{{style.image_id}}" width="100%" height="100%">
+      				
+    			</a>
+  			</div>
+    	</div>
+	 </div>
+
+	<div ng-repeat="styles in styleQuest3 track by $index" ng-hide="hidePage3" ng-animate="'box'"> 
+        <div class="row" id="div{{pageCount}}">
+        	<div class="col-xs-6 col-md-3" ng-repeat="style in styles">
+    			<a href="/styleQuiz" id="{{style.image_id}}" class="thumbnail"  ng-click="nextPage(style.image_id)"> 
+      				<img ng-src="{{style.image_style}}" alt="{{style.image_id}}" width="100%" height="100%">
+      				
+    			</a>
+  			</div>
+    	</div>
+	 </div>
+
+	<div ng-repeat="styles in styleQuest4 track by $index" ng-hide="hidePage4" ng-animate="'box'"> 
+        <div class="row" id="div{{pageCount}}">
+        	<div class="col-xs-6 col-md-3" ng-repeat="style in styles">
+    			<a href="/styleQuiz" id="{{style.image_id}}" class="thumbnail"  ng-click="nextPage(style.image_id)"> 
+      				<img ng-src="{{style.image_style}}" alt="{{style.image_id}}" width="100%" height="100%">
+      				
+    			</a>
+  			</div>
+    	</div>
+	 </div>
+
+	 <div ng-repeat="styles in styleColor track by $index" ng-hide="hidePage5" ng-animate="'box'"> 
+        <div class="row" id="div{{pageCount}}">
+        	<div class="col-xs-6 col-md-3" ng-repeat="style in styles">
+    			<a href="/styleQuiz" id="{{style.image_id}}" class="thumbnail"  ng-click="nextPage(style.image_id)"> 
+      				<img ng-src="{{style.image_style}}" alt="{{style.image_id}}" width="100%" height="100%">
+      				
+    			</a>
+  			</div>
+    	</div>
+	 </div>
+
+<!-- <div> -->
+	 <div ng-repeat="styles in stylePrint track by $index" ng-hide="hidePage6" ng-animate="'box'"> 
+        <div class="row" id="div{{pageCount}}">
+        	<div class="col-xs-6 col-md-3" ng-repeat="style in styles">
+    			<a ng-href="/{{gotoLink}}" id="{{style.image_id}}" class="thumbnail"  ng-click="nextPage(style.image_id)"> 
+      				<img ng-src="{{style.image_style}}" alt="{{style.image_id}}" width="100%" height="100%">
+      				
+    			</a>
+  			</div>
+    	</div>
+	 </div>
+    <!-- <button type="button" class="btn btn-primary" ng-click="go('/login')">Find your Style </button> 
+    </div> -->
+
+	<div ng-hide= "resultPage" style="margin:auto;">
+    	<div align="center">
+      		<div  ng-repeat="item in userStyle">
+	 			<span>{{item.style}} : {{item.value}}% </span><br/>
+			</div>
+		</div> 
+
+		
+		<div style="color:#1C1C1C;font-size:26px;font-weight:300;margin-bottom:30px;margin-top:10px;text-align:center;padding:0 10px;">
+			<span>Your Style Profile Is..</span>
+						
+		</div>
+		
+  		<div class="flex-container" >
+  		 <div ng-repeat="item in userStyle" class="flex-item">
+  		  <div style="font-weight:600;font-size:16px;text-transform:uppercase;">
+  		  	<span align="center">{{item.title}} </span>
+  		  </div>
+  		  <div style="font-size: 20px; padding-bottom: 5px; font-weight: 300;">
+  		  	<span>{{item.style}}</span>
+  		  </div>
+  		  <div>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. 
+        </div>
+  		 </div>
+  		</div>
+  	</div>
+
+
+	</div>
