@@ -12,7 +12,8 @@ angular.module("app")
 				
 	            $scope.progressRate=10;
 				$scope.pageCount=0;
-				$scope.hidePage1 = false;
+				$scope.hideMain = false;
+				$scope.hidePage1 = true;
 				$scope.hidePage2 = true;
 				$scope.hidePage3 = true;
 				$scope.hidePage4 = true;
@@ -22,9 +23,12 @@ angular.module("app")
 				$scope.rowCount = 2;
 				$scope.selectedImages = [];
 				$scope.identity = mvIdentity;
-				$scope.progress = true;
+				$scope.progress = false;
 				var prefStyle = [];
 				$scope.userStyle = [];
+
+
+				//$scope.data = 
 				
 
 				$scope.styleQuest1 = [
@@ -183,6 +187,7 @@ angular.module("app")
 	    		// To maintain the quiz result and style quiz pages state when redirected here after login.
 	    		if(quizResult.getStyle().length>=1){
 	    			$scope.userStyle = quizResult.getStyle();
+	    			$scope.hideMain = true;
 	    			$scope.hidePage1 = true;
 					$scope.hidePage2 = true;
 					$scope.hidePage3 = true;
@@ -208,8 +213,9 @@ angular.module("app")
 					$scope.pageCount++;
 					
 					switch(currentPage){
-						case 0: quizResult.clearStyle();
+						case 0: //quizResult.clearStyle();
 								$scope.hideMain = true;
+								$scope.progress = true;
 								$scope.hidePage1 = false;
 								break; 
 
@@ -241,6 +247,7 @@ angular.module("app")
 								 //show the page.
 								 if(mvIdentity.isAuthenticated()){
 									 $scope.hidePage6 = true;
+									 $scope.hideMain = true;
 									 $scope.resultPage = false;
 									 $scope.progress = false;	
 								 }
@@ -355,8 +362,32 @@ angular.module("app")
 
 						}
 					}
-					quizResult.storeStyle($scope.userStyle);
+					if(!mvIdentity.isAuthenticated()){
+						console.log('Stoing style in svc before going to login');
+						quizResult.storeStyle($scope.userStyle);
+					}
 				}
+
+				$scope.retakeQuiz = function(){
+					//$scope.data = angular.copy($scope.orig);
+					 $scope.progressRate=10;
+				$scope.pageCount=0;
+				$scope.hideMain = false;
+				$scope.hidePage1 = true;
+				$scope.hidePage2 = true;
+				$scope.hidePage3 = true;
+				$scope.hidePage4 = true;
+				$scope.hidePage5 = true;
+				$scope.hidePage6 = true;
+				$scope.resultPage=true;
+				$scope.rowCount = 2;
+				$scope.selectedImages = [];
+				// $scope.identity = mvIdentity;
+				$scope.progress = false;
+				prefStyle = [];
+				$scope.userStyle = [];
+    			}
+				
 
 				function sortValues(a, b) {
 					if (a.value === b.value) {
@@ -366,6 +397,8 @@ angular.module("app")
 	       				 return (a.value > b.value) ? -1 : 1;
 	    				}
 					}	
+
+
 			});
 
 

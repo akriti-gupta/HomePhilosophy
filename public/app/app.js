@@ -9,7 +9,7 @@ angular.module('app')
 				//console.log("In angular, before reading root path for partials");
 				//$locationProvider.html5Mode(true);
 				$routeProvider
-					.when('/',{templateUrl: 'app/styleQuiz/main.html', controller: 'MainController'})
+					.when('/',{templateUrl: 'app/main.html', controller: 'MainController'})
 					.when('/login',{templateUrl: 'app/account/login.html', controller: 'LoginController'})
 					.when('/styleQuiz',{templateUrl: 'app/styleQuiz/styleQuiz.html', controller: 'QuizController'})
 					

@@ -7,8 +7,10 @@ var express = require('express'),
 
 module.exports = function(app,config){	
 	app.use(express.static(config.rootPath + '/public'));
-	app.engine('html', require('ejs').renderFile);
-	app.set('view engine', 'html');
+	// app.engine('html', require('ejs').renderFile);
+	// app.set('view engine', 'html');
+
+	app.set('view engine', 'ejs');
 	app.set('views', config.rootPath + '/public');
 	app.use(logger('dev'));
 	app.use(cookieParser());
@@ -17,7 +19,7 @@ module.exports = function(app,config){
 
 
 	app.use(session({secret:'home philiosphy',resave:false,saveUninitialized:false}));
-	console.log("Bef initialize");
+	//console.log("Bef initialize");
 	app.use(passport.initialize());
 	app.use(passport.session());
 }

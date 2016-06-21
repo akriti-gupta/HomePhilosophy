@@ -2,3 +2,5 @@
 .DS_Store
 Documents/*
 public/images/*
+public/bkup/*
+public/css/bkup/*

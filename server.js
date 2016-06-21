@@ -11,12 +11,10 @@ var app = express();
 var config = require('./server/config/config')[env];
 require('./server/config/express')(app,config);
 
-/* requiring config db.js file starts*/
+
 var db = require("./server/config/db.js");
 var connection_object= new db();
-var connection=connection_object.connection; // getting conncetion object here 
-/* requiring config db.js file ends*/
-
+var connection=connection_object.connection; 
 
 
 passport.use(new LocalStrategy(
@@ -29,7 +27,7 @@ passport.use(new LocalStrategy(
 
 		query_runner(data,function(result){
 			if(result.length>0) {
-				console.log("Im server, result >0");
+				//console.log("In auth code in server, result >0");
 				return done(null,result);
 		    }
 		    else {
@@ -40,30 +38,42 @@ passport.use(new LocalStrategy(
 ));
 	
 
+// app.use(function(req,res,next){
+// 	console.log('In middlware: ' +req.user);  //Returns true here.
+// 	next();
+// });
+
 passport.serializeUser(function(user,done){
 	if(user){
-		console.log('In serialise');
+		//console.log('In serialise, :'+user[0].id);
 		done(null,user[0].id);
 	}
 });
 
 passport.deserializeUser(function(id,done){
+	//console.log('deserializeUser called, id='+id);
 	var data={
-			   query:"select * from user where id="+id+" ",
+			   query:"select * from user where id="+id,
 		       connection:connection
 		     };
 	query_runner(data,function(result){
 		if(result.length>0) {
+			//console.log("Result len >0, it is: "+result[0].username);
 			return done(null,result[0]);
 	    }
 	    else {
 	    	return done(null,false);
 	    }
 	});
-	return done(null, true);
+	//return done(null, res);
 });
 require('./server/config/routes')(app);
 
+
+// app.use(function(req,res,next){
+// 	console.log('New middlware: ' +req.user.username);   // Returns user object.
+// 	next();
+// });
 
 var query_runner=function(data,callback){
 	var db_connection=data.connection;
@@ -78,14 +88,12 @@ var query_runner=function(data,callback){
 		    if(!err) {
 		    	callback(rows);
 		    } else {
-		      console.log(err);  
-		      console.log("Query failed");  
+		      console.log("Query failed: "+err);  
 		    }        
 		  });
 		}
 	});
 }
-
 
 app.listen(config.port)
 console.log('Server is listening on port' + config.port);

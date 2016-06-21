@@ -1,12 +1,18 @@
-<div ng-controller="QuizController">
+
+<div style=" margin:10px auto;" ng-controller="QuizController">
 {{quizResult.getStyle()}}
 
+
+
+
+
+<div> <a href="/"> Go to main </a></div>
 <div id="stylePageMain" ng-hide="hideMain">
-      <a href="/styleQuiz" ng-click="nextPage(0)"> <button type="button" class="btn btn-primary">Find your Style </button> </a>
+      <a href="/styleQuiz" ng-click="nextPage(0)"> 
+      This page will contain room icons.
+        <button type="button" class="btn btn-primary">Find your Style </button> 
+      </a>
 </div>
-
-
-<a href ="/"> Retake Quiz </a>
 
 <div ng-show="progress">
 Question {{pageCount}} of 6
@@ -88,6 +94,7 @@ Question {{pageCount}} of 6
     </div> -->
 
 	<div ng-hide= "resultPage" style="margin:auto;">
+  <a href ="/styleQuiz" ng-click="retakeQuiz()"> Retake Quiz </a>
     	<div align="center">
       		<div  ng-repeat="item in userStyle">
 	 			<span>{{item.style}} : {{item.value}}% </span><br/>
