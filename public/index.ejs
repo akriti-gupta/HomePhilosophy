@@ -122,7 +122,7 @@
 
    
 
-		<div  style="width:100%"  ng-app="app" >
+		<!-- <div  style="width:100%"   > -->
 			<!-- <div class="dropdown" ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
 	    		<a href="/login">Sign In</a>
 			</div>
@@ -141,15 +141,18 @@
 			<!-- <div style="max-width:1200px; margin:10px auto;"> -->
 			
 
-			<% if(!!bootstrappedUser){%>  
+			
+		
+			<div style="width:100%" ng-app="app" ng-view>
+				<% if(!!bootstrappedUser){%>  
 				<script type="text/javascript">
 					window.bootstrappedUserObject = <%- JSON.stringify(bootstrappedUser)%>
 					//alert(window.bootstrappedUserObject);
 				</script>
 			<%}%>
-		
-			<div style="width:100%" ng-view></div>
-		</div>
+				
+			</div>
+		<!-- </div> -->
 			
 
 		
@@ -159,29 +162,29 @@
   				 <span>Get In Touch!</span>
 			</div>
 
-			<div class="site_header">
+			<div class="site_header" style="margin-bottom:100px;">
 				<div id="site_logo"> 
 		 			<a href="http://www.homephilosophy.com.sg">
-			            <img src="images/logo.png" style="max-width: 455px; max-height: 122px" />
+			            <img src="images/Logo_small.png" />
 			        </a>	
 			    </div>
 			    <div id="footer_data" style="width:70%;text-align:left;display:inline-block;padding-left:100px">
 			    
 			    	<ul style="list-style:none;display:table-cell;padding-right:100px;">
-			    		<li> More Information</li>
-			    		<li> FAQs</li>
-			    		<li> Terms and Privacy</li>
+			    		<li class="footer-list-header font-montserrat footer-list-color"> More Information</li>
+			    		<li class="font-montserrat footer-list-color font-size-12"> FAQs</li>
+			    		<li class="font-montserrat footer-list-color font-size-12"> Terms and Privacy</li>
 			    		
 
 			    	</ul>
-			    	<ul style="list-style:none;display:table-cell;">
-			    		<li> Contact Us</li>
-			    		<li> hello@homephilosophy.co.sg</li>
-			    		<li> +65 927 26032</li>
+			    	<ul style="list-style:none;display:table-cell;padding-right:100px;">
+			    		<li class="footer-list-header font-montserrat footer-list-color"> Contact Us</li>
+			    		<li class="font-montserrat footer-list-color font-size-12"> hello@homephilosophy.co.sg</li>
+			    		<li class="font-montserrat footer-list-color font-size-12"> +65 927 26032</li>
 
 			    	</ul>
 			    	<ul style="list-style:none;display:table-cell;">
-			    		<li> Follow Us</li>
+			    		<li class="footer-list-header font-montserrat footer-list-color"> Follow Us</li>
 			    		<li> Instagram and Pinterest</li>
 
 			    	</ul>
