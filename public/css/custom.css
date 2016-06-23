@@ -229,14 +229,15 @@ body{
  /* padding-left: 100px;*/
   /*overflow:hidden;*/
   display: inline-block;
+  padding-bottom: 50px;
 
 
 
 }
 .hp_workflow {
   min-height: 200px;
-  height: 250px;
-  width:250px;
+  height: 320px;
+  width:300px;
   float:left; 
   margin-right: 40px;
   margin-top: 20px;
@@ -245,8 +246,10 @@ body{
 }
 .step_icon{
   position: relative;
-  min-height:100px;
-  width:40%;
+   width:50%;
+  height: 130px;
+  /*min-height:100px;*/
+
   top:-20px;
   margin:0 auto;
   text-align: center;
@@ -258,7 +261,7 @@ body{
     text-align: center;
     overflow: hidden;
     white-space: nowrap;
-    padding-top: 40px; 
+    padding-top: 60px; 
     padding-bottom:50px;
     min-width:400px;
 }
@@ -292,6 +295,7 @@ body{
 
 .divider > span:before {
     right: 100%;
+    margin-right: 0px;
     
 }
 
@@ -359,8 +363,8 @@ body{
 .mask {
         position: relative;
         top:-2px;
-        left:30%;
-        width:40%;
+        left:25%;
+        width:50%;
         height: 2px;
         background-color:#fff;
 }
@@ -377,11 +381,12 @@ body{
 
 .gallery{
     text-align: center;
+    padding-top: 50px;
 }
 
 .design{
     display: inline-block;
-    width: 35%;
+    width: 43%;
     height: 35%;
     background: #ccc;
     margin: 15px;
@@ -396,3 +401,44 @@ body{
 .footer-list-color{
   color: rgb(112, 112, 112);
 }
+
+.text{ width:340px; height:217px; background:#FFF; opacity:0; } 
+
+.gallery .design img:hover .text{
+  opacity:0.6; 
+  text-align:justify; 
+  color:#000000; 
+  font-size:20px; 
+  font-weight:700; 
+  padding:30px;
+}
+
+#footer_data li a:hover{
+  color: rgb(112, 112, 112);
+  text-decoration: underline;
+}
+
+.step-title{
+  position: relative;
+  width:70%;
+  top:-10px;
+  margin:0 auto;
+  text-align: center;
+  font-size: 12px;
+  color: rgb(85, 85, 85);
+  text-transform: uppercase;
+}
+
+.step-text{
+  font-size: 12px;
+  font-family: "Raleway-Regular";
+  color: rgb(70, 70, 70);
+  position: relative;
+  width:78%;
+  top:10px;
+  margin:0 auto;
+  text-align: center;
+  }
+
+
+
