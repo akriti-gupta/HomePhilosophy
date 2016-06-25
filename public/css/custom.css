@@ -33,7 +33,7 @@ body{
   clear: both; /* to clear any float settings */
   width: 100%;
   height: 300px;
-  padding-top: 100px;
+  padding-top: 40px;
 }
 
 #site_logo{
@@ -101,7 +101,7 @@ body{
 
 .btn-start-quiz{
   color: rgb(255, 255, 255);
-  background-color: rgb(47, 185, 175);
+  background-color: rgb(100, 198, 190);
   border-color: transparent;
   font-family: Montserrat-Regular;
   text-transform: uppercase;
@@ -120,8 +120,8 @@ body{
 
 .hero-rect{
   position: relative;
-  top: 270px;
-  margin: auto;
+  top: 25%;
+  margin: 0 auto;
   background-color: rgba(255, 255, 255, 0.9);
   width: 55%;
   height: 44%;
@@ -136,8 +136,8 @@ body{
   position: relative;
   top: 25%;
   margin: 0 auto;
-  width: 60%;
-  height: 60%;
+  width: 80%;
+  height: 80%;
   text-align: center;
   
 }
@@ -197,7 +197,7 @@ body{
 
 .btn-container{
   position: relative;
-  top: 55%;
+  top: 35%;
   margin: 0 auto;
 
 
@@ -206,6 +206,7 @@ body{
 .btn-hero{
   font-size: 20px;
   padding: 15px;
+  box-shadow: -2px 2px 0px 1px rgb(38, 165, 156);
 }
 
 #hp_experience{
@@ -223,17 +224,11 @@ body{
 */
 
 .step_wrapper { 
- /* position: relative;
-  width:90%;
-  margin: 0px auto;*/
- /* padding-left: 100px;*/
-  /*overflow:hidden;*/
   display: inline-block;
-  padding-bottom: 50px;
-
-
-
+  padding-bottom: 100px;
+ /* padding-top:60px;*/
 }
+
 .hp_workflow {
   min-height: 200px;
   height: 320px;
@@ -250,7 +245,7 @@ body{
   height: 130px;
   /*min-height:100px;*/
 
-  top:-20px;
+  top:-105px;
   margin:0 auto;
   text-align: center;
 
@@ -362,7 +357,7 @@ body{
 
 .mask {
         position: relative;
-        top:-2px;
+        top:-82px;
         left:25%;
         width:50%;
         height: 2px;
@@ -391,6 +386,9 @@ body{
     background: #ccc;
     margin: 15px;
   }
+  .wrapper11{
+    width: 100%;
+  }
 
 .footer-list-header{
   background-color: rgb(235, 235, 235);
@@ -402,15 +400,29 @@ body{
   color: rgb(112, 112, 112);
 }
 
-.text{ width:340px; height:217px; background:#FFF; opacity:0; } 
+.text{ 
+   position: relative;
+    top: 10;
+    width:20px;
+    margin: 0 auto;
+    color:red;
+    background-color:rgba(255,255,255,0.8);
+    /*width: 100px;
+    height: 100px;*/
+    /*line-height:100px;*/
+    text-align: center;
+   
+    opacity: 1;
+   /* -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease; */} 
 
-.gallery .design img:hover .text{
+}
+
+ .text:hover{
   opacity:0.6; 
-  text-align:justify; 
-  color:#000000; 
-  font-size:20px; 
-  font-weight:700; 
-  padding:30px;
+  
 }
 
 #footer_data li a:hover{
@@ -421,7 +433,7 @@ body{
 .step-title{
   position: relative;
   width:70%;
-  top:-10px;
+  top:-90px;
   margin:0 auto;
   text-align: center;
   font-size: 12px;
@@ -435,10 +447,13 @@ body{
   color: rgb(70, 70, 70);
   position: relative;
   width:78%;
-  top:10px;
+  top:-80px;
   margin:0 auto;
   text-align: center;
   }
 
+.step-no{
+  color: rgb(100, 198, 190);
 
+}
 

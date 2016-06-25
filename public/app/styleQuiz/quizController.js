@@ -9,7 +9,7 @@ angular.module("app")
 // 					});
 
 	
-				
+				console.log("Here1");
 	            $scope.progressRate=10;
 				$scope.pageCount=0;
 				$scope.hideMain = false;
@@ -181,8 +181,10 @@ angular.module("app")
 	    // 	}
 
 	    	if(quizResult.getStyleText().length==0){
+	    		
 	    		quizResult.fetchStyleText();
 	    	}
+
 				
 	    		// To maintain the quiz result and style quiz pages state when redirected here after login.
 	    		if(quizResult.getStyle().length>=1){
@@ -196,7 +198,9 @@ angular.module("app")
 					$scope.hidePage6 = true;
 					$scope.progress = false;
 					$scope.resultPage=false;
+				
 	    		}
+
 	    		if(mvIdentity.isAuthenticated()){
 	    			//console.log('user is isAuthenticated');
 					$scope.gotoLink = "styleQuiz";
@@ -207,6 +211,7 @@ angular.module("app")
 				}
 				
 				$scope.nextPage = function(selectedImage){
+
 					$scope.selectedImages.push({page: $scope.pageCount, image_id: selectedImage});
 					var currentPage = $scope.pageCount;
 					
