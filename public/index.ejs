@@ -30,22 +30,15 @@
 		<link rel="stylesheet" href="/css/custom.css"/>
 		<link rel="stylesheet" href="/css/bootstrap.min.css"/>
 		<base href="/">
-	
-
-	<script type="text/javascript">
-		 
-		function myFunction() {
-    		document.getElementsByClassName("topnav")[0].classList.toggle("responsive");
-		}
-	</script>
 
 	</head>
 
-	<body>	
+	<body ng-app="app">	
 		<header id="site_header">
 	 		<div id="site_logo"> 
 	 			<a href="http://www.homephilosophy.com.sg">
-		            <img src="images/logo.png" style="max-width: 455px; max-height: 122px" />
+		            <!-- <img src="images/logo.png" style="max-width: 455px; max-height: 122px" /> -->
+		            <img src="images/logo1.png" style="width: 70%;height: 70%" />
 		        </a>
 		        <div class="tab_icon">
     					<a href="javascript:void(0);" onclick="myFunction()">&#9776;</a>
@@ -73,56 +66,9 @@
 		</header>
 
 
-		<!-- <div class="main-wrapper">
-			<div id="page-header">
-				<div class="menu">
-					<div class="logo">
-		            	<a href="http://www.homephilosophy.com.sg">
-		               		 <img src="images/logo.png" style="max-width: 455px; max-height: 122px" />
-		            	</a>
-		        	</div>
-					<nav class="navbar navbar-custom">
-						<div class="container-fluid">	
-					    	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-								<ul class="nav navbar-nav navbar-right">
-							        <li><a href="#">ABOUT US</a></li>
-							        <li><a href="#">HOW IT WORKS</a></li>
-							        <li><a href="#">PRICING</a></li>
-							        <li><a href="#">LUXURY SPACES</a></li>
-							        <li><a href="#">PORTFOLIO</a></li>
-							        <li><a href="#">FAQ</a></li>
-							        <li><a href="#">CONTACT US</a></li>	  
-							        <li>
-							        	<a href="/styleQuiz"> 
-											<button type="button" class="btn-menu">
-												GET STARTED 
-											</button> 
-										</a>
-									</li>	  
-					     		</ul>
-					   		</div>
-					 	</div>
-					</nav>
-				</div>
-		    </div>
+	
 
-		</div> -->
-
-
-
-
-
-		
-
-
-
-		 
-		
-
-
-   
-
-		<!-- <div  style="width:100%"   > -->
+		<section id="content-wrapper">
 			<!-- <div class="dropdown" ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
 	    		<a href="/login">Sign In</a>
 			</div>
@@ -138,20 +84,20 @@
 			</div> -->
 
 
-			<!-- <div style="max-width:1200px; margin:10px auto;"> -->
+			<!-- <div > -->
 			
-
-			
-		
-			<div style="width:100%" ng-app="app" ng-view>
-				<% if(!!bootstrappedUser){%>  
+<% if(!!bootstrappedUser){%>  
 				<script type="text/javascript">
 					window.bootstrappedUserObject = <%- JSON.stringify(bootstrappedUser)%>
 					//alert(window.bootstrappedUserObject);
 				</script>
 			<%}%>
+			
+		
+			<div ng-view></div>
 				
-			</div>
+				
+			</section>
 		<!-- </div> -->
 			
 
@@ -165,7 +111,7 @@
 			<div class="site_header" style="margin-bottom:100px;">
 				<div id="site_logo"> 
 		 			<a href="http://www.homephilosophy.com.sg">
-			            <img src="images/Logo_small.png" />
+			            <img src="images/Logo_small.png" style="width:80%;height:auto" />
 			        </a>	
 			    </div>
 			    <div id="footer_data" style="width:70%;text-align:left;display:inline-block;padding-left:100px">
