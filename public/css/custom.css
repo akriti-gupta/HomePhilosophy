@@ -13,195 +13,9 @@
   src: url(../fonts/Raleway-Regular.ttf);
 }
 
-body{
-  background: #ffffff;
-  color: #000;
-  max-width: 1920px;
-  width: 100%;
-  font-family: 'Montserrat-Regular', sans-serif;
-  word-wrap: break-word;
-}
 
-#site_header{
-  width: 100%;
-  height: 120px;
-  padding: 30px 0;
-  position: relative;
-}
-
-#site_footer{
-  clear: both; /* to clear any float settings */
-  width: 100%;
-  height: 300px;
-  padding-top: 40px;
-}
-
-#site_logo{
-  padding: 0 50px;
-    float: left;
-}
-
-#site_logo img {
-    height: 60px;
-}
-
-#hp_nav{
-  margin: 0 30px;
-  padding: 18px 0;
-    position: absolute;
-    right: 0;
-}
-
-#hp_nav ul {
-  list-style:none;
-  text-align:center;
-  margin: 0;
-  padding: 0;
-  z-index: 2;
-}
- 
-#hp_nav ul li{
-  width: auto;
-  display: -moz-inline-stack;
-  display:inline-block;
-  padding: 0 2px;
-  margin: 0 18px;
-}
-
-#hp_nav ul li:hover{
-  border-bottom: 2px solid rgb(100, 198, 190);
-}
-
-#hp_nav ul li:nth-child(8):hover{
-  border-bottom: 0;
-}
-
-.tab_icon{
-    display: none;
-}
-
-#hp_nav ul li a {
-    font-family:Montserrat-Regular;
-    text-transform: uppercase;
-    font-size: 10px;
-    color: #000;
-    text-decoration: none;
-}
-
-@media screen and (max-width: 1280px) {
-    #hp_nav ul li {
-        margin: 0 10px;
-    }
-
-    #site_logo {
-        padding: 0 40px;
-    }
-
-    #hp_nav {
-        margin: 0 20px;
-    }
-}
-
-@media screen and (max-width: 1080px) {
-    #hp_nav ul li {
-        margin: 0 7px;
-    }
-
-    #site_logo {
-        padding: 0 26px;
-    }
-
-    #hp_nav {
-        margin: 0 12px;
-    }
-}
-
-/* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens */
-@media screen and (max-width:980px) {
-    #hp_nav ul {
-        margin-right: 50px;
-    }
-
-    #hp_nav ul li:not(:last-child) {
-        display: none;
-    }
-
-    .tab_icon {
-        margin: 0 18px;
-        display: inline-block;
-        position: absolute;
-        top: 16px;
-        right: 0;
-        font-size: 20px;
-    }
-
-    .tab_icon a {
-        color: rgb(100, 198, 190);
-    }
-
-    .tab_icon a:hover, .tab_icon a:active, .tab_icon a:visited {
-        color: rgb(100, 198, 190);
-        text-decoration: none;
-    }
-
-    #hp_nav ul.responsive {
-        position: relative;
-        background-color: #fff;
-        padding: 2px 20px;
-        border: 1px solid rgb(100, 198, 190);
-    }
-
-    #hp_nav ul.responsive li {
-        float: none;
-        display: list-item;
-        margin: 10px 0;
-    }
-
-    #hp_nav ul.responsive li a {
-        display: block;
-        text-align: left;
-    }
-}
-
-
-#hero{
-  height:600px;
-  background-image:url('/images/hpMain.png');
-  background-size: cover;
-  background-position: 0 -120px;
-  position: relative;
-}
-
-.hero-rect{
-  position: relative;
-  top: 150px;
-  margin: 0 auto;
-  background-color: #fff;
-  opacity: 0.9;
-  height: 300px;
-  text-align: center;
-  width: 65%;
-    min-width: 540px;
-}
-
-.container-ctr-txt{
-  margin: 0 auto;
-  padding-top: 70px;
-  max-width: 510px;
-  min-width: 450px;
-}
-
-.btn-container{
-    position: absolute;
-    top: 419px;
-    left: calc(50% - 85px);
-    margin: 0 auto;
-}
-
-.font-noto-txt{
-  /*margin: 0 auto;*/
+.font-noto{
   font-family: NotoSerif-Regular;
-  text-transform: uppercase;
   text-overflow: wrap;
 }
 
@@ -210,105 +24,78 @@ body{
   text-overflow: wrap;
 }
 
-.btn-start-quiz{
-    color: rgb(255, 255, 255);
-    background-color: rgb(100, 198, 190);
-    border-color: transparent;
-    font-family: Montserrat-Regular;
-    text-transform: uppercase;
-    text-decoration: none;
-}
-
-.btn-nav{
-    font-size: 11px;
+.font-raleway{
+  font-family: Raleway-Regular;
 }
 
 .txt-upper{
   text-transform: uppercase;
 }
+.txt-capital{
+  text-transform: capitalize;
+}
+.txt_undeline{
+  text-decoration: underline;
+}
 
-.font-size-30{
+.fs-30px{
   
   font-size: 30px;
   
 }
-.font-size-14{
+
+.fs-20px{
+  
+  font-size: 20px; 
+}
+
+.fs-16px{
+  
+  font-size: 16px; 
+}
+
+
+.fs-14px{
   
   font-size: 14px; 
 }
 
-.font-size-12{
+.fs-12px{
   
   font-size: 12px; 
 }
 
-.color-experience{
-  color: rgb(37, 37, 37);
-}
-
-.color-view-gallery{
-  color: rgb(161, 161, 161);
-  text-decoration: underline;
-}
-
-.font-color-30{
-  color: rgb(47, 185, 175);
-  font-size: 30px;
-}
-
-
-.font-raleway-txt{
-  font-family: Raleway-Regular;
-  font-size: 16px;
-
-}
-
-.btn-hero{
-  font-size: 20px;
-  padding: 15px;
-  border-left: 2px solid rgb(38, 165, 156);
-  border-bottom: 2px solid rgb(38, 165, 156);
-}
-
-#hp_experience{
-  padding-top: 30px;
-  position: relative;
-  width:100%;
-  margin: 0 auto;
-  text-align: center;
-}
-
-/*.experience_subtext{
-  align: justify;
-  display: inline;
-}
-*/
-
-.step_wrapper { 
-  display: inline-block;
-  padding-bottom: 100px;
- /* padding-top:60px;*/
-}
-
-.hp_workflow {
-  min-height: 200px;
-  height: 320px;
-  width:300px;
-  float:left; 
-  margin: 10px 20px;
-  text-align: center;
+.fs-11px{
   
+  font-size: 12px; 
 }
-.step_icon{
-  position: relative;
-   width:50%;
-  height: 130px;
-  /*min-height:100px;*/
 
-  top:-105px;
-  margin:0 auto;
-  text-align: center;
+.fs-10px{
+  
+  font-size: 12px; 
+}
 
+
+.col-lightgreen{
+  color: #252525; /*rgb(37, 37, 37);*/
+}
+
+.col-silvergrey{
+  /*color: #A1A1A1;*/ /*rgb(161, 161, 161);*/
+  
+  color: #DDDCDC;
+}
+
+.col-darkgrey{
+  color: #707070;
+}
+
+.col-cyan{
+  color: #2fb9af; /*rgb(47, 185, 175)*/;
+}
+
+.col-lightcyan{
+   color: #64C6BE;/*rgb(100, 198, 190);*/
 }
 
 .divider {
@@ -362,102 +149,239 @@ body{
 
 
 
-            /*.buttons{
-                display:inline-block;
-                position:relative;
-                top:-30px;
-                background-color: red;
-                padding: 5px;
-                border: 1px solid blue;
-                text-align: center;
-            }*/
 
 
-@media screen and (max-width: 400px) {
-   #step1,#step2, #step3, #step4 { 
-    float: none;
-    margin-right:0;
-    padding:40px;
-    width:auto;
-    border:2px;
-   /* margin-bottom:10px;    */
-  }
-
+body{
+  background: #ffffff;
+  color: #000;
+  max-width: 1920px;
+  width: 100%;
+  font-family: 'Montserrat-Regular', sans-serif;
+  word-wrap: break-word;
 }
 
-.mask {
+/* Header starts */
+
+#site_header{
+  width: 100%;
+  height: 120px;
+  padding: 30px 0;
+  position: relative;
+}
+
+
+
+#hp-nav{
+  margin: 0 30px;
+  padding: 18px 0;
+    position: absolute;
+    right: 0;
+}
+
+.topnav {
+  list-style:none;
+  text-align:center;
+  margin: 0;
+  padding: 0;
+  z-index: 2;
+}
+ 
+.topnav li{
+  width: auto;
+  display: -moz-inline-stack;
+  display:inline-block;
+  padding: 0 2px;
+  margin: 0 18px;
+}
+
+.topnav li:hover{
+  border-bottom: 2px solid #64C6BE;
+}
+
+.topnav li:nth-child(8):hover{
+  border-bottom: 0;
+}
+
+.tab_icon{
+    display: none;
+}
+
+.topnav li a {
+    font-family:Montserrat-Regular;
+    text-transform: uppercase;
+    font-size: 10px;
+    color: #000;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 1280px) {
+    .topnav li {
+        margin: 0 10px;
+    }
+
+    #site_logo {
+        padding: 0 40px;
+    }
+
+    #hp-nav {
+        margin: 0 20px;
+    }
+}
+
+@media screen and (max-width: 1080px) {
+    .topnav li {
+        margin: 0 7px;
+    }
+
+    #site_logo {
+        padding: 0 26px;
+    }
+
+    #hp-nav {
+        margin: 0 12px;
+    }
+}
+
+/* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens */
+@media screen and (max-width:980px) {
+    .topnav {
+        margin-right: 50px;
+    }
+
+    .topnav li:not(:last-child) {
+        display: none;
+    }
+
+    .tab_icon {
+        margin: 0 18px;
+        display: inline-block;
+        position: absolute;
+        top: 16px;
+        right: 0;
+        font-size: 20px;
+    }
+
+    .tab_icon a {
+        color: #64C6BE;
+    }
+
+    .tab_icon a:hover, .tab_icon a:active, .tab_icon a:visited {
+        color: #64C6BE;
+        text-decoration: none;
+    }
+
+    #hp-nav ul.responsive {
         position: relative;
-        top:-82px;
-        left:25%;
-        width:50%;
-        height: 2px;
-        background-color:#fff;
-}
-.img-steps{
-    width: auto;
-    height: auto;
-    position: absolute;  
-    top: 0;  
-    bottom: 0;  
-    left: 0;  
-    right: 0;  
-    margin: auto;
-}
+        background-color: #fff;
+        padding: 2px 20px;
+        border: 1px solid #64C6BE;
+    }
 
-.gallery{
-    text-align: center;
-    padding-top: 50px;
+    #hp-nav ul.responsive li {
+        float: none;
+        display: list-item;
+        margin: 10px 0;
+    }
+
+    #hp-nav ul.responsive li a {
+        display: block;
+        text-align: left;
+    }
 }
 
-.design{
-    display: inline-block;
-    width: 43%;
-    height: 35%;
-    background: #ccc;
-    margin: 15px;
-  }
-  .wrapper11{
-    width: 100%;
-  }
+/* Header ends */
 
-.footer-list-header{
-  background-color: rgb(235, 235, 235);
-  font-size: 14px;
-  margin-bottom: 10px;
+/* Homepage Main Section*/ 
+
+#hero{
+  height:550px;
+  background-image:url('/images/hpMain.png');
+  background-size: cover;
+  background-position: 0 -80px;
+  position: relative;
+  background-repeat:no-repeat;
 }
 
-.footer-list-color{
-  color: rgb(112, 112, 112);
+.hero-rect{
+  position: relative;
+  top: 100px;
+  margin: 0 auto;
+  background-color: #fff;
+  opacity: 0.9;
+  height: 300px;
+  text-align: center;
+  width: 50%;
+  min-width: 540px;
 }
 
-.text{ 
-   position: relative;
-    top: 10;
-    width:20px;
+.container-ctr-txt{
+  margin: 0 auto;
+  padding-top: 70px;
+  max-width: 510px;
+  min-width: 450px;
+}
+
+.btn-container{
+    position: absolute;
+    top: 370px;
+    left: calc(50% - 85px);
     margin: 0 auto;
-    color:red;
-    background-color:rgba(255,255,255,0.8);
-    /*width: 100px;
-    height: 100px;*/
-    /*line-height:100px;*/
-    text-align: center;
-   
-    opacity: 1;
-   /* -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease; */} 
-
 }
 
- .text:hover{
-  opacity:0.6; 
+
+.btn-start-quiz{
+    color: #fff;
+    background-color: #64C6BE; /*rgb(100, 198, 190)*/;
+    border-color: transparent;
+    text-decoration: none;
+}
+
+
+.btn-hero{
+  padding: 15px;
+  border-left: 2px solid rgb(38, 165, 156);
+  border-bottom: 2px solid rgb(38, 165, 156);
+}
+
+/* Homepage Main Section ends*/ 
+
+/* HP experience starts*/
+
+#hp_experience{
+  /*padding-top: 30px;*/
+  position: relative;
+  width:100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.step_wrapper { 
+  width:100%;
+  display: inline-block;
+  padding-bottom: 100px;
+ /* padding-top:60px;*/
+}
+
+.hp_workflow {
+  min-height: 200px;
+  height: 320px;
+  width:300px;
+  float:left; 
+  margin: 10px 20px;
+  text-align: center;
+
   
 }
+.step_icon{
+  position: relative;
+   width:50%;
+  height: 130px;
+  /*min-height:100px;*/
 
-#footer_data li a:hover{
-  color: rgb(112, 112, 112);
-  text-decoration: underline;
+  top:-105px;
+  margin:0 auto;
+  text-align: center;
+  border:2px solid rgb(100, 198, 190);
 }
 
 .step-title{
@@ -482,8 +406,128 @@ body{
   text-align: center;
   }
 
-.step-no{
-  color: rgb(100, 198, 190);
+
+.mask {
+        position: relative;
+        top:-82px;
+        left:25%;
+        width:50%;
+        height: 2px;
+        background-color:#fff;
+}
+.img-steps{
+    width: auto;
+    height: auto;
+    position: absolute;  
+    top: 0;  
+    bottom: 0;  
+    left: 0;  
+    right: 0;  
+    margin: auto;
+}
+
+@media screen and (max-width: 400px) {
+   #step1,#step2, #step3, #step4 { 
+    float: none;
+    margin-right:0;
+    padding:40px;
+    width:auto;
+    border:2px;
+  }
 
 }
+
+/* To force only 2 steps in a row on screen resizing*/
+@media screen and (max-width:1340px) {
+    .step_wrapper {
+        max-width:70%;
+    }
+  }
+
+/* HP experience ends*/
+
+
+
+
+
+/* Gallery CSS start*/
+
+
+.gallery{
+    text-align: center;
+    padding-top: 50px;
+}
+
+.design{
+    display: inline-block;
+    width: 43%;
+    height: 35%;
+    background: #ccc;
+    margin: 15px;
+  }
+
+  .text{ 
+   position: relative;
+    top: 10;
+    width:20px;
+    margin: 0 auto;
+    color:red;
+    background-color:rgba(255,255,255,0.8);
+    /*width: 100px;
+    height: 100px;*/
+    /*line-height:100px;*/
+    text-align: center;
+   
+    opacity: 1;
+   /* -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease; */} 
+
+}
+
+ .text:hover{
+  opacity:0.6; 
+  
+}
+
+/* Gallery CSS ends*/
+
+/* Footer starts*/
+.footer-list-header{
+  background-color: rgb(235, 235, 235);
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+#site_footer{
+  clear: both; /* to clear any float settings */
+  width: 100%;
+  height: 300px;
+  padding-top: 40px;
+}
+
+.hp-logo{
+  padding: 0 50px;
+    float: left;
+}
+
+.hp-logo img {
+    height: 60px;
+}
+
+#footer-data{
+  width:70%;text-align:left;display:inline-block;padding-left:100px;
+}
+
+#footer-data ul{
+  list-style:none;display:table-cell;padding-right:100px;
+}
+
+#footer_data li a:hover{
+  color: #707070;
+  text-decoration: underline;
+}
+
+/* Footer ends*/
 
