@@ -99,29 +99,22 @@
 }
 
 .divider {
-    display: block;
     text-align: center;
-    overflow: hidden;
     white-space: nowrap;
-    padding-top: 60px; 
-    padding-bottom:50px;
-    min-width:400px;
+    padding: 20px 0 60px;
 }
 
 .divider > span {
     position: relative;
     display: inline-block;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 60px;
-    padding-right: 60px;
+    width: 300px;
+    padding: 10px;
     border:2px solid rgb(47, 185, 175);
     text-transform: uppercase;
     font-family: Montserrat-Regular;
     color:rgb(47, 185, 175);
     font-size: 20px;
     clear:both;
-
 }
 
 .divider > span:before,
@@ -132,7 +125,12 @@
     width: 9999px;
     height: 2px;
     background: rgb(47, 185, 175);
+}
 
+footer .divider > span:before,  footer .divider > span:after {
+    top: 14px;
+    height: 20px;
+    opacity: 0.5;
 }
 
 .divider > span:before {
@@ -347,47 +345,43 @@ body{
 /* Homepage Main Section ends*/ 
 
 /* HP experience starts*/
-
 #hp_experience{
-  position: relative;
-  width:100%;
-  margin: 0 auto;
+  margin: 60px 40px;
   text-align: center;
 }
 
-.step_wrapper { 
-  width:92%;
-  display: inline-block;
+.step_wrapper {
   padding-bottom: 100px;
-  padding-top:20px;
+  padding:20px;
 }
 
 .hp_workflow {
-  min-height: 200px;
-  height: 280px;
-  width:280px;
-  float:left; 
-  margin: 10px 20px;
+  height: 320px;
+  width:300px;
+  display: inline-block;
+  margin: 40px 10px;
   text-align: center;
-
-  
+  vertical-align: top;
 }
+
+.hp_workflow_content {
+    height: 300px;
+    text-align: center;
+    position: relative;
+}
+
 .step_icon{
   position: relative;
-   width:40%;
+  width: 110px;
   height: 110px;
-  /*min-height:100px;*/
-
-  top:-105px;
+  top: -20px;
   margin:0 auto;
   text-align: center;
   border:2px solid rgb(100, 198, 190);
 }
 
 .step-title{
-  position: relative;
-  width:70%;
-  top:-90px;
+  width:200px;
   margin:0 auto;
   text-align: center;
   font-size: 12px;
@@ -399,22 +393,23 @@ body{
   font-size: 12px;
   font-family: "Raleway-Regular";
   color: rgb(70, 70, 70);
-  position: relative;
-  width:78%;
-  top:-80px;
-  margin:0 auto;
+  width: 240px;
+  margin: 0 28px;
   text-align: center;
-  }
+  top: 160px;
+  position: absolute;
+}
 
 
 .mask {
-        position: relative;
-        top:-82px;
-        left:30%;
-        width:40%;
-        height: 2px;
-        background-color:#fff;
+  position: relative;
+  top: -2px;
+  left: 93px;
+  width: 110px;
+  height: 2px;
+  background-color:#fff;
 }
+
 .img-steps{
     width: auto;
     height: auto;
@@ -437,13 +432,6 @@ body{
 
 }
 
-/* To force only 2 steps in a row on screen resizing*/
-@media screen and (max-width:1390px) {
-    .step_wrapper {
-        max-width:60%;
-    }
-  }
-
 @media screen and (max-width:500px) {
     #exp-maintext {
       font-size:20px;
@@ -452,57 +440,61 @@ body{
       font-size: 10px;
     }
 }
-
 /* HP experience ends*/
 
 
-
-
-
 /* Gallery CSS start*/
-
+#recent-designs {
+  margin: 60px 40px;
+  text-align: center;
+}
 
 .gallery{
-    text-align: center;
-    padding-top: 50px;
+  text-align: center;
+  padding-top: 50px;
 }
 
 .design{
-    display: inline-block;
-    width: 43%;
-    height: 35%;
-    background: #ccc;
-    margin: 15px;
-  }
+  display: inline-block;
+  position: relative;
+  width: 43%;
+  margin: 15px;
+}
 
 
 #view-gallery{
   color: #DDDCDC;
 }
 
-  .text{ 
-   position: relative;
-    top: 10;
-    width:15px;
-    margin: 0 auto;
-    color:red;
-    /*background-color:rgba(255,255,255,0.8);*/
-    /*width: 100px;*/
-    height: 200px;
-    line-height:100px;
-    text-align: center;
-   
-    opacity: 0;
-   /* -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease; */} 
-
+.text, .text-border{
+  background-color: #fff;
+  position: absolute;
+  margin: 20px;
+  color: #777;
+  height: 200px;
+  text-align: center;
+  width: calc(100% - 40px);
+  height: calc(100% - 40px);
+  opacity: 0;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  text-decoration: underline;
 }
 
- .text:hover{
-  opacity:1; 
-  
+.text-border {
+    background-color: transparent;
+    border: 1px solid #fff;
+    opacity: 0.9;
+}
+
+.text:hover{
+  opacity: 0.9;
+}
+
+.text div {
+    margin-top: calc(50% - 60px);
 }
 
 /* Gallery CSS ends*/
