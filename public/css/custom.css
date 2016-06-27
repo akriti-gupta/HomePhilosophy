@@ -67,7 +67,7 @@
 
 .fs-11px{
   
-  font-size: 12px; 
+  font-size: 11px; 
 }
 
 .fs-10px{
@@ -214,6 +214,7 @@ body{
     text-decoration: none;
 }
 
+
 @media screen and (max-width: 1280px) {
     .topnav li {
         margin: 0 10px;
@@ -348,7 +349,6 @@ body{
 /* HP experience starts*/
 
 #hp_experience{
-  /*padding-top: 30px;*/
   position: relative;
   width:100%;
   margin: 0 auto;
@@ -356,16 +356,16 @@ body{
 }
 
 .step_wrapper { 
-  width:100%;
+  width:92%;
   display: inline-block;
   padding-bottom: 100px;
- /* padding-top:60px;*/
+  padding-top:20px;
 }
 
 .hp_workflow {
   min-height: 200px;
-  height: 320px;
-  width:300px;
+  height: 280px;
+  width:280px;
   float:left; 
   margin: 10px 20px;
   text-align: center;
@@ -374,8 +374,8 @@ body{
 }
 .step_icon{
   position: relative;
-   width:50%;
-  height: 130px;
+   width:40%;
+  height: 110px;
   /*min-height:100px;*/
 
   top:-105px;
@@ -410,8 +410,8 @@ body{
 .mask {
         position: relative;
         top:-82px;
-        left:25%;
-        width:50%;
+        left:30%;
+        width:40%;
         height: 2px;
         background-color:#fff;
 }
@@ -438,11 +438,20 @@ body{
 }
 
 /* To force only 2 steps in a row on screen resizing*/
-@media screen and (max-width:1340px) {
+@media screen and (max-width:1390px) {
     .step_wrapper {
-        max-width:70%;
+        max-width:60%;
     }
   }
+
+@media screen and (max-width:500px) {
+    #exp-maintext {
+      font-size:20px;
+    }
+    #exp-subtext{
+      font-size: 10px;
+    }
+}
 
 /* HP experience ends*/
 
@@ -465,6 +474,11 @@ body{
     background: #ccc;
     margin: 15px;
   }
+
+  
+#view-gallery{
+  color: #DDDCDC;
+}
 
   .text{ 
    position: relative;
