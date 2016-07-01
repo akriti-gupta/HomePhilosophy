@@ -1,8 +1,9 @@
-	angular.module('app').service("quizResult", function($http, $q) {
+	angular.module('app').service("quizResult", function($http, $q, $location) {
         var result = [];
         var scores="";
         var styleText = [];
         var styleImages = [];
+        var showNavBar = true;
         
 
         //Called from quizController to store calculated style before control is passed to login page.
@@ -33,6 +34,16 @@
 		 	return styleText;
 		 }
 
+		 var showNavBar = function(){
+		 	if($location.path==='/styleQuiz'){
+		 		showNavBar = false;
+		 	}
+		 	else{
+		 		showNavBar = true;
+		 	}
+		 	return showNavBar;
+		 }
+
 
 		 // var fetchStyleImage = function(){
 		 // 	// var dfd = $q.defer();
@@ -61,7 +72,8 @@
 			    getStyle: getStyle,
 			    clearStyle: clearStyle,
 			    fetchStyleText: fetchStyleText,
-			    getStyleText: getStyleText
+			    getStyleText: getStyleText,
+			    showNavBar: showNavBar
 			   // fetchStyleImage: fetchStyleImage,
 			   // getStyleImage: getStyleImage
 
