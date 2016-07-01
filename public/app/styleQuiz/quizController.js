@@ -10,7 +10,7 @@ angular.module("app")
 
 	
 				console.log("Here1");
-	            $scope.progressRate=10;
+	            $scope.progressRate=2.5;
 				$scope.pageCount=0;
 				$scope.hideMain = false;
 				$scope.hidePage1 = true;
@@ -26,8 +26,9 @@ angular.module("app")
 				$scope.progress = false;
 				var prefStyle = [];
 				$scope.userStyle = [];
+				
 
-
+//$scope.showNavBar = false;
 				//$scope.data = 
 				
 
@@ -164,6 +165,32 @@ angular.module("app")
 	  				image_id: 3
 	    		}]];
 
+	    		$scope.roomArr = [
+				[{
+	        		room_image: "images/master.png",
+	        		room_id: 1
+	    		}, 
+	    		{
+	    			room_image: "images/living.png",
+					room_id: 2
+	    		},
+	    		{
+	  				room_image: "images/kids.png",
+	  				room_id: 3
+	    		}],
+	    		[{
+	    			room_image: "images/homeOffice.png",
+	        		room_id: 4
+	    		}, 
+	    		{
+					room_image: "images/dining.png",
+					room_id: 5
+	    		},
+	    		{
+	  				room_image: "images/bedroom.png",
+	  				room_id: 6
+	    		}]];
+
 	    // 	if(!$scope.majorStyleText){
 	    			
 			 	// console.log("fetching text now.");
@@ -222,27 +249,38 @@ angular.module("app")
 								$scope.hideMain = true;
 								$scope.progress = true;
 								$scope.hidePage1 = false;
+								$scope.backgroundCol = "#00a99d";
 								break; 
 
 						case 1: $scope.hidePage1 = true;
 								$scope.hidePage2 = false;
+								$scope.backgroundCol2 = "#00a99d";
+								$scope.progressRate+=0.5;
 								break;
 
 						case 2: $scope.hidePage2 = true;
 								$scope.hidePage3 = false;
+								$scope.backgroundCol3 = "#00a99d";
+								$scope.progressRate+=1.5;
 								break; 
 
 						case 3: $scope.hidePage3 = true;
 								$scope.hidePage4 = false;
+								$scope.backgroundCol4 = "#00a99d";
+								$scope.progressRate+=1.5;
 								break;
 
 						case 4: $scope.hidePage4 = true;
 								$scope.hidePage5 = false;
+								$scope.backgroundCol5 = "#00a99d";
+								$scope.progressRate+=1.5;
 								break;
 
 						case 5: $scope.computeStyle();
 								$scope.hidePage5 = true;
 								$scope.hidePage6 = false;
+								$scope.backgroundCol6 = "#00a99d";
+								$scope.progressRate+=1.5;
 								break;
 
 						default: 
@@ -265,7 +303,8 @@ angular.module("app")
 								 //console.log('Before calling login')
 								 
 					}
-					$scope.progressRate+= 10;
+					$scope.progressRate+= 10.5;
+					
 				}
 
 				// $scope.go = function ( path ) {
@@ -375,7 +414,14 @@ angular.module("app")
 
 				$scope.retakeQuiz = function(){
 					//$scope.data = angular.copy($scope.orig);
-					 $scope.progressRate=10;
+					 //$scope.progressRate=10;
+					 $scope.progressRate=2.5;
+					 $scope.backgroundCol = "#00a99d";
+					 $scope.backgroundCol2 = "#cccccc";
+					 $scope.backgroundCol3 = "#cccccc";
+					 $scope.backgroundCol4 = "#cccccc";
+					 $scope.backgroundCol5 = "#cccccc";
+					 $scope.backgroundCol6 = "#cccccc";
 				$scope.pageCount=0;
 				$scope.hideMain = false;
 				$scope.hidePage1 = true;

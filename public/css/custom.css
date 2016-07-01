@@ -5,7 +5,32 @@
 
 @font-face{
   font-family: NotoSerif-Regular;
+  font-weight: normal;
   src: url(../fonts/NotoSerif-Regular.ttf);
+}
+
+@font-face{
+  font-family: PlayfairDisplay-Regular;
+  font-weight: normal;
+  src: url(../fonts/PlayfairDisplay-Regular.ttf);
+}
+
+@font-face{
+  font-family: MartelSans-ExtraLight;
+  font-weight: normal;
+  src: url(../fonts/MartelSans-ExtraLight.ttf);
+}
+
+@font-face{
+  font-family: OpenSans-Regular;
+  font-weight: normal;
+  src: url(../fonts/OpenSans-Regular.ttf);
+}
+
+@font-face{
+  font-family: OpenSans-Light;
+  font-weight: normal;
+  src: url(../fonts/OpenSans-Light.ttf);
 }
 
 @font-face{
@@ -13,7 +38,39 @@
   src: url(../fonts/Raleway-Regular.ttf);
 }
 
+@font-face{
+  font-family: Lustria-Regular;
+  src: url(../fonts/Lustria-Regular.ttf);
+}
 
+.font-sansRegular{
+  font-family: OpenSans-Regular;
+  text-overflow: wrap;
+}
+
+.font-sansLight{
+  font-family: OpenSans-Light;
+  text-overflow: wrap;
+}
+
+
+
+.font-martel{
+  font-family: MartelSans-ExtraLight;
+  text-overflow: wrap;
+}
+
+
+.font-playfair{
+  font-family: PlayfairDisplay-Regular;
+  text-overflow: wrap;
+
+}
+
+.font-lustria{
+  font-family: Lustria-Regular;
+  text-overflow: wrap;
+}
 .font-noto{
   font-family: NotoSerif-Regular;
   text-overflow: wrap;
@@ -28,6 +85,9 @@
   font-family: Raleway-Regular;
 }
 
+.font-halvetica{
+  font-family: 'Helvetica Neue 25 UltraLight';
+}
 .txt-upper{
   text-transform: uppercase;
 }
@@ -38,10 +98,26 @@
   text-decoration: underline;
 }
 
+.fs-35px{
+  
+  font-size: 33px;
+  
+}
+
 .fs-30px{
   
   font-size: 30px;
   
+}
+.fs-25px{
+  
+  font-size: 25px;
+  
+}
+
+.fs-22px{
+  
+  font-size: 22px; 
 }
 
 .fs-20px{
@@ -54,6 +130,10 @@
   font-size: 16px; 
 }
 
+.fs-15px{
+  
+  font-size: 15px; 
+}
 
 .fs-14px{
   
@@ -88,6 +168,15 @@
 
 .col-darkgrey{
   color: #707070;
+}
+
+.col-inspiring{
+  color:#64c6be;
+}
+
+.col-hpgreen{
+  color:;
+  /*color:#00a99d;*/
 }
 
 .col-cyan{
@@ -127,11 +216,11 @@
     background: rgb(47, 185, 175);
 }
 
-footer .divider > span:before,  footer .divider > span:after {
+/*footer .divider > span:before,  footer .divider > span:after {
     top: 14px;
     height: 20px;
     opacity: 0.5;
-}
+}*/
 
 .divider > span:before {
     right: 100%;
@@ -162,8 +251,8 @@ body{
 
 #site_header{
   width: 100%;
-  height: 120px;
-  padding: 30px 0;
+  height: 135px;
+  padding: 8px 0;
   position: relative;
 }
 
@@ -171,7 +260,7 @@ body{
 
 #hp-nav{
   margin: 0 30px;
-  padding: 18px 0;
+  padding: 30px 0;
     position: absolute;
     right: 0;
 }
@@ -188,7 +277,10 @@ body{
   width: auto;
   display: -moz-inline-stack;
   display:inline-block;
-  padding: 0 2px;
+  padding-top: 15px;
+  padding-bottom:2px;
+  padding-left: 2px;
+  padding-right: 2px;
   margin: 0 18px;
 }
 
@@ -207,11 +299,16 @@ body{
 .topnav li a {
     font-family:Montserrat-Regular;
     text-transform: uppercase;
-    font-size: 10px;
+    font-size: 11px;
+    letter-spacing: 1px;
     color: #000;
     text-decoration: none;
 }
 
+
+#exp-subtext{
+  
+}
 
 @media screen and (max-width: 1280px) {
     .topnav li {
@@ -251,7 +348,7 @@ body{
         display: none;
     }
 
-    .tab_icon {
+    .tab_icon,.tab-icon-quiz {
         margin: 0 18px;
         display: inline-block;
         position: absolute;
@@ -260,11 +357,12 @@ body{
         font-size: 20px;
     }
 
-    .tab_icon a {
+    .tab_icon a , .tab-icon-quiz a{
         color: #64C6BE;
     }
 
-    .tab_icon a:hover, .tab_icon a:active, .tab_icon a:visited {
+    .tab_icon a:hover, .tab_icon a:active, .tab_icon a:visited,
+    .tab-icon-quiz a:hover, .tab-icon-quiz a:active, .tab-icon-quiz a:visited {
         color: #64C6BE;
         text-decoration: none;
     }
@@ -293,21 +391,21 @@ body{
 /* Homepage Main Section*/ 
 
 #hero{
-  height:550px;
+  height:650px;
   background-image:url('/images/hpMain.png');
   background-size: cover;
-  background-position: 0 -80px;
+  background-position: 0 -20px;
   position: relative;
   background-repeat:no-repeat;
 }
 
 .hero-rect{
   position: relative;
-  top: 100px;
+  top: 140px;
   margin: 0 auto;
   background-color: #fff;
-  opacity: 0.9;
-  height: 300px;
+  opacity: 0.95;
+  height: 320px;
   text-align: center;
   width: 50%;
   min-width: 540px;
@@ -315,15 +413,15 @@ body{
 
 .container-ctr-txt{
   margin: 0 auto;
-  padding-top: 70px;
+  padding-top: 80px;
   max-width: 510px;
   min-width: 450px;
 }
 
 .btn-container{
     position: absolute;
-    top: 370px;
-    left: calc(50% - 85px);
+    top: 430px;
+    left: calc(50% - 100px);
     margin: 0 auto;
 }
 
@@ -337,7 +435,10 @@ body{
 
 
 .btn-hero{
-  padding: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 40px;
+  padding-right: 40px;
   border-left: 2px solid rgb(38, 165, 156);
   border-bottom: 2px solid rgb(38, 165, 156);
 }
@@ -346,7 +447,8 @@ body{
 
 /* HP experience starts*/
 #hp_experience{
-  margin: 60px 40px;
+
+  margin: 70px 40px;
   text-align: center;
 }
 
@@ -368,6 +470,7 @@ body{
     height: 300px;
     text-align: center;
     position: relative;
+    border:2px solid rgb(100, 198, 190);
 }
 
 .step_icon{
@@ -391,7 +494,7 @@ body{
 
 .step-text{
   font-size: 12px;
-  font-family: "Raleway-Regular";
+  /*font-family: "Raleway-Regular";*/
   color: rgb(70, 70, 70);
   width: 240px;
   margin: 0 28px;
@@ -475,6 +578,23 @@ body{
   text-align: center;
   width: calc(100% - 40px);
   height: calc(100% - 40px);
+  opacity: 0.8;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  text-decoration: underline;
+}
+
+.text1{
+  background-color: #fff;
+  position: absolute;
+  margin: 20px;
+  color: #777;
+  height: 200px;
+  text-align: center;
+  width: calc(100% - 40px);
+  height: calc(100% - 40px);
   opacity: 0;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
@@ -490,7 +610,7 @@ body{
 }
 
 .text:hover{
-  opacity: 0.9;
+  opacity: 0;
 }
 
 .text div {
@@ -509,17 +629,17 @@ body{
 #site_footer{
   clear: both; /* to clear any float settings */
   width: 100%;
-  height: 300px;
-  padding-top: 40px;
+  height: 100px;
+  
 }
 
 .hp-logo{
-  padding: 0 50px;
+  padding: 0 20px;
     float: left;
 }
 
 .hp-logo img {
-    height: 60px;
+    height: 120px;
 }
 
 #footer-data{
@@ -536,4 +656,6 @@ body{
 }
 
 /* Footer ends*/
+
+
 

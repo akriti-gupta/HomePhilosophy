@@ -122,3 +122,51 @@ filter:alpha(opacity=50); /* for <= IE 8 */
     height: 100px;*/
     margin: 10px;
 }
+
+
+
+.sr-only11 {
+  height: 15px;
+  width: 15px;
+  border-radius: 100%;
+  background:#cccccc;
+  position: absolute;
+  top: 190px;
+}
+
+
+
+.first-progress{
+  left:18.2%;
+}
+.second-progress{
+  left:28%;
+}
+.third-progress{
+  left:38%;
+}
+.fourth-progress{
+  left:48%;
+}
+.fifth-progress{
+  left:58%;
+}
+.sixth-progress{
+  left:68%;
+}
+
+.progress-step{
+  position:relative;
+  left:12%;
+  color: rgb(183, 183, 183);
+}
+
+.col-xs-6 a:hover{
+  text-decoration: none;
+
+  border: 0px;
+}
+
+.col-xs-6 a:hover > img{
+  border: 3px solid #64C6BE;
+}

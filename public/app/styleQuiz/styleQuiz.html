@@ -1,5 +1,33 @@
 
-<div style=" margin:10px auto;" ng-controller="QuizController">
+<header id="site_header">
+      <div class="hp-logo"> 
+        <a href="http://www.homephilosophy.com.sg">
+                <img src="images/hp_logo1.png" />
+            </a>
+        </div>
+      <div id="hp-nav">
+                <ul class="topnav" >
+                   <li><a href="#" style="display:none;">About us</a></li>
+                    <li><a href="#" style="display:none;">How it works</a></li>
+                    <li><a href="#" style="display:none;">Pricing</a></li>
+                    <li><a href="#" style="display:none;">Luxury spaces</a></li>
+                    <li><a href="#" style="display:none;">Portfolio</a></li>
+                    <li><a href="#" style="display:none;">FAQ</a></li>
+                    <li><a href="#" style="display:none;">Contact us</a></li>
+                    
+                </ul>
+                
+                <div class="tab-icon-quiz">
+                    <a href="javascript:void(0);" onclick="myFunction()">&#9776;</a>
+                </div>
+        </div>
+    </header>
+
+ <div class="divider" style="border-top:2px solid #e1e1e1;padding:15px;">
+          
+      </div>
+
+<div style="margin:5px auto;width:1200px;" ng-controller="QuizController">
 
 
 
@@ -7,35 +35,67 @@
 
 
 <div> <a href="/"> Go to main </a></div>
-<div id="stylePageMain" ng-hide="hideMain">
-      <a href="/styleQuiz" ng-click="nextPage(0)"> 
-      This page will contain room icons.
+
+<div id="stylePageMain" ng-hide="hideMain" class="font-playfair fs-20px" style="padding-top:30px;text-align:center"> What would you like Home Philosophy to design?
+   <div ng-repeat="rooms in roomArr track by $index" ng-animate="box'" style="padding-top:20px;"> 
+
+        <div class="row" id="div{{pageCount}}" >
+          <div class="col-xs-6 col-md-3" ng-repeat="room in rooms" >
+          <a href="/styleQuiz" id="{{room.room_id}}" class="thumbnail"  ng-click="nextPage(room.room_id)" style="padding:0;margin:0;"> 
+              <img ng-src="{{room.room_image}}" width="100%" height="100%"> 
+            </a>
+        </div>
+      </div>
+   </div>
+</div>
+
+
+
+     <!-- <a href="/styleQuiz" ng-click="nextPage(0)"> 
+      
         <button type="button" class="btn btn-primary">Find your Style </button> 
       </a>
 </div>
-
+-->
 <div ng-show="progress">
-Question {{pageCount}} of 6
 	<div class="progress">
 
   		<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{progressRate}}%;">
-    		<span class="sr-only">{{progressRate}}% Complete</span>
+    		<span class="sr-only11 first-progress" ng-style="{'background': backgroundCol}"></span>
+        <span class="sr-only11 second-progress" ng-style="{'background': backgroundCol2}"></span>
+        <span class="sr-only11 third-progress"  ng-style="{'background': backgroundCol3}"></span>
+        <span class="sr-only11 fourth-progress"  ng-style="{'background': backgroundCol4}"></span>
+        <span class="sr-only11 fifth-progress"  ng-style="{'background': backgroundCol5}"></span>
+        <span class="sr-only11 sixth-progress"  ng-style="{'background': backgroundCol6}"></span>
+
   		</div>
+      
 	</div>
+  <div style="width:100%">
+        <span class="font-montserrat fs-26px progress-step">1</span>
+        <span class="font-montserrat fs-26px progress-step" style="left:22.9%;">2</span>
+        <span class="font-montserrat fs-26px progress-step" style="left:33.9%;">3</span>
+        <span class="font-montserrat fs-26px progress-step" style="left:44.9%;">4</span>
+        <span class="font-montserrat fs-26px progress-step" style="left:55.9%;">5</span>
+        <span class="font-montserrat fs-26px progress-step" style="left:66.9%;">6</span>
+  </div>
 </div>
 
-	 <div ng-repeat="styles in styleQuest1 track by $index" ng-hide="hidePage1" ng-animate="box'" > 
+<div ng-hide="hidePage1" class="font-playfair fs-20px" style="padding-top:30px;text-align:center"> Which Living room do you want to relax in?
+	 <div ng-repeat="styles in styleQuest1 track by $index" ng-animate="box'" style="padding-top:20px;"> 
+
         <div class="row" id="div{{pageCount}}" >
         	<div class="col-xs-6 col-md-3" ng-repeat="style in styles" >
-    			<a href="/styleQuiz" id="{{style.image_id}}" class="thumbnail"  ng-click="nextPage(style.image_id)"> 
+    			<a href="/styleQuiz" id="{{style.image_id}}" class="thumbnail"  ng-click="nextPage(style.image_id)" style="padding:0;margin:0;"> 
       				<img ng-src="{{style.image_style}}" alt="{{style.image_id}}" width="100%" height="100%"> 
       			</a>
   			</div>
     	</div>
 	 </div>
+</div>
 
-
-	 <div ng-repeat="styles in styleQuest2	 track by $index" ng-hide="hidePage2" ng-animate="'box'" > 
+<div ng-hide="hidePage2" class="font-playfair fs-20px"> Which Living room do you want to relax in?
+	 <div ng-repeat="styles in styleQuest2	 track by $index" ng-animate="'box'" style="padding-top:50px;"> 
         <div class="row" id="div{{pageCount}}">
         	<div class="col-xs-6 col-md-3" ng-repeat="style in styles">
     			<a href="/styleQuiz" id="{{style.image_id}}" class="thumbnail"  ng-click="nextPage(style.image_id)"> 
@@ -45,8 +105,10 @@ Question {{pageCount}} of 6
   			</div>
     	</div>
 	 </div>
+</div>
 
-	<div ng-repeat="styles in styleQuest3 track by $index" ng-hide="hidePage3" ng-animate="'box'"> 
+<div ng-hide="hidePage3" class="font-playfair fs-20px" style="padding-top:30px;text-align:center"> Which Living room do you want to relax in?
+	<div ng-repeat="styles in styleQuest3 track by $index" ng-animate="'box'" style="padding-top:50px;"> 
         <div class="row" id="div{{pageCount}}">
         	<div class="col-xs-6 col-md-3" ng-repeat="style in styles">
     			<a href="/styleQuiz" id="{{style.image_id}}" class="thumbnail"  ng-click="nextPage(style.image_id)"> 
@@ -56,8 +118,10 @@ Question {{pageCount}} of 6
   			</div>
     	</div>
 	 </div>
+</div>
 
-	<div ng-repeat="styles in styleQuest4 track by $index" ng-hide="hidePage4" ng-animate="'box'"> 
+<div ng-hide="hidePage4" class="font-playfair fs-20px" style="padding-top:30px;text-align:center"> Which Living room do you want to relax in?
+	<div ng-repeat="styles in styleQuest4 track by $index" ng-animate="'box'" style="padding-top:50px;"> 
         <div class="row" id="div{{pageCount}}">
         	<div class="col-xs-6 col-md-3" ng-repeat="style in styles">
     			<a href="/styleQuiz" id="{{style.image_id}}" class="thumbnail"  ng-click="nextPage(style.image_id)"> 
@@ -67,8 +131,10 @@ Question {{pageCount}} of 6
   			</div>
     	</div>
 	 </div>
+</div>
 
-	 <div ng-repeat="styles in styleColor track by $index" ng-hide="hidePage5" ng-animate="'box'"> 
+<div ng-hide="hidePage5" class="font-playfair fs-20px" style="padding-top:30px;text-align:center"> Which Living room do you want to relax in?
+	 <div ng-repeat="styles in styleColor track by $index" ng-animate="'box'" style="padding-top:10px;"> 
         <div class="row" id="div{{pageCount}}">
         	<div class="col-xs-6 col-md-3" ng-repeat="style in styles">
     			<a href="/styleQuiz" id="{{style.image_id}}" class="thumbnail"  ng-click="nextPage(style.image_id)"> 
@@ -78,9 +144,11 @@ Question {{pageCount}} of 6
   			</div>
     	</div>
 	 </div>
+</div>
 
 <!-- <div> -->
-	 <div ng-repeat="styles in stylePrint track by $index" ng-hide="hidePage6" ng-animate="'box'"> 
+<div ng-hide="hidePage6" class="font-playfair fs-20px" style="padding-top:30px;text-align:center"> Which Living room do you want to relax in?
+	 <div ng-repeat="styles in stylePrint track by $index" ng-animate="'box'" style="padding-top:50px;"s> 
         <div class="row" id="div{{pageCount}}">
         	<div class="col-xs-6 col-md-3" ng-repeat="style in styles">
     			<a ng-href="/{{gotoLink}}" id="{{style.image_id}}" class="thumbnail"  ng-click="nextPage(style.image_id)"> 
@@ -90,6 +158,7 @@ Question {{pageCount}} of 6
   			</div>
     	</div>
 	 </div>
+</div>
     <!-- <button type="button" class="btn btn-primary" ng-click="go('/login')">Find your Style </button> 
     </div> -->
 
@@ -121,5 +190,24 @@ Question {{pageCount}} of 6
   		</div>
   	</div>
 
+<div style="text-align:center;padding-top:45px;">
+    <a href="/styleQuiz">
+                           <button type="button" class="font-sansRegular txt-upper fs-12px" style="margin-right:10px;padding-top:10px; padding-bottom:10px;padding-left:40px;padding-right:40px;letter-spacing:1px;background-color:#fff;color:#707070;border:1px solid #707070;">
+                                Back
+                            </button>
+                        </a>
+                        
+
+     <a href="/styleQuiz">
+                            <button type="button" class="font-sansRegular txt-upper fs-12px" style="padding-top:10px; padding-bottom:10px;padding-left:40px;padding-right:40px;letter-spacing:1px;background-color:#00a99d;color:#fff;border:2px solid #00a99d;">
+                                Next
+                            </button>
+                        </a>
+                        </div>
 
 	</div>
+
+  <div class="divider" style="border-top:2px solid rgb(47, 185, 175);">
+          
+      </div>
+      
