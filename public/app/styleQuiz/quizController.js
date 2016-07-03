@@ -19,6 +19,7 @@ angular.module("app")
 				$scope.hidePage4 = true;
 				$scope.hidePage5 = true;
 				$scope.hidePage6 = true;
+				$scope.hidePage7 = true;
 				$scope.resultPage=true;
 				$scope.rowCount = 2;
 				$scope.selectedImages = [];
@@ -59,7 +60,7 @@ angular.module("app")
 	  				image_id: 6
 	    		}]];
 
-				$scope.styleQuest2 = [
+				$scope.styleQuest3 = [
 				[{
 	        		image_style: "images/styles/dining/1.jpg",
 	        		image_id: 1
@@ -85,7 +86,7 @@ angular.module("app")
 	  				image_id: 6
 	    		}]];
 
-	    		$scope.styleQuest3 = [
+	    		$scope.styleQuest4 = [
 				[{
 	        		image_style: "images/styles/kitchen/1.jpg",
 	        		image_id: 1
@@ -111,7 +112,7 @@ angular.module("app")
 	  				image_id: 6
 	    		}]];
 
-	    		$scope.styleQuest4 = [
+	    		$scope.styleQuest2 = [
 				[{
 	        		image_style: "images/styles/bedroom/1.jpg",
 	        		image_id: 1
@@ -134,6 +135,32 @@ angular.module("app")
 	    		},
 	    		{
 	  				image_style: "images/styles/bedroom/6.jpg",
+	  				image_id: 6
+	    		}]];
+
+	    		$scope.styleQuest5 = [
+				[{
+	        		image_style: "images/styles/textures/1.jpg",
+	        		image_id: 1
+	    		}, 
+	    		{
+	    			image_style: "images/styles/textures/2.jpg",
+					image_id: 2
+	    		},
+	    		{
+	  				image_style: "images/styles/textures/3.jpg",
+	  				image_id: 3
+	    		}],
+	    		[{
+	    			image_style: "images/styles/textures/4.jpg",
+	        		image_id: 4
+	    		}, 
+	    		{
+					image_style: "images/styles/textures/5.jpg",
+					image_id: 5
+	    		},
+	    		{
+	  				image_style: "images/styles/textures/6.jpg",
 	  				image_id: 6
 	    		}]];
 
@@ -255,32 +282,39 @@ angular.module("app")
 						case 1: $scope.hidePage1 = true;
 								$scope.hidePage2 = false;
 								$scope.backgroundCol2 = "#00a99d";
-								$scope.progressRate+=0.5;
+								$scope.progressRate+=3.5;
 								break;
 
 						case 2: $scope.hidePage2 = true;
 								$scope.hidePage3 = false;
 								$scope.backgroundCol3 = "#00a99d";
-								$scope.progressRate+=1.5;
+								$scope.progressRate+=4.5;
 								break; 
 
 						case 3: $scope.hidePage3 = true;
 								$scope.hidePage4 = false;
 								$scope.backgroundCol4 = "#00a99d";
-								$scope.progressRate+=1.5;
+								$scope.progressRate+=5.5;
 								break;
 
 						case 4: $scope.hidePage4 = true;
 								$scope.hidePage5 = false;
 								$scope.backgroundCol5 = "#00a99d";
-								$scope.progressRate+=1.5;
+								$scope.progressRate+=4.5;
 								break;
 
 						case 5: $scope.computeStyle();
 								$scope.hidePage5 = true;
 								$scope.hidePage6 = false;
 								$scope.backgroundCol6 = "#00a99d";
-								$scope.progressRate+=1.5;
+								$scope.progressRate+=6.5;
+								break;
+
+						case 6: 
+								$scope.hidePage6 = true;
+								$scope.hidePage7 = false;
+								$scope.backgroundCol6 = "#00a99d";
+								$scope.progressRate+=7.5;
 								break;
 
 						default: 
@@ -289,7 +323,7 @@ angular.module("app")
 								 //Show up login page, transfer control with scope. Return. Once logged in
 								 //show the page.
 								 if(mvIdentity.isAuthenticated()){
-									 $scope.hidePage6 = true;
+									 $scope.hidePage7 = true;
 									 $scope.hideMain = true;
 									 $scope.resultPage = false;
 									 $scope.progress = false;	
@@ -303,7 +337,7 @@ angular.module("app")
 								 //console.log('Before calling login')
 								 
 					}
-					$scope.progressRate+= 10.5;
+					$scope.progressRate+= 12.5;
 					
 				}
 
