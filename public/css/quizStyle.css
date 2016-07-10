@@ -228,11 +228,11 @@ a:active, a:hover {
 .room-option {
   background: #fff;
   padding: 25px 10px;
-  padding-top: 40px;
+  padding-top: 50px;
   border: 0.5px solid rgb(112,112,112);
   border-radius:0px;
   color: rgb(112, 112, 112);
-  height: 250px; 
+  height: 270px; 
 
 }
   .room-option img {
@@ -247,7 +247,7 @@ a:active, a:hover {
   
   .room-caption {
     text-transform: uppercase; 
-    padding-top:10px;
+    padding-top:20px;
     color:rgb(112,112,112);
     font-family: Montserrat-Regular;}
   
