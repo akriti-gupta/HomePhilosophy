@@ -353,7 +353,7 @@ angular.module("app")
 								$scope.progressRate+= 16;
 								//temp change for progress bar at pinterest
 								
-								$scope.progress = false;
+								//$scope.progress = false;
 								break;
 
 						case 3: //$scope.hidePage2 = true;
