@@ -50,7 +50,7 @@
    </div>
 </div> -->
 
-<div id="stylePageMain" ng-hide="hideMain" style="padding-top:30px;text-align:center;"> 
+<div id="stylePageMain" ng-hide="pageCount!=0" style="padding-top:30px;text-align:center;"> 
   <p  class="font-playfair fs-20px">What would you like Home Philosophy to design?</p>
   <p class="font-sansRegular fs-11px">[Choose multiple rooms for an entire apartment design]</p>
   <div class="row" style="padding-top:40px;margin-right:-250px;">
@@ -84,10 +84,10 @@
 
     <div class="col-md-2 col-xs-6" style="margin-right:20px;">
       <a href="#" class="thumbnail1 room-option" data-room-type="3">
-        <div class="subroom-container" style="padding-top:18px;">
-          <img class="img-responsive center-block room-img" src="images/living.png" style="width:90%;height:auto;">
+        <div class="subroom-container" style="padding-top:10px;">
+          <img class="img-responsive center-block room-img" src="images/living.png" style="width:100%;height:auto;">
         </div>
-        <div class="room-caption text-center" style="padding-top:21px;">
+        <div class="room-caption text-center" style="padding-top:31px;">
           <p class="txt-upper font-montserrat fs-14px" style="letter-spacing:1px;color:rgb(112,112,112);">Living room</p>
         </div>
         <div class="fs-11px" style="padding-top:35px;"> 
@@ -109,8 +109,8 @@
 
     <div class=" col-md-2 col-xs-6" style="margin-right:20px;">
       <a href="#" class="thumbnail1 room-option" data-room-type="5">
-        <div class="subroom-container" style="padding-top:-28px;">
-          <img class="img-responsive center-block room-img" src="images/kids.png" style="width:80%;height:auto;">
+        <div class="subroom-container" style="margin-top:-17px;">
+          <img class="img-responsive center-block room-img" src="images/kids.png" style="width:90%;height:auto;">
         </div>
         <div class="room-caption text-center">
           <p class="txt-upper font-montserrat fs-14px" style="letter-spacing:1px;color:rgb(112,112,112);">Kids Room</p>
@@ -168,7 +168,7 @@
         <div class="subroom-container" style="padding-top:31px;">
           <img class="img-responsive center-block room-img" src="images/dining.png" style="width:90%;height:auto;">
         </div>
-        <div class="room-caption text-center" style="padding-top:12px;">
+        <div class="room-caption text-center" style="padding-top:22px;">
           <p class="txt-upper font-montserrat fs-14px" style="letter-spacing:1px;color:rgb(112,112,112);">Dining Room</p>
         </div>
         <div class="fs-11px" style="padding-top:30px;"> 
@@ -188,12 +188,12 @@
       <div class="clearfix"></div>
     </div>
 
-    <div class=" col-md-2 col-xs-6" style="margin-right:20px;">
+    <div class="col-md-2 col-xs-6" style="margin-right:20px;">
       <a href="#" class="thumbnail1 room-option" data-room-type="5">
-        <div class="subroom-container" style="padding-top:18px;">
-          <img class="img-responsive center-block room-img" src="images/bedroom.png" style="width:80%;height:auto;">
+        <div class="subroom-container" style="padding-top:7px;">
+          <img class="img-responsive center-block room-img" src="images/bedroom.png" style="width:90%;height:auto;">
         </div>
-        <div class="room-caption text-center">
+        <div class="room-caption text-center" style="margin-top:0px;">
           <p class="txt-upper font-montserrat fs-14px" style="letter-spacing:1px;color:rgb(112,112,112);"> Bedroom</p>
         </div>
         <div class="fs-11px" style="padding-top:30px;"> 
@@ -245,164 +245,345 @@
 
 
 <div style="width:1800px;margin:0 auto;">
-<div ng-show="progress" style="width:1100px;margin-left:180px;margin-right:220px;">
-	<div class="progress">
 
-  		<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{progressRate}}%;">
-    		<span class="sr-only11 first-progress" ng-style="{'background': backgroundCol}"></span>
-        <span class="sr-only11 second-progress" ng-style="{'background': backgroundCol2}"></span>
-        <span class="sr-only11 third-progress"  ng-style="{'background': backgroundCol3}"></span>
-        <span class="sr-only11 fourth-progress"  ng-style="{'background': backgroundCol4}"></span>
-        <span class="sr-only11 fifth-progress"  ng-style="{'background': backgroundCol5}"></span>
-        <span class="sr-only11 sixth-progress"  ng-style="{'background': backgroundCol6}"></span>
+  <div ng-show="progress" style="width:1045px;margin-left:180px;margin-right:220px;">
+	 <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{progressRate}}%;">
+      		<span class="sr-only11 first-progress" ng-style="{'background': backgroundCol}"></span>
+          <span class="sr-only11 second-progress" ng-style="{'background': backgroundCol2}"></span>
+          <span class="sr-only11 third-progress"  ng-style="{'background': backgroundCol3}"></span>
+          <span class="sr-only11 fourth-progress"  ng-style="{'background': backgroundCol4}"></span>
+          <span class="sr-only11 fifth-progress"  ng-style="{'background': backgroundCol5}"></span>
+          <span class="sr-only11 sixth-progress"  ng-style="{'background': backgroundCol6}"></span>
+        </div>
+      </div>
+     <!--  <div style="width:100%"> -->
+        <span class="font-montserrat fs-26px progress-step" ng-show="true">1</span>
+        <span class="font-montserrat fs-26px progress-step" style="left:29%;" ng-show="pageCount>=3">2</span>
+        <span class="font-montserrat fs-26px progress-step" style="left:46%;" ng-show="pageCount>=4">3</span>
+        <span class="font-montserrat fs-26px progress-step" style="left:63%;" ng-show="pageCount>=5">4</span>
+        <span class="font-montserrat fs-26px progress-step" style="left:77.9%;" ng-show="pageCount>=6">5</span>
+        <span class="font-montserrat fs-26px progress-step" style="left:93.9%;" ng-show="pageCount>=7">6</span>
+      <!-- </div> -->
+    </div>
 
-  		</div>
-      
-	</div>
-  <div style="width:100%">
-        <span class="font-montserrat fs-26px progress-step">1</span>
-        <span class="font-montserrat fs-26px progress-step" style="left:29.9%;">2</span>
-        <span class="font-montserrat fs-26px progress-step" style="left:46%;">3</span>
-        <span class="font-montserrat fs-26px progress-step" style="left:61.9%;">4</span>
-        <span class="font-montserrat fs-26px progress-step" style="left:77.9%;">5</span>
-        <span class="font-montserrat fs-26px progress-step" style="left:93.9%;">6</span>
+    <div ng-hide="pageCount!=1" class="font-playfair fs-22px" style="padding-top:40px;"> 
+  <p style="text-align:center;margin-right:300px;margin-left:-90px;margin-bottom:50px;">What is your design style?</p>
+
+  <div ng-repeat="styles in stylePref track by $index" ng-animate="box">
+    <div class="row" style="margin-top:5px;margin-right:-350px;margin-bottom:30px;">
+      <div class="col-md-1 hidden-xs hidden-sm" ></div>
+      <div class="col-md-2 col-xs-6" ng-repeat="style in styles">
+        <a href="#" data-room-type="1" ng-click="nextPage(style.image_id)">
+          <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:94%;height:auto;">
+        </a>
+      </div>
+      <div class="col-md-1 hidden-xs hidden-sm" ></div>
+
+    </div>
+    <div class="row" style="margin-top:-30px;margin-left:32px;margin-bottom:30px;">
+       <div class="col-md-1 hidden-xs hidden-sm" ></div>
+       <div class="col-md-2 col-xs-6 font-montserrat txt-center txt-upper fs-16px" ng-repeat="style in styles" style="border:0.5px solid #acacac;width:330px;margin-right:31px;color:#707070;">{{style.image_name}}</div>
+       
+       <div class="col-md-1 hidden-xs hidden-sm" ></div>
+      </div>
   </div>
 </div>
 
-<div ng-hide="hidePage1" class="font-playfair fs-20px" style="padding-top:40px;"> 
-<p style="text-align:center;margin-right:300px;margin-left:-90px;margin-bottom:50px;">Which Living room do you want to relax in?</p>
-	 <!-- <div ng-repeat="styles in styleQuest1 track by $index" ng-animate="box'" style="padding-top:20px;"> 
+<div ng-hide="pageCount!=2" class="font-playfair fs-22px" style="padding-top:40px;"> 
+  <p style="text-align:center;margin-right:300px;margin-left:-90px;margin-bottom:50px;">Which Living room do you want to relax in?</p>
 
-        <div class="row style-grid" id="div{{pageCount}}">
-        	<div class="col-xs-6 col-md-3" ng-repeat="style in styles">
-    			<a href="/styleQuiz" id="{{style.image_id}}" class="thumbnail"  ng-click="nextPage(style.image_id)" style="padding:0;margin:0;"> 
-      				<img ng-src="{{style.image_style}}" alt="{{style.image_id}}" width="100%" height="100%"> 
-      			</a>
-  			</div>
-    	</div>
-	 </div>
-</div> -->
-
-<div ng-repeat="styles in styleQuest1 track by $index" ng-animate="box">
-  <div class="row" style="margin-top:5px;margin-right:-350px;margin-bottom:30px;">
-    <div class="col-md-1 hidden-xs hidden-sm" ></div>
-    <div class="col-md-2 col-xs-6" ng-repeat="style in styles" style="margin-right:25px;">
-      <a href="#" data-room-type="1" ng-click="nextPage(style.image_id)">
-        
-          <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:100%;height:auto;">
-          
-        
-      </a>
+  <div ng-repeat="styles in styleQuest1 track by $index" ng-animate="box">
+    <div class="row" style="margin-top:5px;margin-right:-350px;margin-bottom:30px;">
+      <div class="col-md-1 hidden-xs hidden-sm" ></div>
+      <div class="col-md-2 col-xs-6" ng-repeat="style in styles">
+        <a href="#" data-room-type="1" ng-click="nextPage(style.image_id)">
+          <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:94%;height:auto;">
+        </a>
+      </div>
+      <div class="col-md-1 hidden-xs hidden-sm" ></div>
     </div>
-    <div class="col-md-1 hidden-xs hidden-sm" ></div>
   </div>
+</div>
+
+
+  
+
+
+<div ng-hide="pageCount!=3" class="pictures-section" data-title="Picture Selection" style="display: block;">
+    
+    
+  <div id="comment-box">
+    <span class="close">×</span>
+    <div style="float:left;width:100px;">
+      <img src="" class="img-comment-box" style="width:280px;height:360px;"/>
+    </div>
+    <div style="width:500px;padding-left:320px;">
+      <textarea rows="10" cols="35" class="font-sansRegular fs-16px" placeholder=" Add a comment" style="resize:none;border:1px solid #acacac;"></textarea>
+      <button type="button" class="btn-start-quiz font-sansRegular fs-16px" style="margin-top:8px;margin-left: 180px;padding-top:10px; padding-bottom:8px;padding-left:20px;padding-right:20px;letter-spacing:1px;">Comment</button>
+    </div>
   </div>
 
 
 
 
+  <div id="img-board" class="images-pin">
+     <div class="col-md-1 hidden-xs hidden-sm" ></div>
+      <div class="col-xs-6 col-md-3 image image-0" style="margin-right:10px;">  
+        <div class="image-container">    
+          <a href="#" class="image-selection" data-ordinal="0" data-image-i9="245">      
+            <img class="style-image" src="images/styles/styleBoards/master/1a.png">      
+            <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+          </a>    
+        </div>
+      </div>
 
-  </div>
+      <div class="col-xs-6 col-md-3" style="margin-right:10px;">  
+        <div class="image-container">    
+              <img class="style-image" src="images/styles/styleBoards/master/2.png"/>   
+              <span class="section-comment">
+                <a href="#" class="comment" data-ordinal="0" data-image-id="245" data-image="images/styles/styleBoards/master/2.png">  
+                  <img src="images/styles/styleBoards/comment.png" id="icon_comment" style="width:20px;height:auto;" data-swap="images/styles/styleBoards/sel_comment.png" class="image-comment image-status">
+                </a>
+              </span>
+
+             <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">  
+              <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+            </a>    
+        </div>
+      </div>
+
+      <div class="col-xs-6 col-md-3 image image-0">  
+        <div class="image-container">    
+          <img class="style-image" src="images/styles/styleBoards/master/3.png">  
+          <span class="section-comment">
+                <a href="#" class="comment" data-ordinal="0" data-image-id="245" data-image="images/styles/styleBoards/master/3.png">  
+                  <img src="images/styles/styleBoards/comment.png" id="icon_comment" style="width:20px;height:auto;" data-swap="images/styles/styleBoards/sel_comment.png" class="image-comment image-status">
+                </a>
+              </span>
+
+             <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">  
+              <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+            </a>    
+        </div>
+      </div>
+
+<div class="clearfix"></div>
+<div class="col-md-1 hidden-xs hidden-sm" ></div>
+<div class="col-xs-6 col-md-3 image image-0" style="margin-right:10px;top:-100px;">  
+        <div class="image-container">    
+          <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">      <img class="style-image" src="images/styles/styleBoards/master/4.png">      
+            <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+          </a>    
+        </div>
+      </div>
+
+      <div class="col-xs-6 col-md-3 image image-0" style="margin-right:10px;top:-200px;">  
+        <div class="image-container">    
+          <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">      <img class="style-image" src="images/styles/styleBoards/master/5.png">      
+            <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+          </a>    
+        </div>
+      </div>
+
+      <div class="col-xs-6 col-md-3 image image-0" style="margin-right:10px;top:-10px;">  
+        <div class="image-container">    
+          <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">      <img class="style-image" src="images/styles/styleBoards/master/6.png">      
+            <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+          </a>    
+        </div>
+      </div>
+
+<div class="clearfix"></div>
+<div class="col-md-1 hidden-xs hidden-sm" ></div>
+<div class="col-xs-6 col-md-3 image image-0" style="left:0px;top:-300px;margin-right:10px;">  
+        <div class="image-container">    
+          <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">      <img class="style-image" src="images/styles/styleBoards/master/7.png">      
+            <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+          </a>    
+        </div>
+      </div>
+      
+
+      <div class="col-xs-6 col-md-3 image image-0" style="left:0px;top:-200px;margin-right:10px;">  
+        <div class="image-container">    
+          <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">      <img class="style-image" src="images/styles/styleBoards/master/8.png">      
+            <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+          </a>    
+        </div>
+      </div>
+
+      <div class="col-xs-6 col-md-3 image image-0" style="left:0px;top:-120px;margin-right:10px;">  
+        <div class="image-container">    
+          <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">      <img class="style-image" src="images/styles/styleBoards/master/9.png">      
+            <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+          </a>    
+        </div>
+      </div>
+
+<div class="clearfix"></div>
+
+<div class="col-md-1 hidden-xs hidden-sm" ></div>
+      <div class="col-xs-6 col-md-3 image image-0" style="left:0px;top:-370px;margin-right:10px;">  
+        <div class="image-container">    
+          <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">      <img class="style-image" src="images/styles/styleBoards/master/10.png">      
+            <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+          </a>    
+        </div>
+      </div>
+
+      <div class="col-xs-6 col-md-3 image image-0" style="left:0px;top:-300px;margin-right:10px;">  
+        <div class="image-container">    
+          <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">      <img class="style-image" src="images/styles/styleBoards/master/11.png">      
+            <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+          </a>    
+        </div>
+      </div>
+
+      <div class="col-xs-6 col-md-3 image image-0" style="left:0px;top:-130px;margin-right:10px;">  
+        <div class="image-container">    
+          <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">      <img class="style-image" src="images/styles/styleBoards/master/12.png">      
+            <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+          </a>    
+        </div>
+      </div>
+
+      <div class="clearfix"></div>
+<div class="col-md-1 hidden-xs hidden-sm" ></div>
+<div class="col-xs-6 col-md-3 image image-0" style="left:0px;top:-370px;margin-right:10px;">  
+        <div class="image-container">    
+          <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">      <img class="style-image" src="images/styles/styleBoards/master/13.png">      
+            <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+          </a>    
+        </div>
+      </div>
+
+      <div class="col-xs-6 col-md-3 image image-0" style="left:0px;top:-500px;margin-right:10px;">  
+        <div class="image-container">    
+          <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">      <img class="style-image" src="images/styles/styleBoards/master/14.png">      
+            <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+          </a>    
+        </div>
+      </div>
+
+      <div class="col-xs-6 col-md-3 image image-0" style="left:0px;top:-340px;margin-right:10px;">  
+        <div class="image-container">    
+          <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">      <img class="style-image" src="images/styles/styleBoards/master/15.png">      
+            <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+          </a>    
+        </div>
+      </div>
+
+    </div> 
+    <div class="clearfix" style="height:10px;"></div>
+</div>
 
 
 
-<div ng-hide="hidePage2" class="font-playfair fs-20px" style="padding-top:30px;"> 
-  <p style="text-align:center;margin-right:300px;margin-left:-90px;margin-bottom:40px;">Which Bedroom do you want to relax in?</p>
+
+
+
+
+
+
+<!-- <div ng-hide="pageCount!=3" class="font-playfair fs-22px" style="padding-top:40px;"> 
+  <p style="text-align:center;margin-right:300px;margin-left:-90px;margin-bottom:50px;">Which Bedroom room do you want to relax in?</p>
 
   <div ng-repeat="styles in styleQuest2 track by $index" ng-animate="box">
     <div class="row" style="margin-top:5px;margin-right:-350px;margin-bottom:30px;">
       <div class="col-md-1 hidden-xs hidden-sm" ></div>
-      <div class=" col-md-2 col-xs-6" ng-repeat="style in styles" style="margin-right:25px;">
+      <div class="col-md-2 col-xs-6" ng-repeat="style in styles">
         <a href="#" data-room-type="1" ng-click="nextPage(style.image_id)">
           <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:100%;height:auto;">
         </a>
       </div>
       <div class="col-md-1 hidden-xs hidden-sm" ></div>
     </div>
-    </div>
-</div>
+  </div>
+</div> -->
 
-<div ng-hide="hidePage3" class="font-playfair fs-20px" style="padding-top:30px;"> 
-  <p style="text-align:center;margin-right:300px;margin-left:-90px;margin-bottom:40px;">Which Dining room do you want to relax in?</p>
+<div ng-hide="pageCount!=4" class="font-playfair fs-22px" style="padding-top:40px;"> 
+  <p style="text-align:center;margin-right:300px;margin-left:-90px;margin-bottom:50px;">Which Dining room do you want to entertain in?</p>
 
   <div ng-repeat="styles in styleQuest3 track by $index" ng-animate="box">
     <div class="row" style="margin-top:5px;margin-right:-350px;margin-bottom:30px;">
       <div class="col-md-1 hidden-xs hidden-sm" ></div>
-      <div class=" col-md-2 col-xs-6" ng-repeat="style in styles" style="margin-right:25px;">
+      <div class="col-md-2 col-xs-6" ng-repeat="style in styles">
         <a href="#" data-room-type="1" ng-click="nextPage(style.image_id)">
-          <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:100%;height:auto;">
+          <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:94%;height:auto;">
         </a>
       </div>
       <div class="col-md-1 hidden-xs hidden-sm" ></div>
     </div>
-    </div>
+  </div>
 </div>
 
-<div ng-hide="hidePage4" class="font-playfair fs-20px" style="padding-top:30px;"> 
-  <p style="text-align:center;margin-right:300px;margin-left:-90px;margin-bottom:40px;">Which Kitchen  do you want to relax in?</p>
+<div ng-hide="pageCount!=5" class="font-playfair fs-22px" style="padding-top:40px;"> 
+  <p style="text-align:center;margin-right:300px;margin-left:-90px;margin-bottom:50px;">Which Kitchen do you want to entertain in?</p>
 
   <div ng-repeat="styles in styleQuest4 track by $index" ng-animate="box">
     <div class="row" style="margin-top:5px;margin-right:-350px;margin-bottom:30px;">
       <div class="col-md-1 hidden-xs hidden-sm" ></div>
-      <div class=" col-md-2 col-xs-6" ng-repeat="style in styles" style="margin-right:25px;">
+      <div class="col-md-2 col-xs-6" ng-repeat="style in styles">
         <a href="#" data-room-type="1" ng-click="nextPage(style.image_id)">
-          <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:100%;height:auto;">
+          <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:94%;height:auto;">
         </a>
       </div>
       <div class="col-md-1 hidden-xs hidden-sm" ></div>
     </div>
-    </div>
+  </div>
 </div>
 
-<div ng-hide="hidePage5" class="font-playfair fs-20px" style="padding-top:30px;"> 
-  <p style="text-align:center;margin-right:300px;margin-left:-90px;margin-bottom:40px;">Which Living room do you want to relax in?</p>
+<div ng-hide="pageCount!=6" class="font-playfair fs-22px" style="padding-top:40px;"> 
+  <p style="text-align:center;margin-right:300px;margin-left:-90px;margin-bottom:50px;">Which Dining room do you want to entertain in?</p>
 
   <div ng-repeat="styles in styleQuest5 track by $index" ng-animate="box">
     <div class="row" style="margin-top:5px;margin-right:-350px;margin-bottom:30px;">
       <div class="col-md-1 hidden-xs hidden-sm" ></div>
-      <div class=" col-md-2 col-xs-6" ng-repeat="style in styles" style="margin-right:25px;">
+      <div class="col-md-2 col-xs-6" ng-repeat="style in styles">
         <a href="#" data-room-type="1" ng-click="nextPage(style.image_id)">
-          <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:100%;height:auto;">
+          <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:94%;height:auto;">
         </a>
       </div>
       <div class="col-md-1 hidden-xs hidden-sm" ></div>
     </div>
-    </div>
+  </div>
 </div>
 
-<div ng-hide="hidePage6" class="font-playfair fs-20px" style="padding-top:30px;"> 
-  <p style="text-align:center;margin-right:300px;margin-left:-90px;margin-bottom:40px;">Which Living room do you want to relax in?</p>
+
+<div ng-hide="pageCount!=7" class="font-playfair fs-22px" style="padding-top:40px;"> 
+  <p style="text-align:center;margin-right:300px;margin-left:-90px;margin-bottom:50px;">Which Dining room do you want to entertain in?</p>
 
   <div ng-repeat="styles in styleColor track by $index" ng-animate="box">
     <div class="row" style="margin-top:5px;margin-right:-350px;margin-bottom:30px;">
       <div class="col-md-1 hidden-xs hidden-sm" ></div>
-      <div class=" col-md-2 col-xs-6" ng-repeat="style in styles" style="margin-right:25px;">
+      <div class="col-md-2 col-xs-6" ng-repeat="style in styles">
         <a href="#" data-room-type="1" ng-click="nextPage(style.image_id)">
-          <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:100%;height:auto;">
+          <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:94%;height:auto;">
         </a>
       </div>
       <div class="col-md-1 hidden-xs hidden-sm" ></div>
     </div>
-    </div>
+  </div>
 </div>
 
-<div ng-hide="hidePage7" class="font-playfair fs-20px" style="padding-top:30px;"> 
-  <p style="text-align:center;margin-right:300px;margin-left:-90px;margin-bottom:40px;">Which Living room do you want to relax in?</p>
+<div ng-hide="pageCount!=8" class="font-playfair fs-22px" style="padding-top:40px;"> 
+  <p style="text-align:center;margin-right:300px;margin-left:-90px;margin-bottom:50px;">Which Dining room do you want to entertain in?</p>
 
   <div ng-repeat="styles in stylePrint track by $index" ng-animate="box">
     <div class="row" style="margin-top:5px;margin-right:-350px;margin-bottom:30px;">
       <div class="col-md-1 hidden-xs hidden-sm" ></div>
-      <div class=" col-md-2 col-xs-6" ng-repeat="style in styles" style="margin-right:25px;">
+      <div class="col-md-2 col-xs-6" ng-repeat="style in styles">
         <a href="#" data-room-type="1" ng-click="nextPage(style.image_id)">
-          <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:100%;height:auto;">
+          <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:94%;height:auto;">
         </a>
       </div>
       <div class="col-md-1 hidden-xs hidden-sm" ></div>
     </div>
-    </div>
+  </div>
 </div>
 
-	<div ng-hide= "resultPage" style="margin:auto;">
+	<div ng-hide="pageCount!=9" style="margin:auto;">
   <a href ="/styleQuiz" ng-click="retakeQuiz()"> Retake Quiz </a>
     	<div align="center">
       		<div  ng-repeat="item in userStyle">
@@ -444,8 +625,12 @@
                                 Next
                             </button>
                         </a>
-                        </div>
+</div>
 
+
+<div ng-hide="pageCount!=1" class="font-playfair fs-20px txt-center" style="margin-top:-20px;padding-bottom:100px;"> 
+Not sure? Take our <span class="font-montserrat col-lightcyan" style="border:2px solid #64C6BE; padding-left:10px;padding-right:10px;padding-top:5px;padding-bottom:5px;"><a href="/styleQuiz" style="text-decoration:none;color:#00a99d;">STYLE QUIZ</a></span>
+</div>
 	</div>
 
   <div class="divider" style="border-top:2px solid rgb(47, 185, 175);">

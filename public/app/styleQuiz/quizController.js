@@ -10,17 +10,17 @@ angular.module("app")
 
 	
 				console.log("Here1");
-	            $scope.progressRate=2.5;
+	            $scope.progressRate=14;
 				$scope.pageCount=0;
-				$scope.hideMain = false;
-				$scope.hidePage1 = true;
-				$scope.hidePage2 = true;
-				$scope.hidePage3 = true;
-				$scope.hidePage4 = true;
-				$scope.hidePage5 = true;
-				$scope.hidePage6 = true;
-				$scope.hidePage7 = true;
-				$scope.resultPage=true;
+				// $scope.hideMain = false;
+				// $scope.hidePage1 = true;
+				// $scope.hidePage2 = true;
+				// $scope.hidePage3 = true;
+				// $scope.hidePage4 = true;
+				// $scope.hidePage5 = true;
+				// $scope.hidePage6 = true;
+				// $scope.hidePage7 = true;
+				// $scope.resultPage=true;
 				$scope.rowCount = 2;
 				$scope.selectedImages = [];
 				$scope.identity = mvIdentity;
@@ -33,33 +33,95 @@ angular.module("app")
 				//$scope.data = 
 				
 
+				// $scope.styleQuest1 = [
+				// [{
+	   //      		 image_style: "images/styles/living/1.jpg",
+	   //      		 image_id: 1
+	   //  		}, 
+	   //  		{
+	   //  			 image_style: "images/styles/living/2.jpg",
+	   //  			 image_id: 2
+	   //  		},
+	   //  		{
+	  	// 			 image_style: "images/styles/living/3.jpg",
+	  	// 			 image_id: 3
+	   //  		}]
+	   //  		,
+	   //  		[{
+	   //  			image_style: "../images/styles/living/4.jpg",
+	   //      		image_id: 4
+	   //  		}, 
+	   //  		{
+				// 	image_style: "images/styles/living/5.jpg",
+				// 	image_id: 5
+	   //  		},
+	   //  		{
+	  	// 			image_style: "images/styles/living/6.jpg",
+	  	// 			image_id: 6
+	   //  		}]];
+
+
+				$scope.stylePref = [
+				[{
+	        		 image_style: "images/styles/classic.png",
+	        		 image_id: 1,
+	        		 image_name: "Classic"
+	    		}, 
+	    		{
+	    			 image_style: "images/styles/Contemporary.png",
+	    			 image_id: 2,
+	    			 image_name: "Contemporary"
+	    		},
+	    		{
+	  				 image_style: "images/styles/Modern.png",
+	  				 image_id: 3,
+	  				 image_name: "Modern"
+	    		}]
+	    		,
+	    		[{
+	    			image_style: "../images/styles/Transitional.png",
+	        		image_id: 4,
+	        		image_name: "Transitional"
+	    		}, 
+	    		{
+					image_style: "images/styles/minimalist.png",
+					image_id: 5,
+					image_name: "Asian Minimalist"
+	    		},
+	    		{
+	  				image_style: "images/styles/scandi.png",
+	  				image_id: 6,
+	  				image_name: "Scandinavian"
+	    		}]];
+
 				$scope.styleQuest1 = [
 				[{
-	        		 image_style: "images/styles/living/1a.jpg",
+	        		 image_style: "images/styles/living/1.png",
 	        		 image_id: 1
 	    		}, 
 	    		{
-	    			 image_style: "images/styles/living/2.jpg",
+	    			 image_style: "images/styles/living/2.png",
 	    			 image_id: 2
 	    		},
 	    		{
-	  				 image_style: "images/styles/living/3.jpg",
+	  				 image_style: "images/styles/living/3.png",
 	  				 image_id: 3
 	    		}]
 	    		,
 	    		[{
-	    			image_style: "../images/styles/living/4.jpg",
+	    			image_style: "../images/styles/living/4.png",
 	        		image_id: 4
 	    		}, 
 	    		{
-					image_style: "images/styles/living/5.jpg",
+					image_style: "images/styles/living/5.png",
 					image_id: 5
 	    		},
 	    		{
-	  				image_style: "images/styles/living/6.jpg",
+	  				image_style: "images/styles/living/6.png",
 	  				image_id: 6
 	    		}]];
-
+	  
+	   
 				$scope.styleQuest3 = [
 				[{
 	        		image_style: "images/styles/dining/1.jpg",
@@ -243,15 +305,15 @@ angular.module("app")
 	    		// To maintain the quiz result and style quiz pages state when redirected here after login.
 	    		if(quizResult.getStyle().length>=1){
 	    			$scope.userStyle = quizResult.getStyle();
-	    			$scope.hideMain = true;
-	    			$scope.hidePage1 = true;
-					$scope.hidePage2 = true;
-					$scope.hidePage3 = true;
-					$scope.hidePage4 = true;
-					$scope.hidePage5 = true;
-					$scope.hidePage6 = true;
+	    // 			$scope.hideMain = true;
+	    // 			$scope.hidePage1 = true;
+					// $scope.hidePage2 = true;
+					// $scope.hidePage3 = true;
+					// $scope.hidePage4 = true;
+					// $scope.hidePage5 = true;
+					// $scope.hidePage6 = true;
 					$scope.progress = false;
-					$scope.resultPage=false;
+					// $scope.resultPage=false;
 				
 	    		}
 
@@ -266,53 +328,65 @@ angular.module("app")
 				
 				$scope.nextPage = function(selectedImage){
 
+
 					$scope.selectedImages.push({page: $scope.pageCount, image_id: selectedImage});
 					var currentPage = $scope.pageCount;
 					
 					$scope.pageCount++;
+					//alert(currentPage);
 					
 					switch(currentPage){
 						case 0: //quizResult.clearStyle();
-								$scope.hideMain = true;
-								$scope.progress = true;
-								$scope.hidePage1 = false;
+								// $scope.hideMain = true;
+								//$scope.progress = true;
+								// $scope.hidePage1 = false;
 								$scope.backgroundCol = "#00a99d";
 								break; 
 
-						case 1: $scope.hidePage1 = true;
-								$scope.hidePage2 = false;
-								$scope.backgroundCol2 = "#00a99d";
-								$scope.progressRate+=3.5;
+						case 1: $scope.progress = true;
 								break;
 
-						case 2: $scope.hidePage2 = true;
-								$scope.hidePage3 = false;
+						case 2: //$scope.hidePage1 = true;
+								//$scope.hidePage2 = false;
+								$scope.backgroundCol2 = "#00a99d";
+								//$scope.progressRate+=3.5;
+								$scope.progressRate+= 16;
+								//temp change for progress bar at pinterest
+								
+								$scope.progress = false;
+								break;
+
+						case 3: //$scope.hidePage2 = true;
+								//$scope.hidePage3 = false;
 								$scope.backgroundCol3 = "#00a99d";
-								$scope.progressRate+=4.5;
+								$scope.progressRate+= 18;
+
+
 								break; 
 
-						case 3: $scope.hidePage3 = true;
-								$scope.hidePage4 = false;
+						case 4: //$scope.hidePage3 = true;
+								//$scope.hidePage4 = false;
 								$scope.backgroundCol4 = "#00a99d";
-								$scope.progressRate+=5.5;
+								$scope.progressRate+=18;
+
 								break;
 
-						case 4: $scope.hidePage4 = true;
-								$scope.hidePage5 = false;
+						case 5: //$scope.hidePage4 = true;
+								//$scope.hidePage5 = false;
 								$scope.backgroundCol5 = "#00a99d";
-								$scope.progressRate+=4.5;
-								break;
-
-						case 5: $scope.computeStyle();
-								$scope.hidePage5 = true;
-								$scope.hidePage6 = false;
-								$scope.backgroundCol6 = "#00a99d";
-								$scope.progressRate+=6.5;
+								$scope.progressRate+=18;
 								break;
 
 						case 6: 
-								$scope.hidePage6 = true;
-								$scope.hidePage7 = false;
+								//$scope.hidePage5 = true;
+								//$scope.hidePage6 = false;
+								$scope.backgroundCol6 = "#00a99d";
+								$scope.progressRate+=18;
+								break;
+
+						case 7: $scope.computeStyle();
+								//$scope.hidePage6 = true;
+								//$scope.hidePage7 = false;
 								$scope.backgroundCol6 = "#00a99d";
 								$scope.progressRate+=7.5;
 								break;
@@ -323,9 +397,9 @@ angular.module("app")
 								 //Show up login page, transfer control with scope. Return. Once logged in
 								 //show the page.
 								 if(mvIdentity.isAuthenticated()){
-									 $scope.hidePage7 = true;
-									 $scope.hideMain = true;
-									 $scope.resultPage = false;
+									 // $scope.hidePage7 = true;
+									 // $scope.hideMain = true;
+									 // $scope.resultPage = false;
 									 $scope.progress = false;	
 								 }
 								 else{
@@ -337,7 +411,7 @@ angular.module("app")
 								 //console.log('Before calling login')
 								 
 					}
-					$scope.progressRate+= 12.5;
+					
 					
 				}
 
@@ -457,14 +531,14 @@ angular.module("app")
 					 $scope.backgroundCol5 = "#cccccc";
 					 $scope.backgroundCol6 = "#cccccc";
 				$scope.pageCount=0;
-				$scope.hideMain = false;
-				$scope.hidePage1 = true;
-				$scope.hidePage2 = true;
-				$scope.hidePage3 = true;
-				$scope.hidePage4 = true;
-				$scope.hidePage5 = true;
-				$scope.hidePage6 = true;
-				$scope.resultPage=true;
+				// $scope.hideMain = false;
+				// $scope.hidePage1 = true;
+				// $scope.hidePage2 = true;
+				// $scope.hidePage3 = true;
+				// $scope.hidePage4 = true;
+				// $scope.hidePage5 = true;
+				// $scope.hidePage6 = true;
+				// $scope.resultPage=true;
 				$scope.rowCount = 2;
 				$scope.selectedImages = [];
 				// $scope.identity = mvIdentity;
