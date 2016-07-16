@@ -5127,8 +5127,8 @@ a.thumbnail.active {
   }
 }
 .progress {
-  height: 10px;
-  /*height: 20px;*/
+  
+  height: 20px;
   margin-bottom: 20px;
   overflow: hidden;
   background-color: #f5f5f5;
@@ -6761,3 +6761,24 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
