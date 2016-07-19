@@ -18,7 +18,16 @@
                 </ul>
                 
                 <div class="tab-icon-quiz" style="text-align:right;padding-right:70px;padding-top:-50px;">
-                    <a href="javascript:void(0);" onclick="myFunction()"><img src="images/menuIcon.png"></a>
+                    <ul class="topnav">
+                      <li class="menu-list"><a href="#"><img src="images/menuIcon.png"></a>
+                        <ul class="submenu-list" style="margin-left:100px;margin-top:40px;">
+                          <li style="text-align:center;"><a href="#">Sign In</a></li>
+                          <li style="text-align:center;"><a href="#">How it works</a></li>
+                          <li style="text-align:center;"><a href="#">Contact us</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                    <!-- <a href="myFunction()" onclick="myFunction()"><img src="images/menuIcon.png"></a> -->
                 </div>
         </div>
     </header>
@@ -116,7 +125,7 @@
           <p class="txt-upper font-montserrat fs-14px" style="letter-spacing:1px;color:rgb(112,112,112);">Kids Room</p>
         </div>
         <div class="fs-11px" style="padding-top:34px;"> 
-          <div style="margin-top:-26px">
+          <div style="margin-top:-18px">
             <span style="align:right;text-align:right;padding-left:220px;">
               <SELECT NAME="numRooms" style="width:35px;border:0.5px solid rgb(149, 149, 149);background-color:#fff">
                 <OPTION SELECTED> 1 </OPTION>
@@ -258,10 +267,10 @@
         </div>
       </div>
      <!--  <div style="width:100%"> -->
-        <span class="font-montserrat fs-26px progress-step" ng-show="true">1</span>
-        <span class="font-montserrat fs-26px progress-step" style="left:29%;" ng-show="pageCount>=3">2</span>
-        <span class="font-montserrat fs-26px progress-step" style="left:46%;" ng-show="pageCount>=4">3</span>
-        <span class="font-montserrat fs-26px progress-step" style="left:63%;" ng-show="pageCount>=5">4</span>
+        <span class="font-montserrat fs-26px progress-step" style="left:13.4%;" ng-show="true">1</span>
+        <span class="font-montserrat fs-26px progress-step" style="left:28.5%;" ng-show="pageCount>=3">2</span>
+        <span class="font-montserrat fs-26px progress-step" style="left:45.3%;" ng-show="pageCount>=4">3</span>
+        <span class="font-montserrat fs-26px progress-step" style="left:62.5%;" ng-show="pageCount>=5">4</span>
         <span class="font-montserrat fs-26px progress-step" style="left:77.9%;" ng-show="pageCount>=6">5</span>
         <span class="font-montserrat fs-26px progress-step" style="left:93.9%;" ng-show="pageCount>=7">6</span>
       <!-- </div> -->
@@ -312,8 +321,35 @@
 <!--Pinterest Board -->
 <div ng-hide="pageCount!=4" class="pictures-section" data-title="Picture Selection" style="display: block;">
     
-    
-  <div id="comment-box">
+
+
+
+<!-- Modal -->
+<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+  <div class="modal-dialog" role="document" >
+    <div class="modal-content" style="width:700px;height:500px;">
+      <div class="modal-header" style="border:none;">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="padding-left">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <div style="float:left;padding-left:20px;">
+          <img src="" class="img-comment-box1" style="width:280px;height:360px;"/> 
+        </div>
+        <div style="width:500px;padding-left:330px;">
+          <textarea rows="9" cols="35" class="font-sansRegular fs-16px" placeholder=" Add a comment" style="resize:none;border:1px solid #acacac;"></textarea>
+        <button type="button" class="btn-start-quiz font-sansRegular fs-16px" style="margin-top:8px;margin-left: 180px;padding-top:10px; padding-bottom:8px;padding-left:20px;padding-right:20px;letter-spacing:1px;">Comment</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+ <!--  <div id="comment-box">
     <span class="close">×</span>
     <div style="float:left;width:100px;">
       <img src="" class="img-comment-box" style="width:280px;height:360px;"/>
@@ -322,7 +358,7 @@
       <textarea rows="10" cols="35" class="font-sansRegular fs-16px" placeholder=" Add a comment" style="resize:none;border:1px solid #acacac;"></textarea>
       <button type="button" class="btn-start-quiz font-sansRegular fs-16px" style="margin-top:8px;margin-left: 180px;padding-top:10px; padding-bottom:8px;padding-left:20px;padding-right:20px;letter-spacing:1px;">Comment</button>
     </div>
-  </div>
+  </div> -->
 
 
 
@@ -342,7 +378,7 @@
         <div class="image-container">    
               <img class="style-image" src="images/styles/styleBoards/master/2.png"/>   
               <span class="section-comment">
-                <a href="#" class="comment" data-ordinal="0" data-image-id="245" data-image="images/styles/styleBoards/master/2.png">  
+                <a href="#" class="comment" data-ordinal="0" data-image-id="245" data-image="images/styles/styleBoards/master/2.png"  data-toggle="modal" data-target="#myModal" >  
                   <img src="images/styles/styleBoards/comment.png" id="icon_comment" style="width:20px;height:auto;" data-swap="images/styles/styleBoards/sel_comment.png" class="image-comment image-status">
                 </a>
               </span>
@@ -353,11 +389,11 @@
         </div>
       </div>
 
-      <div class="col-xs-6 col-md-3 image image-0">  
+      <div class="col-xs-6 col-md-3">  
         <div class="image-container">    
           <img class="style-image" src="images/styles/styleBoards/master/3.png">  
           <span class="section-comment">
-                <a href="#" class="comment" data-ordinal="0" data-image-id="245" data-image="images/styles/styleBoards/master/3.png">  
+                <a href="#" class="comment" data-ordinal="0" data-image-id="245" data-image="images/styles/styleBoards/master/3.png"  data-toggle="modal" data-target="#myModal">  
                   <img src="images/styles/styleBoards/comment.png" id="icon_comment" style="width:20px;height:auto;" data-swap="images/styles/styleBoards/sel_comment.png" class="image-comment image-status">
                 </a>
               </span>
@@ -407,9 +443,15 @@
 
       <div class="col-xs-6 col-md-3 image image-0" style="left:0px;top:-200px;margin-right:10px;">  
         <div class="image-container">    
-          <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">      <img class="style-image" src="images/styles/styleBoards/master/8.png">      
-            <span class="glyphicon glyphicon-heart-empty image-status"></span>   
-          </a>    
+         <img class="style-image" src="images/styles/styleBoards/master/8.png">  
+          <span class="section-comment">
+                <a href="#" class="comment" data-ordinal="0" data-image-id="245" data-image="images/styles/styleBoards/master/8.png"  data-toggle="modal" data-target="#myModal">  
+                  <img src="images/styles/styleBoards/comment.png" id="icon_comment" style="width:20px;height:auto;" data-swap="images/styles/styleBoards/sel_comment.png" class="image-comment image-status">
+                </a>
+              </span>
+
+             <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">  
+              <span class="glyphicon glyphicon-heart-empty image-status"></span>     
         </div>
       </div>
 

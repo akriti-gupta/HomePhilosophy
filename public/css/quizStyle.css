@@ -332,13 +332,16 @@ a {
   opacity: 0.5;}
 
 
+.modal-content {
+  border-radius: 0px;
 
+}
 #comment-box{
   background-color:white;
   z-index:9999;
   display:none;
   position:absolute; 
-  top:200px; left:200px;
+  top:300px; left:300px;
   width:700px;height:500px;
   align:center;
   margin:0 auto;
@@ -352,7 +355,7 @@ a {
 .close {
     color: black;
     margin-top:-60px;
-    margin-right:-30px;
+    /*margin-right:2px;*/
     font-size: 32px;
 }
 

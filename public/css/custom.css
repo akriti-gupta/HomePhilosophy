@@ -1,3 +1,4 @@
+
 @font-face{
   font-family: Montserrat-Regular;
   src: url(../fonts/Montserrat-Regular.otf);
@@ -282,11 +283,12 @@ body{
 }
 #hp-nav ul {
   list-style:none;
-  text-align:center;
+  text-align:left;
   margin: 0;
   padding: 0;
   z-index: 2;
   display: inline-block;
+
 }
  
 .topnav li{
@@ -322,9 +324,9 @@ body{
     letter-spacing: 1px;
     color: #000;
     text-decoration: none;
-     padding-top: 10px;
-  padding-bottom: 10px;
-  text-align: left;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: left;
 }
 
  .topnav li:hover >ul >li
@@ -341,8 +343,7 @@ body{
   left:20px;
   width:180px;
   background:#fff; 
-
-  /*border:0.5px solid rgb(183, 183, 183);*/
+  text-align: left;
 }
 
 
@@ -362,18 +363,6 @@ body{
 
 }
 
-/*.submenu-list li{
-  float:none;
-  width:90px;
-  padding:0px;
-
-
-
-}
-.submenu-list a{
-  line-height:190%;
- 
-}*/
 #exp-subtext{
   padding-top:13px;letter-spacing:1px;
 }
@@ -435,6 +424,14 @@ body{
         text-decoration: none;
     }
 
+    .tab-icon-quiz ul li:hover >ul >li
+    {
+      display:block;
+    }
+
+    .tab-icon-quiz ul li ul{
+      display: none;
+    }
     #hp-nav ul.responsive {
         position: relative;
         background-color: #fff;
