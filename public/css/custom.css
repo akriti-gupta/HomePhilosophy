@@ -230,6 +230,7 @@
     white-space: nowrap;
     padding: 20px 0 60px;
     clear:both;
+    position: relative;
 }
 
 .divider > span {
@@ -245,12 +246,12 @@
     clear:both;
 }
 
-.divider > span:before,
-.divider > span:after {
+.divider:before,
+.divider:after {
     content: "";
     position: absolute;
-    top: 50%;
-    width: 9999px;
+    width: calc(50% - 150px);
+    top: 46px;
     height: 2px;
     background: rgb(47, 185, 175);
 }
@@ -261,16 +262,14 @@
     opacity: 0.5;
 }*/
 
-.divider > span:before {
-    right: 100%;
+.divider:before {
+    right: 0;
     margin-right: 0px;
-    
 }
 
-.divider > span:after {
-    left: 100%;
+.divider:after {
+    left: 0;
     margin-left: 0px;
-
 }
 
 
