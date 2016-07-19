@@ -360,6 +360,7 @@ angular.module("app")
 								//$scope.hidePage3 = false;
 								$scope.backgroundCol3 = "#00a99d";
 								$scope.progressRate+= 18;
+								$scope.progress = false;
 
 
 								break; 
