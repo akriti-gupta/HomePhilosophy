@@ -17,6 +17,13 @@
 }
 
 @font-face{
+  font-family: PlayfairDisplay-Bold;
+  font-weight: normal;
+  src: url(../fonts/PlayfairDisplay-Bold.ttf);
+}
+
+
+@font-face{
   font-family: MartelSans-ExtraLight;
   font-weight: normal;
   src: url(../fonts/MartelSans-ExtraLight.ttf);
@@ -26,6 +33,12 @@
   font-family: OpenSans-Regular;
   font-weight: normal;
   src: url(../fonts/OpenSans-Regular.ttf);
+}
+
+@font-face{
+  font-family: OpenSans-Bold;
+  font-weight: normal;
+  src: url(../fonts/OpenSans-Bold.ttf);
 }
 
 @font-face{
@@ -54,7 +67,10 @@
   text-overflow: wrap;
 }
 
-
+.font-sansBold{
+  font-family: OpenSans-Bold;
+  text-overflow: wrap;
+}
 
 .font-martel{
   font-family: MartelSans-ExtraLight;
@@ -64,6 +80,12 @@
 
 .font-playfair{
   font-family: PlayfairDisplay-Regular;
+  text-overflow: wrap;
+
+}
+
+.font-playfair-bold{
+  font-family: PlayfairDisplay-Bold;
   text-overflow: wrap;
 
 }
