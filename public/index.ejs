@@ -31,6 +31,7 @@
 		<script type="text/javascript">
 		 
 			function myFunction() {
+				alert("Click");
     			document.getElementsByClassName("topnav")[0].classList.toggle("responsive");
 			}
 
@@ -62,7 +63,6 @@
 			$(document).on('click', '.comment', function(e) {
                 
                 e.preventDefault();
-              //  alert($(this).attr('data-image'));
 	           
 	            // if($(document).width() > 736) {
 	            //     $(this).closest('.image-container').toggleClass('image-container-selected animated pulse');
@@ -70,20 +70,20 @@
 	            var current = $("#icon_comment").attr("src");
 				var swap = $("#icon_comment").attr("data-swap");     
 				$("#icon_comment").attr('src', swap).attr("data-swap",current);   
-				$(".images-pin").toggleClass('images-pin-sel').toggleClass('images-pin');
+				//$(".images-pin").toggleClass('images-pin-sel').toggleClass('images-pin');
 				
 				var current_img=$(this).attr('data-image');
-				$(".img-comment-box").attr('src', current_img);
-				$("#comment-box").toggle();
+				$(".img-comment-box1").attr('src', current_img);
+				//$("#comment-box").toggle();
 	            
-	            selectedImages = $('.image-selection-selected').length;
+	            //selectedImages = $('.image-selection-selected').length;
 			});	      
      
                  
 //Close button on popup - Pinterest Board.                
 $(document).on('click', '.close', function(e) {
-	$("#comment-box").toggle();
-	$("#img-board").toggleClass('images-pin').toggleClass('images-pin-sel');
+	// $("#comment-box").toggle();
+	// $("#img-board").toggleClass('images-pin').toggleClass('images-pin-sel');
 	var current = $("#icon_comment").attr("src");
     var swap = $("#icon_comment").attr("data-swap");   
 	$("#icon_comment").attr('src', swap).attr("data-swap",current);   
