@@ -1,68 +1,31 @@
 
 <header id="site_header">
-      <div class="hp-logo"> 
-        <a href="http://www.homephilosophy.com.sg">
-                <img src="images/logo_header.png" />
-            </a>
-        </div>
-      <div id="hp-nav">
-                <ul class="topnav" >
-                   <li><a href="#" style="display:none;">About us</a></li>
-                    <li><a href="#" style="display:none;">How it works</a></li>
-                    <li><a href="#" style="display:none;">Pricing</a></li>
-                    <li><a href="#" style="display:none;">Luxury spaces</a></li>
-                    <li><a href="#" style="display:none;">Portfolio</a></li>
-                    <li><a href="#" style="display:none;">FAQ</a></li>
-                    <li><a href="#" style="display:none;">Contact us</a></li>
-                    
-                </ul>
-                
-                <div class="tab-icon-quiz" style="text-align:right;padding-right:70px;padding-top:-50px;">
-                    <ul class="topnav">
-                      <li class="menu-list"><a href="#"><img src="images/menuIcon.png"></a>
-                        <ul class="submenu-list" style="margin-left:100px;margin-top:40px;">
-                          <li style="text-align:center;"><a href="#">Sign In</a></li>
-                          <li style="text-align:center;"><a href="#">How it works</a></li>
-                          <li style="text-align:center;"><a href="#">Contact us</a></li>
-                        </ul>
-                      </li>
-                    </ul>
-                    <!-- <a href="myFunction()" onclick="myFunction()"><img src="images/menuIcon.png"></a> -->
-                </div>
-        </div>
-    </header>
+  <div class="hp-logo"> 
+    <a href="http://www.homephilosophy.com.sg">
+            <img src="images/logo_header.png" />
+        </a>
+    </div>
+    <div class="qz-mnu">
+      <ul>
+        <li style="padding-bottom:70px;"><a href="#"><img src="images/menuIcon.png" width="60%" height="auto"></a>
+          <ul class="qz-sub-list">
+            <li ><a href="#">Sign In</a></li>
+            <li ><a href="#">How it works</a></li>
+            <li><a href="#">Contact us</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+</header>
 
- <div class="divider" style="border-top:2px solid #e1e1e1;padding:15px;">
-          
-      </div>
-
+<div class="divider" style="border-top:2px solid #e1e1e1;padding:15px;"></div>
+ 
 <div ng-controller="QuizController">
 
-
-
-
-
-
-<!-- <div> <a href="/"> Go to main </a></div> -->
-
-<!-- <div id="stylePageMain" ng-hide="hideMain" class="font-playfair fs-20px" style="padding-top:30px;text-align:center"> What would you like Home Philosophy to design?
-   <div ng-repeat="rooms in roomArr track by $index" ng-animate="box'" style="padding-top:20px;"> 
-
-        <div class="row" id="div{{pageCount}}" >
-          <div class="col-xs-6 col-md-3"  ng-repeat="room in rooms" >
-          <a href="/styleQuiz" id="{{room.room_id}}" class="thumbnail"  ng-click="nextPage(room.room_id)"> <div class="testdiv" style="position:relative;top:0px;width:95%;padding-top:70px;padding-bottom:100px;border:0.5px solid rgb(112,112,112);border-radius:0px;" >
-              <img ng-src="{{room.room_image}}"/> 
-            </div>
-            </a>
-        </div>
-      </div>
-   </div>
-</div> -->
-
-<div id="stylePageMain" ng-hide="pageCount!=0" style="padding-top:30px;text-align:center;"> 
-  <p  class="font-playfair fs-20px">What would you like Home Philosophy to design?</p>
+<div id="stylePageMain" ng-hide="pageCount!=0" style="padding-top:60px;text-align:center;"> 
+  <p  class="font-playfair fs-22px">What would you like Home Philosophy to design?</p>
   <p class="font-sansRegular fs-11px">[Choose multiple rooms for an entire apartment design]</p>
-  <div class="row" style="padding-top:40px;margin-right:-250px;">
+  <div class="row" style="padding-top:50px;margin-right:-250px;">
     <div class="col-md-2 hidden-xs hidden-sm"></div>
     <div class=" col-md-2 col-xs-6" style="margin-right:20px;">
       <a href="/styleQuiz" class="thumbnail1 room-option" ng-click="nextPage(0)" data-room-type="1">
@@ -253,7 +216,7 @@
 
 
 
-<div>
+<div style="width:1800px;">
 
   <div ng-show="progress" style="width:1045px;margin-left:180px;margin-right:220px;">
 	 <div class="progress">
@@ -276,7 +239,7 @@
       <!-- </div> -->
     </div>
 
-    <div ng-hide="pageCount!=1" class="font-playfair fs-22px" style="padding-top:40px;"> 
+    <div ng-hide="pageCount!=1" class="font-playfair fs-22px" style="padding-top:60px;"> 
   <p style="text-align:center;margin-right:300px;margin-left:-90px;margin-bottom:50px;">What is your design style?</p>
 
   <div ng-repeat="styles in stylePref track by $index" ng-animate="box">
@@ -292,11 +255,16 @@
     </div>
     <div class="row" style="margin-top:-30px;margin-left:32px;margin-bottom:30px;">
        <div class="col-md-1 hidden-xs hidden-sm" ></div>
-       <div class="col-md-2 col-xs-6 font-montserrat txt-center txt-upper fs-16px" ng-repeat="style in styles" style="border:0.5px solid #acacac;width:330px;margin-right:31px;color:#707070;">{{style.image_name}}</div>
+       <div class="col-md-2 col-xs-6 font-sansRegular txt-center txt-upper fs-16px" ng-repeat="style in styles" style="padding:4px 0px;border:0.5px solid #acacac;width:330px;margin-right:31px;color:#707070;">{{style.image_name}}</div>
        
        <div class="col-md-1 hidden-xs hidden-sm" ></div>
       </div>
   </div>
+
+<div class="font-playfair fs-20px txt-center" style="margin-top:-20px;padding-bottom:100px;"> 
+Not sure? Take our <span class="font-sansRegular col-lightcyan" style="border:2px solid #64C6BE; padding-left:10px;padding-right:10px;padding-top:5px;padding-bottom:5px;"><a href="/styleQuiz" style="text-decoration:none;color:#00a99d;">STYLE QUIZ</a></span>
+</div>
+
 </div>
 
 <div ng-hide="pageCount!=2" class="font-playfair fs-22px" style="padding-top:40px;"> 
@@ -687,9 +655,6 @@
 </div>
 
 
-<div ng-hide="pageCount!=1" class="font-playfair fs-20px txt-center" style="margin-top:-20px;padding-bottom:100px;"> 
-Not sure? Take our <span class="font-montserrat col-lightcyan" style="border:2px solid #64C6BE; padding-left:10px;padding-right:10px;padding-top:5px;padding-bottom:5px;"><a href="/styleQuiz" style="text-decoration:none;color:#00a99d;">STYLE QUIZ</a></span>
-</div>
 	</div>
 
   <div class="divider" style="border-top:2px solid rgb(47, 185, 175);">

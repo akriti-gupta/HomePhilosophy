@@ -129,7 +129,7 @@
 }
 .fs-35px{
   
-  font-size: 33px;
+  font-size: 35px;
   
 }
 
@@ -225,15 +225,18 @@
    color: #64C6BE;/*rgb(100, 198, 190);*/
 }
 
-.divider {
+.section-divider, .divider {
     text-align: center;
     white-space: nowrap;
     padding: 20px 0 60px;
-    clear:both;
+    /*clear:both;*/
     position: relative;
 }
 
-.divider > span {
+.divider {
+  border-top:2px solid rgb(47, 185, 175);
+}
+.section-divider > span {
     position: relative;
     display: inline-block;
     width: 300px;
@@ -246,8 +249,8 @@
     clear:both;
 }
 
-.divider:before,
-.divider:after {
+.section-divider:before,
+.section-divider:after {
     content: "";
     position: absolute;
     width: calc(50% - 150px);
@@ -262,12 +265,12 @@
     opacity: 0.5;
 }*/
 
-.divider:before {
+.section-divider:before {
     right: 0;
     margin-right: 0px;
 }
 
-.divider:after {
+.section-divider:after {
     left: 0;
     margin-left: 0px;
 }
@@ -281,9 +284,17 @@ body{
   color: #000;
   max-width: 1920px;
   width: 100%;
-  font-family: 'Montserrat-Regular', sans-serif;
+  font-family:OpenSans-Regular;
   word-wrap: break-word;
 }
+
+a{
+  text-decoration: none;
+}
+
+/*li:hover{
+  border-bottom: 2px solid #64C6BE;
+  }*/
 
 /* Header starts */
 
@@ -745,7 +756,7 @@ padding-left:10px;
 
 .hp-logo{
   padding: 0 20px;
-    float: left;
+  float: left;
 }
 
 .hp-logo img {
