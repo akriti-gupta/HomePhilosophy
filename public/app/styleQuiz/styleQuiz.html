@@ -220,7 +220,7 @@
 <!-- <div class="qz-container"> -->
   
   <!--Progress bar -->
- <!--  <div ng-show="progress" style="width:1045px;margin-left:180px;margin-right:220px;">
+  <!-- <div ng-show="progress" class="progress">
     <div class="progress">
       <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{progressRate}}%;">
       		<span class="sr-only11 first-progress" ng-style="{'background': backgroundCol}"></span>
@@ -237,10 +237,48 @@
     <span class="font-montserrat fs-26px progress-step" style="left:62.5%;" ng-show="pageCount>=5">4</span>
     <span class="font-montserrat fs-26px progress-step" style="left:77.9%;" ng-show="pageCount>=6">5</span>
     <span class="font-montserrat fs-26px progress-step" style="left:93.9%;" ng-show="pageCount>=7">6</span>
-  </div>  --><!-- Progress bar ends -->
+  </div>  -->
+
+
+  <div ng-show="progress" class="progress-wrapper">
+    <div class="progress">
+      <div class="one primary-color"></div>
+      <div class="two no-color" ng-style="{'background': backgroundCol2}"></div>
+      <div class="three no-color" ng-style="{'background': backgroundCol3}"></div>
+      <div class="four no-color" ng-style="{'background': backgroundCol4}"></div>
+      <div class="five no-color" ng-style="{'background': backgroundCol5}"></div>
+      <div class="six no-color" ng-style="{'background': backgroundCol6}"></div>
+      <div class="progress-bar" style="width: {{progressRate}}%"></div>
+
+      <div class="lbl-one one">1</div>
+      <div class="lbl-two two" ng-show="pageCount>2">2</div>
+      <div class="lbl-three three" ng-show="pageCount>3">3</div>
+      <div class="lbl-four four" ng-show="pageCount>4">4</div>
+      <div class="lbl-five five" ng-show="pageCount>5">5</div>
+      <div class="lbl-six six" ng-show="pageCount>6">6</div>
+    </div>
+  </div>
+
+
+  <!-- Progress bar ends -->
 
   
-  <div ng-hide="pageCount!=0" class="font-playfair fs-22px txt-center" > 
+
+  <div ng-show="pageCount===0" class="font-playfair fs-22px" > 
+    <p style="padding-bottom:50px;">Test Page</p>
+    <div ng-repeat="styles in styleQuest1 track by $index">
+      <div class="row qz-row">
+        <div class="col-md-4 col-xs-4" ng-repeat="style in styles">
+          <a href="#" data-room-type="1" ng-click="nextPage(style.image_id)">
+            <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:100%;height:auto;">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div ng-show="pageCount===1" class="font-playfair fs-22px" > 
     <p style="padding-bottom:50px;">What is your design style?</p>
      <div ng-repeat="styles in stylePref track by $index">
       <div class="row" style="position:relative;width:78%;margin:0 auto;padding-bottom:30px;">
@@ -254,38 +292,96 @@
         </div>
       </div>
     </div>
-
-    <div class="fs-22px" style="padding:50px 0px 70px;"> 
-       Not sure? Take our <button id="take-qz-btn" class="font-sansRegular col-hpgreen">STYLE QUIZ</button>
+    <div class="fs-22px" style="padding:40px 0px 0px;"> 
+       <p>Not sure? Take our <button id="take-qz-btn" class="font-sansRegular col-hpgreen">STYLE QUIZ</button></p>
     </div>
   </div>
 
-
-
-
-
-
-
-
-<div ng-hide="pageCount!=1" class="font-playfair fs-22px txt-center" > 
+  <div ng-show="pageCount===2" class="font-playfair fs-22px" > 
     <p style="padding-bottom:50px;">Which Living room do you want to relax in?</p>
-
-  <div ng-repeat="styles in styleQuest1 track by $index">
-    <div class="row" style="position:relative;width:78%;margin:0 auto;padding-bottom:30px;">
-      <div class="col-md-4 col-xs-4" ng-repeat="style in styles">
-        <a href="#" data-room-type="1" ng-click="nextPage(style.image_id)">
-          <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:100%;height:auto;">
-        </a>
+    <div ng-repeat="styles in styleQuest1 track by $index">
+      <div class="row qz-row">
+        <div class="col-md-4 col-xs-4" ng-repeat="style in styles">
+          <a href="#" data-room-type="1" ng-click="nextPage(style.image_id)">
+            <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:100%;height:auto;">
+          </a>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
+
+  <div ng-show="pageCount===3" class="font-playfair fs-22px"> 
+    <p style="padding-bottom:50px;">Which Bedroom do you want to relax in?</p>
+    <div ng-repeat="styles in styleQuest2 track by $index">
+      <div class="row qz-row">
+        <div class="col-md-4 col-xs-4" ng-repeat="style in styles">
+          <a href="#" data-room-type="1" ng-click="nextPage(style.image_id)">
+            <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:100%;height:auto;">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div ng-show="pageCount===4" class="font-playfair fs-22px"> 
+    <p style="padding-bottom:50px;">Which Dining room do you want to entertain in?</p>
+    <div ng-repeat="styles in styleQuest3 track by $index">
+      <div class="row qz-row">
+        <div class="col-md-4 col-xs-4" ng-repeat="style in styles">
+          <a href="#" data-room-type="1" ng-click="nextPage(style.image_id)">
+            <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:100%;height:auto;">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div ng-show="pageCount===5" class="font-playfair fs-22px"> 
+    <p style="padding-bottom:50px;">Which Kitchen do you want to cook in?</p>
+    <div ng-repeat="styles in styleQuest4 track by $index">
+      <div class="row qz-row">
+        <div class="col-md-4 col-xs-4" ng-repeat="style in styles">
+          <a href="#" data-room-type="1" ng-click="nextPage(style.image_id)">
+            <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:100%;height:auto;">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div ng-show="pageCount===6" class="font-playfair fs-22px"> 
+    <p style="padding-bottom:50px;">What Texture do you like?</p>
+    <div ng-repeat="styles in styleQuest5 track by $index">
+      <div class="row qz-row">
+        <div class="col-md-4 col-xs-4
+        " ng-repeat="style in styles">
+          <a href="#" data-room-type="1" ng-click="nextPage(style.image_id)">
+            <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:100%;height:auto;">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div ng-show="pageCount===7" class="font-playfair fs-22px"> 
+    <p style="padding-bottom:50px;">What color palette do you like?</p>
+    <div ng-repeat="styles in styleColor track by $index">
+      <div class="row qz-row">
+        <div class="col-md-4 col-xs-6" ng-repeat="style in styles">
+          <a href="#" data-room-type="1" ng-click="nextPage(style.image_id)">
+            <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:100%;height:auto;">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 
   
 
 <!--Pinterest Board -->
-<div ng-hide="pageCount!=4" class="pictures-section" data-title="Picture Selection" style="display: block;">
+<div ng-show="pageCount===8" class="pictures-section" data-title="Picture Selection" style="display: block;">
     
 
 
@@ -510,102 +606,7 @@
 
 
 
-<div ng-hide="pageCount!=3" class="font-playfair fs-22px" style="padding-top:40px;"> 
-  <p style="text-align:center;margin-right:300px;margin-left:-90px;margin-bottom:50px;">Which Bedroom room do you want to relax in?</p>
 
-  <div ng-repeat="styles in styleQuest2 track by $index" ng-animate="box">
-    <div class="row" style="margin-top:5px;margin-right:-350px;margin-bottom:30px;">
-      <div class="col-md-1 hidden-xs hidden-sm" ></div>
-      <div class="col-md-2 col-xs-6" ng-repeat="style in styles">
-        <a href="#" data-room-type="1" ng-click="nextPage(style.image_id)">
-          <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:94%;height:auto;">
-        </a>
-      </div>
-      <div class="col-md-1 hidden-xs hidden-sm" ></div>
-    </div>
-  </div>
-</div>
-
-<!-- <div ng-hide="pageCount!=4" class="font-playfair fs-22px" style="padding-top:40px;"> 
-  <p style="text-align:center;margin-right:300px;margin-left:-90px;margin-bottom:50px;">Which Dining room do you want to entertain in?</p>
-
-  <div ng-repeat="styles in styleQuest3 track by $index" ng-animate="box">
-    <div class="row" style="margin-top:5px;margin-right:-350px;margin-bottom:30px;">
-      <div class="col-md-1 hidden-xs hidden-sm" ></div>
-      <div class="col-md-2 col-xs-6" ng-repeat="style in styles">
-        <a href="#" data-room-type="1" ng-click="nextPage(style.image_id)">
-          <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:94%;height:auto;">
-        </a>
-      </div>
-      <div class="col-md-1 hidden-xs hidden-sm" ></div>
-    </div>
-  </div>
-</div> -->
-
-<div ng-hide="pageCount!=5" class="font-playfair fs-22px" style="padding-top:40px;"> 
-  <p style="text-align:center;margin-right:300px;margin-left:-90px;margin-bottom:50px;">Which Kitchen do you want to entertain in?</p>
-
-  <div ng-repeat="styles in styleQuest4 track by $index" ng-animate="box">
-    <div class="row" style="margin-top:5px;margin-right:-350px;margin-bottom:30px;">
-      <div class="col-md-1 hidden-xs hidden-sm" ></div>
-      <div class="col-md-2 col-xs-6" ng-repeat="style in styles">
-        <a href="#" data-room-type="1" ng-click="nextPage(style.image_id)">
-          <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:94%;height:auto;">
-        </a>
-      </div>
-      <div class="col-md-1 hidden-xs hidden-sm" ></div>
-    </div>
-  </div>
-</div>
-
-<div ng-hide="pageCount!=6" class="font-playfair fs-22px" style="padding-top:40px;"> 
-  <p style="text-align:center;margin-right:300px;margin-left:-90px;margin-bottom:50px;">Which Dining room do you want to entertain in?</p>
-
-  <div ng-repeat="styles in styleQuest5 track by $index" ng-animate="box">
-    <div class="row" style="margin-top:5px;margin-right:-350px;margin-bottom:30px;">
-      <div class="col-md-1 hidden-xs hidden-sm" ></div>
-      <div class="col-md-2 col-xs-6" ng-repeat="style in styles">
-        <a href="#" data-room-type="1" ng-click="nextPage(style.image_id)">
-          <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:94%;height:auto;">
-        </a>
-      </div>
-      <div class="col-md-1 hidden-xs hidden-sm" ></div>
-    </div>
-  </div>
-</div>
-
-
-<div ng-hide="pageCount!=7" class="font-playfair fs-22px" style="padding-top:40px;"> 
-  <p style="text-align:center;margin-right:300px;margin-left:-90px;margin-bottom:50px;">Which Dining room do you want to entertain in?</p>
-
-  <div ng-repeat="styles in styleColor track by $index" ng-animate="box">
-    <div class="row" style="margin-top:5px;margin-right:-350px;margin-bottom:30px;">
-      <div class="col-md-1 hidden-xs hidden-sm" ></div>
-      <div class="col-md-2 col-xs-6" ng-repeat="style in styles">
-        <a href="#" data-room-type="1" ng-click="nextPage(style.image_id)">
-          <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:94%;height:auto;">
-        </a>
-      </div>
-      <div class="col-md-1 hidden-xs hidden-sm" ></div>
-    </div>
-  </div>
-</div>
-
-<div ng-hide="pageCount!=8" class="font-playfair fs-22px" style="padding-top:40px;"> 
-  <p style="text-align:center;margin-right:300px;margin-left:-90px;margin-bottom:50px;">Which Dining room do you want to entertain in?</p>
-
-  <div ng-repeat="styles in stylePrint track by $index" ng-animate="box">
-    <div class="row" style="margin-top:5px;margin-right:-350px;margin-bottom:30px;">
-      <div class="col-md-1 hidden-xs hidden-sm" ></div>
-      <div class="col-md-2 col-xs-6" ng-repeat="style in styles">
-        <a href="#" data-room-type="1" ng-click="nextPage(style.image_id)">
-          <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:94%;height:auto;">
-        </a>
-      </div>
-      <div class="col-md-1 hidden-xs hidden-sm" ></div>
-    </div>
-  </div>
-</div>
 
 	<div ng-hide="pageCount!=9" style="margin:auto;">
   <a href ="/styleQuiz" ng-click="retakeQuiz()"> Retake Quiz </a>
@@ -637,7 +638,7 @@
     </div>
 
     <!-- Buttons -->
-    <div style="text-align:center;margin-bottom:100px;" ng-hide="pageCount==4">
+    <div style="text-align:center;padding:80px 0px 100px;" ng-hide="pageCount==8">
       <button type="button" class="btn-qz btn-bk">Back</button>
       <button type="button" class="btn-qz btn-nxt">Next</button>
     </div>
