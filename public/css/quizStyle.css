@@ -59,6 +59,57 @@
 
 /* Menu Ends*/
 
+
+.qz-container{
+  clear: both;
+  padding-top:22px;
+}
+
+.cap-prf-styl{
+  border:0.5px solid #acacac;
+  color:#707070;
+  padding:5px 0px;
+}
+
+#take-qz-btn{
+  border:2px solid #acacac;
+  padding:5px 10px;
+  background-color:#fff;
+}
+
+#take-qz-btn:hover{
+  border:2px solid #64C6BE;
+}
+
+.btn-qz{
+  padding:12px 58px;
+  letter-spacing:1px;
+  text-transform: uppercase;
+  font-family: OpenSans-Regular;
+  font-size:14px;
+}
+
+.btn-bk{
+  
+  background-color:#fff;
+  color:#707070;
+  border:1px solid #707070;
+}
+
+.btn-nxt{
+  background-color:#00a99d;
+  color:#fff;
+  border:2px solid #00a99d;
+  margin-left:15px;
+}
+
+@media screen and (max-width: 340px) {
+    .btn-nxt {
+        margin: 5px 0px;
+    }
+
+}
+
 /*
 
 .box { color: white; text-align: center; height: 100px; font-size: 86px; }
@@ -149,7 +200,7 @@
 .progress-bar{
   background-color: #00a99d;  
 }
-
+/*
 .row .col-md-3{
 	width: 33%;
 }
@@ -157,7 +208,7 @@
 .row .col-xs-6{
 	padding-left: 5px;
 	padding-right: 5px;
-}
+}*/
 
 
 #resultPage{
@@ -443,13 +494,13 @@ a {
   width: 250px;
   padding:20px;
   display: inline-block;
+  float:left;
 }
 
 .pinboard-list-item:hover{
   background-color: rgb(0, 169, 157);
   color:white;
 }
-
 
 
 
