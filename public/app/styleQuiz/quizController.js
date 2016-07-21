@@ -10,7 +10,7 @@ angular.module("app")
 
 	
 				console.log("Here1");
-	            $scope.progressRate=14;
+	            $scope.progressRate=16.6; 
 				$scope.pageCount=0;
 				$scope.rowCount = 2;
 				$scope.selectedImages = [];
@@ -83,61 +83,8 @@ angular.module("app")
 	  				image_style: "images/styles/living/6.png",
 	  				image_id: 6
 	    		}]];
-	  
-	   
-				$scope.styleQuest3 = [
-				[{
-	        		image_style: "images/styles/dining/1.jpg",
-	        		image_id: 1
-	    		}, 
-	    		{
-	    			image_style: "images/styles/dining/2.jpg",
-					image_id: 2
-	    		},
-	    		{
-	  				image_style: "images/styles/dining/3.jpg",
-	  				image_id: 3
-	    		}],
-	    		[{
-	    			image_style: "images/styles/dining/4.jpg",
-	        		image_id: 4
-	    		}, 
-	    		{
-					image_style: "images/styles/dining/5.jpg",
-					image_id: 5
-	    		},
-	    		{
-	    			image_style: "images/styles/dining/6.jpg",
-	  				image_id: 6
-	    		}]];
-
-	    		$scope.styleQuest4 = [
-				[{
-	        		image_style: "images/styles/kitchen/1.jpg",
-	        		image_id: 1
-	    		}, 
-	    		{
-	    			image_style: "images/styles/kitchen/2.jpg",
-					image_id: 2
-	    		},
-	    		{
-	  				image_style: "images/styles/kitchen/3.jpg",
-	  				image_id: 3
-	    		}],
-	    		[{
-	    			image_style: "images/styles/kitchen/4.jpg",
-	        		image_id: 4
-	    		}, 
-	    		{
-					image_style: "images/styles/kitchen/5.jpg",
-					image_id: 5
-	    		},
-	    		{
-	  				image_style: "images/styles/kitchen/6.jpg",
-	  				image_id: 6
-	    		}]];
-
-	    		$scope.styleQuest2 = [
+	  			
+	  			$scope.styleQuest2 = [
 				[{
 	        		image_style: "images/styles/bedroom/1.png",
 	        		image_id: 1
@@ -162,60 +109,102 @@ angular.module("app")
 	  				image_style: "images/styles/bedroom/6.png",
 	  				image_id: 6
 	    		}]];
-
-	    		$scope.styleQuest5 = [
+	   
+				$scope.styleQuest3 = [
 				[{
-	        		image_style: "images/styles/textures/1.jpg",
+	        		image_style: "images/styles/dining/1.png",
 	        		image_id: 1
 	    		}, 
 	    		{
-	    			image_style: "images/styles/textures/2.jpg",
+	    			image_style: "images/styles/dining/2.png",
 					image_id: 2
 	    		},
 	    		{
-	  				image_style: "images/styles/textures/3.jpg",
+	  				image_style: "images/styles/dining/3.png",
 	  				image_id: 3
 	    		}],
 	    		[{
-	    			image_style: "images/styles/textures/4.jpg",
+	    			image_style: "images/styles/dining/4.png",
 	        		image_id: 4
 	    		}, 
 	    		{
-					image_style: "images/styles/textures/5.jpg",
+					image_style: "images/styles/dining/5.png",
 					image_id: 5
 	    		},
 	    		{
-	  				image_style: "images/styles/textures/6.jpg",
+	    			image_style: "images/styles/dining/6.png",
+	  				image_id: 6
+	    		}]];
+
+	    		$scope.styleQuest4 = [
+				[{
+	        		image_style: "images/styles/kitchen/1.png",
+	        		image_id: 1
+	    		}, 
+	    		{
+	    			image_style: "images/styles/kitchen/2.png",
+					image_id: 2
+	    		},
+	    		{
+	  				image_style: "images/styles/kitchen/3.png",
+	  				image_id: 3
+	    		}],
+	    		[{
+	    			image_style: "images/styles/kitchen/4.png",
+	        		image_id: 4
+	    		}, 
+	    		{
+					image_style: "images/styles/kitchen/5.png",
+					image_id: 5
+	    		},
+	    		{
+	  				image_style: "images/styles/kitchen/6.png",
+	  				image_id: 6
+	    		}]];
+
+	    		
+
+	    		$scope.styleQuest5 = [
+				[{
+	        		image_style: "images/styles/textures/1.png",
+	        		image_id: 1
+	    		}, 
+	    		{
+	    			image_style: "images/styles/textures/2.png",
+					image_id: 2
+	    		},
+	    		{
+	  				image_style: "images/styles/textures/3.png",
+	  				image_id: 3
+	    		}],
+	    		[{
+	    			image_style: "images/styles/textures/4.png",
+	        		image_id: 4
+	    		}, 
+	    		{
+					image_style: "images/styles/textures/5.png",
+					image_id: 5
+	    		},
+	    		{
+	  				image_style: "images/styles/textures/6.png",
 	  				image_id: 6
 	    		}]];
 
 	    		$scope.styleColor = [
 				[{
-	        		image_style: "images/styles/colour/balanced.jpg",
+	        		image_style: "images/styles/colour/balanced.png",
 	        		image_id: 1
 	    		}, 
 	    		{
-	    			image_style: "images/styles/colour/bold.jpg",
+	    			image_style: "images/styles/colour/bold.png",
 					image_id: 2
 	    		},
 	    		{
-	  				image_style: "images/styles/colour/neutrals.jpg",
+	  				image_style: "images/styles/colour/neutral.png",
 	  				image_id: 3
 	    		}]];
 
-	    		$scope.stylePrint = [
-				[{
-	        		image_style: "images/styles/print/mixed.jpg",
-	        		image_id: 1
-	    		}, 
-	    		{
-	    			image_style: "images/styles/print/patterns.jpg",
-					image_id: 2
-	    		},
-	    		{
-	  				image_style: "images/styles/print/solids.jpg",
-	  				image_id: 3
-	    		}]];
+	    		
 
 	    		$scope.roomArr = [
 				[{
@@ -299,61 +288,65 @@ angular.module("app")
 					//alert(currentPage);
 					
 					switch(currentPage){
+
 						case 0: //quizResult.clearStyle();
-								// $scope.hideMain = true;
-								//$scope.progress = true;
-								// $scope.hidePage1 = false;
+								
 								$scope.backgroundCol = "#00a99d";
 								break; 
 
 						case 1: $scope.progress = true;
 								break;
 
-						case 2: //$scope.hidePage1 = true;
-								//$scope.hidePage2 = false;
+						case 2: 
 								$scope.backgroundCol2 = "#00a99d";
-								//$scope.progressRate+=3.5;
-								$scope.progressRate+= 16;
-								//temp change for progress bar at pinterest
 								
-								//$scope.progress = false;
+								$scope.progressRate+=16.5;
+								
 								break;
 
-						case 3: //$scope.hidePage2 = true;
-								//$scope.hidePage3 = false;
+						case 3: 
 								$scope.backgroundCol3 = "#00a99d";
-								$scope.progressRate+= 18;
-								$scope.progress = false;
-
+								
+								$scope.progressRate+=16.5;
 
 								break; 
 
-						case 4: //$scope.hidePage3 = true;
-								//$scope.hidePage4 = false;
+						case 4: 
 								$scope.backgroundCol4 = "#00a99d";
-								$scope.progressRate+=18;
-
+								
+								$scope.progressRate+=16.5;
 								break;
 
 						case 5: //$scope.hidePage4 = true;
 								//$scope.hidePage5 = false;
 								$scope.backgroundCol5 = "#00a99d";
-								$scope.progressRate+=18;
+								// $scope.progressRate+=18;$scope.progressRate+=17;
+								$scope.progressRate+=16.5;
 								break;
 
-						case 6: 
+						case 6: $scope.computeStyle();
 								//$scope.hidePage5 = true;
 								//$scope.hidePage6 = false;
 								$scope.backgroundCol6 = "#00a99d";
-								$scope.progressRate+=18;
+								// $scope.progressRate+=18;
+								$scope.progressRate+=16.5;
 								break;
 
-						case 7: $scope.computeStyle();
+
+						case 7: $scope.progress=false;
+								//$scope.hidePage6 = true;
+								//$scope.hidePage7 = false;
+								// $scope.backgroundCol6 = "#00a99d";
+								// $scope.progressRate+=7.5;
+								break;
+
+						case 8: 
 								//$scope.hidePage6 = true;
 								//$scope.hidePage7 = false;
 								$scope.backgroundCol6 = "#00a99d";
-								$scope.progressRate+=7.5;
+								
 								break;
+
 
 						default: 
 								
