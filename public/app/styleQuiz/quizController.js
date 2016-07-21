@@ -12,15 +12,6 @@ angular.module("app")
 				console.log("Here1");
 	            $scope.progressRate=14;
 				$scope.pageCount=0;
-				// $scope.hideMain = false;
-				// $scope.hidePage1 = true;
-				// $scope.hidePage2 = true;
-				// $scope.hidePage3 = true;
-				// $scope.hidePage4 = true;
-				// $scope.hidePage5 = true;
-				// $scope.hidePage6 = true;
-				// $scope.hidePage7 = true;
-				// $scope.resultPage=true;
 				$scope.rowCount = 2;
 				$scope.selectedImages = [];
 				$scope.identity = mvIdentity;
@@ -32,34 +23,6 @@ angular.module("app")
 //$scope.showNavBar = false;
 				//$scope.data = 
 				
-
-				// $scope.styleQuest1 = [
-				// [{
-	   //      		 image_style: "images/styles/living/1.jpg",
-	   //      		 image_id: 1
-	   //  		}, 
-	   //  		{
-	   //  			 image_style: "images/styles/living/2.jpg",
-	   //  			 image_id: 2
-	   //  		},
-	   //  		{
-	  	// 			 image_style: "images/styles/living/3.jpg",
-	  	// 			 image_id: 3
-	   //  		}]
-	   //  		,
-	   //  		[{
-	   //  			image_style: "../images/styles/living/4.jpg",
-	   //      		image_id: 4
-	   //  		}, 
-	   //  		{
-				// 	image_style: "images/styles/living/5.jpg",
-				// 	image_id: 5
-	   //  		},
-	   //  		{
-	  	// 			image_style: "images/styles/living/6.jpg",
-	  	// 			image_id: 6
-	   //  		}]];
-
 
 				$scope.stylePref = [
 				[{
@@ -176,27 +139,27 @@ angular.module("app")
 
 	    		$scope.styleQuest2 = [
 				[{
-	        		image_style: "images/styles/bedroom/1.jpg",
+	        		image_style: "images/styles/bedroom/1.png",
 	        		image_id: 1
 	    		}, 
 	    		{
-	    			image_style: "images/styles/bedroom/2.jpg",
+	    			image_style: "images/styles/bedroom/2.png",
 					image_id: 2
 	    		},
 	    		{
-	  				image_style: "images/styles/bedroom/3.jpg",
+	  				image_style: "images/styles/bedroom/3.png",
 	  				image_id: 3
 	    		}],
 	    		[{
-	    			image_style: "images/styles/bedroom/4.jpg",
+	    			image_style: "images/styles/bedroom/4.png",
 	        		image_id: 4
 	    		}, 
 	    		{
-					image_style: "images/styles/bedroom/5.jpg",
+					image_style: "images/styles/bedroom/5.png",
 					image_id: 5
 	    		},
 	    		{
-	  				image_style: "images/styles/bedroom/6.jpg",
+	  				image_style: "images/styles/bedroom/6.png",
 	  				image_id: 6
 	    		}]];
 

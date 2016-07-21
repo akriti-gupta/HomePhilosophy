@@ -20,7 +20,7 @@
 
 <div class="divider" style="border-top:2px solid #e1e1e1;padding:15px;"></div>
  
-<div ng-controller="QuizController" class="qz-container">
+<div ng-controller="QuizController" >
 <!-- 
 <div id="stylePageMain" ng-hide="pageCount!=0" style="padding-top:60px;text-align:center;"> 
   <p  class="font-playfair fs-22px">What would you like Home Philosophy to design?</p>
@@ -217,7 +217,7 @@
 
 
 <!-- <div style="width:1800px;"> -->
-<!-- <div class="qz-container"> -->
+<div class="qz-container">
   
   <!--Progress bar -->
  <!--  <div ng-show="progress" style="width:1045px;margin-left:180px;margin-right:220px;">
@@ -241,22 +241,29 @@
 
   
   <div ng-hide="pageCount!=0" class="font-playfair fs-22px txt-center" > 
-    <p style="padding-bottom:50px;">What is your design style?</p>
-     <div ng-repeat="styles in stylePref track by $index">
-      <div class="row" style="position:relative;width:78%;margin:0 auto;padding-bottom:30px;">
-        <div class="col-md-4 col-xs-4" ng-repeat="style in styles">
+    <p style="margin-bottom:50px;">What is your design style?</p>
+
+    <!-- <div ng-repeat="styles in stylePref track by $index" ng-animate="box">
+      <div class="row" style="margin-top:5px;margin-right:-350px;margin-bottom:30px;">
+        <div class="col-md-1 hidden-xs hidden-sm" ></div>
+        <div class="col-md-2 col-xs-6" ng-repeat="style in styles">
           <a href="#" data-room-type="1" ng-click="nextPage(style.image_id)">
-            <figure>
-              <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:100%;height:auto;">
-              <figcaption class="font-sansRegular txt-center txt-upper fs-16px cap-prf-styl">{{style.image_name}}</figcaption>
-            </figure>
+            <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:94%;height:auto;">
           </a>
         </div>
+        <div class="col-md-1 hidden-xs hidden-sm" ></div>
       </div>
-    </div>
+      <div class="row" style="margin-top:-30px;margin-left:32px;margin-bottom:30px;">
+        <div class="col-md-1 hidden-xs hidden-sm" ></div>
+        <div class="col-md-2 col-xs-6 font-sansRegular txt-center txt-upper fs-16px" ng-repeat="style in styles" style="padding:4px 0px;border:0.5px solid #acacac;width:330px;margin-right:31px;color:#707070;">
+          {{style.image_name}}
+        </div>
+        <div class="col-md-1 hidden-xs hidden-sm" ></div>
+      </div>
+    </div> -->
 
-    <div class="fs-22px" style="padding:50px 0px 70px;"> 
-       Not sure? Take our <button id="take-qz-btn" class="font-sansRegular col-hpgreen">STYLE QUIZ</button>
+    <div class="font-playfair fs-20px txt-center" style="margin-top:-20px;padding-bottom:100px;"> 
+      Not sure? Take our <span class="font-sansRegular col-lightcyan" style="border:2px solid #64C6BE; padding-left:10px;padding-right:10px;padding-top:5px;padding-bottom:5px;"><a href="/styleQuiz" style="text-decoration:none;color:#00a99d;">STYLE QUIZ</a></span>
     </div>
   </div>
 
@@ -267,16 +274,19 @@
 
 
 
-<div ng-hide="pageCount!=1" class="font-playfair fs-22px txt-center" > 
-    <p style="padding-bottom:50px;">Which Living room do you want to relax in?</p>
 
-  <div ng-repeat="styles in styleQuest1 track by $index">
-    <div class="row" style="position:relative;width:78%;margin:0 auto;padding-bottom:30px;">
-      <div class="col-md-4 col-xs-4" ng-repeat="style in styles">
+<div ng-hide="pageCount!=2" class="font-playfair fs-22px" style="padding-top:40px;"> 
+  <p style="text-align:center;margin-right:300px;margin-left:-90px;margin-bottom:50px;">Which Living room do you want to relax in?</p>
+
+  <div ng-repeat="styles in styleQuest1 track by $index" ng-animate="box">
+    <div class="row" style="margin-top:5px;margin-right:-350px;margin-bottom:30px;">
+      <div class="col-md-1 hidden-xs hidden-sm" ></div>
+      <div class="col-md-2 col-xs-6" ng-repeat="style in styles">
         <a href="#" data-room-type="1" ng-click="nextPage(style.image_id)">
-          <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:100%;height:auto;">
+          <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:94%;height:auto;">
         </a>
       </div>
+      <div class="col-md-1 hidden-xs hidden-sm" ></div>
     </div>
   </div>
 </div>
@@ -636,13 +646,25 @@
   	</div>
     </div>
 
-    <!-- Buttons -->
-    <div style="text-align:center;margin-bottom:100px;" ng-hide="pageCount==4">
-      <button type="button" class="btn-qz btn-bk">Back</button>
-      <button type="button" class="btn-qz btn-nxt">Next</button>
-    </div>
-  
-  </div>
+<div style="text-align:center;padding-top:45px;margin-bottom:80px;" ng-hide="pageCount==4">
+    <a href="/styleQuiz">
+                           <button type="button" class="font-sansRegular txt-upper fs-12px" style="margin-right:10px;padding-top:10px; padding-bottom:10px;padding-left:40px;padding-right:40px;letter-spacing:1px;background-color:#fff;color:#707070;border:1px solid #707070;">
+                                Back
+                            </button>
+                        </a>
+                        
 
-  <div class="divider" style="border-top:2px solid rgb(47, 185, 175);"></div>
+     <a href="/styleQuiz">
+                            <button type="button" class="font-sansRegular txt-upper fs-12px" style="padding-top:10px; padding-bottom:10px;padding-left:40px;padding-right:40px;letter-spacing:1px;background-color:#00a99d;color:#fff;border:2px solid #00a99d;">
+                                Next
+                            </button>
+                        </a>
+</div>
+
+
+	</div>
+
+  <div class="divider" style="border-top:2px solid rgb(47, 185, 175);">
+          
+      </div>
       
