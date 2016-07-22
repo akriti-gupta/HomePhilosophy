@@ -288,7 +288,7 @@ body{
   word-wrap: break-word;
 }
 
-a, a:hover{
+a, a:hover, a:active, a:focus{
   text-decoration: none;
   color: inherit;
 }
@@ -527,7 +527,7 @@ button:focus {outline:0;}
 }
 
 
-.btn-start-quiz{
+.btn-start-quiz,.btn-comment{
     color: #fff;
     background-color: #64C6BE; /*rgb(100, 198, 190)*/;
     border-color: transparent;

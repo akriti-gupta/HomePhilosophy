@@ -16,6 +16,8 @@
 		<script src="/vendor/jquery/jquery.js"></script>
 		<script src="/vendor/toastr/toastr.js"></script>
 		<script src="/vendor/bootstrap/bootstrap.min.js"></script>
+		<script src='vendor/masonry/masonry.pkgd.min.js'></script>
+		<script src="https://npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
 		<!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
@@ -27,6 +29,7 @@
 		<script src="/app/account/mvIdentity.js"></script>
 		<script src="/app/account/mvAuth.js"></script>
 		<script src="/app/common/mvNotifier.js"></script>
+
 		
 		<script type="text/javascript">
 		 
@@ -73,6 +76,7 @@
 				//$(".images-pin").toggleClass('images-pin-sel').toggleClass('images-pin');
 				
 				var current_img=$(this).attr('data-image');
+				
 				$(".img-comment-box1").attr('src', current_img);
 				//$("#comment-box").toggle();
 	            
@@ -88,7 +92,63 @@ $(document).on('click', '.close', function(e) {
     var swap = $("#icon_comment").attr("data-swap");   
 	$("#icon_comment").attr('src', swap).attr("data-swap",current);   
 });
+
+
+
+$(document).on('click', '.pinboard-list-item', function(e) {
+	
+	    $(this).siblings(".active").removeClass('active');
+        $(this).addClass('active');
+	});
 		</script>
+
+
+<script>
+  var container = document.querySelector('#masonry');
+
+  $container.imagesLoaded( function(){
+       $container.masonry({
+  		 columnWidth	: 200,
+        itemSelector : '.item'
+      });
+    });
+
+
+  // var masonry = new Masonry(container, {
+  //   columnWidth: 50,
+  //   itemSelector: '.item'
+  // });
+</script>
+
+
+<script>
+  // $(function(){
+ 
+  //   var $container = $('#container-pin');
+  
+  //   $container.imagesLoaded( function(){
+  //     $container.masonry({
+  //     	// columnWidth	: 300,
+  //       itemSelector : '.masonryImage'
+  //       // gutter : '.gutter-sizer',
+  //       // percentPosition: true,
+  //       // isFitWidth: true
+  //     });
+  //   });
+  
+  // });
+
+  $(document).ready(function() {
+$('#container-pin').masonry({
+columnWidth: 320,
+itemSelector: '.item',
+isFitWidth: true
+}).imagesLoaded(function() {
+$('#container-pin').masonry('reload');
+});
+});
+</script>
+
 
 
 		<!-- <link rel="stylesheet" href="/css/bootstrap.css"/> -->
@@ -106,36 +166,6 @@ $(document).on('click', '.close', function(e) {
 	</head>
 
 	<body ng-app="app">	
-		<!-- <header id="site_header">
-	 		<div class="hp-logo"> 
-	 			<a href="http://www.homephilosophy.com.sg">
-		            <img src="images/hp_logo1.png" />
-		        </a>
-		    </div>
-			<div id="hp-nav">
-                <ul class="topnav">
-                   <li><a href="#">About us</a></li>
-                    <li><a href="#">How it works</a></li>
-                    <li><a href="#">Pricing</a></li>
-                    <li><a href="#">Luxury spaces</a></li>
-                    <li><a href="#">Portfolio</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Contact us</a></li>
-                    <li>
-                        <a href="/styleQuiz">
-                            <button type="button" class="btn-start-quiz font-montserrat txt-upper col-lightcyan fs-12px" style="padding-top:6px; padding-bottom:6px;letter-spacing:1px;">
-                                Get Started
-                            </button>
-                        </a>
-                    </li>
-                </ul>
-                <div class="tab_icon">
-                    <a href="javascript:void(0);" onclick="myFunction()">&#9776;</a>
-                </div>
-    		</div>
-		</header> -->
-	
-
 		<section id="content-wrapper">
 			<!-- <div class="dropdown" ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
 	    		<a href="/login">Sign In</a>
@@ -157,7 +187,6 @@ $(document).on('click', '.close', function(e) {
 <% if(!!bootstrappedUser){%>  
 				<script type="text/javascript">
 					window.bootstrappedUserObject = <%- JSON.stringify(bootstrappedUser)%>
-					//alert(window.bootstrappedUserObject);
 				</script>
 			<%}%>
 			
@@ -168,10 +197,6 @@ $(document).on('click', '.close', function(e) {
 			</section>
 
 		<footer id="site_footer">
-			<!-- <div class="divider">
-  				 <span>Get In Touch!</span>
-			</div> -->
-
 			<div class="site_header" style="margin-bottom:100px;">
 				<div class="hp-logo"> 
 		 			<a href="http://www.homephilosophy.com.sg">
@@ -199,5 +224,6 @@ $(document).on('click', '.close', function(e) {
 			    </div>
 			</div>
 		</footer>
+		
 	</body>
 </html>

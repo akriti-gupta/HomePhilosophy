@@ -351,7 +351,7 @@ a:active, a:hover {
       color: #ff2e78; }*/
 
 
-a {
+/*a {
   
   text-decoration: none;
    }
@@ -363,7 +363,7 @@ a {
     outline: thin dotted;
     outline: 2px auto -webkit-focus-ring-color;
     outline-offset: -2px;
-     }
+     }*/
 
 
 .pictures-section .col-md-3, .pictures-section .col-xs-6 {
@@ -381,13 +381,13 @@ a {
 }
 
 
-  .pictures-section .image-container .image-selection span.glyphicon-heart-empty, .pictures-section .image-container .image-selection span.glyphicon-heart  {
+  /*.pictures-section .image-container .image-selection span.glyphicon-heart-empty, .pictures-section .image-container .image-selection span.glyphicon-heart  {
     color: #fff; }
 
 
   .pictures-section .image-container .image-selection-selected span.glyphicon-heart-empty, .pictures-section .image-container .image-selection-selected span.glyphicon-heart {
     color: rgb(0, 169, 157);
-       text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white; }
+       text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white; }*/
   
   .pictures-section .image-container .image-status {
     position: absolute;
@@ -395,11 +395,11 @@ a {
     right: 12px;
     font-size: 20px; }
 
-    .image-comment{
+    /*.image-comment{
       position: absolute;
     top: 15px;
     left:265px;
-    }
+    }*/
   .pictures-section .image-container .style-image {
     opacity: 1;
     width: 100%;
@@ -409,8 +409,11 @@ a {
   .pictures-section .image-container-selected {
     border: 1px solid #f6f6f6; }
 
-    .images-pin {
+    /*.images-pin {
   visibility: visible; position: relative; margin-left:30px;margin-right:0px;width:80%;
+  opacity: 1;}*/
+  .images-pin {
+  visibility: visible; position: relative; margin:0px auto;width:90%;
   opacity: 1;}
 
 .images-pin-sel {
@@ -464,16 +467,149 @@ a {
 
 .pinboard-list-item{
   border-right:1px solid rgb(172, 172, 172); 
-  width: 250px;
-  padding:20px;
+  width: 200px;
+  padding:15px 0px;
   display: inline-block;
   float:left;
 }
 
-.pinboard-list-item:hover{
+
+.pinboard-list-item.active,
+.pinboard-list-item:hover
+{
   background-color: rgb(0, 169, 157);
   color:white;
+
+}
+
+@media screen and (max-width: 930px) {
+    .pinboard-list{
+        list-style: initial;
+        border: 0px;
+        width:70%;
+    }
+    .pinboard-list-item{
+      display: block;
+      border: 1px solid rgb(172, 172, 172);
+    }
+
+}
+
+.btn-comment{
+  margin-top:8px;
+  margin-left: 180px;
+  padding:10px 20px 8px;
+  letter-spacing:1px;
 }
 
 
 
+
+
+
+#container-pin {
+ width: 100px;
+ margin: 0 auto;
+}
+ 
+/*Media Queries*/
+@media only screen and (max-width : 1199px),
+only screen and (max-device-width : 1199px){
+ #container-pin {
+ width: 1000px;
+ }
+}
+ 
+ 
+@media only screen and (max-width : 999px),
+only screen and (max-device-width : 999px){
+ #container-pin {
+ width: 800px;
+ }
+}
+ 
+@media only screen and (max-width : 799px),
+only screen and (max-device-width : 799px){
+ #container-pin {
+ width: 600px;
+ }
+}
+ 
+@media only screen and (max-width : 599px),
+only screen and (max-device-width : 599px){
+ #container-pin {
+ width: 400px;
+ }
+}
+ 
+@media only screen and (max-width : 399px),
+only screen and (max-device-width : 399px){
+ #container-pin {
+ width: 200px;
+ }
+}
+
+.gutter-sizer{
+  width:4%;
+}
+
+
+.item {
+        width:  307px;
+        height: 400px;
+        float: left;
+        background: #fff;
+        border: 2px solid red;
+        margin-right:30px;
+        margin-bottom:30px;
+      }
+
+      .item img{
+        /*height:100%;*/
+        width:100%;
+      }
+
+      .item.small {
+        /*width:  300px;*/
+        height: 280px;
+        
+      }
+
+      .item.medium {
+        width:  290px;
+       /* height: 180px;*/
+       
+      }
+
+      .item.large {
+        /*width:  300px;*/
+        height: 500px;
+        
+      }
+
+
+
+    .ngg-pro-masonry{max-width:100%;height:auto;line-height:0;margin:0 auto}
+    .ngg-pro-masonry-item{margin:0;padding:0;height:auto;max-width: 280px; position: absolute;}
+    .ngg-pro-masonry-item a{margin:0;padding:0}
+    .ngg-pro-masonry-item a img{margin:0;padding:0;max-width:100%;width:100%;height:auto;border:0;}
+
+
+
+
+.image-status {
+    position: absolute;
+    top: 17px;
+    left: 251px;
+    font-size: 25px; }
+
+    .pictures-section .image-container .image-selection span.glyphicon-heart-empty, .pictures-section .image-container .image-selection span.glyphicon-heart  {
+    color: #fff; }
+
+ .image-selection span.glyphicon-heart-empty, .image-selection span.glyphicon-heart  {
+    color: #fff; }
+
+  .image-selection-selected span.glyphicon-heart-empty,  .image-selection-selected span.glyphicon-heart {
+    color: rgb(0, 169, 157);
+    text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white; }
+  
