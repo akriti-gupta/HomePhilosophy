@@ -461,7 +461,9 @@ $scope.pics =[{
 								//$scope.hidePage7 = false;
 								// $scope.backgroundCol6 = "#00a99d";
 								// $scope.progressRate+=7.5;
-								break;
+								$scope.refresh(); 
+												break;
+
 
 						case 8: 
 								//$scope.hidePage6 = true;
@@ -499,6 +501,11 @@ $scope.pics =[{
 				// 	console.log('Path is :'+path);
 	  	// 			$location.path( path );
 				// };
+
+$scope.refresh = function(){
+	console.log("refreshing gallery noe");
+            angularGridInstance.gallerypin.refresh();
+        }
 
 				$scope.computeStyle = function(){
 					//initialising scorecards of each style to 0
