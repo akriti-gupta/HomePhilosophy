@@ -285,7 +285,7 @@ angular.module("app")
 					var currentPage = $scope.pageCount;
 					
 					$scope.pageCount++;
-					//alert(currentPage);
+					// alert($scope.pageCount);
 					
 					switch(currentPage){
 

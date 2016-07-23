@@ -21,8 +21,8 @@
 <div class="divider" style="border-top:2px solid #e1e1e1;padding:15px;"></div>
  
 <div ng-controller="QuizController" class="qz-container">
-<!-- 
-<div id="stylePageMain" ng-hide="pageCount!=0" style="padding-top:60px;text-align:center;"> 
+
+<div id="stylePageMain" ng-show="pageCount==0" style="padding-top:60px;text-align:center;"> 
   <p  class="font-playfair fs-22px">What would you like Home Philosophy to design?</p>
   <p class="font-sansRegular fs-11px">[Choose multiple rooms for an entire apartment design]</p>
   <div class="row" style="padding-top:50px;margin-right:-250px;">
@@ -198,7 +198,7 @@
     
   </div>
 </div>
- -->
+
 
 
 
@@ -241,7 +241,7 @@
   </div>
   <!-- Progress bar ends -->
 
-  <div ng-show="pageCount===8" class="font-playfair fs-22px" > 
+  <!-- <div ng-show="pageCount===0" class="font-playfair fs-22px" > 
     <p style="padding-bottom:50px;">Test Page</p>
     <div ng-repeat="styles in styleQuest1 track by $index">
       <div class="row qz-row">
@@ -252,7 +252,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <div ng-show="pageCount===1" class="font-playfair fs-22px" > 
     <p style="padding-bottom:50px;">What is your design style?</p>
@@ -357,10 +357,10 @@
 
 
 <!--Pinterest Board -->
-<div ng-show="pageCount===0" class="pictures-section" data-title="Picture Selection">
+<div ng-show="pageCount===8" class="pictures-section" data-title="Picture Selection">
 
   <!-- Modal -->
-  <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+  <div class="modal" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel" >
     <div class="modal-dialog" role="document" >
       <div class="modal-content" style="width:700px;height:500px;">
         <div class="modal-header" style="border:none;">
@@ -373,6 +373,22 @@
           <div style="width:500px;padding-left:330px;">
             <textarea rows="9" cols="35" class="font-sansRegular fs-16px" placeholder=" Add a comment" style="resize:none;border:1px solid #acacac;"></textarea>
           <button type="button" class="btn-start-quiz btn-comment font-sansRegular fs-16px">Comment</button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="zoomModal" tabindex="-1" role="dialog" aria-labelledby="zoomModalLabel" >
+    <div class="modal-dialog" role="document" >
+      <div class="modal-content" style="width:900px;">
+        <div class="modal-header" style="border:none;">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="padding-left">&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <div style="position:relative;width:99%;margin:0 auto;">
+            <img src="" class="img-zoom-box" style="width:100%"/> 
           </div>
         </div>
         
@@ -431,11 +447,11 @@
     <div class="ngg-pro-masonry-sizer" style="width: 400px"></div> -->
     
     <div class="ngg-pro-masonry-item" style="height: 100px;left: 0px; top: 0px;">
-      <a href="#">
+      <a href="#" class="zoom" data-toggle="modal" data-target="#zoomModal">
         <img style="max-width:none" width="280" height="auto" src="images/styles/styleBoards/master/1a.png">
       </a>
 
-      <a href="#" class="comment" data-image="images/styles/styleBoards/master/1a.png"  data-toggle="modal" data-target="#myModal">
+      <a href="#" class="comment" data-image="images/styles/styleBoards/master/1a.png"  data-toggle="modal" data-target="#commentModal">
         <img src="images/styles/styleBoards/comment.png" id="icon_comment"  class="image-comment image-status" style="width:20px;height:auto;left:220px;" data-swap="images/styles/styleBoards/sel_comment.png">
       </a>     
 
@@ -446,11 +462,11 @@
     
     
     <div class="ngg-pro-masonry-item" style="height: 133px; left: 310px; top: 0px;">
-      <a href="#">
+      <a href="#"  class="zoom" data-toggle="modal" data-target="#zoomModal">
         <img style="max-width:none" width="280" height="auto" src="images/styles/styleBoards/master/2.png">
       </a>
 
-        <a href="#" class="comment" data-image="images/styles/styleBoards/master/2.png"  data-toggle="modal" data-target="#myModal">
+        <a href="#" class="comment" data-image="images/styles/styleBoards/master/2.png"  data-toggle="modal" data-target="#commentModal">
         <img src="images/styles/styleBoards/comment.png" id="icon_comment"  class="image-comment image-status" style="width:20px;height:auto;left:220px;" data-swap="images/styles/styleBoards/sel_comment.png">
       </a>     
 
@@ -461,10 +477,10 @@
     
     
     <div class="ngg-pro-masonry-item" style="height: 134px; left: 620px; top: 0px;">
-      <a href="#">
+      <a href="#"  class="zoom" data-toggle="modal" data-target="#zoomModal">
         <img style="max-width:none" width="280" height="auto" src="images/styles/styleBoards/master/3.png">
       </a>
-      <a href="#" class="comment" data-image="images/styles/styleBoards/master/3.png"  data-toggle="modal" data-target="#myModal">
+      <a href="#" class="comment" data-image="images/styles/styleBoards/master/3.png"  data-toggle="modal" data-target="#commentModal">
         <img src="images/styles/styleBoards/comment.png" id="icon_comment"  class="image-comment image-status" style="width:20px;height:auto;left:220px;" data-swap="images/styles/styleBoards/sel_comment.png">
       </a>     
 
@@ -474,10 +490,10 @@
     </div>
     
     <div class="ngg-pro-masonry-item" style="height: 134px;left: 0px; top: 390px;">
-      <a href="#">
+      <a href="#" class="zoom" data-toggle="modal" data-target="#zoomModal">
         <img style="max-width:none" width="280" height="auto" src="images/styles/styleBoards/master/4.png">
       </a>
-      <a href="#" class="comment" data-image="images/styles/styleBoards/master/4.png"  data-toggle="modal" data-target="#myModal">
+      <a href="#" class="comment" data-image="images/styles/styleBoards/master/4.png"  data-toggle="modal" data-target="#commentModal">
         <img src="images/styles/styleBoards/comment.png" id="icon_comment"  class="image-comment image-status" style="width:20px;height:auto;left:220px;" data-swap="images/styles/styleBoards/sel_comment.png">
       </a>     
 
@@ -487,10 +503,10 @@
     </div>
     
     <div class="ngg-pro-masonry-item" style="height: 267px; left: 310px; top: 314px;">
-      <a href="#">  
+      <a href="#" class="zoom" data-toggle="modal" data-target="#zoomModal">  
         <img style="max-width:none" width="280" height="auto" src="images/styles/styleBoards/master/5.png">
       </a>
-        <a href="#" class="comment" data-image="images/styles/styleBoards/master/5.png"  data-toggle="modal" data-target="#myModal">
+        <a href="#" class="comment" data-image="images/styles/styleBoards/master/5.png"  data-toggle="modal" data-target="#commentModal">
         <img src="images/styles/styleBoards/comment.png" id="icon_comment"  class="image-comment image-status" style="width:20px;height:auto;left:220px;" data-swap="images/styles/styleBoards/sel_comment.png">
       </a>     
 
@@ -500,10 +516,10 @@
     </div>
     
     <div class="ngg-pro-masonry-item" style="height: 133px;left: 620px; top: 470px;">
-      <a href="#">
+      <a href="#" class="zoom" data-toggle="modal" data-target="#zoomModal">
         <img style="max-width:none" width="280" height="auto" src="images/styles/styleBoards/master/6.png">
       </a>
-        <a href="#" class="comment" data-image="images/styles/styleBoards/master/6.png"  data-toggle="modal" data-target="#myModal">
+        <a href="#" class="comment" data-image="images/styles/styleBoards/master/6.png"  data-toggle="modal" data-target="#commentModal">
         <img src="images/styles/styleBoards/comment.png" id="icon_comment"  class="image-comment image-status" style="width:20px;height:auto;left:220px;" data-swap="images/styles/styleBoards/sel_comment.png">
       </a>     
 
@@ -513,10 +529,10 @@
     </div>
     
     <div class="ngg-pro-masonry-item" style="height: 164px;left: 0px; top: 705px;">
-      <a href="#">
+      <a href="#" class="zoom" data-toggle="modal" data-target="#zoomModal">
         <img style="max-width:none" width="280" height="auto" src="images/styles/styleBoards/master/7.png">
       </a>
-      <a href="#" class="comment" data-image="images/styles/styleBoards/master/7.png"  data-toggle="modal" data-target="#myModal">
+      <a href="#" class="comment" data-image="images/styles/styleBoards/master/7.png"  data-toggle="modal" data-target="#commentModal">
         <img src="images/styles/styleBoards/comment.png" id="icon_comment"  class="image-comment image-status" style="width:20px;height:auto;left:220px;" data-swap="images/styles/styleBoards/sel_comment.png">
       </a>     
 
@@ -526,11 +542,11 @@
     </div>
     
     <div class="ngg-pro-masonry-item" style="height: 133px;left: 310px; top: 797px;">
-      <a href="#">
+      <a href="#" class="zoom" data-toggle="modal" data-target="#zoomModal">
         <img style="max-width:none" width="280" height="auto" src="images/styles/styleBoards/master/8.png">
       </a>
       
-      <a href="#" class="comment" data-image="images/styles/styleBoards/master/8.png"  data-toggle="modal" data-target="#myModal">
+      <a href="#" class="comment" data-image="images/styles/styleBoards/master/8.png"  data-toggle="modal" data-target="#commentModal">
         <img src="images/styles/styleBoards/comment.png" id="icon_comment"  class="image-comment image-status" style="width:20px;height:auto;left:220px;" data-swap="images/styles/styleBoards/sel_comment.png">
       </a>     
 
@@ -540,10 +556,10 @@
     </div>
             
     <div class="ngg-pro-masonry-item" style="height: 200px;left: 620px; top: 870px;">
-      <a href="#">
+      <a href="#" class="zoom" data-toggle="modal" data-target="#zoomModal">
         <img style="max-width:none" width="280" height="auto" src="images/styles/styleBoards/master/9.png">
 
-      <a href="#" class="comment" data-image="images/styles/styleBoards/master/9.png"  data-toggle="modal" data-target="#myModal">
+      <a href="#" class="comment" data-image="images/styles/styleBoards/master/9.png"  data-toggle="modal" data-target="#commentModal">
         <img src="images/styles/styleBoards/comment.png" id="icon_comment"  class="image-comment image-status" style="width:20px;height:auto;left:220px;" data-swap="images/styles/styleBoards/sel_comment.png">
       </a>     
 
@@ -555,10 +571,10 @@
    
     
     <div class="ngg-pro-masonry-item" style="height: 133px;left: 0px; top: 1078px;">
-      <a href="#">
+      <a href="#" class="zoom" data-toggle="modal" data-target="#zoomModal">
         <img style="max-width:none" width="280" height="auto" src="images/styles/styleBoards/master/10.png">
       </a>
-      <a href="#" class="comment" data-image="images/styles/styleBoards/master/10.png"  data-toggle="modal" data-target="#myModal">
+      <a href="#" class="comment" data-image="images/styles/styleBoards/master/10.png"  data-toggle="modal" data-target="#commentModal">
         <img src="images/styles/styleBoards/comment.png" id="icon_comment"  class="image-comment image-status" style="width:20px;height:auto;left:220px;" data-swap="images/styles/styleBoards/sel_comment.png">
       </a>     
 
@@ -570,10 +586,10 @@
     
     
     <div class="ngg-pro-masonry-item" style="height: 133px; left: 310px; top: 1151px;">
-      <a href="#">
+      <a href="#" class="zoom" data-toggle="modal" data-target="#zoomModal">
         <img title="China" alt="China" style="max-width:none" width="280" height="auto" src="images/styles/styleBoards/master/11.png">
       </a>
-      <a href="#" class="comment" data-image="images/styles/styleBoards/master/11.png"  data-toggle="modal" data-target="#myModal">
+      <a href="#" class="comment" data-image="images/styles/styleBoards/master/11.png"  data-toggle="modal" data-target="#commentModal">
         <img src="images/styles/styleBoards/comment.png" id="icon_comment"  class="image-comment image-status" style="width:20px;height:auto;left:220px;" data-swap="images/styles/styleBoards/sel_comment.png">
       </a>     
 
@@ -584,11 +600,11 @@
     </div>
 
     <div class="ngg-pro-masonry-item" style="height: 133px;  left: 620px; top: 1305px;">
-      <a href="#">
+      <a href="#" class="zoom" data-toggle="modal" data-target="#zoomModal">
         <img style="max-width:none" width="280" height="auto" src="images/styles/styleBoards/master/12.png">
       </a>
       
-      <a href="#" class="comment" data-image="images/styles/styleBoards/master/12.png"  data-toggle="modal" data-target="#myModal">
+      <a href="#" class="comment" data-image="images/styles/styleBoards/master/12.png"  data-toggle="modal" data-target="#commentModal">
         <img src="images/styles/styleBoards/comment.png" id="icon_comment"  class="image-comment image-status" style="width:20px;height:auto;left:220px;" data-swap="images/styles/styleBoards/sel_comment.png">
       </a>     
 
@@ -600,11 +616,11 @@
     
     
     <div class="ngg-pro-masonry-item" style="height: 200px;left: 0px; top: 1561px;">
-      <a href="#"> 
+      <a href="#" class="zoom" data-toggle="modal" data-target="#zoomModal"> 
         <img style="max-width:none" width="280" height="auto" src="images/styles/styleBoards/master/13.png">
       </a>
 
-        <a href="#" class="comment" data-image="images/styles/styleBoards/master/13.png"  data-toggle="modal" data-target="#myModal">
+        <a href="#" class="comment" data-image="images/styles/styleBoards/master/13.png"  data-toggle="modal" data-target="#commentModal">
         <img src="images/styles/styleBoards/comment.png" id="icon_comment"  class="image-comment image-status" style="width:20px;height:auto;left:220px;" data-swap="images/styles/styleBoards/sel_comment.png">
       </a>     
 
@@ -615,10 +631,10 @@
     </div>
     
     <div class="ngg-pro-masonry-item" style="height: 139px;left: 310px; top: 1466px;">
-      <a href="#">
+      <a href="#" class="zoom" data-toggle="modal" data-target="#zoomModal">
         <img style="max-width:none" width="280" height="auto" src="images/styles/styleBoards/master/14.png">
       </a>
-      <a href="#" class="comment" data-image="images/styles/styleBoards/master/14.png"  data-toggle="modal" data-target="#myModal">
+      <a href="#" class="comment" data-image="images/styles/styleBoards/master/14.png"  data-toggle="modal" data-target="#commentModal">
         <img src="images/styles/styleBoards/comment.png" id="icon_comment"  class="image-comment image-status" style="width:20px;height:auto;left:220px;" data-swap="images/styles/styleBoards/sel_comment.png">
       </a>     
 
@@ -630,11 +646,11 @@
    
 
     <div class="ngg-pro-masonry-item" style="height: 300px;left: 620px; top: 1620px;">
-      <a href="#">
-        <img style="max-width:none" width="280" height="auto" srcset="images/styles/styleBoards/master/15.png">
-        </a>
+      <a href="#" class="zoom" data-toggle="modal" data-target="#zoomModal">
+        <img style="max-width:none" width="280" height="auto" src="images/styles/styleBoards/master/15.png">
+      </a>
 
-        <a href="#" class="comment" data-image="images/styles/styleBoards/master/15.png"  data-toggle="modal" data-target="#myModal">
+        <a href="#" class="comment" data-image="images/styles/styleBoards/master/15.png"  data-toggle="modal" data-target="#commentModal">
         <img src="images/styles/styleBoards/comment.png" id="icon_comment"  class="image-comment image-status" style="width:20px;height:auto;left:220px;" data-swap="images/styles/styleBoards/sel_comment.png">
       </a>     
 
@@ -665,7 +681,7 @@
         <div class="image-container">    
               <img class="style-image" src="images/styles/styleBoards/master/2.png"/>   
               <span class="section-comment">
-                <a href="#" class="image-comment" data-ordinal="0" data-image-id="245" data-image="images/styles/styleBoards/master/2.png"  data-toggle="modal" data-target="#myModal" >  
+                <a href="#" class="image-comment" data-ordinal="0" data-image-id="245" data-image="images/styles/styleBoards/master/2.png"  data-toggle="modal" data-target="#commentModal" >  
                   <img src="images/styles/styleBoards/comment.png" id="icon_comment" style="width:20px;height:auto;" data-swap="images/styles/styleBoards/sel_comment.png" class="image-comment image-status">
                 </a>
               </span>
@@ -680,7 +696,7 @@
         <div class="image-container">    
           <img class="style-image" src="images/styles/styleBoards/master/3.png">  
           <span class="section-comment">
-                <a href="#" class="comment" data-ordinal="0" data-image-id="245" data-image="images/styles/styleBoards/master/3.png"  data-toggle="modal" data-target="#myModal">  
+                <a href="#" class="comment" data-ordinal="0" data-image-id="245" data-image="images/styles/styleBoards/master/3.png"  data-toggle="modal" data-target="#commentModal">  
                   <img src="images/styles/styleBoards/comment.png" id="icon_comment" style="width:20px;height:auto;" data-swap="images/styles/styleBoards/sel_comment.png" class="image-comment image-status">
                 </a>
               </span>
@@ -732,7 +748,7 @@
         <div class="image-container">    
          <img class="style-image" src="images/styles/styleBoards/master/8.png">  
           <span class="section-comment">
-                <a href="#" class="comment" data-ordinal="0" data-image-id="245" data-image="images/styles/styleBoards/master/8.png"  data-toggle="modal" data-target="#myModal">  
+                <a href="#" class="comment" data-ordinal="0" data-image-id="245" data-image="images/styles/styleBoards/master/8.png"  data-toggle="modal" data-target="#commentModal">  
                   <img src="images/styles/styleBoards/comment.png" id="icon_comment" style="width:20px;height:auto;" data-swap="images/styles/styleBoards/sel_comment.png" class="image-comment image-status">
                 </a>
               </span>
@@ -845,10 +861,10 @@
   		 </div>
   		</div>
   	</div>
-    </div>
+    
 
     <!-- Buttons -->
-    <div style="text-align:center;padding:80px 0px 100px;" ng-hide="pageCount==0">
+    <div style="text-align:center;padding:80px 0px 100px;" ng-show="pageCount!=8">
       <button type="button" class="btn-qz btn-bk">Back</button>
       <button type="button" class="btn-qz btn-nxt">Next</button>
     </div>
