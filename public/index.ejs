@@ -73,12 +73,8 @@
 	            var current = $("#icon_comment").attr("src");
 				var swap = $("#icon_comment").attr("data-swap");     
 				$("#icon_comment").attr('src', swap).attr("data-swap",current);   
-				//$(".images-pin").toggleClass('images-pin-sel').toggleClass('images-pin');
-				
 				var current_img=$(this).attr('data-image');
-				
 				$(".img-comment-box1").attr('src', current_img);
-				//$("#comment-box").toggle();
 	            
 	            //selectedImages = $('.image-selection-selected').length;
 			});	      
@@ -86,14 +82,18 @@
                  
 //Close button on popup - Pinterest Board.                
 $(document).on('click', '.close', function(e) {
-	// $("#comment-box").toggle();
-	// $("#img-board").toggleClass('images-pin').toggleClass('images-pin-sel');
 	var current = $("#icon_comment").attr("src");
     var swap = $("#icon_comment").attr("data-swap");   
 	$("#icon_comment").attr('src', swap).attr("data-swap",current);   
 });
 
 
+$(document).on('click', '.zoom img', function(e) {
+	var current_img = $(this).attr("src");
+	$(".img-zoom-box").attr('src',current_img)
+	
+	
+});
 
 $(document).on('click', '.pinboard-list-item', function(e) {
 	
