@@ -1,0 +1,941 @@
+
+<header id="site_header">
+  <div class="hp-logo"> 
+    <a href="http://www.homephilosophy.com.sg">
+            <img src="images/logo_header.png" />
+        </a>
+    </div>
+    <div class="qz-mnu">
+      <ul>
+        <li style="padding-bottom:70px;"><a href="#"><img src="images/menuIcon.png" width="60%" height="auto"></a>
+          <ul class="qz-sub-list">
+            <li ><a href="#">Sign In</a></li>
+            <li ><a href="#">How it works</a></li>
+            <li><a href="#">Contact us</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+</header>
+
+<div class="divider" style="border-top:2px solid #e1e1e1;padding:15px;"></div>
+ 
+<div ng-controller="QuizController" class="qz-container">
+
+<div id="stylePageMain" ng-show="pageCount==8" style="padding-top:60px;text-align:center;"> 
+  <p  class="font-playfair fs-22px">What would you like Home Philosophy to design?</p>
+  <p class="font-sansRegular fs-11px">[Choose multiple rooms for an entire apartment design]</p>
+  <div class="row" style="padding-top:50px;margin-right:-250px;">
+    <div class="col-md-2 hidden-xs hidden-sm"></div>
+    <div class=" col-md-2 col-xs-6" style="margin-right:20px;">
+      <a href="/styleQuiz" class="thumbnail1 room-option" ng-click="nextPage(0)" data-room-type="1">
+        
+        <div class="subroom-container">
+          <img class="img-responsive center-block room-img" src="images/master.png" style="width:90%;height:auto;">
+        </div>
+        <div class="room-caption text-center">
+          <p class="txt-upper font-montserrat fs-14px" style="letter-spacing:1px;color:rgb(112,112,112);">  Master Bedroom</p>
+        </div>
+        <div class="fs-10px  font-sansRegular" style="padding-top:15px;"> 
+          <p align="center" class="font-sansRegular" style="color:rgb(161, 161, 161);"> select number of rooms </p>
+          <div style="margin-top:-26px">
+            <span style="align:right;text-align:right;padding-left:220px;">
+              <SELECT NAME="numRooms" style="width:35px;border:0.5px solid rgb(149, 149, 149);background-color:#fff">
+                <OPTION SELECTED> 1 </OPTION>
+                <OPTION> 2</OPTION>
+                <OPTION> 3</OPTION>
+                <OPTION> 4</OPTION>
+                <OPTION> 5</OPTION>
+              </SELECT>
+            </span>
+          </div>
+        </div>
+      </a>
+      <div class="clearfix"></div>
+    </div>
+
+    <div class="col-md-2 col-xs-6" style="margin-right:20px;">
+      <a href="#" class="thumbnail1 room-option" data-room-type="3">
+        <div class="subroom-container" style="padding-top:10px;">
+          <img class="img-responsive center-block room-img" src="images/living.png" style="width:100%;height:auto;">
+        </div>
+        <div class="room-caption text-center" style="padding-top:31px;">
+          <p class="txt-upper font-montserrat fs-14px" style="letter-spacing:1px;color:rgb(112,112,112);">Living room</p>
+        </div>
+        <div class="fs-11px" style="padding-top:35px;"> 
+          <div style="margin-top:-23px">
+            <span style="align:right;text-align:right;padding-left:220px;">
+              <SELECT NAME="numRooms" style="width:35px;border:0.5px solid rgb(149, 149, 149);background-color:#fff">
+                <OPTION SELECTED> 1 </OPTION>
+                <OPTION> 2</OPTION>
+                <OPTION> 3</OPTION>
+                <OPTION> 4</OPTION>
+                <OPTION> 5</OPTION>
+              </SELECT>
+            </span>
+          </div>
+        </div>
+      </a>
+      <div class="clearfix"></div>
+    </div>
+
+    <div class=" col-md-2 col-xs-6" style="margin-right:20px;">
+      <a href="#" class="thumbnail1 room-option" data-room-type="5">
+        <div class="subroom-container" style="margin-top:-17px;">
+          <img class="img-responsive center-block room-img" src="images/kids.png" style="width:90%;height:auto;">
+        </div>
+        <div class="room-caption text-center">
+          <p class="txt-upper font-montserrat fs-14px" style="letter-spacing:1px;color:rgb(112,112,112);">Kids Room</p>
+        </div>
+        <div class="fs-11px" style="padding-top:34px;"> 
+          <div style="margin-top:-18px">
+            <span style="align:right;text-align:right;padding-left:220px;">
+              <SELECT NAME="numRooms" style="width:35px;border:0.5px solid rgb(149, 149, 149);background-color:#fff">
+                <OPTION SELECTED> 1 </OPTION>
+                <OPTION> 2</OPTION>
+                <OPTION> 3</OPTION>
+                <OPTION> 4</OPTION>
+                <OPTION> 5</OPTION>
+              </SELECT>
+            </span>
+          </div>
+        </div>
+      </a>
+      <div class="clearfix"></div>
+    </div>
+                      
+    <div class="col-md-2 hidden-xs hidden-sm"></div>
+  </div> <!-- End of row 1  -->
+
+
+  <div class="row" style="margin-top:5px;margin-right:-250px;">
+    <div class="col-md-2 hidden-xs hidden-sm" ></div>
+    <div class=" col-md-2 col-xs-6" style="margin-right:20px;">
+      <a href="#" class="thumbnail1 room-option" data-room-type="1">
+        <div class="subroom-container">
+          <img class="img-responsive center-block room-img" src="images/homeOffice.png" style="width:80%;height:auto;">
+        </div>
+        <div class="room-caption text-center">
+          <p class="txt-upper font-montserrat fs-14px" style="letter-spacing:1px;color:rgb(112,112,112);">Home Office</p>
+        </div>
+        <div class="fs-11px" style="padding-top:30px;"> 
+          <div style="margin-top:-28px">
+            <span style="align:right;text-align:right;padding-left:220px;">
+              <SELECT NAME="numRooms" style="width:35px;border:0.5px solid rgb(149, 149, 149);background-color:#fff">
+                <OPTION SELECTED> 1 </OPTION>
+                <OPTION> 2</OPTION>
+                <OPTION> 3</OPTION>
+                <OPTION> 4</OPTION>
+                <OPTION> 5</OPTION>
+              </SELECT>
+            </span>
+          </div>
+        </div>
+      </a>
+      <div class="clearfix"></div>
+    </div>
+
+    <div class="col-md-2 col-xs-6" style="margin-right:20px;">
+      <a href="#" class="thumbnail1 room-option" data-room-type="3">
+        <div class="subroom-container" style="padding-top:31px;">
+          <img class="img-responsive center-block room-img" src="images/dining.png" style="width:90%;height:auto;">
+        </div>
+        <div class="room-caption text-center" style="padding-top:22px;">
+          <p class="txt-upper font-montserrat fs-14px" style="letter-spacing:1px;color:rgb(112,112,112);">Dining Room</p>
+        </div>
+        <div class="fs-11px" style="padding-top:30px;"> 
+          <div style="margin-top:-27px">
+            <span style="align:right;text-align:right;padding-left:220px;">
+              <SELECT NAME="numRooms" style="width:35px;border:0.5px solid rgb(149, 149, 149);background-color:#fff">
+                <OPTION SELECTED> 1 </OPTION>
+                <OPTION> 2</OPTION>
+                <OPTION> 3</OPTION>
+                <OPTION> 4</OPTION>
+                <OPTION> 5</OPTION>
+              </SELECT>
+            </span>
+          </div>
+        </div>
+      </a>
+      <div class="clearfix"></div>
+    </div>
+
+    <div class="col-md-2 col-xs-6" style="margin-right:20px;">
+      <a href="#" class="thumbnail1 room-option" data-room-type="5">
+        <div class="subroom-container" style="padding-top:7px;">
+          <img class="img-responsive center-block room-img" src="images/bedroom.png" style="width:90%;height:auto;">
+        </div>
+        <div class="room-caption text-center" style="margin-top:0px;">
+          <p class="txt-upper font-montserrat fs-14px" style="letter-spacing:1px;color:rgb(112,112,112);"> Bedroom</p>
+        </div>
+        <div class="fs-11px" style="padding-top:30px;"> 
+          <div style="margin-top:-25px">
+            <span style="align:right;text-align:right;padding-left:220px;">
+              <SELECT NAME="numRooms" style="width:35px;border:0.5px solid rgb(149, 149, 149);background-color:#fff">
+                <OPTION SELECTED> 1 </OPTION>
+                <OPTION> 2</OPTION>
+                <OPTION> 3</OPTION>
+                <OPTION> 4</OPTION>
+                <OPTION> 5</OPTION>
+              </SELECT>
+            </span>
+          </div>
+        </div>
+      </a>
+      <div class="clearfix"></div>
+    </div>
+    <div class="col-md-2 hidden-xs hidden-sm"></div>
+  </div>
+
+  <div style="float:right;padding-right:282px;">
+    <span class="font-montserrat fs-14px" style="color:rgb(112,112,112);">
+     OTHER: <input type="text"/>
+    </span>
+  </div>
+
+  <div style="clear:both;text-align:center;padding-top:40px;">
+    <span class="font-playfair fs-18px">Renovating your Kitchen or Bathroom? <u>Get a custom quote</u>&nbsp; </span><a href="#"><img src="images/email.png" style="margin-top:-6px;"/></a>
+    
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div style="width:1800px;"> -->
+<!-- <div class="qz-container"> -->
+  
+  <!--Progress bar -->
+  <div ng-show="progress" class="progress-wrapper">
+    <div class="progress">
+     <div class="progress-bar" style="width: {{progressRate}}%"></div>
+      <div class="one primary-color"></div>
+      <div class="two no-color" ng-style="{'background': backgroundCol2}"></div>
+      <div class="three no-color" ng-style="{'background': backgroundCol3}"></div>
+      <div class="four no-color" ng-style="{'background': backgroundCol4}"></div>
+      <div class="five no-color" ng-style="{'background': backgroundCol5}"></div>
+      <div class="six no-color" ng-style="{'background': backgroundCol6}"></div>
+     
+
+      <div class="lbl-one one">1</div>
+      <div class="lbl-two two" ng-show="pageCount>2">2</div>
+      <div class="lbl-three three" ng-show="pageCount>3">3</div>
+      <div class="lbl-four four" ng-show="pageCount>4">4</div>
+      <div class="lbl-five five" ng-show="pageCount>5">5</div>
+      <div class="lbl-six six" ng-show="pageCount>6">6</div>
+    </div>
+  </div>
+  <!-- Progress bar ends -->
+
+  <!-- <div ng-show="pageCount===0" class="font-playfair fs-22px" > 
+    <p style="padding-bottom:50px;">Test Page</p>
+    <div ng-repeat="styles in styleQuest1 track by $index">
+      <div class="row qz-row">
+        <div class="col-md-4 col-xs-4" ng-repeat="style in styles">
+          <a href="#" data-room-type="1" ng-click="nextPage(style.image_id)">
+            <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:100%;height:auto;">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <div ng-show="pageCount===1" class="font-playfair fs-22px" > 
+    <p style="padding-bottom:50px;">What is your design style?</p>
+     <div ng-repeat="styles in stylePref track by $index">
+      <div class="row" style="position:relative;width:78%;margin:0 auto;padding-bottom:30px;">
+        <div class="col-md-4 col-xs-4" ng-repeat="style in styles">
+          <a href="#" data-room-type="1" ng-click="nextPage(style.image_id)">
+            <figure>
+              <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:100%;height:auto;">
+              <figcaption class="font-sansRegular txt-center txt-upper fs-16px cap-prf-styl">{{style.image_name}}</figcaption>
+            </figure>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="fs-22px" style="padding:40px 0px 0px;"> 
+       <p>Not sure? Take our <button id="take-qz-btn" class="font-sansRegular col-hpgreen">STYLE QUIZ</button></p>
+    </div>
+  </div>
+
+  <div ng-show="pageCount===2" class="font-playfair fs-22px" > 
+    <p style="padding-bottom:50px;">Which Living room do you want to relax in?</p>
+    <div ng-repeat="styles in styleQuest1 track by $index">
+      <div class="row qz-row">
+        <div class="col-md-4 col-xs-4" ng-repeat="style in styles">
+          <a href="#" data-room-type="1" ng-click="nextPage(style.image_id)">
+            <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:100%;height:auto;">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div ng-show="pageCount===3" class="font-playfair fs-22px"> 
+    <p style="padding-bottom:50px;">Which Bedroom do you want to relax in?</p>
+    <div ng-repeat="styles in styleQuest2 track by $index">
+      <div class="row qz-row">
+        <div class="col-md-4 col-xs-4" ng-repeat="style in styles">
+          <a href="#" data-room-type="1" ng-click="nextPage(style.image_id)">
+            <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:100%;height:auto;">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div ng-show="pageCount===4" class="font-playfair fs-22px"> 
+    <p style="padding-bottom:50px;">Which Dining room do you want to entertain in?</p>
+    <div ng-repeat="styles in styleQuest3 track by $index">
+      <div class="row qz-row">
+        <div class="col-md-4 col-xs-4" ng-repeat="style in styles">
+          <a href="#" data-room-type="1" ng-click="nextPage(style.image_id)">
+            <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:100%;height:auto;">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div ng-show="pageCount===5" class="font-playfair fs-22px"> 
+    <p style="padding-bottom:50px;">Which Kitchen do you want to cook in?</p>
+    <div ng-repeat="styles in styleQuest4 track by $index">
+      <div class="row qz-row">
+        <div class="col-md-4 col-xs-4" ng-repeat="style in styles">
+          <a href="#" data-room-type="1" ng-click="nextPage(style.image_id)">
+            <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:100%;height:auto;">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div ng-show="pageCount===6" class="font-playfair fs-22px"> 
+    <p style="padding-bottom:50px;">What Texture do you like?</p>
+    <div ng-repeat="styles in styleQuest5 track by $index">
+      <div class="row qz-row">
+        <div class="col-md-4 col-xs-4
+        " ng-repeat="style in styles">
+          <a href="#" data-room-type="1" ng-click="nextPage(style.image_id)">
+            <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:100%;height:auto;">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div ng-show="pageCount===7" class="font-playfair fs-22px"> 
+    <p style="padding-bottom:50px;">What color palette do you like?</p>
+    <div ng-repeat="styles in styleColor track by $index">
+      <div class="row qz-row">
+        <div class="col-md-4 col-xs-6" ng-repeat="style in styles">
+          <a href="#" data-room-type="1" ng-click="nextPage(style.image_id)">
+            <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:100%;height:auto;">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+
+
+<!--Pinterest Board -->
+<div ng-show="pageCount===0" class="pictures-section" data-title="Picture Selection" style="width:100%;">
+
+  <!-- Modal -->
+  <div class="modal" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel" >
+    <div class="modal-dialog" role="document" >
+      <div class="modal-content" style="width:700px;height:500px;">
+        <div class="modal-header" style="border:none;">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="padding-left">&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <div style="float:left;padding-left:20px;">
+            <img src="" class="img-comment-box1" style="width:280px;height:360px;"/> 
+          </div>
+          <div style="width:500px;padding-left:330px;">
+            <textarea rows="9" cols="35" class="font-sansRegular fs-16px" placeholder=" Add a comment" style="resize:none;border:1px solid #acacac;"></textarea>
+          <button type="button" class="btn-start-quiz btn-comment font-sansRegular fs-16px">Comment</button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="zoomModal" tabindex="-1" role="dialog" aria-labelledby="zoomModalLabel" >
+    <div class="modal-dialog" role="document" >
+      <div class="modal-content">
+        <div class="modal-header" style="border:none;">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <div style="position:relative;width:99%;margin:0 auto;">
+            <img src="" class="img-zoom-box" style="width:100%"/> 
+          </div>
+        </div>
+        <div class="modal-footer" style="border:none;">
+          Image Credit:
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  <div id="pin-text">
+    <p class="font-playfair-bold fs-22px txt-upper"> Design Inspiration </p>
+    <p style="padding-top:10px;" class="font-sansRegular fs-16px">Choose your favourite <span class="font-sansBold">3 images</span> for our designer to use as reference. </p>
+    <p style="padding-top:10px;margin-bottom:0px;color:rgb(77,77,77);" class="font-sansRegular fs-14px">Love the colours of a living room image and want us to use it when we design your bedroom?</p>
+    <p class="font-sansRegular fs-14px" style="color:rgb(77,77,77);">Just add a comment to let us know and we will ensure to incorporate it.</p>
+  </div>
+
+  <div  class="txt-center" style="padding:40px;">
+    <ul class="pinboard-list">
+      <li class="pinboard-list-item font-sansRegular fs-18px active"><a href="#">MASTER BEDROOM</a></li>
+      <li class="pinboard-list-item font-sansRegular fs-18px"><a href="#">LIVING ROOM</a></li>
+      <li class="pinboard-list-item font-sansRegular fs-18px"><a href="#">HOME OFFICE</a></li>
+      <li class="pinboard-list-item font-sansRegular fs-18px"><a href="#">DINING ROOM</a></li>
+    </ul>
+  </div>
+
+   
+
+   <!--  <div id='masonry' class="images-pin">
+
+      <div class="item"><img src="images/styles/styleBoards/master/1a.png"> </div>
+      <div class="item small"><img src="images/styles/styleBoards/master/2.png"></div>
+      <div class="item"><img src="images/styles/styleBoards/master/3.png"></div>
+
+      
+      <div class="item small"><img src="images/styles/styleBoards/master/4.png"></div>
+      <div class="item medium"><img src="images/styles/styleBoards/master/5.png"></div>
+      <div class="item medium"><img src="images/styles/styleBoards/master/6.png"></div>
+      <div class="item"><img src="images/styles/styleBoards/master/7.png"></div>
+      <div class="item"><img src="images/styles/styleBoards/master/8.png"></div>
+      <div class="item medium"><img src="images/styles/styleBoards/master/9.png"></div>
+      <div class="item large"><img src="images/styles/styleBoards/master/10.png"></div>
+      <div class="item thumbanil"><img src="images/styles/styleBoards/master/11.png"></div>
+      <div class="item thumnail"><img src="images/styles/styleBoards/master/12.png"></div>
+      <div class="item"><img src="images/styles/styleBoards/master/13.png"></div>
+      <div class="item large"><img src="images/styles/styleBoards/master/14.png"></div>
+      <div class="item thumbanil"><img src="images/styles/styleBoards/master/15.png"></div>
+ 
+    </div>
+ -->
+  
+
+<!-- <div style="width:1400px;text-align:center;">
+<div class="grid" style="text-align:center;position:relative;width:50%; margin:"0 auto;">
+                                                                                        
+  <div class="grid-item grid-item--height1">1</div>
+  
+  <div class="grid-item">2</div>
+  <div class="grid-item grid-item--height3">3</div>
+                                           
+                                           
+  <div class="grid-item">4</div>
+  <div class="grid-item grid-item--height4">5</div>
+  <div class="grid-item grid-item--height2">6</div>
+                                           
+  <div class="grid-item grid-item--height1">7</div>
+  <div class="grid-item grid-item--height1">8</div>
+  <div class="grid-item grid-item--height25">9</div>
+                                            
+  <div class="grid-item grid-item--height3">10</div>
+  <div class="grid-item">11</div>
+  <div class="grid-item grid-item--height3">12</div>
+  <div class="grid-item">13</div>
+</div>
+</div>
+ -->
+
+
+  <!-- <div class="ngg-pro-masonry" id="ngg-gallery-21830" style="position: relative; width: 63%; height: 2000px;">
+    <div class="ngg-pro-masonry-gutter" style="width: 200px"></div>
+    <div class="ngg-pro-masonry-sizer" style="width: 400px"></div>
+    
+    <div class="ngg-pro-masonry-item" style="height: 100px;left: 0px; top: 0px;">
+      <a href="#" class="zoom" data-toggle="modal" data-target="#zoomModal">
+        <img style="max-width:none" width="280" height="auto" src="images/styles/styleBoards/master/1a.png">
+      </a>
+
+      <a href="#" class="comment" data-image="images/styles/styleBoards/master/1a.png"  data-toggle="modal" data-target="#commentModal">
+        <img src="images/styles/styleBoards/comment.png" id="icon_comment"  class="image-comment image-status" style="width:20px;height:auto;left:220px;" data-swap="images/styles/styleBoards/sel_comment.png">
+      </a>     
+
+      <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">  
+        <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+      </a>   
+    </div>
+    
+    
+    <div class="ngg-pro-masonry-item" style="height: 133px; left: 310px; top: 0px;">
+      <a href="#"  class="zoom" data-toggle="modal" data-target="#zoomModal">
+        <img style="max-width:none" width="280" height="auto" src="images/styles/styleBoards/master/2.png">
+      </a>
+
+        <a href="#" class="comment" data-image="images/styles/styleBoards/master/2.png"  data-toggle="modal" data-target="#commentModal">
+        <img src="images/styles/styleBoards/comment.png" id="icon_comment"  class="image-comment image-status" style="width:20px;height:auto;left:220px;" data-swap="images/styles/styleBoards/sel_comment.png">
+      </a>     
+
+      <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">  
+        <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+      </a> 
+    </div>
+    
+    
+    <div class="ngg-pro-masonry-item" style="height: 134px; left: 620px; top: 0px;">
+      <a href="#"  class="zoom" data-toggle="modal" data-target="#zoomModal">
+        <img style="max-width:none" width="280" height="auto" src="images/styles/styleBoards/master/3.png">
+      </a>
+      <a href="#" class="comment" data-image="images/styles/styleBoards/master/3.png"  data-toggle="modal" data-target="#commentModal">
+        <img src="images/styles/styleBoards/comment.png" id="icon_comment"  class="image-comment image-status" style="width:20px;height:auto;left:220px;" data-swap="images/styles/styleBoards/sel_comment.png">
+      </a>     
+
+      <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">  
+        <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+      </a> 
+    </div>
+    
+    <div class="ngg-pro-masonry-item" style="height: 134px;left: 0px; top: 390px;">
+      <a href="#" class="zoom" data-toggle="modal" data-target="#zoomModal">
+        <img style="max-width:none" width="280" height="auto" src="images/styles/styleBoards/master/4.png">
+      </a>
+      <a href="#" class="comment" data-image="images/styles/styleBoards/master/4.png"  data-toggle="modal" data-target="#commentModal">
+        <img src="images/styles/styleBoards/comment.png" id="icon_comment"  class="image-comment image-status" style="width:20px;height:auto;left:220px;" data-swap="images/styles/styleBoards/sel_comment.png">
+      </a>     
+
+      <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">  
+        <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+      </a> 
+    </div>
+    
+    <div class="ngg-pro-masonry-item" style="height: 267px; left: 310px; top: 314px;">
+      <a href="#" class="zoom" data-toggle="modal" data-target="#zoomModal">  
+        <img style="max-width:none" width="280" height="auto" src="images/styles/styleBoards/master/5.png">
+      </a>
+        <a href="#" class="comment" data-image="images/styles/styleBoards/master/5.png"  data-toggle="modal" data-target="#commentModal">
+        <img src="images/styles/styleBoards/comment.png" id="icon_comment"  class="image-comment image-status" style="width:20px;height:auto;left:220px;" data-swap="images/styles/styleBoards/sel_comment.png">
+      </a>     
+
+      <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">  
+        <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+      </a> 
+    </div>
+    
+    <div class="ngg-pro-masonry-item" style="height: 133px;left: 620px; top: 470px;">
+      <a href="#" class="zoom" data-toggle="modal" data-target="#zoomModal">
+        <img style="max-width:none" width="280" height="auto" src="images/styles/styleBoards/master/6.png">
+      </a>
+        <a href="#" class="comment" data-image="images/styles/styleBoards/master/6.png"  data-toggle="modal" data-target="#commentModal">
+        <img src="images/styles/styleBoards/comment.png" id="icon_comment"  class="image-comment image-status" style="width:20px;height:auto;left:220px;" data-swap="images/styles/styleBoards/sel_comment.png">
+      </a>     
+
+      <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">  
+        <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+      </a> 
+    </div>
+    
+    <div class="ngg-pro-masonry-item" style="height: 164px;left: 0px; top: 705px;">
+      <a href="#" class="zoom" data-toggle="modal" data-target="#zoomModal">
+        <img style="max-width:none" width="280" height="auto" src="images/styles/styleBoards/master/7.png">
+      </a>
+      <a href="#" class="comment" data-image="images/styles/styleBoards/master/7.png"  data-toggle="modal" data-target="#commentModal">
+        <img src="images/styles/styleBoards/comment.png" id="icon_comment"  class="image-comment image-status" style="width:20px;height:auto;left:220px;" data-swap="images/styles/styleBoards/sel_comment.png">
+      </a>     
+
+      <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">  
+        <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+      </a> 
+    </div>
+    
+    <div class="ngg-pro-masonry-item" style="height: 133px;left: 310px; top: 797px;">
+      <a href="#" class="zoom" data-toggle="modal" data-target="#zoomModal">
+        <img style="max-width:none" width="280" height="auto" src="images/styles/styleBoards/master/8.png">
+      </a>
+      
+      <a href="#" class="comment" data-image="images/styles/styleBoards/master/8.png"  data-toggle="modal" data-target="#commentModal">
+        <img src="images/styles/styleBoards/comment.png" id="icon_comment"  class="image-comment image-status" style="width:20px;height:auto;left:220px;" data-swap="images/styles/styleBoards/sel_comment.png">
+      </a>     
+
+      <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">  
+        <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+      </a> 
+    </div>
+            
+    <div class="ngg-pro-masonry-item" style="height: 200px;left: 620px; top: 870px;">
+      <a href="#" class="zoom" data-toggle="modal" data-target="#zoomModal">
+        <img style="max-width:none" width="280" height="auto" src="images/styles/styleBoards/master/9.png">
+
+      <a href="#" class="comment" data-image="images/styles/styleBoards/master/9.png"  data-toggle="modal" data-target="#commentModal">
+        <img src="images/styles/styleBoards/comment.png" id="icon_comment"  class="image-comment image-status" style="width:20px;height:auto;left:220px;" data-swap="images/styles/styleBoards/sel_comment.png">
+      </a>     
+
+      <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">  
+        <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+      </a> 
+    </div>
+    
+   
+    
+    <div class="ngg-pro-masonry-item" style="height: 133px;left: 0px; top: 1078px;">
+      <a href="#" class="zoom" data-toggle="modal" data-target="#zoomModal">
+        <img style="max-width:none" width="280" height="auto" src="images/styles/styleBoards/master/10.png">
+      </a>
+      <a href="#" class="comment" data-image="images/styles/styleBoards/master/10.png"  data-toggle="modal" data-target="#commentModal">
+        <img src="images/styles/styleBoards/comment.png" id="icon_comment"  class="image-comment image-status" style="width:20px;height:auto;left:220px;" data-swap="images/styles/styleBoards/sel_comment.png">
+      </a>     
+
+      <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">  
+        <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+      </a> 
+    </div>
+    
+    
+    
+    <div class="ngg-pro-masonry-item" style="height: 133px; left: 310px; top: 1151px;">
+      <a href="#" class="zoom" data-toggle="modal" data-target="#zoomModal">
+        <img title="China" alt="China" style="max-width:none" width="280" height="auto" src="images/styles/styleBoards/master/11.png">
+      </a>
+      <a href="#" class="comment" data-image="images/styles/styleBoards/master/11.png"  data-toggle="modal" data-target="#commentModal">
+        <img src="images/styles/styleBoards/comment.png" id="icon_comment"  class="image-comment image-status" style="width:20px;height:auto;left:220px;" data-swap="images/styles/styleBoards/sel_comment.png">
+      </a>     
+
+      <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">  
+        <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+      </a> 
+                   
+    </div>
+
+    <div class="ngg-pro-masonry-item" style="height: 133px;  left: 620px; top: 1305px;">
+      <a href="#" class="zoom" data-toggle="modal" data-target="#zoomModal">
+        <img style="max-width:none" width="280" height="auto" src="images/styles/styleBoards/master/12.png">
+      </a>
+      
+      <a href="#" class="comment" data-image="images/styles/styleBoards/master/12.png"  data-toggle="modal" data-target="#commentModal">
+        <img src="images/styles/styleBoards/comment.png" id="icon_comment"  class="image-comment image-status" style="width:20px;height:auto;left:220px;" data-swap="images/styles/styleBoards/sel_comment.png">
+      </a>     
+
+      <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">  
+        <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+      </a> 
+
+    </div>
+    
+    
+    <div class="ngg-pro-masonry-item" style="height: 200px;left: 0px; top: 1561px;">
+      <a href="#" class="zoom" data-toggle="modal" data-target="#zoomModal"> 
+        <img style="max-width:none" width="280" height="auto" src="images/styles/styleBoards/master/13.png">
+      </a>
+
+        <a href="#" class="comment" data-image="images/styles/styleBoards/master/13.png"  data-toggle="modal" data-target="#commentModal">
+        <img src="images/styles/styleBoards/comment.png" id="icon_comment"  class="image-comment image-status" style="width:20px;height:auto;left:220px;" data-swap="images/styles/styleBoards/sel_comment.png">
+      </a>     
+
+      <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">  
+        <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+      </a> 
+      
+    </div>
+    
+    <div class="ngg-pro-masonry-item" style="height: 139px;left: 310px; top: 1466px;">
+      <a href="#" class="zoom" data-toggle="modal" data-target="#zoomModal">
+        <img style="max-width:none" width="280" height="auto" src="images/styles/styleBoards/master/14.png">
+      </a>
+      <a href="#" class="comment" data-image="images/styles/styleBoards/master/14.png"  data-toggle="modal" data-target="#commentModal">
+        <img src="images/styles/styleBoards/comment.png" id="icon_comment"  class="image-comment image-status" style="width:20px;height:auto;left:220px;" data-swap="images/styles/styleBoards/sel_comment.png">
+      </a>     
+
+      <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">  
+        <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+      </a> 
+    </div>
+    
+   
+
+    <div class="ngg-pro-masonry-item" style="height: 300px;left: 620px; top: 1620px;">
+      <a href="#" class="zoom" data-toggle="modal" data-target="#zoomModal">
+        <img style="max-width:none" width="280" height="auto" src="images/styles/styleBoards/master/15.png">
+      </a>
+
+        <a href="#" class="comment" data-image="images/styles/styleBoards/master/15.png"  data-toggle="modal" data-target="#commentModal">
+        <img src="images/styles/styleBoards/comment.png" id="icon_comment"  class="image-comment image-status" style="width:20px;height:auto;left:220px;" data-swap="images/styles/styleBoards/sel_comment.png">
+      </a>     
+
+      <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">  
+        <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+      </a> 
+      
+    </div>
+
+
+
+    
+  </div> -->
+
+
+
+<div class="grid">
+          
+  <div class="grid-item grid-item--height1"><img style="max-width:300px;" src="images/styles/styleBoards/master/1a.png"/></div>
+  
+  <div class="grid-item"><img style="max-width:300px;" src="images/styles/styleBoards/master/2.png"/></div>
+  <div class="grid-item grid-item--height31"><img style="max-width:300px;" src="images/styles/styleBoards/master/3.png"/></div>
+  <div class="grid-item grid-item--height4"><img style="max-width:300px;" src="images/styles/styleBoards/master/5.png"/></div>
+  <div class="grid-item"><img style="max-width:300px;" src="images/styles/styleBoards/master/4.png"/></div>                                       
+                                      
+  
+  
+  <div class="grid-item grid-item--height6"><img style="max-width:300px;" src="images/styles/styleBoards/master/6.png"/></div>
+                                           
+  <div class="grid-item grid-item--height13"><img style="max-width:300px;" src="images/styles/styleBoards/master/7.png"/></div>
+
+
+  <div class="grid-item grid-item--height8"><img style="max-width:300px;" src="images/styles/styleBoards/master/8.png"/></div>
+  <div class="grid-item grid-item--height9"><img style="max-width:300px;" src="images/styles/styleBoards/master/9.png"/></div>
+  
+  <div class="grid-item grid-item--height10"><img style="max-width:300px;" src="images/styles/styleBoards/master/10.png"/></div>
+  <div class="grid-item grid-item--h1"><img style="max-width:300px;" src="images/styles/styleBoards/master/11.png"/></div>                                          
+  
+  
+  
+  <div class="grid-item"><img style="max-width:300px;" src="images/styles/styleBoards/master/12.png"/></div>
+  <div class="grid-item grid-item--height3"><img style="max-width:300px;" src="images/styles/styleBoards/master/14.png"/> </div>
+  <div class="grid-item grid-item--height13"><img style="max-width:300px;" src="images/styles/styleBoards/master/13.png"/></div>
+  
+  <div class="grid-item"><img style="max-width:300px;" src="images/styles/styleBoards/master/15.png"/> </div>
+  
+  
+  
+
+</div>
+
+
+
+
+  <!-- <div id="img-board" class="images-pin">
+     <div class="col-md-1 hidden-xs hidden-sm" ></div>
+      <div class="col-xs-6 col-md-3 image image-0" style="margin-right:10px;">  
+        <div class="image-container">    
+          <a href="#" class="image-selection" data-ordinal="0" data-image-i9="245">      
+            <img class="style-image" src="images/styles/styleBoards/master/1a.png">      
+            <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+          </a>    
+        </div>
+      </div>
+
+      <div class="col-xs-6 col-md-3" style="margin-right:10px;">  
+        <div class="image-container">    
+              <img class="style-image" src="images/styles/styleBoards/master/2.png"/>   
+              <span class="section-comment">
+                <a href="#" class="image-comment" data-ordinal="0" data-image-id="245" data-image="images/styles/styleBoards/master/2.png"  data-toggle="modal" data-target="#commentModal" >  
+                  <img src="images/styles/styleBoards/comment.png" id="icon_comment" style="width:20px;height:auto;" data-swap="images/styles/styleBoards/sel_comment.png" class="image-comment image-status">
+                </a>
+              </span>
+
+             <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">  
+              <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+            </a>    
+        </div>
+      </div>
+
+      <div class="col-xs-6 col-md-3">  
+        <div class="image-container">    
+          <img class="style-image" src="images/styles/styleBoards/master/3.png">  
+          <span class="section-comment">
+                <a href="#" class="comment" data-ordinal="0" data-image-id="245" data-image="images/styles/styleBoards/master/3.png"  data-toggle="modal" data-target="#commentModal">  
+                  <img src="images/styles/styleBoards/comment.png" id="icon_comment" style="width:20px;height:auto;" data-swap="images/styles/styleBoards/sel_comment.png" class="image-comment image-status">
+                </a>
+              </span>
+
+             <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">  
+              <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+            </a>    
+        </div>
+      </div>
+
+<div class="clearfix"></div>
+<div class="col-md-1 hidden-xs hidden-sm" ></div>
+<div class="col-xs-6 col-md-3 image image-0" style="margin-right:10px;top:-100px;">  
+        <div class="image-container">    
+          <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">      <img class="style-image" src="images/styles/styleBoards/master/4.png">      
+            <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+          </a>    
+        </div>
+      </div>
+
+      <div class="col-xs-6 col-md-3 image image-0" style="margin-right:10px;top:-200px;">  
+        <div class="image-container">    
+          <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">      <img class="style-image" src="images/styles/styleBoards/master/5.png">      
+            <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+          </a>    
+        </div>
+      </div>
+
+      <div class="col-xs-6 col-md-3 image image-0" style="margin-right:10px;top:-10px;">  
+        <div class="image-container">    
+          <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">      <img class="style-image" src="images/styles/styleBoards/master/6.png">      
+            <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+          </a>    
+        </div>
+      </div>
+
+<div class="clearfix"></div>
+<div class="col-md-1 hidden-xs hidden-sm" ></div>
+<div class="col-xs-6 col-md-3 image image-0" style="left:0px;top:-300px;margin-right:10px;">  
+        <div class="image-container">    
+          <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">      <img class="style-image" src="images/styles/styleBoards/master/7.png">      
+            <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+          </a>    
+        </div>
+      </div>
+      
+
+      <div class="col-xs-6 col-md-3 image image-0" style="left:0px;top:-200px;margin-right:10px;">  
+        <div class="image-container">    
+         <img class="style-image" src="images/styles/styleBoards/master/8.png">  
+          <span class="section-comment">
+                <a href="#" class="comment" data-ordinal="0" data-image-id="245" data-image="images/styles/styleBoards/master/8.png"  data-toggle="modal" data-target="#commentModal">  
+                  <img src="images/styles/styleBoards/comment.png" id="icon_comment" style="width:20px;height:auto;" data-swap="images/styles/styleBoards/sel_comment.png" class="image-comment image-status">
+                </a>
+              </span>
+
+             <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">  
+              <span class="glyphicon glyphicon-heart-empty image-status"></span>     
+        </div>
+      </div>
+
+      <div class="col-xs-6 col-md-3 image image-0" style="left:0px;top:-120px;margin-right:10px;">  
+        <div class="image-container">    
+          <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">      <img class="style-image" src="images/styles/styleBoards/master/9.png">      
+            <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+          </a>    
+        </div>
+      </div>
+
+<div class="clearfix"></div>
+
+<div class="col-md-1 hidden-xs hidden-sm" ></div>
+      <div class="col-xs-6 col-md-3 image image-0" style="left:0px;top:-370px;margin-right:10px;">  
+        <div class="image-container">    
+          <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">      <img class="style-image" src="images/styles/styleBoards/master/10.png">      
+            <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+          </a>    
+        </div>
+      </div>
+
+      <div class="col-xs-6 col-md-3 image image-0" style="left:0px;top:-300px;margin-right:10px;">  
+        <div class="image-container">    
+          <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">      <img class="style-image" src="images/styles/styleBoards/master/11.png">      
+            <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+          </a>    
+        </div>
+      </div>
+
+      <div class="col-xs-6 col-md-3 image image-0" style="left:0px;top:-130px;margin-right:10px;">  
+        <div class="image-container">    
+          <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">      <img class="style-image" src="images/styles/styleBoards/master/12.png">      
+            <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+          </a>    
+        </div>
+      </div>
+
+      <div class="clearfix"></div>
+<div class="col-md-1 hidden-xs hidden-sm" ></div>
+<div class="col-xs-6 col-md-3 image image-0" style="left:0px;top:-370px;margin-right:10px;">  
+        <div class="image-container">    
+          <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">      <img class="style-image" src="images/styles/styleBoards/master/13.png">      
+            <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+          </a>    
+        </div>
+      </div>
+
+      <div class="col-xs-6 col-md-3 image image-0" style="left:0px;top:-500px;margin-right:10px;">  
+        <div class="image-container">    
+          <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">      <img class="style-image" src="images/styles/styleBoards/master/14.png">      
+            <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+          </a>    
+        </div>
+      </div>
+
+      <div class="col-xs-6 col-md-3 image image-0" style="left:0px;top:-340px;margin-right:10px;">  
+        <div class="image-container">    
+          <a href="#" class="image-selection" data-ordinal="0" data-image-id="245">      <img class="style-image" src="images/styles/styleBoards/master/15.png">      
+            <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+          </a>    
+        </div>
+      </div>
+
+    </div> 
+-->
+<div style="clear:both; padding-bottom:120px;" class="txt-center">
+    <button type="button" class="btn-start-quiz font-sansRegular txt-upper col-lightcyan fs-16px btn-hero" style="border:0px;">See your results</button></div>
+
+
+</div>
+
+
+
+
+
+
+
+
+	<div ng-hide="pageCount!=9" style="margin:auto;">
+  <a href ="/styleQuiz" ng-click="retakeQuiz()"> Retake Quiz </a>
+    	<div align="center">
+      		<div  ng-repeat="item in userStyle">
+	 			<span>{{item.style}} : {{item.value}}% </span><br/>
+			</div>
+		</div> 
+
+		
+		<div style="color:#1C1C1C;font-size:26px;font-weight:300;margin-bottom:30px;margin-top:10px;text-align:center;padding:0 10px;">
+			<span>Your Style Profile Is..</span>
+						
+		</div>
+		
+  		<div class="flex-container" >
+  		 <div ng-repeat="item in userStyle" class="flex-item">
+  		  <div style="font-weight:600;font-size:16px;text-transform:uppercase;">
+  		  	<span align="center">{{item.title}} </span>
+  		  </div>
+  		  <div style="font-size: 20px; padding-bottom: 5px; font-weight: 300;">
+  		  	<span>{{item.style}}</span>
+  		  </div>
+  		  <div>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. 
+        </div>
+  		 </div>
+  		</div>
+  	</div>
+    
+
+    <!-- Buttons -->
+    <div style="text-align:center;padding:80px 0px 100px;" ng-show="pageCount!=8">
+      <button type="button" class="btn-qz btn-bk">Back</button>
+      <button type="button" class="btn-qz btn-nxt">Next</button>
+    </div>
+  
+  </div>
+
+  <div class="divider" style="border-top:2px solid rgb(47, 185, 175);"></div>
+      

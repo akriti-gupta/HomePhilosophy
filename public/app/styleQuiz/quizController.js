@@ -1,5 +1,15 @@
+
+angular.module('app')
+    .service('imageService',['$q','$http',function($q,$http){
+        this.loadImages = function(){
+            return $http.jsonp("https://api.flickr.com/services/feeds/photos_public.gne?format=json&jsoncallback=JSON_CALLBACK");
+        };
+        console.log("Loaded imafes");
+    }]);
+
+
 angular.module("app")
-		  .controller("QuizController",function($scope,$location,quizResult,$http,mvIdentity){
+		  .controller("QuizController",function($scope,$location,quizResult,$http,mvIdentity,imageService,angularGridInstance){
 
 // $http.get('/getScores', function(request, response){
 // 						console.log("Inside cb of scores");
@@ -19,10 +29,123 @@ angular.module("app")
 				var prefStyle = [];
 				$scope.userStyle = [];
 				
+ // imageService.loadImages().then(function(data){
+ //            data.data.items.forEach(function(obj){
+ //                var desc = obj.description,
+ //                    width = desc.match(/width="(.*?)"/)[1],
+ //                    height = desc.match(/height="(.*?)"/)[1];
+ 
+ //                obj.actualHeight  = height;
+ //                obj.actualWidth = width;
+ //            });
+ //           $scope.pics = data.data.items;
+ //        });
+ //        $scope.refresh = function(){
+ //            angularGridInstance.gallery.refresh();
+ //        }
 
-//$scope.showNavBar = false;
-				//$scope.data = 
-				
+// TODO: Create a JSON file and read in the service. No hardcoding to be done.
+$scope.pics =[{
+				isrc: "images/styles/styleBoards/master/1a.png",
+				actualWidth: "300px",
+				actualHeight: "390px"
+			  },
+			  {
+				isrc: "images/styles/styleBoards/master/2.png",
+				actualWidth: "300px",
+				actualHeight: "300px"
+			  },
+			  {
+				isrc: "images/styles/styleBoards/master/3.png",
+				actualWidth: "300px",
+				actualHeight: "480px"
+			  },
+
+			  {
+				isrc: "images/styles/styleBoards/master/5.png",
+				actualWidth: "300px",
+				actualHeight: "490px"
+			  },
+
+			  {
+				isrc: "images/styles/styleBoards/master/4.png",
+				actualWidth: "300px",
+				actualHeight: "300px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/master/6.png",
+				actualWidth: "300px",
+				actualHeight: "400px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/master/7.png",
+				actualWidth: "300px",
+				actualHeight: "370px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/master/8.png",
+				actualWidth: "300px",
+				actualHeight: "350px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/master/9.png",
+				actualWidth: "300px",
+				actualHeight: "430px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/master/10.png",
+				actualWidth: "300px",
+				actualHeight: "480px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/master/11.png",
+				actualWidth: "300px",
+				actualHeight: "350px"
+			  },
+			  {
+				isrc: "images/styles/styleBoards/master/12.png",
+				actualWidth: "300px",
+				actualHeight: "300px"
+			  },
+			   
+			  {
+				isrc: "images/styles/styleBoards/master/14.png",
+				actualWidth: "300px",
+				actualHeight: "470px"
+			  },
+			  {
+				isrc: "images/styles/styleBoards/master/13.png",
+				actualWidth: "300px",
+				actualHeight: "370px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/master/15.png",
+				actualWidth: "300px",
+				actualHeight: "300px"
+			  }
+
+			  ]; 
 
 				$scope.stylePref = [
 				[{
@@ -518,4 +641,8 @@ angular.module("app")
 			});
 
 
+
+
+
+    
 
