@@ -1,7 +1,7 @@
 
 //var app = angular.module("styleQuiz",[]);
 
-angular.module('app',['ngResource','ngRoute']); 
+angular.module('app',['ngResource','ngRoute','angularGrid']); 
 
 //console.log("In app.js");
 angular.module('app')
