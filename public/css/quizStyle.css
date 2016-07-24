@@ -78,13 +78,13 @@
 }
 
 #take-qz-btn{
-  border:2px solid #acacac;
+  border:3px solid #acacac;
   padding:5px 10px;
   background-color:#fff;
 }
 
 #take-qz-btn:hover{
-  border:2px solid #64C6BE;
+  border:3px solid #64C6BE;
 }
 
 .btn-qz{
@@ -109,6 +109,9 @@
   margin-left:15px;
 }
 
+.btn-nxt:hover{
+  background-color:#64c6be;
+}
 @media screen and (max-width: 340px) {
     .btn-nxt {
         margin: 5px 0px;
@@ -292,7 +295,7 @@ filter:alpha(opacity=50); /* for <= IE 8 */
     color: #404040; }
 
 a.thumbnail1:hover, a.thumbnail1:focus, a.thumbnail1.active {
-  border: 2px solid;
+  border: 3px solid;
   border-color: #00a99d; }
 
 a {
@@ -470,7 +473,7 @@ a:active, a:hover {
 
 .pinboard-list-item{
   border-right:1px solid rgb(172, 172, 172); 
-  width: 200px;
+  width: 240px;
   padding:15px 0px;
   display: inline-block;
   float:left;
@@ -505,56 +508,8 @@ a:active, a:hover {
   letter-spacing:1px;
 }
 
-
-
-/*
-
-
-#container-pin {
- width: 100px;
- margin: 0 auto;
-}*/
- /*
-
-@media only screen and (max-width : 1199px),
-only screen and (max-device-width : 1199px){
- #container-pin {
- width: 1000px;
- }
-}
- 
- 
-@media only screen and (max-width : 999px),
-only screen and (max-device-width : 999px){
- #container-pin {
- width: 800px;
- }
-}
- 
-@media only screen and (max-width : 799px),
-only screen and (max-device-width : 799px){
- #container-pin {
- width: 600px;
- }
-}
- 
-@media only screen and (max-width : 599px),
-only screen and (max-device-width : 599px){
- #container-pin {
- width: 400px;
- }
-}
- 
-@media only screen and (max-width : 399px),
-only screen and (max-device-width : 399px){
- #container-pin {
- width: 200px;
- }
-}
-*/
-
 .grid {
-    border: 1px solid #cccccc;
+   /* border: 1px solid #cccccc;*/
     list-style: none;
     background: #ffffff;
     box-sizing: border-box;
