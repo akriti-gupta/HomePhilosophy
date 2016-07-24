@@ -19,15 +19,15 @@ angular.module("app")
 // 					});
 
 	
-				console.log("Here1");
-	            $scope.progressRate=16.6; 
-				$scope.pageCount=0;
-				$scope.rowCount = 2;
-				$scope.selectedImages = [];
-				$scope.identity = mvIdentity;
-				$scope.progress = false;
-				var prefStyle = [];
-				$scope.userStyle = [];
+				
+    $scope.progressRate=16.6; 
+	$scope.pageCount=0;
+	// $scope.rowCount = 2;
+	$scope.selectedImages = [];
+	$scope.identity = mvIdentity;
+	$scope.progress = false;
+	var prefStyle = [];
+	$scope.userStyle = [];
 				
  // imageService.loadImages().then(function(data){
  //            data.data.items.forEach(function(obj){
@@ -45,7 +45,7 @@ angular.module("app")
  //        }
 
 // TODO: Create a JSON file and read in the service. No hardcoding to be done.
-$scope.pics =[{
+	$scope.pics =[{
 				isrc: "images/styles/styleBoards/master/1a.png",
 				actualWidth: "300px",
 				actualHeight: "390px"
@@ -147,7 +147,7 @@ $scope.pics =[{
 
 			  ]; 
 
-				$scope.stylePref = [
+	$scope.stylePref = [
 				[{
 	        		 image_style: "images/styles/classic.png",
 	        		 image_id: 1,
@@ -180,7 +180,7 @@ $scope.pics =[{
 	  				image_name: "Scandinavian"
 	    		}]];
 
-				$scope.styleQuest1 = [
+	$scope.styleQuest1 = [
 				[{
 	        		 image_style: "images/styles/living/1.png",
 	        		 image_id: 1
@@ -207,7 +207,7 @@ $scope.pics =[{
 	  				image_id: 6
 	    		}]];
 	  			
-	  			$scope.styleQuest2 = [
+	$scope.styleQuest2 = [
 				[{
 	        		image_style: "images/styles/bedroom/1.png",
 	        		image_id: 1
@@ -233,7 +233,7 @@ $scope.pics =[{
 	  				image_id: 6
 	    		}]];
 	   
-				$scope.styleQuest3 = [
+	$scope.styleQuest3 = [
 				[{
 	        		image_style: "images/styles/dining/1.png",
 	        		image_id: 1
@@ -259,7 +259,7 @@ $scope.pics =[{
 	  				image_id: 6
 	    		}]];
 
-	    		$scope.styleQuest4 = [
+	$scope.styleQuest4 = [
 				[{
 	        		image_style: "images/styles/kitchen/1.png",
 	        		image_id: 1
@@ -287,7 +287,7 @@ $scope.pics =[{
 
 	    		
 
-	    		$scope.styleQuest5 = [
+	$scope.styleQuest5 = [
 				[{
 	        		image_style: "images/styles/textures/1.png",
 	        		image_id: 1
@@ -313,7 +313,7 @@ $scope.pics =[{
 	  				image_id: 6
 	    		}]];
 
-	    		$scope.styleColor = [
+	$scope.styleColor = [
 				[{
 	        		image_style: "images/styles/colour/balanced.png",
 	        		image_id: 1
@@ -329,7 +329,7 @@ $scope.pics =[{
 
 	    		
 
-	    		$scope.roomArr = [
+	$scope.roomArr = [
 				[{
 	        		room_image: "images/master.png",
 	        		room_id: 1
@@ -371,281 +371,222 @@ $scope.pics =[{
 	    // 		});
 	    // 	}
 
-	    	if(quizResult.getStyleText().length==0){
-	    		
-	    		quizResult.fetchStyleText();
-	    	}
+	if(quizResult.getStyleText().length==0){
+	    quizResult.fetchStyleText();
+	}
 
-				
-	    		// To maintain the quiz result and style quiz pages state when redirected here after login.
-	    		if(quizResult.getStyle().length>=1){
-	    			$scope.userStyle = quizResult.getStyle();
-	    // 			$scope.hideMain = true;
-	    // 			$scope.hidePage1 = true;
-					// $scope.hidePage2 = true;
-					// $scope.hidePage3 = true;
-					// $scope.hidePage4 = true;
-					// $scope.hidePage5 = true;
-					// $scope.hidePage6 = true;
-					$scope.progress = false;
-					// $scope.resultPage=false;
-				
-	    		}
+	// To maintain the quiz result and style quiz pages state when redirected here after login.
+	if(quizResult.getStyle().length>=1){
+		$scope.userStyle = quizResult.getStyle();
+		$scope.progress = false;
+	}
 
-	    		if(mvIdentity.isAuthenticated()){
-	    			//console.log('user is isAuthenticated');
-					$scope.gotoLink = "styleQuiz";
-				}
-				else{
-					//console.log('User not authenticated. going to login page');
-					$scope.gotoLink = "login";
-				}
-				
-				$scope.nextPage = function(selectedImage){
+	if(mvIdentity.isAuthenticated()){
+		//console.log('user is isAuthenticated');
+		$scope.gotoLink = "styleQuiz";
+	}
+	else{
+		//console.log('User not authenticated. going to login page');
+		$scope.gotoLink = "login";
+	}
+	
+	$scope.nextPage = function(selectedImage){
+		$scope.selectedImages.push({page: $scope.pageCount, image_id: selectedImage});
+		var currentPage = $scope.pageCount;
+		$scope.pageCount++;
+		// alert($scope.pageCount);
 
+		switch(currentPage){
 
-					$scope.selectedImages.push({page: $scope.pageCount, image_id: selectedImage});
-					var currentPage = $scope.pageCount;
+			case 0: //quizResult.clearStyle();
 					
-					$scope.pageCount++;
-					// alert($scope.pageCount);
+					$scope.backgroundCol = "#00a99d";
+					break; 
+
+			case 1: $scope.progress = true;
+					break;
+
+			case 2: 
+					$scope.backgroundCol2 = "#00a99d";
 					
-					switch(currentPage){
+					$scope.progressRate+=16.5;
+					
+					break;
 
-						case 0: //quizResult.clearStyle();
-								
-								$scope.backgroundCol = "#00a99d";
-								break; 
+			case 3: 
+					$scope.backgroundCol3 = "#00a99d";
+					
+					$scope.progressRate+=16.5;
 
-						case 1: $scope.progress = true;
-								break;
+					break; 
 
-						case 2: 
-								$scope.backgroundCol2 = "#00a99d";
-								
-								$scope.progressRate+=16.5;
-								
-								break;
+			case 4: 
+					$scope.backgroundCol4 = "#00a99d";
+					
+					$scope.progressRate+=16.5;
+					break;
 
-						case 3: 
-								$scope.backgroundCol3 = "#00a99d";
-								
-								$scope.progressRate+=16.5;
+			case 5: $scope.backgroundCol5 = "#00a99d";
+					$scope.progressRate+=16.5;
+					break;
 
-								break; 
-
-						case 4: 
-								$scope.backgroundCol4 = "#00a99d";
-								
-								$scope.progressRate+=16.5;
-								break;
-
-						case 5: //$scope.hidePage4 = true;
-								//$scope.hidePage5 = false;
-								$scope.backgroundCol5 = "#00a99d";
-								// $scope.progressRate+=18;$scope.progressRate+=17;
-								$scope.progressRate+=16.5;
-								break;
-
-						case 6: $scope.computeStyle();
-								//$scope.hidePage5 = true;
-								//$scope.hidePage6 = false;
-								$scope.backgroundCol6 = "#00a99d";
-								// $scope.progressRate+=18;
-								$scope.progressRate+=16.5;
-								break;
+			case 6: $scope.computeStyle();
+					$scope.backgroundCol6 = "#00a99d";
+					$scope.progressRate+=16.5;
+					break;
 
 
-						case 7: $scope.progress=false;
-								//$scope.hidePage6 = true;
-								//$scope.hidePage7 = false;
-								// $scope.backgroundCol6 = "#00a99d";
-								// $scope.progressRate+=7.5;
-								$scope.refresh(); 
-												break;
+			case 7: $scope.progress=false;
+					$scope.refresh(); 
+					break;
 
 
-						case 8: 
-								//$scope.hidePage6 = true;
-								//$scope.hidePage7 = false;
-								$scope.backgroundCol6 = "#00a99d";
-								
-								break;
+			case 8: $scope.backgroundCol6 = "#00a99d";
+					break;
 
 
-						default: 
-								
-								 // $scope.computeStyle();
-								 //Show up login page, transfer control with scope. Return. Once logged in
-								 //show the page.
-								 if(mvIdentity.isAuthenticated()){
-									 // $scope.hidePage7 = true;
-									 // $scope.hideMain = true;
-									 // $scope.resultPage = false;
-									 $scope.progress = false;	
-								 }
-								 else{
-								 	console.log("Going to Login page");
-								 }
-								 // $scope.hidePage6 = true;
-								 // $scope.resultPage = false;
-								 // $scope.progress = false;
-								 //console.log('Before calling login')
-								 
+			default: //Show up login page, transfer control with scope. Return. Once logged in
+					 //show the page.
+					if(mvIdentity.isAuthenticated()){
+						$scope.progress = false;	
 					}
-					
-					
-				}
+					else{
+					 	console.log("Going to Login page");
+					}								 
+		}
+	}
 
-				// $scope.go = function ( path ) {
-				// 	console.log('Path is :'+path);
-	  	// 			$location.path( path );
-				// };
+	$scope.refresh = function(){
+		console.log("refreshing gallery noe");
+        angularGridInstance.gallerypin.refresh();
+    }
 
-$scope.refresh = function(){
-	console.log("refreshing gallery noe");
-            angularGridInstance.gallerypin.refresh();
-        }
-
-				$scope.computeStyle = function(){
-					//initialising scorecards of each style to 0
-					var totA = 0;
-					var totB = 0;
-					var totC = 0;
-					var totD = 0;
-					var totE = 0;
-					var totF = 0;
-					var totG = 0;
+	$scope.computeStyle = function(){
+		//initialising scorecards of each style to 0
+		var totA = 0;
+		var totB = 0;
+		var totC = 0;
+		var totD = 0;
+		var totE = 0;
+		var totF = 0;
+		var totG = 0;
 
 
-					//user selections
-					var sel1 = $scope.selectedImages[0].image_id;
-					var sel2 = $scope.selectedImages[1].image_id;
-					var sel3 = $scope.selectedImages[2].image_id;
-					var sel4 = $scope.selectedImages[3].image_id;
+		//user selections
+		var sel1 = $scope.selectedImages[0].image_id;
+		var sel2 = $scope.selectedImages[1].image_id;
+		var sel3 = $scope.selectedImages[2].image_id;
+		var sel4 = $scope.selectedImages[3].image_id;
 
-					//alert(sel1 + " " +sel2 + " " + sel3 + " " +sel4);
+		//alert(sel1 + " " +sel2 + " " + sel3 + " " +sel4);
 
-					// LivingRoom  
-					if(sel1 == 1){totB+= 1.00; totE+=4.00;} 	
-					if(sel1 == 2){totB+= 2.25; totD+= 2.75;}
-					if(sel1 == 3){totA+= 4.25; totC+= 0.75;}
-					if(sel1 == 4){totC+= 1.75; totF+= 3.25;}
-					if(sel1 == 5){totB+= 1.25; totD+= 3.75;}
-					if(sel1 == 6){totB+= 3.75; totD+= 0.70; totF+=0.55;}
+		// LivingRoom  
+		if(sel1 == 1){totB+= 1.00; totE+=4.00;} 	
+		if(sel1 == 2){totB+= 2.25; totD+= 2.75;}
+		if(sel1 == 3){totA+= 4.25; totC+= 0.75;}
+		if(sel1 == 4){totC+= 1.75; totF+= 3.25;}
+		if(sel1 == 5){totB+= 1.25; totD+= 3.75;}
+		if(sel1 == 6){totB+= 3.75; totD+= 0.70; totF+=0.55;}
 
-					// DiningRoom 
-					if(sel2 == 1){totB+= 1.25;totD+=3.75;}
-					if(sel2 == 2){totA+= 0.5;totB+=0.75;totC+=3.25;totD+=0.5;}
-					if(sel2 == 3){totB+= 0.55;totE+=4.45;}
-					if(sel2 == 4){totB+= 3.25;totF+=2.95;} //Changed on 23042016
-					if(sel2 == 5){totE+= 2.25;totF+=2.75;}
-					if(sel2 == 6){totA+= 4.00;totB+=0.50;totC+=0.5;}
-					
-					// Kitchen
-					if(sel3 == 1){totD+= 0.5; totE+= 4.50;}
-					if(sel3 == 2){totB+= 4.00; totE+= 2.00; totF+=2.25;} //Changed on 24042016
-					if(sel3 == 3){totB+= 1.35;totD+=3.65;}
-					if(sel3 == 4){totC+= 0.5;totD+=4.50;}
-					if(sel3 == 5){totA+= 4.35;totB+=0.65;}
-					if(sel3 == 6){totB+= 0.25; totD+= 3.25; totF+=1.50;}
+		// DiningRoom 
+		if(sel2 == 1){totB+= 1.25;totD+=3.75;}
+		if(sel2 == 2){totA+= 0.5;totB+=0.75;totC+=3.25;totD+=0.5;}
+		if(sel2 == 3){totB+= 0.55;totE+=4.45;}
+		if(sel2 == 4){totB+= 3.25;totF+=2.95;} //Changed on 23042016
+		if(sel2 == 5){totE+= 2.25;totF+=2.75;}
+		if(sel2 == 6){totA+= 4.00;totB+=0.50;totC+=0.5;}
+		
+		// Kitchen
+		if(sel3 == 1){totD+= 0.5; totE+= 4.50;}
+		if(sel3 == 2){totB+= 4.00; totE+= 2.00; totF+=2.25;} //Changed on 24042016
+		if(sel3 == 3){totB+= 1.35;totD+=3.65;}
+		if(sel3 == 4){totC+= 0.5;totD+=4.50;}
+		if(sel3 == 5){totA+= 4.35;totB+=0.65;}
+		if(sel3 == 6){totB+= 0.25; totD+= 3.25; totF+=1.50;}
 
-					// Bedroom
-					if(sel4 == 1){totA+= 4.55; totB+=0.15;totC+=0.30;}
-					if(sel4 == 2){totB+= 3.95; totC+= 1.05;}
-					if(sel4 == 3){totA+= 2.25;totC+=2.25;totF+=0.50;}
-					if(sel4 == 4){totB+= 0.5;totD+=3.85;totE+=0.65;}
-					if(sel4 == 5){totB+= 2.75;totE+=4.00;totF+=1.25;} //Changed on 24042016
-					if(sel4 == 6){totB+= 1.15; totF+= 3.85;}
+		// Bedroom
+		if(sel4 == 1){totA+= 4.55; totB+=0.15;totC+=0.30;}
+		if(sel4 == 2){totB+= 3.95; totC+= 1.05;}
+		if(sel4 == 3){totA+= 2.25;totC+=2.25;totF+=0.50;}
+		if(sel4 == 4){totB+= 0.5;totD+=3.85;totE+=0.65;}
+		if(sel4 == 5){totB+= 2.75;totE+=4.00;totF+=1.25;} //Changed on 24042016
+		if(sel4 == 6){totB+= 1.15; totF+= 3.85;}
 
 
-					//alert("Modern:" +totMod + " contemporary:" +totCntmpry + " Eclectic:" + totEcltc + " Trad:" +totTrad + " Industrial:" +totIndstrl+ " Transitional:" +totTrnsnl);
+		//alert("Modern:" +totMod + " contemporary:" +totCntmpry + " Eclectic:" + totEcltc + " Trad:" +totTrad + " Industrial:" +totIndstrl+ " Transitional:" +totTrnsnl);
 
-					var totAll = totA + totB + totC + totD + totE + totF;
+		var totAll = totA + totB + totC + totD + totE + totF;
 
-					if(totA > 0)
-						prefStyle.push({style: 'Classic', value: (Math.round(totA/totAll * 100))});
-					if(totB > 0)
-						prefStyle.push({style: 'Contemporary', value: (Math.round(totB/totAll * 100))});
-					if(totC > 0)
-						prefStyle.push({style: 'Transitional', value: (Math.round(totC/totAll * 100))});
-					if(totD > 0)
-						prefStyle.push({style: 'Modern', value: (Math.round(totD/totAll * 100))});
-					if(totE > 0)
-						prefStyle.push({style: 'Scandinavian', value: (Math.round(totE/totAll * 100))});
-					if(totF > 0)
-						prefStyle.push({style: 'Asian Inspired Minimalist', value:(Math.round(totF/totAll * 100))});
+		if(totA > 0)
+			prefStyle.push({style: 'Classic', value: (Math.round(totA/totAll * 100))});
+		if(totB > 0)
+			prefStyle.push({style: 'Contemporary', value: (Math.round(totB/totAll * 100))});
+		if(totC > 0)
+			prefStyle.push({style: 'Transitional', value: (Math.round(totC/totAll * 100))});
+		if(totD > 0)
+			prefStyle.push({style: 'Modern', value: (Math.round(totD/totAll * 100))});
+		if(totE > 0)
+			prefStyle.push({style: 'Scandinavian', value: (Math.round(totE/totAll * 100))});
+		if(totF > 0)
+			prefStyle.push({style: 'Asian Inspired Minimalist', value:(Math.round(totF/totAll * 100))});
 
-					prefStyle.sort(sortValues);
+		prefStyle.sort(sortValues);
 
-					for(var j =0;j<prefStyle.length; j++){
-						
-						if(prefStyle[j].value >= 70){
-							$scope.userStyle.push({title: quizResult.getStyleText()[0] , style: (prefStyle[j].style), value: (prefStyle[j].value)});
-							break;
-						}
-						else if(prefStyle[j].value < 70 && prefStyle[j].value >= 50){
-							$scope.userStyle.push({title: quizResult.getStyleText()[0] , style: (prefStyle[j].style), value: (prefStyle[j].value)});
-							if(j+1 < prefStyle.length)
-								$scope.userStyle.push({title: quizResult.getStyleText()[1] ,style: (prefStyle[j+1].style), value: (prefStyle[j+1].value)});
-							break;
+		for(var j =0;j<prefStyle.length; j++){
+			
+			if(prefStyle[j].value >= 70){
+				$scope.userStyle.push({title: quizResult.getStyleText()[0] , style: (prefStyle[j].style), value: (prefStyle[j].value)});
+				break;
+			}
+			else if(prefStyle[j].value < 70 && prefStyle[j].value >= 50){
+				$scope.userStyle.push({title: quizResult.getStyleText()[0] , style: (prefStyle[j].style), value: (prefStyle[j].value)});
+				if(j+1 < prefStyle.length)
+					$scope.userStyle.push({title: quizResult.getStyleText()[1] ,style: (prefStyle[j+1].style), value: (prefStyle[j+1].value)});
+				break;
 
-						}
-						else if(prefStyle[j].value < 50 && prefStyle[j].value >= 10){
-							$scope.userStyle.push({title: quizResult.getStyleText()[0] , style: (prefStyle[j].style), value: (prefStyle[j].value)});
-							if(j+1 < prefStyle.length)
-								$scope.userStyle.push({title: quizResult.getStyleText()[1], style:(prefStyle[j+1].style), value: (prefStyle[j+1].value)});
-							if(j+2 < prefStyle.length)
-								$scope.userStyle.push({title: quizResult.getStyleText()[2], style: (prefStyle[j+2].style), value: (prefStyle[j+2].value)});
-							break;
+			}
+			else if(prefStyle[j].value < 50 && prefStyle[j].value >= 10){
+				$scope.userStyle.push({title: quizResult.getStyleText()[0] , style: (prefStyle[j].style), value: (prefStyle[j].value)});
+				if(j+1 < prefStyle.length)
+					$scope.userStyle.push({title: quizResult.getStyleText()[1], style:(prefStyle[j+1].style), value: (prefStyle[j+1].value)});
+				if(j+2 < prefStyle.length)
+					$scope.userStyle.push({title: quizResult.getStyleText()[2], style: (prefStyle[j+2].style), value: (prefStyle[j+2].value)});
+				break;
 
-						}
-					}
-					if(!mvIdentity.isAuthenticated()){
-						console.log('Stoing style in svc before going to login');
-						quizResult.storeStyle($scope.userStyle);
-					}
-				}
+			}
+		}
+		if(!mvIdentity.isAuthenticated()){
+			console.log('Stoing style in svc before going to login');
+			quizResult.storeStyle($scope.userStyle);
+		}
+	}
 
-				$scope.retakeQuiz = function(){
-					//$scope.data = angular.copy($scope.orig);
-					 //$scope.progressRate=10;
-					 $scope.progressRate=2.5;
-					 $scope.backgroundCol = "#00a99d";
-					 $scope.backgroundCol2 = "#cccccc";
-					 $scope.backgroundCol3 = "#cccccc";
-					 $scope.backgroundCol4 = "#cccccc";
-					 $scope.backgroundCol5 = "#cccccc";
-					 $scope.backgroundCol6 = "#cccccc";
-				$scope.pageCount=0;
-				// $scope.hideMain = false;
-				// $scope.hidePage1 = true;
-				// $scope.hidePage2 = true;
-				// $scope.hidePage3 = true;
-				// $scope.hidePage4 = true;
-				// $scope.hidePage5 = true;
-				// $scope.hidePage6 = true;
-				// $scope.resultPage=true;
-				$scope.rowCount = 2;
-				$scope.selectedImages = [];
-				// $scope.identity = mvIdentity;
-				$scope.progress = false;
-				prefStyle = [];
-				$scope.userStyle = [];
-    			}
+	$scope.retakeQuiz = function(){
+		$scope.progressRate=16.6;
+		$scope.backgroundCol = "#00a99d";
+		$scope.backgroundCol2 = "#cccccc";
+		$scope.backgroundCol3 = "#cccccc";
+		$scope.backgroundCol4 = "#cccccc";
+		$scope.backgroundCol5 = "#cccccc";
+		$scope.backgroundCol6 = "#cccccc";
+		$scope.pageCount=0;
+		// $scope.rowCount = 2;
+		$scope.selectedImages = [];
+		// $scope.identity = mvIdentity;
+		$scope.progress = false;
+		prefStyle = [];
+		$scope.userStyle = [];
+	}
 				
-
-				function sortValues(a, b) {
-					if (a.value === b.value) {
-	      				  return 0;
-	    				}
-	   					else {
-	       				 return (a.value > b.value) ? -1 : 1;
-	    				}
-					}	
-
-
-			});
+	function sortValues(a, b) {
+		if (a.value === b.value) {
+			return 0;
+		}
+		else {
+			return (a.value > b.value) ? -1 : 1;
+		}
+	}
+});
 
 
 

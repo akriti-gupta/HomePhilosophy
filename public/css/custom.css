@@ -338,25 +338,28 @@ button:focus {outline:0;}
   margin: 0 18px;
 }
 
-.topnav li:hover{
-  border-bottom: 2px solid #64C6BE;
+.topnav li:not(:first-child):hover{
+  border-bottom: 3px solid #64C6BE;
 }
 
 .topnav li:nth-child(6):hover{
   border-bottom: 0;
 }
 .topnav li ul li:hover{
-  border-bottom: 2px solid #64C6BE;
+  border-bottom: 3px solid #64C6BE;
 }
 
 .tab_icon{
     display: none;
 }
+.plist-border:hover{
+  border-bottom: 3px solid #64C6BE;
+}
 
 .topnav li a {
     font-family:Montserrat-Regular;
     text-transform: uppercase;
-    font-size: 12px;
+    font-size: 14px;
     letter-spacing: 1px;
     color: #000;
     text-decoration: none;
@@ -375,29 +378,29 @@ button:focus {outline:0;}
   display:block;
   position:absolute;
   top:70%;
-  /*height:100px;*/
   left:2px;
   width:180px;
   background:#fff; 
   text-align: left;
 }
 
-
-
 .topnav li ul li{
   display: none;
   border-bottom: 0.5px solid black;
-
 }
 
 .topnav li ul li:nth-child(2){
    margin-bottom:25px;
 }
 
-.submenu-list li a{
-  font-size:12px;
+/*.submenu-list li a{
+  font-size:14px;
+}*/
 
+.submenu-list li a:hover{
 }
+
+.topnav .submenu-list:hover + a { border-bottom: none; }
 
 #exp-subtext{
   padding-top:13px;letter-spacing:1px;

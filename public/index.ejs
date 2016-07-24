@@ -25,10 +25,12 @@
 		
 		<!-- <script src="https://npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script> -->
 		<script src="/app/app.js"></script>
+		<script src="/app/common/common.js"></script>
 		<script src="/app/mainController.js"></script>
 		<script src="/app/styleQuiz/quizController.js"></script>
 		<script src="/app/account/loginController.js"></script>
 		<script src="/app/styleQuiz/svcQuizResult.js"></script>
+		<script src="/app/styleQuiz/quiz.js"></script>
 		<script src="/app/account/mvIdentity.js"></script>
 		<script src="/app/account/mvAuth.js"></script>
 		<script src="/app/common/mvNotifier.js"></script>
@@ -41,71 +43,10 @@
     			document.getElementsByClassName("topnav")[0].classList.toggle("responsive");
 			}
 
-			$(window).resize(function(){
-   				console.log('resize called');
-   				var width = $(window).width();
-   				if(width < 500 ){
-				   	//   alert($("#exp-maintext"));
-				       
-				       $('#exp-maintext').removeAttr('class');
-				      // $('#exp-maintext').addClass('fs-11px');
-				       // $('#exp-subtext').removeClass('fs-20px');
-				       // $('#exp-subtext').addClass('fs-11px');
-				   }
-			});
+			
 
 
-		  	//Image/ Heart Click on Pinterest Board
-	      	$(document).on('click', '.image-selection', function(e) {
-        		e.preventDefault();
-        		$(this).toggleClass('image-selection-selected');
-            	// if($(document).width() > 736) {
-            	//     $(this).closest('.image-container').toggleClass('image-container-selected animated pulse');
-            	// }
-            	$(".glyphicon", this).toggleClass('glyphicon-heart-empty').toggleClass('glyphicon-heart');
-        	});
-
-
-			$(document).on('click', '.comment', function(e) {
-                
-                e.preventDefault();
-	           
-	            // if($(document).width() > 736) {
-	            //     $(this).closest('.image-container').toggleClass('image-container-selected animated pulse');
-	            // }
-	            var current = $(this).find(':first-child').attr("src");
-	            
-				var swap = $(this).find(':first-child').attr("data-swap");     
-
-				$(this).find(':first-child').attr("src", swap).attr("data-swap",current);   
-				var current_img=$(this).attr('data-image');
-				$(".img-comment-box1").attr('src', current_img);
-	            
-	            //selectedImages = $('.image-selection-selected').length;
-			});	      
-     
-                 
-			//Close button on popup - Pinterest Board.                
-			$(document).on('click', '.close', function(e) {
-				// var current = $("#icon_comment").attr("src");
-			 //    var swap = $("#icon_comment").attr("data-swap");   
-				// $("#icon_comment").attr('src', swap).attr("data-swap",current);   
-			});
-
-
-			$(document).on('click', '.zoom img', function(e) {
-				var current_img = $(this).attr("src");
-
-				$(".img-zoom-box").attr('src',current_img)
-				
-				
-			});
-
-			$(document).on('click', '.pinboard-list-item', function(e) {
-				
-				    $(this).siblings(".active").removeClass('active');
-			        $(this).addClass('active');
-				});
+		  
 		</script>
 
 		<!-- <link rel="stylesheet" href="/css/bootstrap.css"/> -->
