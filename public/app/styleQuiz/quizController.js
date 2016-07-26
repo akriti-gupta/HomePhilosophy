@@ -663,18 +663,18 @@ angular.module("app")
 	        		 image_name: "Classic"
 	    		}, 
 	    		{
-	    			 image_style: "images/styles/Contemporary.png",
+	    			 image_style: "images/styles/contemporary.png",
 	    			 image_id: 2,
 	    			 image_name: "Contemporary"
 	    		},
 	    		{
-	  				 image_style: "images/styles/Modern.png",
+	  				 image_style: "images/styles/modern.png",
 	  				 image_id: 3,
 	  				 image_name: "Modern"
 	    		}]
 	    		,
 	    		[{
-	    			image_style: "../images/styles/Transitional.png",
+	    			image_style: "../images/styles/transitional.png",
 	        		image_id: 4,
 	        		image_name: "Transitional"
 	    		}, 
