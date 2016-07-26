@@ -384,25 +384,12 @@ a:active, a:hover {
 }
 
 
-  /*.pictures-section .image-container .image-selection span.glyphicon-heart-empty, .pictures-section .image-container .image-selection span.glyphicon-heart  {
-    color: #fff; }
-
-
-  .pictures-section .image-container .image-selection-selected span.glyphicon-heart-empty, .pictures-section .image-container .image-selection-selected span.glyphicon-heart {
-    color: rgb(0, 169, 157);
-       text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white; }*/
-  
-  .pictures-section .image-container .image-status {
+  /*.pictures-section .image-container .image-status {
     position: absolute;
     top: 15px;
     right: 12px;
     font-size: 20px; }
 
-    /*.image-comment{
-      position: absolute;
-    top: 15px;
-    left:265px;
-    }*/
   .pictures-section .image-container .style-image {
     opacity: 1;
     width: 100%;
@@ -410,18 +397,19 @@ a:active, a:hover {
     background-color: #000; }
   
   .pictures-section .image-container-selected {
-    border: 1px solid #f6f6f6; }
+    border: 1px solid #f6f6f6; }*/
 
     /*.images-pin {
   visibility: visible; position: relative; margin-left:30px;margin-right:0px;width:80%;
   opacity: 1;}*/
+  
   .images-pin {
   visibility: visible; position: relative; margin:0px auto;width:90%;
   opacity: 1;}
 
-.images-pin-sel {
+/*.images-pin-sel {
   
-  opacity: 0.5;}
+  opacity: 0.5;}*/
 
 
 .modal-content {
@@ -541,16 +529,16 @@ a:active, a:hover {
 .image-status {
     position: absolute;
     top: 10px;
-    left: 365px;
+/*    left: 365px;*/
     font-size: 30px; }
 
-    .pictures-section .image-container .image-selection span.glyphicon-heart-empty, .pictures-section .image-container .image-selection span.glyphicon-heart  {
+    /*.pictures-section .image-container .image-like span.glyphicon-heart-empty, .pictures-section .image-container .image-like span.glyphicon-heart  {
+    color: #fff; }*/
+
+ .image-like span.glyphicon-heart-empty, .image-like span.glyphicon-heart  {
     color: #fff; }
 
- .image-selection span.glyphicon-heart-empty, .image-selection span.glyphicon-heart  {
-    color: #fff; }
-
-  .image-selection-selected span.glyphicon-heart-empty,  .image-selection-selected span.glyphicon-heart {
+  .image-like-selected span.glyphicon-heart-empty,  .image-like-selected span.glyphicon-heart {
     color: rgb(0, 169, 157);
     text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white; }
   
