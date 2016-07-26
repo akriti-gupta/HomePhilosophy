@@ -12,9 +12,9 @@ var config = require('./server/config/config')[env];
 require('./server/config/express')(app,config);
 
 
-var db = require("./server/config/db.js");
-var connection_object= new db();
-var connection=connection_object.connection; 
+// var db = require("./server/config/db.js");
+// var connection_object= new db();
+// var connection=connection_object.connection; 
 
 
 passport.use(new LocalStrategy(
@@ -23,6 +23,9 @@ passport.use(new LocalStrategy(
 		//Authentication code.
 		var data={query:"select * from user where password='"+password+"' and username='"+username+"' ",
 		  		  connection:connection
+		  		 };
+		  		 var data={query:"select * from user where password='"+password+"' and username='"+username+"' "
+		  		  // connection:connection
 		  		 };
 
 		query_runner(data,function(result){
