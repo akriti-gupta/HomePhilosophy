@@ -798,27 +798,27 @@ angular.module("app")
 
 	$scope.styleQuest5 = [
 				[{
-	        		image_style: "images/styles/textures/1.png",
+	        		image_style: "images/styles/Textures/1.png",
 	        		image_id: 1
 	    		}, 
 	    		{
-	    			image_style: "images/styles/textures/2.png",
+	    			image_style: "images/styles/Textures/2.png",
 					image_id: 2
 	    		},
 	    		{
-	  				image_style: "images/styles/textures/3.png",
+	  				image_style: "images/styles/Textures/3.png",
 	  				image_id: 3
 	    		}],
 	    		[{
-	    			image_style: "images/styles/textures/4.png",
+	    			image_style: "images/styles/Textures/4.png",
 	        		image_id: 4
 	    		}, 
 	    		{
-					image_style: "images/styles/textures/5.png",
+					image_style: "images/styles/Textures/5.png",
 					image_id: 5
 	    		},
 	    		{
-	  				image_style: "images/styles/textures/6.png",
+	  				image_style: "images/styles/Textures/6.png",
 	  				image_id: 6
 	    		}]];
 
