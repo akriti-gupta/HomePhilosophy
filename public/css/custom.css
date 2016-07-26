@@ -339,21 +339,21 @@ button:focus {outline:0;}
 }
 
 .topnav li:not(:first-child):hover{
-  border-bottom: 3px solid #64C6BE;
+  border-bottom: 2px solid #64C6BE;
 }
 
 .topnav li:nth-child(6):hover{
   border-bottom: 0;
 }
 .topnav li ul li:hover{
-  border-bottom: 3px solid #64C6BE;
+  border-bottom: 2px solid #64C6BE;
 }
 
 .tab_icon{
     display: none;
 }
 .plist-border:hover{
-  border-bottom: 3px solid #64C6BE;
+  border-bottom: 2px solid #64C6BE;
 }
 
 .topnav li a {
