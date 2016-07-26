@@ -1,7 +1,7 @@
 //Image/ Heart Click on Pinterest Board
-	      	$(document).on('click', '.image-selection', function(e) {
+	      	$(document).on('click', '.image-like', function(e) {
         		e.preventDefault();
-        		$(this).toggleClass('image-selection-selected');
+        		$(this).toggleClass('image-like-selected');
             	// if($(document).width() > 736) {
             	//     $(this).closest('.image-container').toggleClass('image-container-selected animated pulse');
             	// }
@@ -24,7 +24,7 @@
 				var current_img=$(this).attr('data-image');
 				$(".img-comment-box1").attr('src', current_img);
 	            
-	            //selectedImages = $('.image-selection-selected').length;
+	            //selectedImages = $('.image-like-selected').length;
 			});	      
      
                  
