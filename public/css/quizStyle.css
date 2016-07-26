@@ -509,7 +509,7 @@ a:active, a:hover {
 }
 
 .grid {
-   /* border: 1px solid #cccccc;*/
+    border: 3px solid green;
     list-style: none;
     background: #ffffff;
     box-sizing: border-box;

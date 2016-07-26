@@ -411,14 +411,14 @@
     <div  class="txt-center" style="padding:40px;">
       <ul class="pinboard-list">
         <li class="pinboard-list-item font-sansRegular fs-18px active"><a href="#">MASTER BEDROOM</a></li>
-        <li class="pinboard-list-item font-sansRegular fs-18px"><a href="#">LIVING ROOM</a></li>
-        <li class="pinboard-list-item font-sansRegular fs-18px"><a href="#">HOME OFFICE</a></li>
-        <li class="pinboard-list-item font-sansRegular fs-18px"><a href="#">DINING ROOM</a></li>
+        <li class="pinboard-list-item font-sansRegular fs-18px"><a href="#" ng-click="refresh();board=2;">LIVING ROOM</a></li>
+        <li class="pinboard-list-item font-sansRegular fs-18px"><a href="#" ng-click="refresh();board=3;">HOME OFFICE</a></li>
+        <li class="pinboard-list-item font-sansRegular fs-18px"><a href="#" ng-click="refresh();board=4;">DINING ROOM</a></li>
       </ul>
     </div>
+    
 
-     
-    <ul class="dynamic-grid txt-center grid-pos"  angular-grid="pics" ag-grid-width="300" ag-gutter-size="30" ag-id="gallerypin" ag-refresh-on-img-load="false" >
+    <ul  class="dynamic-grid txt-center grid-pos"  angular-grid="pics" ag-grid-width="300" ag-gutter-size="40" ag-id="gallerypin" ag-refresh-on-img-load="false" >
       <li data-ng-repeat="pic in pics" class="grid">
         <a href="#" class="zoom" data-toggle="modal" data-target="#zoomModal">
            <img src="{{pic.isrc}}" class="grid-img" data-actual-width = "{{pic.actualWidth}}"  data-actual-height="{{pic.actualHeight}}" />
@@ -433,6 +433,9 @@
         </a> 
       </li>
     </ul>
+
+    
+    
 
     <div style="clear:both; padding-bottom:120px; padding-top:80px" class="txt-center">
       <button type="button" class="btn-start-quiz font-sansRegular txt-upper col-lightcyan fs-16px btn-hero" style="border:0px;">See your results</button>

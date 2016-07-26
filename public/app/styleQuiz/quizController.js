@@ -28,7 +28,7 @@ angular.module("app")
 	$scope.progress = false;
 	var prefStyle = [];
 	$scope.userStyle = [];
-				
+	$scope.board=1;				
  // imageService.loadImages().then(function(data){
  //            data.data.items.forEach(function(obj){
  //                var desc = obj.description,
@@ -46,7 +46,7 @@ angular.module("app")
 
 // TODO: Create a JSON file and read in the service. No hardcoding to be done.
 	$scope.pics =[{
-				isrc: "images/styles/styleBoards/master/1a.png",
+				isrc: "images/styles/styleBoards/master/1.png",
 				actualWidth: "300px",
 				actualHeight: "390px"
 			  },
@@ -146,6 +146,515 @@ angular.module("app")
 			  }
 
 			  ]; 
+
+			  $scope.pics1 =[{
+				isrc: "images/styles/styleBoards/contemporary/1.png",
+				actualWidth: "300px",
+				actualHeight: "390px"
+			  },
+			  {
+				isrc: "images/styles/styleBoards/contemporary/2.png",
+				actualWidth: "300px",
+				actualHeight: "300px"
+			  },
+			  {
+				isrc: "images/styles/styleBoards/contemporary/3.png",
+				actualWidth: "300px",
+				actualHeight: "480px"
+			  },
+
+			  {
+				isrc: "images/styles/styleBoards/contemporary/5.png",
+				actualWidth: "300px",
+				actualHeight: "490px"
+			  },
+
+			  {
+				isrc: "images/styles/styleBoards/contemporary/4.png",
+				actualWidth: "300px",
+				actualHeight: "300px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/contemporary/6.png",
+				actualWidth: "300px",
+				actualHeight: "400px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/contemporary/7.png",
+				actualWidth: "300px",
+				actualHeight: "370px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/contemporary/8.png",
+				actualWidth: "300px",
+				actualHeight: "350px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/contemporary/9.png",
+				actualWidth: "300px",
+				actualHeight: "430px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/contemporary/10.png",
+				actualWidth: "300px",
+				actualHeight: "480px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/contemporary/11.png",
+				actualWidth: "300px",
+				actualHeight: "350px"
+			  },
+			  {
+				isrc: "images/styles/styleBoards/contemporary/12.png",
+				actualWidth: "300px",
+				actualHeight: "300px"
+			  },
+			   
+			  {
+				isrc: "images/styles/styleBoards/contemporary/14.png",
+				actualWidth: "300px",
+				actualHeight: "470px"
+			  },
+			  {
+				isrc: "images/styles/styleBoards/contemporary/13.png",
+				actualWidth: "300px",
+				actualHeight: "370px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/contemporary/15.png",
+				actualWidth: "300px",
+				actualHeight: "300px"
+			  }
+
+			  ]; 
+
+			  $scope.pics2 =[{
+				isrc: "images/styles/styleBoards/scandi/1.png",
+				actualWidth: "300px",
+				actualHeight: "390px"
+			  },
+			  {
+				isrc: "images/styles/styleBoards/scandi/2.png",
+				actualWidth: "300px",
+				actualHeight: "300px"
+			  },
+			  {
+				isrc: "images/styles/styleBoards/scandi/3.png",
+				actualWidth: "300px",
+				actualHeight: "480px"
+			  },
+
+			  {
+				isrc: "images/styles/styleBoards/scandi/5.png",
+				actualWidth: "300px",
+				actualHeight: "490px"
+			  },
+
+			  {
+				isrc: "images/styles/styleBoards/scandi/4.png",
+				actualWidth: "300px",
+				actualHeight: "300px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/scandi/6.png",
+				actualWidth: "300px",
+				actualHeight: "400px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/scandi/7.png",
+				actualWidth: "300px",
+				actualHeight: "370px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/scandi/8.png",
+				actualWidth: "300px",
+				actualHeight: "350px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/scandi/9.png",
+				actualWidth: "300px",
+				actualHeight: "430px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/scandi/10.png",
+				actualWidth: "300px",
+				actualHeight: "480px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/scandi/11.png",
+				actualWidth: "300px",
+				actualHeight: "350px"
+			  },
+			  {
+				isrc: "images/styles/styleBoards/scandi/12.png",
+				actualWidth: "300px",
+				actualHeight: "300px"
+			  },
+			   
+			  {
+				isrc: "images/styles/styleBoards/scandi/14.png",
+				actualWidth: "300px",
+				actualHeight: "470px"
+			  },
+			  {
+				isrc: "images/styles/styleBoards/scandi/13.png",
+				actualWidth: "300px",
+				actualHeight: "370px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/scandi/15.png",
+				actualWidth: "300px",
+				actualHeight: "300px"
+			  }
+
+			  ]; 
+
+			  $scope.pics3 =[{
+				isrc: "images/styles/styleBoards/modern/1.png",
+				actualWidth: "300px",
+				actualHeight: "390px"
+			  },
+			  {
+				isrc: "images/styles/styleBoards/modern/2.png",
+				actualWidth: "300px",
+				actualHeight: "300px"
+			  },
+			  {
+				isrc: "images/styles/styleBoards/modern/3.png",
+				actualWidth: "300px",
+				actualHeight: "480px"
+			  },
+
+			  {
+				isrc: "images/styles/styleBoards/modern/5.png",
+				actualWidth: "300px",
+				actualHeight: "490px"
+			  },
+
+			  {
+				isrc: "images/styles/styleBoards/modern/4.png",
+				actualWidth: "300px",
+				actualHeight: "300px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/modern/6.png",
+				actualWidth: "300px",
+				actualHeight: "400px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/modern/7.png",
+				actualWidth: "300px",
+				actualHeight: "370px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/modern/8.png",
+				actualWidth: "300px",
+				actualHeight: "350px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/modern/9.png",
+				actualWidth: "300px",
+				actualHeight: "430px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/modern/10.png",
+				actualWidth: "300px",
+				actualHeight: "480px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/modern/11.png",
+				actualWidth: "300px",
+				actualHeight: "350px"
+			  },
+			  {
+				isrc: "images/styles/styleBoards/modern/12.png",
+				actualWidth: "300px",
+				actualHeight: "300px"
+			  },
+			   
+			  {
+				isrc: "images/styles/styleBoards/modern/14.png",
+				actualWidth: "300px",
+				actualHeight: "470px"
+			  },
+			  {
+				isrc: "images/styles/styleBoards/modern/13.png",
+				actualWidth: "300px",
+				actualHeight: "370px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/modern/15.png",
+				actualWidth: "300px",
+				actualHeight: "300px"
+			  }
+
+			  ]; 
+
+			  $scope.pics4 =[{
+				isrc: "images/styles/styleBoards/classic/1.png",
+				actualWidth: "300px",
+				actualHeight: "390px"
+			  },
+			  {
+				isrc: "images/styles/styleBoards/classic/2.png",
+				actualWidth: "300px",
+				actualHeight: "300px"
+			  },
+			  {
+				isrc: "images/styles/styleBoards/classic/3.png",
+				actualWidth: "300px",
+				actualHeight: "480px"
+			  },
+
+			  {
+				isrc: "images/styles/styleBoards/classic/5.png",
+				actualWidth: "300px",
+				actualHeight: "490px"
+			  },
+
+			  {
+				isrc: "images/styles/styleBoards/classic/4.png",
+				actualWidth: "300px",
+				actualHeight: "300px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/classic/6.png",
+				actualWidth: "300px",
+				actualHeight: "400px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/classic/7.png",
+				actualWidth: "300px",
+				actualHeight: "370px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/classic/8.png",
+				actualWidth: "300px",
+				actualHeight: "350px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/classic/9.png",
+				actualWidth: "300px",
+				actualHeight: "430px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/classic/10.png",
+				actualWidth: "300px",
+				actualHeight: "480px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/classic/11.png",
+				actualWidth: "300px",
+				actualHeight: "350px"
+			  },
+			  {
+				isrc: "images/styles/styleBoards/classic/12.png",
+				actualWidth: "300px",
+				actualHeight: "300px"
+			  },
+			   
+			  {
+				isrc: "images/styles/styleBoards/classic/14.png",
+				actualWidth: "300px",
+				actualHeight: "470px"
+			  },
+			  {
+				isrc: "images/styles/styleBoards/classic/13.png",
+				actualWidth: "300px",
+				actualHeight: "370px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/classic/15.png",
+				actualWidth: "300px",
+				actualHeight: "300px"
+			  }
+
+			  ]; 
+
+			  $scope.pics5 =[{
+				isrc: "images/styles/styleBoards/transitional/1.png",
+				actualWidth: "300px",
+				actualHeight: "390px"
+			  },
+			  {
+				isrc: "images/styles/styleBoards/transitional/2.png",
+				actualWidth: "300px",
+				actualHeight: "300px"
+			  },
+			  {
+				isrc: "images/styles/styleBoards/transitional/3.png",
+				actualWidth: "300px",
+				actualHeight: "480px"
+			  },
+
+			  {
+				isrc: "images/styles/styleBoards/transitional/5.png",
+				actualWidth: "300px",
+				actualHeight: "490px"
+			  },
+
+			  {
+				isrc: "images/styles/styleBoards/transitional/4.png",
+				actualWidth: "300px",
+				actualHeight: "300px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/transitional/6.png",
+				actualWidth: "300px",
+				actualHeight: "400px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/transitional/7.png",
+				actualWidth: "300px",
+				actualHeight: "370px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/transitional/8.png",
+				actualWidth: "300px",
+				actualHeight: "350px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/transitional/9.png",
+				actualWidth: "300px",
+				actualHeight: "430px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/transitional/10.png",
+				actualWidth: "300px",
+				actualHeight: "480px"
+			  },
+			  
+			  
+			  
+			  {
+				isrc: "images/styles/styleBoards/transitional/11.png",
+				actualWidth: "300px",
+				actualHeight: "350px"
+			  },
+			  {
+				isrc: "images/styles/styleBoards/transitional/12.png",
+				actualWidth: "300px",
+				actualHeight: "300px"
+			  },
+			   
+			  {
+				isrc: "images/styles/styleBoards/transitional/14.png",
+				actualWidth: "300px",
+				actualHeight: "470px"
+			  },
+			  {
+				isrc: "images/styles/styleBoards/transitional/13.png",
+				actualWidth: "300px",
+				actualHeight: "370px"
+			  },
+			  
+			  {
+				isrc: "images/styles/styleBoards/transitional/15.png",
+				actualWidth: "300px",
+				actualHeight: "300px"
+			  }
+
+			  ]; 
+
 
 	$scope.stylePref = [
 				[{
@@ -437,6 +946,7 @@ angular.module("app")
 
 
 			case 7: $scope.progress=false;
+					console.log("Called refresh");
 					$scope.refresh(); 
 					break;
 
@@ -457,7 +967,7 @@ angular.module("app")
 	}
 
 	$scope.refresh = function(){
-		console.log("refreshing gallery noe");
+		console.log("refreshing gallery now");
         angularGridInstance.gallerypin.refresh();
     }
 
@@ -576,6 +1086,7 @@ angular.module("app")
 		$scope.progress = false;
 		prefStyle = [];
 		$scope.userStyle = [];
+		$scope.board=1;
 	}
 				
 	function sortValues(a, b) {
