@@ -4,12 +4,15 @@ angular.module('app')
         this.loadImages = function(){
             return $http.jsonp("https://api.flickr.com/services/feeds/photos_public.gne?format=json&jsoncallback=JSON_CALLBACK");
         };
-        console.log("Loaded imafes");
+        //console.log("Loaded imafes");
     }]);
 
 
 angular.module("app")
 		  .controller("QuizController",function($scope,$location,quizResult,$http,mvIdentity,imageService,angularGridInstance){
+
+
+
 
 // $http.get('/getScores', function(request, response){
 // 						console.log("Inside cb of scores");
@@ -28,7 +31,8 @@ angular.module("app")
 	$scope.progress = false;
 	var prefStyle = [];
 	$scope.userStyle = [];
-	$scope.board=1;				
+	$scope.board=1;	
+
  // imageService.loadImages().then(function(data){
  //            data.data.items.forEach(function(obj){
  //                var desc = obj.description,
@@ -147,7 +151,7 @@ angular.module("app")
 
 			  ]; 
 
-			  $scope.pics1 =[{
+	$scope.pics1 =[{
 				isrc: "images/styles/styleBoards/contemporary/1.png",
 				actualWidth: "300px",
 				actualHeight: "390px"
@@ -880,6 +884,8 @@ angular.module("app")
 	    // 		});
 	    // 	}
 
+	    $scope.picp="pics2";	
+
 	if(quizResult.getStyleText().length==0){
 	    quizResult.fetchStyleText();
 	}
@@ -946,7 +952,7 @@ angular.module("app")
 
 
 			case 7: $scope.progress=false;
-					console.log("Called refresh");
+					// console.log("Called refresh");
 					$scope.refresh(); 
 					break;
 
@@ -966,8 +972,12 @@ angular.module("app")
 		}
 	}
 
+	
+	$scope.board = $scope.pics;
+
 	$scope.refresh = function(){
 		console.log("refreshing gallery now");
+        
         angularGridInstance.gallerypin.refresh();
     }
 
@@ -1089,6 +1099,24 @@ angular.module("app")
 		$scope.board=1;
 	}
 				
+	$scope.loadBoard= function(boardVal){
+		
+		switch(boardVal){
+	
+		 case 1:	$scope.board = $scope.pics;
+		 			break;
+		 case 2:	$scope.board = $scope.pics1;
+		 			break;
+		 case 3:	$scope.board = $scope.pics2;
+		 			break;
+		 case 4:	$scope.board = $scope.pics3;
+		 			break;
+		 default: 	$scope.board = $scope.pics;
+		 			break; 
+}
+		 //$scope.refresh();
+	}
+	
 	function sortValues(a, b) {
 		if (a.value === b.value) {
 			return 0;
