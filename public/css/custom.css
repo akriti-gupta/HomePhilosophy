@@ -132,6 +132,11 @@
   font-size: 35px;
   
 }
+.fs-33px{
+  
+  font-size: 33px;
+  
+}
 
 .fs-30px{
   
@@ -359,7 +364,9 @@ button:focus {outline:0;}
 .topnav li a {
     font-family:Montserrat-Regular;
     text-transform: uppercase;
-    font-size: 14px;
+    /*Changed for Heroku*/
+    /*font-size: 14px;*/
+    font-size: 12px;
     letter-spacing: 1px;
     color: #000;
     text-decoration: none;
