@@ -1,4 +1,8 @@
-
+function myFunction() {
+				alert("Click");
+    			document.getElementsByClassName("topnav")[0].classList.toggle("responsive");
+			} 
+			
 $(window).resize(function(){
 	console.log('resize called');
 	var width = $(window).width();
