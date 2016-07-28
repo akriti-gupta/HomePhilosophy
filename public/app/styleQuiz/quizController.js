@@ -164,13 +164,15 @@ angular.module("app")
 			  {
 				isrc: "images/styles/styleBoards/contemporary/3.png",
 				actualWidth: "300px",
-				actualHeight: "480px"
+				actualHeight: "480px",
+				imgCredit: "Design by Kababie Arquitectos. Photo by Jaime Navarro"
 			  },
 
 			  {
 				isrc: "images/styles/styleBoards/contemporary/5.png",
 				actualWidth: "300px",
-				actualHeight: "490px"
+				actualHeight: "490px",
+				imgCredit: "Designer: Lucas Y Hernandez Gil arquitectos. Photo by Adriana Merlo"
 			  },
 
 			  {
@@ -224,18 +226,20 @@ angular.module("app")
 			  {
 				isrc: "images/styles/styleBoards/contemporary/11.png",
 				actualWidth: "300px",
-				actualHeight: "350px"
+				actualHeight: "350px",
+				imgCredit: "Design by Joel Dessaules Design"
 			  },
 			  {
 				isrc: "images/styles/styleBoards/contemporary/12.png",
 				actualWidth: "300px",
-				actualHeight: "300px"
+				actualHeight: "300px",
+				imgCredit: "Design by Nottdesign. Photo by A. Avdeenko"
 			  },
 			   
 			  {
 				isrc: "images/styles/styleBoards/contemporary/14.png",
 				actualWidth: "300px",
-				actualHeight: "470px"
+				actualHeight: "470px",
 			  },
 			  {
 				isrc: "images/styles/styleBoards/contemporary/13.png",
@@ -253,7 +257,7 @@ angular.module("app")
 
 			  ]; 
 
-			  $scope.pics2 =[{
+	$scope.pics2 =[{
 				isrc: "images/styles/styleBoards/scandi/1.png",
 				actualWidth: "300px",
 				actualHeight: "390px"
@@ -261,12 +265,14 @@ angular.module("app")
 			  {
 				isrc: "images/styles/styleBoards/scandi/2.png",
 				actualWidth: "300px",
-				actualHeight: "300px"
+				actualHeight: "300px",
+				imgCredit: "Kimberly Demmy design.Photo by Daniel O’Connor"
 			  },
 			  {
 				isrc: "images/styles/styleBoards/scandi/3.png",
 				actualWidth: "300px",
-				actualHeight: "480px"
+				actualHeight: "480px",
+				imgCredit: "Design by Regan Baker Design. Photo by Sarah Hebenstreit."
 			  },
 
 			  {
@@ -286,7 +292,9 @@ angular.module("app")
 			  {
 				isrc: "images/styles/styleBoards/scandi/6.png",
 				actualWidth: "300px",
-				actualHeight: "400px"
+				actualHeight: "400px",
+				imgCredit: "Design by Nest-architects"
+
 			  },
 			  
 			  
@@ -318,7 +326,8 @@ angular.module("app")
 			  {
 				isrc: "images/styles/styleBoards/scandi/10.png",
 				actualWidth: "300px",
-				actualHeight: "480px"
+				actualHeight: "480px",
+				imgCredit: "Design by Casa and Margherita Serboli architecture.<br/>Photo by Roberto Ruiz"
 			  },
 			  
 			  
@@ -326,7 +335,9 @@ angular.module("app")
 			  {
 				isrc: "images/styles/styleBoards/scandi/11.png",
 				actualWidth: "300px",
-				actualHeight: "350px"
+				actualHeight: "350px",
+				imgCredit: "Design by Nottdesign. Photo by A. Avdeenko"
+
 			  },
 			  {
 				isrc: "images/styles/styleBoards/scandi/12.png",
@@ -355,7 +366,7 @@ angular.module("app")
 
 			  ]; 
 
-			  $scope.pics3 =[{
+	$scope.pics3 =[{
 				isrc: "images/styles/styleBoards/modern/1.png",
 				actualWidth: "300px",
 				actualHeight: "390px"
@@ -363,7 +374,8 @@ angular.module("app")
 			  {
 				isrc: "images/styles/styleBoards/modern/2.png",
 				actualWidth: "300px",
-				actualHeight: "300px"
+				actualHeight: "300px",
+				imgCredit: "Designer: Kimberly Demmy Design. Photo by Daniel O’Connor"
 			  },
 			  {
 				isrc: "images/styles/styleBoards/modern/3.png",
@@ -380,7 +392,8 @@ angular.module("app")
 			  {
 				isrc: "images/styles/styleBoards/modern/4.png",
 				actualWidth: "300px",
-				actualHeight: "300px"
+				actualHeight: "300px",
+				imgCredit: "By Yodezeen Designs"
 			  },
 			  
 			  
@@ -388,7 +401,8 @@ angular.module("app")
 			  {
 				isrc: "images/styles/styleBoards/modern/6.png",
 				actualWidth: "300px",
-				actualHeight: "400px"
+				actualHeight: "400px",
+				imgCredit: "By Diego Grand"
 			  },
 			  
 			  
@@ -412,7 +426,8 @@ angular.module("app")
 			  {
 				isrc: "images/styles/styleBoards/modern/9.png",
 				actualWidth: "300px",
-				actualHeight: "430px"
+				actualHeight: "430px",
+				imgCredit: "B House by Tal Goldsmith Fish Design Studio"
 			  },
 			  
 			  
@@ -428,7 +443,8 @@ angular.module("app")
 			  {
 				isrc: "images/styles/styleBoards/modern/11.png",
 				actualWidth: "300px",
-				actualHeight: "350px"
+				actualHeight: "350px",
+				imgCredit: "Design by nottdesign. Photo by A. Avdeenko"
 			  },
 			  {
 				isrc: "images/styles/styleBoards/modern/12.png",
@@ -457,7 +473,7 @@ angular.module("app")
 
 			  ]; 
 
-			  $scope.pics4 =[{
+	$scope.pics4 =[{
 				isrc: "images/styles/styleBoards/classic/1.png",
 				actualWidth: "300px",
 				actualHeight: "390px"
@@ -535,7 +551,8 @@ angular.module("app")
 			  {
 				isrc: "images/styles/styleBoards/classic/12.png",
 				actualWidth: "300px",
-				actualHeight: "300px"
+				actualHeight: "300px",
+				imgCredit: "Design by Nottdesign. Photo by A. Avdeenko"
 			  },
 			   
 			  {
@@ -546,7 +563,8 @@ angular.module("app")
 			  {
 				isrc: "images/styles/styleBoards/classic/13.png",
 				actualWidth: "300px",
-				actualHeight: "370px"
+				actualHeight: "370px",
+				imgCredit: "Designer kimberly Demmy Design. Photo by Daniel O’Connor"
 			  },
 			  
 			  
@@ -559,7 +577,7 @@ angular.module("app")
 
 			  ]; 
 
-			  $scope.pics5 =[{
+	$scope.pics5 =[{
 				isrc: "images/styles/styleBoards/transitional/1.png",
 				actualWidth: "300px",
 				actualHeight: "390px"
@@ -567,12 +585,14 @@ angular.module("app")
 			  {
 				isrc: "images/styles/styleBoards/transitional/2.png",
 				actualWidth: "300px",
-				actualHeight: "300px"
+				actualHeight: "300px",
+				imgCredit: "Designer kimberly Demmy Design. Photo by Daniel O’Connor"
 			  },
 			  {
 				isrc: "images/styles/styleBoards/transitional/3.png",
 				actualWidth: "300px",
-				actualHeight: "480px"
+				actualHeight: "480px",
+				imgCredit: "Design Studio Oj. Photo By Bass Lu"
 			  },
 
 			  {
@@ -584,7 +604,8 @@ angular.module("app")
 			  {
 				isrc: "images/styles/styleBoards/transitional/4.png",
 				actualWidth: "300px",
-				actualHeight: "300px"
+				actualHeight: "300px",
+				imgCredit: "Joel Dessaules Design"
 			  },
 			  
 			  
@@ -632,12 +653,14 @@ angular.module("app")
 			  {
 				isrc: "images/styles/styleBoards/transitional/11.png",
 				actualWidth: "300px",
-				actualHeight: "350px"
+				actualHeight: "350px",
+				imgCredit: "Design by Studio Oj. Photo by Bass Lu"
 			  },
 			  {
 				isrc: "images/styles/styleBoards/transitional/12.png",
 				actualWidth: "300px",
-				actualHeight: "300px"
+				actualHeight: "300px",
+				imgCredit: "Design by Nottdesign. Photo by A. Avdeenko"
 			  },
 			   
 			  {
