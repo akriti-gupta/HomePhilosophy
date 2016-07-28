@@ -203,7 +203,7 @@
   <!-- Progress bar ends -->
 
   <div ng-show="pageCount===1" class="font-playfair fs-22px" > 
-    <p style="padding-bottom:50px;">What is your design style?</p>
+    <p style="padding-bottom:50px;"><u>What is your design style?</u></p>
      <div ng-repeat="styles in stylePref track by $index">
       <div class="row qz-row">
         <div class="col-md-4 col-xs-4" ng-repeat="style in styles">
@@ -217,12 +217,15 @@
       </div>
     </div>
     <div class="fs-22px" style="padding:40px 0px 0px;"> 
-       <p>Not sure? Take our <button id="take-qz-btn" class="font-sansRegular col-hpgreen">STYLE QUIZ</button></p>
+       <p>Not sure? Take our <!-- <button id="take-qz-btn" class="font-sansRegular col-hpgreen">STYLE QUIZ</button> -->
+         <button class="btn-next" class="font-sansRegular col-hpgreen">STYLE QUIZ</button>
+
+       </p>
     </div>
   </div>
 
   <div ng-show="pageCount===2" class="font-playfair fs-22px" > 
-    <p style="padding-bottom:50px;">Which Living room do you want to relax in?</p>
+    <p style="padding-bottom:50px;"><u>Which living room do you want to relax in?</u></p>
     <div ng-repeat="styles in styleQuest1 track by $index">
       <div class="row qz-row">
         <div class="col-md-4 col-xs-4" ng-repeat="style in styles">
@@ -235,7 +238,7 @@
   </div>
 
   <div ng-show="pageCount===3" class="font-playfair fs-22px"> 
-    <p style="padding-bottom:50px;">Which Bedroom do you want to relax in?</p>
+    <p style="padding-bottom:50px;"><u>Which bedroom do you want to relax in?</u></p>
     <div ng-repeat="styles in styleQuest2 track by $index">
       <div class="row qz-row">
         <div class="col-md-4 col-xs-4" ng-repeat="style in styles">
@@ -248,7 +251,7 @@
   </div>
 
   <div ng-show="pageCount===4" class="font-playfair fs-22px"> 
-    <p style="padding-bottom:50px;">Which Dining room do you want to entertain in?</p>
+    <p style="padding-bottom:50px;"><u>Which dining room do you want to entertain in?</u></p>
     <div ng-repeat="styles in styleQuest3 track by $index">
       <div class="row qz-row">
         <div class="col-md-4 col-xs-4" ng-repeat="style in styles">
@@ -261,7 +264,7 @@
   </div>
 
   <div ng-show="pageCount===5" class="font-playfair fs-22px"> 
-    <p style="padding-bottom:50px;">Which Kitchen do you want to cook in?</p>
+    <p style="padding-bottom:50px;"><u>Which kitchen do you want to cook in?</u></p>
     <div ng-repeat="styles in styleQuest4 track by $index">
       <div class="row qz-row">
         <div class="col-md-4 col-xs-4" ng-repeat="style in styles">
@@ -274,7 +277,7 @@
   </div>
 
   <div ng-show="pageCount===6" class="font-playfair fs-22px"> 
-    <p style="padding-bottom:50px;">What Texture do you like?</p>
+    <p style="padding-bottom:50px;"><u>What texture do you like?</u></p>
     <div ng-repeat="styles in styleQuest5 track by $index">
       <div class="row qz-row">
         <div class="col-md-4 col-xs-4
@@ -287,13 +290,19 @@
     </div>
   </div>
 
+
+
+
   <div ng-show="pageCount===7" class="font-playfair fs-22px"> 
-    <p style="padding-bottom:50px;">What color palette do you like?</p>
+    <p style="padding-bottom:50px;"><u>What color palette do you like?</u></p>
     <div ng-repeat="styles in styleColor track by $index">
       <div class="row qz-row">
         <div class="col-md-4 col-xs-6" ng-repeat="style in styles">
           <a href="#" data-room-type="1" ng-click="nextPage(style.image_id)">
-            <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:100%;height:auto;">
+            <figure>
+              <img class="img-responsive center-block room-img" ng-src="{{style.image_style}}"  style="width:100%;height:auto;"/>
+              <figcaption class="font-sansRegular txt-center txt-upper fs-16px cap-prf-styl">{{style.image_name}}</figcaption>
+            </figure>
           </a>
         </div>
       </div>
@@ -384,13 +393,14 @@
     </ul>
 
     <div style="clear:both; padding-bottom:120px; padding-top:80px" class="txt-center">
-      <button type="button" class="btn-start-quiz font-sansRegular txt-upper col-lightcyan fs-16px btn-hero" style="border:0px;">See your results</button>
+      <a href="#" ng-click="nextPage(10)">
+      <button type="button" class="btn-start-quiz font-sansRegular txt-upper col-lightcyan fs-16px btn-hero" style="border:0px;">See your results</button></a>
     </div>
   </div>
 
 
 
-  <div ng-hide="pageCount!=9" style="margin:auto;">
+  <div ng-show="pageCount==9" style="margin:auto;">
     <a href ="/styleQuiz" ng-click="retakeQuiz()"> Retake Quiz </a>
     	<div align="center">
       		<div  ng-repeat="item in userStyle">

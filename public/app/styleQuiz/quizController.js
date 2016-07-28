@@ -851,16 +851,19 @@ angular.module("app")
 
 	$scope.styleColor = [
 				[{
-	        		image_style: "images/styles/colour/balanced.png",
-	        		image_id: 1
+	        		image_style: "images/styles/colour/neutral.png",
+	        		image_id: 1,
+	        		image_name: "Neutral"
 	    		}, 
 	    		{
-	    			image_style: "images/styles/colour/bold.png",
-					image_id: 2
+	    			image_style: "images/styles/colour/balanced.png",
+					image_id: 2,
+					image_name: "Balanced"
 	    		},
 	    		{
-	  				image_style: "images/styles/colour/neutral.png",
-	  				image_id: 3
+	  				image_style: "images/styles/colour/bold.png",
+	  				image_id: 3,
+	  				image_name: "Bold"
 	    		}]];
 
 	    		
@@ -968,14 +971,14 @@ angular.module("app")
 					$scope.progressRate+=16.5;
 					break;
 
-			case 6: $scope.computeStyle();
+			case 6: 
+					$scope.computeStyle();
 					$scope.backgroundCol6 = "#00a99d";
 					$scope.progressRate+=16.5;
 					break;
 
 
 			case 7: $scope.progress=false;
-					// console.log("Called refresh");
 					$scope.refresh(); 
 					break;
 
@@ -1012,48 +1015,58 @@ angular.module("app")
 		var totD = 0;
 		var totE = 0;
 		var totF = 0;
-		var totG = 0;
 
 
 		//user selections
-		var sel1 = $scope.selectedImages[0].image_id;
-		var sel2 = $scope.selectedImages[1].image_id;
-		var sel3 = $scope.selectedImages[2].image_id;
-		var sel4 = $scope.selectedImages[3].image_id;
+		var sel1 = $scope.selectedImages[2].image_id;
+		var sel2 = $scope.selectedImages[3].image_id;
+		var sel3 = $scope.selectedImages[4].image_id;
+		var sel4 = $scope.selectedImages[5].image_id;
+		var sel5 = $scope.selectedImages[6].image_id;
 
-		//alert(sel1 + " " +sel2 + " " + sel3 + " " +sel4);
+	//	alert(sel1 + " " +sel2 + " " + sel3 + " " +sel4 + " "+sel5);
 
 		// LivingRoom  
-		if(sel1 == 1){totB+= 1.00; totE+=4.00;} 	
-		if(sel1 == 2){totB+= 2.25; totD+= 2.75;}
-		if(sel1 == 3){totA+= 4.25; totC+= 0.75;}
-		if(sel1 == 4){totC+= 1.75; totF+= 3.25;}
-		if(sel1 == 5){totB+= 1.25; totD+= 3.75;}
-		if(sel1 == 6){totB+= 3.75; totD+= 0.70; totF+=0.55;}
-
-		// DiningRoom 
-		if(sel2 == 1){totB+= 1.25;totD+=3.75;}
-		if(sel2 == 2){totA+= 0.5;totB+=0.75;totC+=3.25;totD+=0.5;}
-		if(sel2 == 3){totB+= 0.55;totE+=4.45;}
-		if(sel2 == 4){totB+= 3.25;totF+=2.95;} //Changed on 23042016
-		if(sel2 == 5){totE+= 2.25;totF+=2.75;}
-		if(sel2 == 6){totA+= 4.00;totB+=0.50;totC+=0.5;}
-		
-		// Kitchen
-		if(sel3 == 1){totD+= 0.5; totE+= 4.50;}
-		if(sel3 == 2){totB+= 4.00; totE+= 2.00; totF+=2.25;} //Changed on 24042016
-		if(sel3 == 3){totB+= 1.35;totD+=3.65;}
-		if(sel3 == 4){totC+= 0.5;totD+=4.50;}
-		if(sel3 == 5){totA+= 4.35;totB+=0.65;}
-		if(sel3 == 6){totB+= 0.25; totD+= 3.25; totF+=1.50;}
+		if(sel1 == 1){totC+= 1.75; totF+=3.25;} 	
+		if(sel1 == 2){totA+= 4.25; totC+= 0.75;}
+		if(sel1 == 3){totB+= 1.00; totE+= 4.00;}
+		if(sel1 == 4){totB+= 0.75; totD+= 4.5;}
+		if(sel1 == 5){totB+= 0.75; totC+= 4.00;}
+		if(sel1 == 6){totB+= 4.5; totC+=1.75;}
 
 		// Bedroom
-		if(sel4 == 1){totA+= 4.55; totB+=0.15;totC+=0.30;}
-		if(sel4 == 2){totB+= 3.95; totC+= 1.05;}
-		if(sel4 == 3){totA+= 2.25;totC+=2.25;totF+=0.50;}
-		if(sel4 == 4){totB+= 0.5;totD+=3.85;totE+=0.65;}
-		if(sel4 == 5){totB+= 2.75;totE+=4.00;totF+=1.25;} //Changed on 24042016
-		if(sel4 == 6){totB+= 1.15; totF+= 3.85;}
+		if(sel2 == 1){totA+= 4.55; totB+=0.15;totC+=0.30;}
+		if(sel2 == 2){totB+= 0.5; totD+= 3.85; totE+=1.65;}
+		if(sel2 == 3){totA+= 0.75;totB+=1.65;totC+=3.95;}
+		if(sel2 == 4){totB+= 1.15;totF+=4.00;}
+		if(sel2 == 5){totB+= 4.65;totE+=3.35;} 
+		if(sel2 == 6){totA+= 2.25; totC+= 3.65;}
+
+
+		// Dining Room 
+		if(sel3 == 1){totB+= 1.25;totD+=3.75;}
+		if(sel3 == 2){totA+= 4.00;totB+=0.5;totC+=0.5;}
+		if(sel3 == 3){totB+= 3.25;totF+=2.95;}
+		if(sel3 == 4){totB+= 4.25;totD+=2.75;}
+		if(sel3 == 5){totE+= 4.45;}
+		if(sel3 == 6){totA+= 0.5;totB+=1.25;totC+=4.25;}
+		
+		// Kitchen
+		if(sel4 == 1){totA+= 4.35; totB+=0.65;}
+		if(sel4 == 2){totB+= 3.00; totE+= 2.00; totF+=2.25;} //Changed on 24042016
+		if(sel4 == 3){totB+= 1.35;totD+=3.65;}
+		if(sel4 == 4){totC+= 3.25;totD+=2.25;totF+=1.5;}
+		if(sel4 == 5){totD+= 0.5;totE+=4.5;}
+		if(sel4 == 6){totC+= 0.5; totD+= 4.5;}
+
+		// Textures
+		if(sel5 == 1){totC+= 1.00; totC+=1.00;totE+= 1.00; totF+=1.00;}
+		if(sel5 == 2){totA+= 2.00; totB+= 2.00; totC+=2.00;} 
+		if(sel5 == 3){totD+= 1.00;totF+=1.00;}
+		if(sel5 == 4){totA+= 2.00;totC+=1.5;totD+=0.5;}
+		if(sel5 == 5){totB+= 2.00;totD+=1.00;totF+=2.00;}
+		if(sel5 == 6){totA+=1.5;totB+=1.5;totC+= 1.00; totD+= 2;}
+
 
 
 		//alert("Modern:" +totMod + " contemporary:" +totCntmpry + " Eclectic:" + totEcltc + " Trad:" +totTrad + " Industrial:" +totIndstrl+ " Transitional:" +totTrnsnl);
@@ -1128,9 +1141,9 @@ angular.module("app")
 	
 		 case 1:	$scope.board = $scope.pics;
 		 			break;
-		 case 2:	$scope.board = $scope.pics1;
+		 case 2:	$scope.board = $scope.pics4;
 		 			break;
-		 case 3:	$scope.board = $scope.pics2;
+		 case 3:	$scope.board = $scope.pics5;
 		 			break;
 		 case 4:	$scope.board = $scope.pics3;
 		 			break;
