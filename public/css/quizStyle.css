@@ -546,3 +546,8 @@ a:active, a:hover {
 .thumbnail:hover,.thumbnail:focus,.thumbnail:active{
   border: 3px solid #00a99d;
 }
+
+#img-credit{
+  font-family: "OpenSans-Regular";
+  font-size: 12px;
+}

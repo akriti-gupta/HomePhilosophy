@@ -38,8 +38,9 @@
 
 			$(document).on('click', '.zoom img', function(e) {
 				var current_img = $(this).attr("src");
-
-				$(".img-zoom-box").attr('src',current_img)
+				$(".img-zoom-box").attr('src',current_img);
+				var img_credit = $(this).attr("data-img-credit");
+				$("#img-credit").html(img_credit);
 				
 				
 			});
