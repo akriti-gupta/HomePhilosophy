@@ -13,7 +13,7 @@ angular.module('app')
 					.when('/',{templateUrl: 'app/main.html', controller: 'MainController'})
 					.when('/login',{templateUrl: 'app/account/login.html', controller: 'LoginController'})
 					.when('/styleQuiz',{templateUrl: 'app/styleQuiz/styleQuiz.html', controller: 'QuizController'})
-					.when('/style-board',{templateUrl: 'app/styleQuiz/style-board-ctmp.html', controller: 'QuizController'})					
+					.when('/op-process',{templateUrl: 'app/process.html'})					
 					
     $locationProvider.html5Mode(true);
 			});
