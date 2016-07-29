@@ -1,4 +1,22 @@
 //Image/ Heart Click on Pinterest Board
+
+			$(document).on('click','.thumbnail',function(e){
+				e.preventDefault();
+				//$(".qz-row-room .thumbnail").removeClass('style-img-selected');
+				$(this).addClass('style-img-selected');
+			});
+
+			$(document).on('click','.qz-row a img',function(e){
+				e.preventDefault();
+
+				$(".qz-row a img").removeClass('style-img-selected');
+				$(this).addClass('style-img-selected');
+			});
+			$(document).on('click','.qz-row-dsg a figure',function(e){
+				e.preventDefault();
+				$(".qz-row-dsg a figure").removeClass('style-img-selected');
+				$(this).addClass('style-img-selected');
+			});
 	      	$(document).on('click', '.image-like', function(e) {
         		e.preventDefault();
         		$(this).toggleClass('image-like-selected');

@@ -25,6 +25,7 @@ angular.module("app")
 				
     $scope.progressRate=16.6; 
 	$scope.pageCount=0;
+	$scope.pagenum = 1;
 	// $scope.rowCount = 2;
 	$scope.selectedImages = [];
 	$scope.identity = mvIdentity;
@@ -32,7 +33,9 @@ angular.module("app")
 	var prefStyle = [];
 	$scope.userStyle = [];
 	$scope.board=1;	
+	$scope.disable = true;
 
+// alert('start of ctrl: disable is'+$scope.disable);
  // imageService.loadImages().then(function(data){
  //            data.data.items.forEach(function(obj){
  //                var desc = obj.description,
@@ -931,59 +934,69 @@ angular.module("app")
 		$scope.gotoLink = "login";
 	}
 	
-	$scope.nextPage = function(selectedImage){
-		$scope.selectedImages.push({page: $scope.pageCount, image_id: selectedImage});
-		var currentPage = $scope.pageCount;
-		$scope.pageCount++;
-		// alert($scope.pageCount);
+	// $scope.nextPage = function(selectedImage){
+		$scope.nextPage = function(){
+		//alert($scope.image_selected);
+		// $scope.selectedImages.push({page: $scope.pageCount, image_id: selectedImage});
+		// var currentPage = $scope.pageCount;
+		// $scope.pageCount++;
 
+		var currentPage = $scope.pagenum;
+		$scope.pagenum++
+		$scope.disable=true;
+		
 		switch(currentPage){
 
-			case 0: //quizResult.clearStyle();
+			case 1: //quizResult.clearStyle();
 					
 					$scope.backgroundCol = "#00a99d";
 					break; 
 
-			case 1: $scope.progress = true;
-					break;
-
 			case 2: 
-					$scope.backgroundCol2 = "#00a99d";
-					
-					$scope.progressRate+=16.5;
-					
+					//alert($scope.selectedImages[1]);
+					if($scope.selectedImages[currentPage] >=1){
+						//$scope.pageCount = -1;
+						//Save selected image id in a service so that it can flow from how it works page to the db
+						$location.path('/op-process');
+
+					}
+					else{
+						$scope.progress = true;
+					}
 					break;
 
 			case 3: 
-					$scope.backgroundCol3 = "#00a99d";
-					
+					$scope.backgroundCol2 = "#00a99d";
 					$scope.progressRate+=16.5;
-
-					break; 
+					break;
 
 			case 4: 
+					$scope.backgroundCol3 = "#00a99d";
+					$scope.progressRate+=16.5;
+					break; 
+
+			case 5: 
 					$scope.backgroundCol4 = "#00a99d";
-					
 					$scope.progressRate+=16.5;
 					break;
 
-			case 5: $scope.backgroundCol5 = "#00a99d";
+			case 6: $scope.backgroundCol5 = "#00a99d";
 					$scope.progressRate+=16.5;
 					break;
 
-			case 6: 
+			case 7: 
 					$scope.computeStyle();
 					$scope.backgroundCol6 = "#00a99d";
 					$scope.progressRate+=16.5;
 					break;
 
 
-			case 7: $scope.progress=false;
+			case 8: $scope.progress=false;
 					$scope.refresh(); 
 					break;
 
 
-			case 8: $scope.backgroundCol6 = "#00a99d";
+			case 9: $scope.backgroundCol6 = "#00a99d";
 					break;
 
 
@@ -996,6 +1009,11 @@ angular.module("app")
 					 	console.log("Going to Login page");
 					}								 
 		}
+	}
+
+	$scope.quiz = function(){
+		$scope.selectedImages[$scope.pagenum] = -1;
+		$scope.pagenum++;
 	}
 
 	
@@ -1016,15 +1034,22 @@ angular.module("app")
 		var totE = 0;
 		var totF = 0;
 
-
 		//user selections
-		var sel1 = $scope.selectedImages[2].image_id;
-		var sel2 = $scope.selectedImages[3].image_id;
-		var sel3 = $scope.selectedImages[4].image_id;
-		var sel4 = $scope.selectedImages[5].image_id;
-		var sel5 = $scope.selectedImages[6].image_id;
+		// var sel1 = $scope.selectedImages[2].image_id;
+		// var sel2 = $scope.selectedImages[3].image_id;
+		// var sel3 = $scope.selectedImages[4].image_id;
+		// var sel4 = $scope.selectedImages[5].image_id;
+		// var sel5 = $scope.selectedImages[6].image_id;
 
-	//	alert(sel1 + " " +sel2 + " " + sel3 + " " +sel4 + " "+sel5);
+		console.log($scope.selectedImages);
+		var sel1 = $scope.selectedImages[3];
+		var sel2 = $scope.selectedImages[4];
+		var sel3 = $scope.selectedImages[5];
+		var sel4 = $scope.selectedImages[6];
+		var sel5 = $scope.selectedImages[7];
+
+
+		alert(sel1 + " " +sel2 + " " + sel3 + " " +sel4 + " "+sel5);
 
 		// LivingRoom  
 		if(sel1 == 1){totC+= 1.75; totF+=3.25;} 	
@@ -1125,7 +1150,7 @@ angular.module("app")
 		$scope.backgroundCol4 = "#cccccc";
 		$scope.backgroundCol5 = "#cccccc";
 		$scope.backgroundCol6 = "#cccccc";
-		$scope.pageCount=0;
+		// $scope.pageCount=0;
 		// $scope.rowCount = 2;
 		$scope.selectedImages = [];
 		// $scope.identity = mvIdentity;
@@ -1160,6 +1185,14 @@ angular.module("app")
 		else {
 			return (a.value > b.value) ? -1 : 1;
 		}
+	}
+
+	$scope.saveSelection = function (imageId) {
+		// $scope.selectedImages.push({page: $scope.pageCount, image_id: imageId});
+		$scope.selectedImages[$scope.pagenum] =  imageId;
+		console.log($scope.selectedImages);
+		$scope.disable=false;
+		// alert('selected imag, disable is: '+ $scope.disable);
 	}
 });
 
