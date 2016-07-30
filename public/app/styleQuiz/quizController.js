@@ -28,8 +28,10 @@ angular.module("app")
 	$scope.pagenum = 1;
 	// $scope.rowCount = 2;
 	$scope.selectedImages = [];
+	$scope.selectedRoom = [];
 	$scope.identity = mvIdentity;
 	$scope.progress = false;
+	$scope.progress_result=false;
 	var prefStyle = [];
 	$scope.userStyle = [];
 	$scope.board=1;	
@@ -65,7 +67,8 @@ angular.module("app")
 			  {
 				isrc: "images/styles/styleBoards/master/3.png",
 				actualWidth: "300px",
-				actualHeight: "480px"
+				actualHeight: "480px",
+				imgCredit: "Kimberly Demmy design.Photo by Daniel O’Connor"
 			  },
 
 			  {
@@ -125,7 +128,8 @@ angular.module("app")
 			  {
 				isrc: "images/styles/styleBoards/master/11.png",
 				actualWidth: "300px",
-				actualHeight: "350px"
+				actualHeight: "350px",
+				imgCredit: "Design by Nottdesign. Photo by A. Avdeenko"
 			  },
 			  {
 				isrc: "images/styles/styleBoards/master/12.png",
@@ -915,8 +919,10 @@ angular.module("app")
 
 	    $scope.picp="pics2";	
 
-	if(quizResult.getStyleText().length==0){
-	    quizResult.fetchStyleText();
+	if(quizResult.getStyleTitle().length==0){
+	    // alert("Fetching");
+	    quizResult.fetchStyleInfo();
+
 	}
 
 	// To maintain the quiz result and style quiz pages state when redirected here after login.
@@ -934,16 +940,12 @@ angular.module("app")
 		$scope.gotoLink = "login";
 	}
 	
-	// $scope.nextPage = function(selectedImage){
-		$scope.nextPage = function(){
-		//alert($scope.image_selected);
-		// $scope.selectedImages.push({page: $scope.pageCount, image_id: selectedImage});
-		// var currentPage = $scope.pageCount;
-		// $scope.pageCount++;
-
+	$scope.nextPage = function(){
+		
 		var currentPage = $scope.pagenum;
 		$scope.pagenum++
 		$scope.disable=true;
+		// alert(currentPage);
 		
 		switch(currentPage){
 
@@ -952,17 +954,12 @@ angular.module("app")
 					$scope.backgroundCol = "#00a99d";
 					break; 
 
-			case 2: 
-					//alert($scope.selectedImages[1]);
-					if($scope.selectedImages[currentPage] >=1){
-						//$scope.pageCount = -1;
-						//Save selected image id in a service so that it can flow from how it works page to the db
+			 case 2: 
+					
+						//TODO: Save selected image id in a service so that it can flow from how it works page to the db
 						$location.path('/op-process');
 
-					}
-					else{
-						$scope.progress = true;
-					}
+					
 					break;
 
 			case 3: 
@@ -997,10 +994,17 @@ angular.module("app")
 
 
 			case 9: $scope.backgroundCol6 = "#00a99d";
+					$scope.progress_result=true;
 					break;
 
 
-			default: //Show up login page, transfer control with scope. Return. Once logged in
+			case 10: 
+					
+					 break;
+
+			default:
+
+					//Show up login page, transfer control with scope. Return. Once logged in
 					 //show the page.
 					if(mvIdentity.isAuthenticated()){
 						$scope.progress = false;	
@@ -1012,12 +1016,15 @@ angular.module("app")
 	}
 
 	$scope.quiz = function(){
+		// alert($scope.pagenum);
 		$scope.selectedImages[$scope.pagenum] = -1;
 		$scope.pagenum++;
+		$scope.disable = true;
+		$scope.progress = true;
 	}
 
 	
-	$scope.board = $scope.pics;
+	
 
 	$scope.refresh = function(){
 		console.log("refreshing gallery now");
@@ -1099,48 +1106,87 @@ angular.module("app")
 		var totAll = totA + totB + totC + totD + totE + totF;
 
 		if(totA > 0)
-			prefStyle.push({style: 'Classic', value: (Math.round(totA/totAll * 100))});
+			prefStyle.push({id: 0, style: 'Classic', value: (Math.round(totA/totAll * 100))});
 		if(totB > 0)
-			prefStyle.push({style: 'Contemporary', value: (Math.round(totB/totAll * 100))});
+			prefStyle.push({id:1, style: 'Contemporary', value: (Math.round(totB/totAll * 100))});
 		if(totC > 0)
-			prefStyle.push({style: 'Transitional', value: (Math.round(totC/totAll * 100))});
+			prefStyle.push({id:2, style: 'Transitional', value: (Math.round(totC/totAll * 100))});
 		if(totD > 0)
-			prefStyle.push({style: 'Modern', value: (Math.round(totD/totAll * 100))});
+			prefStyle.push({id:3, style: 'Modern', value: (Math.round(totD/totAll * 100))});
 		if(totE > 0)
-			prefStyle.push({style: 'Scandinavian', value: (Math.round(totE/totAll * 100))});
+			prefStyle.push({id:4, style: 'Scandinavian', value: (Math.round(totE/totAll * 100))});
 		if(totF > 0)
-			prefStyle.push({style: 'Asian Inspired Minimalist', value:(Math.round(totF/totAll * 100))});
+			prefStyle.push({id:5, style: 'Asian Inspired', value:(Math.round(totF/totAll * 100))});
 
 		prefStyle.sort(sortValues);
+		console.log(prefStyle);
+
+
+		
 
 		for(var j =0;j<prefStyle.length; j++){
 			
+			var test= quizResult.getStyleDesc();
+			var imageObj = quizResult.getStyleImage()[0];
+			// image:quizResult.getStyleImage()[0][prefStyle[j].style]
+			var style_name = prefStyle[j].style;
+			console.log(style_name);
+			console.log(quizResult.getStyleDesc());
+			
 			if(prefStyle[j].value >= 70){
-				$scope.userStyle.push({title: quizResult.getStyleText()[0] , style: (prefStyle[j].style), value: (prefStyle[j].value)});
+				$scope.userStyle.push({title: quizResult.getStyleTitle()[0] , style: (prefStyle[j].style), desc:quizResult.getStyleDesc()[0][prefStyle[j].style].text,image: imageObj[style_name].image,value: (prefStyle[j].value)});
 				break;
 			}
 			else if(prefStyle[j].value < 70 && prefStyle[j].value >= 50){
-				$scope.userStyle.push({title: quizResult.getStyleText()[0] , style: (prefStyle[j].style), value: (prefStyle[j].value)});
-				if(j+1 < prefStyle.length)
-					$scope.userStyle.push({title: quizResult.getStyleText()[1] ,style: (prefStyle[j+1].style), value: (prefStyle[j+1].value)});
+				$scope.userStyle.push({title: quizResult.getStyleTitle()[0] , style: (prefStyle[j].style), desc:quizResult.getStyleDesc()[0][prefStyle[j].style].text,image: imageObj[style_name].image,value: (prefStyle[j].value)});
+				if(j+1 < prefStyle.length){
+					$scope.userStyle.push({title: quizResult.getStyleTitle()[1] ,style: (prefStyle[j+1].style),desc:quizResult.getStyleDesc()[0][prefStyle[j+1].style].text, image: imageObj[prefStyle[j+1].style].image,value: (prefStyle[j+1].value)});
+				}
 				break;
-
 			}
 			else if(prefStyle[j].value < 50 && prefStyle[j].value >= 10){
-				$scope.userStyle.push({title: quizResult.getStyleText()[0] , style: (prefStyle[j].style), value: (prefStyle[j].value)});
-				if(j+1 < prefStyle.length)
-					$scope.userStyle.push({title: quizResult.getStyleText()[1], style:(prefStyle[j+1].style), value: (prefStyle[j+1].value)});
-				if(j+2 < prefStyle.length)
-					$scope.userStyle.push({title: quizResult.getStyleText()[2], style: (prefStyle[j+2].style), value: (prefStyle[j+2].value)});
+				$scope.userStyle.push({title: quizResult.getStyleTitle()[0] , style: (prefStyle[j].style), desc:quizResult.getStyleDesc()[0][prefStyle[j].style].text,image: imageObj[style_name].image,value: (prefStyle[j].value)});
+				if(j+1 < prefStyle.length){
+					$scope.userStyle.push({title: quizResult.getStyleTitle()[1], style:(prefStyle[j+1].style),desc:quizResult.getStyleDesc()[0][prefStyle[j+1].style].text,image: imageObj[prefStyle[j+1].style].image, value: (prefStyle[j+1].value)});
+				}
+				if(j+2 < prefStyle.length){
+					$scope.userStyle.push({title: quizResult.getStyleTitle()[2], style: (prefStyle[j+2].style), desc:quizResult.getStyleDesc()[0][prefStyle[j+2].style].text,image: imageObj[prefStyle[j+2].style].image,value: (prefStyle[j+2].value)});
+				}
 				break;
-
 			}
 		}
+
+		$scope.setBoard(prefStyle[0]);
 		if(!mvIdentity.isAuthenticated()){
 			console.log('Stoing style in svc before going to login');
 			quizResult.storeStyle($scope.userStyle);
 		}
 	}
+
+	$scope.setBoard = function(styleResult){
+		var res_style = styleResult.style;
+		console.log(res_style);
+		if(res_style==="Classic")
+			$scope.board = $scope.pics4;
+
+		else if(res_style==="Modern")
+			$scope.board = $scope.pics3;
+		
+		else if(res_style==="Transitional")
+			$scope.board = $scope.pics5;
+		
+		else if(res_style==="Contemporary")
+			$scope.board = $scope.pics1;
+		
+		else if(res_style==="Asian Inspired")
+			$scope.board = $scope.pics;
+		
+		else if(res_style==="Scandinavian")
+			$scope.board = $scope.pics2;
+
+
+		}
+	
 
 	$scope.retakeQuiz = function(){
 		$scope.progressRate=16.6;
@@ -1150,8 +1196,7 @@ angular.module("app")
 		$scope.backgroundCol4 = "#cccccc";
 		$scope.backgroundCol5 = "#cccccc";
 		$scope.backgroundCol6 = "#cccccc";
-		// $scope.pageCount=0;
-		// $scope.rowCount = 2;
+		$scope.pagenum=2;
 		$scope.selectedImages = [];
 		// $scope.identity = mvIdentity;
 		$scope.progress = false;
@@ -1189,10 +1234,38 @@ angular.module("app")
 
 	$scope.saveSelection = function (imageId) {
 		// $scope.selectedImages.push({page: $scope.pageCount, image_id: imageId});
-		$scope.selectedImages[$scope.pagenum] =  imageId;
-		console.log($scope.selectedImages);
-		$scope.disable=false;
-		// alert('selected imag, disable is: '+ $scope.disable);
+		if($scope.pagenum==1){ // Allow multiple room selections
+			
+			//If room already exists, user clicked a room icon twice to deselect, remove image ID from array
+			var index = $scope.selectedRoom.indexOf(imageId);
+			if(index>-1){
+				$scope.selectedRoom.splice(index, 1);
+			}
+			else{
+				$scope.selectedRoom.push(imageId);
+			}
+			if($scope.selectedRoom.length>=1){
+				$scope.disable=false;
+			}
+			else{
+				$scope.disable=true;
+			}
+		}
+		else{
+			$scope.selectedImages[$scope.pagenum] =  imageId;
+			// console.log($scope.selectedImages);
+			$scope.disable=false;
+		}
+	}
+
+	$scope.prev = function(){
+		if($scope.pagenum>1){
+			$scope.pagenum--;
+		}
+		else{
+			$location.path('/');
+		}
+
 	}
 });
 

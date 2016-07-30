@@ -1,15 +1,17 @@
 	angular.module('app').service("quizResult", function($http, $q, $location) {
         var result = [];
         var scores="";
-        var styleText = [];
+        var styleTitle = [];
         var styleImages = [];
+        var styleDesc =[];
+        var styleImage = [];
         var showNavBar = true;
         
 
         //Called from quizController to store calculated style before control is passed to login page.
 		var storeStyle = function(newObj) {
 		    for(i=0;i<newObj.length;i++){
-		    	result.push({"title": newObj[i].title, "style":newObj[i].style, "value":newObj[i].value});
+		    	result.push({"title": newObj[i].title, "style":newObj[i].style, "desc": newObj[i].desc,"value":newObj[i].value});
 			}
 		};
 
@@ -21,17 +23,42 @@
 		 	result.length = 0;
 		 }
 
-		 var fetchStyleText = function(){
+		 var fetchStyleInfo = function(){
 		 	$http.get('resources/styleText.properties').then(function (response) {
 	         //   console.log("resp is: "+response);
-	            styleText[0] = response.data.MajorStyle;
-	            styleText[1] = response.data.SubStyle;
-	            styleText[2] =  response.data.MinorStyle;
+	            styleTitle[0] = response.data.MajorStyle;
+	            styleTitle[1] = response.data.SubStyle;
+	            styleTitle[2] =  response.data.MinorStyle;
+
+	           // result.push({"title": newObj[i].title, "style":newObj[i].style, "desc": newObj[i].desc,"value":newObj[i].value});
+	            styleDesc.push({"Classic":response.data.Classic,
+	            				"Asian Inspired":response.data["Asian Inspired"],
+	            				"Contemporary":response.data.Contemporary,
+	            				"Transitional":response.data.Transitional,
+	            				"Modern":response.data.Modern,
+	            				"Scandinavian":response.data.Scandinavian});
+
+	            styleImage.push({"Classic":response.data.Classic,
+	            				"Asian Inspired":response.data["Asian Inspired"],
+	            				"Contemporary":response.data.Contemporary,
+	            				"Transitional":response.data.Transitional,
+	            				"Modern":response.data.Modern,
+	            				"Scandinavian":response.data.Scandinavian});
 	            });
+
+		 	console.log("styleDesc is: "+styleDesc);
 		 }
 
-		 var getStyleText = function(){
-		 	return styleText;
+		 var getStyleTitle = function(){
+		 	return styleTitle;
+		 }
+
+		 var getStyleDesc = function(){
+		 	return styleDesc;
+		 }
+
+		 var getStyleImage = function(){
+		 	return styleImage;
 		 }
 
 		 var showNavBar = function(){
@@ -71,11 +98,11 @@
 			    storeStyle: storeStyle,
 			    getStyle: getStyle,
 			    clearStyle: clearStyle,
-			    fetchStyleText: fetchStyleText,
-			    getStyleText: getStyleText,
-			    showNavBar: showNavBar
-			   // fetchStyleImage: fetchStyleImage,
-			   // getStyleImage: getStyleImage
+			    fetchStyleInfo: fetchStyleInfo,
+			    getStyleTitle: getStyleTitle,
+			    getStyleDesc: getStyleDesc,
+			    showNavBar: showNavBar,
+			   	getStyleImage: getStyleImage
 
 			  };
         });
