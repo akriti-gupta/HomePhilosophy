@@ -2,13 +2,21 @@
 
 			$(document).on('click','.thumbnail',function(e){
 				e.preventDefault();
-				//$(".qz-row-room .thumbnail").removeClass('style-img-selected');
-				$(this).addClass('style-img-selected');
+				var isSelected=false;
+				if($(this).hasClass('style-img-selected')){
+					isSelected=true;
+				}
+				if(isSelected){
+					$(this).removeClass('style-img-selected');
+				}
+				else{
+					$(this).addClass('style-img-selected');
+				}
 			});
 
 			$(document).on('click','.qz-row a img',function(e){
 				e.preventDefault();
-
+						// $(".qz-row a img").removeClass('style-img-selected');siblings
 				$(".qz-row a img").removeClass('style-img-selected');
 				$(this).addClass('style-img-selected');
 			});

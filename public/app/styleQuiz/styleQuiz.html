@@ -29,8 +29,8 @@
     <div class="row qz-row-room">
       <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
-          <img src="images/master.png" alt="master bedroom">
-          <a href="#"><span class="tag"></span></a>
+          <img src="images/master.png" data-room-id="1" alt="master bedroom">
+          <a href="#" ng-click="saveSelection(1)"><span class="tag"></span></a>
           <div class="caption txt-center">
             <p class="font-montserrat txt-upper fs-16px">Master Bedroom</p>
              <p class="font-sansRegular fs-10px" style="padding-top:20px;color:rgb(161, 161, 161);">
@@ -59,7 +59,7 @@
       <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
           <img src="images/living.png" alt="living room">
-          <a href="#"><span class="tag"></span></a>
+          <a href="#" ng-click="saveSelection(2)"><span class="tag"></span></a>
           <div class="caption txt-center">
             <p class="font-montserrat txt-upper fs-16px">Living Room</p>
           </div>
@@ -80,7 +80,7 @@
       <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
           <img src="images/kids.png" alt="kids room">
-          <a href="#"><span class="tag"></span></a>
+          <a href="#" ng-click="saveSelection(3)"><span class="tag"></span></a>
           <div class="caption txt-center">
             <p class="font-montserrat txt-upper fs-16px">Kids Room</p>
           </div>
@@ -103,7 +103,7 @@
     <div class="row qz-row-room">
       <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
-          <a href="#" ng-click="nextPage(3)"><span class="tag"></span></a>
+          <a href="#" ng-click="saveSelection(4)"><span class="tag"></span></a>
           <img src="images/homeOffice.png" alt="home office">
           <div class="caption txt-center">
             <p class="font-montserrat txt-upper fs-16px">Home Office</p>
@@ -125,7 +125,7 @@
       
       <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
-          <a href="#" ng-click="nextPage(4)"><span class="tag"></span></a>
+          <a href="#" ng-click="saveSelection(5)"><span class="tag"></span></a>
           <img src="images/dining.png" alt="dining room">
           <div class="caption txt-center">
             <p class="font-montserrat txt-upper fs-16px">Dining Room</p>
@@ -147,7 +147,7 @@
       
       <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
-          <a href="#" ng-click="saveSelection(6);nextPage()"><span class="tag"></span></a>
+          <a href="#" ng-click="saveSelection(6)"><span class="tag"></span></a>
           <img src="images/bedroom.png" alt="bedroom">
          <div class="caption txt-center">
             <p class="font-montserrat txt-upper fs-16px">Bedroom</p>
@@ -376,18 +376,7 @@
       <p style="padding-top:10px;margin-bottom:0px;color:rgb(77,77,77);" class="font-sansRegular fs-14px">Love the colours of a living room image and want us to use it when we design your bedroom?</p>
       <p class="font-sansRegular fs-14px" style="padding-bottom:40px;color:rgb(77,77,77);">Just add a comment to let us know and we will ensure to incorporate it.</p>
     </div>
-<!-- 
-    <div  class="txt-center" style="padding:40px;">
-      <ul class="pinboard-list">
-        <li class="pinboard-list-item font-sansRegular fs-18px active"><a href="#" ng-click="loadBoard(1);">MASTER BEDROOM</a></li>
-        <li class="pinboard-list-item font-sansRegular fs-18px"><a href="#" ng-click="loadBoard(2);">LIVING ROOM</a></li>
-        <li class="pinboard-list-item font-sansRegular fs-18px"><a href="#" ng-click="loadBoard(3);">HOME OFFICE</a></li>
-        <li class="pinboard-list-item font-sansRegular fs-18px"><a href="#" ng-click="loadBoard(4);">DINING ROOM</a></li>
-      </ul>
-    </div>
-     -->
 
-    
     <ul  class="dynamic-grid txt-center grid-pos" angular-grid="board" ag-grid-width="300" ag-gutter-size="40" ag-id="gallerypin" ag-refresh-on-img-load="true" >
       <li data-ng-repeat="pic in board" class="grid">
         <a href="#" class="zoom" data-toggle="modal" data-target="#zoomModal">
@@ -412,36 +401,60 @@
 
 
 
-  <div ng-show="pagenum===10" style="margin:auto;">
-    <a href ="/styleQuiz" ng-click="retakeQuiz()"> Retake Quiz </a>
-    	<div align="center">
-      		<div  ng-repeat="item in userStyle">
-	 			<span>{{item.style}} : {{item.value}}% </span><br/>
-			</div>
-		</div> 
+  <div ng-show="pagenum===10" style="width:80%;margin:auto;">
+    <div ng-show="progress_result" class="progress-wrapper">
+      <div class="progress">
+        <div class="progress-bar" style="width: {{progressRate}}%"></div>
+        <div class="one primary-color"></div>
+        <div class="two no-color" ng-style="{'background': backgroundCol2}"></div>
+        <div class="three no-color" ng-style="{'background': backgroundCol3}"></div>
+        <div class="four no-color" ng-style="{'background': backgroundCol4}"></div>
+        <div class="five no-color" ng-style="{'background': backgroundCol5}"></div>
 
-		<div style="color:#1C1C1C;font-size:26px;font-weight:300;margin-bottom:30px;margin-top:10px;text-align:center;padding:0 10px;">
-			<span>Your Style Profile Is..</span>
-		</div>
-		
-		<div class="flex-container" >
-		 <div ng-repeat="item in userStyle" class="flex-item">
-		  <div style="font-weight:600;font-size:16px;text-transform:uppercase;">
-		  	<span align="center">{{item.title}} </span>
-		  </div>
-		  <div style="font-size: 20px; padding-bottom: 5px; font-weight: 300;">
-		  	<span>{{item.style}}</span>
-		  </div>
-		  <div>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. 
+        <div class="lbl-one one">1</div>
+        <div class="lbl-two two" ng-show="pagenum>1">2</div>
+        <div class="lbl-three three" ng-show="pagenum>2">3</div>
+        <div class="lbl-four four" ng-show="pagenum>3">4</div>
+        <div class="lbl-five five" ng-show="pagenum>4">5</div>
       </div>
-		 </div>
-		</div>
-	</div>
+     </div>
+
+    <div  style="width:90%;margin:0 auto;padding-bottom:40px;" ng-repeat="item in userStyle" ng-if="$first">
+      <p class="font-playfair fs-22px result-title">{{item.title}} <span class="txt-upper font-playfair-bold">{{item.style}}</span></p>
+      <p class="font-sansRegular fs-16px" style="padding:30px 80px;"> {{item.desc}}</p>
+        <img ng-src="{{item.image}}" style="width:100%;"/>
+      <p ng-if="userStyle.length==1" class="font-playfair fs-22px" style="text-align:right;color:rgb(77, 77, 77);">Not your style? Re-take the <a href="/styleQuiz"  ng-click="retakeQuiz()"><u>Style Quiz</u></a></p>
+    </div>
+
+    <div style="width:90%;margin:0 auto;" ng-repeat="item in userStyle.slice(1,entries.length)" ng-if="userStyle.length==2">
+      <div style="width:49%;margin:0 auto;">
+        <p class="font-playfair fs-22px result-title">{{item.title}}  <span class="txt-upper font-playfair-bold">{{item.style}}</span></p>
+        <img ng-src="{{item.image}}" style="width:100%;">
+        <p class="font-playfair fs-22px" style="text-align:right;color:rgb(77, 77, 77);">Not your style? Re-take the <a href="/styleQuiz"  ng-click="retakeQuiz()"><u>Style Quiz</u></a></p>
+      </div>
+    </div>
+  
+    <div style="width:90%;margin:0 auto;" ng-repeat="item in userStyle.slice(1,entries.length)" ng-if="userStyle.length==3">
+      <div style="width:49%;float:left;" ng-if="$first">
+        <p class="font-playfair fs-22px result-title">{{item.title}}   <span class="txt-upper font-playfair-bold">{{item.style}}</p>
+        <img ng-src="{{item.image}}" style="width:100%;">
+      </div>
+      <div style="width:49%;float:right;" ng-if="$last">
+        <p class="font-playfair fs-22px result-title">{{item.title}}   <span class="txt-upper font-playfair-bold">{{item.style}}</span></p>
+        <img ng-src="{{item.image}}" style="width:100%;">
+        <p class="font-playfair fs-22px" style="text-align:right;color:rgb(77, 77, 77);">Not your style? Re-take the <a href="/styleQuiz"  ng-click="retakeQuiz()"><u>Style Quiz</u></a></p>
+      </div>
+    </div> 
+
+    <!-- <div style="clear:both;margin:0 auto;float:right;padding-right:5%;">
+      <p class="font-playfair fs-22px" style="color:rgb(77, 77, 77);">Not your style? Re-take the <a href="/styleQuiz"  ng-click="retakeQuiz()">Style Quiz</a></p>
+    </div> -->
+  </div>
     
 
   <!-- Buttons -->
-  <div style="text-align:center;padding:80px 0px 100px;" ng-show="pagenum!=9">
-    <button type="button" class="btn-qz btn-bk">Back</button>
+  <div style="text-align:center;padding:80px 0px 100px;clear:both;" ng-show="pagenum!=9">
+    <button type="button" class="btn-qz btn-bk" ng-click="prev();">Back</button>
     <button type="button" class="btn-qz btn-nxt" ng-disabled="disable" ng-click="nextPage()">Next</button>
   </div>
   
