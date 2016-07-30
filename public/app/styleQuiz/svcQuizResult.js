@@ -11,8 +11,9 @@
         //Called from quizController to store calculated style before control is passed to login page.
 		var storeStyle = function(newObj) {
 		    for(i=0;i<newObj.length;i++){
-		    	result.push({"title": newObj[i].title, "style":newObj[i].style, "desc": newObj[i].desc,"value":newObj[i].value});
+		    	result.push({"title": newObj[i].title, "style":newObj[i].style, "desc": newObj[i].desc, "image": newObj[i].image, "value":newObj[i].value});
 			}
+			console.log("Jn storeStyle, stored res  is: "+result)
 		};
 
 		var getStyle = function(){
@@ -25,12 +26,10 @@
 
 		 var fetchStyleInfo = function(){
 		 	$http.get('resources/styleText.properties').then(function (response) {
-	         //   console.log("resp is: "+response);
 	            styleTitle[0] = response.data.MajorStyle;
 	            styleTitle[1] = response.data.SubStyle;
 	            styleTitle[2] =  response.data.MinorStyle;
 
-	           // result.push({"title": newObj[i].title, "style":newObj[i].style, "desc": newObj[i].desc,"value":newObj[i].value});
 	            styleDesc.push({"Classic":response.data.Classic,
 	            				"Asian Inspired":response.data["Asian Inspired"],
 	            				"Contemporary":response.data.Contemporary,
@@ -45,8 +44,6 @@
 	            				"Modern":response.data.Modern,
 	            				"Scandinavian":response.data.Scandinavian});
 	            });
-
-		 	console.log("styleDesc is: "+styleDesc);
 		 }
 
 		 var getStyleTitle = function(){
@@ -70,28 +67,6 @@
 		 	}
 		 	return showNavBar;
 		 }
-
-
-		 // var fetchStyleImage = function(){
-		 // 	// var dfd = $q.defer();
-			// 	// console.log('In style factory, getting images');
-			//  	$http.get('/getStyleImage').then(function(response){
-			 		
-		 //  			 if(true){
-		 //  			 	styleImages = response.data.results;
-		 //  			 	console.log("In svc" +response.data.results);
-		 //  				//dfd.resolve(true);
-		 //  			}
-		 //  			else{
-		 //  			//	dfd.resolve(false);
-		 //  			}
-		 //  		});
-		 //  		return styleImages;
-		 // }
-
-		 // var getStyleImage  = function(){
-		 // 	return styleImages;
-		 // }
 
 
 		return {

@@ -4,7 +4,7 @@ angular.module('app')
         this.loadImages = function(){
             return $http.jsonp("https://api.flickr.com/services/feeds/photos_public.gne?format=json&jsoncallback=JSON_CALLBACK");
         };
-        //console.log("Loaded imafes");
+        
     }]);
 
 
@@ -24,9 +24,7 @@ angular.module("app")
 	
 				
     $scope.progressRate=16.6; 
-	$scope.pageCount=0;
 	$scope.pagenum = 1;
-	// $scope.rowCount = 2;
 	$scope.selectedImages = [];
 	$scope.selectedRoom = [];
 	$scope.identity = mvIdentity;
@@ -901,44 +899,30 @@ angular.module("app")
 	  				room_id: 6
 	    		}]];
 
-	    // 	if(!$scope.majorStyleText){
-	    			
-			 	// console.log("fetching text now.");
-			 	
-		   //  	$http.get('resources/styleText.properties').then(function (response) {
-	    //         console.log("resp is: "+response);
-	    //         $scope.majorStyleText = response.data.MajorStyle;
-	    //         $scope.subStyleText = response.data.SubStyle;
-	    //         $scope.minorStyleText = response.data.MinorStyle;
-	    //         console.log('TestString is ', response.data.MajorStyle);
-	    //         console.log('BooleanValue is ', response.data.SubStyle);    
-	    //         console.log('BooleanValue is ', response.data.MinorStyle);  
-	             
-	    // 		});
-	    // 	}
 
-	    $scope.picp="pics2";	
+	 
 
 	if(quizResult.getStyleTitle().length==0){
-	    // alert("Fetching");
 	    quizResult.fetchStyleInfo();
-
 	}
 
 	// To maintain the quiz result and style quiz pages state when redirected here after login.
+	console.log("quizResult.getStyle() is :"+quizResult.getStyle());
+	console.log("Stored result len is:"+quizResult.getStyle().length)
 	if(quizResult.getStyle().length>=1){
 		$scope.userStyle = quizResult.getStyle();
-		$scope.progress = false;
+		$scope.pagenum=10;
+		$scope.progress_result = false;
 	}
 
-	if(mvIdentity.isAuthenticated()){
-		//console.log('user is isAuthenticated');
-		$scope.gotoLink = "styleQuiz";
-	}
-	else{
-		//console.log('User not authenticated. going to login page');
-		$scope.gotoLink = "login";
-	}
+	// if(mvIdentity.isAuthenticated()){
+	// 	//console.log('user is isAuthenticated');
+	// 	$scope.gotoLink = "styleQuiz";
+	// }
+	// else{
+	// 	//console.log('User not authenticated. going to login page');
+	// 	$scope.gotoLink = "login";
+	// }
 	
 	$scope.nextPage = function(){
 		
@@ -993,12 +977,22 @@ angular.module("app")
 					break;
 
 
-			case 9: $scope.backgroundCol6 = "#00a99d";
-					$scope.progress_result=true;
+			case 9: //Pinboard
+					$scope.backgroundCol6 = "#00a99d";
+
+					if(mvIdentity.isAuthenticated()){
+						$scope.progress = false;
+						$scope.progress_result = true;
+					}
+					else{
+					 	console.log("Going to Login page");
+					 	$location.path('/login');
+					}
 					break;
 
 
-			case 10: 
+			case 10:// $scope.progress_result=true;
+
 					
 					 break;
 
@@ -1041,13 +1035,6 @@ angular.module("app")
 		var totE = 0;
 		var totF = 0;
 
-		//user selections
-		// var sel1 = $scope.selectedImages[2].image_id;
-		// var sel2 = $scope.selectedImages[3].image_id;
-		// var sel3 = $scope.selectedImages[4].image_id;
-		// var sel4 = $scope.selectedImages[5].image_id;
-		// var sel5 = $scope.selectedImages[6].image_id;
-
 		console.log($scope.selectedImages);
 		var sel1 = $scope.selectedImages[3];
 		var sel2 = $scope.selectedImages[4];
@@ -1056,7 +1043,7 @@ angular.module("app")
 		var sel5 = $scope.selectedImages[7];
 
 
-		alert(sel1 + " " +sel2 + " " + sel3 + " " +sel4 + " "+sel5);
+		// alert(sel1 + " " +sel2 + " " + sel3 + " " +sel4 + " "+sel5);
 
 		// LivingRoom  
 		if(sel1 == 1){totC+= 1.75; totF+=3.25;} 	
@@ -1130,8 +1117,8 @@ angular.module("app")
 			var imageObj = quizResult.getStyleImage()[0];
 			// image:quizResult.getStyleImage()[0][prefStyle[j].style]
 			var style_name = prefStyle[j].style;
-			console.log(style_name);
-			console.log(quizResult.getStyleDesc());
+			// console.log(style_name);
+			// console.log(quizResult.getStyleDesc());
 			
 			if(prefStyle[j].value >= 70){
 				$scope.userStyle.push({title: quizResult.getStyleTitle()[0] , style: (prefStyle[j].style), desc:quizResult.getStyleDesc()[0][prefStyle[j].style].text,image: imageObj[style_name].image,value: (prefStyle[j].value)});
@@ -1158,7 +1145,7 @@ angular.module("app")
 
 		$scope.setBoard(prefStyle[0]);
 		if(!mvIdentity.isAuthenticated()){
-			console.log('Stoing style in svc before going to login');
+			console.log('Storing style in svc before going to login, to store: '+$scope.userStyle);
 			quizResult.storeStyle($scope.userStyle);
 		}
 	}

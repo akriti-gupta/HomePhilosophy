@@ -9,7 +9,8 @@
       <ul>
         <li style="padding-bottom:70px;"><a href="#"><img src="images/menuIcon.png" width="60%" height="auto"></a>
           <ul class="qz-sub-list">
-            <li ><a href="#">Sign In</a></li>
+            <li ng-controller="LoginController" ng-hide="identity.isAuthenticated()"><a href="/login">Sign In</a></li>
+            <li ng-controller="LoginController" ng-show="identity.isAuthenticated()"><a ng-click="signout()">Sign Out</a></li>
             <li ><a href="#">How it works</a></li>
             <li><a href="#">Contact us</a></li>
           </ul>
@@ -445,10 +446,6 @@
         <p class="font-playfair fs-22px" style="text-align:right;color:rgb(77, 77, 77);">Not your style? Re-take the <a href="/styleQuiz"  ng-click="retakeQuiz()"><u>Style Quiz</u></a></p>
       </div>
     </div> 
-
-    <!-- <div style="clear:both;margin:0 auto;float:right;padding-right:5%;">
-      <p class="font-playfair fs-22px" style="color:rgb(77, 77, 77);">Not your style? Re-take the <a href="/styleQuiz"  ng-click="retakeQuiz()">Style Quiz</a></p>
-    </div> -->
   </div>
     
 

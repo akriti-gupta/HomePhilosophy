@@ -1,12 +1,13 @@
-angular.module("app").controller("LoginController",function($scope,$location, $http, mvIdentity, mvNotifier, mvAuth, quizResult){
+angular.module("app")
+	.controller("LoginController",function($scope,$location, $http, mvIdentity, mvNotifier, mvAuth, quizResult){
 			
 			$scope.identity =mvIdentity;
-						
+			$scope.showName = true;			
 		  	$scope.signin= function(username, password){
 		  		mvAuth.authenticateUser(username,password).then(function(success){
 		  			if(success){
-		  				//mvNotifier.notify('You have successfully signed in!');
-		  				//$scope.go("/styleQuiz");
+		  				console.log("In login, quizResult.getStyle() is:"+quizResult.getStyle());
+		  				console.log("Len is: "+quizResult.getStyle().length);
 		  				if(quizResult.getStyle().length>=1){
 		  					$location.path('/styleQuiz');
 		  				}
@@ -32,7 +33,10 @@ angular.module("app").controller("LoginController",function($scope,$location, $h
 		  		});	
 		  	}
 
-		 //  	$scope.go = function(path){
-		 //  	  	$location.path( path );
-			// };
+		  	$scope.showLogin = function(){
+		  		$scope.showName = false;
+		  	}
+		  	$scope.showRegister = function(){
+		  		$scope.showName = true;
+		  	}
 });
