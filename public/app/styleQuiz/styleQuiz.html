@@ -403,24 +403,31 @@
 
 
   <div ng-show="pagenum===10" style="width:80%;margin:auto;">
-    <div ng-show="progress_result" class="progress-wrapper">
-      <div class="progress">
-        <div class="progress-bar" style="width: {{progressRate}}%"></div>
-        <div class="one primary-color"></div>
-        <div class="two no-color" ng-style="{'background': backgroundCol2}"></div>
-        <div class="three no-color" ng-style="{'background': backgroundCol3}"></div>
-        <div class="four no-color" ng-style="{'background': backgroundCol4}"></div>
-        <div class="five no-color" ng-style="{'background': backgroundCol5}"></div>
+    <div class="prg-wrp">
+      <div class="progress-result">
+        <!-- <div class="progress-bar"></div> -->
+        <div class="resprg-one primary-color"></div>
+        <div class="resprg-two no-color" ng-style="{'background': resPrgCol2}"></div>
+        <div class="resprg-three no-color" ng-style="{'background': resPrgCol2}"></div>
+        <div class="resprg-four no-color" ng-style="{'background': resPrgCol2}"></div>
+        <div class="resprg-five no-color" ng-style="{'background': resPrgCol2}"></div>
 
-        <div class="lbl-one one">1</div>
-        <div class="lbl-two two" ng-show="pagenum>1">2</div>
-        <div class="lbl-three three" ng-show="pagenum>2">3</div>
-        <div class="lbl-four four" ng-show="pagenum>3">4</div>
-        <div class="lbl-five five" ng-show="pagenum>4">5</div>
+        <div class="step-one primary-color">1</div>
+        <div class="step-two no-color">2</div>
+        <div class="step-three no-color">3</div>
+        <div class="step-four no-color">4</div>
+        <div class="step-five no-color">5</div>
+
+
+        <div class="resprg-lbl-one font-sansRegular fs-20px">STYLE QUIZ</div>
+        <div class="resprg-lbl-two font-sansRegular fs-20px">TELL US MORE</div>
+        <div class="resprg-lbl-three font-sansRegular fs-20px">CHOOSE A PACKAGE</div>
+        <div class="resprg-lbl-four font-sansRegular fs-20px">PAYMENT</div>
+        <div class="resprg-lbl-five font-sansRegular fs-20px">LAUNCH PROJECT</div>
       </div>
-     </div>
+    </div>
 
-    <div  style="width:90%;margin:0 auto;padding-bottom:40px;" ng-repeat="item in userStyle" ng-if="$first">
+    <div  style="width:90%;margin:0 auto;padding:80px 0px 40px;" ng-repeat="item in userStyle" ng-if="$first">
       <p class="font-playfair fs-22px result-title">{{item.title}} <span class="txt-upper font-playfair-bold">{{item.style}}</span></p>
       <p class="font-sansRegular fs-16px" style="padding:30px 80px;"> {{item.desc}}</p>
         <img ng-src="{{item.image}}" style="width:100%;"/>

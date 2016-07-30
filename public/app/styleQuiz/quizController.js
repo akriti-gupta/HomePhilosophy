@@ -29,7 +29,7 @@ angular.module("app")
 	$scope.selectedRoom = [];
 	$scope.identity = mvIdentity;
 	$scope.progress = false;
-	$scope.progress_result=false;
+	$scope.progress_result=true;
 	var prefStyle = [];
 	$scope.userStyle = [];
 	$scope.board=1;	
