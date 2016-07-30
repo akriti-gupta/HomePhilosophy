@@ -1,30 +1,62 @@
-<div ng-controller="LoginController">
-<form name="loginForm" class="form-horizontal")>
-  <div class="form-group">
-    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-    <div class="col-sm-10">
-      <input type="email" class="form-control" id="inputEmail3" name="email" ng-model="username" placeholder="Email">
+<header id="site_header">
+  <div class="hp-logo"> 
+    <a href="/">
+            <img src="images/logo_header.png" />
+        </a>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-    <div class="col-sm-10">
-      <input type="password" class="form-control" id="inputPassword3" name="password" ng-model="password"  placeholder="Password">
+    <div class="qz-mnu">
+      <ul>
+        <li style="padding-bottom:70px;"><a href="#"><img src="images/menuIcon.png" width="60%" height="auto"></a>
+          <ul class="qz-sub-list">
+            <li ng-controller="LoginController" ng-hide="identity.isAuthenticated()"><a href="/login">Sign In</a></li>
+            <li ng-controller="LoginController" ng-show="identity.isAuthenticated()"><a ng-click="signout()">Sign Out</a></li>
+            <li ><a href="#">How it works</a></li>
+            <li><a href="#">Contact us</a></li>
+          </ul>
+        </li>
+      </ul>
     </div>
-  </div>
- <!--  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <div class="checkbox">
-        <label>
-          <input type="checkbox"> Remember me
-        </label>
+</header>
+
+<div ng-controller="LoginController" id="login-section">
+  <div style="position:relative;width:50%;margin:0 auto; top:15%;background-color:#fff">
+    <p style="background-color:#000;padding-bottom:10px;">&nbsp;</p>
+    <p class="txt-upper fs-30px font-playfair" style="padding-top:20px;color:rgb(54, 54, 54);">Sign Up to see Results</p>
+    <p ng-show="showName" class="font-sansRegular fs-16px" style="color:rgb(112, 112, 112);">Already have an account? <a href="#" class="col-lightcyan" ng-click="showLogin()">Sign In </a></p>
+
+    <div style="text-align:center;padding-top:20px;">
+      <a href="https://www.facebook.com/v2.5/dialog/oauth?client_id=1720813668142794&amp;state=48fc6a93a77e12d65d6730d2a0174700&amp;response_type=code&amp;sdk=php-sdk-5.2.0&amp;redirect_uri=https%3A%2F%2Fapp.havenly.com%2Fusers%2Ffb_login&amp;scope=email">
+        <button type="submit" class="btn btn-primary btn-fb">
+      | <span style="padding-left:20px;">Sign Up with Facebook</span></button>
+      </a>
+    </div>
+    <div style="text-align:center;padding:20px 0px;color:rgb(172, 172, 172);" class="fs-20px font-openSans"><span>- or -</span></div>
+
+
+    <form name="loginForm" style="width:80%;margin:0 auto;">
+      <div class="form-group" ng-show="showName">
+        <label for="inputName">Name</label>
+        <input type="text" class="form-control" id="inputName" name="username1" ng-model="username1">
       </div>
-    </div>
-  </div> -->
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default" ng-click = "signin(username,password)" >Sign in</button>
-    </div>
+      <div class="form-group">
+        <label for="inputEmail">Email</label>
+         <input type="email" class="form-control" id="inputEmail" name="email" ng-model="username">
+      </div>
+      <div class="form-group">
+        <label for="inputPassword3">Password</label>
+         <input type="password" class="form-control" id="inputPassword" name="password" ng-model="password">
+      </div>
+
+      <div style="float:right" ng-hide="showName"><a href="#" class="font-sansRegular fs-16px col-lightcyan" ng-click="showRegister()">Sign Up </a></div>
+      
+      <div style="clear:both;text-align:center;padding:30px 0px 40px;">
+        <button type="submit" class="btn-start-quiz btn-login font-sansRegular txt-upper col-lightcyan fs-20px" ng-click = "signin(username,password)" >CONTINUE</button>
+      </div>
+
+      <div style="text-align:center;padding:0px 0px 40px;color: rgb(112, 112, 112);" class="font-sansRegular">
+        By signing up, I agree to Home Philosophy's <a href="#" class="col-lightcyan">Terms &amp; Services.</a>
+      </div>
+    </form>
   </div>
-</form>
 </div>
+<div style="padding-bottom:40px;"></div>

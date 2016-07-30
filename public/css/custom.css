@@ -230,7 +230,7 @@
    color: #64C6BE;/*rgb(100, 198, 190);*/
 }
 
-.section-divider, .divider {
+.section-divider, .divider,.text-strike {
     text-align: center;
     white-space: nowrap;
     padding: 20px 0 60px;
@@ -263,6 +263,8 @@
     height: 2px;
     background: rgb(47, 185, 175);
 }
+
+
 
 /*footer .divider > span:before,  footer .divider > span:after {
     top: 14px;
@@ -793,3 +795,31 @@ padding-left:10px;
 /* Footer ends*/
 
 
+
+
+#login-section{
+  height:1050px;
+  background-image:url('/images/login_bg.png');
+  background-size: cover;
+  /*background-position: 0 -20px;*/
+  position: relative;
+  background-repeat:no-repeat;
+  padding-bottom:40px;
+}
+
+.form-control{
+  border-radius: 0px;
+  height:44px;
+}
+.btn-fb{
+  padding:12px 105px;
+  letter-spacing:1px;
+  font-family: OpenSans-Regular;
+  font-size:14px;
+  background-color: #0054a6;
+  border-color: #0054a6;
+  border-radius: 0px;
+}
+.btn-login{
+  padding:8px 95px;
+}
