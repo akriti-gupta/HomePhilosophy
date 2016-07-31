@@ -6,20 +6,24 @@
         var styleDesc =[];
         var styleImage = [];
         var showNavBar = true;
-        
+        var board;
 
         //Called from quizController to store calculated style before control is passed to login page.
-		var storeStyle = function(newObj) {
+		var storeStyle = function(newObj,boardVal) {
 		    for(i=0;i<newObj.length;i++){
 		    	result.push({"title": newObj[i].title, "style":newObj[i].style, "desc": newObj[i].desc, "image": newObj[i].image, "value":newObj[i].value});
+		    	board = boardVal;
 			}
-			console.log("Jn storeStyle, stored res  is: "+result)
+			console.log("In storeStyle, stored res  is: "+result)
 		};
 
 		var getStyle = function(){
 			return result;
 		 };
 
+		 var getBoard = function(){
+		 	return board;
+		 }
 		 var clearStyle = function(){
 		 	result.length = 0;
 		 }
@@ -77,7 +81,8 @@
 			    getStyleTitle: getStyleTitle,
 			    getStyleDesc: getStyleDesc,
 			    showNavBar: showNavBar,
-			   	getStyleImage: getStyleImage
+			   	getStyleImage: getStyleImage,
+			   	getBoard: getBoard
 
 			  };
         });

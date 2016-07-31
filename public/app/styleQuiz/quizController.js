@@ -913,6 +913,9 @@ angular.module("app")
 		$scope.userStyle = quizResult.getStyle();
 		$scope.pagenum=10;
 		$scope.progress_result = false;
+		$scope.board = quizResult.getBoard();
+
+
 	}
 
 	// if(mvIdentity.isAuthenticated()){
@@ -1146,7 +1149,7 @@ angular.module("app")
 		$scope.setBoard(prefStyle[0]);
 		if(!mvIdentity.isAuthenticated()){
 			console.log('Storing style in svc before going to login, to store: '+$scope.userStyle);
-			quizResult.storeStyle($scope.userStyle);
+			quizResult.storeStyle($scope.userStyle,$scope.board);
 		}
 	}
 
