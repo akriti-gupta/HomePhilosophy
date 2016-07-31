@@ -186,19 +186,21 @@
     <div class="progress">
      <div class="progress-bar" style="width: {{progressRate}}%"></div>
       <div class="one primary-color"></div>
-      <div class="two no-color" ng-style="{'background': backgroundCol2}"></div>
-      <div class="three no-color" ng-style="{'background': backgroundCol3}"></div>
-      <div class="four no-color" ng-style="{'background': backgroundCol4}"></div>
-      <div class="five no-color" ng-style="{'background': backgroundCol5}"></div>
-      <div class="six no-color" ng-style="{'background': backgroundCol6}"></div>
+      <div class="two" ng-style="pagenum>3 ? { 'background-color':'#00a99d'} : { 'background-color': '#cccccc' }"></div>
+
+     
+      <div class="three" ng-style="pagenum>4 ? { 'background-color':'#00a99d'} : { 'background-color': '#cccccc' }"></div>
+      <div class="four no-color" ng-style="pagenum>5 ? { 'background-color':'#00a99d'} : { 'background-color': '#cccccc' }"></div>
+      <div class="five no-color" ng-style="pagenum>6 ? { 'background-color':'#00a99d'} : { 'background-color': '#cccccc' }"></div>
+      <div class="six no-color" ng-style="pagenum>7 ? { 'background-color':'#00a99d'} : { 'background-color': '#cccccc' }"></div>
      
 
       <div class="lbl-one one">1</div>
-      <div class="lbl-two two" ng-show="pagenum>1">2</div>
-      <div class="lbl-three three" ng-show="pagenum>2">3</div>
-      <div class="lbl-four four" ng-show="pagenum>3">4</div>
-      <div class="lbl-five five" ng-show="pagenum>4">5</div>
-      <div class="lbl-six six" ng-show="pagenum>5">6</div>
+      <div class="lbl-two two" ng-show="pagenum>3">2</div>
+      <div class="lbl-three three" ng-show="pagenum>4">3</div>
+      <div class="lbl-four four" ng-show="pagenum>5">4</div>
+      <div class="lbl-five five" ng-show="pagenum>6">5</div>
+      <div class="lbl-six six" ng-show="pagenum>7">6</div>
     </div>
   </div>
   <!-- Progress bar ends -->

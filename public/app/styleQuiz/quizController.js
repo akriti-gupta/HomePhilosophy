@@ -1254,6 +1254,15 @@ angular.module("app")
 		if($scope.pagenum==10){
 			$scope.refresh();
 		}
+		if($scope.pagenum>3 && $scope.pagenum<9){
+			$scope.progressRate-=16.5;
+			alert($scope.progressRate);
+		}
+
+		if($scope.pagenum<=3){
+			$scope.progress=false;
+		}
+
 		if($scope.pagenum>1){
 			$scope.pagenum--;
 		}
@@ -1261,6 +1270,8 @@ angular.module("app")
 		else{
 			$location.path('/');
 		}
+
+		
 
 	}
 });
