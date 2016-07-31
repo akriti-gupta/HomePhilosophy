@@ -931,7 +931,7 @@ angular.module("app")
 		
 		var currentPage = $scope.pagenum;
 		$scope.pagenum++
-		$scope.disable=true;
+		//$scope.disable=true;
 		// alert(currentPage);
 		
 		switch(currentPage){
@@ -982,6 +982,7 @@ angular.module("app")
 
 			case 9: //Pinboard
 					$scope.backgroundCol6 = "#00a99d";
+					$scope.disable = false;
 
 					if(mvIdentity.isAuthenticated()){
 						$scope.progress = false;
@@ -1016,7 +1017,7 @@ angular.module("app")
 		// alert($scope.pagenum);
 		$scope.selectedImages[$scope.pagenum] = -1;
 		$scope.pagenum++;
-		$scope.disable = true;
+		//$scope.disable = true;
 		$scope.progress = true;
 	}
 
@@ -1244,14 +1245,19 @@ angular.module("app")
 		else{
 			$scope.selectedImages[$scope.pagenum] =  imageId;
 			// console.log($scope.selectedImages);
-			$scope.disable=false;
+			//$scope.disable=false;
+			$scope.nextPage();
 		}
 	}
 
 	$scope.prev = function(){
+		if($scope.pagenum==10){
+			$scope.refresh();
+		}
 		if($scope.pagenum>1){
 			$scope.pagenum--;
 		}
+
 		else{
 			$location.path('/');
 		}

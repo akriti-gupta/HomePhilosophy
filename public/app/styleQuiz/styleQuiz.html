@@ -481,7 +481,7 @@
   <!-- Buttons -->
   <div style="text-align:center;padding:80px 0px 100px;clear:both;" ng-show="pagenum!=9">
     <button type="button" class="btn-qz btn-bk" ng-click="prev();">Back</button>
-    <button type="button" class="btn-qz btn-nxt" ng-disabled="disable" ng-click="nextPage()">Next</button>
+    <button type="button" class="btn-qz btn-nxt" ng-show="pagenum===1 || pagenum===10" ng-disabled="disable" ng-click="nextPage()">Next</button>
   </div>
   
 </div> <!--Main Div QuizController -->
