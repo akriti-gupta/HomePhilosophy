@@ -930,7 +930,8 @@ angular.module("app")
 	$scope.nextPage = function(){
 		
 		var currentPage = $scope.pagenum;
-		$scope.pagenum++
+		if(currentPage!=2)
+			$scope.pagenum++
 		//$scope.disable=true;
 		// alert(currentPage);
 		
@@ -1256,7 +1257,6 @@ angular.module("app")
 		}
 		if($scope.pagenum>3 && $scope.pagenum<9){
 			$scope.progressRate-=16.5;
-			alert($scope.progressRate);
 		}
 
 		if($scope.pagenum<=3){
