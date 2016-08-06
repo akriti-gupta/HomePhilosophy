@@ -346,21 +346,24 @@ button:focus {outline:0;}
 }
 
 .topnav li:not(:first-child):hover{
-  border-bottom: 2px solid #64C6BE;
+  /*border-bottom: 2px solid #64C6BE;*/
+   /*border-bottom: 2px solid grey;*/
+   
 }
 
 .topnav li:nth-child(6):hover{
   border-bottom: 0;
 }
 .topnav li ul li:hover{
-  border-bottom: 2px solid #64C6BE;
+  border-bottom: 2px solid grey;
+  /*color: #64C6BE;*/
 }
 
 .tab_icon{
     display: none;
 }
 .plist-border:hover{
-  border-bottom: 2px solid #64C6BE;
+  /*border-bottom: 2px solid #64C6BE;*/
 }
 
 .topnav li a {
@@ -375,6 +378,9 @@ button:focus {outline:0;}
     padding-top: 10px;
     padding-bottom: 10px;
     text-align: left;
+}
+.topnav li a:hover{
+  color: #64C6BE;
 }
 
  .topnav li:hover >ul >li
@@ -396,6 +402,7 @@ button:focus {outline:0;}
 .topnav li ul li{
   display: none;
   border-bottom: 0.5px solid black;
+  padding-bottom: 10px;
 }
 
 .topnav li ul li:nth-child(2){
@@ -665,7 +672,7 @@ padding-top:6px; padding-bottom:6px;letter-spacing:1px;
 
 /* Gallery CSS start*/
 #recent-designs {
-  margin: 60px 40px;
+  margin: 0px 40px 60px;
   text-align: center;
 }
 
@@ -683,16 +690,8 @@ padding-top:6px; padding-bottom:6px;letter-spacing:1px;
 }
 
 
-#view-gallery{
-  
-  color:rgb(170,170,170);
-  padding-left:3px;
-  padding-right:5px;
-  padding-bottom:1px;
-  border-bottom:1px solid;
-}
 
-.text, .text-border{
+.text{
   font-family:"PlayfairDisplay-Regular";
   background-color: #fff;
   position: absolute;
@@ -712,7 +711,7 @@ padding-top:6px; padding-bottom:6px;letter-spacing:1px;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
   text-decoration: none;
-}
+}/*
 
 .text1{
   background-color: #fff;
@@ -735,7 +734,7 @@ padding-top:6px; padding-bottom:6px;letter-spacing:1px;
     background-color: transparent;
     border: 1px solid #fff;
     opacity: 0.9;
-}
+}*/
 
 .text:hover{
   opacity: 0.9;
@@ -743,6 +742,16 @@ padding-top:6px; padding-bottom:6px;letter-spacing:1px;
 
 .text div {
     margin-top: calc(50% - 60px);
+}
+
+
+#view-gallery{
+  
+  color:rgb(170,170,170);
+  padding-left:3px;
+  padding-right:5px;
+  padding-bottom:1px;
+  border-bottom:1px solid;
 }
 
 /* Gallery CSS ends*/
@@ -771,7 +780,7 @@ padding-left:10px;
 }
 
 .hp-logo{
-  padding: 0 20px;
+  padding: 0 65px;
   float: left;
 }
 
@@ -823,3 +832,6 @@ padding-left:10px;
 .btn-login{
   padding:8px 95px;
 }
+/*.btn-fb:before{
+  content: "&#xf09a;";
+}*/
