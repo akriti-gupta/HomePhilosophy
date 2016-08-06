@@ -12,9 +12,9 @@ var config = require('./server/config/config')[env];
 require('./server/config/express')(app,config);
 
 
-// var db = require("./server/config/db.js");
-// var connection_object= new db();
-// var connection=connection_object.connection; 
+var db = require("./server/config/db.js");
+var connection_object= new db();
+var connection=connection_object.connection; 
 
 
 passport.use(new LocalStrategy(

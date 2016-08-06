@@ -9,7 +9,7 @@ angular.module('app')
 
 
 angular.module("app")
-		  .controller("QuizController",function($scope,$location,quizResult,$http,mvIdentity,imageService,angularGridInstance){
+		  .controller("QuizController",function($scope,$location,$window,quizResult,$http,mvIdentity,imageService,angularGridInstance){
 
 
 
@@ -692,33 +692,39 @@ angular.module("app")
 				[{
 	        		 image_style: "images/styles/classic.png",
 	        		 image_id: 1,
-	        		 image_name: "Classic"
+	        		 image_name: "Classic",
+	        		 image_desc:"Timeless, elegant aesthetics with neutral colours, distinct shapes and a large focal point."
 	    		}, 
 	    		{
 	    			 image_style: "images/styles/contemporary.png",
 	    			 image_id: 2,
-	    			 image_name: "Contemporary"
+	    			 image_name: "Contemporary",
+	    			 image_desc:"Staying true to what is on trend now, this fresh style features blended textures of fabrics, leathers and wood."
 	    		},
 	    		{
 	  				 image_style: "images/styles/modern.png",
 	  				 image_id: 3,
-	  				 image_name: "Modern"
+	  				 image_name: "Modern",
+	  				 image_desc:"Celebrated for its simple and stylish pieces that focus on geometry and clean lines, often with distinct colour palettes. "
 	    		}]
 	    		,
 	    		[{
 	    			image_style: "../images/styles/transitional.png",
 	        		image_id: 4,
-	        		image_name: "Transitional"
+	        		image_name: "Transitional",
+	        		image_desc: "A style that speaks to the unique merging of classic and contemporary, it combines masculine and feminine elements."
 	    		}, 
 	    		{
 					image_style: "images/styles/minimalist.png",
 					image_id: 5,
-					image_name: "Asian Minimalist"
+					image_name: "Asian Minimalist",
+					image_desc: "A minimalistic style that incorporates natural elements; this style is all about contemporary sophistication with subtle print and texture."
 	    		},
 	    		{
 	  				image_style: "images/styles/scandi.png",
 	  				image_id: 6,
-	  				image_name: "Scandinavian"
+	  				image_name: "Scandinavian",
+	  				image_desc: "Renowned for its understated colour palette, simplicity and utility; Scandinavian influence embraces functionality and clean lines."
 	    		}]];
 
 	$scope.styleQuest1 = [
@@ -930,59 +936,42 @@ angular.module("app")
 	$scope.nextPage = function(){
 		
 		var currentPage = $scope.pagenum;
-		if(currentPage!=2)
-			$scope.pagenum++
-		//$scope.disable=true;
-		// alert(currentPage);
-		
+		$scope.pagenum++;
+
 		switch(currentPage){
 
 			case 1: //quizResult.clearStyle();
 					
-					$scope.backgroundCol = "#00a99d";
+					
+					$scope.scrollTop();
 					break; 
 
-			 case 2: 
-					
-						//TODO: Save selected image id in a service so that it can flow from how it works page to the db
-						$location.path('/op-process');
-
-					
-					break;
+			 case 2: $location.path('/op-process');
+					 break;
 
 			case 3: 
-					$scope.backgroundCol2 = "#00a99d";
-					$scope.progressRate+=16.5;
-					break;
-
-			case 4: 
-					$scope.backgroundCol3 = "#00a99d";
-					$scope.progressRate+=16.5;
-					break; 
-
-			case 5: 
-					$scope.backgroundCol4 = "#00a99d";
-					$scope.progressRate+=16.5;
-					break;
-
-			case 6: $scope.backgroundCol5 = "#00a99d";
-					$scope.progressRate+=16.5;
-					break;
+					
+			case 4:
+			case 5: 		
+			case 6:	  $scope.progressRate+=16.5
+					  $scope.scrollTop();	
+					  break;
 
 			case 7: 
 					$scope.computeStyle();
-					$scope.backgroundCol6 = "#00a99d";
 					$scope.progressRate+=16.5;
+					$scope.scrollTop();
 					break;
 
 
 			case 8: $scope.progress=false;
 					$scope.refresh(); 
+					$scope.scrollTop();
 					break;
 
 
 			case 9: //Pinboard
-					$scope.backgroundCol6 = "#00a99d";
+					
 					$scope.disable = false;
 
 					if(mvIdentity.isAuthenticated()){
@@ -990,9 +979,9 @@ angular.module("app")
 						$scope.progress_result = true;
 					}
 					else{
-					 	console.log("Going to Login page");
 					 	$location.path('/login');
 					}
+					$scope.scrollTop();
 					break;
 
 
@@ -1001,22 +990,26 @@ angular.module("app")
 					
 					 break;
 
-			default:
+			// default:
 
-					//Show up login page, transfer control with scope. Return. Once logged in
-					 //show the page.
-					if(mvIdentity.isAuthenticated()){
-						$scope.progress = false;	
-					}
-					else{
-					 	console.log("Going to Login page");
-					}								 
+			// 		//Show up login page, transfer control with scope. Return. Once logged in
+			// 		 //show the page.
+			// 		if(mvIdentity.isAuthenticated()){
+			// 			$scope.progress = false;	
+			// 		}
+			// 		else{
+			// 		 	console.log("Going to Login page");
+			// 		}
+			// 		break;
+
+												 
 		}
 	}
 
 	$scope.quiz = function(){
 		// alert($scope.pagenum);
 		$scope.selectedImages[$scope.pagenum] = -1;
+		$scope.scrollTop();
 		$scope.pagenum++;
 		//$scope.disable = true;
 		$scope.progress = true;
@@ -1247,7 +1240,8 @@ angular.module("app")
 			$scope.selectedImages[$scope.pagenum] =  imageId;
 			// console.log($scope.selectedImages);
 			//$scope.disable=false;
-			$scope.nextPage();
+			if($scope.pagenum!=8)
+				$scope.nextPage();
 		}
 	}
 
@@ -1272,7 +1266,17 @@ angular.module("app")
 		}
 
 		
+   		 $scope.scrollTop();  
+		
 
+		
+
+	}
+
+	$scope.scrollTop = function(){
+		setTimeout(function() {
+   		 $(window).scrollTop(50);  
+		}, 0);
 	}
 });
 
