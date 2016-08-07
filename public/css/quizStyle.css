@@ -591,7 +591,6 @@ filter:alpha(opacity=50); /* for <= IE 8 */
   background-color: #fff;
   position: absolute;
   color: #777;
-  /*height: 450px;*/
   text-align: center;
   padding:31px;
   width: calc(100% - 26px);
@@ -610,7 +609,7 @@ filter:alpha(opacity=50); /* for <= IE 8 */
 }
 
 .text-dsg div {
-    margin-top: calc(50% - 30px);
+    margin-top: calc(80% - 40%);
     padding:0px 20px;
     text-align: center;
 }

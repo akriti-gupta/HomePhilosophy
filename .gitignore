@@ -4,3 +4,5 @@ Documents/*
 public/bkup/*
 public/css/bkup/*
 public/images.zip
+bower_components/*
+server/config/upload.js.bkup.js

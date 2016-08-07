@@ -1,7 +1,7 @@
 
 //var app = angular.module("styleQuiz",[]);
 
-angular.module('app',['ngResource','ngRoute','angularGrid']); 
+angular.module('app',['ngResource','ngRoute','angularGrid','ngFileUpload']); 
 
 
 //console.log("In app.js");
@@ -14,6 +14,8 @@ angular.module('app')
 					.when('/login',{templateUrl: 'app/account/login.html', controller: 'LoginController'})
 					.when('/styleQuiz',{templateUrl: 'app/styleQuiz/styleQuiz.html', controller: 'QuizController'})
 					.when('/op-process',{templateUrl: 'app/process.html'})					
+					.when('/tell-us-more',{templateUrl: 'app/moreDetails.html', controller: 'SaveDetails'})
+					
 					
     $locationProvider.html5Mode(true);
 			});
