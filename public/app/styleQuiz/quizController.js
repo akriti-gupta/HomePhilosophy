@@ -1048,14 +1048,14 @@ angular.module("app")
 
 		// LivingRoom  
 		if(sel1 == 1){totC+= 1.75; totF+=3.25;} 	
-		if(sel1 == 2){totA+= 4.25; totC+= 0.75;}
+		if(sel1 == 2){totA+= 6.25; totC+= 0.75;}
 		if(sel1 == 3){totB+= 1.00; totE+= 4.00;}
 		if(sel1 == 4){totB+= 0.75; totD+= 4.5;}
 		if(sel1 == 5){totB+= 0.75; totC+= 4.00;}
 		if(sel1 == 6){totB+= 4.5; totC+=1.75;}
 
 		// Bedroom
-		if(sel2 == 1){totA+= 4.55; totB+=0.15;totC+=0.30;}
+		if(sel2 == 1){totA+= 6.55; totB+=0.15;totC+=0.30;}
 		if(sel2 == 2){totB+= 0.5; totD+= 3.85; totE+=1.65;}
 		if(sel2 == 3){totA+= 0.75;totB+=1.65;totC+=3.95;}
 		if(sel2 == 4){totB+= 1.15;totF+=4.00;}
@@ -1065,14 +1065,14 @@ angular.module("app")
 
 		// Dining Room 
 		if(sel3 == 1){totB+= 1.25;totD+=3.75;}
-		if(sel3 == 2){totA+= 4.00;totB+=0.5;totC+=0.5;}
+		if(sel3 == 2){totA+= 6.00;totB+=0.5;totC+=0.5;}
 		if(sel3 == 3){totB+= 3.25;totF+=2.95;}
 		if(sel3 == 4){totB+= 4.25;totD+=2.75;}
 		if(sel3 == 5){totE+= 4.45;}
 		if(sel3 == 6){totA+= 0.5;totB+=1.25;totC+=4.25;}
 		
 		// Kitchen
-		if(sel4 == 1){totA+= 4.35; totB+=0.65;}
+		if(sel4 == 1){totA+= 6.35; totB+=0.65;}
 		if(sel4 == 2){totB+= 3.00; totE+= 2.00; totF+=2.25;} //Changed on 24042016
 		if(sel4 == 3){totB+= 1.35;totD+=3.65;}
 		if(sel4 == 4){totC+= 3.25;totD+=2.25;totF+=1.5;}
@@ -1081,11 +1081,11 @@ angular.module("app")
 
 		// Textures
 		if(sel5 == 1){totC+= 1.00; totC+=1.00;totE+= 1.00; totF+=1.00;}
-		if(sel5 == 2){totA+= 2.00; totB+= 2.00; totC+=2.00;} 
+		if(sel5 == 2){totA+= 4.00; totB+= 2.00; totC+=2.00;} 
 		if(sel5 == 3){totD+= 1.00;totF+=1.00;}
-		if(sel5 == 4){totA+= 2.00;totC+=1.5;totD+=0.5;}
+		if(sel5 == 4){totA+= 4.00;totC+=1.5;totD+=0.5;}
 		if(sel5 == 5){totB+= 2.00;totD+=1.00;totF+=2.00;}
-		if(sel5 == 6){totA+=1.5;totB+=1.5;totC+= 1.00; totD+= 2;}
+		if(sel5 == 6){totA+=3.5;totB+=1.5;totC+= 1.00; totD+= 2;}
 
 
 
