@@ -2,6 +2,8 @@ var express = require('express'),
 	mysql = require('mysql'),
 	passport = require('passport'),
 	LocalStrategy = require('passport-local').Strategy;
+	
+    
 
 var env = process.env.NODE = process.env.NODE || 'development';
 var app = express();
@@ -9,6 +11,7 @@ var app = express();
 
 
 var config = require('./server/config/config')[env];
+
 require('./server/config/express')(app,config);
 
 
@@ -38,7 +41,7 @@ passport.use(new LocalStrategy(
 	}
 ));
 	
-
+console.log("Line 3");
 // app.use(function(req,res,next){
 // 	console.log('In middlware: ' +req.user);  //Returns true here.
 // 	next();
@@ -68,7 +71,9 @@ passport.deserializeUser(function(id,done){
 	});
 	//return done(null, res);
 });
+
 require('./server/config/routes')(app);
+
 
 
 // app.use(function(req,res,next){

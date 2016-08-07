@@ -1,0 +1,321 @@
+
+<header id="site_header">
+  <div class="hp-logo"> 
+    <a href="/">
+            <img src="images/logo_header.png" />
+        </a>
+    </div>
+    <div class="qz-mnu">
+      <ul>
+        <li style="padding-bottom:70px;"><a href="#"><img src="images/menuIcon.png" width="60%" height="auto"></a>
+          <ul class="qz-sub-list">
+            <li><a href="/login">Sign In</a></li>
+           <!--  <li ng-controller="LoginController" ng-show="identity.isAuthenticated()"><a ng-click="signout()">Sign Out</a></li> -->
+            <li ><a href="#">How it works</a></li>
+            <li><a href="#">Contact us</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+</header>
+
+<div class="divider" style="border-top:2px solid #e1e1e1;padding:15px;"></div>
+
+<div  class="qz-container" ng-controller="SaveDetails">
+	<div style="width:80%;margin:auto;">
+		<div class="prg-wrp">
+	      <div class="progress-result">
+	        <!-- <div class="progress-bar"></div> -->
+	        <div class="resprg-one primary-color"></div>
+	        <div class="resprg-two primary-color"></div>
+	        <div class="resprg-three no-color"></div>
+	        <div class="resprg-four no-color"></div>
+	        <div class="resprg-five no-color"></div>
+
+	        <div class="step-one primary-color">1</div>
+	        <div class="step-two primary-color">2</div>
+	        <div class="step-three no-color">3</div>
+	        <div class="step-four no-color">4</div>
+	        <div class="step-five no-color">5</div>
+
+
+	        <div class="resprg-lbl-one font-sansRegular fs-16px">STYLE QUIZ</div>
+	        <div class="resprg-lbl-two font-sansRegular fs-16px">TELL US MORE</div>
+	        <div class="resprg-lbl-three font-sansRegular fs-16px">CHOOSE A PACKAGE</div>
+	        <div class="resprg-lbl-four font-sansRegular fs-16px">PAYMENT</div>
+	        <div class="resprg-lbl-five font-sansRegular fs-16px">LAUNCH PROJECT</div>
+	      </div>
+    	</div>
+
+    	<form name="detailForm" enctype="multipart/form-data" style="width:80%;margin:0 auto;padding-top:100px;" class="font-openSans fs-16px">
+	      	<div class="form-group">
+	        	<span class="fs-18px">1. How much would you like to spend on your home?</span>
+	        	<div class="radio">
+  					<label>
+    					<input type="radio" name="radioBudget" id="budget1" value="option1" checked>
+    					$3,000 - $4,000
+  					</label>
+				</div>
+				<div class="radio">
+  					<label>
+    					<input type="radio" name="radioBudget" id="budget2" value="option2" checked>
+    					$4,000 - $5,000
+  					</label>
+				</div>
+				<div class="radio">
+  					<label>
+    					<input type="radio" name="radioBudget" id="budget3" value="option3" checked>
+    					$5,000 - $7,000
+  					</label>
+				</div>
+				<div class="radio">
+  					<label>
+    					<input type="radio" name="radioBudget" id="budget4" value="option4" checked>
+    					$7,000 - $10,000
+  					</label>
+				</div>
+				<div class="radio">
+  					<label>
+    					<input type="radio" name="radioBudget" id="budget5" value="option5" checked>
+    					I’m not on a budget.
+  					</label>
+				</div>
+	      	</div>
+	        <div class="form-group">
+	        	<span class="fs-18px">2. Do you own or rent?</span>
+	         	<div class="radio">
+  					<label>
+    					<input type="radio" name="radioAprt" id="aprtOwn" value="option1" checked>
+    					Own my apartment
+  					</label>
+				</div>
+				<div class="radio">
+  					<label>
+    					<input type="radio" name="radioAprt" id="aprtRent" value="option2" checked>
+    					Rent my apartment
+  					</label>
+				</div>
+	      	</div>
+	      	<div class="form-group">
+	        	<span class="fs-18px">3. Is there a reason you would like to design your space?</span>
+	         	<div class="checkbox">
+  					<label>
+    					<input type="checkbox" value="">I recently relocated or am going to soon
+    				</label>
+				</div>
+				<div class="checkbox">
+  					<label>
+    					<input type="checkbox" value="">I want to rent/sell my place
+    				</label>
+				</div>
+				<div class="checkbox">
+  					<label>
+    					<input type="checkbox" value="">It's time for an upgrade
+    				</label>
+				</div>
+				<div class="checkbox">
+  					<label>
+    					<input type="checkbox" value="">A baby's on the way
+    				</label>
+				</div>
+				<div class="checkbox">
+  					<label>
+    					<input type="checkbox" value="">My lifestyle is changing or has changed
+    				</label>
+				</div>
+				<div class="checkbox">
+  					<label>
+    					<input type="checkbox" value="">I just feel like it
+    				</label>
+				</div>
+
+				<span>Other<input type="text" class="form-info form-control" id="reasonOther" name="reasonOther" ng-model="reasonOther"></span>
+
+	      	</div>
+	      	<div class="form-group">
+	        	<span class="fs-18px">4. What do you use your space for? i.e. living room for entertaining, bedroom for watching TV etc</span>
+	         	<textarea rows="7" cols="50" class="form-info font-sansRegular fs-16px" style="resize:none;border:1px solid #acacac;" id="spaceUse" name="spaceUse" ng-model="spaceUse"></textarea>
+	         	<!-- <input type="text" class="form-info form-control" id="spaceUse" name="spaceUse" ng-model="spaceUse"> -->
+	      	</div>
+	      	<div class="form-group">
+	        	<span class="fs-18px">5. Who do you share your space with?</span>
+	         	<div class="checkbox">
+  					<label>
+    					<input type="checkbox" value="" >Just myself
+    				</label>
+				</div>
+				<div class="checkbox">
+  					<label>
+    					<input type="checkbox" value="">Partner
+    				</label>
+				</div>
+				<div class="checkbox">
+  					<label>
+    					<input type="checkbox" value="">Roommate
+    				</label>
+				</div>
+				<div class="checkbox">
+  					<label>
+    					<input type="checkbox" value="">Small children (under 5)
+    				</label>
+				</div>
+				<div class="checkbox">
+  					<label>
+    					<input type="checkbox" value="">Kids (6-18)
+    				</label>
+				</div>
+				<div class="checkbox">
+  					<label>
+    					<input type="checkbox" value="">Adult Kids(18+)
+    				</label>
+				</div>
+				<div class="checkbox">
+  					<label>
+    					<input type="checkbox" value="">Pets
+    				</label>
+				</div>
+				<div class="checkbox">
+  					<label>
+    					<input type="checkbox" value="">Parents/ In-laws
+    				</label>
+				</div>
+				<div class="checkbox">
+  					<label>
+    					<input type="checkbox" value="">Grandparents
+    				</label>
+				</div>
+				<div class="checkbox">
+  					<label>
+    					<input type="checkbox" value="">Other/ NA
+    				</label>
+				</div>
+	      	</div>
+
+	      	<div class="form-group">
+	        	<span class="fs-18px">6. Any furniture brands you absolutely love or loathe? </span><br/>
+	         		<textarea rows="7" cols="50" class="form-info font-sansRegular fs-16px" style="resize:none;border:1px solid #acacac;"  id="brand" name="brand" ng-model="brand">
+	         		</textarea>
+	         	<!-- <input type="text" class="form-info form-control" id="brand" name="brand" ng-model="brand"> -->
+	      	</div>
+
+	      	<div class="form-group">
+	      		<span class="fs-18px">7. Choose the colours you love</span>
+		      		<div class="row color-select">
+			        	<div class="col-sm-8 col-md-8">
+		        			<a href="#" ng-click="saveColour(1)">
+				        		<div class="square" style="background:#000080;"></div>
+				        	</a>
+				        	<a href="#" ng-click="saveColour(2)">
+				        		<div class="square" style="background:red;"></div>
+				        	</a>
+				        	<a href="#" ng-click="saveColour(3)">
+				        		<div class="square" style="background:green;"></div>
+				        	</a>
+				        	<a href="#" ng-click="saveColour(4)">
+				        		<div class="square" style="background:orange;"></div>
+				        	</a>
+				        	<a href="#" ng-click="saveColour(5)">
+				        		<div class="square" style="background:yellow;"></div>
+				        	</a>
+				        	
+			        	</div>
+			        </div>
+		        	<div class="row color-select">
+			        	<div class="col-sm-8 col-md-8">
+		        			<a href="#" ng-click="saveColour(6)">
+				        		<div class="square" style="background:#fafafa;"></div>
+				        	</a>
+				        	<a href="#" ng-click="saveColour(7)">
+				        		<div class="square" style="background:grey;"></div>
+				        	</a>
+				        	<a href="#" ng-click="saveColour(8)">
+				        		<div class="square" style="background:black;"></div>
+				        	</a>
+				        	<a href="#" ng-click="saveColour(9)">
+				        		<div class="square" style="background:beige;"></div>
+				        	</a>
+				        	<a href="#" ng-click="saveColour(10)">
+				        		<div class="square" style="background:brown;"></div>
+				        	</a>
+				        	
+			        	</div>
+			      	</div>
+			    </div>
+
+	      	<div class="form-group">
+	        	<span class="fs-18px">8. Any other details you’d like to share with your designers?</span> <br/>
+	         	 <textarea rows="7" cols="50" class="form-info font-sansRegular fs-16px" style="resize:none;border:1px solid #acacac;" id="extraInfo" name="password" ng-model="extrainfo"></textarea>
+	      	</div>
+
+	      	<div class="form-group">
+	        	<div class="fs-18px">9. Upload images of your current place and/or share images and a pinterest board (if any)?</div>
+	        		<input type="text"  class="form-info form-control" id="upload-file-info" 
+	        				style="width:50%;float:left;" value="" disabled/>
+	        	
+	        		<label class="form-info btn-start-quiz upload-btn" for="cust-file-selector">
+	        		<input id="cust-file-selector" type="file" ngf-select="" ng-model="file" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="10MB" 
+		                  style="display:none;"
+		                  onchange="$('#upload-file-info').val($(this).val().split('\\').pop());
+		                   			 $('#upload-furn-info').val('');
+									 angular.element(this).scope().fileToUpload(this)"/>
+		            	...
+		        	</label>
+					<button type="submit" class="form-info btn-start-quiz upload-btn font-sansRegular txt-upper col-lightcyan fs-16px" ng-click="uploadFile()" ng-disabled="uploadBtn1" style="margin-left:20px;">Upload</button> <label id="fileUploadStatus" ng-bind="filestatus"></label>
+				
+
+
+	      	</div>
+
+	      	<div class="form-group" name="uploadFurn" style="clear:both;padding-top:30px;">
+	        	<div class="fs-18px">10. Upload images of any existing furniture or accessories you want us to incorporate in the design?</div>
+	         	<input type="text"  class="form-info form-control" id="upload-furn-info" style="width:50%;float:left;" value="" disabled="" />
+	        	
+	        		<label class="form-info btn-start-quiz upload-btn" for="cust-furn-selector">
+	        		<input id="cust-furn-selector" type="file" ngf-select ng-model="file" name="file" 
+		                   ngf-pattern="'image/*'" accept="image/*" ngf-max-size="10MB" 
+		                   style="display:none;"
+		                   onchange="$('#upload-furn-info').val($(this).val().split('\\').pop());
+		                   $('#upload-file-info').val('');
+		                   angular.element(this).scope().fileToUpload(this)"/>
+		            	...
+		        	</label>
+					<button type="submit" class="form-info btn-start-quiz upload-btn font-sansRegular txt-upper col-lightcyan fs-16px" ng-disabled="uploadBtn2" ng-click="uploadFile()" style="margin-left:20px;">Upload</button> <label id="fileUploadStatus" ng-bind="filestatus"></label>
+				
+	      	</div>
+
+      		<div class="form-horizontal" style="clear:both;padding-top:30px;">
+      			<div class="fs-18px">11. Contact information in case we have questions about your project! </div>
+			  	<div class="form-group" style="margin-bottom:10px;">
+				    <label for="inputEmail" class="col-sm-1 control-label">Email</label>
+				    <div class="col-sm-10">
+				      <input type="email" class="form-control" id="inputEmail" placeholder="Email" style="width:30%">
+				    </div>
+			  	</div>
+				<div class="form-group">
+			    	<label for="inputPhone" class="col-sm-1 control-label">Phone</label>
+			    	<div class="col-sm-10">
+			      		<input type="text" class="form-control" id="inputPhone" style="width:30%;">
+			    	</div>
+  				</div>
+
+         		<!-- <div style="margin:10px 0px 0px 30px;float:left;">
+
+         		<span>Email: <input type="text"  class="form-info form-control" id="upload-img-furn" style="width:30%;"></span>
+         		
+         		<span>Mob: <input type="text"  class="form-info form-control" id="upload-img-furn" style="width:30%;float:left;"></span>
+         		</div> -->
+	      	</div>
+
+      		
+      
+      		<div style="text-align:center;padding:30px 0px 40px;">
+        		<a href="/pricing"><button type="submit" class="btn-start-quiz btn-qz btn-nxt font-sansRegular txt-upper col-lightcyan fs-20px" ng-click = "saveDetails()" >NEXT</button></a>
+      		</div>
+
+      		
+    	</form>
+
+	</div>
+</div>
+<div style="padding-bottom:40px;"></div>
+<div class="divider" style="border-top:2px solid rgb(47, 185, 175);"></div>

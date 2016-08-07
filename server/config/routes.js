@@ -1,64 +1,70 @@
 var auth = require('./auth');
 var quiz = require('./quiz');
+
+var multer = require('multer');
 var fs = require('fs');
-// var walk    = require('walk');
 
 
 module.exports = function(app){
 	
-	// app.get('/getStyleImage',function(req,res){
-	// 	console.log("Server caught request to read file");
-	// 	var resStatus = {
-	// 		success : false,
-	// 		content : null
-	// 	};
-		
-	// 	var arr = [];
-
-		
-	// 	var files   = [];
-
-	// 	// Walker options
-	// 	console.log(__dirname);
-	// 	var walker  = walk.walk(__dirname+'/../../public/images/styles', { followLinks: false, filters:[".DS_Store"]});
-
-	// 	walker.on('file', function(root, stat, next) {
- //    	// Add this file to the list of files
-
- //    	files.push(root + '/' + stat.name);
- //    	next();
-	// 	});
-
-	// 	walker.on('end', function() {
- //    		console.log("Files are:" +files);
-	// 	});
-
-		
-
-	// 	console.log("Server after request to read file");
-
-	// });
-
-
-
-	//app.get('/getStyleImage',quiz.fetchImages);
-
-
 	app.post('/signin',auth.authenticate);
 
 	app.post('/logout',function(req,res){
 		req.logout();
 		res.end();
-	})
+	});
+
+	// /** API path that will upload the files */
+ //    app.post('/upload', function(req, res) {
+ //    	console.log("upload called at server")
+ //        upload.upload(req,res,function(err){
+ //            if(err){
+ //                 res.json({error_code:1,err_desc:err});
+ //                 return;
+ //            }
+ //             res.json({error_code:0,err_desc:null});
+ //        })
+ //    });
 
 
-	//app.get('/getStyleImage',quiz.getStyleImage);
-	
+//  app.post('/upload', multer({ dest: './customer_uploads/',
+//  							 rename: function (fieldname, filename) {
+//     								return filename.replace(/\W+/g, '-').toLowerCase() + Date.now()
+//   							}}).single('file'), function(req,res){
+// 	console.log(req.file); //form files
+// 	res.status(200).end();
+// });
+
+
+
+
+var storage =   multer.diskStorage({
+  destination: function (req, file, callback) {
+    callback(null, './customer_uploads');
+  },
+  filename: function (req, file, callback) {
+    callback(null, file.fieldname + '-' + Date.now());
+  }
+});
+var upload = multer({ storage : storage}).single('file');
+
+
+app.post('/upload',function(req,res){
+    upload(req,res,function(err) {
+        if(err) {
+            return res.send({error_code:-1, err_desc:"Error uploading file."});
+        }
+        res.send({error_code:0, err_desc:"File is uploaded"});
+    });
+});
+
+
+
+
 
 	app.get('*', function(req,res){
+			console.log("Line 1a");
 		console.log("Server caught request " +req.params[0]);
-		//console.log(req.user); // returns undefined/ true . Never returns user object
-
 		res.render('index',{
 			bootstrappedUser: req.user 
 		});

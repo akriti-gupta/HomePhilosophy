@@ -9,7 +9,12 @@ module.exports = function(app,config){
 	app.use(express.static(config.rootPath + '/public'));
 	// app.engine('html', require('ejs').renderFile);
 	// app.set('view engine', 'html');
-
+	app.use(function(req, res, next) {
+        res.header("Access-Control-Allow-Origin", "http://localhost");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        next();
+    });
+    
 	app.set('view engine', 'ejs');
 	app.set('views', config.rootPath + '/public');
 	app.use(logger('dev'));

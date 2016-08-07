@@ -923,6 +923,9 @@ angular.module("app")
 
 
 	}
+	if($scope.pagenum===10){
+		$scope.disable=false;
+	}
 
 	// if(mvIdentity.isAuthenticated()){
 	// 	//console.log('user is isAuthenticated');
@@ -987,7 +990,7 @@ angular.module("app")
 
 			case 10:// $scope.progress_result=true;
 
-					
+					 $location.path('/tell-us-more');
 					 break;
 
 			// default:

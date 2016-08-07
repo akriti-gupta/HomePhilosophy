@@ -76,3 +76,17 @@
 				    $(this).siblings(".active").removeClass('active');
 			        $(this).addClass('active');
 				});
+
+			$(document).on('click','.square',function(e){
+				e.preventDefault();
+				var isSelected=false;
+				if($(this).hasClass('style-img-selected')){
+					isSelected=true;
+				}
+				if(isSelected){
+					$(this).removeClass('style-img-selected');
+				}
+				else{
+					$(this).addClass('style-img-selected');
+				}
+			});
