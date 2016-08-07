@@ -3,17 +3,21 @@ angular.module('app').factory('mvAuth', function($http, mvIdentity, $q){
 
 		authenticateUser: function(username,password){
 			var dfd = $q.defer();
-		 	$http.post('/signin',{username: username , password :password}).then(function(response){
-	  			if(response.data.success){
-	  				mvIdentity.currentUser = response.data.user[0];
-	  				dfd.resolve(true);
-	  			}
-	  			else{
-	  				dfd.resolve(false);
-	  			}
-	  		});
-	  		return dfd.promise;
-		},
+		//  	$http.post('/signin',{username: username , password :password}).then(function(response){
+	 //  			if(response.data.success){
+	 //  				mvIdentity.currentUser = response.data.user[0];
+	 //  				dfd.resolve(true);
+	 //  			}
+	 //  			else{
+	 //  				dfd.resolve(false);
+	 //  			}
+	 //  		});
+	 //  		return dfd.promise;
+		// }
+		dfd.resolve(true);
+		return dfd.promise;
+	}
+		,
 		logoutUser: function(){
 			var dfd = $q.defer();
 			$http.post('/logout',{logout:true}).then(function(){
