@@ -332,9 +332,13 @@ filter:alpha(opacity=50); /* for <= IE 8 */
   z-index: 2;
   display: inline-block;
   border:1px solid rgb(172, 172, 172);
-  margin-left: 150px;
 }
 
+/*.comment-room-list li:nth-child(1){
+  background-color: rgb(0, 169, 157);
+  color:white;
+
+}*/
 .pinboard-comment-litem{
   border-right:1px solid rgb(172, 172, 172); 
   width: 100px;
@@ -342,14 +346,14 @@ filter:alpha(opacity=50); /* for <= IE 8 */
   display: inline-block;
   float:left;
 }
-
+/*
 .pinboard-list-item{
   border-right:1px solid rgb(172, 172, 172); 
   width: 240px;
   padding:0px;
   display: inline-block;
   float:left;
-}
+}*/
 
 
 .pinboard-comment-litem.active, .pinboard-comment-litem:hover,.pinboard-list-item.active,
