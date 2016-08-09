@@ -954,7 +954,7 @@ angular.module("app")
 
 			case 1: //quizResult.clearStyle();
 					
-					alert($scope.selectedRoom);
+					// alert($scope.selectedRoom);
 					$scope.scrollTop();
 					break; 
 

@@ -10,7 +10,7 @@
         <li style="padding-bottom:70px;"><a href="#"><img src="images/menuIcon.png" width="60%" height="auto"></a>
           <ul class="qz-sub-list">
             <li ng-controller="LoginController" ng-hide="identity.isAuthenticated()"><a href="/login">Sign In</a></li>
-            <li ng-controller="LoginController" ng-show="identity.isAuthenticated()"><a ng-click="signout()">Sign Out</a></li>
+            <!-- <li ng-controller="LoginController" ng-show="identity.isAuthenticated()"><a ng-click="signout()">Sign Out</a></li> -->
             <li ><a href="#">How it works</a></li>
             <li><a href="#">Contact us</a></li>
           </ul>
@@ -30,7 +30,8 @@
     <div class="row qz-row-room">
       <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
-          <img src="images/rooms/master.png" data-room-id="1" alt="master bedroom">
+          <img src="images/rooms/master
+          .png" data-room-id="1" alt="master bedroom">
           <a href="#" ng-click="saveSelection(1)"><span class="tag"></span></a>
           <div class="caption txt-center">
             <p class="font-montserrat txt-upper fs-16px">Master Bedroom</p>
