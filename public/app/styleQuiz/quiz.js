@@ -25,13 +25,32 @@
 				$(".qz-row-dsg a figure").removeClass('style-img-selected');
 				$(this).addClass('style-img-selected');
 			});
+
+
 	      	$(document).on('click', '.image-like', function(e) {
         		e.preventDefault();
-        		$(this).toggleClass('image-like-selected');
-            	// if($(document).width() > 736) {
-            	//     $(this).closest('.image-container').toggleClass('image-container-selected animated pulse');
+        		//alert($(this).attr("data-images-liked"));
+
+        		//Unclicking a selecte image
+        		// if($(this).attr("data-images-liked") == 3 && $(this).hasClass('image-like-selected')){
+        		// 	$(this).toggleClass('image-like-selected').toggleClass('image-like');
+        		// }
+
+
+        		// if($(this).attr("data-images-liked") == 3 && $(this).hasClass('image-like')){
+        		// 	$(this).toggleClass('image-like-selected').toggleClass('image-like');
+        		// }
+
+        		// else {
+	        		$(this).toggleClass('image-like-selected');
+	            	$(".glyphicon", this).toggleClass('glyphicon-heart-empty').toggleClass('glyphicon-heart');
+            	//}
+
+
+            	// else if($(this).hasClass('image-like-selected')){
+            	// 	$(this).toggleClass('image-like-selected');
+	            // 	$(".glyphicon", this).toggleClass('glyphicon-heart');
             	// }
-            	$(".glyphicon", this).toggleClass('glyphicon-heart-empty').toggleClass('glyphicon-heart');
         	});
 
 
@@ -71,7 +90,7 @@
 				
 			});
 
-			$(document).on('click', '.pinboard-list-item', function(e) {
+			$(document).on('click', '.pinboard-comment-litem', function(e) {
 				
 				    $(this).siblings(".active").removeClass('active');
 			        $(this).addClass('active');

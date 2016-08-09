@@ -34,6 +34,7 @@ angular.module("app")
 	$scope.userStyle = [];
 	$scope.board=1;	
 	$scope.disable = true;
+	$scope.arrImgLiked = [];
 
 // alert('start of ctrl: disable is'+$scope.disable);
  // imageService.loadImages().then(function(data){
@@ -52,6 +53,8 @@ angular.module("app")
  //        }
 
 // TODO: Create a JSON file and read in the service. No hardcoding to be done.
+
+
 	$scope.pics =[{
 				isrc: "images/styles/styleBoards/master/1.png",
 				actualWidth: "300px",
@@ -877,32 +880,38 @@ angular.module("app")
 	  				image_name: "Bold"
 	    		}]];
 
-	    		
+	    	$scope.roomNames = ["Test","Master room","Living room","Kids room","Home office","Dining room","Bedroom"];
 
 	$scope.roomArr = [
 				[{
 	        		room_image: "images/master.png",
-	        		room_id: 1
+	        		room_id: 1,
+	        		room_name: "Master Bedroom"
 	    		}, 
 	    		{
 	    			room_image: "images/living.png",
-					room_id: 2
+					room_id: 2,
+					room_name: "Living room"
 	    		},
 	    		{
 	  				room_image: "images/kids.png",
-	  				room_id: 3
+	  				room_id: 3,
+	  				room_name: "Kids Room"
 	    		}],
 	    		[{
 	    			room_image: "images/homeOffice.png",
-	        		room_id: 4
+	        		room_id: 4,
+	        		room_name: "Home Office"
 	    		}, 
 	    		{
 					room_image: "images/dining.png",
-					room_id: 5
+					room_id: 5,
+					room_name: "Dining Room"
 	    		},
 	    		{
 	  				room_image: "images/bedroom.png",
-	  				room_id: 6
+	  				room_id: 6,
+	  				room_name: "Bedroom"
 	    		}]];
 
 
@@ -945,7 +954,7 @@ angular.module("app")
 
 			case 1: //quizResult.clearStyle();
 					
-					
+					alert($scope.selectedRoom);
 					$scope.scrollTop();
 					break; 
 
@@ -1226,11 +1235,14 @@ angular.module("app")
 			
 			//If room already exists, user clicked a room icon twice to deselect, remove image ID from array
 			var index = $scope.selectedRoom.indexOf(imageId);
+			console.log("index is: "+index);
 			if(index>-1){
 				$scope.selectedRoom.splice(index, 1);
+				console.log("After splicing, room arr is: "+$scope.selectedRoom);
 			}
 			else{
 				$scope.selectedRoom.push(imageId);
+				console.log("After new image, room arr is: "+$scope.selectedRoom);
 			}
 			if($scope.selectedRoom.length>=1){
 				$scope.disable=false;
@@ -1238,6 +1250,7 @@ angular.module("app")
 			else{
 				$scope.disable=true;
 			}
+			console.log("Final, room arr is: "+$scope.selectedRoom);
 		}
 		else{
 			$scope.selectedImages[$scope.pagenum] =  imageId;
@@ -1280,6 +1293,21 @@ angular.module("app")
 		setTimeout(function() {
    		 $(window).scrollTop(50);  
 		}, 0);
+	}
+
+	$scope.isActive = function(index){
+		
+		if(index===0)
+			return 'active';
+	}
+	$scope.imageLiked = function(image_id){
+		var index = $scope.arrImgLiked.indexOf(image_id);
+		if(index>-1){
+			$scope.arrImgLiked.splice(index, 1);
+		}
+		else if($scope.arrImgLiked.length<3){
+			$scope.arrImgLiked.push(image_id);
+		}
 	}
 });
 

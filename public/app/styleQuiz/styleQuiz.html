@@ -335,13 +335,11 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="padding-left">&times;</span></button>
           </div>
           <div class="modal-body comment-modal-body">
-
-<ul class="comment-room-list" style="margin-bottom:20px;">
-        <li class="pinboard-comment-litem font-sansRegular fs-10px active"><a href="#" ng-click="loadBoard(1);">MASTER BEDROOM</a></li>
-        <li class="pinboard-comment-litem font-sansRegular fs-10px"><a href="#" ng-click="loadBoard(2);">LIVING ROOM</a></li>
-        <li class="pinboard-comment-litem font-sansRegular fs-10px"><a href="#" ng-click="loadBoard(3);">HOME OFFICE</a></li>
-        <li class="pinboard-comment-litem font-sansRegular fs-10px"><a href="#" ng-click="loadBoard(4);">DINING ROOM</a></li>
-      </ul>
+            <div style="position:relative;width:90%;margin:0 auto;text-align:center;">
+              <ul class="comment-room-list" style="margin-bottom:20px;" >
+                <li ng-repeat="selRoom in selectedRoom track by $index" class="pinboard-comment-litem font-sansRegular fs-10px" ng-class="isActive($index)"><a href="#">{{roomNames[selRoom]}}</a></li>
+              </ul>
+            </div>
 
 
             <div style="float:left;padding-left:20px;">
@@ -399,7 +397,7 @@
           <img src="images/styles/styleBoards/comment.png" id="icon_comment"  class="image-status" style="right:15%;" data-swap="images/styles/styleBoards/sel_comment.png">
         </a>     
 
-        <a href="#" class="image-like" data-ordinal="0" data-image-id="245">  
+        <a href="#" class="image-like" ng-click="imageLiked(pic.isrc)" data-ordinal="0" data-image-id="245" data-images-liked="{{arrImgLiked.length}}">  
           <span class="glyphicon glyphicon-heart-empty image-status" style="right:5%;"></span>   
         </a> 
       </li>
