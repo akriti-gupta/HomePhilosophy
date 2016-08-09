@@ -22,12 +22,12 @@
   src: url(../fonts/PlayfairDisplay-Bold.ttf);
 }
 
-
+/*
 @font-face{
   font-family: MartelSans-ExtraLight;
   font-weight: normal;
   src: url(../fonts/MartelSans-ExtraLight.ttf);
-}
+}*/
 
 @font-face{
   font-family: OpenSans-Regular;
@@ -51,12 +51,12 @@
   font-family: Raleway-Regular;
   src: url(../fonts/Raleway-Regular.ttf);
 }
-
+/*
 @font-face{
   font-family: Lustria-Regular;
   src: url(../fonts/Lustria-Regular.ttf);
 }
-
+*/
 .font-sansRegular{
   font-family: OpenSans-Regular;
   text-overflow: wrap;
@@ -72,10 +72,10 @@
   text-overflow: wrap;
 }
 
-.font-martel{
+/*.font-martel{
   font-family: MartelSans-ExtraLight;
   text-overflow: wrap;
-}
+}*/
 
 
 .font-playfair{
@@ -88,12 +88,12 @@
   font-family: PlayfairDisplay-Bold;
   text-overflow: wrap;
 
-}
+}/*
 
 .font-lustria{
   font-family: Lustria-Regular;
   text-overflow: wrap;
-}
+}*/
 .font-noto{
   font-family: NotoSerif-Regular;
   text-overflow: wrap;
@@ -223,7 +223,7 @@
 }
 
 .col-cyan{
-  color: #2fb9af; /*rgb(47, 185, 175)*/;
+  color: #2fb9af; 
 }
 
 .col-lightcyan{
@@ -354,10 +354,9 @@ button:focus {outline:0;}
 .topnav li:nth-child(6):hover{
   border-bottom: 0;
 }
-.topnav li ul li:hover{
+/*.topnav li ul li:hover{
   border-bottom: 2px solid grey;
-  /*color: #64C6BE;*/
-}
+}*/
 
 .tab_icon{
     display: none;
@@ -399,13 +398,13 @@ button:focus {outline:0;}
   text-align: left;
 }
 
-.topnav li ul li{
+.submenu-list li{
   display: none;
-  border-bottom: 0.5px solid black;
+  border-bottom: 1px solid black;
   padding-bottom: 10px;
 }
 
-.topnav li ul li:nth-child(2){
+.submenu-list li:nth-child(2){
    margin-bottom:25px;
 }
 
@@ -548,7 +547,7 @@ button:focus {outline:0;}
 
 .btn-start-quiz,.btn-comment{
     color: #fff;
-    background-color: #64C6BE; /*rgb(100, 198, 190)*/;
+    background-color: #64C6BE; 
     border-color: transparent;
     text-decoration: none;
 }
