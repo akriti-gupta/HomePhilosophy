@@ -11,4 +11,26 @@ exports.authenticate = function(req, res, next){
 		 	})
 		 });
 		auth(req,res,next);
+	};
+
+exports.requiresApiLogin = function(req, res, next){
+	if(!req.isAuthenticated()){
+		res.status(403);
+		res.end();
 	}
+	else{
+		next();
+	}
+};
+
+exports.requiresRole = function(role){
+	return function(req,res,next){
+		if(!req.isAuthenticated() || req.user.role!=role){
+			res.status(403);
+			res.end();
+		}
+		else{
+			next();
+		}
+	}
+}

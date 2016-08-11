@@ -342,15 +342,15 @@ button:focus {outline:0;}
   margin: 0 18px;
 }
 
-.topnav li:not(:first-child):hover{
-  /*border-bottom: 2px solid #64C6BE;*/
-   /*border-bottom: 2px solid grey;*/
+/*.topnav li:not(:first-child):hover{
+  border-bottom: 2px solid #64C6BE;
+  border-bottom: 2px solid grey;
    
-}
-
+}*/
+/*
 .topnav li:nth-child(6):hover{
   border-bottom: 0;
-}
+}*/
 /*.topnav li ul li:hover{
   border-bottom: 2px solid grey;
 }*/
@@ -358,9 +358,9 @@ button:focus {outline:0;}
 .tab_icon{
     display: none;
 }
-.plist-border:hover{
-  /*border-bottom: 2px solid #64C6BE;*/
-}
+/*.plist-border:hover{
+  border-bottom: 2px solid #64C6BE;
+}*/
 
 .topnav li a {
     font-family:Montserrat-Regular;
@@ -408,11 +408,11 @@ button:focus {outline:0;}
 /*.submenu-list li a{
   font-size:14px;
 }*/
-
+/*
 .submenu-list li a:hover{
-}
+}*/
 
-.topnav .submenu-list:hover + a { border-bottom: none; }
+/*.topnav .submenu-list:hover + a { border-bottom: none; }*/
 
 #exp-subtext{
   padding-top:13px;letter-spacing:1px;
@@ -452,7 +452,7 @@ button:focus {outline:0;}
         margin-right: 50px;
     }
 
-    .topnav li:not(:last-child) {
+    .topnav li {
         display: none;
     }
 
@@ -460,7 +460,7 @@ button:focus {outline:0;}
         margin: 0 18px;
         display: inline-block;
         position: absolute;
-        top: 16px;
+        top: 40px;
         right: 0;
         font-size: 20px;
     }
