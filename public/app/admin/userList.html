@@ -1,0 +1,30 @@
+<header id="site_header">
+  <div class="hp-logo"> 
+    <a href="/">
+            <img src="images/logo_header.png" />
+        </a>
+    </div>
+    <div class="qz-mnu">
+      <ul>
+        <li style="padding-bottom:70px;"><a href="#"><img src="images/menuIcon.png" width="60%" height="auto"></a>
+          <ul class="qz-sub-list">
+            <li ng-controller="LoginController" ng-hide="identity.isAuthenticated()"><a href="/login">Sign In</a></li>
+            <!-- <li ng-controller="LoginController" ng-show="identity.isAuthenticated()"><a ng-click="signout()">Sign Out</a></li> -->
+            <li ><a href="#">How it works</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li ng-show="identity.currentUser.isAdmin()"><a href="/admin/users">User Admin </a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+</header>
+
+<div class="divider" style="border-top:2px solid #e1e1e1;padding:15px;"></div>
+ 
+<div ng-controller="UserListCtrl" class="qz-container">
+
+<div ng-repeat = "user in users">
+<p>{{user.username}}</p>
+</div>
+
+<div class="divider" style="border-top:2px solid rgb(47, 185, 175);"></div>

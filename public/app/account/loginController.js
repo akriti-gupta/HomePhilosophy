@@ -9,7 +9,7 @@ angular.module("app")
 		  				console.log("In login, quizResult.getStyle() is:"+quizResult.getStyle());
 		  				console.log("Len is: "+quizResult.getStyle().length);
 		  				if(quizResult.getStyle().length>=1){
-		  					$location.path('/styleQuiz');
+		  					$location.path('/style-quiz');
 		  				}
 		  				else{
 		  					$location.path('/');
