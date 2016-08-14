@@ -1,17 +1,19 @@
-var express = require('express'),
-	mysql = require('mysql');
+var express = require('express');
+	
 
 var env = process.env.NODE = process.env.NODE || 'development';
 var app = express();
 var config = require('./server/config/config')[env];
-var db = require("./server/config/db.js");
-var connObj= new db.getConnection();
-var connection=connObj.connection; 
+// var connObj= new db.getConnection();
+// var db = require('./server/config/db');
+// var connection=db.connection();
+// console.log('In server, conn is: '+connection);
+
 
 
 require('./server/config/express')(app,config);
-require('./server/config/passport')(connection);
-require('./server/config/routes')(app,connection);
+// require('./server/config/passport');
+require('./server/config/routes')(app);
 
 
 app.listen(config.port)

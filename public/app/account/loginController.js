@@ -33,6 +33,27 @@ angular.module("app")
 		  		});	
 		  	}
 
+		  	$scope.signup = function(){
+		  		alert('Sign up called');
+		  		var newUserData = {
+		  			firstname: $scope.username,
+		  			username: $scope.email,
+		  			password: $scope.password
+		  		};
+
+		  		mvAuth.createUser(newUserData).then(function(){
+		  			mvNotifier.notify('User account created!');
+		  			if(quizResult.getStyle().length>=1){
+		  				$location.path('/style-quiz');
+		  			}
+		  			else{
+		  				$location.path('/');
+		  			}
+		  		}, function(reason){
+		  			mvNotifier.error(reason);
+		  		});
+		  	}
+
 		  	$scope.showLogin = function(){
 		  		$scope.showName = false;
 		  	}

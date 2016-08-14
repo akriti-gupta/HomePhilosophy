@@ -17,7 +17,8 @@ angular.module('app')
 					.when('/op-process',{templateUrl: 'app/process.html'})					
 					.when('/tell-us-more',{templateUrl: 'app/moreDetails.html', controller: 'SaveDetails'})
 					.when('/admin/users',{templateUrl: 'app/admin/userList.html', 
-						controller: 'UserListCtrl',resolve: routeRoleChecks.admin});
+						controller: 'UserListCtrl',resolve: routeRoleChecks.admin})
+					.when('/signup',{templateUrl: 'app/account/login.html', controller: 'LoginController'});
     		});
 
 
