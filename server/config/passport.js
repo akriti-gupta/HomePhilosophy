@@ -2,17 +2,18 @@ var passport = require('passport'),
 	LocalStrategy = require('passport-local').Strategy,
 	db = require('./db.js');
 
-module.exports = function(connection){
+module.exports = function(){
+	
 	passport.use(new LocalStrategy(
 		function(username, password, done){
+	
 
 			//Authentication code.
-			var data={query:"select * from user where password='"+password+"' and username='"+username+"' ",
-			  		  connection:connection
+			var data={query:"select * from user where password='"+password+"' and username='"+username+"' "
 			  		 };
-			  	db.query_runner(data,function(result){
-				if(result.length>0) {
-					return done(null,result);
+			  	db.query_runner(data,function(user){
+				if(user.length>0) {
+					return done(null,user);
 			    }
 			    else {
 			    	return done(null,false);
@@ -29,8 +30,7 @@ module.exports = function(connection){
 
 	passport.deserializeUser(function(id,done){
 		var data={
-				   query:"select * from user where id="+id,
-			       connection:connection
+				   query:"select * from user where id="+id
 			     };
 		db.query_runner(data,function(result){
 			if(result.length>0) {

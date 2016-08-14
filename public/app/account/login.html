@@ -37,21 +37,25 @@
     <form name="loginForm" style="width:80%;margin:0 auto;">
       <div class="form-group" ng-show="showName">
         <label for="inputName">Name</label>
-        <input type="text" class="form-control" id="inputName" name="username1" ng-model="username1">
+        <input type="text" class="form-control" id="inputName" name="username" ng-model="username">
       </div>
       <div class="form-group">
         <label for="inputEmail">Email</label>
-         <input type="email" class="form-control" id="inputEmail" name="email" ng-model="username">
+         <input type="email" class="form-control" id="inputEmail" name="email" ng-model="email" required>
       </div>
       <div class="form-group">
-        <label for="inputPassword3">Password</label>
+        <label for="inputPassword">Password</label>
          <input type="password" class="form-control" id="inputPassword" name="password" ng-model="password">
       </div>
 
       <div style="float:right" ng-hide="showName"><a href="#" class="font-sansRegular fs-16px col-lightcyan" ng-click="showRegister()">Sign Up </a></div>
       
-      <div style="clear:both;text-align:center;padding:30px 0px 40px;">
-        <button type="submit" class="btn-start-quiz btn-login font-sansRegular txt-upper col-lightcyan fs-20px" ng-click = "signin(username,password)" >CONTINUE</button>
+      <div style="clear:both;text-align:center;padding:30px 0px 40px;" ng-hide="showName">
+        <button type="submit" class="btn-start-quiz btn-login font-sansRegular txt-upper col-lightcyan fs-20px" ng-click = "signin(email,password)" ng-disabled="loginForm.$invalid">CONTINUE</button>
+      </div>
+
+      <div style="clear:both;text-align:center;padding:30px 0px 40px;" ng-show="showName">
+        <button type="submit" class="btn-start-quiz btn-login font-sansRegular txt-upper col-lightcyan fs-20px" ng-click = "signup()" ng-disabled="loginForm.$invalid">CONTINUE</button>
       </div>
 
       <div style="text-align:center;padding:0px 0px 40px;color: rgb(112, 112, 112);" class="font-sansRegular">

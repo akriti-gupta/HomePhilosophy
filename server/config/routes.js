@@ -1,7 +1,7 @@
 var auth = require('./auth'),
-	quiz = require('./quiz'),
-	db = require('./db.js'),
-	multer = require('multer');
+	quiz = require('./quiz'),	
+	multer = require('multer'),
+	users = require('../controllers/users');
 
 var storage =   multer.diskStorage({
   destination: function (req, file, callback) {
@@ -14,15 +14,11 @@ var storage =   multer.diskStorage({
 var upload = multer({ storage : storage}).single('file');
 
 
-module.exports = function(app,connection){
+module.exports = function(app){
 	
-	app.get('/api/users',auth.requiresRole('admin'),function(req,res){
-		var data={query:"select * from user",connection:connection};
-		db.query_runner(data,function(collection){
-			res.send(collection);
-		});
-	});
+	app.get('/api/users',auth.requiresRole('admin'),users.getUsers);
 	
+	app.post('/api/users',users.createUser);
 
 	app.post('/signin',auth.authenticate);
 
