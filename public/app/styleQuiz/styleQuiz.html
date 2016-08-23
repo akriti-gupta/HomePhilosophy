@@ -249,7 +249,7 @@
   </div>
 
   <div ng-show="pagenum===4" class="font-playfair fs-22px"> 
-    <p style="padding-bottom:50px;">Which bedroom do you want to relax in?</p>
+    <p style="padding-bottom:50px;">Which bedroom do you like best?</p>
     <div ng-repeat="styles in styleQuest2 track by $index">
       <div class="row qz-row">
         <div class="col-md-4 col-xs-4" ng-repeat="style in styles">
@@ -288,7 +288,7 @@
   </div>
 
   <div ng-show="pagenum===7" class="font-playfair fs-22px"> 
-    <p style="padding-bottom:50px;">What texture do you like?</p>
+    <p style="padding-bottom:50px;">What texture is your favourite?</p>
     <div ng-repeat="styles in styleQuest5 track by $index">
       <div class="row qz-row">
         <div class="col-md-4 col-xs-4" ng-repeat="style in styles">
@@ -304,7 +304,7 @@
 
 
   <div ng-show="pagenum===8" class="font-playfair fs-22px"> 
-    <p style="padding-bottom:50px;">What color palette do you like?</p>
+    <p style="padding-bottom:50px;">If you had to choose a colour palette it would be...</p>
     <div ng-repeat="styles in styleColor track by $index">
       <div class="row qz-row-dsg">
         <div class="col-md-4 col-xs-4" ng-repeat="style in styles">
@@ -335,7 +335,7 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="padding-left">&times;</span></button>
           </div>
           <div class="modal-body comment-modal-body">
-            <div style="position:relative;width:90%;margin:0 auto;text-align:center;">
+            <div style="position:relative;width:90%;margin:0 auto;text-align:center;" ng-show="selectedRoom.length>1">
               <ul class="comment-room-list" style="margin-bottom:20px;" >
                 <li ng-repeat="selRoom in selectedRoom track by $index" class="pinboard-comment-litem font-sansRegular fs-10px" ng-class="isActive($index)"><a href="#">{{roomNames[selRoom]}}</a></li>
               </ul>
@@ -440,7 +440,7 @@
       <p class="font-playfair fs-20px result-title">{{item.title}} <span class="txt-upper fs-22px font-sansRegular">{{item.style}}</span></p>
       <p class="font-sansRegular fs-16px" style="padding:5px 80px 30px;"> {{item.desc}}</p>
         <img ng-src="{{item.image}}" style="width:100%;"/>
-      <p ng-if="userStyle.length==1" class="font-playfair fs-22px" style="text-align:right;color:rgb(77, 77, 77);">Not really your style? Re-take the <a href="/style-quiz"  ng-click="retakeQuiz()"><u>Style Quiz</u></a></p>
+      <p ng-if="userStyle.length==1" class="font-playfair fs-12px" style="text-align:right;color:rgb(77, 77, 77);">Not really your style? Re-take the <a href="/style-quiz"  ng-click="retakeQuiz()"><u>Style Quiz</u></a></p>
     </div>
 
     <div style="width:90%;margin:0 auto;" ng-repeat="item in userStyle.slice(1,entries.length)" ng-if="userStyle.length==2">

@@ -3,13 +3,14 @@ var rootPath = path.normalize(__dirname + '../../../');
 
 module.exports = {
 	development:{
+		db: 'mongodb://localhost/homephilosophy',
 		rootPath: rootPath,
 		port: process.env.PORT || 8006
-		//Set Mysql connection string also here later 
+		
 	},
 	production:{
+		db: 'mongodb://localhost/homephilosophy',
 		rootPath: rootPath,
 		port: process.env.PORT || 80
-		//Set Mysql connection string also here later 
 	}
 }
