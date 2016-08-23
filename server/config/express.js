@@ -21,10 +21,9 @@ module.exports = function(app,config){
 	app.use(cookieParser());
 	app.use(bodyParser.urlencoded({extended : true}));
 	app.use(bodyParser.json());
-
-
 	app.use(session({secret:'home philiosphy',resave:false,saveUninitialized:false}));
 	//console.log("Bef initialize");
 	app.use(passport.initialize());
 	app.use(passport.session());
+
 }

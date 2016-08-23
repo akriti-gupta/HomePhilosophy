@@ -36,7 +36,7 @@ angular.module("app")
 		  	$scope.signup = function(){
 		  		alert('Sign up called');
 		  		var newUserData = {
-		  			firstname: $scope.username,
+		  			firstName: $scope.firstname,
 		  			username: $scope.email,
 		  			password: $scope.password
 		  		};

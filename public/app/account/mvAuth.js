@@ -6,7 +6,7 @@ angular.module('app').factory('mvAuth', function($http, mvIdentity, $q, mvUser){
 		 	$http.post('/signin',{username: username , password :password}).then(function(response){
 	  			if(response.data.success){
 	  				var user = new mvUser();
-	  				angular.extend(user, response.data.user[0]);
+	  				angular.extend(user, response.data.user);
 	  				// mvIdentity.currentUser = response.data.user[0];
 	  				mvIdentity.currentUser = user;
 	  				dfd.resolve(true);

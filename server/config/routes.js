@@ -17,7 +17,8 @@ var upload = multer({ storage : storage}).single('file');
 module.exports = function(app){
 	
 	app.get('/api/users',auth.requiresRole('admin'),users.getUsers);
-	
+
+	//Gets called on Sign in, while $save of user resource	
 	app.post('/api/users',users.createUser);
 
 	app.post('/signin',auth.authenticate);

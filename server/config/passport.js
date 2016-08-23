@@ -1,18 +1,16 @@
 var passport = require('passport'),
-	LocalStrategy = require('passport-local').Strategy,
-	db = require('./db.js');
+  mongoose = require('mongoose'),
+  LocalStrategy = require('passport-local').Strategy,
+  User = mongoose.model('User');
+
+	
 
 module.exports = function(){
-	
+	var User = mongoose.model('User');
 	passport.use(new LocalStrategy(
 		function(username, password, done){
-	
-
-			//Authentication code.
-			var data={query:"select * from user where password='"+password+"' and username='"+username+"' "
-			  		 };
-			  	db.query_runner(data,function(user){
-				if(user.length>0) {
+			User.findOne({username: username}).exec(function(err,user) {
+     		 if(user && user.authenticate(password)) {
 					return done(null,user);
 			    }
 			    else {
@@ -24,21 +22,18 @@ module.exports = function(){
 
 	passport.serializeUser(function(user,done){
 		if(user){
-			done(null,user[0].id);
+			done(null,user._id);
 		}
 	});
 
 	passport.deserializeUser(function(id,done){
-		var data={
-				   query:"select * from user where id="+id
-			     };
-		db.query_runner(data,function(result){
-			if(result.length>0) {
-				return done(null,result[0]);
-		    }
-		    else {
-		    	return done(null,false);
-		    }
+			User.findOne({_id: id}).exec(function(err,user) {
+				if(user) {
+					return done(null,user);
+			    }
+			    else {
+			    	return done(null,false);
+			    }
 		});
 
 	});
