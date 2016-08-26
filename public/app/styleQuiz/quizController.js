@@ -1202,23 +1202,23 @@ angular.module("app")
 		$scope.board=1;
 	}
 				
-	$scope.loadBoard= function(boardVal){
+// 	$scope.loadBoard= function(boardVal){
 		
-		switch(boardVal){
+// 		switch(boardVal){
 	
-		 case 1:	$scope.board = $scope.pics;
-		 			break;
-		 case 2:	$scope.board = $scope.pics4;
-		 			break;
-		 case 3:	$scope.board = $scope.pics5;
-		 			break;
-		 case 4:	$scope.board = $scope.pics3;
-		 			break;
-		 default: 	$scope.board = $scope.pics;
-		 			break; 
-}
-		 //$scope.refresh();
-	}
+// 		 case 1:	$scope.board = $scope.pics;
+// 		 			break;
+// 		 case 2:	$scope.board = $scope.pics4;
+// 		 			break;
+// 		 case 3:	$scope.board = $scope.pics5;
+// 		 			break;
+// 		 case 4:	$scope.board = $scope.pics3;
+// 		 			break;
+// 		 default: 	$scope.board = $scope.pics;
+// 		 			break; 
+// }
+		 
+// 	}
 	
 	function sortValues(a, b) {
 		if (a.value === b.value) {

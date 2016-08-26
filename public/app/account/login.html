@@ -1,4 +1,4 @@
-<header id="site_header">
+<!-- <header id="site_header">
   <div class="hp-logo"> 
     <a href="/">
             <img src="images/logo_header.png" />
@@ -16,20 +16,24 @@
         </li>
       </ul>
     </div>
-</header>
+</header> -->
 
 <div ng-controller="LoginController" id="login-section">
-  <div style="position:relative;width:50%;margin:0 auto; top:15%;background-color:#fff">
-    <p style="background-color:#000;padding-bottom:10px;">&nbsp;</p>
-    <p class="txt-upper fs-30px font-playfair" style="padding-top:20px;color:rgb(54, 54, 54);">Sign Up to see Results</p>
-    <p ng-show="showName" class="font-sansRegular fs-16px" style="color:rgb(112, 112, 112);">Already have an account? <a href="#" class="col-lightcyan" ng-click="showLogin()">Sign In </a></p>
+  <div class="login-ctr">
+    <p style="background-color:#000;padding-bottom:10px;height:1.5em;">&nbsp;</p>
+    <p class="txt-upper fs-responsive-lg font-playfair" style="padding-top:20px;color:rgb(54, 54, 54);">Sign Up to see Results</p>
+
+   <!--  <p style="background-color:#000;margin-bottom:3em;height:1.5em;">&nbsp;</p>
+    <p class="txt-upper font-playfair fs-30px" style="color:rgb(54, 54, 54);">Sign Up to see Results</p> -->
+
+    <p ng-show="showName" class="font-sansRegular fs-responsive-sml" style="color:rgb(112, 112, 112);">Already have an account? <a href="#" class="col-lightcyan" ng-click="showLogin()">Sign In </a></p>
 
     <div style="text-align:center;padding-top:20px;">
-      <!-- <a href="https://www.facebook.com/v2.5/dialog/oauth?client_id=1720813668142794&amp;state=48fc6a93a77e12d65d6730d2a0174700&amp;response_type=code&amp;sdk=php-sdk-5.2.0&amp;redirect_uri=https%3A%2F%2Fapp.havenly.com%2Fusers%2Ffb_login&amp;scope=email"> -->
+      <a href="https://www.facebook.com/v2.5/dialog/oauth?client_id=1720813668142794&amp;state=48fc6a93a77e12d65d6730d2a0174700&amp;response_type=code&amp;sdk=php-sdk-5.2.0&amp;redirect_uri=https%3A%2F%2Fapp.havenly.com%2Fusers%2Ffb_login&amp;scope=email">
 
         <button type="submit" class="btn btn-primary btn-fb"><i style="font-size:22px" class="fa">&#xf09a;</i>
        <span style="padding-left:20px;">Sign Up with Facebook</span></button>
-      <!-- </a> -->
+      </a>
     </div>
     <div style="text-align:center;padding:20px 0px;color:rgb(172, 172, 172);" class="fs-20px font-openSans"><span>- or -</span></div>
 
