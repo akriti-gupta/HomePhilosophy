@@ -93,6 +93,7 @@
   border:1px solid #acacac;
   color:#707070;
   padding:6px 0px;
+  font-size:16px;
 }
 
 /*#take-qz-btn{
@@ -113,6 +114,10 @@
   font-family: OpenSans-Regular;
   font-size:22px;
   padding: 6px 12px;
+}
+
+.icon-prev{
+  position:relative; width:76%; margin:0 auto;
 }
 
 .btn-qz{
@@ -142,7 +147,7 @@
   background-color:#00a99d;
   color:#fff;
   border:2px solid #00a99d;
-  margin-left:15px;
+  /*margin-left:15px;*/
 }
 
 .btn-nxt:hover:enabled,.take-qz-btn:hover{
@@ -154,6 +159,10 @@
         margin: 5px 0px;
     }
 
+}
+
+.txt-renovate{
+  font-size:18px;
 }
 
 /*Progress Bar*/
@@ -448,6 +457,7 @@ filter:alpha(opacity=50); /* for <= IE 8 */
   padding: 30px 30px 0px;
   letter-spacing:1px;
   color:rgb(112,112,112);
+  font-size:16px;
 }
 
 .tag{ 
@@ -470,9 +480,19 @@ filter:alpha(opacity=50); /* for <= IE 8 */
 
 .result-title{
   padding-bottom:10px;border-bottom:1px solid #999;margin-bottom:20px;
+  font-size:20px;
 }
 
+.result-desc{
+  padding:5px 80px 30px;
+  font-size: 16px;
+}
 
+.result-style-name{
+  font-size:22px;
+  text-transform: uppercase;
+  font-family: OpenSans-Regular;
+}
 /*Progress Bar Result Page*/
 
 .prg-wrp{
@@ -499,11 +519,12 @@ filter:alpha(opacity=50); /* for <= IE 8 */
   height:25px;
   width:25px;
   border-radius:100%;
+
   /*border: 1px solid #cccccc;*/
   
 }
 .resprg-one{
-  left:8%;
+  left:7%;
 }
 .resprg-two{
   left:27.9%;
@@ -541,7 +562,7 @@ filter:alpha(opacity=50); /* for <= IE 8 */
 }
 
 .step-one{
-  left:8.8%;
+  left:7.8%;
 }
 .step-two{
   left:28.6%;
@@ -561,8 +582,8 @@ filter:alpha(opacity=50); /* for <= IE 8 */
   margin-top:15px;
   color: rgb(183, 183, 183);
   font-family: OpenSans-Regular;
-  font-size: 14px;
-  width:200px;
+  font-size: 16px;
+  text-transform: uppercase;
 }
 .resprg-lbl-one{
   left:5%;

@@ -127,6 +127,17 @@
 .txt-justify{
   text-align: justify;
 }
+
+.fs-responsive-lg{
+  font-size: 30px;
+}
+.fs-responsive-med{
+  font-size:22px;
+}
+.fs-responsive-sml{
+  font-size:16px;
+}
+
 .fs-35px{
   
   font-size: 35px;
@@ -215,6 +226,7 @@
 
 .col-inspiring{
   color:#64c6be;
+  font-size: 35px;
 }
 
 .col-hpgreen{
@@ -414,9 +426,6 @@ button:focus {outline:0;}
 
 /*.topnav .submenu-list:hover + a { border-bottom: none; }*/
 
-#exp-subtext{
-  padding-top:13px;letter-spacing:1px;
-}
 
 @media screen and (max-width: 1280px) {
     .topnav li {
@@ -521,17 +530,30 @@ button:focus {outline:0;}
   margin: 0 auto;
   background-color: #fff;
   opacity: 0.95;
-  height: 320px;
+  /*height: 320px;*/
+  height: 50%;
   text-align: center;
   width: 50%;
-  min-width: 540px;
+  /*min-width: 540px;*/
 }
 
 .container-ctr-txt{
   margin: 0 auto;
   padding-top: 80px;
   max-width: 510px;
-  min-width: 450px;
+  /*min-width: 450px;*/
+}
+
+.exp-maintext{
+  font-size:33px;
+  text-transform: uppercase;
+  font-family:"PlayfairDisplay-Regular";
+}
+.exp-subtext{
+  text-transform: capitalize;
+  font-family: OpenSans-Regular;
+  font-size:15px;
+  padding-top:13px;letter-spacing:1px;
 }
 
 .btn-container{
@@ -552,13 +574,14 @@ button:focus {outline:0;}
 padding-top:6px; padding-bottom:6px;letter-spacing:1px;
 }
 .btn-hero{
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding: 15px 40px;
+  /*padding-bottom: 15px;
   padding-left: 40px;
-  padding-right: 40px;
+  padding-right: 40px;*/
   border-left: 2px solid rgb(38, 165, 156);
   border-bottom: 2px solid rgb(38, 165, 156);
   letter-spacing: 1px;
+  font-size: 22px;
 }
 
 /* Homepage Main Section ends*/ 
@@ -572,8 +595,6 @@ padding-top:6px; padding-bottom:6px;letter-spacing:1px;
 }
 
 .step_wrapper {
-  padding-bottom: 100px;
-
   padding:20px;
 }
 
@@ -586,11 +607,25 @@ padding-top:6px; padding-bottom:6px;letter-spacing:1px;
   vertical-align: top;
 }
 
+
 .hp_workflow_content {
     height: 300px;
     text-align: center;
     position: relative;
     border:2px solid rgb(100, 198, 190);
+}
+
+.stp-head-maintxt{
+  font-family:"PlayfairDisplay-Regular";
+  font-size: 25px;
+  text-transform: capitalize;
+}
+
+.stp-head-subtxt{
+  padding-bottom:20px;
+  font-family:OpenSans-Regular;
+  font-size:16px;
+  color: #252525;
 }
 
 .step_icon{
@@ -644,25 +679,15 @@ padding-top:6px; padding-bottom:6px;letter-spacing:1px;
     margin: auto;
 }
 
-@media screen and (max-width: 400px) {
-   #step1,#step2, #step3, #step4 { 
-    float: none;
-    margin-right:0;
-    padding:40px;
-    width:auto;
-    border:2px;
-  }
 
-}
-
-@media screen and (max-width:500px) {
+/*@media screen and (max-width:500px) {
     #exp-maintext {
       font-size:20px;
     }
     #exp-subtext{
       font-size: 10px;
     }
-}
+}*/
 /* HP experience ends*/
 
 
@@ -784,13 +809,28 @@ padding-left:10px;
     height: 120px;
 }
 
+
+.hp-logo-footer{
+  padding: 0 65px;
+  float: left;
+}
+
 #footer-data{
-  width:80%;text-align:left;display:inline-block;padding-left:100px;
+  /*width:80%;*/
+  text-align:left;
+  /*display:inline-block;*/
+  padding-left:100px;
 }
 
 #footer-data ul{
   list-style:none;display:table-cell;padding-right:100px;
 }
+
+
+.flh3{padding-right:100px;}
+
+.flh1{padding-right:60px;}
+
 
 #footer_data li a:hover{
   color: #707070;
@@ -810,6 +850,10 @@ padding-left:10px;
   position: relative;
   background-repeat:no-repeat;
   padding-bottom:40px;
+}
+
+.login-ctr{
+  position:relative;width:50%;margin:0 auto; top:15%;background-color:#fff
 }
 
 .form-control{
@@ -832,6 +876,10 @@ padding-left:10px;
   content: "&#xf09a;";
 }*/
 
+.prg-dtl-ctr{
+  width:80%;margin:auto;
+}
+
 .form-group {
   margin-bottom: 35px;
 }
@@ -853,4 +901,9 @@ padding-left:10px;
 .upload-btn{
  float:left;
  padding:11px;
+ margin-left:20px;
+ border:0px;
+}
+.form-group .control-label{
+  text-align: center;
 }

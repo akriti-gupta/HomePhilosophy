@@ -1,13 +1,207 @@
 /*==========  Mobile First Method  ==========*/
 
     /* Custom, iPhone Retina */ 
-    @media only screen and (min-width : 320px) {
+    @media only screen and (min-width : 320px) and (max-width: 480px) {
+
+        .fs-responsive-lg{
+            font-size: 22px;
+        }
+        .fs-responsive-med{
+            font-size:16px;
+        }
+        .fs-responsive-sml{
+            font-size: 12px;
+        }
+        .hp-logo{
+            padding: 0 25px;
+        }
+        /*Home page*/
+        .exp-maintext,.col-inspiring{
+            font-size:20px;
+        }
+        .exp-subtext{
+            font-size: 10px;
+        }
+        .btn-container{
+            top: 440px;
+            left: calc(50% - 70px);
+        }
+        .btn-hero{
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .hp_workflow {
+            height: 60%;
+            width: 80%;
+        }
+
+        #hp_experience{
+            margin: 30px 0px;
+        }
+
+        .stp-head-maintxt{
+            font-size: 22px;
+        }
+        .stp-head-subtxt{
+            padding: 0px 15px 20px;
+        }
+        #step1,#step2, #step3, #step4 { 
+            float: none;
+            margin:0;
+            width:auto;
+        }
+        .step-text{
+            width:210px;
+        }
+        .mask{
+            left:77px;
+        }
+
+        #recent-designs{
+            margin:0px 10px 60px;
+        }
+        .design{
+            width:47%;
+        }
+
+        /* Style Quiz */
+        .col-sm-6, .col-md-4{
+            padding:5px 5px 0px;
+        }
+        .qz-row-room{
+            padding-bottom: 0px;
+            /*width:100%;*/
+        }
+        .qz-row-dsg, .qz-row{
+            width:95%;
+            padding-bottom:2px;
+        }
+
+        .thumbnail .caption{
+            font-size: 9px;
+        }
+        .txt-renovate{
+            font-size: 12px;
+        }
+
+        .cap-prf-styl{
+            font-size: 10px;
+        }
+
+        .text-dsg{
+            display: none;
+        }
+        .btn-qz{
+            font-size:12px;
+            margin-top:10px;
+        }
+        .icon-prev{
+            width: 92%;
+            padding-top: 10px;
+        }
+
+        .login-ctr{
+            width:95%;
+        }
+
+        .btn-login{
+            padding: 8px 69px;
+        }
+
+        .btn-fb{
+            padding: 12px 40px;
+        }
+       
+        .result-title{
+            font-size:16px;
+        }
+        .result-desc{
+            padding:5px 0px 30px;
+            font-size: 12px;
+        }
+        .result-style-name{
+             font-size:16px;
+        }
         
+        .flh1,.flh3{padding-right:0px;}
+
+        .hp-logo-footer{
+            padding: 0 25px;
+            width: 40%;
+        }
+
+        #footer-data ul{
+            display: inherit;
+            padding-right: 20px;
+            margin-bottom: 30px;
+        }
+         #footer-data ul li{
+            padding-right: 10px;
+         }
+
+        .prg-dtl-ctr{
+            width:98%
+        }
+
+        .resprg-one, .resprg-two, .resprg-three, .resprg-four, .resprg-five, .resprg-six{
+            margin-top:-6px;
+            height:15px;
+            width:15px;
+        }
+        .resprg-lbl-one,.resprg-lbl-two,.resprg-lbl-three, .resprg-lbl-four, .resprg-lbl-five{
+            font-size: 10px;
+            text-transform: capitalize;
+            width:20%
+        }
+       
+        .step-one, .step-two, .step-three, .step-four, .step-five{
+            font-size:10px;
+            margin-top:-6px;
+        }
+        .step-one{
+          left:8.5%;
+        }
+        .step-two{
+          left:29.5%;
+        }
+        .step-three{
+          left:50.5%;
+        }
+        .step-four{
+          left:72%;
+        }
+        .step-five{
+          left:91.5%;
+        }
+        .resprg-lbl-one{
+          left:3%;
+        }
+        .resprg-lbl-two{
+          left:24%;
+        }
+        .resprg-lbl-three{
+          left:45%;
+        }
+        .resprg-lbl-four{
+          left:68%;
+        } 
+        .resprg-lbl-five{
+          left: 88%;
+        } 
+        .square{
+            width:25px;
+            height:25px;
+        }
+        .upload-btn{
+            margin-left:4px;
+        }
+
     }
 
     /* Extra Small Devices, Phones */ 
     @media only screen and (min-width : 480px) {
-
+        
     }
 
     /* Small Devices, Tablets */
@@ -24,6 +218,21 @@
     @media only screen and (min-width : 1200px) {
 
     }
+
+/*Added for ifone 6plus*/
+ @media only screen and (min-width : 400px) {
+
+     .mask{
+        left:93px;
+       } 
+    .step-text{
+        width: 240px;
+    }
+    .resprg-lbl-one,.resprg-lbl-two,.resprg-lbl-three, .resprg-lbl-four, .resprg-lbl-five{
+        width:18%;
+    }
+}
+
 
 
 
@@ -46,10 +255,31 @@
 
     /* Extra Small Devices, Phones */ 
     @media only screen and (max-width : 480px) {
-
+       
+       /*.mask{
+        left:93px;
+       } */
     }
 
     /* Custom, iPhone Retina */ 
     @media only screen and (max-width : 320px) {
-        
-    }
+        .hp_workflow_content{
+            height:320px;
+        }
+        .mask{
+            left:4em;
+        }
+        .step-text{
+            width:165px;
+        }
+        .btn-qz{
+            padding: 12px 40px;
+        }
+        .hp-logo-footer{
+            width:32%;
+        }
+        #footer-data ul{
+            padding-right: 10px;
+            padding-left: 2px;
+        }
+    }   
