@@ -35,6 +35,7 @@ angular.module("app")
 	$scope.board=1;	
 	$scope.disable = true;
 	$scope.arrImgLiked = [];
+	$scope.room_comments = "";
 
 // alert('start of ctrl: disable is'+$scope.disable);
  // imageService.loadImages().then(function(data){
@@ -1308,6 +1309,11 @@ angular.module("app")
 		else if($scope.arrImgLiked.length<3){
 			$scope.arrImgLiked.push(image_id);
 		}
+	}
+	$scope.saveComments = function(room_id){
+		//TODO: Save room comments 
+		// $scope.room_comments = 
+
 	}
 });
 

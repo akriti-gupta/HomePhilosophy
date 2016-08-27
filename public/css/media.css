@@ -1,6 +1,7 @@
 /*==========  Mobile First Method  ==========*/
 
     /* Custom, iPhone Retina */ 
+
     @media only screen and (min-width : 320px) and (max-width: 480px) {
 
         .fs-responsive-lg{
@@ -13,8 +14,19 @@
             font-size: 12px;
         }
         .hp-logo{
-            padding: 0 25px;
+            /*padding: 0 25px;*/
+            width:45%;
+            background-image:url('/images/logo-head-sml.png');
+            margin:0px;
+            
         }
+        /*.hp-logo-footer{
+            padding: 0 10px 0 20px;
+        }
+        .hp-logo-footer a img{
+            width:80%;
+        }
+*/
         /*Home page*/
         .exp-maintext,.col-inspiring{
             font-size:20px;
@@ -66,6 +78,12 @@
         }
 
         /* Style Quiz */
+        .qz-mnu{
+            padding: 46px 0px;
+        }
+        .qz-mnu li ul{
+            width:300px;
+        }
         .col-sm-6, .col-md-4{
             padding:5px 5px 0px;
         }
@@ -80,6 +98,9 @@
 
         .thumbnail .caption{
             font-size: 9px;
+        }
+        .ctr-oth-styl{
+            padding:25px 6px;
         }
         .txt-renovate{
             font-size: 12px;
@@ -124,12 +145,13 @@
              font-size:16px;
         }
         
-        .flh1,.flh3{padding-right:0px;}
-
         .hp-logo-footer{
-            padding: 0 25px;
-            width: 40%;
+            padding: 0 10px 0 20px;
         }
+        .hp-logo-footer a img{
+            width:80%;
+        }
+        .flh1,.flh3{padding-right:0px;}
 
         #footer-data ul{
             display: inherit;
@@ -139,7 +161,6 @@
          #footer-data ul li{
             padding-right: 10px;
          }
-
         .prg-dtl-ctr{
             width:98%
         }
@@ -203,10 +224,54 @@
     @media only screen and (min-width : 480px) {
         
     }
-
+    @media only screen and (min-width : 320px) and (max-width: 768px) {
+        
+    }
     /* Small Devices, Tablets */
-    @media only screen and (min-width : 768px) {
+    @media only screen and (min-width : 768px) and (max-width: 800px) {
+        .hp-logo{
+            width:55%;
+        }
+        .btn-fb{
+            padding: 12px 80px;
+        }
+        .step-one{
+          left:8.3%;
+        }
+        .step-two{
+          left:29.6%;
+        }
+        .step-three{
+          left:50.2%;
+        }
+        .step-four{
+          left:71.8%;
+        }
+        .step-five{
+            left:91.4%;
+        }
+        .hp-logo-footer{
+            padding: 0 10px 0 50px;
 
+        }
+       /* .hp-logo-footer a img{
+            width:80%;
+        }*/
+
+        #footer-data{
+            padding-left: 200px;
+            width:80%;
+        }
+        .flh1,.flh3{padding-right:0px;}
+
+        #footer-data ul{
+            display: inherit;
+            margin-bottom: 30px;
+        }
+         #footer-data ul li{
+            padding-right: 10px;
+         }
+        
     }
 
     /* Medium Devices, Desktops */
@@ -250,7 +315,7 @@
 
     /* Small Devices, Tablets */
     @media only screen and (max-width : 768px) {
-
+        
     }
 
     /* Extra Small Devices, Phones */ 

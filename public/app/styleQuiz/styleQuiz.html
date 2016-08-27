@@ -1,10 +1,10 @@
 
 <header id="site_header">
-  <!-- <div class="hp-logo"> 
-    <a href="/">
+  <a href="/"><div class="hp-logo"></div></a> 
+   <!--  <a href="/">
             <img src="images/logo_header.png" />
-        </a>
-    </div> -->
+        </a> -->
+   
     <div class="qz-mnu">
       <ul>
         <li style="padding-bottom:70px;"><a href="#"><img src="images/menuIcon.png" width="60%" height="auto"></a>
@@ -171,13 +171,16 @@
           </p>
           </div>
         </div>
-        <div style="float:right;padding:25px 15px;">
+
+      
+
+         <div class="ctr-oth-styl">
         <span class="font-montserrat fs-14px" style="color:rgb(112,112,112);">
-         OTHER:&nbsp; <input type="text"/>
+         OTHER:&nbsp; <input type="text" style="border:1px solid #ddd;border-radius: 0px;"/>
           
         </span>
       </div>
-    </div><!--End of row 2 -->
+    </div> <!--End of row 2 -->
       
     <p class="font-playfair txt-renovate">
       Renovating your Kitchen or Bathroom? <u>Get a custom quote</u>
@@ -338,7 +341,8 @@
           <div class="modal-body comment-modal-body">
             <div style="position:relative;width:90%;margin:0 auto;text-align:center;" ng-show="selectedRoom.length>1">
               <ul class="comment-room-list" style="margin-bottom:20px;" >
-                <li ng-repeat="selRoom in selectedRoom track by $index" class="pinboard-comment-litem font-sansRegular fs-10px" ng-class="isActive($index)"><a href="#">{{roomNames[selRoom]}}</a></li>
+                <li ng-repeat="selRoom in selectedRoom track by $index" class="pinboard-comment-litem font-sansRegular fs-10px" ng-class="isActive($index)" ><a href="#">{{roomNames[selRoom]}}</a></li>
+                <!-- ng-click="saveComments(selRoom)" -->
               </ul>
             </div>
 
@@ -347,7 +351,8 @@
               <img src="" class="img-comment-box1" style="width:280px;height:360px;"/> 
             </div>
             <div style="width:500px;padding-left:330px;">
-              <textarea rows="9" cols="35" class="font-sansRegular fs-16px" placeholder=" Add a comment" style="resize:none;border:1px solid #acacac;"></textarea>
+              <textarea rows="9" cols="35" class="font-sansRegular fs-16px"  placeholder=" Add a comment" style="resize:none;border:1px solid #acacac;" ></textarea>
+              <!-- ng-model="room_comments" -->
               
 
 
