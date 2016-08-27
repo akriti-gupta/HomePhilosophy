@@ -160,6 +160,9 @@
     }
 
 }
+.ctr-oth-styl{
+  float:right;padding:25px 15px;
+  }
 
 .txt-renovate{
   font-size:18px;
@@ -426,7 +429,7 @@ filter:alpha(opacity=50); /* for <= IE 8 */
 .image-status {
     position: absolute;
     top: 10px;
-    font-size: 28px; 
+    font-size: 25px; 
   }
 
 

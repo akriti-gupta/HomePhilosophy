@@ -801,18 +801,28 @@ padding-left:10px;
 }
 
 .hp-logo{
-  padding: 0 65px;
+  
+  height:100%;
+  width:27%;
+  background-image:url('/images/logo_header.png');
+  background-size: cover;
+  margin: 0 65px;
   float: left;
 }
 
-.hp-logo img {
+/*.hp-logo img {
     height: 120px;
 }
-
+*/
 
 .hp-logo-footer{
   padding: 0 65px;
   float: left;
+  /*margin: 0 65px;
+  height:100%;
+  width:15%;
+  background-image:url('/images/logo_header.png');
+  background-size: cover;*/
 }
 
 #footer-data{
