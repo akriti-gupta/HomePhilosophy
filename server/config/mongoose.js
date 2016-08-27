@@ -9,8 +9,8 @@ module.exports = function(config){
 	console.log('after connecting to DB');
 	var db = mongoose.connection;
 	console.log('db is: '+db);
+	db.on('error',console.error.bind(console,'connection error'));
 	// db.on('error',console.error.bind(console,'connection error'));
-	db.on('error',console.log('connection error'));
 	db.once('open',function(callback){
 		console.log("HP DB opened");
 	});
