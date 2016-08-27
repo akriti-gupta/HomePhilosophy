@@ -326,7 +326,7 @@ button:focus {outline:0;}
 }
 
 
-
+/*
 #hp-nav{
   margin: 0 30px;
   padding: 30px 0;
@@ -354,32 +354,19 @@ button:focus {outline:0;}
   margin: 0 18px;
 }
 
-/*.topnav li:not(:first-child):hover{
-  border-bottom: 2px solid #64C6BE;
-  border-bottom: 2px solid grey;
-   
-}*/
-/*
-.topnav li:nth-child(6):hover{
-  border-bottom: 0;
-}*/
-/*.topnav li ul li:hover{
-  border-bottom: 2px solid grey;
-}*/
+
 
 .tab_icon{
     display: none;
 }
-/*.plist-border:hover{
-  border-bottom: 2px solid #64C6BE;
-}*/
+
 
 .topnav li a {
     font-family:Montserrat-Regular;
-    text-transform: uppercase;
+    text-transform: uppercase;*/
     /*Changed for Heroku*/
     /*font-size: 14px;*/
-    font-size: 12px;
+    /*font-size: 12px;
     letter-spacing: 1px;
     color: #000;
     text-decoration: none;
@@ -412,19 +399,86 @@ button:focus {outline:0;}
   border-bottom: 1px solid black;
   padding-bottom: 10px;
 }
+*/
+
+
+
+
+
+
+
+
+#hp-nav{
+  margin: 0 30px;
+  padding: 30px 0;
+  position: absolute;
+  right: 0;
+}
+.topnav,.submenu-list {
+  list-style:none;
+  text-align:left;
+  margin: 0;
+  padding: 0;
+  /*display: inline-block;*/
+  z-index: 2;
+}
+.topnav{
+  display: inline-block;
+ }
+
+
+.submenu-list{
+  display: none;
+  position:absolute;
+  top:70%;
+  left:2px;
+  width:180px;
+  background:#fff; 
+ }
+
+.topnav li{
+  width: auto;
+  display: -moz-inline-stack;
+  display:inline-block;
+  padding-top: 15px;
+  padding-bottom:2px;
+  padding-left: 2px;
+  padding-right: 2px;
+  margin: 0 18px;
+}
+
+
+
+.tab_icon{
+    display: none;
+}
+
+
+.topnav li a {
+    font-family:Montserrat-Regular;
+    text-transform: uppercase;*/
+    /*Changed for Heroku*/
+    /*font-size: 14px;*/
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #000;
+    text-decoration: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: left;
+}
+.topnav li a:hover{
+  color: #64C6BE;
+}
+
+ .topnav li:hover >ul
+{
+  display:block;
+}
 
 .submenu-list li:nth-child(2){
    margin-bottom:25px;
 }
-
-/*.submenu-list li a{
-  font-size:14px;
-}*/
-/*
-.submenu-list li a:hover{
-}*/
-
-/*.topnav .submenu-list:hover + a { border-bottom: none; }*/
 
 
 @media screen and (max-width: 1280px) {
@@ -457,6 +511,9 @@ button:focus {outline:0;}
 
 /* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens */
 @media screen and (max-width:980px) {
+   #hp-nav {
+        margin: 0px;
+    }
     .topnav {
         margin-right: 50px;
     }
@@ -497,6 +554,8 @@ button:focus {outline:0;}
         background-color: #fff;
         padding: 2px 20px;
         border: 1px solid #64C6BE;
+        margin-top:97px;
+        margin-right:0px;
     }
 
     #hp-nav ul.responsive li {
@@ -509,6 +568,19 @@ button:focus {outline:0;}
         display: block;
         text-align: left;
     }
+    .submenu-list {
+   
+    position: absolute;
+    top: 0%;
+    left: -111px;
+    width: 110px;
+    background: #fff;
+    border: 1px solid #64C6BE;
+  }
+
+  .submenu-list li{
+    padding-left:10px;
+  }
 }
 
 /* Header ends */

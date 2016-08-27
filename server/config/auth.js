@@ -4,7 +4,7 @@ var passport = require('passport');
 exports.authenticate = function(req, res, next){
 		console.log('In auth.js 1');
 		var auth = passport.authenticate('local',function(err, user){
-			console.log('In auth.js 2');
+			console.log('In auth.js 2a');
 			if(err){return next(err);console.log('In auth.js err');}
 			if(!user){res.send({success: false});console.log('In auth.js err 1');}
 			console.log('In auth.js bef login');
@@ -13,7 +13,9 @@ exports.authenticate = function(req, res, next){
 		 		res.send({success:true, user:user});
 		 	})
 		 });
+		console.log('In auth.js 2');
 		auth(req,res,next);
+		console.log('In auth.js 10');
 	};
 
 exports.requiresApiLogin = function(req, res, next){

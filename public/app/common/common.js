@@ -1,7 +1,10 @@
-function myFunction() {
-				alert("Click");
-    			document.getElementsByClassName("topnav")[0].classList.toggle("responsive");
-			} 
+function displayDropDown() {
+    document.getElementsByClassName("topnav")[0].classList.toggle("responsive");
+} 
+
+function dispSubMenu(){
+	document.getElementsByClassName("submenu-list")[0].classList.toggle("responsive");	
+}
 			
 $(window).resize(function(){
 	console.log('resize called');
@@ -17,14 +20,14 @@ $(window).resize(function(){
 });
 
 
-$(document).on('mouseover', '.submenu-list', function(e) {
-	e.preventDefault();
-	$(".menu-list").removeClass('plist-border');
-});
-$(document).on('mouseout', '.submenu-list', function(e) {
-	e.preventDefault();
-	$(".menu-list").addClass('plist-border');
-});
+// $(document).on('mouseover', '.submenu-list', function(e) {
+// 	e.preventDefault();
+// 	$(".menu-list").removeClass('plist-border');
+// });
+// $(document).on('mouseout', '.submenu-list', function(e) {
+// 	e.preventDefault();
+// 	$(".menu-list").addClass('plist-border');
+// });
 
 
 		
