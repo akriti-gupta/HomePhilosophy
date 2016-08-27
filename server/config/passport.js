@@ -7,8 +7,10 @@ var passport = require('passport'),
 
 module.exports = function(){
 	var User = mongoose.model('User');
+	console.log('In pp 1');
 	passport.use(new LocalStrategy(
 		function(username, password, done){
+			console.log('In pp 2');
 			User.findOne({username: username}).exec(function(err,user) {
      		 if(user && user.authenticate(password)) {
 					return done(null,user);
