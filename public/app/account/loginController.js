@@ -54,6 +54,12 @@ angular.module("app")
 		  		});
 		  	}
 
+		  	$scope.fbLogin = function(){
+		  		$http.get('/auth/facebook').then(function(response){
+		  			console.log("Hello response is: "+response);
+		  		});
+		  	}
+
 		  	$scope.showLogin = function(){
 		  		$scope.showName = false;
 		  	}
