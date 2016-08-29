@@ -1,9 +1,9 @@
-<!-- <header id="site_header">
-  <div class="hp-logo"> 
-    <a href="/">
+<header id="site_header">
+  <a href="/"><div class="hp-logo"> 
+    <!-- <a href="/">
             <img src="images/logo_header.png" />
-        </a>
-    </div>
+        </a> -->
+    </div></a>
     <div class="qz-mnu">
       <ul>
         <li style="padding-bottom:70px;"><a href="#"><img src="images/menuIcon.png" width="60%" height="auto"></a>
@@ -16,7 +16,7 @@
         </li>
       </ul>
     </div>
-</header> -->
+</header>
 
 <div ng-controller="LoginController" id="login-section">
   <div class="login-ctr">
@@ -29,9 +29,9 @@
     <p ng-show="showName" class="font-sansRegular fs-responsive-sml" style="color:rgb(112, 112, 112);">Already have an account? <a href="#" class="col-lightcyan" ng-click="showLogin()">Sign In </a></p>
 
     <div style="text-align:center;padding-top:20px;">
-      <a href="https://www.facebook.com/v2.5/dialog/oauth?client_id=1720813668142794&amp;state=48fc6a93a77e12d65d6730d2a0174700&amp;response_type=code&amp;sdk=php-sdk-5.2.0&amp;redirect_uri=https%3A%2F%2Fapp.havenly.com%2Fusers%2Ffb_login&amp;scope=email">
+      <a href="/auth/facebook">
 
-        <button type="submit" class="btn btn-primary btn-fb"><i style="font-size:22px" class="fa">&#xf09a;</i>
+        <button type="submit" class="btn btn-primary btn-fb" ng-click="fbLogin()"><i style="font-size:22px" class="fa">&#xf09a;</i>
        <span style="padding-left:20px;">Sign Up with Facebook</span></button>
       </a>
     </div>

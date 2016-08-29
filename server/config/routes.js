@@ -1,7 +1,8 @@
 var auth = require('./auth'),
 	quiz = require('./quiz'),	
 	multer = require('multer'),
-	users = require('../controllers/users');
+	users = require('../controllers/users'),
+	passport = require('passport');
 
 var storage =   multer.diskStorage({
   destination: function (req, file, callback) {
@@ -27,7 +28,22 @@ module.exports = function(app){
 		req.logout();
 		res.end();
 	});
-	
+
+
+// route for facebook authentication and login
+    app.get('/auth/facebook',
+  passport.authenticate('facebook',{ scope : ['email'] }),
+  function(req, res){});
+
+    // handle the callback after facebook has authenticated the user
+    app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/' }),
+  function(req, res) {
+    res.redirect('/tell-us-more');
+  });
+
+
+
 	app.post('/upload',function(req,res){
     	upload(req,res,function(err) {
         	if(err) {
