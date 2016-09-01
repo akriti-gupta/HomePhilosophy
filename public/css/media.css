@@ -115,6 +115,12 @@
             padding-top: 10px;
         }
 
+        .pinboard-comment-litem{
+            width: 45px;
+            font-size:9px;
+            height:30px;
+        }
+
         .login-ctr{
             width:95%;
         }
@@ -224,6 +230,16 @@
         .qz-mnu li ul{
             width:300px;
         }
+        .pin-comment-txt-ctr{
+            width:55%;
+        }
+        .pin-comment-txt-ctr textarea{
+            height:107px;
+            padding-left:0px;
+        }
+        .pin-comment-img-ctr{
+            padding-left: 0px;
+        }
        
     }
     /* Small Devices, Tablets */
@@ -281,6 +297,12 @@
           .thumbnail .caption{
             font-size: 11px;
         }
+        .pin-comment-txt-ctr textarea{
+            height:235px;
+        }
+        /*.pinboard-comment-litem{
+            width: 80px;
+        }*/
 
         
     }
