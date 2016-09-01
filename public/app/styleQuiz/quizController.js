@@ -36,6 +36,11 @@ angular.module("app")
 	$scope.disable = true;
 	$scope.arrImgLiked = [];
 	$scope.room_comments = "";
+	var last_active_room_id = 0;
+	var arrComments = [];
+	var roomCommentArr = [];
+	$scope.imgCmtsArr = [];
+	$scope.image_id=-1;
 
 // alert('start of ctrl: disable is'+$scope.disable);
  // imageService.loadImages().then(function(data){
@@ -923,8 +928,8 @@ angular.module("app")
 	}
 
 	// To maintain the quiz result and style quiz pages state when redirected here after login.
-	console.log("quizResult.getStyle() is :"+quizResult.getStyle());
-	console.log("Stored result len is:"+quizResult.getStyle().length)
+	// console.log("quizResult.getStyle() is :"+quizResult.getStyle());
+	// console.log("Stored result len is:"+quizResult.getStyle().length)
 	if(quizResult.getStyle().length>=1){
 		$scope.userStyle = quizResult.getStyle();
 		$scope.pagenum=10;
@@ -956,7 +961,7 @@ angular.module("app")
 			case 1: //quizResult.clearStyle();
 					
 					// alert($scope.selectedRoom);
-					$scope.scrollTop();
+					scrollTop();
 					break; 
 
 			 case 2: $location.path('/op-process');
@@ -967,19 +972,19 @@ angular.module("app")
 			case 4:
 			case 5: 		
 			case 6:	  $scope.progressRate+=16.5
-					  $scope.scrollTop();	
+					  scrollTop();	
 					  break;
 
 			case 7: 
 					$scope.computeStyle();
 					$scope.progressRate+=16.5;
-					$scope.scrollTop();
+					scrollTop();
 					break;
 
 
 			case 8: $scope.progress=false;
 					$scope.refresh(); 
-					$scope.scrollTop();
+					scrollTop();
 					break;
 
 
@@ -994,7 +999,7 @@ angular.module("app")
 					else{
 					 	$location.path('/login');
 					}
-					$scope.scrollTop();
+					scrollTop();
 					break;
 
 
@@ -1022,7 +1027,7 @@ angular.module("app")
 	$scope.quiz = function(){
 		// alert($scope.pagenum);
 		$scope.selectedImages[$scope.pagenum] = -1;
-		$scope.scrollTop();
+		scrollTop();
 		$scope.pagenum++;
 		//$scope.disable = true;
 		$scope.progress = true;
@@ -1032,7 +1037,7 @@ angular.module("app")
 	
 
 	$scope.refresh = function(){
-		console.log("refreshing gallery now");
+		// console.log("refreshing gallery now");
         
         angularGridInstance.gallerypin.refresh();
     }
@@ -1046,7 +1051,7 @@ angular.module("app")
 		var totE = 0;
 		var totF = 0;
 
-		console.log($scope.selectedImages);
+		// console.log($scope.selectedImages);
 		var sel1 = $scope.selectedImages[3];
 		var sel2 = $scope.selectedImages[4];
 		var sel3 = $scope.selectedImages[5];
@@ -1117,7 +1122,7 @@ angular.module("app")
 			prefStyle.push({id:5, style: 'Asian Inspired', value:(Math.round(totF/totAll * 100))});
 
 		prefStyle.sort(sortValues);
-		console.log(prefStyle);
+		// console.log(prefStyle);
 
 
 		
@@ -1156,14 +1161,13 @@ angular.module("app")
 
 		$scope.setBoard(prefStyle[0]);
 		if(!mvIdentity.isAuthenticated()){
-			console.log('Storing style in svc before going to login, to store: '+$scope.userStyle);
+			// console.log('Storing style in svc before going to login, to store: '+$scope.userStyle);
 			quizResult.storeStyle($scope.userStyle,$scope.board);
 		}
 	}
 
 	$scope.setBoard = function(styleResult){
 		var res_style = styleResult.style;
-		console.log(res_style);
 		if(res_style==="Classic")
 			$scope.board = $scope.pics4;
 
@@ -1231,27 +1235,26 @@ angular.module("app")
 	}
 
 	$scope.saveSelection = function (imageId) {
-		// $scope.selectedImages.push({page: $scope.pageCount, image_id: imageId});
 		if($scope.pagenum==1){ // Allow multiple room selections
 			
 			//If room already exists, user clicked a room icon twice to deselect, remove image ID from array
 			var index = $scope.selectedRoom.indexOf(imageId);
-			console.log("index is: "+index);
+			// console.log("index is: "+index);
 			if(index>-1){
 				$scope.selectedRoom.splice(index, 1);
-				console.log("After splicing, room arr is: "+$scope.selectedRoom);
+				// console.log("After splicing, room arr is: "+$scope.selectedRoom);
 			}
-			else{
+			
 				$scope.selectedRoom.push(imageId);
-				console.log("After new image, room arr is: "+$scope.selectedRoom);
-			}
+				// console.log("After new image, room arr is: "+$scope.selectedRoom);
+			
 			if($scope.selectedRoom.length>=1){
 				$scope.disable=false;
 			}
 			else{
 				$scope.disable=true;
 			}
-			console.log("Final, room arr is: "+$scope.selectedRoom);
+			// console.log("Final, room arr is: "+$scope.selectedRoom);
 		}
 		else{
 			$scope.selectedImages[$scope.pagenum] =  imageId;
@@ -1283,14 +1286,14 @@ angular.module("app")
 		}
 
 		
-   		 $scope.scrollTop();  
+   		 scrollTop();  
 		
 
 		
 
 	}
 
-	$scope.scrollTop = function(){
+	function scrollTop(){
 		setTimeout(function() {
    		 $(window).scrollTop(50);  
 		}, 0);
@@ -1310,11 +1313,314 @@ angular.module("app")
 			$scope.arrImgLiked.push(image_id);
 		}
 	}
-	$scope.saveComments = function(room_id){
-		//TODO: Save room comments 
-		// $scope.room_comments = 
 
+
+	
+	// $scope.loadComments = function(img_id,room_id,roomTabClicked){
+	// 	$scope.img_id = img_id;
+	// 	console.log('roomTabClicked is '+roomTabClicked + ' room_id = '+room_id);
+	// 	var comment = "";
+	// 	if(roomTabClicked){
+	// 		comment = getRoomComments(room_id);
+	// 		if(comment===""){
+	// 			//Check in master array, if commented earlier and launched comment box again
+	// 			comment = getImgCmtForRoom(img_id,room_id);
+	// 		}
+	// 	}
+	// 	else{
+
+	// 		// roomCommentArr=[];
+	// 		console.log('Comment Icon Clicked, fetching cmt for img_id: '+img_id+' and room_id: '+room_id);
+	// 		comment = getImgFirstCmt($scope.img_id);
+	// 	}
+		
+	// 	$scope.room_comments = comment;
+	// }
+
+
+	$scope.loadComments = function(img_id,room_id){
+		$scope.img_id = img_id;
+		console.log('Img Id is: '+$scope.img_id);
+		console.log('Room Id is: '+room_id);
+		var comments = "";
+		console.log('arrComments.length is: '+arrComments.length);
+		if(arrComments.length > 0){
+			for(var i = 0; i< arrComments.length ; i++){
+				console.log('arrComments[i].image_id is :'+arrComments[i].image_id);
+				if(arrComments[i].image_id ===img_id){
+					console.log('img MAtcheeeeessss');
+					for(var j =0; j< arrComments[i].comments.length;j++){
+						console.log('arrComments[i].comments[j].room_id is :'+arrComments[i].comments[j].room_id);
+						if(arrComments[i].comments[j].room_id === room_id){
+							console.log('Room matcchhhess');
+							console.log('comment fetched iss: '+arrComments[i].comments[j].room_comments);
+							comments = arrComments[i].comments[j].room_comments;
+							break;
+						}
+					}
+					break;
+				}
+			}
+		}
+		$scope.room_comments = comments;
 	}
+
+	$scope.saveCmtsOnTabClick = function(room_id){
+		
+		var idx_exitsingObj = -1;
+		var idx_image_obj = -1;
+		var idx_cmt_obj = -1;
+		if($scope.selectedRoom.length==1){
+			var hasCmt = false;
+			arrCommentsTmp =[];
+			arrCommentsTmp.push({"room_id":0,"room_comments":$scope.room_comments});
+			for(var i =0; i< arrComments.length; i++){
+				if(arrComments[i].image_id===$scope.img_id){
+					hasCmt = true;
+					arrComments[i].comments[0] = arrCommentsTmp;
+					break;
+				}
+			}
+			if(!hasCmt)
+				arrComments.push({"image_id":$scope.img_id,"comments":arrCommentsTmp});
+		}
+		else{
+		for(var i =0; i< arrComments.length; i++){
+			if(arrComments[i].image_id===$scope.img_id){
+				idx_image_obj = i;
+				var arr_comment = arrComments[i].comments;
+				for(var j =0; j<arr_comment.length; j++){
+					if(arr_comment[j].room_id===last_active_room_id){
+						idx_cmt_obj = j;
+						break;
+					}
+				}
+				break;
+			}
+		}
+		if(idx_image_obj===-1 && idx_cmt_obj==-1){
+			if($scope.room_comments!=""){
+				var arrCommentsTmp=[];
+				arrCommentsTmp.push({"room_id":last_active_room_id,"room_comments":$scope.room_comments})
+				arrComments.push({"image_id":$scope.img_id,"comments":arrCommentsTmp});
+			}	
+		}
+		else if(idx_image_obj>=0 && idx_cmt_obj>=0){ //Cmt exits
+			console.log('Both exits');
+			console.log(arrComments[idx_image_obj].comments[idx_cmt_obj].room_comments);
+			if((arrComments[idx_image_obj].comments[idx_cmt_obj].room_comments).localeCompare($scope.room_comments) != 0)
+				arrComments[idx_image_obj].comments[idx_cmt_obj].room_comments = $scope.room_comments;
+		}
+		else if(idx_image_obj>=0 && idx_cmt_obj===-1){ //Only image exists, no comment for the room
+			if($scope.room_comments!=""){
+				console.log('idx_image_obj is '+idx_image_obj+ ' and idx_cmt_obj = '+idx_cmt_obj);			
+				console.log('arrComments[idx_image_obj].comments is: ');
+				var arrCommentsTmp=arrComments[idx_image_obj].comments;
+				console.log(arrCommentsTmp);
+				arrCommentsTmp.push({"room_id":last_active_room_id,"room_comments":$scope.room_comments});
+				console.log('after push');
+				console.log(arrCommentsTmp);
+				arrComments[idx_image_obj].comments=arrCommentsTmp;
+			}
+		}
+		// console.log(arrComments);
+		last_active_room_id = room_id;
+		$scope.loadComments($scope.img_id,room_id);
+		}
+		console.log(arrComments);
+	}
+
+	$scope.submitComments = function(item){
+		var room_id = item.currentTarget.getAttribute("data-room-id");
+		console.log('In submit, room_id is: '+room_id);
+		$scope.saveCmtsOnTabClick(room_id);
+		console.log('After submit, final arr is: ');
+		console.log(arrComments);
+		last_active_room_id = 0;
+	}
+
+	// $scope.saveCmtsOnImage = function(room_id,arrTemp){
+	// 	var idx_exitsingObj = -1;
+
+
+	// 	if(idx_exitsingObj===-1){
+	// 		arrComments.push({"image_id":$scope.img_id, "comments":arrTemp});
+	// 	}
+	// }
+
+
+
+	// //on li click, submitFlag=0, 1 on Submit hit
+	// $scope.saveImgRoomCmts = function(room_id,submitFlag){
+
+	// 	console.log('In saveImgRoomCmts: '+submitFlag);
+	// 	console.log(typeof(submitFlag));
+	// 	if(submitFlag===1) console.log('Submitted');
+	// 	else console.log('Tab Clicked');
+		
+	// 	saveRoomComment($scope.img_id,room_id);
+		
+	// 	if(submitFlag===0){
+	// 		// showExistingComment(img_id,room_id);
+	// 		console.log('Now loading latest active room cmts');
+	// 		$scope.loadComments($scope.img_id,room_id,true);
+	// 	}
+	// 	if(submitFlag===1){
+	// 		saveImgCmts($scope.img_id);
+	// 	}
+	// }
+
+	// $scope.submitImgCmts = function(item){
+	// 	var img_id = item.currentTarget.getAttribute("data-img-id");
+ //        var last_active_rid = item.currentTarget.getAttribute("data-room-id");
+	// 	$scope.saveImgRoomCmts(active_room_tab,1);
+	// 	active_room_tab = 0;
+	// }
+
+	
+
+	// function saveRoomComment(img_id,room_id){
+	// 	console.log('Saving cmts for room_id :' +active_room_tab +' of image: '+img_id);
+	// 	var commentArr;
+	// 	// console.log(active_room_tab + " and " +room_id );
+	// 	if($scope.selectedRoom.length>1){
+	// 		var cmt_index = indexOfRoomCmt(roomCommentArr,active_room_tab,$scope.room_comments);
+	// 		console.log('exists cmt index = '+cmt_index);
+	// 		if(cmt_index==-1){
+	// 			if($scope.room_comments!=""){
+	// 				roomCommentArr.push({"room_id":active_room_tab, "room_comments":$scope.room_comments});
+	// 			}
+	// 		}
+	// 		else if(cmt_index >= 0){				
+	// 			roomCommentArr.splice(cmt_index,1);
+	// 			roomCommentArr.push({"room_id":active_room_tab, "room_comments":$scope.room_comments});
+	// 		}
+			
+			
+	// 		active_room_tab = room_id;
+	// 		console.log('After saving room cmts, roomCommentArr = ');
+	// 		console.log(roomCommentArr);
+			
+	// 	}
+	// 	//Only 1 room selected on page 1
+	// 	else{
+	// 		// roomCommentArr
+	// 	}
+
+	// }
+
+	// function saveImgCmts(img_id){
+
+	// 	//Check if cmt exits and splice and save, else
+	// 	console.log('In save of image Comment');
+	// 	var imgComments = isExistsImgCmt(img_id);
+	// 	console.log('existing cmt obj for img: '+imgComments);
+	// 	if(imgComments!=-1){
+	// 		$scope.imgCmtsArr.splice(imgComments,1);
+	// 	}
+	// 	$scope.imgCmtsArr.push({"image_id":img_id, "comments":roomCommentArr});	
+		
+		
+	// 	roomCommentArr=[];
+	// 	console.log('After saving img cmts, arr is:');
+	// 	console.log($scope.imgCmtsArr);
+
+	// }
+
+	// // $scope.showExistingComment = function(img_id, room_id){
+	// // 	var current_comment = roomCommentExists(room_id);
+	// // 	$scope.room_comments = current_comment;
+	// // }
+	// //submitFlag = true when comments submitted per image. false when room tabs clicked and cmts per room have to be saved.
+	
+
+	
+
+	// function getRoomComments(room_id){
+	// 	var comment = "";
+	// 	console.log('In getting room cmts, rommcmtsarr is:');
+	// 	console.log(roomCommentArr);
+	// 	for(var i =0;i<roomCommentArr.length;i++){
+	// 		if(roomCommentArr[i].room_id===room_id){
+	// 			comment = roomCommentArr[i].room_comments;
+	// 			break;
+	// 		}
+	// 	}
+	// 	console.log('Returning Comment: '+comment);
+	// 	return comment;
+	// }
+
+	// function getImgFirstCmt(img_id){
+	// 	var comments ="";
+	// 	console.log('In getImgFirstCmt, imgCmtArr len is: '+$scope.imgCmtsArr.length+ ' and arr is: ');
+	// 	console.log($scope.imgCmtsArr);
+	// 	console.log('Img_id passed is: '+img_id);
+	// 	for(var i =0;i<$scope.imgCmtsArr.length;i++){
+	// 		console.log('$scope.imgCmtsArr[i].image_id = '+$scope.imgCmtsArr[i].image_id);
+	// 		console.log(typeof($scope.imgCmtsArr[i].image_id));
+	// 		console.log(typeof(img_id));
+	// 		if(parseInt($scope.imgCmtsArr[i].image_id)===img_id){
+	// 			console.log('Matches..');
+	// 			console.log($scope.imgCmtsArr[i].comments[0]);
+	// 			console.log($scope.imgCmtsArr[i].comments[0].room_comments);
+	// 			comments =  $scope.imgCmtsArr[i].comments[0].room_comments;
+	// 			break;
+	// 		}
+	// 	}	
+	// 	console.log('In getImgFirstCmt, comments is: '+comments);
+	// 	return comments;
+	// }
+
+	// function getImgCmtForRoom(img_id, room_id){
+	// 	var comments ="";
+	// 	console.log('In getImgFirstCmt, imgCmtArr len is: '+$scope.imgCmtsArr.length+ ' and arr is: ');
+	// 	console.log($scope.imgCmtsArr);
+	// 	console.log('Img_id passed is: '+img_id);
+	// 	for(var i =0;i<$scope.imgCmtsArr.length;i++){
+	// 		console.log('$scope.imgCmtsArr[i].image_id = '+$scope.imgCmtsArr[i].image_id);
+	// 		console.log(typeof($scope.imgCmtsArr[i].image_id));
+	// 		console.log(typeof(img_id));
+	// 		if(parseInt($scope.imgCmtsArr[i].image_id)===img_id){
+	// 			console.log('Matches..');
+	// 			for(var j=0;j<$scope.imgCmtsArr[i].comments.length; j++){
+	// 				if($scope.imgCmtsArr[i].comments[j].room_id===room_id){
+	// 					comments = $scope.imgCmtsArr[i].comments[j].room_comments;
+	// 				}
+	// 			}
+	// 			break;
+	// 		}
+	// 	}	
+	// 	console.log('In getImgFirstCmt, comments is: '+comments);
+	// 	return comments;
+	// }
+
+	// function isExistsImgCmt(img_id){
+	// 	var cmt_index = -1;
+	// 	for(var i =0;i<$scope.imgCmtsArr.length;i++){
+	// 		if($scope.imgCmtsArr[i].image_id===img_id){
+	// 			cmt_index = i;
+	// 			break;
+	// 		}
+	// 	}	
+	// 	return cmt_index;
+	// }
+
+	
+
+	// //Return -1 if room has no comment or no change in comment
+	// function indexOfRoomCmt(roomCommentArr,room_id,commentsEntered){
+	// 	for(var i =0 ; i< roomCommentArr.length; i++){
+	// 		if(roomCommentArr[i].room_id===room_id){
+	// 			if(roomCommentArr[i].room_comments === commentsEntered){
+	// 				return -2;
+	// 			}
+	// 		return i;
+	// 		}
+	// 	}
+	// 	return -1;
+	// }
+
+
 });
 
 

@@ -14,7 +14,7 @@
 		    	result.push({"title": newObj[i].title, "style":newObj[i].style, "desc": newObj[i].desc, "image": newObj[i].image, "value":newObj[i].value});
 		    	board = boardVal;
 			}
-			console.log("In storeStyle, stored res  is: "+result)
+			// console.log("In storeStyle, stored res  is: "+result);
 		};
 
 		var getStyle = function(){

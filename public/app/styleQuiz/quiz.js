@@ -88,13 +88,17 @@ if (touch) { // remove all :hover stylesheets
 	            //     $(this).closest('.image-container').toggleClass('image-container-selected animated pulse');
 	            // }
 	            var current = $(this).find(':first-child').attr("src");
-	            
-				var swap = $(this).find(':first-child').attr("data-swap");     
-
+	           	var swap = $(this).find(':first-child').attr("data-swap");     
 				$(this).find(':first-child').attr("src", swap).attr("data-swap",current);   
+				
 				var current_img=$(this).attr('data-image');
 				$(".img-comment-box1").attr('src', current_img);
-	            
+				
+				// var current_img_id=$(this).attr('data-image-id');
+				$(".btn-comment").attr('data-img-id', $(this).attr('data-image-id'));
+				$(".btn-comment").attr('data-room-id', 0);
+				// $(".pinboard-comment-litem").attr('data-img-id', $(this).attr('data-image-id'));
+
 	            //selectedImages = $('.image-like-selected').length;
 			});	      
      
@@ -104,6 +108,10 @@ if (touch) { // remove all :hover stylesheets
 				// var current = $("#icon_comment").attr("src");
 			 //    var swap = $("#icon_comment").attr("data-swap");   
 				// $("#icon_comment").attr('src', swap).attr("data-swap",current);   
+				var pinRoomArr = $('.pinboard-comment-litem');
+				$(pinRoomArr[0]).siblings(".active").removeClass('active');
+			    $(pinRoomArr[0]).addClass('active');
+
 			});
 
 
@@ -121,6 +129,23 @@ if (touch) { // remove all :hover stylesheets
 				    $(this).siblings(".active").removeClass('active');
 			        $(this).addClass('active');
 				});
+			$(document).on('click','.btn-comment',function(e){
+				var pinRoomArr = $('.pinboard-comment-litem');
+				for(var i = 0; i<pinRoomArr.length;i++){
+				 	var curr_room_tab = pinRoomArr[i];
+				 	//var attr_class = $(curr_room_tab).attr('class');
+				 	if($(curr_room_tab).hasClass('active')){
+				 		// alert($(curr_room_tab).attr('data-room-id'));
+				 		$(this).attr('data-room-id', $(curr_room_tab).attr('data-room-id'));
+				 		// alert($(this).attr('data-room-id'));
+				 	}
+				}
+
+				//After comment is submitted, active to be attached to room id 0.
+				$(pinRoomArr[0]).siblings(".active").removeClass('active');
+			    $(pinRoomArr[0]).addClass('active');
+
+			});
 
 			$(document).on('click','.square',function(e){
 				e.preventDefault();
