@@ -1,5 +1,7 @@
+var numImgLiked = 0;
 $(document).ready(function(){
 	// alert('Doc ready');
+
 var touch = window.ontouchstart
             || (navigator.MaxTouchPoints > 0)
             || (navigator.msMaxTouchPoints > 0);
@@ -55,28 +57,20 @@ if (touch) { // remove all :hover stylesheets
 
 	      	$(document).on('click', '.image-like', function(e) {
         		e.preventDefault();
-        		//alert($(this).attr("data-images-liked"));
-
-        		//Unclicking a selecte image
-        		// if($(this).attr("data-images-liked") == 3 && $(this).hasClass('image-like-selected')){
-        		// 	$(this).toggleClass('image-like-selected').toggleClass('image-like');
-        		// }
-
-
-        		// if($(this).attr("data-images-liked") == 3 && $(this).hasClass('image-like')){
-        		// 	$(this).toggleClass('image-like-selected').toggleClass('image-like');
-        		// }
-
-        		// else {
+        		//Deselecting a selected image
+        		if($(".glyphicon", this).hasClass('glyphicon-heart')){
+        			$(this).toggleClass('image-like-selected');
+        			$(".glyphicon", this).toggleClass('glyphicon-heart-empty').toggleClass('glyphicon-heart');	
+        			numImgLiked-=1;
+        			return;
+        		}
+    			if(numImgLiked<3){
 	        		$(this).toggleClass('image-like-selected');
-	            	$(".glyphicon", this).toggleClass('glyphicon-heart-empty').toggleClass('glyphicon-heart');
-            	//}
-
-
-            	// else if($(this).hasClass('image-like-selected')){
-            	// 	$(this).toggleClass('image-like-selected');
-	            // 	$(".glyphicon", this).toggleClass('glyphicon-heart');
-            	// }
+	        		numImgLiked+=1;
+	        		$(".glyphicon", this).toggleClass('glyphicon-heart-empty').toggleClass('glyphicon-heart');	
+	        	}
+	            // $(".glyphicon", this).toggleClass('glyphicon-heart-empty').toggleClass('glyphicon-heart');
+            	
         	});
 
 
