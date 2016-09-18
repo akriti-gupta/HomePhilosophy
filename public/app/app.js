@@ -11,10 +11,11 @@ angular.module('app')
 				};
 				$locationProvider.html5Mode(true);
 				$routeProvider
-					.when('/',{templateUrl: 'app/main.html', controller: 'MainController'})
+					.when('/',{templateUrl: 'app/home/main.html', controller: 'MainController'})
+					.when('/portfolio',{templateUrl: 'app/home/portfolio.html'})
 					.when('/login',{templateUrl: 'app/account/login.html', controller: 'LoginController'})
 					.when('/style-quiz',{templateUrl: 'app/styleQuiz/styleQuiz.html', controller: 'QuizController'})
-					.when('/op-process',{templateUrl: 'app/process.html'})					
+					.when('/op-process',{templateUrl: 'app/home/process.html'})					
 					.when('/tell-us-more',{templateUrl: 'app/moreDetails.html', controller: 'SaveDetails'})
 					.when('/admin/users',{templateUrl: 'app/admin/userList.html', 
 						controller: 'UserListCtrl',resolve: routeRoleChecks.admin})
