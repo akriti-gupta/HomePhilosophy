@@ -240,6 +240,21 @@
         .pin-comment-img-ctr{
             padding-left: 0px;
         }
+
+         .slick-slide:not(.slick-center) {
+            transform: scale(0.8,1);  
+        }
+        .slick-prev{
+            left:0px;
+            top:35%;
+        }
+        .slick-next{
+            right:0px;
+            top:35%;
+        }
+        .slide img{
+            border: 10px solid white;
+        }
        
     }
     /* Small Devices, Tablets */

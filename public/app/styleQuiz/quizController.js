@@ -58,6 +58,8 @@ angular.module("app")
  //            angularGridInstance.gallery.refresh();
  //        }
 
+
+
 // TODO: Create a JSON file and read in the service. No hardcoding to be done.
 
 
