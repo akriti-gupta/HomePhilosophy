@@ -73,8 +73,10 @@
 
 }
 
-.numRooms{
-  width:35px;border:0.5px solid rgb(149, 149, 149);background-color:#fff;
+.num-rooms{
+  width:35px;
+  border:0.5px solid rgb(149, 149, 149);
+  background-color:#fff;
 }
 
 .qz-row-dsg, .qz-row{
