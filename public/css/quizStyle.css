@@ -73,6 +73,10 @@
 
 }
 
+.numRooms{
+  width:35px;border:0.5px solid rgb(149, 149, 149);background-color:#fff;
+}
+
 .qz-row-dsg, .qz-row{
   position:relative;
   width:78%;
@@ -412,8 +416,9 @@ filter:alpha(opacity=50); /* for <= IE 8 */
 
 .btn-comment{
   margin-top:8px;
-  /*margin-left: 235px;*/
-  padding:10px 20px 8px;
+  margin-left: 70%;
+  /*padding:10px 20px 8px;*/
+  padding:8px 12px;
   letter-spacing:1px;
 }
 

@@ -41,6 +41,22 @@ angular.module("app")
 	var roomCommentArr = [];
 	$scope.imgCmtsArr = [];
 	$scope.image_id=-1;
+	$scope.numMaster = 1;
+
+	 $scope.units = [
+         {'id': 1, 'label': '1'},
+         {'id': 2, 'label': '2'},
+         {'id': 3, 'label': '3'},
+         {'id': 4, 'label': '4'},
+         {'id': 5, 'label': '5'},
+      ];
+
+   $scope.numMaster= $scope.units[0];
+   $scope.numLiving= $scope.units[0];
+   $scope.numKids= $scope.units[0];
+   $scope.numOffice= $scope.units[0];
+   $scope.numDining= $scope.units[0];
+   $scope.numBeds= $scope.units[0];
 
 // alert('start of ctrl: disable is'+$scope.disable);
  // imageService.loadImages().then(function(data){
@@ -963,11 +979,12 @@ angular.module("app")
 			case 1: //quizResult.clearStyle();
 					
 					// alert($scope.selectedRoom);
+					saveRoomInfo();
 					scrollTop();
 					break; 
 
-			 case 2: $location.path('/op-process');
-					 break;
+			 case 2: //$location.path('/op-process');
+					 //break;
 
 			case 3: 
 					
@@ -1299,6 +1316,11 @@ angular.module("app")
 		setTimeout(function() {
    		 $(window).scrollTop(50);  
 		}, 0);
+	}
+
+	function saveRoomInfo(){
+		var numRooms =[];
+		alert($scope.numMaster.id);
 	}
 
 	$scope.isActive = function(index){
