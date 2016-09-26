@@ -42,13 +42,15 @@
 
           
             <span style="padding-left:99%;">
-              <SELECT NAME="numRooms" style="width:35px;border:0.5px solid rgb(149, 149, 149);background-color:#fff">
+              <!-- <SELECT NAME="numRooms" ng-model="numMaster" class="numRooms">
                 <OPTION SELECTED> 1 </OPTION>
                 <OPTION> 2</OPTION>
                 <OPTION> 3</OPTION>
                 <OPTION> 4</OPTION>
                 <OPTION> 5</OPTION>
-              </SELECT>
+              </SELECT> -->
+              <select ng-model="numMaster" ng-options="opt as opt.label for opt in units ">
+                </select>
             </span>
           </div>
           </div>
@@ -67,13 +69,15 @@
           </div>
           <p class="font-sansRegular fs-10px" style="padding-top:20px;text-align:right;color:rgb(161, 161, 161);">
             <span>
-              <SELECT NAME="numRooms" style="width:35px;border:0.5px solid rgb(149, 149, 149);background-color:#fff">
+              <!-- <SELECT NAME="numRooms" id="numLiving" class="numRooms">
                 <OPTION SELECTED> 1 </OPTION>
                 <OPTION> 2</OPTION>
                 <OPTION> 3</OPTION>
                 <OPTION> 4</OPTION>
                 <OPTION> 5</OPTION>
-              </SELECT>
+              </SELECT> -->
+              <select ng-model="numLiving" ng-options="opt as opt.label for opt in units ">
+                </select>
             </span>
           </p>
         </div>
@@ -88,13 +92,15 @@
           </div>
           <p class="font-sansRegular fs-10px" style="text-align:right;padding-top:20px;color:rgb(161, 161, 161);">
             <span>
-              <SELECT NAME="numRooms" style="width:35px;border:0.5px solid rgb(149, 149, 149);background-color:#fff">
+              <!-- <SELECT NAME="numRooms" id="numKids" class="numRooms">
                 <OPTION SELECTED> 1 </OPTION>
                 <OPTION> 2</OPTION>
                 <OPTION> 3</OPTION>
                 <OPTION> 4</OPTION>
                 <OPTION> 5</OPTION>
-              </SELECT>
+              </SELECT> -->
+              <select ng-model="numKids" ng-options="opt as opt.label for opt in units ">
+                </select>
             </span>
           </p>
         </div>
@@ -116,13 +122,15 @@
           </div>
               <p class="font-sansRegular fs-10px" style="text-align:right;padding-top:20px;color:rgb(161, 161, 161);">
             <span>
-              <SELECT NAME="numRooms" style="width:35px;border:0.5px solid rgb(149, 149, 149);background-color:#fff">
+              <!-- <SELECT NAME="numRooms" id="numOffice" class="numRooms">
                 <OPTION SELECTED> 1 </OPTION>
                 <OPTION> 2</OPTION>
                 <OPTION> 3</OPTION>
                 <OPTION> 4</OPTION>
                 <OPTION> 5</OPTION>
-              </SELECT>
+              </SELECT> -->
+              <select ng-model="numOffice" ng-options="opt as opt.label for opt in units ">
+                </select>
             </span>
           </p>
           </div>
@@ -138,13 +146,15 @@
           </div>
               <p class="font-sansRegular fs-10px" style="text-align:right;padding-top:20px;color:rgb(161, 161, 161);">
             <span>
-              <SELECT NAME="numRooms" style="width:35px;border:0.5px solid rgb(149, 149, 149);background-color:#fff">
+              <!-- <SELECT NAME="numRooms" id="numDining" class="numRooms">
                 <OPTION SELECTED> 1 </OPTION>
                 <OPTION> 2</OPTION>
                 <OPTION> 3</OPTION>
                 <OPTION> 4</OPTION>
                 <OPTION> 5</OPTION>
-              </SELECT>
+              </SELECT> -->
+              <select ng-model="numDining" ng-options="opt as opt.label for opt in units ">
+                </select>
             </span>
           </p>
           </div>
@@ -159,14 +169,16 @@
             <p class="font-montserrat txt-upper">Bedroom</p>
           </div>
              <p class="font-sansRegular fs-10px" style="text-align:right;padding-top:20px;color:rgb(161, 161, 161);">
-            <span><a href="#">
-              <SELECT NAME="numRooms" style="width:35px;border:0.5px solid rgb(149, 149, 149);background-color:#fff">
+            <span><!-- <a href="#">
+              <SELECT NAME="numRooms" id="numBeds" class="numRooms">
                 <OPTION SELECTED> 1 </OPTION>
                 <OPTION> 2</OPTION>
                 <OPTION> 3</OPTION>
                 <OPTION> 4</OPTION>
                 <OPTION> 5</OPTION>
-              </SELECT></a>
+              </SELECT></a> -->
+              <select ng-model="numBeds" ng-options="opt as opt.label for opt in units ">
+                </select>
             </span>
           </p>
           </div>
@@ -217,7 +229,7 @@
      <div ng-repeat="styles in stylePref track by $index">
       <div class="row qz-row-dsg">
         <div class="col-md-4 col-xs-4" ng-repeat="style in styles">
-          <a href="#" data-room-type="1" ng-click="saveSelection(style.image_id)">
+          <a href="/login" data-room-type="1" ng-click="saveSelection(style.image_id)">
             <div class="text-dsg fs-16px">
               <div>{{style.image_desc}}</div>
             </div>
@@ -384,10 +396,12 @@
 
     <div id="pin-text">
       <p class="font-playfair-bold fs-22px txt-upper">Design Inspiration </p>
-      <p style="padding-top:10px;" class="font-sansRegular fs-16px">Choose your favourite <span class="font-sansBold">3 images</span> for our designer to use as reference. </p>
+      <p style="padding-top:10px;" class="font-sansRegular fs-16px image-like-selected"><!-- Choose your favourite <span class="font-sansBold">3 images</span> for our designer to use as reference. --> 
+    Select <span class="glyphicon glyphicon-heart"></span> up to 3 of your favourite images below for our designer to use as a reference
+      </p>
       <p style="padding-top:10px;margin-bottom:0px;color:rgb(77,77,77);" class="font-sansRegular fs-14px">Love the colours of a living room image and want us to use it when we design your bedroom?</p>
       <p class="font-sansRegular fs-14px" style="color:rgb(77,77,77);">Just add a comment to let us know and we will ensure to incorporate it.</p>
-      <p style="padding-bottom:40px;color:rgb(77,77,77);"><a href="#" ng-click="saveSelection(-1);"> Skip and sign up to see your results.</a></p>
+      <p style="padding-bottom:40px;color:rgb(77,77,77);"><a href="#" ng-click="saveSelection(-1);" style="border-bottom:1px solid;"> Skip and sign up to see your results.</a></p>
     </div>
 
     <ul  class="dynamic-grid txt-center grid-pos" angular-grid="board" ag-grid-width="300" ag-gutter-size="40" ag-id="gallerypin" ag-refresh-on-img-load="true" >
