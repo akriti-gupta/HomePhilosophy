@@ -79,6 +79,9 @@
   background-color:#fff;
 }
 
+.num-rooms:focus{
+  outline: none;
+}
 .qz-row-dsg, .qz-row{
   position:relative;
   width:78%;
