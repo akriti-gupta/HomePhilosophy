@@ -29,6 +29,7 @@ if (touch) { // remove all :hover stylesheets
 //Image/ Heart Click on Pinterest Board
 
 			$(document).on('click','.thumbnail',function(e){
+				//alert('Clicked');
 				e.preventDefault();
 				var isSelected=false;
 				if($(this).hasClass('style-img-selected')){
@@ -42,6 +43,11 @@ if (touch) { // remove all :hover stylesheets
 				}
 			});
 
+$(document).on('click','.num-rooms',function(e){
+				//alert('Clicked on select box');
+				e.stopPropagation();
+				
+			});
 			$(document).on('click','.qz-row a img',function(e){
 				e.preventDefault();
 						// $(".qz-row a img").removeClass('style-img-selected');siblings
