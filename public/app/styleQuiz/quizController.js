@@ -41,7 +41,6 @@ angular.module("app")
 	var roomCommentArr = [];
 	$scope.imgCmtsArr = [];
 	$scope.image_id=-1;
-	$scope.numMaster = 1;
 
 	 $scope.units = [
          {'id': 1, 'label': '1'},
@@ -51,12 +50,13 @@ angular.module("app")
          {'id': 5, 'label': '5'},
       ];
 
-   $scope.numMaster= $scope.units[0];
-   $scope.numLiving= $scope.units[0];
-   $scope.numKids= $scope.units[0];
-   $scope.numOffice= $scope.units[0];
-   $scope.numDining= $scope.units[0];
-   $scope.numBeds= $scope.units[0];
+    
+   $scope.master= $scope.units[0];
+   $scope.living= $scope.units[0];
+   $scope.kids= $scope.units[0];
+   $scope.office= $scope.units[0];
+   $scope.dining= $scope.units[0];
+   $scope.bedroom= $scope.units[0];
 
 // alert('start of ctrl: disable is'+$scope.disable);
  // imageService.loadImages().then(function(data){
@@ -904,7 +904,7 @@ angular.module("app")
 	  				image_name: "Bold"
 	    		}]];
 
-	    	$scope.roomNames = ["Test","Master room","Living room","Kids room","Home office","Dining room","Bedroom"];
+	    	//$scope.roomNames = ["Test","Master room","Living room","Kids room","Home office","Dining room","Bedroom"];
 
 	$scope.roomArr = [
 				[{
@@ -1253,22 +1253,31 @@ angular.module("app")
 		}
 	}
 
-	$scope.saveSelection = function (imageId) {
+	$scope.saveSelection = function (imageId,roomName,roomDispName) {
+		console.log('Save selections called');
 		if($scope.pagenum==1){ // Allow multiple room selections
 			
 			//If room already exists, user clicked a room icon twice to deselect, remove image ID from array
-			var index = $scope.selectedRoom.indexOf(imageId);
+			//var index = $scope.selectedRoom.indexOf(imageId);
+			var index = -1;
+			for(var i in $scope.selectedRoom){
+				if($scope.selectedRoom[i].room_id===imageId){
+					index = i;
+					break;
+				}
+			}
 			// console.log("index is: "+index);
 			if(index>-1){
 				$scope.selectedRoom.splice(index, 1);
 				// console.log("After splicing, room arr is: "+$scope.selectedRoom);
 			}
 			
-				$scope.selectedRoom.push(imageId);
+				//$scope.selectedRoom.push(imageId);
+				else $scope.selectedRoom.push({"room_id":imageId,"room_name":roomName,"room_num":1,"room_disp_name":roomDispName});
 				// console.log("After new image, room arr is: "+$scope.selectedRoom);
 			
 			if($scope.selectedRoom.length>=1){
-				$scope.disable=false;
+				$scope.disable=false
 			}
 			else{
 				$scope.disable=true;
@@ -1319,8 +1328,19 @@ angular.module("app")
 	}
 
 	function saveRoomInfo(){
-		var numRooms =[];
-		alert($scope.numMaster.id);
+		var roomDsgArr =[];
+		var room = 'numMaster';
+		console.log("Rooms Selected are: ");
+		console.log($scope.selectedRoom);
+		// console.log($scope[room]);
+		for(var i in $scope.selectedRoom){
+
+		console.log($scope[$scope.selectedRoom[i].room_name]);
+			$scope.selectedRoom[i].room_num = $scope[$scope.selectedRoom[i].room_name];
+			
+		}
+		
+		console.log($scope.selectedRoom);
 	}
 
 	$scope.isActive = function(index){

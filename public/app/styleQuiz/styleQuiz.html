@@ -32,7 +32,7 @@
       <div class="col-sm-4 col-md-4">
         <div class="thumbnail">
           <img src="images/rooms/master.png" data-room-id="1" alt="master bedroom">
-          <a href="#" ng-click="saveSelection(1)"><span class="tag"></span></a>
+          <a href="#" ng-click="saveSelection(1,'master','Master Room')"><span class="tag"></span></a>
           <div class="caption txt-center">
             <p class="font-montserrat txt-upper">Master Bedroom</p>
              <p class="font-sansRegular" style="padding-top:20px;color:rgb(161, 161, 161);font-size:9px;">
@@ -49,7 +49,7 @@
                 <OPTION> 4</OPTION>
                 <OPTION> 5</OPTION>
               </SELECT> -->
-              <select ng-model="numMaster" ng-options="opt as opt.label for opt in units" class="num-rooms">
+              <select ng-model="master" ng-options="opt as opt.label for opt in units" class="num-rooms">
                 </select>
             </span>
           </div>
@@ -63,7 +63,7 @@
       <div class="col-sm-4 col-md-4">
         <div class="thumbnail">
           <img src="images/rooms/living.png" alt="living room">
-          <a href="#" ng-click="saveSelection(2)"><span class="tag"></span></a>
+          <a href="#" ng-click="saveSelection(2,'living','Living Room')"><span class="tag"></span></a>
           <div class="caption txt-center">
             <p class="font-montserrat txt-upper">Living Room</p>
           </div>
@@ -76,7 +76,7 @@
                 <OPTION> 4</OPTION>
                 <OPTION> 5</OPTION>
               </SELECT> -->
-              <select ng-model="numLiving" ng-options="opt as opt.label for opt in units" class="num-rooms">
+              <select ng-model="living" ng-options="opt as opt.label for opt in units" class="num-rooms">
                 </select>
             </span>
           </p>
@@ -86,7 +86,7 @@
       <div class="col-sm-4 col-md-4">
         <div class="thumbnail">
           <img src="images/rooms/kids.png" alt="kids room">
-          <a href="#" ng-click="saveSelection(3)"><span class="tag"></span></a>
+          <a href="#" ng-click="saveSelection(3,'kids','Kids Room')"><span class="tag"></span></a>
           <div class="caption txt-center">
             <p class="font-montserrat txt-upper">Kids Room</p>
           </div>
@@ -99,7 +99,7 @@
                 <OPTION> 4</OPTION>
                 <OPTION> 5</OPTION>
               </SELECT> -->
-              <select ng-model="numKids" ng-options="opt as opt.label for opt in units" class="num-rooms">
+              <select ng-model="kids" ng-options="opt as opt.label for opt in units" class="num-rooms">
                 </select>
             </span>
           </p>
@@ -115,8 +115,8 @@
     <div class="row qz-row-room">
       <div class="col-sm-4 col-md-4">
         <div class="thumbnail">
-          <a href="#" ng-click="saveSelection(4)"><span class="tag"></span></a>
-          <img src="images/rooms/homeOffice.png" alt="dining room">
+          <a href="#" ng-click="saveSelection(4,'office','Home Office')"><span class="tag"></span></a>
+          <img src="images/rooms/homeOffice.png" alt="Home Office">
           <div class="caption txt-center">
             <p class="font-montserrat txt-upper">Home Office</p>
           </div>
@@ -129,7 +129,7 @@
                 <OPTION> 4</OPTION>
                 <OPTION> 5</OPTION>
               </SELECT> -->
-              <select ng-model="numOffice" ng-options="opt as opt.label for opt in units" class="num-rooms">
+              <select ng-model="office" ng-options="opt as opt.label for opt in units" class="num-rooms">
                 </select>
             </span>
           </p>
@@ -139,7 +139,7 @@
       
       <div class="col-sm-4 col-md-4">
         <div class="thumbnail">
-          <a href="#" ng-click="saveSelection(5)"><span class="tag"></span></a>
+          <a href="#" ng-click="saveSelection(5,'dining','Dining Room')"><span class="tag"></span></a>
           <img src="images/rooms/dining.png" alt="dining room">
           <div class="caption txt-center">
             <p class="font-montserrat txt-upper">Dining Room</p>
@@ -153,7 +153,7 @@
                 <OPTION> 4</OPTION>
                 <OPTION> 5</OPTION>
               </SELECT> -->
-              <select ng-model="numDining" ng-options="opt as opt.label for opt in units" class="num-rooms">
+              <select ng-model="dining" ng-options="opt as opt.label for opt in units" class="num-rooms">
                 </select>
             </span>
           </p>
@@ -163,7 +163,7 @@
       
       <div class="col-sm-4 col-md-4">
         <div class="thumbnail">
-          <a href="#" ng-click="saveSelection(6)"><span class="tag"></span></a>
+          <a href="#" ng-click="saveSelection(6,'bedroom','Bedroom')"><span class="tag"></span></a>
           <img src="images/rooms/bedroom.png" alt="bedroom">
          <div class="caption txt-center">
             <p class="font-montserrat txt-upper">Bedroom</p>
@@ -177,7 +177,7 @@
                 <OPTION> 4</OPTION>
                 <OPTION> 5</OPTION>
               </SELECT></a> -->
-              <select ng-model="numBeds" ng-options="opt as opt.label for opt in units" class="num-rooms" >
+              <select ng-model="bedroom" ng-options="opt as opt.label for opt in units" class="num-rooms" >
                 </select>
             </span>
           </p>
@@ -354,7 +354,7 @@
             <div style="position:relative;width:90%;margin:0 auto;text-align:center;" ng-show="selectedRoom.length>1">
               
               <ul class="comment-room-list" style="margin-bottom:20px;" >
-                <li ng-repeat="selRoom in selectedRoom track by $index" class="pinboard-comment-litem" ng-class="isActive($index)" data-room-id="{{$index}}"><a href="#"  ng-click="saveCmtsOnTabClick($index)">{{roomNames[selRoom]}}</a></li>
+                <li ng-repeat="selRoom in selectedRoom track by $index" class="pinboard-comment-litem" ng-class="isActive($index)" data-room-id="{{$index}}"><a href="#"  ng-click="saveCmtsOnTabClick($index)">{{selRoom.room_disp_name}}</a></li>
               </ul>
             
             </div>
