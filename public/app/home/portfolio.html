@@ -185,8 +185,9 @@
 <div class="divider" style="border-top:2px solid rgb(47, 185, 175);"></div>
 
 <script type="text/javascript">
+
 $('.center').slick({
-  initialSlide:1,
+  initialSlide: portfolioImg,    
   arrows: false,
   centerMode: true,
   infinite: true,
@@ -206,5 +207,10 @@ $('.center').slick({
     }
   ]
 });
-
+var currentSlide = $('.center').slick('slickCurrentSlide');
+if(!($('div[data-slick-index="'+currentSlide +'"]').hasClass('slick-active'))){
+  $('div[data-slick-index="'+currentSlide +'"]').addClass('slick-active');
+  $('div[data-slick-index="'+currentSlide +'"]').addClass('slick-center');
+  $('div[data-slick-index="'+currentSlide +'"]').attr('aria-hidden',"false");
+}
 </script>

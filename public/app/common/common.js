@@ -1,4 +1,4 @@
-
+var portfolioImg = 0;
 function displayDropDown() {
     document.getElementsByClassName("topnav")[0].classList.toggle("responsive");
 } 
@@ -20,9 +20,15 @@ $(window).resize(function(){
    	}
 });
 
-
+$(document).on('click','#portfolio-link',function(e){
+  portfolioImg = 0;
+   $('.center').slick('slickGoTo',0); 
+});
 $(document).on('click','.design',function(e){
-  $('.center').slick('slickGoTo',$(this).attr('data-img-id')); 
+    portfolioImg = $(this).attr('data-img-id');
+    $('.center').slick('slickGoTo',$(this).attr('data-img-id')); 
+    
+    
 });
 
 
