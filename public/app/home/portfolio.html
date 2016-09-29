@@ -1,16 +1,13 @@
 <header id="site_header">
   <a href="/"><div class="hp-logo"></div></a>
-    <!-- <a href="/"><img src="images/logo_header.png" /></a> -->
   
   <div id="hp-nav">
       <ul class="topnav">
-          <!-- <li class="menu-list plist-border"> -->
           <li class="menu-list">
             <ul class="submenu-list">
               <li><a href="#">About us</a></li>
               <li><a href="#">FAQ</a></li>
             </ul>
-            <!-- <a href="/op-process">How it works</a> -->
             <a href="#">How it works</a>
          </li>
       <li><a href="#">Pricing</a></li>
@@ -32,7 +29,7 @@
 <p style="background-color:#000;padding:20px 0px;margin:0;color:rgb(248,248,248);font-family:PlayfairDisplay-Regular;font-size:20px;">- THE HOME PHILOSOPHY PORTFOLIO -</p>
 <div class="content">
   <div class="center">
-    <div id="p1">
+    <div>
       <div class="slide">
        <p style="font-family:PlayfairDisplay-Regular;font-size:20px;">Contemporary Cool</p>
         <img src="images/portfolio/1.png" />
@@ -51,9 +48,9 @@
       </div>
     </div>
 
-    <div id="p2">
+    <div>
       <div class="slide">
-      <p style="font-family:PlayfairDisplay-Regular;font-size:20px;">New Take on Classics</p>
+      <p style="font-family:PlayfairDisplay-Regular;font-size:20px;">Floral Elegance</p>
         <img src="images/portfolio/2.png" />
          <div class="portfolio-information">
           <aside class="stats">
@@ -91,13 +88,8 @@
     
     <div>
       <div class="slide">
-        <p style="font-family:PlayfairDisplay-Regular;font-size:20px;"> Floral Elegance</p>
+        <p style="font-family:PlayfairDisplay-Regular;font-size:20px;"> Layering with Textures</p>
         <img src="images/portfolio/4.png" />
-       
-        <!-- <div class="portfolio-caption"><b> Package:</b>&nbsp; Room Design</div>
-        <div style="padding: 30px 10px; background-color: white;"> The brief for this design space was to make the living room both comfortable to relax in, and fun to entertain friends. With a pop of colour and a contemporary geometric print rug to uplift the space, the living room transforms into effortlessly cool space.</div>
-      </div> -->
-
         <div class="portfolio-information">
           <aside class="stats">
             <div class="stat-lines">
@@ -150,7 +142,7 @@
     </div>
     <div>
       <div class="slide">
-      <p style="font-family:PlayfairDisplay-Regular;font-size:20px;"> Bright Crisp Neutrals</p>
+      <p style="font-family:PlayfairDisplay-Regular;font-size:20px;"> New Take on Classics</p>
        <img src="images/portfolio/7.png" />
         <div class="portfolio-information">
           <aside class="stats">
@@ -193,8 +185,8 @@
 <div class="divider" style="border-top:2px solid rgb(47, 185, 175);"></div>
 
 <script type="text/javascript">
-  
 $('.center').slick({
+  initialSlide:1,
   arrows: false,
   centerMode: true,
   infinite: true,
@@ -214,30 +206,5 @@ $('.center').slick({
     }
   ]
 });
-// $('.center').slickGoTo({index : 2, dontAnimate : false}); 
-
-
-// $('.center').slick({
-//   arrows: false,
-//   centerMode: true,
-//   infinite: true,
-//   centerPadding: '250px',
-//   slidesToShow: 1,
-//   speed: 500,
-//   dots: false,
-//   focusOnSelect: true,
-//   responsive: [
-//     {
-//       breakpoint: 480,
-//       settings: {
-//         slidesToShow: 1,
-//         slidesToScroll: 1,
-//         dots: false,
-//         arrows: true,
-//         focusOnSelect: false
-//       }
-//     }
-//   ]
-// });
 
 </script>

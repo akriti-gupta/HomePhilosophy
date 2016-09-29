@@ -83,6 +83,10 @@ $(document).on('click','.num-rooms',function(e){
 			$(document).on('click', '.comment', function(e) {
                 
                 e.preventDefault();
+                var imgLiked = true;
+                if(imgLiked){
+                	 $("#commentModal").modal('show');
+                }
 	           
 	            // if($(document).width() > 736) {
 	            //     $(this).closest('.image-container').toggleClass('image-container-selected animated pulse');
