@@ -1,3 +1,4 @@
+
 function displayDropDown() {
     document.getElementsByClassName("topnav")[0].classList.toggle("responsive");
 } 
@@ -20,14 +21,10 @@ $(window).resize(function(){
 });
 
 
-// $(document).on('mouseover', '.submenu-list', function(e) {
-// 	e.preventDefault();
-// 	$(".menu-list").removeClass('plist-border');
-// });
-// $(document).on('mouseout', '.submenu-list', function(e) {
-// 	e.preventDefault();
-// 	$(".menu-list").addClass('plist-border');
-// });
+$(document).on('click','.design',function(e){
+  $('.center').slick('slickGoTo',$(this).attr('data-img-id')); 
+});
+
 
 
 		
