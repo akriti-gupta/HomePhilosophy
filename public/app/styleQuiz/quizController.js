@@ -41,6 +41,7 @@ angular.module("app")
 	var roomCommentArr = [];
 	$scope.imgCmtsArr = [];
 	$scope.image_id=-1;
+	$scope.roomSelectionArr = [];
 
 	 $scope.units = [
          {'id': 1, 'label': '1'},
@@ -1331,16 +1332,24 @@ angular.module("app")
 		var roomDsgArr =[];
 		var room = 'numMaster';
 		console.log("Rooms Selected are: ");
-		console.log($scope.selectedRoom);
 		// console.log($scope[room]);
 		for(var i in $scope.selectedRoom){
-
-		console.log($scope[$scope.selectedRoom[i].room_name]);
 			$scope.selectedRoom[i].room_num = $scope[$scope.selectedRoom[i].room_name];
 			
 		}
 		
 		console.log($scope.selectedRoom);
+
+		for (var i in $scope.selectedRoom){
+			if($scope.selectedRoom[i].room_num.id > 1){
+				for(var j=1; j<= $scope.selectedRoom[i].room_num.id; j++){
+					$scope.roomSelectionArr.push($scope.selectedRoom[i].room_disp_name+' '+j);
+				}
+			}
+			else{
+				$scope.roomSelectionArr.push($scope.selectedRoom[i].room_disp_name);
+			}
+		}
 	}
 
 	$scope.isActive = function(index){

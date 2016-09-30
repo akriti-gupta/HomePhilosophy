@@ -351,10 +351,10 @@
           </div>
           
           <div class="modal-body comment-modal-body">
-            <div style="position:relative;width:90%;margin:0 auto;text-align:center;" ng-show="selectedRoom.length>1">
+            <div style="position:relative;width:90%;margin:0 auto;text-align:center;" ng-show="roomSelectionArr.length>1">
               
               <ul class="comment-room-list" style="margin-bottom:20px;" >
-                <li ng-repeat="selRoom in selectedRoom track by $index" class="pinboard-comment-litem" ng-class="isActive($index)" data-room-id="{{$index}}"><a href="#"  ng-click="saveCmtsOnTabClick($index)">{{selRoom.room_disp_name}}</a></li>
+                <li ng-repeat="selRoom in roomSelectionArr track by $index" class="pinboard-comment-litem" ng-class="isActive($index)" data-room-id="{{$index}}"><a href="#"  ng-click="saveCmtsOnTabClick($index)">{{selRoom}}</a></li>
               </ul>
             
             </div>
@@ -410,11 +410,11 @@
            <img src="{{pic.isrc}}" class="grid-img" data-actual-width = "{{pic.actualWidth}}"  data-actual-height="{{pic.actualHeight}}" data-img-credit="{{pic.imgCredit}}"/>
         </a>
           
-        <a href="#" class="comment" data-image="{{pic.isrc}}" data-image-id={{$index}} data-toggle="modal"  ng-click="loadComments($index,0);">
+        <a href="#" class="comment" data-image="{{pic.isrc}}" data-image-id={{$index}} data-toggle="modal" ng-click="loadComments($index,0);">
           <img src="images/styles/styleBoards/comment.png" id="icon_comment"  class="image-status" style="right:15%;" data-swap="images/styles/styleBoards/sel_comment.png">
         </a>     
 
-        <a href="#" class="image-like" ng-click="imageLiked(pic.isrc)" data-ordinal="0" data-image-id="245" data-images-liked="{{arrImgLiked.length}}">  
+        <a href="#" class="image-like" ng-click="imageLiked(pic.isrc)" data-ordinal="0" data-image-id={{$index}}>  
           <span class="glyphicon glyphicon-heart-empty image-status" style="right:5%;"></span>   
         </a> 
       </li>
@@ -457,7 +457,7 @@
       <p class="font-playfair result-title">{{item.title}} <span class="txt-upper fs-22px font-sansRegular">{{item.style}}</span></p>
       <p class="font-sansRegular result-desc"> {{item.desc}}</p>
         <img ng-src="{{item.image}}" style="width:100%;"/>
-      <p ng-if="userStyle.length==1" class="font-playfair fs-12px" style="text-align:right;color:rgb(77, 77, 77);">Not really your style? Re-take the <a href="/style-quiz"  ng-click="retakeQuiz()"><u>Style Quiz</u></a></p>
+      <p ng-if="userStyle.length==1" class="font-playfair fs-12px" style="text-align:right;color:rgb(77, 77, 77);">Not really your style? Re-take the <a href="/style-quiz" id="start-quiz" ng-click="retakeQuiz()"><u>Style Quiz</u></a></p>
     </div>
 
     <div style="width:90%;margin:0 auto;" ng-repeat="item in userStyle.slice(1,entries.length)" ng-if="userStyle.length==2">
