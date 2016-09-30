@@ -255,10 +255,18 @@
 		            	...
 		        	</label>
 					<button type="submit" class="form-info btn-start-quiz upload-btn font-sansRegular txt-upper col-lightcyan fs-16px" ng-click="uploadFile()" ng-disabled="uploadBtn1" >Upload</button> <label id="fileUploadStatus" ng-bind="filestatus"></label>
-				
-
+	
 
 	      	</div>
+			
+			<div class="form-group">
+				<label for="urlImages" class="col-sm-2 control-label" style="text-align:left;padding:20px 0px 0px;width:100%;">URL</label>
+    			<input type="url" class="form-info form-control" name="urlImages" ng-model="url" 
+				style="width:53.5%;float:left;" />
+				<!-- onchange="angular.element(this).scope().urlToShare(this)" -->
+	        	<button type="submit" class="form-info btn-start-quiz upload-btn font-sansRegular txt-upper col-lightcyan fs-16px" ng-click="shareURL()" ng-disabled="uploadBtn3" style="padding:11px 18px;">Share</button> <label id="shareURL" ng-bind="urlStatus" style="padding-top:20px;padding-left:10px;"></label>
+	    				
+  			</div>
 
 	      	<div class="form-group" name="uploadFurn" style="clear:both;padding-top:30px;">
 	        	<div class="fs-18px">10. Upload images of any existing furniture or accessories you want us to incorporate in the design?</div>
