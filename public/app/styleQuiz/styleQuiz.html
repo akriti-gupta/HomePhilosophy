@@ -1,23 +1,19 @@
 
 <header id="site_header">
   <a href="/"><div class="hp-logo"></div></a> 
-   <!--  <a href="/">
-            <img src="images/logo_header.png" />
-        </a> -->
-   
-    <div class="qz-mnu">
-      <ul>
-        <li style="padding-bottom:70px;"><a href="#"><img src="images/menuIcon.png" width="60%" height="auto"></a>
-          <ul class="qz-sub-list">
-            <li ng-controller="LoginController" ng-hide="identity.isAuthenticated()"><a href="/login">Sign In</a></li>
-            <!-- <li ng-controller="LoginController" ng-show="identity.isAuthenticated()"><a ng-click="signout()">Sign Out</a></li> -->
-            <li ><a href="#">How it works</a></li>
-            <li><a href="#">Contact us</a></li>
-            <li ng-show="identity.currentUser.isAdmin()"><a href="/admin/users">User Admin </a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
+  <div class="qz-mnu">
+    <ul>
+      <li style="padding-bottom:70px;"><a href="#"><img src="images/menuIcon.png" width="60%" height="auto"></a>
+        <ul class="qz-sub-list">
+          <li ng-controller="LoginController" ng-hide="identity.isAuthenticated()"><a href="/login">Sign In</a></li>
+          <!-- <li ng-controller="LoginController" ng-show="identity.isAuthenticated()"><a ng-click="signout()">Sign Out</a></li> -->
+          <li ><a href="#">How it works</a></li>
+          <li><a href="#">Contact us</a></li>
+          <li ng-show="identity.currentUser.isAdmin()"><a href="/admin/users">User Admin </a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
 </header>
 
 <div class="divider" style="border-top:2px solid #e1e1e1;padding:15px;"></div>
@@ -35,20 +31,16 @@
           <a href="#" ng-click="saveSelection(1,'master','Master Room')"><span class="tag"></span></a>
           <div class="caption txt-center">
             <p class="font-montserrat txt-upper">Master Bedroom</p>
+            </div>
+
+            <div class="txt-center">
              <p class="font-sansRegular" style="padding-top:20px;color:rgb(161, 161, 161);font-size:9px;">
             select number of rooms</p>
             
           <div class="font-sansRegular fs-10px" style="padding-bottom:12px;position:relative;color:rgb(161, 161, 161);margin-top:-26px;">
 
           
-            <span style="padding-left:99%;">
-              <!-- <SELECT NAME="numRooms" ng-model="numMaster" class="numRooms">
-                <OPTION SELECTED> 1 </OPTION>
-                <OPTION> 2</OPTION>
-                <OPTION> 3</OPTION>
-                <OPTION> 4</OPTION>
-                <OPTION> 5</OPTION>
-              </SELECT> -->
+            <span style="padding-left:86%;">
               <select ng-model="master" ng-options="opt as opt.label for opt in units" class="num-rooms">
                 </select>
             </span>
@@ -92,13 +84,6 @@
           </div>
           <p class="font-sansRegular fs-10px" style="text-align:right;padding-top:20px;color:rgb(161, 161, 161);">
             <span>
-              <!-- <SELECT NAME="numRooms" id="numKids" class="numRooms">
-                <OPTION SELECTED> 1 </OPTION>
-                <OPTION> 2</OPTION>
-                <OPTION> 3</OPTION>
-                <OPTION> 4</OPTION>
-                <OPTION> 5</OPTION>
-              </SELECT> -->
               <select ng-model="kids" ng-options="opt as opt.label for opt in units" class="num-rooms">
                 </select>
             </span>
@@ -122,13 +107,6 @@
           </div>
               <p class="font-sansRegular fs-10px" style="text-align:right;padding-top:20px;color:rgb(161, 161, 161);">
             <span>
-              <!-- <SELECT NAME="numRooms" id="numOffice" class="numRooms">
-                <OPTION SELECTED> 1 </OPTION>
-                <OPTION> 2</OPTION>
-                <OPTION> 3</OPTION>
-                <OPTION> 4</OPTION>
-                <OPTION> 5</OPTION>
-              </SELECT> -->
               <select ng-model="office" ng-options="opt as opt.label for opt in units" class="num-rooms">
                 </select>
             </span>
@@ -146,13 +124,6 @@
           </div>
               <p class="font-sansRegular fs-10px" style="text-align:right;padding-top:20px;color:rgb(161, 161, 161);">
             <span>
-              <!-- <SELECT NAME="numRooms" id="numDining" class="numRooms">
-                <OPTION SELECTED> 1 </OPTION>
-                <OPTION> 2</OPTION>
-                <OPTION> 3</OPTION>
-                <OPTION> 4</OPTION>
-                <OPTION> 5</OPTION>
-              </SELECT> -->
               <select ng-model="dining" ng-options="opt as opt.label for opt in units" class="num-rooms">
                 </select>
             </span>
@@ -169,14 +140,7 @@
             <p class="font-montserrat txt-upper">Bedroom</p>
           </div>
              <p class="font-sansRegular fs-10px" style="text-align:right;padding-top:20px;color:rgb(161, 161, 161);">
-            <span><!-- <a href="#">
-              <SELECT NAME="numRooms" id="numBeds" class="numRooms">
-                <OPTION SELECTED> 1 </OPTION>
-                <OPTION> 2</OPTION>
-                <OPTION> 3</OPTION>
-                <OPTION> 4</OPTION>
-                <OPTION> 5</OPTION>
-              </SELECT></a> -->
+            <span>
               <select ng-model="bedroom" ng-options="opt as opt.label for opt in units" class="num-rooms" >
                 </select>
             </span>

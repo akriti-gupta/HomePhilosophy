@@ -545,11 +545,12 @@ button:focus {outline:0;}
 
 .btn-container{
     position: absolute;
-    top: 430px;
     left: calc(50% - 120px);
     margin: 0 auto;
 }
-
+.btn-getStarted{
+  top: 430px;
+}
 
 .btn-start-quiz,.btn-comment{
     color: #fff;
@@ -562,9 +563,6 @@ padding-top:6px; padding-bottom:6px;letter-spacing:1px;
 }
 .btn-hero{
   padding: 15px 40px;
-  /*padding-bottom: 15px;
-  padding-left: 40px;
-  padding-right: 40px;*/
   border-left: 2px solid rgb(38, 165, 156);
   border-bottom: 2px solid rgb(38, 165, 156);
   letter-spacing: 1px;
@@ -1039,4 +1037,73 @@ padding-left:10px;
 
 .portfolio-txt{
 padding:40px 0px 60px;font-size:22px;margin:0;font-family:PlayfairDisplay-Regular;
+}
+
+
+/* About Us */
+#about-banner{
+  height:650px;
+  background-image:url('/images/aboutBg.png');
+  background-size: cover;
+  background-position: 0 -20px;
+  position: relative;
+  background-repeat:no-repeat;
+}
+.about-rect{
+  position: relative;
+  top: 80px;
+  margin: 0 auto;
+  background-color: #fff;
+  opacity: 0.85;
+  height: 80%;
+  text-align: center;
+  width: 70%;
+  
+}
+.about-maintext{
+  font-family: PlayfairDisplay;
+font-style: normal;
+font-size: 19px;
+  color: rgb(37, 37, 37);
+}
+.container-about-txt{
+  margin: 0 auto;
+  padding-top: 80px;
+  max-width: 710px; 
+}
+.btn-faq{
+  top: 570px;
+}
+
+#edesign{
+  background-color: #f5f5f5;
+}
+.edesign-ctr{
+  position: relative;
+  width:80%;
+  margin: 0 auto;
+  background-color: #fff;
+  min-height: 920px;
+}
+
+.edesign-ctr:before {
+  content:'';
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width:100%;
+    background-color: #f5f5f5;
+    height:20px;
+}
+.edesign-ctr:after{
+    content:'';
+    position: absolute;
+    top: 2%;
+    left: 50%;
+    margin-left: -50px;
+    width: 0;
+    height: 0;
+    border-top: solid 50px #f5f5f5;
+    border-left: solid 50px transparent;
+    border-right: solid 50px transparent;
 }

@@ -13,6 +13,7 @@ angular.module('app')
 				$routeProvider
 					.when('/',{templateUrl: 'app/home/main.html', controller: 'MainController'})
 					.when('/portfolio',{templateUrl: 'app/home/portfolio.html'})
+					.when('/aboutUs',{templateUrl: 'app/home/aboutUs/aboutUs.html'})
 					.when('/login',{templateUrl: 'app/account/login.html', controller: 'LoginController'})
 					.when('/style-quiz',{templateUrl: 'app/styleQuiz/styleQuiz.html', controller: 'QuizController'})
 					.when('/op-process',{templateUrl: 'app/home/process.html'})					
