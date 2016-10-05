@@ -2,6 +2,13 @@
 
     /* Custom, iPhone Retina */ 
 
+
+@media only screen and (min-width : 800px) and (max-width: 1080px){
+    .thumbnail .caption{
+        padding: 10px 10px 0px;
+        font-size: 9px;
+    }   
+}
     @media only screen and (min-width : 320px) and (max-width: 480px) {
 
         .fs-responsive-lg{
@@ -90,7 +97,7 @@
         }
 
         .thumbnail .caption{
-            font-size: 9px;
+            font-size: 9px;            
         }
         .ctr-oth-styl{
             padding:25px 6px;
