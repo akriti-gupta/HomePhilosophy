@@ -1073,6 +1073,7 @@ font-size: 19px;
 }
 .btn-faq{
   top: 570px;
+  left: calc(50% - 70px);
 }
 
 #edesign{
