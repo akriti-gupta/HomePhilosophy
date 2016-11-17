@@ -31,6 +31,15 @@ $(document).on('click','.design',function(e){
     
 });
 
+$(document).on('click','.accordion',function(e){
+   this.classList.toggle("active");
+   $(".faq").removeClass("show");
+   //alert($(this).next());
+    this.nextElementSibling.classList.toggle("show");
+   //this.next().classList.toggle("show");
+    
+    
+});
 
 
 		
