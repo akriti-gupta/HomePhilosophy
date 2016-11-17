@@ -32,6 +32,7 @@ $(document).on('click','.design',function(e){
 });
 
 $(document).on('click','.accordion',function(e){
+  $(".accordion").removeClass("active");
    this.classList.toggle("active");
    $(".faq").removeClass("show");
    //alert($(this).next());
