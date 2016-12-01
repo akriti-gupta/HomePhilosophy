@@ -5,5 +5,4 @@ public/bkup/*
 public/css/bkup/*
 public/images.zip
 bower_components/*
-customer_uploads/*
 server/config/upload.js.bkup.js
