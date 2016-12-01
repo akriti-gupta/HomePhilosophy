@@ -16,7 +16,7 @@
 
 <div class="divider" style="border-top:2px solid #e1e1e1;padding:15px;"></div>
  
-<div  class="qz-container" ng-controller="SaveDetails">
+<div  class="qz-container" ng-controller="SaveDetails as sd">
 	<div class="prg-dtl-ctr">
 		<div class="prg-wrp">
 	      <div class="progress-result">
@@ -41,9 +41,9 @@
 	      </div>
     	</div>
 
-    	<form name="detailForm" enctype="multipart/form-data" style="width:80%;margin:0 auto;padding-top:100px;" class="font-openSans fs-16px">
+    	<form name="detailForm" enctype="multipart/form-data" style="width:80%;margin:0 auto;padding-top:100px;" class="font-noto fs-18px">
 	      	<div class="form-group">
-	        	<span class="fs-18px">1. How much would you like to spend on your home?</span>
+	        	<span class="fs-20px">1. How much would you like to spend on your room?</span>
 	        	<div class="radio">
   					<label>
     					<input type="radio" name="radioBudget" id="budget1" value="option1" checked>
@@ -71,12 +71,12 @@
 				<div class="radio">
   					<label>
     					<input type="radio" name="radioBudget" id="budget5" value="option5" checked>
-    					I’m not on a budget.
+    					I’m not on a budget
   					</label>
 				</div>
 	      	</div>
 	        <div class="form-group">
-	        	<span class="fs-18px">2. Do you own or rent?</span>
+	        	<span class="fs-20px">2. Do you own or rent?</span>
 	         	<div class="radio">
   					<label>
     					<input type="radio" name="radioAprt" id="aprtOwn" value="option1" checked>
@@ -91,7 +91,7 @@
 				</div>
 	      	</div>
 	      	<div class="form-group">
-	        	<span class="fs-18px">3. Is there a reason you would like to design your space?</span>
+	        	<span class="fs-20px">3. Is there a reason you would like to design your space?</span>
 	         	<div class="checkbox">
   					<label>
     					<input type="checkbox" value="">I recently relocated or am going to soon
@@ -123,16 +123,16 @@
     				</label>
 				</div>
 
-				<span>Other<input type="text" class="form-info form-control" id="reasonOther" name="reasonOther" ng-model="reasonOther"></span>
+				<span>Other<input type="text" class="form-info form-control hp-form-input" id="reasonOther" name="reasonOther" ng-model="reasonOther"></span>
 
 	      	</div>
 	      	<div class="form-group">
-	        	<span class="fs-18px">4. What do you use your space for? i.e. living room for entertaining, bedroom for watching TV etc</span>
-	         	<textarea rows="7" cols="50" class="form-info font-sansRegular fs-16px" style="resize:none;border:1px solid #acacac;width:100%;" id="spaceUse" name="spaceUse" ng-model="spaceUse"></textarea>
+	        	<span class="fs-20px">4. What do you use your space for? i.e. living room for entertaining, bedroom for watching TV etc</span>
+	         	<textarea rows="7" cols="50" class="form-info font-sansRegular fs-16px" style="resize:none;border:1px solid #acacac;width:58%;" id="spaceUse" name="spaceUse" ng-model="spaceUse"></textarea>
 	         	<!-- <input type="text" class="form-info form-control" id="spaceUse" name="spaceUse" ng-model="spaceUse"> -->
 	      	</div>
 	      	<div class="form-group">
-	        	<span class="fs-18px">5. Who do you share your space with?</span>
+	        	<span class="fs-20px">5. Who do you share your space with?</span>
 	         	<div class="checkbox">
   					<label>
     					<input type="checkbox" value="" >Just myself
@@ -186,64 +186,94 @@
 	      	</div>
 
 	      	<div class="form-group">
-	        	<span class="fs-18px">6. Any furniture brands you absolutely love or loathe? </span><br/>
-	         		<textarea rows="7" cols="50" class="form-info font-sansRegular fs-16px" style="resize:none;border:1px solid #acacac;width:100%;"  id="brand" name="brand" ng-model="brand">
+	        	<span class="fs-20px">6. Any furniture brands you absolutely love or loathe? </span><br/>
+	         		<textarea rows="7" cols="50" class="form-info font-sansRegular fs-16px" style="resize:none;border:1px solid #acacac;width:58%;"  id="brand" name="brand" ng-model="brand">
 	         		</textarea>
 	         	<!-- <input type="text" class="form-info form-control" id="brand" name="brand" ng-model="brand"> -->
 	      	</div>
 
 	      	<div class="form-group">
-	      		<span class="fs-18px">7. Choose the colours you love</span>
+	      		<span class="fs-20px">7. Choose the colours you love</span>
 		      		<div class="row color-select">
-			        	<div class="col-sm-10 col-md-10">
+			        	<div class="col-sm-8 col-md-8">
 		        			<a href="#" ng-click="saveColour(1)">
-				        		<div class="square" style="background:rgb(204,255,204);"></div>
+				        		<div class="square" style="background-image:url('/images/oranges.png');"></div>
+				        		
 				        	</a>
 				        	<a href="#" ng-click="saveColour(2)">
-				        		<div class="square" style="background:rgb(255, 153, 0);"></div>
+				        		<!-- <div class="square" style="background:rgb(255, 153, 0);"></div> -->
+				        		<div class="square" style="background-image:url('/images/yellows.png')"></div>
+				        		
 				        	</a>
 				        	<a href="#" ng-click="saveColour(3)">
-				        		<div class="square" style="background:rgb(255, 255, 153);"></div>
+				        		<!-- <div class="square" style="background:rgb(255, 255, 153);"></div> -->
+				        		<div class="square" style="background-image:url('/images/reds.png')"></div>
+				        		
 				        	</a>
 				        	<a href="#" ng-click="saveColour(4)">
-				        		<div class="square" style="background:rgb(199, 0, 57);"></div>
+				        		<!-- <div class="square" style="background:rgb(199, 0, 57);"></div> -->
+				        		<div class="square" style="background-image:url('/images/neutrals.png')"></div>
+				        		<!-- <img src="images/neutrals.png" alt="reds"> -->
 				        	</a>
-				        	<a href="#" ng-click="saveColour(5)">
+				        	<!-- <a href="#" ng-click="saveColour(5)">
 				        		<div class="square" style="background:rgb(255, 204, 153);"></div>
-				        	</a>
+				        	</a> -->
 				        	
 			        	</div>
 			        </div>
 		        	<div class="row color-select">
 			        	<div class="col-sm-10 col-md-10">
 		        			<a href="#" ng-click="saveColour(6)">
-				        		<div class="square" style="background:#000;"></div>
+				        		<!-- <div class="square" style="background:#000;"></div> -->
+				        		<div class="square" style="background-image:url('/images/blacks.png')"></div>
 				        	</a>
 				        	<a href="#" ng-click="saveColour(7)">
-				        		<div class="square" style="background:rgb(51, 51, 51);"></div>
+				        		<!-- <div class="square" style="background:rgb(51, 51, 51);"></div> -->
+				        		<div class="square" style="background-image:url('/images/greys.png')"></div>
 				        	</a>
 				        	<a href="#" ng-click="saveColour(8)">
-				        		<div class="square" style="background:rgb(204, 204, 204);"></div>
+				        		<!-- <div class="square" style="background:rgb(204, 204, 204);"></div> -->
+				        		<div class="square" style="background-image:url('/images/whites.png')"></div>
 				        	</a>
 				        	<a href="#" ng-click="saveColour(9)">
-				        		<div class="square" style="background:rgb(0, 0, 102);"></div>
+				        		<!-- <div class="square" style="background:rgb(0, 0, 102);"></div> -->
+				        		<div class="square" style="background-image:url('/images/blues.png')"></div>
 				        	</a>
-				        	<a href="#" ng-click="saveColour(10)">
+				        	<!-- <a href="#" ng-click="saveColour(10)">
 				        		<div class="square" style="background:rgb(102, 0, 51);"></div>
-				        	</a>
+				        	</a> -->
 				        	
 			        	</div>
 			      	</div>
 			    </div>
 
 	      	<div class="form-group">
-	        	<span class="fs-18px">8. Any other details you’d like to share with your designers?</span> <br/>
-	         	 <textarea rows="7" cols="50" class="form-info font-sansRegular fs-16px" style="resize:none;border:1px solid #acacac;width:100%;" id="extraInfo" name="password" ng-model="extrainfo"></textarea>
+	        	<span class="fs-20px">8. Any other details you’d like to share with your designers?</span> <br/>
+	         	 <textarea rows="7" cols="50" class="form-info font-sansRegular fs-16px" style="resize:none;border:1px solid #acacac;width:58%;" id="extraInfo" name="password" ng-model="extrainfo"></textarea>
 	      	</div>
 
-	      	<div class="form-group">
-	        	<div class="fs-18px">9. Upload images of your current place and/or share images and a pinterest board (if any)?</div>
-	        		<input type="text"  class="form-info form-control" id="upload-file-info" 
+	      	<div class="form-group" style="margin-bottom:0px;">
+	        	<div class="fs-20px">9. Upload images of your current place and/or share images and a pinterest board (if any)?
+
+					<label>
+	        			<input type="file" multiple ngf-pattern="'image/*'" accept="image/*" ngf-max-size="10MB" style="display:none;"
+		                  onchange="angular.element(this).scope().addFileToUploadQ(this)"/>
+		            		<img src="images/attach.png" width="30%"/>
+		        	</label>
+	        	</div>
+	        	
+
+				<div id="file-name" style="width:50%;">
+					<div ng-repeat="file in pendingFilesArr track by $index">
+					  <div style="margin-bottom:10px;width:90%;float:left;background-color:#00a99d;color:#fff;">{{file.name}} ({{file.size}}) </div>
+					  <div style="width:10%;float:right;background-color:#00a99d;color:#fff;">
+					  	<a href="#" ng-click="removeFileFromQ($index)">x</a>
+					  </div>
+					</div>
+				</div>
+<!-- <a id="upload-file-info">{{uploadFileLabel}}</a> -->
+
+	        		<!-- <input type="text"  class="form-info form-control" id="upload-file-info" 
 	        				style="width:50%;float:left;" value="" disabled/>
 	        	
 	        		<label class="form-info btn-start-quiz upload-btn" for="cust-file-selector" style="margin-left:0px;">
@@ -254,8 +284,9 @@
 									 angular.element(this).scope().fileToUpload(this)"/>
 		            	...
 		        	</label>
-					<button type="submit" class="form-info btn-start-quiz upload-btn font-sansRegular txt-upper col-lightcyan fs-16px" ng-click="uploadFile()" ng-disabled="uploadBtn1" >Upload</button> <label id="fileUploadStatus" ng-bind="filestatus"></label>
-	
+		        	 -->
+					<!-- <button type="submit" class="form-info btn-start-quiz upload-btn font-sansRegular txt-upper col-lightcyan fs-16px" ng-click="uploadFile()" ng-disabled="uploadBtn1" >Upload</button> <label id="fileUploadStatus" ng-bind="filestatus"></label>
+	 -->
 
 	      	</div>
 			
@@ -264,39 +295,35 @@
     			<input type="url" class="form-info form-control" name="urlImages" ng-model="url" 
 				style="width:53.5%;float:left;" />
 				<!-- onchange="angular.element(this).scope().urlToShare(this)" -->
-	        	<button type="submit" class="form-info btn-start-quiz upload-btn font-sansRegular txt-upper col-lightcyan fs-16px" ng-click="shareURL()" ng-disabled="uploadBtn3" style="padding:11px 18px;">Share</button> <label id="shareURL" ng-bind="urlStatus" style="padding-top:20px;padding-left:10px;"></label>
+	        	<!-- <button type="submit" class="form-info btn-start-quiz upload-btn font-sansRegular txt-upper col-lightcyan fs-16px" ng-click="shareURL()" ng-disabled="uploadBtn3" style="padding:11px 18px;">Share</button> <label id="shareURL" ng-bind="urlStatus" style="padding-top:20px;padding-left:10px;"></label> -->
 	    				
   			</div>
 
 	      	<div class="form-group" name="uploadFurn" style="clear:both;padding-top:30px;">
-	        	<div class="fs-18px">10. Upload images of any existing furniture or accessories you want us to incorporate in the design?</div>
-	         	<input type="text"  class="form-info form-control" id="upload-furn-info" style="width:50%;float:left;" value="" disabled="" />
-	        	
-	        		<label class="form-info btn-start-quiz upload-btn" for="cust-furn-selector" style="margin-left:0px;">
-	        		<input id="cust-furn-selector" type="file" ngf-select ng-model="file" name="file" 
-		                   ngf-pattern="'image/*'" accept="image/*" ngf-max-size="10MB" 
-		                   style="display:none;"
-		                   onchange="$('#upload-furn-info').val($(this).val().split('\\').pop());
-		                   $('#upload-file-info').val('');
-		                   angular.element(this).scope().fileToUpload(this)"/>
-		            	...
-		        	</label>
-					<button type="submit" class="form-info btn-start-quiz upload-btn font-sansRegular txt-upper col-lightcyan fs-16px" ng-disabled="uploadBtn2" ng-click="uploadFile()">Upload</button> <label id="fileUploadStatus" ng-bind="filestatus"></label>
-				
+	        	<div class="fs-20px">10. Upload images of any existing furniture or accessories you want us to incorporate in the design?</div>
+	         	<div dropzone>Drop Files Here</div>
+	         	<div style="width:50%;">
+					<div ng-repeat="file in pendingDropFiles track by $index">
+					  <div style="margin-bottom:10px;width:90%;float:left;background-color:#00a99d;color:#fff;">{{file.name}} ({{file.size}}) </div>
+					  <div style="width:10%;float:right;background-color:#00a99d;color:#fff;">
+					  	<a href="#" ng-click="removeFileFromQ($index,2)">x</a>
+					  </div>
+					</div>
+				</div>
 	      	</div>
 
       		<div class="form-horizontal" style="clear:both;padding-top:30px;">
-      			<div class="fs-18px">11. Contact information in case we have questions about your project! </div>
+      			<div class="fs-20px">11. Contact information in case we have questions about your project! </div>
 			  	<div class="form-group" style="margin:10px 0px;">
-				    <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+				    <label for="inputEmail" class="col-sm-2 control-label ">Email</label>
 				    <div class="col-sm-10">
-				      <input type="email" class="form-control" id="inputEmail" placeholder="Email" style="width:100%">
+				      <input type="email" class="form-control hp-form-input" id="inputEmail" placeholder="Email" >
 				    </div>
 			  	</div>
 				<div class="form-group"  style="margin:10px 0px;">
 			    	<label for="inputPhone" class="col-sm-2 control-label">Tel.</label>
 			    	<div class="col-sm-10">
-			      		<input type="text" class="form-control" id="inputPhone" style="width:100%;">
+			      		<input type="text" class="form-control hp-form-input" id="inputPhone" >
 			    	</div>
   				</div>
 	      	</div>
@@ -304,7 +331,7 @@
       		
       
       		<div style="text-align:center;padding:30px 0px 40px;">
-        		<a href="/pricing"><button type="submit" class="btn-start-quiz btn-qz btn-nxt font-sansRegular txt-upper col-lightcyan fs-20px" ng-click = "saveDetails()" >NEXT</button></a>
+        		<!-- <a href="/pricing"> --><button type="submit" class="btn-start-quiz btn-qz btn-nxt font-sansRegular txt-upper col-lightcyan fs-20px" ng-click = "uploadFiles()" >NEXT</button><!-- </a> -->
       		</div>
 
       		

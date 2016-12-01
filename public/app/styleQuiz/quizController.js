@@ -44,6 +44,7 @@ angular.module("app")
 	$scope.roomSelectionArr = [];
 
 	 $scope.units = [
+	 	 {'id': 0, 'label': ''},
          {'id': 1, 'label': '1'},
          {'id': 2, 'label': '2'},
          {'id': 3, 'label': '3'},
@@ -951,13 +952,13 @@ angular.module("app")
 	// console.log("Stored result len is:"+quizResult.getStyle().length)
 	if(quizResult.getStyle().length>=1){
 		$scope.userStyle = quizResult.getStyle();
-		$scope.pagenum=10;
+		$scope.pagenum=11;
 		$scope.progress_result = false;
 		$scope.board = quizResult.getBoard();
 
 
 	}
-	if($scope.pagenum===10){
+	if($scope.pagenum===11){
 		$scope.disable=false;
 	}
 
@@ -991,24 +992,25 @@ angular.module("app")
 					
 			case 4:
 			case 5: 		
-			case 6:	  $scope.progressRate+=16.5
+			case 6:	
+			case 7:	  $scope.progressRate+=16.5
 					  scrollTop();	
 					  break;
 
-			case 7: 
+			case 8: 
 					$scope.computeStyle();
 					$scope.progressRate+=16.5;
 					scrollTop();
 					break;
 
 
-			case 8: $scope.progress=false;
+			case 9: $scope.progress=false;
 					$scope.refresh(); 
 					scrollTop();
 					break;
 
 
-			case 9: //Pinboard
+			case 10: //Pinboard
 					
 					$scope.disable = false;
 
@@ -1023,7 +1025,7 @@ angular.module("app")
 					break;
 
 
-			case 10:// $scope.progress_result=true;
+			case 11:// $scope.progress_result=true;
 
 					 $location.path('/tell-us-more');
 					 break;
@@ -1044,13 +1046,20 @@ angular.module("app")
 		}
 	}
 
-	$scope.quiz = function(){
+	$scope.quiz = function(option){
 		// alert($scope.pagenum);
 		$scope.selectedImages[$scope.pagenum] = -1;
 		scrollTop();
-		$scope.pagenum++;
+		if(option===1){
+			$scope.progress = true;
+			$scope.pagenum=4;			
+		}
+
+		else
+			$scope.pagenum++;
 		//$scope.disable = true;
-		$scope.progress = true;
+		
+		
 	}
 
 	
@@ -1072,11 +1081,11 @@ angular.module("app")
 		var totF = 0;
 
 		// console.log($scope.selectedImages);
-		var sel1 = $scope.selectedImages[3];
-		var sel2 = $scope.selectedImages[4];
-		var sel3 = $scope.selectedImages[5];
-		var sel4 = $scope.selectedImages[6];
-		var sel5 = $scope.selectedImages[7];
+		var sel1 = $scope.selectedImages[4];
+		var sel2 = $scope.selectedImages[5];
+		var sel3 = $scope.selectedImages[6];
+		var sel4 = $scope.selectedImages[7];
+		var sel5 = $scope.selectedImages[8];
 
 
 		// alert(sel1 + " " +sel2 + " " + sel3 + " " +sel4 + " "+sel5);
@@ -1289,16 +1298,16 @@ angular.module("app")
 			$scope.selectedImages[$scope.pagenum] =  imageId;
 			// console.log($scope.selectedImages);
 			//$scope.disable=false;
-			if($scope.pagenum!=8)
+			if($scope.pagenum!=9)
 				$scope.nextPage();
 		}
 	}
 
 	$scope.prev = function(){
-		if($scope.pagenum==10){
+		if($scope.pagenum==11){
 			$scope.refresh();
 		}
-		if($scope.pagenum>3 && $scope.pagenum<9){
+		if($scope.pagenum>3 && $scope.pagenum<10){
 			$scope.progressRate-=16.5;
 		}
 

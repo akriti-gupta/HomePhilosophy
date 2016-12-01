@@ -562,11 +562,11 @@ button:focus {outline:0;}
 padding-top:6px; padding-bottom:6px;letter-spacing:1px;
 }
 .btn-hero{
-  padding: 15px 40px;
+  padding: 15px 30px;
   border-left: 2px solid rgb(38, 165, 156);
   border-bottom: 2px solid rgb(38, 165, 156);
   letter-spacing: 1px;
-  font-size: 22px;
+  font-size: 20px;
 }
 
 /* Homepage Main Section ends*/ 
@@ -889,6 +889,10 @@ padding-left:10px;
 .form-group {
   margin-bottom: 35px;
 }
+
+.hp-form-input{
+  width:58%;
+}
 .form-info{
   margin:10px 0px 0px;
 }
@@ -901,6 +905,9 @@ padding-left:10px;
 
 }
 
+/*.color-select > div{
+  margin: 10px;
+}*/
 .color-select a:hover > div{
   border: 4px solid #64C6BE;
 }
@@ -1175,3 +1182,14 @@ padding:10px;
  .modal-firstLook{
   width:700px;
  }
+
+ div[dropzone] {
+    border: 2px dashed #bbb;
+    border-radius: 5px;
+    padding: 100px;
+    width: 53%;
+    text-align: center;
+    font: 20pt bold;
+    color: #bbb;
+    margin-bottom: 20px;
+}
