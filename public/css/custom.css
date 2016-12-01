@@ -664,6 +664,13 @@ padding-top:6px; padding-bottom:6px;letter-spacing:1px;
     margin: auto;
 }
 
+.modal-shpList{
+  width:540px;
+}
+.modal-firstLook{
+  width:700px;
+}
+
 
 /*@media screen and (max-width:500px) {
     #exp-maintext {
@@ -1176,12 +1183,6 @@ table.tbl-shpngList td{
 padding:10px;
  }
 
- .modal-shpList{
-  width:540px;
- }
- .modal-firstLook{
-  width:700px;
- }
 
  div[dropzone] {
     border: 2px dashed #bbb;
