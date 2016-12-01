@@ -43,15 +43,18 @@ $(document).on('click','.thumbnail',function(e){
 		$(this).addClass('style-img-selected');
 	}
 
-	var obj = $(this).find(".num-rooms");
-	var num = $(this).find(".num-rooms").length;
-	for(var i =0;i<num;i++){
-		//	alert(obj[i]);
+	if($(this).find(".num-rooms").val()==0){
+		$(this).find(".num-rooms option").each(function() { 
+   			this.selected = (this.text == 1); 
+		});
 	}
 });
 
+
+
 $(document).on('click','.num-rooms',function(e){
 	e.stopPropagation();
+	// alert('Clicked');
 });
 
 $(document).on('click','.qz-row a img',function(e){

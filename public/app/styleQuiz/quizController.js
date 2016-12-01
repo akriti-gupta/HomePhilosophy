@@ -44,12 +44,12 @@ angular.module("app")
 	$scope.roomSelectionArr = [];
 
 	 $scope.units = [
-	 	 {'id': 0, 'label': ''},
-         {'id': 1, 'label': '1'},
-         {'id': 2, 'label': '2'},
-         {'id': 3, 'label': '3'},
-         {'id': 4, 'label': '4'},
-         {'id': 5, 'label': '5'},
+	 	 {'id': 0, 'label': '',value:0},
+         {'id': 1, 'label': '1',value:1},
+         {'id': 2, 'label': '2',value:2},
+         {'id': 3, 'label': '3',value:3},
+         {'id': 4, 'label': '4',value:4},
+         {'id': 5, 'label': '5',value:5}
       ];
 
     
@@ -981,12 +981,14 @@ angular.module("app")
 			case 1: //quizResult.clearStyle();
 					
 					// alert($scope.selectedRoom);
+
 					saveRoomInfo();
 					scrollTop();
 					break; 
 
 			 case 2: //$location.path('/op-process');
-					 //break;
+			 		 scrollTop();
+					 break;
 
 			case 3: 
 					
@@ -1058,7 +1060,7 @@ angular.module("app")
 		else
 			$scope.pagenum++;
 		//$scope.disable = true;
-		
+
 		
 	}
 
@@ -1332,9 +1334,18 @@ angular.module("app")
 	}
 
 	function scrollTop(){
-		setTimeout(function() {
-   		 $(window).scrollTop(50);  
-		}, 0);
+
+		console.log($scope.pagenum);
+		if($scope.pagenum>=3 && $scope.pagenum<=8){
+			setTimeout(function() {
+	   		 $(window).scrollTop(350);  
+			}, 0);
+		}
+		else{
+			setTimeout(function() {
+	   		 $(window).scrollTop(10);  
+			}, 0);
+		}	
 	}
 
 	function saveRoomInfo(){
@@ -1344,7 +1355,6 @@ angular.module("app")
 		// console.log($scope[room]);
 		for(var i in $scope.selectedRoom){
 			$scope.selectedRoom[i].room_num = $scope[$scope.selectedRoom[i].room_name];
-			
 		}
 		
 		console.log($scope.selectedRoom);

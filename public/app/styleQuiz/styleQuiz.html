@@ -41,7 +41,8 @@
 
           
             <span style="padding-left:86%;">
-              <select ng-model="master" ng-options="opt as opt.label for opt in units" class="num-rooms">
+            
+              <select ng-model="master" ng-options="opt.label for opt in units track by opt.value" class="num-rooms">
                 </select>
             </span>
           </div>
@@ -68,7 +69,7 @@
                 <OPTION> 4</OPTION>
                 <OPTION> 5</OPTION>
               </SELECT> -->
-              <select ng-model="living" ng-options="opt as opt.label for opt in units" class="num-rooms">
+              <select ng-model="living" ng-options="opt.label for opt in units track by opt.value" class="num-rooms">
                 </select>
             </span>
           </p>
@@ -84,7 +85,7 @@
           </div>
           <p class="font-sansRegular fs-10px" style="text-align:right;padding-top:20px;color:rgb(161, 161, 161);">
             <span>
-              <select ng-model="kids" ng-options="opt as opt.label for opt in units" class="num-rooms">
+              <select ng-model="kids" ng-options="opt.label for opt in units track by opt.value" class="num-rooms">
                 </select>
             </span>
           </p>
@@ -107,7 +108,7 @@
           </div>
               <p class="font-sansRegular fs-10px" style="text-align:right;padding-top:20px;color:rgb(161, 161, 161);">
             <span>
-              <select ng-model="office" ng-options="opt as opt.label for opt in units" class="num-rooms">
+              <select ng-model="office" ng-options="opt.label for opt in units track by opt.value" class="num-rooms">
                 </select>
             </span>
           </p>
@@ -124,7 +125,7 @@
           </div>
               <p class="font-sansRegular fs-10px" style="text-align:right;padding-top:20px;color:rgb(161, 161, 161);">
             <span>
-              <select ng-model="dining" ng-options="opt as opt.label for opt in units" class="num-rooms">
+              <select ng-model="dining" ng-options="opt.label for opt in units track by opt.value" class="num-rooms">
                 </select>
             </span>
           </p>
@@ -141,7 +142,7 @@
           </div>
              <p class="font-sansRegular fs-10px" style="text-align:right;padding-top:20px;color:rgb(161, 161, 161);">
             <span>
-              <select ng-model="bedroom" ng-options="opt as opt.label for opt in units" class="num-rooms" >
+              <select ng-model="bedroom" ng-options="opt.label for opt in units track by opt.value" class="num-rooms" >
                 </select>
             </span>
           </p>
@@ -190,20 +191,37 @@
 
 
 <div ng-show="pagenum===2" class="font-playfair fs-responsive-med" > 
-    <p style="padding-bottom:50px;">What is your design style new page?</p>
-     <div class="fs-22px" style="padding:40px 0px 0px;margin-left:40px;"> 
+    <p style="padding-bottom:80px;">What is your design style?</p>
+     <!-- <div class="fs-22px" style="padding:40px 0px 0px;margin-left:40px;"> 
        <p>Not sure? Take our 
          <button type="button" class="take-qz-btn" ng-click="quiz(1)">STYLE QUIZ</button>
 </p>
        
+    </div> -->
+    <div class="fs-22px" style="padding:0px 0px 0px 200px;float:left;width:30%;"> 
+       Not sure? Take our
     </div>
-    <div class="fs-22px" style="padding:40px 0px 0px;margin-left:40px;"> 
+    <div  class="fs-22px" style="float:right;width:70%;">
+      <button type="button" class="take-qz-btn" ng-click="nextPage();quiz(1)" style="padding-left:23px;padding-right:23px;">STYLE QUIZ</button>
+    </div>
+
+<div style="clear:both; padding-bottom:40px;"></div>
+
+    <div class="fs-22px" style="padding:0px 0px 0px 70px;float:left;width:30%;"> 
+       <p>I already know!</p>
+    </div>
+    <div  class="fs-22px" style="float:right;width:70%;">
+         <button type="button" class="take-qz-btn" ng-click="quiz(2)">SELECT STYLE</button>
+    </div>
+</div>
+<div style="clear:both; padding-bottom:70px;"></div>
+    <!-- <div class="fs-22px" style="padding:40px 0px 0px;margin-left:40px;"> 
        <p>I already know!
          <button type="button" class="take-qz-btn" ng-click="quiz(2)">SELECT STYLE</button>
 </p>
        
     </div>
-  </div>
+  </div> -->
 
 
   <div ng-show="pagenum===3" class="font-playfair fs-responsive-med" > 
