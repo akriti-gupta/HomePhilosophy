@@ -371,7 +371,7 @@ button:focus {outline:0;}
 
 .topnav li a {
     font-family:Montserrat-Regular;
-    text-transform: uppercase;*/
+    text-transform: uppercase;
     /*Changed for Heroku*/
     /*font-size: 14px;*/
     font-size: 12px;
