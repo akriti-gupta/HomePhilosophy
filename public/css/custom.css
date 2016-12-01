@@ -667,11 +667,34 @@ padding-top:6px; padding-bottom:6px;letter-spacing:1px;
 .modal-shpList{
   width:540px;
 }
+
+
+table.tbl-shpngList, table.tbl-shpngList th, table.tbl-shpngList td
+{
+  border: 1px solid #000;
+  text-align: center; 
+}
+
+table.tbl-shpngList th{
+  padding:5px;
+}
+table.tbl-shpngList td{
+padding:10px;
+ }
+
 .modal-firstLook{
   width:700px;
 }
 
+/* Concept Board*/
+.slick-slider
+{
+    margin: 10px;
+}
 
+.concept-center .slick-prev:before, .concept-center .slick-next:before {
+  color: #000;
+}
 /*@media screen and (max-width:500px) {
     #exp-maintext {
       font-size:20px;
@@ -934,7 +957,7 @@ padding-left:10px;
 /*Portfolio*/
 
 
-.content {
+.content .portfolio-carousel{
   width: 100%;
   margin: auto;
   /*height: 1180px;*/
@@ -944,12 +967,12 @@ padding-left:10px;
 /*.slide{
   background-color: #fff;
 }*/
-.slick-slide{
+.portfolio-carousel .slick-slide{
   overflow: hidden;
   margin-top:30px;
   
 }
-.slick-slide:not(.slick-center) {
+.portfolio-carousel .slick-slide:not(.slick-center) {
   z-index: 0;  
   opacity:0.5;
   transform: scale(0.8,0.8);  
@@ -957,13 +980,13 @@ padding-left:10px;
  
 }
 
-.slick-slide:not(.slick-center):hover, .slick-slide:not(.slick-center):focus, .slick-slide:not(.slick-center):active  {
+.portfolio-carousel .slick-slide:not(.slick-center):hover, .portfolio-carousel .slick-slide:not(.slick-center):focus, .portfolio-carousel .slick-slide:not(.slick-center):active  {
   opacity:1;
   cursor:pointer;
   position: relative;
 
 }
-.slick-image
+.portfolio-carousel .slick-image
 .slick-active.slick-center+.slick-slide+.slick-slide {
   z-index: 1;
 }
@@ -975,11 +998,11 @@ padding-left:10px;
   z-index: 3;
 
 }
-.slick-slide {
+.portfolio-carousel .slick-slide {
   position: relative;
   transition: transform 80ms;
 }
-.slide img {
+.portfolio-carousel .slide img {
   position: relative;
   transform: translateX(-50%);
   left: 50%;
@@ -992,7 +1015,7 @@ padding-left:10px;
 }
 
 
-.slick-slide:not(.slick-center) .slide img:hover{
+.portfolio-carousel .slick-slide:not(.slick-center) .slide img:hover{
   margin-top:-20px;
 }
 .portfolio-caption{
@@ -1005,7 +1028,7 @@ padding-left:10px;
 
 
 
-.slick-prev:before,.slick-next:before  {
+.portfolio-carousel .slick-prev:before,.portfolio-carousel .slick-next:before  {
   font-size:22px;
   color:#000;
 }
@@ -1170,18 +1193,6 @@ div.faq.show {
     display: block;
 }
 
-table.tbl-shpngList, table.tbl-shpngList th, table.tbl-shpngList td
-{
-  border: 1px solid #000;
-  text-align: center; 
-}
-
-table.tbl-shpngList th{
-  padding:5px;
-}
-table.tbl-shpngList td{
-padding:10px;
- }
 
 
  div[dropzone] {
