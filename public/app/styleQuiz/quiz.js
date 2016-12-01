@@ -30,7 +30,7 @@ $(document).on('click','#start-quiz',function(e){
 });
 
 $(document).on('click','.thumbnail',function(e){
-	//alert('Clicked');
+	// alert('Clicked');
 	e.preventDefault();
 	var isSelected=false;
 	if($(this).hasClass('style-img-selected')){
@@ -41,6 +41,12 @@ $(document).on('click','.thumbnail',function(e){
 	}
 	else{
 		$(this).addClass('style-img-selected');
+	}
+
+	var obj = $(this).find(".num-rooms");
+	var num = $(this).find(".num-rooms").length;
+	for(var i =0;i<num;i++){
+		//	alert(obj[i]);
 	}
 });
 
