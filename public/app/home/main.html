@@ -1,5 +1,4 @@
 <!-- TODO: Header to go in  index.js and show up on pages other than /styleQuiz.-->
-
 <header id="site_header">
 	<a href="/"><div class="hp-logo"></div></a>
 		<!-- <a href="/"><img src="images/logo_header.png" /></a> -->
@@ -50,6 +49,7 @@
 </section>
 
  <div class="modal" id="shoppingListModal" tabindex="-1" role="dialog" aria-labelledby="shoppingListModal" >
+
       <div class="modal-dialog modal-shpList" role="document" >
         <div class="modal-content">
           <div class="modal-header" style="border:none;">
@@ -106,84 +106,50 @@
       </div>
     </div>
 
-<div class="modal" id="firstLookModal" tabindex="-1" role="dialog" aria-labelledby="firstLookModal" >
-    <div class="modal-dialog modal-firstLook" role="document" >
-        <div class="modal-content">
-          <div class="modal-body">
-           
 
-            <div >
-				<div class="firstLookSlide">
-			    	<div style="padding:0px;">
-			      		<div class="slide">
-			   				<img src="images/firstLooks/3.jpg" />
-			      		</div>
-			    	</div>
-			    	<div style="padding:0px;">
-			      		<div class="slide">
-			   				<img src="images/firstLooks/scandi.jpg" />
-			      		</div>
-			    	</div>
+	<script type="text/javascript">
+
+	$('.concept-center').slick({  
+	  lazyLoad: 'ondemand',
+	  infinite: false,
+	  speed: 500,
+	  dots: false,
+	  focusOnSelect: true,
+	  responsive: [
+	    {
+	      breakpoint: 1000,
+	      settings: {
+	        focusOnSelect: false
+	      }
+	    }
+	  ]
+	});
+
+	</script>
+
+	<div class="modal" id="firstLookModal" 
+						aria-labelledby="firstLookModal">
+		<div class="modal-dialog">
+        	<div class="modal-content">
+				<div class="modal-body">
+					<div class="content">
+  						<div class="concept-center">
+    						<div>
+      							<div class="slide"><img data-lazy="images/firstLooks/3.jpg"/></div>
+    						</div>
+
+    						<div>
+      							<div class="slide"><img data-lazy="images/firstLooks/scandi.jpg"/></div>
+        					</div>
+						</div>
+    				</div>
 				</div>
-          	</div>
-        </div>
-      </div>
-    </div>
-</div>
+			</div>
+		</div>
+	</div>
 
-<!-- 
-<div class="modal fade bs-example-modal-lg" id="firstLookModal" tabindex="-1" role="dialog" aria-labelledby="firstLookModal" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 
-  
-  <div class="carousel-inner">
-    <div class="item active">
-     <img class="img-responsive" src="images/firstLooks/scandi.jpg" alt="...">
-      
-    </div>
-    <div class="item">
-      <img class="img-responsive" src="images/firstLooks/3.jpg" alt="...">
-      
-    </div>
-  </div>
 
- 
-  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left"></span>
-  </a>
-  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right"></span>
-  </a>
-</div>
-    </div>
-  </div>
-</div> -->
-
-<script type="text/javascript">
-
-$('.firstLookSlide').slick({
-  initialSlide: 1,    
-  arrows: true,
-  centerMode: true,
-  centerPadding: '50px',
-  infinite: false,
-  slidesToShow: 1,
-  speed: 500,
-  dots: false,
-  responsive: [
-    {
-      breakpoint: 1000,
-      settings: {
-        centerPadding: '20px',
-        arrows: true,
-        focusOnSelect: false
-      }
-    }
-  ]
-});
-</script>
 
 
 <section id="hp_experience">
