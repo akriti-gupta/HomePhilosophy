@@ -1121,6 +1121,7 @@ font-size: 19px;
   width:80%;
   margin: 0 auto;
   background-color: #fff;
+  height: 1600px;
   min-height: 920px;
 }
 
@@ -1136,7 +1137,7 @@ font-size: 19px;
 .edesign-ctr:after{
     content:'';
     position: absolute;
-    top: 2%;
+    top: 0%;
     left: 50%;
     margin-left: -50px;
     width: 0;
@@ -1146,7 +1147,53 @@ font-size: 19px;
     border-right: solid 50px transparent;
 }
 
+.edesign-flex-ctr{
 
+  display:                 flex;
+  display:                 -webkit-flex; /* Safari 8 */
+  flex-wrap:               wrap;
+  -webkit-flex-wrap:       wrap;         /* Safari 8 */
+  justify-content:         center;
+  -webkit-justify-content: center;       /* Safari 8 */
+}
+.edsg-flex-child{
+  width:              350px;
+  margin:             10px;    
+}
+
+
+.circle1,.circle{
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  border: 2px solid;
+  position: relative;
+  border-color: #000;
+  margin-bottom: 130px;
+  }
+
+.circle1:after {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 50%;
+  border: 1px dashed;
+  border-width: 0 0 0 1px;
+  width: 1px;
+  height: 130px;
+}
+
+.small-circle{
+  margin-top: 15%;
+  margin-left: 15%;
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  border: 1px solid #000;
+  border-radius: 50%;
+}
 
 
 /* Style the buttons that are used to open and close the accordion panel */
