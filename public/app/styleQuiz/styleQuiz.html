@@ -7,7 +7,7 @@
         <ul class="qz-sub-list">
           <li ng-controller="LoginController" ng-hide="identity.isAuthenticated()"><a href="/login">Sign In</a></li>
           <!-- <li ng-controller="LoginController" ng-show="identity.isAuthenticated()"><a ng-click="signout()">Sign Out</a></li> -->
-          <li ><a href="#">How it works</a></li>
+          <li ><a href="/aboutUs">How it works</a></li>
           <li><a href="#">Contact us</a></li>
           <li ng-show="identity.currentUser.isAdmin()"><a href="/admin/users">User Admin </a></li>
         </ul>
@@ -198,20 +198,25 @@
 </p>
        
     </div> -->
-    <div class="fs-22px" style="padding:0px 0px 0px 200px;float:left;width:30%;"> 
+    <div style="position:relative; width:25%; margin:auto;">
+    <!-- <div class="fs-22px" style="padding:0px 0px 0px 200px;float:left;width:30%;">  -->
+    <div class="fs-22px" style="display:inline-block;"> 
        Not sure? Take our
     </div>
-    <div  class="fs-22px" style="float:right;width:70%;">
+    <!-- <div  class="fs-22px" style="float:right;width:70%;"> -->
+    <div  class="fs-22px" style="float:right;">
       <button type="button" class="take-qz-btn" ng-click="nextPage();quiz(1)" style="padding-left:23px;padding-right:23px;">STYLE QUIZ</button>
     </div>
 
 <div style="clear:both; padding-bottom:40px;"></div>
 
-    <div class="fs-22px" style="padding:0px 0px 0px 70px;float:left;width:30%;"> 
+    <!-- <div class="fs-22px" style="padding:0px 0px 0px 70px;float:left;width:30%;">  -->
+    <div class="fs-22px" style="display:inline-block;"> 
        <p>I already know!</p>
     </div>
-    <div  class="fs-22px" style="float:right;width:70%;">
+    <div  class="fs-22px" style="float:right;">
          <button type="button" class="take-qz-btn" ng-click="quiz(2)">SELECT STYLE</button>
+    </div>
     </div>
 </div>
 <div style="clear:both; padding-bottom:70px;"></div>
