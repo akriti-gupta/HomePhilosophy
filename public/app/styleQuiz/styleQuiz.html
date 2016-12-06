@@ -462,14 +462,14 @@
       <p class="font-playfair result-title">{{item.title}} <span class="txt-upper fs-22px font-sansRegular">{{item.style}}</span></p>
       <p class="font-sansRegular result-desc"> {{item.desc}}</p>
         <img ng-src="{{item.image}}" style="width:100%;"/>
-      <p ng-if="userStyle.length==1" class="font-playfair fs-12px" style="text-align:right;color:rgb(77, 77, 77);">Not really your style? Re-take the <a href="/style-quiz" id="start-quiz" ng-click="retakeQuiz()"><u>Style Quiz</u></a></p>
+      <p ng-if="userStyle.length==1" class="font-playfair fs-18px" style="text-align:right;color:rgb(77, 77, 77);">Not really your style? Re-take the <a href="/style-quiz" id="start-quiz" ng-click="retakeQuiz()"><u>Style Quiz</u></a></p>
     </div>
 
     <div style="width:90%;margin:0 auto;" ng-repeat="item in userStyle.slice(1,entries.length)" ng-if="userStyle.length==2">
       <div style="width:49%;margin:0 auto;">
         <p class="font-playfair result-title">{{item.title}}  <span class="result-style-name">{{item.style}}</span></p>
         <img ng-src="{{item.image}}" style="width:100%;">
-        <p class="font-playfair fs-12px" style="text-align:right;color:rgb(183, 183, 183);">Not your style? Re-take the <a href="/style-quiz"  ng-click="retakeQuiz()"><u>Style Quiz</u></a></p>
+        <p class="font-playfair fs-18px" style="text-align:right;color:rgb(183, 183, 183);">Not your style? Re-take the <a href="/style-quiz"  ng-click="retakeQuiz()"><u>Style Quiz</u></a></p>
       </div>
     </div>
   
@@ -481,7 +481,7 @@
       <div style="width:49%;float:right;" ng-if="$last">
         <p class="font-playfair result-title">{{item.title}}   <span class="result-style-name">{{item.style}}</span></p>
         <img ng-src="{{item.image}}" style="width:100%;">
-        <p class="font-playfair fs-12px" style="text-align:right;color:rgb(77, 77, 77);">Not your style? Re-take the <a href="/style-quiz"  ng-click="retakeQuiz()"><u>Style Quiz</u></a></p>
+        <p class="font-playfair fs-18px" style="text-align:right;color:rgb(77, 77, 77);">Not your style? Re-take the <a href="/style-quiz"  ng-click="retakeQuiz()"><u>Style Quiz</u></a></p>
       </div>
     </div> 
   </div>
