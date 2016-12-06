@@ -665,7 +665,7 @@ padding-top:6px; padding-bottom:6px;letter-spacing:1px;
 }
 
 .modal-shpList{
-  width:540px;
+  width:480px;
 }
 
 
@@ -1163,8 +1163,8 @@ font-size: 19px;
 
 
 .circle1,.circle{
-  height: 45px;
-  width: 45px;
+  height: 35px;
+  width: 35px;
   border-radius: 50%;
   border: 2px solid;
   position: relative;
