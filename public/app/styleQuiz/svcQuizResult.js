@@ -5,15 +5,40 @@
         var styleImages = [];
         var styleDesc =[];
         var styleImage = [];
+        var roomArr = [];
+        var imgArr = [];
+        var custSelections = [];
         var showNavBar = true;
         var board;
 
+        var storeUserQuizInfo = function(infoObj){
+        	if(infoObj){
+        		roomArr = infoObj.roomSelected;	
+        		imgArr = infoObj.quizImgSelected;
+        		console.log('In storeUserQuizInfo,roomArr is: ');
+        		console.log(roomArr);
+        		console.log('In storeUserQuizInfo,imgArr is: ');
+        		console.log(imgArr);
+
+        		if(imgArr["2"] && imgArr["2"]===-1){
+        			console.log('Already know style, style is stored in index 3:'+imgArr["3"]);
+
+        		}
+        		else if(imgArr["3"] && imgArr["3"]===-1){
+        			console.log('Style Quiz taken. Info stored in index 4 to 8');
+        		}
+				custSelections = infoObj;
+			}
+        	
+        }
         //Called from quizController to store calculated style before control is passed to login page.
 		var storeStyle = function(newObj,boardVal) {
+			console.log('In storestyle result is: ');
 		    for(i=0;i<newObj.length;i++){
-		    	result.push({"title": newObj[i].title, "style":newObj[i].style, "desc": newObj[i].desc, "image": newObj[i].image, "value":newObj[i].value});
+		    	result.push({"id": newObj[i].id, "title": newObj[i].title, "style":newObj[i].style, "desc": newObj[i].desc, "image": newObj[i].image, "value":newObj[i].value});
 		    	board = boardVal;
 			}
+			console.log(result);
 			// console.log("In storeStyle, stored res  is: "+result);
 		};
 
@@ -21,6 +46,9 @@
 			return result;
 		 };
 
+		var getCustSelections = function(){
+			return custSelections;
+		 };
 		 var getBoard = function(){
 		 	return board;
 		 }
@@ -76,13 +104,15 @@
 		return {
 			    storeStyle: storeStyle,
 			    getStyle: getStyle,
+			    getCustSelections: getCustSelections,
 			    clearStyle: clearStyle,
 			    fetchStyleInfo: fetchStyleInfo,
 			    getStyleTitle: getStyleTitle,
 			    getStyleDesc: getStyleDesc,
 			    showNavBar: showNavBar,
 			   	getStyleImage: getStyleImage,
-			   	getBoard: getBoard
+			   	getBoard: getBoard,
+			   	storeUserQuizInfo: storeUserQuizInfo
 
 			  };
         });

@@ -9,7 +9,7 @@ angular.module('app')
 
 
 angular.module("app")
-		  .controller("QuizController",function($scope,$location,$window,quizResult,$http,mvIdentity,imageService,angularGridInstance){
+		  .controller("QuizController",function($scope,$location,$window,quizResult,$http,mvIdentity,mvUserQuiz,imageService,angularGridInstance){
 
 
 
@@ -990,7 +990,9 @@ angular.module("app")
 			 		 scrollTop();
 					 break;
 
-			case 3: 
+			case 3: console.log('Store already known style here');
+					quizResult.storeUserQuizInfo({"roomSelected":$scope.selectedRoom,"quizImgSelected":$scope.selectedImages});
+					break;	
 					
 			case 4:
 			case 5: 		
@@ -999,7 +1001,7 @@ angular.module("app")
 					  scrollTop();	
 					  break;
 
-			case 8: 
+			case 8: console.log('currentPage: '+currentPage);
 					$scope.computeStyle();
 					$scope.progressRate+=16.5;
 					scrollTop();
@@ -1017,6 +1019,17 @@ angular.module("app")
 					$scope.disable = false;
 
 					if(mvIdentity.isAuthenticated()){
+						var result = quizResult.getStyle();
+						var userSelectionInfo = quizResult.getCustSelections();
+						console.log('In quizController, userSelectionInfo before sending to DB is: ');
+						console.log(userSelectionInfo);
+						console.log('In quizController, result before sending to DB is: ');
+						console.log(result);
+		  				mvUserQuiz.saveUserData(userSelectionInfo, result).then(function(){
+		  					console.log('In login ctrl after saving user data');
+		  				}, function(reason){
+		  					console.log(reason);
+		  				});
 						$scope.progress = false;
 						$scope.progress_result = true;
 					}
@@ -1074,6 +1087,7 @@ angular.module("app")
     }
 
 	$scope.computeStyle = function(){
+		console.log('In computeStyle');
 		//initialising scorecards of each style to 0
 		var totA = 0;
 		var totB = 0;
@@ -1140,17 +1154,17 @@ angular.module("app")
 		var totAll = totA + totB + totC + totD + totE + totF;
 
 		if(totA > 0)
-			prefStyle.push({id: 0, style: 'Classic', value: (Math.round(totA/totAll * 100))});
+			prefStyle.push({id: 1, style: 'Classic', value: (Math.round(totA/totAll * 100))});
 		if(totB > 0)
-			prefStyle.push({id:1, style: 'Contemporary', value: (Math.round(totB/totAll * 100))});
+			prefStyle.push({id:2, style: 'Contemporary', value: (Math.round(totB/totAll * 100))});
 		if(totC > 0)
-			prefStyle.push({id:2, style: 'Transitional', value: (Math.round(totC/totAll * 100))});
+			prefStyle.push({id:3, style: 'Transitional', value: (Math.round(totC/totAll * 100))});
 		if(totD > 0)
-			prefStyle.push({id:3, style: 'Modern', value: (Math.round(totD/totAll * 100))});
+			prefStyle.push({id:4, style: 'Modern', value: (Math.round(totD/totAll * 100))});
 		if(totE > 0)
-			prefStyle.push({id:4, style: 'Scandinavian', value: (Math.round(totE/totAll * 100))});
+			prefStyle.push({id:5, style: 'Scandinavian', value: (Math.round(totE/totAll * 100))});
 		if(totF > 0)
-			prefStyle.push({id:5, style: 'Asian Inspired', value:(Math.round(totF/totAll * 100))});
+			prefStyle.push({id:6, style: 'Asian Inspired', value:(Math.round(totF/totAll * 100))});
 
 		prefStyle.sort(sortValues);
 		// console.log(prefStyle);
@@ -1168,33 +1182,36 @@ angular.module("app")
 			// console.log(quizResult.getStyleDesc());
 			
 			if(prefStyle[j].value >= 70){
-				$scope.userStyle.push({title: quizResult.getStyleTitle()[0] , style: (prefStyle[j].style), desc:quizResult.getStyleDesc()[0][prefStyle[j].style].text,image: imageObj[style_name].image,value: (prefStyle[j].value)});
+				$scope.userStyle.push({id:prefStyle[j].id, title: quizResult.getStyleTitle()[0] , style: (prefStyle[j].style), desc:quizResult.getStyleDesc()[0][prefStyle[j].style].text,image: imageObj[style_name].image,value: (prefStyle[j].value)});
 				break;
 			}
 			else if(prefStyle[j].value < 70 && prefStyle[j].value >= 50){
-				$scope.userStyle.push({title: quizResult.getStyleTitle()[0] , style: (prefStyle[j].style), desc:quizResult.getStyleDesc()[0][prefStyle[j].style].text,image: imageObj[style_name].image,value: (prefStyle[j].value)});
+				$scope.userStyle.push({id:prefStyle[j].id, title: quizResult.getStyleTitle()[0] , style: (prefStyle[j].style), desc:quizResult.getStyleDesc()[0][prefStyle[j].style].text,image: imageObj[style_name].image,value: (prefStyle[j].value)});
 				if(j+1 < prefStyle.length){
-					$scope.userStyle.push({title: quizResult.getStyleTitle()[1] ,style: (prefStyle[j+1].style),desc:quizResult.getStyleDesc()[0][prefStyle[j+1].style].text, image: imageObj[prefStyle[j+1].style].image,value: (prefStyle[j+1].value)});
+					$scope.userStyle.push({id:prefStyle[j+1].id, title: quizResult.getStyleTitle()[1] ,style: (prefStyle[j+1].style),desc:quizResult.getStyleDesc()[0][prefStyle[j+1].style].text, image: imageObj[prefStyle[j+1].style].image,value: (prefStyle[j+1].value)});
 				}
 				break;
 			}
 			else if(prefStyle[j].value < 50 && prefStyle[j].value >= 10){
-				$scope.userStyle.push({title: quizResult.getStyleTitle()[0] , style: (prefStyle[j].style), desc:quizResult.getStyleDesc()[0][prefStyle[j].style].text,image: imageObj[style_name].image,value: (prefStyle[j].value)});
+				$scope.userStyle.push({id:prefStyle[j].id, title: quizResult.getStyleTitle()[0] , style: (prefStyle[j].style), desc:quizResult.getStyleDesc()[0][prefStyle[j].style].text,image: imageObj[style_name].image,value: (prefStyle[j].value)});
 				if(j+1 < prefStyle.length){
-					$scope.userStyle.push({title: quizResult.getStyleTitle()[1], style:(prefStyle[j+1].style),desc:quizResult.getStyleDesc()[0][prefStyle[j+1].style].text,image: imageObj[prefStyle[j+1].style].image, value: (prefStyle[j+1].value)});
+					$scope.userStyle.push({id:prefStyle[j+1].id, title: quizResult.getStyleTitle()[1], style:(prefStyle[j+1].style),desc:quizResult.getStyleDesc()[0][prefStyle[j+1].style].text,image: imageObj[prefStyle[j+1].style].image, value: (prefStyle[j+1].value)});
 				}
 				if(j+2 < prefStyle.length){
-					$scope.userStyle.push({title: quizResult.getStyleTitle()[2], style: (prefStyle[j+2].style), desc:quizResult.getStyleDesc()[0][prefStyle[j+2].style].text,image: imageObj[prefStyle[j+2].style].image,value: (prefStyle[j+2].value)});
+					$scope.userStyle.push({id:prefStyle[j+2].id, title: quizResult.getStyleTitle()[2], style: (prefStyle[j+2].style), desc:quizResult.getStyleDesc()[0][prefStyle[j+2].style].text,image: imageObj[prefStyle[j+2].style].image,value: (prefStyle[j+2].value)});
 				}
 				break;
 			}
 		}
 
 		$scope.setBoard(prefStyle[0]);
-		if(!mvIdentity.isAuthenticated()){
+		// if(!mvIdentity.isAuthenticated()){
 			// console.log('Storing style in svc before going to login, to store: '+$scope.userStyle);
+
+			//To store pinterest image and comments
+			quizResult.storeUserQuizInfo({"roomSelected":$scope.selectedRoom,"quizImgSelected":$scope.selectedImages});
+			console.log('In quizController, before storing style');
 			quizResult.storeStyle($scope.userStyle,$scope.board);
-		}
 	}
 
 	$scope.setBoard = function(styleResult){
@@ -1237,24 +1254,6 @@ angular.module("app")
 		$scope.userStyle = [];
 		$scope.board=1;
 	}
-				
-// 	$scope.loadBoard= function(boardVal){
-		
-// 		switch(boardVal){
-	
-// 		 case 1:	$scope.board = $scope.pics;
-// 		 			break;
-// 		 case 2:	$scope.board = $scope.pics4;
-// 		 			break;
-// 		 case 3:	$scope.board = $scope.pics5;
-// 		 			break;
-// 		 case 4:	$scope.board = $scope.pics3;
-// 		 			break;
-// 		 default: 	$scope.board = $scope.pics;
-// 		 			break; 
-// }
-		 
-// 	}
 	
 	function sortValues(a, b) {
 		if (a.value === b.value) {
@@ -1298,7 +1297,7 @@ angular.module("app")
 		}
 		else{
 			$scope.selectedImages[$scope.pagenum] =  imageId;
-			// console.log($scope.selectedImages);
+			console.log('$scope.selectedImages is: '+$scope.selectedImages);
 			//$scope.disable=false;
 			if($scope.pagenum!=9)
 				$scope.nextPage();
@@ -1334,8 +1333,6 @@ angular.module("app")
 	}
 
 	function scrollTop(){
-
-		console.log($scope.pagenum);
 		if($scope.pagenum>=3 && $scope.pagenum<=8){
 			setTimeout(function() {
 	   		 $(window).scrollTop(350);  
@@ -1351,12 +1348,25 @@ angular.module("app")
 	function saveRoomInfo(){
 		var roomDsgArr =[];
 		var room = 'numMaster';
-		console.log("Rooms Selected are: ");
-		// console.log($scope[room]);
-		for(var i in $scope.selectedRoom){
-			$scope.selectedRoom[i].room_num = $scope[$scope.selectedRoom[i].room_name];
-		}
 		
+		
+		for(var i in $scope.selectedRoom){
+			console.log('In For of saveRoomInfo');
+			console.log($scope[$scope.selectedRoom[i].room_name]);
+			if($scope[$scope.selectedRoom[i].room_name].value===0){
+				console.log('In If, updating values');
+				// $scope[$scope.selectedRoom[i].room_name] = 1;
+				// $scope.selectedRoom[i].room_num = 1; 
+				// $scope.selectedRoom[i].room_num.id = 1;
+				$scope[$scope.selectedRoom[i].room_name].id = 1;
+				$scope[$scope.selectedRoom[i].room_name].value = 1;
+				$scope[$scope.selectedRoom[i].room_name].label = "1";
+			}
+			// else{
+				$scope.selectedRoom[i].room_num = $scope[$scope.selectedRoom[i].room_name];
+			// }
+		}
+		console.log("Rooms Selected are: ");
 		console.log($scope.selectedRoom);
 
 		for (var i in $scope.selectedRoom){

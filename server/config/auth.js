@@ -1,4 +1,4 @@
-var passport = require('passport');
+	var passport = require('passport');
 	
 
 exports.authenticate = function(req, res, next){
@@ -25,7 +25,7 @@ exports.requiresApiLogin = function(req, res, next){
 
 exports.requiresRole = function(role){
 	return function(req,res,next){
-		if(!req.isAuthenticated() || req.user.role!=role){
+		if(!req.isAuthenticated() || req.user.get('role')!=role){
 			res.status(403);
 			res.end();
 		}

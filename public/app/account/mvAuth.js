@@ -1,4 +1,5 @@
-angular.module('app').factory('mvAuth', function($http, mvIdentity, $q, mvUser){
+// angular.module('app').factory('mvAuth', function($http, mvIdentity, $q, mvUser,mvUserQuizDetail){
+	angular.module('app').factory('mvAuth', function($http, mvIdentity, $q, mvUser){
 	return{
 
 		authenticateUser: function(username,password){
@@ -23,8 +24,9 @@ angular.module('app').factory('mvAuth', function($http, mvIdentity, $q, mvUser){
 		createUser: function(newUserData){
 			var newUser = new mvUser(newUserData);
 			var dfd = $q.defer();
-		
+			console.log('In mvAuth client before calling save');
 			newUser.$save().then(function(){
+				console.log('In mvAuth client after calling save');
 				mvIdentity.currentUser = newUser;
 				dfd.resolve();	
 			}, function(response){
@@ -49,6 +51,7 @@ angular.module('app').factory('mvAuth', function($http, mvIdentity, $q, mvUser){
 			else{
 				return $q.reject('Unauthorized');
 			}
-		}
-	}
-});
+		},
+
+
+}});

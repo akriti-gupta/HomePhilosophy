@@ -5,6 +5,7 @@ exports.createSalt = function(){
 }
 
 exports.hashPswd = function(pswd, salt){
+	console.log('In encryption');
 	var hmac = crypto.createHmac('sha1',salt);
 	hmac.setEncoding('hex');
 	hmac.write(pswd);

@@ -1,13 +1,43 @@
-var passport = require('passport'),
-  mongoose = require('mongoose'),
-  LocalStrategy = require('passport-local').Strategy,
-  FacebookStrategy = require('passport-facebook').Strategy;
-  User = mongoose.model('User');
+/*  mongoose = require('mongoose'),
+    ModelBase = require('../config/bookshelf'),
+    User = mongoose.model('User'); */
 
-	
+var passport = require('passport'),
+    LocalStrategy = require('passport-local').Strategy,
+    FacebookStrategy = require('passport-facebook').Strategy,
+    bookshelf = require('../config/bookshelf'),
+    User = require('../models/User'),
+    encrypt = require('../utilities/encryption');
+
+
+
+/*	var User = ModelBase.extend({
+                tableName: 'user',
+                authenticate: function(pswd){
+                    console.log('In authenticate: pswd is : '+pswd+' and salt is: '+this.get('salt'));
+                    return encrypt.hashPswd(pswd,this.get('salt'))===this.get('password');
+                }});*/
+
 
 module.exports = function(){
-	var User = mongoose.model('User');
+
+    passport.use(new LocalStrategy(
+        function(username, password, done){
+
+            //User.findOne({username: username}).then(function(user) {
+            User.forge({username: username}).fetch().asCallback(function(err,user) {     
+                if(user && user.authenticate(password)) {
+                    return done(null,user);
+                }
+                else {
+                    return done(null,false);
+                }
+            })
+        }
+    ));
+
+    //MONGO method
+    /*var User = mongoose.model('User');
 	passport.use(new LocalStrategy(
 		function(username, password, done){
 			User.findOne({username: username}).exec(function(err,user) {
@@ -19,7 +49,7 @@ module.exports = function(){
 			    }
 			});
 		}
-	));
+	));*/
 
 	 passport.use(new FacebookStrategy({
 
@@ -77,20 +107,34 @@ console.log('In FB auth');
 
 	passport.serializeUser(function(user,done){
 		if(user){
-			done(null,user._id);
+			// done(null,user._id);
+            done(null,user.get('id'));
 		}
 	});
 
-	passport.deserializeUser(function(id,done){
-			User.findOne({_id: id}).exec(function(err,user) {
-				if(user) {
-					return done(null,user);
-			    }
-			    else {
-			    	return done(null,false);
-			    }
-		});
+    passport.deserializeUser(function(id,done){
+        //User.findOne({id: id}).asCallback(function(err,user) {
+        User.forge({id: id}).fetch().asCallback(function(err,user) {     
+            if(user) {
+                return done(null,user);
+            }
+            else {
+                return done(null,false);
+            }
+        });
 
-	});
+    });
+
+	// passport.deserializeUser(function(id,done){
+	// 		User.findOne({_id: id}).exec(function(err,user) {
+	// 			if(user) {
+	// 				return done(null,user);
+	// 		    }
+	// 		    else {
+	// 		    	return done(null,false);
+	// 		    }
+	// 	});
+
+	// });
 }
 
