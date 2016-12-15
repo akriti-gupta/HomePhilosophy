@@ -844,11 +844,6 @@ padding-left:10px;
 .hp-logo-footer{
   padding: 0 65px;
   float: left;
-  /*margin: 0 65px;
-  height:100%;
-  width:15%;
-  background-image:url('/images/logo_header.png');
-  background-size: cover;*/
 }
 
 #footer-data{
@@ -1156,11 +1151,14 @@ font-size: 19px;
   justify-content:         center;
   -webkit-justify-content: center;       /* Safari 8 */
 }
-.flex-child,.edsg-flex-child{
-  margin:             10px;    
+.flex-child{
+  margin: 10px; 
+  flex-basis: 0;
+  flex-grow: 1;   
 }
 .edsg-flex-child{
-  width:              350px;
+  margin: 10px; 
+  width: 350px;
 }
 
 .circle1,.circle{
@@ -1256,7 +1254,7 @@ div.faq.show {
 
 
 #pricing-section{
-  height:1350px;
+  height:1100px;
   background-image:url('/images/pricing_bg.png');
   background-size: cover;
   /*background-position: 0 -20px;*/
@@ -1308,5 +1306,5 @@ div.faq.show {
   color:#fff;
   letter-spacing: 1px;
   font-size: 16px;
-  padding: 15px 120px;
+  padding: 10px 70px;
 }

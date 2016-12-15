@@ -1,0 +1,87 @@
+<header id="site_header">
+	<a href="/"><div class="hp-logo"></div></a>
+		<!-- <a href="/"><img src="images/logo_header.png" /></a> -->
+	
+	<div id="hp-nav">
+	    <ul class="topnav">
+	        <!-- <li class="menu-list plist-border"> -->
+	        <li class="menu-list">
+	        	<!-- <ul class="submenu-list">
+	        	  <li><a href="/aboutUs">About us</a></li>
+	        	  <li><a href="/faq">FAQ</a></li>
+	        	</ul> -->
+	        	<!-- <a href="/op-process">How it works</a> -->
+	        	<a href="/aboutUs">How it works</a>
+	       </li>
+			<li><a href="/pricing">Pricing</a></li>
+	        <li><a href="/portfolio" id="portfolio-link">Portfolio</a></li>
+	        <li><a href="#">Luxury spaces</a></li>
+	        <li><a href="/faq">FAQ</a></li>
+	        <li><a href="#">Contact us</a></li>
+	        <li>
+	            <a href="/style-quiz" id="start-quiz">
+	                <button type="button" class="btn-start-quiz btn-topnav font-montserrat txt-upper col-lightcyan fs-14px">Get Started</button>
+	            </a>
+	        </li>
+	    </ul>
+    	<div class="tab_icon">
+        	<a href="javascript:void(0);" onclick="displayDropDown()">&#9776;</a>
+    	</div>
+	</div>
+</header>
+
+<div class="divider" style="border-top:2px solid #e1e1e1;padding:15px;"></div>
+ 
+<div  class="qz-container">
+	<div style="padding-top:50px; width:50%; margin:0 auto;">
+		<form name="detailForm"  class="font-noto fs-18px">
+	      	
+
+      		<div class="form-horizontal">
+      			<div class="form-group">
+				    <label for="inputName" class="col-sm-2 control-label" style="text-align:right;">Name</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control hp-form-input" id="inputName">
+				    </div>
+			  	</div>
+			  	<!-- <div class="form-group">
+				    <label for="inputAddress" class="col-sm-2 control-label" style="text-align:right;">Address</label>
+				    <div class="col-sm-6">
+				      <input type="text" class="form-control hp-form-input" id="inputAddress">
+				    </div>
+			  	</div> -->
+      			<div class="form-group">
+				    <label for="inputEmail" class="col-sm-2 control-label" style="text-align:right;">Email</label>
+				    <div class="col-sm-10">
+				      <input type="email" class="form-control hp-form-input" id="inputEmail">
+				    </div>
+			  	</div>
+				<div class="form-group">
+			    	<label for="inputPhone" class="col-sm-2 control-label" style="text-align:right;">Contact No.</label>
+			    	<div class="col-sm-10">
+			      		<input type="text" class="form-control hp-form-input" id="inputPhone" >
+			    	</div>
+  				</div>
+  				<div class="form-group">
+	        		<label for="inputComments" class="col-sm-2 control-label" style="text-align:right;">Comments</label>
+	        		<div class="col-sm-10">
+	         			<textarea rows="7" cols="41" class="form-info font-sansRegular fs-16px" style="resize:none;border:1px solid #acacac;" id="comments" name="comments" ng-model="comments"></textarea>
+	         		</div>
+	      	</div>
+
+	      	<div style="text-align:center;padding:30px 0px 40px;">
+        		<a href="#"><button type="submit" class="btn-start-quiz btn-qz btn-nxt font-sansRegular txt-upper col-lightcyan fs-20px" ng-click = "uploadFiles()" >SUBMIT</button> </a>
+      		</div>
+
+	      	</div>
+
+      		
+      
+      		
+      		
+    	</form>
+
+	</div>
+</div>
+<div style="padding-bottom:40px;"></div>
+<div class="divider" style="border-top:2px solid rgb(47, 185, 175);"></div>

@@ -8,7 +8,7 @@
           <li ng-controller="LoginController" ng-hide="identity.isAuthenticated()"><a href="/login">Sign In</a></li>
           <!-- <li ng-controller="LoginController" ng-show="identity.isAuthenticated()"><a ng-click="signout()">Sign Out</a></li> -->
           <li ><a href="/aboutUs">How it works</a></li>
-          <li><a href="#">Contact us</a></li>
+          <li><a href="/contactUs">Contact us</a></li>
           <li ng-show="identity.currentUser.isAdmin()"><a href="/admin/users">User Admin </a></li>
         </ul>
       </li>
@@ -220,13 +220,7 @@
     </div>
 </div>
 <div style="clear:both; padding-bottom:70px;"></div>
-    <!-- <div class="fs-22px" style="padding:40px 0px 0px;margin-left:40px;"> 
-       <p>I already know!
-         <button type="button" class="take-qz-btn" ng-click="quiz(2)">SELECT STYLE</button>
-</p>
-       
-    </div>
-  </div> -->
+   
 
 
   <div ng-show="pagenum===3" class="font-playfair fs-responsive-med" > 

@@ -2,6 +2,7 @@ var auth = require('./auth'),
 	quiz = require('./quiz'),	
 	multer = require('multer'),
 	users = require('../controllers/users'),
+	userQuiz = require('../controllers/userQuiz'),
 	passport = require('passport');
 
 var storage =   multer.diskStorage({
@@ -29,10 +30,21 @@ module.exports = function(app){
 	app.post('/logout',function(req,res){
 		req.logout();
 		res.end();
-});
+	});
+
+	app.post('/createUserQuiz',userQuiz.createUserQuiz);
+	app.post('/saveUserQuizDtls',userQuiz.saveUserQuizDtls);
 
 
-	// route for facebook authentication and login
+/*app.get('/api/users/quiz/*', function(req,res){
+	console.log('In get of users quiz, req is:');
+	console.log(req.params[0]);
+	console.log(req.query["status"]);
+	users.getUserQuiz();
+});*/
+
+
+// route for facebook authentication and login
 	 app.get('/auth/facebook',passport.authenticate('facebook',{ scope : ['email'] }),function(req, res){});
 
 	// handle the callback after facebook has authenticated the user
@@ -43,7 +55,6 @@ module.exports = function(app){
 
 	//File uploads from Tell Us More Page
 	app.post('/upload',function(req,res){
-		console.log('Uploading files');
     	upload(req,res,function(err) {
         	if(err) {
         		console.log(err);
@@ -52,6 +63,7 @@ module.exports = function(app){
         	res.send({error_code:0, err_desc:"File is uploaded"});
     	});
 	});
+
 
 	app.get('*', function(req,res){
 		console.log("Server caught request " +req.params[0]);
