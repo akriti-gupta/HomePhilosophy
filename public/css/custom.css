@@ -1100,7 +1100,7 @@ font-size: 19px;
 }
 .container-about-txt{
   margin: 0 auto;
-  padding-top: 80px;
+  padding-top: 60px;
   max-width: 710px; 
 }
 .btn-faq{
@@ -1264,7 +1264,7 @@ div.faq.show {
 }
 .pricing-footnote{
   background-color:#f4f5f6;
-  opacity:0.5;
+  opacity:0.95;
   position:absolute;
   top:93.5%;
   text-align:center;
@@ -1307,4 +1307,93 @@ div.faq.show {
   letter-spacing: 1px;
   font-size: 16px;
   padding: 10px 70px;
+}
+#contactus{
+  height:1100px;
+  background-image:url('/images/contactbg.png');
+  background-size: cover;
+  background-position: 0 -20px;
+  position: relative;
+  background-repeat:no-repeat;
+}
+
+.contact-title,.contact-text{
+  position: relative;
+  margin: 0 auto;
+  background-color: #fff;
+  opacity: 0.7;
+  text-align: center;
+  
+}
+.contact-title{
+  top: 15%;
+  height: 7%;
+  width: 50%;
+}
+.contact-text{
+  top: 25%;
+  height: 58%;
+  opacity: 0.95;
+  width: 50%;
+}
+.contact-main-text{
+  font-family:"PlayfairDisplay-Regular";
+  font-size: 25px;
+}
+
+/*CUSTOMER DASHBOARD*/
+
+.data-dashboard{
+  padding-top:50px;
+}
+
+.cust-data{
+  border-collapse: collapse;
+  width:80%;
+  margin:0 auto;
+}
+.cust-data, .cust-data th, .cust-data td{
+  border: 1px solid black;
+}
+
+.cust-data th, .cust-data td{
+  text-align: center;
+  padding:20px 20px;
+  width:80px;
+}
+.cust-data td img{
+  height: 100px;
+  width: auto;
+}
+.cust-view-tab,.admin-view-tab{
+  border-right:1px solid black;
+  text-align: center;
+}
+.cust-view-tab{
+  padding:50px;
+}
+
+.admin-view-tab{
+  padding:20px;
+}
+
+
+
+.form-meet-dtls{
+  margin:0px;
+  padding:0px;
+}
+.dtls-input{
+  text-align: left;
+}
+
+.tab-active{
+  background-color: #64c6be;
+  color: #fff;
+}
+.admin-dtl-ctr{
+  position: relative;
+  width: 80%;
+  margin: 0 auto;
+  padding-top: 50px;
 }
