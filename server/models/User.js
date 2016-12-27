@@ -1,6 +1,6 @@
-var mongoose = require('mongoose'),
+//var mongoose = require('mongoose'),
    // var ModelBase = require('../config/bookshelf'),
-	encrypt = require('../utilities/encryption');
+	var encrypt = require('../utilities/encryption');
 
 var userSchema = mongoose.Schema({
 		firstName: String,
@@ -36,8 +36,8 @@ function createDefaultUsers(){
 }
 
 
-exports.User = User;
-//exports.createDefaultUsers = createDefaultUsers;
+//exports.User = User;
+exports.createDefaultUsers = createDefaultUsers;
 
 // var bookshelf = require('../config/bookshelf'),
 // 	encrypt = require('../utilities/encryption'),
