@@ -1,8 +1,8 @@
 var mongoose = require('mongoose'),
-	userModel = require('../models/User'),
-	styleModel = require('../models/Style'),
-	roomModel = require('../models/Room'),
-	imageModel = require('../models/QuizImage');
+	userModel = require('../models/User');
+	// styleModel = require('../models/Style'),
+	// roomModel = require('../models/Room'),
+	// imageModel = require('../models/QuizImage');
 
 module.exports = function(config){
 	mongoose.connect(config.db);
@@ -13,8 +13,8 @@ module.exports = function(config){
 	});
 
 	userModel.createDefaultUsers();
-	styleModel.createStyles();
-	roomModel.createRooms();
-	imageModel.createQuizImages();
+	// styleModel.createStyles();
+	// roomModel.createRooms();
+	// imageModel.createQuizImages();
 }
 
