@@ -30,58 +30,69 @@
 	</div>
 </header>
 
-<div class="divider" style="border-top:2px solid #e1e1e1;padding:15px;"></div>
+<!-- <div class="divider" style="border-top:2px solid #e1e1e1;padding:15px;"></div> -->
  
-<div  class="qz-container">
-	<div style="padding-top:50px;">
-		<form name="detailForm"  class="font-noto fs-18px">
-	      	
-
-      		<div class="form-horizontal">
-      			<div class="form-group">
-				    <label for="inputName" class="col-sm-4 control-label" style="text-align:right;">Name</label>
-				    <div class="col-sm-6">
-				      <input type="text" class="form-control hp-form-input" id="inputName">
-				    </div>
-			  	</div>
-			  	<!-- <div class="form-group">
-				    <label for="inputAddress" class="col-sm-2 control-label" style="text-align:right;">Address</label>
-				    <div class="col-sm-6">
-				      <input type="text" class="form-control hp-form-input" id="inputAddress">
-				    </div>
-			  	</div> -->
-      			<div class="form-group">
-				    <label for="inputEmail" class="col-sm-4 control-label" style="text-align:right;">Email</label>
-				    <div class="col-sm-6">
-				      <input type="email" class="form-control hp-form-input" id="inputEmail">
-				    </div>
-			  	</div>
-				<div class="form-group">
-			    	<label for="inputPhone" class="col-sm-4 control-label" style="text-align:right;">Contact No.</label>
-			    	<div class="col-sm-6">
-			      		<input type="text" class="form-control hp-form-input" id="inputPhone" >
-			    	</div>
-  				</div>
-  				<div class="form-group">
-	        		<label for="inputComments" class="col-sm-4 control-label" style="text-align:right;">Comments</label>
-	        		<div class="col-sm-6">
-	         			<textarea rows="7" cols="49" class="form-info font-sansRegular fs-16px" style="resize:none;border:1px solid #acacac;" id="comments" name="comments" ng-model="comments"></textarea>
-	         		</div>
-	      	</div>
-
-	      	<div style="text-align:center;padding:20px 0px 30px;">
-        		<a href="#"><button type="submit" class="btn-start-quiz btn-qz btn-nxt font-sansRegular txt-upper col-lightcyan fs-20px" ng-click = "uploadFiles()" >SUBMIT</button> </a>
-      		</div>
-
-	      	</div>
-
-      		
-      
-      		
-      		
-    	</form>
-
+<section id="contactus">
+	 <div class="contact-title">
+			<p class="font-sansRegular" style="padding-top:10px;font-size:40px;">
+				We'd love to hear from you
+			</p>
 	</div>
-</div>
-<div style="padding-bottom:40px;"></div>
-<div class="divider" style="border-top:2px solid rgb(47, 185, 175);"></div>
+
+	<div class="contact-text">
+		<p class="contact-main-text" style="padding:10px 0px;color:rgb(70, 70, 70);">Get in touch</p>
+
+		<p class="stp-head-subtxt" style="padding-bottom:0px;">
+		Call us anytime 8am to 8pm Monday to Friday +65 9272 6032 or send us a message using the form below and we’ll get straight back to you.</p>
+
+		<div style="width:100%;margin:0 auto;padding-top:20px;">
+			<form>
+				<div class="row" style="margin:0 auto;padding-bottom:5px;">
+      				<div class="col-sm-4 col-md-4" style="text-align:left;">
+   						NAME *
+   					</div>
+  					<div class="col-sm-4 col-md-4" style="text-align:left;">
+   						EMAIL *
+   					</div>
+   					<div class="col-sm-4 col-md-4" style="text-align:left;">
+   						PHONE
+   					</div>
+  				</div>
+
+  				<div class="row" style="margin:0 auto;">
+      				<div class="col-sm-4 col-md-4">
+   						<input type="text" class="form-control" required>
+   					</div>
+  					<div class="col-sm-4 col-md-4">
+   						<input type="text" class="form-control" required>
+   					</div>
+   					<div class="col-sm-4 col-md-4">
+   						<input type="text" class="form-control">
+   					</div>
+  				</div>
+
+  				<div style="margin-top:40px;padding:40px 15px 0px;border-top:1px dashed black;">
+  					<p style="text-align:left;margin-bottom:0px;">MESSAGE *</p>
+  					<textarea rows="9" cols="50" class="form-info font-sansRegular fs-16px" style="resize:none;border:1px solid #acacac;width:100%;" id="contactUsMsg" name="contactUsMsg"></textarea>
+  				</div>
+
+  				<div style="padding:30px 0px 0px 15px;float:left;">
+        			<button type="submit" class="btn-start-quiz btn-qz font-sansRegular col-lightcyan fs-20px" ng-click="submitComment()" style="padding:10px 20px 10px;">SUBMIT</button>
+        		</div>
+			</form>
+		</div>
+	</div>
+</section>
+
+<!-- <div style="padding-bottom:40px;"></div> -->
+<!-- <div class="divider" style="border-top:2px solid rgb(47, 185, 175);"></div> -->
+
+
+ <!--  <div class="col-lg-2">
+   
+      <input type="text" class="form-control">
+ 
+ 
+
+
+</div>  -->
