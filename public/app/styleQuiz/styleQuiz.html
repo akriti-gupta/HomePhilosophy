@@ -20,6 +20,40 @@
  
 <div ng-controller="QuizController" class="qz-container">
 
+  <div class="modal" id="quizModal" tabindex="-1" role="dialog" aria-labelledby="quizModalLabel" >
+      <div class="modal-dialog" role="document" >
+        <div class="modal-content">
+          <div class="modal-header" style="border:none;">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="padding-left">&times;</span></button>
+          </div>
+          
+          <div class="modal-body comment-modal-body">
+            <div class="font-playfair fs-responsive-med" > 
+              <p style="padding-bottom:40px;">What is your design style?</p>
+    
+              <div style="position:relative; width:65%; margin:auto;">
+                <div class="fs-22px" style="display:inline-block;"> Not sure? Take our</div>
+                <div  class="fs-22px" style="float:right;">
+
+                 <!-- ng-click="nextPage();quiz(1)" -->
+                  <button type="button" class="take-qz-btn" ng-click="nextPage();" style="padding-left:23px;padding-right:23px;" >STYLE QUIZ</button>
+                </div>
+
+                <div style="clear:both; padding-bottom:40px;"></div>
+                <div class="fs-22px" style="display:inline-block;"> 
+                  <p>I already know!</p>
+                </div>
+                <div  class="fs-22px" style="float:right;">
+                  <button type="button" class="take-qz-btn" ng-click="quiz(1)">SELECT STYLE</button>
+                </div>
+              </div>
+            </div>
+            <div style="clear:both; padding-bottom:70px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   <div id="stylePageMain" ng-show="pagenum===1"> 
     <p  class="font-playfair fs-responsive-med">What would you like Home Philosophy to design?</p>
     <p class="font-sansRegular fs-11px" style="padding-bottom:50px;">[Choose multiple rooms for an entire apartment design]</p>
@@ -170,60 +204,27 @@
     <div class="progress">
      <div class="progress-bar" style="width: {{progressRate}}%"></div>
       <div class="one primary-color"></div>
-      <div class="two" ng-style="pagenum>4 ? { 'background-color':'#00a99d'} : { 'background-color': '#cccccc' }"></div>
+      <div class="two" ng-style="pagenum>2 ? { 'background-color':'#00a99d'} : { 'background-color': '#cccccc' }"></div>
 
      
-      <div class="three" ng-style="pagenum>5 ? { 'background-color':'#00a99d'} : { 'background-color': '#cccccc' }"></div>
-      <div class="four no-color" ng-style="pagenum>6 ? { 'background-color':'#00a99d'} : { 'background-color': '#cccccc' }"></div>
-      <div class="five no-color" ng-style="pagenum>7 ? { 'background-color':'#00a99d'} : { 'background-color': '#cccccc' }"></div>
-      <div class="six no-color" ng-style="pagenum>8 ? { 'background-color':'#00a99d'} : { 'background-color': '#cccccc' }"></div>
+      <div class="three" ng-style="pagenum>3 ? { 'background-color':'#00a99d'} : { 'background-color': '#cccccc' }"></div>
+      <div class="four no-color" ng-style="pagenum>4 ? { 'background-color':'#00a99d'} : { 'background-color': '#cccccc' }"></div>
+      <div class="five no-color" ng-style="pagenum>5 ? { 'background-color':'#00a99d'} : { 'background-color': '#cccccc' }"></div>
+      <div class="six no-color" ng-style="pagenum>6 ? { 'background-color':'#00a99d'} : { 'background-color': '#cccccc' }"></div>
      
 
       <div class="lbl-one one">1</div>
-      <div class="lbl-two two" ng-show="pagenum>3">2</div>
-      <div class="lbl-three three" ng-show="pagenum>4">3</div>
-      <div class="lbl-four four" ng-show="pagenum>5">4</div>
-      <div class="lbl-five five" ng-show="pagenum>6">5</div>
-      <div class="lbl-six six" ng-show="pagenum>7">6</div>
+      <div class="lbl-two two" ng-show="pagenum>2">2</div>
+      <div class="lbl-three three" ng-show="pagenum>3">3</div>
+      <div class="lbl-four four" ng-show="pagenum>4">4</div>
+      <div class="lbl-five five" ng-show="pagenum>5">5</div>
+      <div class="lbl-six six" ng-show="pagenum>6">6</div>
     </div>
   </div>
   <!-- Progress bar ends -->
 
 
-<div ng-show="pagenum===2" class="font-playfair fs-responsive-med" > 
-    <p style="padding-bottom:80px;">What is your design style?</p>
-     <!-- <div class="fs-22px" style="padding:40px 0px 0px;margin-left:40px;"> 
-       <p>Not sure? Take our 
-         <button type="button" class="take-qz-btn" ng-click="quiz(1)">STYLE QUIZ</button>
-</p>
-       
-    </div> -->
-    <div style="position:relative; width:25%; margin:auto;">
-    <!-- <div class="fs-22px" style="padding:0px 0px 0px 200px;float:left;width:30%;">  -->
-    <div class="fs-22px" style="display:inline-block;"> 
-       Not sure? Take our
-    </div>
-    <!-- <div  class="fs-22px" style="float:right;width:70%;"> -->
-    <div  class="fs-22px" style="float:right;">
-      <button type="button" class="take-qz-btn" ng-click="nextPage();quiz(1)" style="padding-left:23px;padding-right:23px;">STYLE QUIZ</button>
-    </div>
-
-<div style="clear:both; padding-bottom:40px;"></div>
-
-    <!-- <div class="fs-22px" style="padding:0px 0px 0px 70px;float:left;width:30%;">  -->
-    <div class="fs-22px" style="display:inline-block;"> 
-       <p>I already know!</p>
-    </div>
-    <div  class="fs-22px" style="float:right;">
-         <button type="button" class="take-qz-btn" ng-click="quiz(2)">SELECT STYLE</button>
-    </div>
-    </div>
-</div>
-<div style="clear:both; padding-bottom:70px;"></div>
-   
-
-
-  <div ng-show="pagenum===3" class="font-playfair fs-responsive-med" > 
+  <div ng-show="showDesignStyle" class="font-playfair fs-responsive-med" > 
     <p style="padding-bottom:50px;">What is your design style?</p>
      <div ng-repeat="styles in stylePref track by $index">
       <div class="row qz-row-dsg">
@@ -243,13 +244,13 @@
 
     <div class="fs-22px" style="padding:40px 0px 0px;"> 
        <p style="margin:0px;">Not sure? Take our 
-         <button type="button" class="take-qz-btn" ng-click="quiz(1)">STYLE QUIZ</button>
+         <button type="button" class="take-qz-btn" ng-click="nextPage();">STYLE QUIZ</button>
 
        </p>
     </div>
   </div>
 
-  <div ng-show="pagenum===4" class="font-playfair fs-responsive-med" > 
+  <div ng-show="pagenum===2" class="font-playfair fs-responsive-med" > 
     <p style="padding-bottom:50px;">Which living room do you want to relax in?</p>
     <div ng-repeat="styles in styleQuest1 track by $index">
       <div class="row qz-row">
@@ -263,7 +264,7 @@
     
   </div>
 
-  <div ng-show="pagenum===5" class="font-playfair fs-responsive-med"> 
+  <div ng-show="pagenum===3" class="font-playfair fs-responsive-med"> 
     <p style="padding-bottom:50px;">Which bedroom do you like best?</p>
     <div ng-repeat="styles in styleQuest2 track by $index">
       <div class="row qz-row">
@@ -276,7 +277,7 @@
     </div>
   </div>
 
-  <div ng-show="pagenum===6" class="font-playfair fs-responsive-med"> 
+  <div ng-show="pagenum===4" class="font-playfair fs-responsive-med"> 
     <p style="padding-bottom:50px;">Which dining room do you want to entertain in?</p>
     <div ng-repeat="styles in styleQuest3 track by $index">
       <div class="row qz-row">
@@ -289,7 +290,7 @@
     </div>
   </div>
 
-  <div ng-show="pagenum===7" class="font-playfair fs-responsive-med"> 
+  <div ng-show="pagenum===5" class="font-playfair fs-responsive-med"> 
     <p style="padding-bottom:50px;">Which kitchen do you want to cook in?</p>
     <div ng-repeat="styles in styleQuest4 track by $index">
       <div class="row qz-row">
@@ -302,7 +303,7 @@
     </div>
   </div>
 
-  <div ng-show="pagenum===8" class="font-playfair fs-responsive-med"> 
+  <div ng-show="pagenum===6" class="font-playfair fs-responsive-med"> 
     <p style="padding-bottom:50px;">What texture is your favourite?</p>
     <div ng-repeat="styles in styleQuest5 track by $index">
       <div class="row qz-row">
@@ -318,7 +319,7 @@
 
 
 
-  <div ng-show="pagenum===9" class="font-playfair fs-responsive-med"> 
+  <div ng-show="pagenum===7" class="font-playfair fs-responsive-med"> 
     <p style="padding-bottom:50px;">If you had to choose a colour palette it would be...</p>
     <div ng-repeat="styles in styleColor track by $index">
       <div class="row qz-row-dsg">
@@ -335,13 +336,11 @@
     </div>
   </div>
 
-  
-
-
 
 <!--Pinterest Board -->
-  <div ng-show="pagenum===10" data-title="Picture Selection">
+  <div ng-show="pagenum===8" data-title="Picture Selection">
 
+    <!--MOdal code begins -->
      <div class="modal" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel" >
       <div class="modal-dialog" role="document" >
         <div class="modal-content">
@@ -350,10 +349,10 @@
           </div>
           
           <div class="modal-body comment-modal-body">
-            <div style="position:relative;width:90%;margin:0 auto;text-align:center;" ng-show="roomSelectionArr.length>1">
+            <div style="position:relative;width:90%;margin:0 auto;text-align:center;" ng-show="selRoomNamesArr.length>1">
               
               <ul class="comment-room-list" style="margin-bottom:20px;" >
-                <li ng-repeat="selRoom in roomSelectionArr track by $index" class="pinboard-comment-litem" ng-class="isActive($index)" data-room-id="{{$index}}"><a href="#"  ng-click="saveCmtsOnTabClick($index)">{{selRoom}}</a></li>
+                <li ng-repeat="selRoom in selRoomNamesArr track by $index" class="pinboard-comment-litem" ng-class="isActive($index)" data-room-id="{{$index}}"><a href="#"  ng-click="saveCmtsOnTabClick($index)">{{selRoom}}</a></li>
               </ul>
             
             </div>
@@ -370,7 +369,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> <!--Comment Modal code ends -->
 
     <div class="modal" id="zoomModal" tabindex="-1" role="dialog" aria-labelledby="zoomModalLabel" >
       <div class="modal-dialog" role="document" >
@@ -427,7 +426,7 @@
 
 
 
-  <div ng-show="pagenum===11" class="prg-dtl-ctr">
+  <div ng-show="pagenum===9" class="prg-dtl-ctr">
     <div class="prg-wrp">
       <div class="progress-result">
         <!-- <div class="progress-bar"></div> -->
@@ -480,12 +479,18 @@
     </div> 
   </div>
     
-<div class="icon-prev" ng-show="pagenum!=1 && pagenum!=10 && pagenum!=11"><a href="#" ng-click="prev();"> &lt;&lt; </a></div>
+<div class="icon-prev" ng-show="pagenum!=1 && pagenum!=8 && pagenum!=9"><a href="#" ng-click="prev();"> &lt;&lt; </a></div>
 
   <!-- Buttons -->
-  <div style="text-align:center;padding:80px 0px 100px;clear:both;" ng-show="pagenum!=10">
+  <div style="text-align:center;padding:80px 0px 100px;clear:both;" ng-show="pagenum!=1 && pagenum!=8">
     <!-- <button type="button" class="btn-qz btn-bk" ng-click="prev();">Back</button> -->
-    <button type="button" class="btn-qz btn-nxt" ng-show="pagenum===1 || pagenum===11" ng-disabled="disable" ng-click="nextPage()">Next</button>
+    <button type="button" class="btn-qz btn-nxt" ng-show="pagenum===9" ng-disabled="disable" ng-click="nextPage()">Next</button>
+  </div>
+
+  <div style="text-align:center;padding:80px 0px 100px;clear:both;" ng-show="pagenum===1">    
+    <a href="#" data-toggle="modal" data-target="#quizModal">
+      <button type="button" class="btn-qz btn-nxt" ng-disabled="disable">Next</button>
+    </a>
   </div>
   
 </div> <!--Main Div QuizController -->

@@ -11,38 +11,27 @@ angular.module('app')
 angular.module("app")
 		  .controller("QuizController",function($scope,$location,$window,quizResult,$http,mvIdentity,mvUserQuiz,imageService,angularGridInstance){
 
-
-
-
-// $http.get('/getScores', function(request, response){
-// 						console.log("Inside cb of scores");
-// 						console.log("Response is: "+response);
-// 						console.log("Response is: "+response.data);
-// 						console.log(response.data.success);
-// 					});
-
-	
 				
     $scope.progressRate=16.6; 
 	$scope.pagenum = 1;
-	$scope.selectedImages = [];
-	$scope.selectedRoom = [];
-	$scope.identity = mvIdentity;
+	$scope.board=1;	
 	$scope.progress = false;
 	$scope.progress_result=true;
-	var prefStyle = [];
-	$scope.userStyle = [];
-	$scope.board=1;	
 	$scope.disable = true;
-	$scope.arrImgLiked = [];
+	$scope.showDesignStyle = false;
 	$scope.room_comments = "";
-	var last_active_room_id = 0;
+	$scope.imgCmtsArr = [];
+	$scope.selRoomNamesArr = [];
+	$scope.selectedImages = [];
+	$scope.selectedRoom = [];
+	$scope.userStyle = [];
+	$scope.arrImgLiked = [];
+
+	var prefStyle = [];
 	var arrComments = [];
 	var roomCommentArr = [];
-	$scope.imgCmtsArr = [];
-	$scope.image_id=-1;
-	$scope.roomSelectionArr = [];
-
+	var last_active_room_id = 0;
+	
 	 $scope.units = [
 	 	 {'id': 0, 'label': '',value:0},
          {'id': 1, 'label': '1',value:1},
@@ -948,8 +937,6 @@ angular.module("app")
 	}
 
 	// To maintain the quiz result and style quiz pages state when redirected here after login.
-	// console.log("quizResult.getStyle() is :"+quizResult.getStyle());
-	// console.log("Stored result len is:"+quizResult.getStyle().length)
 	if(quizResult.getStyle().length>=1){
 		$scope.userStyle = quizResult.getStyle();
 		$scope.pagenum=11;
@@ -961,15 +948,6 @@ angular.module("app")
 	if($scope.pagenum===11){
 		$scope.disable=false;
 	}
-
-	// if(mvIdentity.isAuthenticated()){
-	// 	//console.log('user is isAuthenticated');
-	// 	$scope.gotoLink = "styleQuiz";
-	// }
-	// else{
-	// 	//console.log('User not authenticated. going to login page');
-	// 	$scope.gotoLink = "login";
-	// }
 	
 	$scope.nextPage = function(){
 		
@@ -978,55 +956,42 @@ angular.module("app")
 
 		switch(currentPage){
 
-			case 1: //quizResult.clearStyle();
-					
-					// alert($scope.selectedRoom);
+			case 0: $scope.showDesignStyle = false;
+					$scope.pagenum = 2;
 
-					saveRoomInfo();
+			case 1: saveRoomInfo();
+					$scope.progress = true;
+					angular.element('#quizModal').modal('hide');
 					scrollTop();
 					break; 
 
-			 case 2: //$location.path('/op-process');
-			 		 scrollTop();
-					 break;
+			case 2: 
 
-			case 3: console.log('Store already known style here');
-					quizResult.storeUserQuizInfo({"roomSelected":$scope.selectedRoom,"quizImgSelected":$scope.selectedImages});
-					break;	
+			case 3: 	
 					
 			case 4:
 			case 5: 		
-			case 6:	
-			case 7:	  $scope.progressRate+=16.5
-					  scrollTop();	
+			case 6:	  $scope.progressRate+=16.5;
 					  break;
 
-			case 8: console.log('currentPage: '+currentPage);
+					// Clicked on Colors Page.
+			case 7:	$scope.progress=false;
 					$scope.computeStyle();
-					$scope.progressRate+=16.5;
-					scrollTop();
-					break;
-
-
-			case 9: $scope.progress=false;
 					$scope.refresh(); 
-					scrollTop();
-					break;
+					  //scrollTop();	
+					  break;
 
-
-			case 10: //Pinboard
+			case 8:
 					
 					$scope.disable = false;
 
 					if(mvIdentity.isAuthenticated()){
 						var result = quizResult.getStyle();
 						var userSelectionInfo = quizResult.getCustSelections();
-						console.log('In quizController, userSelectionInfo before sending to DB is: ');
-						console.log(userSelectionInfo);
-						console.log('In quizController, result before sending to DB is: ');
-						console.log(result);
-		  				mvUserQuiz.saveUserData(userSelectionInfo, result).then(function(){
-		  					console.log('In login ctrl after saving user data');
+		  				mvUserQuiz.saveUserData(userSelectionInfo, result).then(function(userQuiz){
+		  					console.log('Inqzctrl, userQuiz is: ');
+		  					console.log(userQuiz);
+		  					quizResult.setUserCurrQuiz(userQuiz.data.quizId);
 		  				}, function(reason){
 		  					console.log(reason);
 		  				});
@@ -1040,39 +1005,21 @@ angular.module("app")
 					break;
 
 
-			case 11:// $scope.progress_result=true;
+			case 9:// $scope.progress_result=true;
 
 					 $location.path('/tell-us-more');
 					 break;
-
-			// default:
-
-			// 		//Show up login page, transfer control with scope. Return. Once logged in
-			// 		 //show the page.
-			// 		if(mvIdentity.isAuthenticated()){
-			// 			$scope.progress = false;	
-			// 		}
-			// 		else{
-			// 		 	console.log("Going to Login page");
-			// 		}
-			// 		break;
-
-												 
-		}
+			}
 	}
 
 	$scope.quiz = function(option){
-		// alert($scope.pagenum);
-		$scope.selectedImages[$scope.pagenum] = -1;
-		scrollTop();
 		if(option===1){
-			$scope.progress = true;
-			$scope.pagenum=4;			
+			//$scope.progress = true;
+			// $scope.pagenum=4;	
+			$scope.pagenum = 0;		
+			$scope.showDesignStyle = true;
+			angular.element('#quizModal').modal('hide');
 		}
-
-		else
-			$scope.pagenum++;
-		//$scope.disable = true;
 
 		
 	}
@@ -1097,11 +1044,18 @@ angular.module("app")
 		var totF = 0;
 
 		// console.log($scope.selectedImages);
-		var sel1 = $scope.selectedImages[4];
-		var sel2 = $scope.selectedImages[5];
-		var sel3 = $scope.selectedImages[6];
-		var sel4 = $scope.selectedImages[7];
-		var sel5 = $scope.selectedImages[8];
+		var sel1 = $scope.selectedImages[0];
+		var sel2 = $scope.selectedImages[1];
+		var sel3 = $scope.selectedImages[2];
+		var sel4 = $scope.selectedImages[3];
+		var sel5 = $scope.selectedImages[4];
+
+
+		// var sel1 = $scope.selectedImages[4];
+		// var sel2 = $scope.selectedImages[5];
+		// var sel3 = $scope.selectedImages[6];
+		// var sel4 = $scope.selectedImages[7];
+		// var sel5 = $scope.selectedImages[8];
 
 
 		// alert(sel1 + " " +sel2 + " " + sel3 + " " +sel4 + " "+sel5);
@@ -1296,39 +1250,36 @@ angular.module("app")
 			// console.log("Final, room arr is: "+$scope.selectedRoom);
 		}
 		else{
-			$scope.selectedImages[$scope.pagenum] =  imageId;
+			//$scope.selectedImages[$scope.pagenum] =  imageId;
+			$scope.selectedImages.push(imageId);
 			console.log('$scope.selectedImages is: '+$scope.selectedImages);
-			//$scope.disable=false;
-			if($scope.pagenum!=9)
+			if($scope.pagenum!=7)
 				$scope.nextPage();
 		}
 	}
 
 	$scope.prev = function(){
-		if($scope.pagenum==11){
-			$scope.refresh();
-		}
-		if($scope.pagenum>3 && $scope.pagenum<10){
-			$scope.progressRate-=16.5;
-		}
+		
+		$scope.selectedImages.pop();
+		console.log($scope.selectedImages);
 
-		if($scope.pagenum<=3){
+		//Back clicked from style already known.
+		if($scope.pagenum===0){
+			$scope.refresh();
+			$scope.showDesignStyle = false;
+			$scope.pagenum =1;
+		}	
+		
+		else if($scope.pagenum>=2 && $scope.pagenum<=7){
+		 	$scope.progressRate-=16.5;
+		 	$scope.pagenum--;
+		 }
+
+		if($scope.pagenum===1){
+			$scope.progressRate=16.5;
 			$scope.progress=false;
 		}
-
-		if($scope.pagenum>1){
-			$scope.pagenum--;
-		}
-
-		else{
-			$location.path('/');
-		}
-
-		
-   		 scrollTop();  
-		
-
-		
+   		scrollTop();  
 
 	}
 
@@ -1351,13 +1302,8 @@ angular.module("app")
 		
 		
 		for(var i in $scope.selectedRoom){
-			console.log('In For of saveRoomInfo');
-			console.log($scope[$scope.selectedRoom[i].room_name]);
 			if($scope[$scope.selectedRoom[i].room_name].value===0){
 				console.log('In If, updating values');
-				// $scope[$scope.selectedRoom[i].room_name] = 1;
-				// $scope.selectedRoom[i].room_num = 1; 
-				// $scope.selectedRoom[i].room_num.id = 1;
 				$scope[$scope.selectedRoom[i].room_name].id = 1;
 				$scope[$scope.selectedRoom[i].room_name].value = 1;
 				$scope[$scope.selectedRoom[i].room_name].label = "1";
@@ -1372,11 +1318,11 @@ angular.module("app")
 		for (var i in $scope.selectedRoom){
 			if($scope.selectedRoom[i].room_num.id > 1){
 				for(var j=1; j<= $scope.selectedRoom[i].room_num.id; j++){
-					$scope.roomSelectionArr.push($scope.selectedRoom[i].room_disp_name+' '+j);
+					$scope.selRoomNamesArr.push($scope.selectedRoom[i].room_disp_name+' '+j);
 				}
 			}
 			else{
-				$scope.roomSelectionArr.push($scope.selectedRoom[i].room_disp_name);
+				$scope.selRoomNamesArr.push($scope.selectedRoom[i].room_disp_name);
 			}
 		}
 	}
@@ -1395,30 +1341,6 @@ angular.module("app")
 			$scope.arrImgLiked.push(image_id);
 		}
 	}
-
-
-	
-	// $scope.loadComments = function(img_id,room_id,roomTabClicked){
-	// 	$scope.img_id = img_id;
-	// 	console.log('roomTabClicked is '+roomTabClicked + ' room_id = '+room_id);
-	// 	var comment = "";
-	// 	if(roomTabClicked){
-	// 		comment = getRoomComments(room_id);
-	// 		if(comment===""){
-	// 			//Check in master array, if commented earlier and launched comment box again
-	// 			comment = getImgCmtForRoom(img_id,room_id);
-	// 		}
-	// 	}
-	// 	else{
-
-	// 		// roomCommentArr=[];
-	// 		console.log('Comment Icon Clicked, fetching cmt for img_id: '+img_id+' and room_id: '+room_id);
-	// 		comment = getImgFirstCmt($scope.img_id);
-	// 	}
-		
-	// 	$scope.room_comments = comment;
-	// }
-
 
 	$scope.loadComments = function(img_id,room_id){
 		$scope.img_id = img_id;
@@ -1520,188 +1442,6 @@ angular.module("app")
 		console.log(arrComments);
 		last_active_room_id = 0;
 	}
-
-	// $scope.saveCmtsOnImage = function(room_id,arrTemp){
-	// 	var idx_exitsingObj = -1;
-
-
-	// 	if(idx_exitsingObj===-1){
-	// 		arrComments.push({"image_id":$scope.img_id, "comments":arrTemp});
-	// 	}
-	// }
-
-
-
-	// //on li click, submitFlag=0, 1 on Submit hit
-	// $scope.saveImgRoomCmts = function(room_id,submitFlag){
-
-	// 	console.log('In saveImgRoomCmts: '+submitFlag);
-	// 	console.log(typeof(submitFlag));
-	// 	if(submitFlag===1) console.log('Submitted');
-	// 	else console.log('Tab Clicked');
-		
-	// 	saveRoomComment($scope.img_id,room_id);
-		
-	// 	if(submitFlag===0){
-	// 		// showExistingComment(img_id,room_id);
-	// 		console.log('Now loading latest active room cmts');
-	// 		$scope.loadComments($scope.img_id,room_id,true);
-	// 	}
-	// 	if(submitFlag===1){
-	// 		saveImgCmts($scope.img_id);
-	// 	}
-	// }
-
-	// $scope.submitImgCmts = function(item){
-	// 	var img_id = item.currentTarget.getAttribute("data-img-id");
- //        var last_active_rid = item.currentTarget.getAttribute("data-room-id");
-	// 	$scope.saveImgRoomCmts(active_room_tab,1);
-	// 	active_room_tab = 0;
-	// }
-
-	
-
-	// function saveRoomComment(img_id,room_id){
-	// 	console.log('Saving cmts for room_id :' +active_room_tab +' of image: '+img_id);
-	// 	var commentArr;
-	// 	// console.log(active_room_tab + " and " +room_id );
-	// 	if($scope.selectedRoom.length>1){
-	// 		var cmt_index = indexOfRoomCmt(roomCommentArr,active_room_tab,$scope.room_comments);
-	// 		console.log('exists cmt index = '+cmt_index);
-	// 		if(cmt_index==-1){
-	// 			if($scope.room_comments!=""){
-	// 				roomCommentArr.push({"room_id":active_room_tab, "room_comments":$scope.room_comments});
-	// 			}
-	// 		}
-	// 		else if(cmt_index >= 0){				
-	// 			roomCommentArr.splice(cmt_index,1);
-	// 			roomCommentArr.push({"room_id":active_room_tab, "room_comments":$scope.room_comments});
-	// 		}
-			
-			
-	// 		active_room_tab = room_id;
-	// 		console.log('After saving room cmts, roomCommentArr = ');
-	// 		console.log(roomCommentArr);
-			
-	// 	}
-	// 	//Only 1 room selected on page 1
-	// 	else{
-	// 		// roomCommentArr
-	// 	}
-
-	// }
-
-	// function saveImgCmts(img_id){
-
-	// 	//Check if cmt exits and splice and save, else
-	// 	console.log('In save of image Comment');
-	// 	var imgComments = isExistsImgCmt(img_id);
-	// 	console.log('existing cmt obj for img: '+imgComments);
-	// 	if(imgComments!=-1){
-	// 		$scope.imgCmtsArr.splice(imgComments,1);
-	// 	}
-	// 	$scope.imgCmtsArr.push({"image_id":img_id, "comments":roomCommentArr});	
-		
-		
-	// 	roomCommentArr=[];
-	// 	console.log('After saving img cmts, arr is:');
-	// 	console.log($scope.imgCmtsArr);
-
-	// }
-
-	// // $scope.showExistingComment = function(img_id, room_id){
-	// // 	var current_comment = roomCommentExists(room_id);
-	// // 	$scope.room_comments = current_comment;
-	// // }
-	// //submitFlag = true when comments submitted per image. false when room tabs clicked and cmts per room have to be saved.
-	
-
-	
-
-	// function getRoomComments(room_id){
-	// 	var comment = "";
-	// 	console.log('In getting room cmts, rommcmtsarr is:');
-	// 	console.log(roomCommentArr);
-	// 	for(var i =0;i<roomCommentArr.length;i++){
-	// 		if(roomCommentArr[i].room_id===room_id){
-	// 			comment = roomCommentArr[i].room_comments;
-	// 			break;
-	// 		}
-	// 	}
-	// 	console.log('Returning Comment: '+comment);
-	// 	return comment;
-	// }
-
-	// function getImgFirstCmt(img_id){
-	// 	var comments ="";
-	// 	console.log('In getImgFirstCmt, imgCmtArr len is: '+$scope.imgCmtsArr.length+ ' and arr is: ');
-	// 	console.log($scope.imgCmtsArr);
-	// 	console.log('Img_id passed is: '+img_id);
-	// 	for(var i =0;i<$scope.imgCmtsArr.length;i++){
-	// 		console.log('$scope.imgCmtsArr[i].image_id = '+$scope.imgCmtsArr[i].image_id);
-	// 		console.log(typeof($scope.imgCmtsArr[i].image_id));
-	// 		console.log(typeof(img_id));
-	// 		if(parseInt($scope.imgCmtsArr[i].image_id)===img_id){
-	// 			console.log('Matches..');
-	// 			console.log($scope.imgCmtsArr[i].comments[0]);
-	// 			console.log($scope.imgCmtsArr[i].comments[0].room_comments);
-	// 			comments =  $scope.imgCmtsArr[i].comments[0].room_comments;
-	// 			break;
-	// 		}
-	// 	}	
-	// 	console.log('In getImgFirstCmt, comments is: '+comments);
-	// 	return comments;
-	// }
-
-	// function getImgCmtForRoom(img_id, room_id){
-	// 	var comments ="";
-	// 	console.log('In getImgFirstCmt, imgCmtArr len is: '+$scope.imgCmtsArr.length+ ' and arr is: ');
-	// 	console.log($scope.imgCmtsArr);
-	// 	console.log('Img_id passed is: '+img_id);
-	// 	for(var i =0;i<$scope.imgCmtsArr.length;i++){
-	// 		console.log('$scope.imgCmtsArr[i].image_id = '+$scope.imgCmtsArr[i].image_id);
-	// 		console.log(typeof($scope.imgCmtsArr[i].image_id));
-	// 		console.log(typeof(img_id));
-	// 		if(parseInt($scope.imgCmtsArr[i].image_id)===img_id){
-	// 			console.log('Matches..');
-	// 			for(var j=0;j<$scope.imgCmtsArr[i].comments.length; j++){
-	// 				if($scope.imgCmtsArr[i].comments[j].room_id===room_id){
-	// 					comments = $scope.imgCmtsArr[i].comments[j].room_comments;
-	// 				}
-	// 			}
-	// 			break;
-	// 		}
-	// 	}	
-	// 	console.log('In getImgFirstCmt, comments is: '+comments);
-	// 	return comments;
-	// }
-
-	// function isExistsImgCmt(img_id){
-	// 	var cmt_index = -1;
-	// 	for(var i =0;i<$scope.imgCmtsArr.length;i++){
-	// 		if($scope.imgCmtsArr[i].image_id===img_id){
-	// 			cmt_index = i;
-	// 			break;
-	// 		}
-	// 	}	
-	// 	return cmt_index;
-	// }
-
-	
-
-	// //Return -1 if room has no comment or no change in comment
-	// function indexOfRoomCmt(roomCommentArr,room_id,commentsEntered){
-	// 	for(var i =0 ; i< roomCommentArr.length; i++){
-	// 		if(roomCommentArr[i].room_id===room_id){
-	// 			if(roomCommentArr[i].room_comments === commentsEntered){
-	// 				return -2;
-	// 			}
-	// 		return i;
-	// 		}
-	// 	}
-	// 	return -1;
-	// }
-
 
 });
 
