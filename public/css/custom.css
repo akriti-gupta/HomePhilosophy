@@ -1310,7 +1310,7 @@ div.faq.show {
 }
 #contactus{
   height:1100px;
-  background-image:url('/images/contactbg.png');
+  background-image:url('/images/contactbg1.png');
   background-size: cover;
   background-position: 0 -20px;
   position: relative;
@@ -1326,15 +1326,15 @@ div.faq.show {
   
 }
 .contact-title{
-  top: 15%;
+  top: 10%;
   height: 7%;
-  width: 50%;
+  width: 40%;
 }
 .contact-text{
-  top: 25%;
+  top: 12%;
   height: 58%;
   opacity: 0.95;
-  width: 50%;
+  width: 40%;
 }
 .contact-main-text{
   font-family:"PlayfairDisplay-Regular";
