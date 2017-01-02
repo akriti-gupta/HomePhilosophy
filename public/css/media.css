@@ -223,6 +223,24 @@
         .upload-btn{
             margin-left:4px;
         }
+        .portfolio-txt{
+            font-size:13px;
+        }
+        .portfolio-information {
+            padding: 0px;
+            display: inline-block;
+            height: inherit;    
+        }
+        .portfolio-information .stats {
+            border-right: none;
+            padding: 0px 20px;
+            text-align: center;
+            width:70%;
+            margin: 0px auto;
+        }
+        .portfolio-information .comment {
+            padding: 10px 30px;
+        }
 
     }
 
@@ -262,6 +280,11 @@
         .slide img{
             border: 10px solid white;
         }
+        .portfolio-title{
+            padding:10px 0px;
+            font-size:15px;
+        }
+
        
     }
     /* Small Devices, Tablets */
