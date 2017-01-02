@@ -291,6 +291,13 @@
         .edsg-flex-child{ /* Used in About Us */
             margin-top: 0px;
         }
+        .flex-ctr{ /* Used in Pricing */
+            padding-bottom: 100px; 
+        }
+        .pricing-footnote{
+            padding: 5px;
+            font-size: 10px;
+        }
 
        
     }

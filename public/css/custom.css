@@ -1271,7 +1271,7 @@ div.faq.show {
 
 
 #pricing-section{
-  height:1100px;
+  min-height:1100px;
   background-image:url('/images/pricing_bg.png');
   background-size: cover;
   /*background-position: 0 -20px;*/
@@ -1283,7 +1283,7 @@ div.faq.show {
   background-color:#f4f5f6;
   opacity:0.95;
   position:absolute;
-  top:93.5%;
+  bottom: 0px;
   text-align:center;
   padding:20px;
   font-size:14px;
