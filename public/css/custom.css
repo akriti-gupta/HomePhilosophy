@@ -1101,8 +1101,8 @@ padding:40px 0px 60px;font-size:22px;margin:0;font-family:PlayfairDisplay-Regula
 }
 .about-maintext{
   font-family: PlayfairDisplay;
-font-style: normal;
-font-size: 19px;
+  font-style: normal;
+  font-size: 19px;
   color: rgb(37, 37, 37);
 }
 .container-about-txt{
@@ -1110,6 +1110,13 @@ font-size: 19px;
   padding-top: 60px;
   max-width: 710px; 
 }
+.about-title{
+  font-size: 25px;
+  font-family: Playfair-Display;
+  padding-bottom: 20px;
+  letter-spacing: 1px;
+}
+
 .btn-faq{
   top: 570px;
   left: calc(50% - 70px);
@@ -1123,7 +1130,7 @@ font-size: 19px;
   width:80%;
   margin: 0 auto;
   background-color: #fff;
-  height: 1600px;
+  /*height: 1600px;*/
   min-height: 920px;
 }
 
@@ -1148,6 +1155,9 @@ font-size: 19px;
     border-left: solid 50px transparent;
     border-right: solid 50px transparent;
 }
+.about-panel2{
+  padding-top:180px;
+}
 
 .flex-ctr{
 
@@ -1163,8 +1173,8 @@ font-size: 19px;
   flex-basis: 0;
   flex-grow: 1;   
 }
-.edsg-flex-child{
-  margin: 10px; 
+.edsg-flex-child{ /* Used in About Us */
+  margin: 10px;  
   width: 350px;
 }
 
