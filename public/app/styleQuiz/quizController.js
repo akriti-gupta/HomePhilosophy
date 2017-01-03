@@ -988,13 +988,13 @@ angular.module("app")
 					if(mvIdentity.isAuthenticated()){
 						var result = quizResult.getStyle();
 						var userSelectionInfo = quizResult.getCustSelections();
-		  				mvUserQuiz.saveUserData(userSelectionInfo, result).then(function(userQuiz){
-		  					console.log('Inqzctrl, userQuiz is: ');
-		  					console.log(userQuiz);
-		  					quizResult.setUserCurrQuiz(userQuiz.data.quizId);
-		  				}, function(reason){
-		  					console.log(reason);
-		  				});
+		  				// mvUserQuiz.saveUserData(userSelectionInfo, result).then(function(userQuiz){
+		  				// 	console.log('Inqzctrl, userQuiz is: ');
+		  				// 	console.log(userQuiz);
+		  				// 	quizResult.setUserCurrQuiz(userQuiz.data.quizId);
+		  				// }, function(reason){
+		  				// 	console.log(reason);
+		  				// });
 						$scope.progress = false;
 						$scope.progress_result = true;
 					}
