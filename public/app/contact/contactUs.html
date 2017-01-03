@@ -26,7 +26,7 @@
  
 <section id="contactus">
 	 <div class="contact-title">
-			<p class="font-sansRegular" style="padding-top:10px;font-size:40px;">
+			<p class="font-sansRegular" style="padding:10px 0px;">
 				We'd love to hear from you
 			</p>
 	</div>
@@ -34,43 +34,44 @@
 	<div class="contact-text">
 		<p class="contact-main-text" style="padding:10px 0px;color:rgb(70, 70, 70);">Get in touch</p>
 
-		<p class="stp-head-subtxt" style="padding-bottom:0px;">
+		<p class="contact-subtxt" style="padding-bottom:0px;">
 		We're always available on +65 92726032, or you can leave us a message below and we'll get right back to you.</p>
 
+		
 		<div style="width:100%;margin:0 auto;padding-top:20px;">
 			<form>
-				<div class="row" style="margin:0 auto;padding-bottom:5px;">
-      				<div class="col-sm-4 col-md-4" style="text-align:left;">
-   						NAME *
-   					</div>
-  					<div class="col-sm-4 col-md-4" style="text-align:left;">
-   						EMAIL *
-   					</div>
-   					<div class="col-sm-4 col-md-4" style="text-align:left;">
-   						PHONE
-   					</div>
-  				</div>
+				<ul class="contactus-list">
+					<li>
+						<label for="contact_name">NAME *</label>
+						<div>
+							<input name="contact_name" id="contact_name" type="text" tabindex="1"  class="form-control" required>
+						</div>
+					</li>
 
-  				<div class="row" style="margin:0 auto;">
-      				<div class="col-sm-4 col-md-4" style="padding-right:0px;">
-   						<input type="text" class="form-control" required>
-   					</div>
-  					<div class="col-sm-4 col-md-4" style="padding-right:0px;">
-   						<input type="text" class="form-control" required>
-   					</div>
-   					<div class="col-sm-4 col-md-4">
-   						<input type="text" class="form-control">
-   					</div>
-  				</div>
+					<li>
+						<label for="contact_email">EMAIL *</label>
+						<div>
+							<input name="contact_email" id="contact_email" type="text" tabindex="2" class="form-control" required>
+						</div>
+					</li>
 
-  				<div style="margin-top:20px;padding:20px 15px 0px;border-top:1px dashed black;">
-  					<p style="text-align:left;margin-bottom:0px;">MESSAGE *</p>
-  					<textarea rows="9" cols="50" class="form-info font-sansRegular fs-16px" style="resize:none;border:1px solid #acacac;width:100%;" id="contactUsMsg" name="contactUsMsg"></textarea>
-  				</div>
+					<li>
+						<label for="contact_phone">PHONE </label>
+						<div>
+							<input name="contact_phone" id="contact_phone" type="text" tabindex="3" class="form-control" >
+						</div>
+					</li>
+				</ul>
 
-  				<div style="padding:5px 0px 0px 15px;float:left;">
-        			<button type="submit" class="btn-start-quiz btn-qz font-sansRegular col-lightcyan fs-20px" ng-click="submitComment()" style="padding:10px 20px 10px;">SUBMIT</button>
-        		</div>
+				<div style="margin-top:20px;padding:20px 15px 0px;border-top:1px dashed black;">
+					<p style="text-align:left;margin-bottom:0px;">MESSAGE *</p>
+					<textarea rows="9" cols="50" class="form-info font-sansRegular fs-16px" style="resize:none;border:1px solid #acacac;width:100%;" id="contactUsMsg" name="contactUsMsg"></textarea>
+	  			</div>
+
+				<div style="padding:5px 0px 10px 15px;text-align:left;">
+					<button type="submit" class="btn-start-quiz btn-qz font-sansRegular col-lightcyan fs-20px" ng-click="submitComment()" style="padding:10px 20px 10px;">SUBMIT</button>
+					<p></p>
+				</div>
 			</form>
 		</div>
 	</div>
