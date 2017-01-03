@@ -6,20 +6,20 @@ angular.module("app")
 		  	$scope.signin= function(username, password){
 		  		mvAuth.authenticateUser(username,password).then(function(success){
 		  			if(success){
-		  				// console.log("In login, quizResult.getStyle() is:"+quizResult.getStyle());
-		  				// console.log("Len is: "+quizResult.getStyle().length);
 		  				if(quizResult.getStyle().length>=1){
 		  					// saveQuizInfo();
 		  					var result = quizResult.getStyle();
 		  					var userSelectionInfo = quizResult.getCustSelections();
 		  					console.log('In LoginController, userSelectionInfo is:');
 		  					console.log(userSelectionInfo);
-		  					mvUserQuiz.saveUserData(userSelectionInfo, result).then(function(){
-		  						console.log('In login ctrl after saving user data');
-		  						mvNotifier.notify('Login success!');
-		  					}, function(reason){
-		  							mvNotifier.error(reason);
-		  					});
+		  					// mvUserQuiz.saveUserData(userSelectionInfo, result).then(function(userQuiz){
+		  					// 	console.log('In login ctrl after saving user data, userQuiz is:');
+		  					// 	console.log(userQuiz);
+		  					// 	quizResult.setUserCurrQuiz(userQuiz.data.quizId);
+		  					// 	mvNotifier.notify('Login success!');
+		  					// }, function(reason){
+		  					// 		mvNotifier.error(reason);
+		  					// });
 		  					
 		  					$location.path('/style-quiz');
 		  				}
@@ -60,8 +60,9 @@ angular.module("app")
 		  				//saveQuizInfo();
 		  				var userSelectionInfo = quizResult.getCustSelections();
 		  				var result = quizResult.getStyle();
-		  				mvUserQuiz.saveUserData(userSelectionInfo,result).then(function(){
+		  				mvUserQuiz.saveUserData(userSelectionInfo,result).then(function(userQuiz){
 		  					console.log('In login ctrl after saving user data');
+		  					quizResult.setUserCurrQuiz(userQuiz.data.quizId);
 		  					mvNotifier.notify('User account created!');
 		  				}, function(reason){
 		  					mvNotifier.error(reason);
