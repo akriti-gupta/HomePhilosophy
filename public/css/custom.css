@@ -331,17 +331,25 @@ button:focus {outline:0;}
   position: absolute;
   right: 0;
 }
-.topnav,.submenu-list {
+.topnav,.submenu-list,.contactus-list {
   list-style:none;
   text-align:left;
   margin: 0;
   padding: 0;
   z-index: 2;
 }
-.topnav{
+.topnav,.contactus-list{
   display: inline-block;
  }
-
+ 
+.contactus-list li{
+  width: auto;
+  display: -moz-inline-stack;
+  display:inline-block;
+  padding-top: 15px;
+  padding-bottom:2px;
+  margin: 0 5px;
+}
 .submenu-list{
   display: none;
   position:absolute;
@@ -357,10 +365,9 @@ button:focus {outline:0;}
   display:inline-block;
   padding-top: 15px;
   padding-bottom:2px;
-  /*padding-left: 2px;
-  padding-right: 2px;*/
   margin: 0 18px;
 }
+
 
 
 
@@ -1344,12 +1351,13 @@ div.faq.show {
 }
 .contact-title{
   top: 10%;
-  height: 7%;
+  /*height: 7%;*/
   width: 40%;
+  font-size:40px;
 }
 .contact-text{
   top: 12%;
-  height: 53%;
+  /*height: 53%;*/
   opacity: 0.95;
   width: 40%;
 }
