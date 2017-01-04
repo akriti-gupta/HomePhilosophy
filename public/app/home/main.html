@@ -28,9 +28,30 @@
     	<div class="tab_icon">
         	<a href="javascript:void(0);" onclick="displayDropDown()">&#9776;</a>
     	</div>
+
+
+    	 <div class="dropdown" style="padding-top:25px;" ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
+	    		<p style="text-align: right; padding-right: 85px;font-family:Montserrat-Regular;;font-size:12px;letter-spacing:1px;"><a href = "/login">SIGN IN</a></p>
+			</div>
+
+	    	<div class="dropdown" style="padding-top:25px;padding-left:730px;" ng-controller="LoginController" ng-show="identity.isAuthenticated()">
+	    		<a href="" data-toggle="dropdown" >{{identity.currentUser.username}}
+	    			<span class="caret"></span>
+	    		</a>
+				<ul class="dropdown-menu" style="left:730px;width:120px;min-width:0px;">
+					<li><a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a></p></li>
+	   				
+	  			</ul>
+			</div> 
+
+
+
+<!-- 
+    	<div style="padding-top:25px;"> 
+	    	<p style="text-align: right; padding-right: 20px;font-family:Montserrat-Regular;;font-size:12px;letter-spacing:1px;"><a href = "/login">SIGN IN</a></p>
+	    </div> -->
 	</div>
 </header>
-
 <section id="hero">
 	 <div class="hero-rect">
 		<div class="container-ctr-txt">
