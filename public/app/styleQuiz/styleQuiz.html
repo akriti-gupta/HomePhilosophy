@@ -7,8 +7,8 @@
         <ul class="qz-sub-list">
           <li ng-controller="LoginController" ng-hide="identity.isAuthenticated()"><a href="/login">Sign In</a></li>
           <!-- <li ng-controller="LoginController" ng-show="identity.isAuthenticated()"><a ng-click="signout()">Sign Out</a></li> -->
-          <li ><a href="/aboutUs">How it works</a></li>
-          <li><a href="/contactUs">Contact us</a></li>
+          <li ><a href="/about-us">How it works</a></li>
+          <li><a href="/contact-us">Contact us</a></li>
           <li ng-show="identity.currentUser.isAdmin()"><a href="/admin/users">User Admin </a></li>
         </ul>
       </li>
