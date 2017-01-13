@@ -1427,3 +1427,41 @@ div.faq.show {
   margin: 0 auto;
   padding-top: 50px;
 }
+
+.luxury-intro{
+  display: flex;
+}
+.ctr1{
+  /*flex:1.5656;*/
+  flex: 1;
+  background-color:#000;color:#fff;
+}
+.ctr2{
+  flex:0.5656;
+  padding-left:10px;
+}
+.lux-ctr-inner{
+  /*position:relative;width:70%;margin:0 auto;*/
+  padding: 0px 200px;
+}
+.lux-main-title{
+  padding-top:100px;
+  font-size:35px;
+  letter-spacing:1px;
+  font-family: PlayfairDisplay-Regular;
+}
+.lux-main-text{
+  padding-top:15px;
+  font-size:22px;
+  line-height: 200%;
+  font-family: PlayfairDisplay-Regular;
+}
+.lux-contact-text{
+   padding-top:120px;
+   font-size:22px;
+   font-family: PlayfairDisplay-Regular;
+}
+.lux-button{
+  padding-top:40px;
+  /*background-color: #c18348;*/
+}
