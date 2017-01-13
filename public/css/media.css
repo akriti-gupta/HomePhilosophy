@@ -235,6 +235,28 @@
             font-size: 20px;
             padding-bottom: 10px;
         }
+        /* .lux-ctr-inner{          
+           padding: 0px 10px;
+        }*/
+        .lux-main-title{
+            padding-top:20px;
+            font-size:12px;
+        }
+        .lux-main-text{
+            padding-top:5px;
+            font-size:10px;
+        }
+       .lux-contact-text{
+            padding-top:0px;
+            font-size:10px;
+       }
+       .lux-button{
+        padding-top: 0px;
+       }
+       .ctr2{
+            /*flex:1.5;*/
+            padding-left:5px;
+        }
 
     }
 
@@ -312,7 +334,10 @@
             width:90%;
             margin:0 15px;
         }
-        
+        .lux-ctr-inner{
+           /* width:95%;*/
+           padding: 0px 10px;
+        }
        
     }
     /* Small Devices, Tablets */
