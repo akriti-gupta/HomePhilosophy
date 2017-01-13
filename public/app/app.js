@@ -1,4 +1,5 @@
-angular.module('app',['ngResource','ngRoute','angularGrid','ngFileUpload', 'ui.bootstrap']); 
+// angular.module('app',['ngResource','ngRoute','angularGrid','ngFileUpload', 'ui.bootstrap']); 
+angular.module('app',['ngResource','ngRoute','angularGrid','ngFileUpload']); 
 
 
 angular.module('app')
