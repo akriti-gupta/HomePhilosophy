@@ -257,6 +257,11 @@
             /*flex:1.5;*/
             padding-left:5px;
         }
+        #contactus{
+            background-image:url('/images/contact1.jpg');
+            background-size: 480px 1100px;
+            background-position: -100px -20px;
+    }
 
     }
 
@@ -339,6 +344,14 @@
            padding: 0px 10px;
         }
        
+       #pricing-section{
+        display: none;
+       }
+
+        #pricing-section-media{
+            display: inline-block;
+
+        }
     }
     /* Small Devices, Tablets */
     @media only screen and (min-width : 768px) and (max-width: 800px) {
