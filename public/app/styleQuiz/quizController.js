@@ -70,6 +70,42 @@ angular.module("app")
 // TODO: Create a JSON file and read in the service. No hardcoding to be done.
 
 
+
+$scope.angularGridOptions;
+
+if($window.innerWidth <=700){
+	$scope.angularGridOptions = {
+					gridWidth: 150,
+					gutterSize:10,
+					gridNo:2
+		};
+}
+else{
+		$scope.angularGridOptions = {
+			gridWidth: 300,
+			gutterSize:40
+		};
+}
+
+angular.element($window).bind('resize',function(){
+	console.log('Resized');
+	console.log('Win size is: ');
+	console.log($window.innerWidth);
+
+	if($window.innerWidth<=700){
+		$scope.$apply(function(){
+			$scope.angularGridOptions = {
+				gridWidth: 150,
+				gutterSize:10,
+				gridNo:2
+			};
+		});
+	}
+
+
+});
+
+$scope.gridWidth=300;
 	$scope.pics =[{
 				isrc: "images/styles/styleBoards/master/1.png",
 				actualWidth: "300px",
@@ -496,97 +532,202 @@ angular.module("app")
 
 			  ]; 
 
-	$scope.pics4 =[{
+	// $scope.pics4 =[{
+	// 			isrc: "images/styles/styleBoards/classic/1.png",
+	// 			actualWidth: "300px",
+	// 			actualHeight: "390px"
+	// 		  },
+	// 		  {
+	// 			isrc: "images/styles/styleBoards/classic/2.png",
+	// 			actualWidth: "300px",
+	// 			actualHeight: "300px"
+	// 		  },
+	// 		  {
+	// 			isrc: "images/styles/styleBoards/classic/3.png",
+	// 			actualWidth: "300px",
+	// 			actualHeight: "480px"
+	// 		  },
+
+	// 		  {
+	// 			isrc: "images/styles/styleBoards/classic/5.png",
+	// 			actualWidth: "300px",
+	// 			actualHeight: "490px"
+	// 		  },
+
+	// 		  {
+	// 			isrc: "images/styles/styleBoards/classic/4.png",
+	// 			actualWidth: "300px",
+	// 			actualHeight: "300px"
+	// 		  },
+			  
+			  
+			  
+	// 		  {
+	// 			isrc: "images/styles/styleBoards/classic/6.png",
+	// 			actualWidth: "300px",
+	// 			actualHeight: "400px"
+	// 		  },
+			  
+			  
+			  
+	// 		  {
+	// 			isrc: "images/styles/styleBoards/classic/7.png",
+	// 			actualWidth: "300px",
+	// 			actualHeight: "370px"
+	// 		  },
+			  
+			  
+			  
+	// 		  {
+	// 			isrc: "images/styles/styleBoards/classic/8.png",
+	// 			actualWidth: "300px",
+	// 			actualHeight: "350px"
+	// 		  },
+			  
+			  
+			  
+	// 		  {
+	// 			isrc: "images/styles/styleBoards/classic/9.png",
+	// 			actualWidth: "300px",
+	// 			actualHeight: "430px"
+	// 		  },
+			  
+			  
+			  
+	// 		  {
+	// 			isrc: "images/styles/styleBoards/classic/10.png",
+	// 			actualWidth: "300px",
+	// 			actualHeight: "480px"
+	// 		  },
+			  
+			  
+			  
+	// 		  {
+	// 			isrc: "images/styles/styleBoards/classic/11.png",
+	// 			actualWidth: "300px",
+	// 			actualHeight: "350px"
+	// 		  },
+	// 		  {
+	// 			isrc: "images/styles/styleBoards/classic/12.png",
+	// 			actualWidth: "300px",
+	// 			actualHeight: "300px",
+	// 			imgCredit: "Design by Nottdesign. Photo by A. Avdeenko"
+	// 		  },
+			   
+	// 		  {
+	// 			isrc: "images/styles/styleBoards/classic/14.png",
+	// 			actualWidth: "300px",
+	// 			actualHeight: "470px"
+	// 		  },
+	// 		  {
+	// 			isrc: "images/styles/styleBoards/classic/13.png",
+	// 			actualWidth: "300px",
+	// 			actualHeight: "370px",
+	// 			imgCredit: "Designer kimberly Demmy Design. Photo by Daniel O’Connor"
+	// 		  },
+			  
+			  
+			  
+	// 		  {
+	// 			isrc: "images/styles/styleBoards/classic/15.png",
+	// 			actualWidth: "300px",
+	// 			actualHeight: "300px"
+	// 		  }
+
+	// 		  ]; 
+
+
+$scope.pics4 =[{
 				isrc: "images/styles/styleBoards/classic/1.png",
-				actualWidth: "300px",
-				actualHeight: "390px"
+				actualWidth: "300",
+				actualHeight: "390"
 			  },
 			  {
 				isrc: "images/styles/styleBoards/classic/2.png",
-				actualWidth: "300px",
-				actualHeight: "300px"
+				actualWidth: "300",
+				actualHeight: "300"
 			  },
 			  {
 				isrc: "images/styles/styleBoards/classic/3.png",
-				actualWidth: "300px",
-				actualHeight: "480px"
+				actualWidth: "300",
+				actualHeight: "480"
 			  },
 
 			  {
 				isrc: "images/styles/styleBoards/classic/5.png",
-				actualWidth: "300px",
-				actualHeight: "490px"
+				actualWidth: "300",
+				actualHeight: "490"
 			  },
 
 			  {
 				isrc: "images/styles/styleBoards/classic/4.png",
-				actualWidth: "300px",
-				actualHeight: "300px"
+				actualWidth: "300",
+				actualHeight: "300"
 			  },
 			  
 			  
 			  
 			  {
 				isrc: "images/styles/styleBoards/classic/6.png",
-				actualWidth: "300px",
-				actualHeight: "400px"
+				actualWidth: "300",
+				actualHeight: "400"
 			  },
 			  
 			  
 			  
 			  {
 				isrc: "images/styles/styleBoards/classic/7.png",
-				actualWidth: "300px",
-				actualHeight: "370px"
+				actualWidth: "300",
+				actualHeight: "370"
 			  },
 			  
 			  
 			  
 			  {
 				isrc: "images/styles/styleBoards/classic/8.png",
-				actualWidth: "300px",
-				actualHeight: "350px"
+				actualWidth: "300",
+				actualHeight: "350"
 			  },
 			  
 			  
 			  
 			  {
 				isrc: "images/styles/styleBoards/classic/9.png",
-				actualWidth: "300px",
-				actualHeight: "430px"
+				actualWidth: "300",
+				actualHeight: "430"
 			  },
 			  
 			  
 			  
 			  {
 				isrc: "images/styles/styleBoards/classic/10.png",
-				actualWidth: "300px",
-				actualHeight: "480px"
+				actualWidth: "300",
+				actualHeight: "480"
 			  },
 			  
 			  
 			  
 			  {
 				isrc: "images/styles/styleBoards/classic/11.png",
-				actualWidth: "300px",
-				actualHeight: "350px"
+				actualWidth: "300",
+				actualHeight: "350"
 			  },
 			  {
 				isrc: "images/styles/styleBoards/classic/12.png",
-				actualWidth: "300px",
-				actualHeight: "300px",
+				actualWidth: "300",
+				actualHeight: "300",
 				imgCredit: "Design by Nottdesign. Photo by A. Avdeenko"
 			  },
 			   
 			  {
 				isrc: "images/styles/styleBoards/classic/14.png",
-				actualWidth: "300px",
-				actualHeight: "470px"
+				actualWidth: "300",
+				actualHeight: "470"
 			  },
 			  {
 				isrc: "images/styles/styleBoards/classic/13.png",
-				actualWidth: "300px",
-				actualHeight: "370px",
+				actualWidth: "300",
+				actualHeight: "370",
 				imgCredit: "Designer kimberly Demmy Design. Photo by Daniel O’Connor"
 			  },
 			  
@@ -594,8 +735,8 @@ angular.module("app")
 			  
 			  {
 				isrc: "images/styles/styleBoards/classic/15.png",
-				actualWidth: "300px",
-				actualHeight: "300px"
+				actualWidth: "300",
+				actualHeight: "300"
 			  }
 
 			  ]; 
@@ -977,7 +1118,7 @@ angular.module("app")
 					// Clicked on Colors Page.
 			case 7:	$scope.progress=false;
 					$scope.computeStyle();
-					$scope.refresh(); 
+					//$scope.refresh(); 
 					  //scrollTop();	
 					  break;
 
@@ -988,13 +1129,13 @@ angular.module("app")
 					if(mvIdentity.isAuthenticated()){
 						var result = quizResult.getStyle();
 						var userSelectionInfo = quizResult.getCustSelections();
-		  				// mvUserQuiz.saveUserData(userSelectionInfo, result).then(function(userQuiz){
-		  				// 	console.log('Inqzctrl, userQuiz is: ');
-		  				// 	console.log(userQuiz);
-		  				// 	quizResult.setUserCurrQuiz(userQuiz.data.quizId);
-		  				// }, function(reason){
-		  				// 	console.log(reason);
-		  				// });
+		  				mvUserQuiz.saveUserData(userSelectionInfo, result).then(function(userQuiz){
+		  					console.log('Inqzctrl, userQuiz is: ');
+		  					console.log(userQuiz);
+		  					quizResult.setUserCurrQuiz(userQuiz.data.quizId);
+		  				}, function(reason){
+		  					console.log(reason);
+		  				});
 						$scope.progress = false;
 						$scope.progress_result = true;
 					}

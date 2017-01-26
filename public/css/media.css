@@ -116,6 +116,9 @@
             font-size:9px;
             height:30px;
         }
+        .grid-pos{
+            width:95%;
+        }
 
         .login-ctr{
             width:95%;
