@@ -296,7 +296,7 @@
             padding-left: 0px;
         }
 
-         .slick-slide:not(.slick-center) {
+         .portfolio-carousel .slick-slide:not(.slick-center) {
             transform: scale(0.8,1);  
         }
         .center .slick-prev{
