@@ -21,11 +21,16 @@
             font-size: 12px;
         }
         .hp-logo{
-            width:45%;
-            background-image:url('/images/logo-head-sml.png');
+            width:30%;
+            background-image:url('/images/logo-head-sml1.png');
             margin:0px;
+            background-size: 60%;
         }
         /*Home page*/
+        #hero{
+            background-image:url('/images/banner_sml.png');
+        }
+
         .exp-maintext,.col-inspiring{
             font-size:20px;
         }
@@ -224,6 +229,7 @@
         }
         .portfolio-information .comment {
             padding: 10px 30px;
+            font-size: 12px;              
         }
          .container-about-txt{
             padding-top: 40px;
@@ -262,6 +268,9 @@
             background-size: 480px 1100px;
             background-position: -100px -20px;
     }
+      /*  .concept-center .slide img{
+            width:600px;
+        }*/
 
     }
 
@@ -290,11 +299,11 @@
          .slick-slide:not(.slick-center) {
             transform: scale(0.8,1);  
         }
-        .slick-prev{
+        .center .slick-prev{
             left:0px;
             top:35%;
         }
-        .slick-next{
+        .center  .slick-next{
             right:0px;
             top:35%;
         }

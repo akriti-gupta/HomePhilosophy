@@ -20,6 +20,15 @@
 	        <li><a href="/faq">FAQ</a></li>
 	        <li><a href="/contact-us">Contact us</a></li>
 	        <li>
+
+
+<div class="dropdown" ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
+	    		<a href = "/login">SIGN IN</a>
+			</div>
+
+
+	        </li>
+	        <li>
 	            <a href="/style-quiz" id="start-quiz">
 	                <button type="button" class="btn-start-quiz btn-topnav font-montserrat txt-upper col-lightcyan fs-14px">Get Started</button>
 	            </a>
@@ -30,7 +39,7 @@
     	</div>
 
 
-    	 <div class="dropdown" style="padding-top:25px;" ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
+    	 <div class="dropdown nav-login" style="padding-top:25px;" ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
 	    		<p style="text-align: right; padding-right: 85px;font-family:Montserrat-Regular;;font-size:12px;letter-spacing:1px;"><a href = "/login">SIGN IN</a></p>
 			</div>
 
@@ -130,12 +139,33 @@
 
 	<script type="text/javascript">
 
+	// $('.concept-center').slick({  
+	//   lazyLoad: 'ondemand',
+	//   infinite: false,
+	//   speed: 500,
+	//   dots: false,
+	//   arrows: true,
+	//   centerMode: true,
+	//   centerPadding: '0px',
+	//   focusOnSelect: true,
+	//   responsive: [
+	//     {
+	//       breakpoint: 1000,
+	//       settings: {
+	//         focusOnSelect: false
+	//       }
+	//     }
+	//   ]
+	// });
+
 	$('.concept-center').slick({  
-	  lazyLoad: 'ondemand',
+	  lazyLoad: 'progressive',
 	  infinite: false,
-	  speed: 500,
+	  
 	  dots: false,
-	  focusOnSelect: true,
+	  // variableWidth: true,
+
+	  
 	  responsive: [
 	    {
 	      breakpoint: 1000,
@@ -146,21 +176,33 @@
 	  ]
 	});
 
+
 	</script>
+
+	<!-- <div class="concept-center">
+    						<div>
+      							<div class="slide"><img data-lazy="images/firstLooks/3.jpg" /></div>
+    						</div>
+
+    						<div>
+      							<div class="slide"><img data-lazy="images/firstLooks/scandi.jpg" /></div>
+        					</div>
+						</div> -->
 
 	<div class="modal" id="firstLookModal" 
 						aria-labelledby="firstLookModal">
-		<div class="modal-dialog" style="width:690px;">
+		<!-- <div class="modal-dialog" style="max-width:690px;"> -->
+		<div class="modal-dialog">
         	<div class="modal-content">
 				<div class="modal-body">
 					<div class="content">
   						<div class="concept-center">
     						<div>
-      							<div class="slide"><img data-lazy="images/firstLooks/3.jpg"/></div>
+      							<div class="slide"><img data-lazy="images/firstLooks/3.jpg" width="100%"/></div>
     						</div>
 
     						<div>
-      							<div class="slide"><img data-lazy="images/firstLooks/scandi.jpg"/></div>
+      							<div class="slide"><img data-lazy="images/firstLooks/scandi.jpg" width="100%"/></div>
         					</div>
 						</div>
     				</div>
