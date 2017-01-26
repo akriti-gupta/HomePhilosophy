@@ -681,7 +681,7 @@ padding-top:6px; padding-bottom:6px;letter-spacing:1px;
 }
 
 .modal-shpList{
-  width:480px;
+  max-width:480px;
 }
 
 
