@@ -493,11 +493,20 @@ button:focus {outline:0;}
         float: none;
         display: list-item;
         margin: 10px 0;
-    }    
+        border-bottom: 1px solid #64C6BE;
+        padding-top:0px;
+    } 
+    #hp-nav ul.responsive li:nth-child(7){
+        border-bottom: none;
+    }
+    #hp-nav ul.responsive li:nth-child(8){
+        /*border-bottom: none;*/
+        display: none;
+    }   
 
     #hp-nav ul.responsive li a {
         display: block;
-        text-align: left;
+        text-align: center;
     }
     .submenu-list {
    
@@ -703,11 +712,11 @@ padding:10px;
 }
 
 /* Concept Board*/
-.slick-slider
+/*.slick-slider
 {
     margin: 10px;
 }
-
+*/
 .concept-center .slick-prev:before, .concept-center .slick-next:before {
   color: #000;
 }
@@ -1198,6 +1207,10 @@ padding:40px 0px 60px;font-size:22px;margin:0;font-family:PlayfairDisplay-Regula
   width: 350px;
 }
 
+.edsg-last-spacer{
+  padding-bottom: 100px;
+}
+
 .circle1,.circle{
   height: 35px;
   width: 35px;
@@ -1340,6 +1353,16 @@ div.faq.show {
   font-size: 60px;
   padding: 10px 0px;
 }
+.price-dollar{
+  font-size:50px;  
+}
+.pkg-select-ctr{
+  padding-bottom:40px;
+}
+.price-pkg-end{
+  padding-bottom:30px;
+}
+
 .pkg-item{
   font-family: PlayfairDisplay-Regular;
   font-size: 18px;
@@ -1354,8 +1377,8 @@ div.faq.show {
   padding: 10px 70px;
 }
 #contactus{
-  height:1100px;
-  background-image:url('/images/contactbg1.png');
+  height:800px;
+  background-image:url('/images/contactbg2.png');
   background-size: cover;
   background-position: 0 -20px;
   position: relative;
@@ -1370,21 +1393,30 @@ div.faq.show {
   text-align: center;
   
 }
+.contact-msg-title{
+    text-align:left;margin-bottom:0px;padding-left:162px;
+  }
 .contact-title{
   top: 10%;
   /*height: 7%;*/
-  width: 40%;
+  width: 60%;
   font-size:40px;
 }
 .contact-text{
   top: 12%;
   /*height: 53%;*/
   opacity: 0.95;
-  width: 40%;
+  width: 60%;
 }
 .contact-main-text{
   font-family:"PlayfairDisplay-Regular";
   font-size: 25px;
+}
+.contact-subtxt{
+  font-size:16px;
+}
+.contact-msg-box{
+  resize:none;border:1px solid #acacac;width:65%;
 }
 
 /*CUSTOMER DASHBOARD*/
@@ -1448,26 +1480,29 @@ div.faq.show {
   display: flex;
 }
 .ctr1{
-  /*flex:1.5656;*/
-  flex: 1;
-  background-color:#000;color:#fff;
+  flex:1.5656;
+  /*flex: 1;*/
+  display: flex;
+  background-color:#000;
+  color:#fff;
 }
 .ctr2{
-  flex:0.5656;
-  padding-left:10px;
-}
-.ctr1-test{
-  flex:1.5656;
-  background-color:#000;color:#fff;
-}
-.ctr2-test{
+  display: flex;
   flex:0.4;
   padding-left:10px;
 }
-
+/*.ctr1-test{
+  flex:1.5656;
+  background-color:#000;color:#fff;
+}*/
+/*.ctr2-test{
+  flex:0.4;
+  padding-left:10px;
+}
+*/
 .lux-ctr-inner{
   /*position:relative;width:70%;margin:0 auto;*/
-  padding: 0px 100px;
+  padding: 0px 155px;
 }
 .lux-main-title{
   padding-top:100px;
@@ -1476,17 +1511,39 @@ div.faq.show {
   font-family: PlayfairDisplay-Regular;
 }
 .lux-main-text{
-  padding-top:15px;
+  padding-top:30px;
   font-size:17px;
   line-height: 200%;
   font-family: PlayfairDisplay-Regular;
 }
+.lux-contact-ctr{
+  margin-top:10px;background-color:#000;color:#fff;
+  width:100%;
+}
 .lux-contact-text{
-   padding-top:70px;
+   padding-top:70%;
    font-size:17px;
    font-family: PlayfairDisplay-Regular;
+}
+.lux-panel2-img-ctr{
+  background-color:#fff;padding-top:10px;
+}
+
+.lux-pad{
+  padding-left:10px;
 }
 .lux-button{
   padding-top:40px;
   /*background-color: #c18348;*/
+}
+.btn-lux-contact{
+    color: #fff;
+    background-color:#c18348;
+    border-color: transparent;
+    text-decoration: none; 
+    font-size: 16px;
+    padding:10px 20px 10px;
+}
+.lux-panel3{
+  padding-bottom:40px;padding-top:10px;
 }

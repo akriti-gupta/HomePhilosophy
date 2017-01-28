@@ -20,13 +20,9 @@
 	        <li><a href="/faq">FAQ</a></li>
 	        <li><a href="/contact-us">Contact us</a></li>
 	        <li>
-
-
-<div class="dropdown" ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
-	    		<a href = "/login">SIGN IN</a>
-			</div>
-
-
+	        	<div class="dropdown" ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
+					 <a href = "/login">SIGN IN</a>
+				</div>
 	        </li>
 	        <li>
 	            <a href="/style-quiz" id="start-quiz">
@@ -38,27 +34,18 @@
         	<a href="javascript:void(0);" onclick="displayDropDown()">&#9776;</a>
     	</div>
 
+    	<div class="dropdown nav-login" style="padding-top:5px;" ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
+	    	<p style="text-align: right; padding-right: 85px;font-family:Montserrat-Regular;;font-size:12px;letter-spacing:1px;color:rgb(161,161,161);"><a href = "/login">SIGN IN</a></p>
+		</div>
 
-    	 <div class="dropdown nav-login" style="padding-top:25px;" ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
-	    		<p style="text-align: right; padding-right: 85px;font-family:Montserrat-Regular;;font-size:12px;letter-spacing:1px;"><a href = "/login">SIGN IN</a></p>
-			</div>
-
-	    	<div class="dropdown" style="padding-top:25px;padding-left:730px;" ng-controller="LoginController" ng-show="identity.isAuthenticated()">
-	    		<a href="" data-toggle="dropdown" >{{identity.currentUser.username}}
-	    			<span class="caret"></span>
-	    		</a>
-				<ul class="dropdown-menu" style="left:730px;width:120px;min-width:0px;">
-					<li><a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a></p></li>
-	   				
-	  			</ul>
-			</div> 
-
-
-
-<!-- 
-    	<div style="padding-top:25px;"> 
-	    	<p style="text-align: right; padding-right: 20px;font-family:Montserrat-Regular;;font-size:12px;letter-spacing:1px;"><a href = "/login">SIGN IN</a></p>
-	    </div> -->
+	    <div class="dropdown" style="padding-top:25px;padding-left:730px;" ng-controller="LoginController" ng-show="identity.isAuthenticated()">
+	    	<a href="" data-toggle="dropdown" >{{identity.currentUser.username}}
+	    		<span class="caret"></span>
+	    	</a>
+			<ul class="dropdown-menu" style="left:730px;width:120px;min-width:0px;">
+				<li><a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a></p></li>
+	   		</ul>
+		</div> 
 	</div>
 </header>
 <section id="hero">

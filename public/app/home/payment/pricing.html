@@ -20,6 +20,11 @@
 	        <li><a href="/faq">FAQ</a></li>
 	        <li><a href="/contact-us">Contact us</a></li>
 	        <li>
+            <div class="dropdown" ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
+           <a href = "/login">SIGN IN</a>
+        </div>
+          </li>
+	        <li>
 	            <a href="/style-quiz" id="start-quiz">
 	                <button type="button" class="btn-start-quiz btn-topnav font-montserrat txt-upper col-lightcyan fs-14px">Get Started</button>
 	            </a>
@@ -28,6 +33,19 @@
     	<div class="tab_icon">
         	<a href="javascript:void(0);" onclick="displayDropDown()">&#9776;</a>
     	</div>
+
+    	<div class="dropdown nav-login" style="padding-top:5px;" ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
+	    	<p style="text-align: right; padding-right: 85px;font-family:Montserrat-Regular;;font-size:12px;letter-spacing:1px;color:rgb(161,161,161);"><a href = "/login">SIGN IN</a></p>
+		</div>
+
+	    <div class="dropdown" style="padding-top:25px;padding-left:730px;" ng-controller="LoginController" ng-show="identity.isAuthenticated()">
+	    	<a href="" data-toggle="dropdown" >{{identity.currentUser.username}}
+	    		<span class="caret"></span>
+	    	</a>
+			<ul class="dropdown-menu" style="left:730px;width:120px;min-width:0px;">
+				<li><a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a></p></li>
+	   		</ul>
+		</div> 
 	</div>
 </header>
 
@@ -102,34 +120,36 @@
 	<div class="faq" style="background-color:#fff;height:35%;opacity:0.95;">
 	  	
 	  	<p class="pkg-desc pkg-divider">for a breath of fresh air</p>
-	  	<p class="pkg-price pkg-divider"> 350<span style="font-size:50px;"><sup>$</sup></span></p>
+	  	<p class="pkg-price pkg-divider"> 350<span class="price-dollar"><sup>$</sup></span></p>
 	  	<p class="pkg-item pkg-divider"> 2 First look concept boards</p>
 	  	<p class="pkg-item pkg-divider"> 1 Final look 2-D room board</p>
 	  	<p class="pkg-item pkg-divider">Personalized shopping list</p>
-	  	<div style="padding-bottom:40px;"></div>
+	  	<div class="pkg-select-ctr"></div>
 	  	<p><a href="#" ng-click = "savePayPkg(1)"><button type="submit" class="btn-select-pkg">SELECT</button></a></p>
-	  	<div style="padding-bottom:30px;"></div>
+	  	<div class="price-pkg-end"></div>
 	</div>
 
 	<button class="accordion" style="text-align:center;margin-top:40px;background-color:#fff;opacity:0.9;">CLASSIC</button>
 	<div class="faq" style="background-color:#fff;height:35%;opacity:0.95;">
 	  	
 	  	<p class="pkg-desc pkg-divider">for a noteable transformation</p>
-	  	<p class="pkg-price pkg-divider">600<span style="font-size:50px;"><sup>$</sup></span></p>
+	  	<p class="pkg-price pkg-divider">600<span class="price-dollar"><sup>$</sup></span></p>
 	  	<p class="pkg-item pkg-divider"> 2 First look concept boards</p>
 	  	<p class="pkg-item pkg-divider"> 1 Final look 2-D room board</p>
 	  	<p class="pkg-item pkg-divider">Paint and/or Wallpaper <br/>selections</p>
 	  	<p class="pkg-item pkg-divider">Furniture layout plan</p>
-	  	<div style="padding-bottom:40px;"></div>
+	  	<p class="pkg-item pkg-divider">Accessories selections111</p>
+	  	<p class="pkg-item pkg-divider">Personalized shopping list111</p>
+	  	<div class="pkg-select-ctr"></div>
 	  	<p><a href="#" ng-click="savePayPkg(2)"><button type="submit" class="btn-select-pkg">SELECT</button></a></p>
-	  	<div style="padding-bottom:30px;"></div>
+	  	<div class="price-pkg-end"></div>
 	</div>
 
 	<button class="accordion" style="text-align:center;margin-top:40px;background-color:#fff;opacity:0.9;">PREMIUM</button>
 	<div class="faq" style="background-color:#fff;height:35%;opacity:0.95;">
 	  	
 	  	<p class="pkg-desc pkg-divider">for a complete overhaul</p>
-	  	<p class="pkg-price pkg-divider"> 1000<span style="font-size:50px;"><sup>$</sup></span></p>
+	  	<p class="pkg-price pkg-divider"> 1000<span class="price-dollar"><sup>$</sup></span></p>
 	  	<p class="pkg-item pkg-divider"> 3 First look concept boards</p>
 	  	<p class="pkg-item pkg-divider"> 1 Final look 2-D room board</p>
 	  	<p class="pkg-item pkg-divider">Paint and/or Wallpaper selections</p>
@@ -137,9 +157,9 @@
 	  	<p class="pkg-item pkg-divider">Accessories selections</p>
 	  	<p class="pkg-item pkg-divider">Personalized shopping list</p>
 	  	<p class="pkg-item pkg-divider">Furniture layout plan</p>
-	  	<div style="padding-bottom:40px;"></div>
+	  	<div class="pkg-select-ctr"></div>
 	  	<p><a href="#" ng-click = "savePayPkg(3)"><button type="submit" class="btn-select-pkg">SELECT</button></a></p>
-	  	<div style="padding-bottom:30px;"></div>
+	  	<div class="price-pkg-end"></div>
 	</div>
 
 	<button class="accordion" style="text-align:center;margin-top:40px;background-color:#fff;opacity:0.9;">CUSTOM</button>
@@ -154,9 +174,9 @@
 	  	<p class="pkg-item pkg-divider">Space planning</p>
 	  	<p class="pkg-item pkg-divider">Furniture layout plan</p>
 	  	<p class="pkg-item pkg-divider">Furniture and <br/>accessories selections</p>
-	  	<div style="padding-bottom:40px;"></div>
+	  	<div class="pkg-select-ctr"></div>
 	  	<p><a href="#" ng-click = "savePayPkg(4)"><button type="submit" class="btn-select-pkg">SELECT</button></a></p>
-	  	<div style="padding-bottom:30px;"></div>
+	  	<div class="price-pkg-end"></div>
 	</div>
 </div>
 <div style="padding:20px;"></div>

@@ -28,7 +28,17 @@
         }
         /*Home page*/
         #hero{
-            background-image:url('/images/banner_sml.png');
+            background-image:url('/images/hero_sml.jpg');
+            background-position: -90px;
+        }
+
+        .hero-rect{
+            width:65%;
+            height:45%;
+        }
+
+        .container-ctr-txt{
+            padding: 50px;
         }
 
         .exp-maintext,.col-inspiring{
@@ -38,7 +48,7 @@
             font-size: 10px;
         }
         .btn-container{
-            top: 440px;
+            top: 410px;
             left: calc(50% - 70px);
         }
         .btn-hero{
@@ -68,6 +78,14 @@
         }
         .mask{
             left:77px;
+        }
+       
+        .section-divider > span{
+            width:200px;
+            font-size:14px;
+        }
+        .section-divider:before, .section-divider:after {
+            width: calc(50% - 100px);
         }
         #recent-designs{
             margin:0px 10px 60px;
@@ -118,6 +136,13 @@
         }
         .grid-pos{
             width:95%;
+        }
+        .image-status{
+            font-size:initial;
+            width: 15px;
+        }
+        .btn-comment{
+            margin-left:50%;
         }
 
         .login-ctr{
@@ -219,9 +244,10 @@
             font-size:13px;
         }
         .portfolio-information {
-            padding: 0px;
+            display: none;
+          /*  padding: 0px;
             display: inline-block;
-            height: inherit;    
+            height: inherit;    */
         }
         .portfolio-information .stats {
             border-right: none;
@@ -234,6 +260,11 @@
             padding: 10px 30px;
             font-size: 12px;              
         }
+
+
+        .portfolio-carousel .slide img {
+            border: 10px solid #fff;
+        }
          .container-about-txt{
             padding-top: 40px;
         }
@@ -244,9 +275,8 @@
             font-size: 20px;
             padding-bottom: 10px;
         }
-        /* .lux-ctr-inner{          
-           padding: 0px 10px;
-        }*/
+
+        /* LUXURY SPACES*/
         .lux-main-title{
             padding-top:20px;
             font-size:12px;
@@ -255,26 +285,70 @@
             padding-top:5px;
             font-size:10px;
         }
-       .lux-contact-text{
-            padding-top:0px;
+        .lux-contact-ctr{
+            margin-top:5px;
+        }
+        .lux-contact-text{
+            padding-top:10%;
             font-size:10px;
-       }
-       .lux-button{
-        padding-top: 0px;
-       }
-       .ctr2{
+        }
+        .lux-button{
+            padding-top: 0px;
+        }
+        .ctr1{
+            flex: 1;
+        }
+        .ctr2{
             /*flex:1.5;*/
             padding-left:5px;
         }
-        #contactus{
-            background-image:url('/images/contact1.jpg');
-            background-size: 480px 1100px;
-            background-position: -100px -20px;
-    }
-      /*  .concept-center .slide img{
-            width:600px;
-        }*/
+        .lux-panel2-img-ctr{
+            padding-top: 5px;
+        }
+        .lux-opt-text{
+            display: none;
+        }
+        .lux-pad{
+             padding-left:5px;
+        }
+        .btn-lux-contact{
+            font-size: 10px;
+            padding:initial;
+        }
+        .lux-panel3{
+            padding-top: 5px;
+        }
 
+        #contactus{
+            background-position: -100px -20px;
+            height: 1050px;
+        }
+        .contact-msg-title{
+            padding-left: 0px;
+        }
+        .contact-msg-box{
+            width: 99%;
+        }
+        .contact-subtxt {
+            font-size:14px;
+            padding: 0px 10px 0px 10px;
+        }
+        .contact-text .form-control{
+            height: initial;
+        }
+        .contact-text textarea{
+            height:150px;
+        }
+        
+        .qz-mnu li ul{
+            right:0px;
+            left:inherit;
+        }
+
+        /*Login page*/
+        .qz-mnu li .qz-sub-list-contact{
+            width: 255px;
+        }
     }
 
     /* Extra Small Devices, Phones */ 
@@ -331,12 +405,35 @@
             margin-top: 0px;
         }
         .flex-ctr{ /* Used in Pricing */
-            padding-bottom: 100px; 
+           /* padding-bottom: 100px; */
+        }
+        .edsg-last-spacer{
+             padding-bottom: 50px;
         }
         .pricing-footnote{
             padding: 5px;
             font-size: 10px;
         }
+        .pkg-price{
+            font-size: 50px;
+        }
+        .pkg-item{
+            font-size:12px;
+        }
+        .pkg-desc{
+            font-size: 14px;
+        }
+        .price-dollar{
+            font-size:40px;  
+        }
+        .pkg-select-ctr{
+            padding-bottom:20px;
+        }
+
+        .price-pkg-end{
+            padding-bottom:10px;
+        }
+
         .contact-title{
             width: 80%;
             font-size:20px;
