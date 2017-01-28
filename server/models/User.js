@@ -1,42 +1,42 @@
-var mongoose = require('mongoose');
-	var encrypt = require('../utilities/encryption');
+// var mongoose = require('mongoose');
+// 	var encrypt = require('../utilities/encryption');
 
-var userSchema = mongoose.Schema({
-		firstName: String,
-		lastName: String,
-		username: String,
-		password: String,
-		salt: String,
-		role: String,
-		token: String
+// var userSchema = mongoose.Schema({
+// 		firstName: String,
+// 		lastName: String,
+// 		username: String,
+// 		password: String,
+// 		salt: String,
+// 		role: String,
+// 		token: String
 
-	});
+// 	});
 
-userSchema.methods ={
-	authenticate: function(pswd){
-		return encrypt.hashPswd(pswd,this.salt)===this.password;
-	}
-}
-var User = mongoose.model('User',userSchema);
-
-
+// userSchema.methods ={
+// 	authenticate: function(pswd){
+// 		return encrypt.hashPswd(pswd,this.salt)===this.password;
+// 	}
+// }
+// var User = mongoose.model('User',userSchema);
 
 
 
-function createDefaultUsers(){
-	User.find({}).exec(function(err,collection){
-		if(collection.length===0){
-			var salt,hash;
-			salt = encrypt.createSalt();
-			hash = encrypt.hashPswd('test',salt)
-			User.create({firstName:'Admin',username:'admin@hp.com',salt: salt, password:hash, role:'admin'});
-		}
-	})
-}
+
+
+// function createDefaultUsers(){
+// 	User.find({}).exec(function(err,collection){
+// 		if(collection.length===0){
+// 			var salt,hash;
+// 			salt = encrypt.createSalt();
+// 			hash = encrypt.hashPswd('test',salt)
+// 			User.create({firstName:'Admin',username:'admin@hp.com',salt: salt, password:hash, role:'admin'});
+// 		}
+// 	})
+// }
 
 
 // //exports.User = User;
-exports.createDefaultUsers = createDefaultUsers;
+//exports.createDefaultUsers = createDefaultUsers;
 
 // var bookshelf = require('../config/bookshelf'),
 // 	encrypt = require('../utilities/encryption'),
@@ -83,3 +83,11 @@ exports.createDefaultUsers = createDefaultUsers;
 // });
 // module.exports = User;
 
+
+var mysqlConn = require('../config/mysqlConn');
+var encrypt = require('../utilities/encryption');
+
+exports.authenticate = function(enteredPswd,salt,recPswd){
+	console.log('In authenticate');
+		return encrypt.hashPswd(enteredPswd,salt)===recPswd;
+	}
