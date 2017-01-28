@@ -1,17 +1,14 @@
 <header id="site_header">
-  <a href="/"><div class="hp-logo"> 
-    <!-- <a href="/">
-            <img src="images/logo_header.png" />
-        </a> -->
-    </div></a>
+  <a href="/"><div class="hp-logo"></div></a>
     <div class="qz-mnu">
       <ul>
-        <li style="padding-bottom:70px;"><a href="#"><img src="images/menuIcon.png" width="60%" height="auto"></a>
-          <ul class="qz-sub-list">
+        <li><a href="#"><img src="images/menuIcon.png" width="60%" height="auto"></a>
+
+          <ul class="qz-sub-list-contact">
             <li ng-controller="LoginController" ng-hide="identity.isAuthenticated()"><a href="/login">Sign In</a></li>
             <li ng-controller="LoginController" ng-show="identity.isAuthenticated()"><a ng-click="signout()">Sign Out</a></li>
-            <li ><a href="#">How it works</a></li>
-            <li><a href="/contactUs">Contact us</a></li>
+            <li ><a href="/about-us">How it works</a></li>
+            <li><a href="/contact-us">Contact us</a></li>
           </ul>
         </li>
       </ul>
@@ -21,10 +18,8 @@
 <div ng-controller="LoginController" id="login-section">
   <div class="login-ctr">
     <p style="background-color:#000;padding-bottom:10px;height:1.5em;">&nbsp;</p>
-    <p class="txt-upper fs-responsive-lg font-playfair" style="padding-top:20px;color:rgb(54, 54, 54);">Sign Up to see Results</p>
+    <p class="txt-upper fs-responsive-lg font-playfair">Sign Up to see Results</p>
 
-   <!--  <p style="background-color:#000;margin-bottom:3em;height:1.5em;">&nbsp;</p>
-    <p class="txt-upper font-playfair fs-30px" style="color:rgb(54, 54, 54);">Sign Up to see Results</p> -->
 
     <p ng-show="showName" class="font-sansRegular fs-responsive-sml" style="color:rgb(112, 112, 112);">Already have an account? <a href="#" class="col-lightcyan" ng-click="showLogin()">Sign In </a></p>
 
