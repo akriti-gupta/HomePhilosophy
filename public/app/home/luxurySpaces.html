@@ -1,80 +1,53 @@
 <header id="site_header">
 	<a href="/"><div class="hp-logo"></div></a>
-		<!-- <a href="/"><img src="images/logo_header.png" /></a> -->
 	
 	<div id="hp-nav">
 	    <ul class="topnav">
-	        <!-- <li class="menu-list plist-border"> -->
-	        <li class="menu-list">
-	        	<!-- <ul class="submenu-list">
-	        	  <li><a href="/aboutUs">About us</a></li>
-	        	  <li><a href="/faq">FAQ</a></li>
-	        	</ul> -->
-	        	<!-- <a href="/op-process">How it works</a> -->
-	        	<a href="/about-us">How it works</a>
-	       </li>
+	        <li class="menu-list"><a href="/about-us">How it works</a></li>
 			<li><a href="/pricing">Pricing</a></li>
 	        <li><a href="/portfolio" id="portfolio-link">Portfolio</a></li>
 	        <li><a href="/luxury-spaces">Luxury spaces</a></li>
 	        <li><a href="/faq">FAQ</a></li>
 	        <li><a href="/contact-us">Contact us</a></li>
-	        <li>
-	            <a href="/style-quiz" id="start-quiz">
-	                <button type="button" class="btn-start-quiz btn-topnav font-montserrat txt-upper col-lightcyan fs-14px">Get Started</button>
-	            </a>
-	        </li>
+	        <li><div class="dropdown" ng-controller="LoginController" ng-hide="identity.isAuthenticated()"><a href = "/login">SIGN IN</a></div></li>
+	        <li><a href="/style-quiz" id="start-quiz"><button type="button" class="btn-start-quiz btn-topnav font-montserrat txt-upper col-lightcyan fs-14px">Get Started</button></a></li>
 	    </ul>
+    	
     	<div class="tab_icon">
         	<a href="javascript:void(0);" onclick="displayDropDown()">&#9776;</a>
     	</div>
 
 
-    	 <div class="dropdown" style="padding-top:25px;" ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
-	    		<p style="text-align: right; padding-right: 85px;font-family:Montserrat-Regular;;font-size:12px;letter-spacing:1px;"><a href = "/login">SIGN IN</a></p>
-			</div>
+    	<div class="dropdown nav-login" style="padding-top:5px;" ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
+	    	<p style="text-align: right; padding-right: 85px;font-family:Montserrat-Regular;;font-size:12px;letter-spacing:1px;color:rgb(161,161,161);"><a href = "/login">SIGN IN</a></p>
+		</div>
 
-	    	<div class="dropdown" style="padding-top:25px;padding-left:730px;" ng-controller="LoginController" ng-show="identity.isAuthenticated()">
-	    		<a href="" data-toggle="dropdown" >{{identity.currentUser.username}}
-	    			<span class="caret"></span>
-	    		</a>
-				<ul class="dropdown-menu" style="left:730px;width:120px;min-width:0px;">
-					<li><a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a></p></li>
-	   				
-	  			</ul>
-			</div> 
-
-
-
-<!-- 
-    	<div style="padding-top:25px;"> 
-	    	<p style="text-align: right; padding-right: 20px;font-family:Montserrat-Regular;;font-size:12px;letter-spacing:1px;"><a href = "/login">SIGN IN</a></p>
-	    </div> -->
+	    <div class="dropdown" style="padding-top:25px;padding-left:730px;" ng-controller="LoginController" ng-show="identity.isAuthenticated()">
+	    	<a href="" data-toggle="dropdown" >{{identity.currentUser.username}}
+	    		<span class="caret"></span>
+	    	</a>
+			<ul class="dropdown-menu" style="left:730px;width:120px;min-width:0px;">
+				<li><a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a></li>
+	   		</ul>
+		</div> 
 	</div>
 </header>
 
-<section>
-	<div class="luxury-intro" style="width:80%;margin:0 auto;">
-		<!-- <div style="width:70%;float:left;background-color:#000;color:#fff;"> -->
-			<!-- <div style="position:relative;width:70%;margin:0 auto"> -->
-			<div class="ctr1">
+<section id="lux-into">
+	<div class="luxury-intro">
+		<div class="ctr1">
 			<div class="lux-ctr-inner">
 				<p class="lux-main-title">
 					<span style="border-bottom:1px solid #c18348;padding-bottom:5px;">CUSTOM LUXURY SPACES</span>
 				</p>
 
 				<p  class="lux-main-text" style="padding-left:20px;padding-right:20px;">Home Philosophy Luxury Spaces creates elegant homes blended with balance and functionality.</p>
-				<p class="lux-main-text">We move beyond simply having branded furniture pieces at home, by understanding your requirements to the smallest detail and creatively crafting unique solutions to suit your lifestyle. Believers in the unparalleled form and functionality of good furniture, we have been sourcing curated pieces from across the globe since 2004. In addition, we work with a range of exclusive furniture brands that focus on effortlessly combining quality and design. </p>
-				<p  class="lux-main-text">Home Philosophy has worked with renowned architects to fully furnish a number of landed properties in Singapore. Our home philosophy - <br/>
+				<p class="lux-main-text">We move beyond simply having branded furniture pieces at home, by understanding your requirements to the smallest detail and creatively crafting unique solutions to suit your lifestyle. <span class="lux-opt-text">Believers in the unparalleled form and functionality of good furniture, we have been sourcing curated pieces from across the globe since 2004. In addition, we work with a range of exclusive furniture brands that focus on effortlessly combining quality and design. </span></p>
+				<p  class="lux-main-text lux-opt-text">Home Philosophy has worked with renowned architects to fully furnish a number of landed properties in Singapore.<br/> Our home philosophy - 
 				A beautifully designed home is the ultimate luxury. </p>
-				<p class="lux-contact-text">To talk to us about custom spaces:</p>
-
-				<!-- <div style="padding:40px 0px 342px 0px;"> -->
-				<div class="lux-button">
-							<p><button type="submit" class="btn-start-quiz btn-qz font-sansRegular fs-20px" ng-click="submitComment()" style="padding:10px 20px 10px;background-color:#c18348;">GET IN TOUCH</button></p>
-				</div>
+				
 			</div>
 		</div>
-		<!-- <div class="luxury-intro-img" style="width:30%;float:right;background-color:#fff;padding-left:10px;"> -->
 		<div class="ctr2">
 			<img src="images/luxury/sitting.png" width="100%" height="100%">	
 		</div>	
@@ -83,17 +56,46 @@
 
 <div style="clear:both;"></div>
 
-<div style="padding-top:10px;width:80%;margin:0 auto;">
-		<img src="images/luxury/dining.png" width="100%" height="auto">
-	</div>
-
-<section style="padding-top:10px;padding-bottom:40px;width:80%;margin:0 auto;">
+<section id="lux-contact">
 	<div class="luxury-intro">
-		<div>
-			<img src="images/luxury/staircase.png" width="100%" height="auto">
+		 <!-- <div style="float:left;width:79%"> -->
+		 <div class="ctr1">
+			<div class="lux-panel2-img-ctr">
+				<img src="images/luxury/dining.png" width="100%" height="auto">
+			</div>
 		</div>
-		<div>
-			<img src="images/luxury/archway.png" width="100%" height="auto">
+
+		<!-- <div style="float:right;width:20.5%;height:652px;margin-top:10px;background-color:#000;color:#fff;"> -->
+		<div class="ctr2">
+		<div class="lux-contact-ctr">
+			<p class="lux-contact-text">
+				To talk to us about custom spaces:
+			</p>
+			<div class="lux-button">
+				<p><button type="submit" class="btn-lux-contact font-sansRegular" ng-click="submitComment()">GET IN TOUCH</button></p>
+			</div>
+		</div>
 		</div>
 	</div>
 </section>
+
+<div style="clear:both;"></div>
+
+<section class="lux-panel3">
+	<div style="background-color:#fff;">
+	<!-- <div style="width:70%;margin:0 auto"> -->
+		<div class="luxury-intro">
+			<div>
+				<img src="images/luxury/staircase.png" width="100%" height="auto">
+			</div>
+			<div class="lux-pad">
+				<img src="images/luxury/archway.png" width="100%" height="auto">
+			</div>
+			<div class="lux-pad">
+				<img src="images/luxury/bath.jpg" width="100%" height="auto">
+			</div>
+		</div>
+	</div>
+</div>
+</section>
+

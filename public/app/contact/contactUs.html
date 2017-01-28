@@ -11,6 +11,11 @@
 	        <li><a href="/faq">FAQ</a></li>
 	        <li><a href="/contact-us">Contact us</a></li>
 	        <li>
+            <div class="dropdown" ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
+           <a href = "/login">SIGN IN</a>
+        </div>
+          </li>
+	        <li>
 	            <a href="/style-quiz" id="start-quiz">
 	                <button type="button" class="btn-start-quiz btn-topnav font-montserrat txt-upper col-lightcyan fs-14px">Get Started</button>
 	            </a>
@@ -18,19 +23,7 @@
 	        </li>
 	    </ul>
 
-	     <div class="dropdown" style="padding-top:5px;" ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
-	    		<p style="text-align: right; padding-right: 85px;font-family:Montserrat-Regular;font-size:12px;letter-spacing:1px;"><a href = "/login">SIGN IN</a></p>
-			</div>
-
-	    	<div class="dropdown" style="padding-top:5px;padding-left:730px;" ng-controller="LoginController" ng-show="identity.isAuthenticated()">
-	    		<a href="" data-toggle="dropdown" >{{identity.currentUser.username}}
-	    			<span class="caret"></span>
-	    		</a>
-				<ul class="dropdown-menu" style="left:730px;width:120px;min-width:0px;">
-					<li><a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a></p></li>
-	   				
-	  			</ul>
-			</div> 
+	     
 
 
 	   <!--  <div> 
@@ -40,6 +33,19 @@
     	<div class="tab_icon">
         	<a href="javascript:void(0);" onclick="displayDropDown()">&#9776;</a>
     	</div>
+
+    	<div class="dropdown nav-login" style="padding-top:5px;" ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
+	    	<p style="text-align: right; padding-right: 85px;font-family:Montserrat-Regular;;font-size:12px;letter-spacing:1px;color:rgb(161,161,161);"><a href = "/login">SIGN IN</a></p>
+		</div>
+
+	    <div class="dropdown" style="padding-top:25px;padding-left:730px;" ng-controller="LoginController" ng-show="identity.isAuthenticated()">
+	    	<a href="" data-toggle="dropdown" >{{identity.currentUser.username}}
+	    		<span class="caret"></span>
+	    	</a>
+			<ul class="dropdown-menu" style="left:730px;width:120px;min-width:0px;">
+				<li><a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a></p></li>
+	   		</ul>
+		</div> 
 	</div>
 </header>
 
@@ -59,8 +65,8 @@
 		We're always available on +65 92726032, or you can leave us a message below and we'll get right back to you.</p>
 
 		
-		<div style="width:100%;margin:0 auto;padding-top:20px;">
-			<form>
+		<div style="width:100%;margin:0 auto;">
+			<form name="contactUsForm">
 				<ul class="contactus-list">
 					<li>
 						<label for="contact_name">NAME *</label>
@@ -85,11 +91,11 @@
 				</ul>
 
 				<div style="margin-top:20px;padding:20px 15px 0px;border-top:1px dashed black;">
-					<p style="text-align:left;margin-bottom:0px;">MESSAGE *</p>
-					<textarea rows="9" cols="50" class="form-info font-sansRegular fs-16px" style="resize:none;border:1px solid #acacac;width:100%;" id="contactUsMsg" name="contactUsMsg"></textarea>
+					<p class="contact-msg-title">MESSAGE *</p>
+					<textarea rows="9" cols="50" class="form-info font-sansRegular fs-16px contact-msg-box"  id="contactUsMsg" name="contactUsMsg"></textarea>
 	  			</div>
 
-				<div style="padding:5px 0px 10px 15px;text-align:left;">
+				<div style="padding:5px 0px 10px 15px;text-align:center;">
 					<button type="submit" class="btn-start-quiz btn-qz font-sansRegular col-lightcyan fs-20px" ng-click="submitComment()" style="padding:10px 20px 10px;">SUBMIT</button>
 					<p></p>
 				</div>

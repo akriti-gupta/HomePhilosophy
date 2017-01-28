@@ -42,10 +42,5 @@ $(document).on('click','.accordion',function(e){
     
 });
 $(document).on('show.bs.modal','#firstLookModal',function(e){
-  //alert('Here');
   $('.concept-center').resize();
-  
-  
-    
-    
 });

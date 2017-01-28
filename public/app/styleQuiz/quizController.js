@@ -101,6 +101,14 @@ angular.element($window).bind('resize',function(){
 			};
 		});
 	}
+	else{
+		$scope.$apply(function(){
+			$scope.angularGridOptions = {
+				gridWidth: 300,
+				gutterSize:40
+			};
+		});
+	}
 
 
 });
