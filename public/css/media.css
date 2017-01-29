@@ -38,14 +38,14 @@
         }
 
         .container-ctr-txt{
-            padding: 50px;
+            padding: 40px;
         }
 
         .exp-maintext,.col-inspiring{
-            font-size:20px;
+            font-size:22px;
         }
         .exp-subtext{
-            font-size: 10px;
+            font-size: 12px;
         }
         .btn-container{
             top: 410px;
@@ -299,7 +299,7 @@
             flex: 1;
         }
         .ctr2{
-            /*flex:1.5;*/
+            flex:0.6;
             padding-left:5px;
         }
         .lux-panel2-img-ctr{
@@ -321,7 +321,7 @@
 
         #contactus{
             background-position: -100px -20px;
-            height: 1050px;
+            height: 910px;
         }
         .contact-msg-title{
             padding-left: 0px;
@@ -391,9 +391,13 @@
             padding:10px 0px;
             font-size:15px;
         }
-         .about-maintext{
+        .about-rect{
+            width: 80%;
+            height: 75%;
+        }
+        .about-maintext{
             font-size: 13px;
-            padding: 0px 5px;
+            padding: 0px 10px;
         }
         #edesign-divider{ /* Used in About Us */
             display: none;
@@ -415,7 +419,10 @@
             font-size: 10px;
         }
         .pkg-price{
-            font-size: 50px;
+            font-size: 65px;
+        }
+        .price-dollar{
+            font-size:50px;  
         }
         .pkg-item{
             font-size:12px;
@@ -424,7 +431,7 @@
             font-size: 14px;
         }
         .price-dollar{
-            font-size:40px;  
+            font-size:50px;  
         }
         .pkg-select-ctr{
             padding-bottom:20px;

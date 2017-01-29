@@ -1350,11 +1350,11 @@ div.faq.show {
 .pkg-price{
   /*font-family: "Myriad Pro";*/
   color: rgb(100, 198, 190);
-  font-size: 60px;
+  font-size: 75px;
   padding: 10px 0px;
 }
 .price-dollar{
-  font-size:50px;  
+  font-size:65px;  
 }
 .pkg-select-ctr{
   padding-bottom:40px;
