@@ -53,7 +53,7 @@ angular.module("app")
 		  			password: $scope.password
 		  		};
 
-		  		mvAuth.x(newUserData).then(function(){
+		  		mvAuth.createUser(newUserData).then(function(){
 		  			console.log('In login ctrl after saving user');
 		  			mvNotifier.notify('User account created!');
 		  			if(quizResult.getStyle().length>=1){
