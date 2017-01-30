@@ -158,3 +158,4 @@ $(document).on('click','.square',function(e){
 		$(this).addClass('style-img-selected');
 	}
 });
+

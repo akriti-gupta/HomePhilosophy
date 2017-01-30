@@ -2,7 +2,7 @@ var auth = require('./auth'),
 	quiz = require('./quiz'),	
 	multer = require('multer'),
 	users = require('../controllers/users'),
-	// userQuiz = require('../controllers/userQuiz'),
+	 userQuiz = require('../controllers/userQuiz'),
 	passport = require('passport'),
 	// payment = require('../controllers/payment'),
 	fs1 = require('fs');
@@ -75,8 +75,8 @@ module.exports = function(app){
 	});
 
 //COMMENTED TO OVERRIDE BOOKSHELF CODE
-	// app.post('/createUserQuiz',userQuiz.createUserQuiz);
-	// app.post('/saveUserQuizDtls',userQuiz.saveUserQuizDtls);
+	app.post('/createUserQuiz',userQuiz.createUserQuiz);
+	app.post('/saveUserQuizDtls',userQuiz.saveUserQuizDtls);
 	// app.post('/storePackage',payment.storePackage);
 	// app.post('/saveAppointment',userProject.saveAppointment);
 	// app.post('/saveFirstLook',userProject.saveFirstLook);

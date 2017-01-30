@@ -12,14 +12,14 @@ angular.module("app")
 		  					var userSelectionInfo = quizResult.getCustSelections();
 		  					console.log('In LoginController, userSelectionInfo is:');
 		  					console.log(userSelectionInfo);
-		  					// mvUserQuiz.saveUserData(userSelectionInfo, result).then(function(userQuiz){
-		  					// 	console.log('In login ctrl after saving user data, userQuiz is:');
-		  					// 	console.log(userQuiz);
-		  					// 	quizResult.setUserCurrQuiz(userQuiz.data.quizId);
-		  					// 	mvNotifier.notify('Login success!');
-		  					// }, function(reason){
-		  					// 		mvNotifier.error(reason);
-		  					// });
+		  					mvUserQuiz.saveUserData(userSelectionInfo, result).then(function(userQuiz){
+		  						console.log('In login ctrl after saving user data, userQuiz is:');
+		  						console.log(userQuiz);
+		  						quizResult.setUserCurrQuiz(userQuiz.data.quizId);
+		  						mvNotifier.notify('Login success!');
+		  					}, function(reason){
+		  							mvNotifier.error(reason);
+		  					});
 		  					
 		  					$location.path('/style-quiz');
 		  				}
@@ -46,14 +46,14 @@ angular.module("app")
 		  	}
 
 		  	$scope.signup = function(){
-		  		alert('Sign up called');
+		  		
 		  		var newUserData = {
 		  			firstName: $scope.firstname,
 		  			username: $scope.email,
 		  			password: $scope.password
 		  		};
 
-		  		mvAuth.createUser(newUserData).then(function(){
+		  		mvAuth.x(newUserData).then(function(){
 		  			console.log('In login ctrl after saving user');
 		  			mvNotifier.notify('User account created!');
 		  			if(quizResult.getStyle().length>=1){
