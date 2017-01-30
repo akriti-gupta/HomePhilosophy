@@ -540,112 +540,8 @@ $scope.gridWidth=300;
 
 			  ]; 
 
-	// $scope.pics4 =[{
-	// 			isrc: "images/styles/styleBoards/classic/1.png",
-	// 			actualWidth: "300px",
-	// 			actualHeight: "390px"
-	// 		  },
-	// 		  {
-	// 			isrc: "images/styles/styleBoards/classic/2.png",
-	// 			actualWidth: "300px",
-	// 			actualHeight: "300px"
-	// 		  },
-	// 		  {
-	// 			isrc: "images/styles/styleBoards/classic/3.png",
-	// 			actualWidth: "300px",
-	// 			actualHeight: "480px"
-	// 		  },
 
-	// 		  {
-	// 			isrc: "images/styles/styleBoards/classic/5.png",
-	// 			actualWidth: "300px",
-	// 			actualHeight: "490px"
-	// 		  },
-
-	// 		  {
-	// 			isrc: "images/styles/styleBoards/classic/4.png",
-	// 			actualWidth: "300px",
-	// 			actualHeight: "300px"
-	// 		  },
-			  
-			  
-			  
-	// 		  {
-	// 			isrc: "images/styles/styleBoards/classic/6.png",
-	// 			actualWidth: "300px",
-	// 			actualHeight: "400px"
-	// 		  },
-			  
-			  
-			  
-	// 		  {
-	// 			isrc: "images/styles/styleBoards/classic/7.png",
-	// 			actualWidth: "300px",
-	// 			actualHeight: "370px"
-	// 		  },
-			  
-			  
-			  
-	// 		  {
-	// 			isrc: "images/styles/styleBoards/classic/8.png",
-	// 			actualWidth: "300px",
-	// 			actualHeight: "350px"
-	// 		  },
-			  
-			  
-			  
-	// 		  {
-	// 			isrc: "images/styles/styleBoards/classic/9.png",
-	// 			actualWidth: "300px",
-	// 			actualHeight: "430px"
-	// 		  },
-			  
-			  
-			  
-	// 		  {
-	// 			isrc: "images/styles/styleBoards/classic/10.png",
-	// 			actualWidth: "300px",
-	// 			actualHeight: "480px"
-	// 		  },
-			  
-			  
-			  
-	// 		  {
-	// 			isrc: "images/styles/styleBoards/classic/11.png",
-	// 			actualWidth: "300px",
-	// 			actualHeight: "350px"
-	// 		  },
-	// 		  {
-	// 			isrc: "images/styles/styleBoards/classic/12.png",
-	// 			actualWidth: "300px",
-	// 			actualHeight: "300px",
-	// 			imgCredit: "Design by Nottdesign. Photo by A. Avdeenko"
-	// 		  },
-			   
-	// 		  {
-	// 			isrc: "images/styles/styleBoards/classic/14.png",
-	// 			actualWidth: "300px",
-	// 			actualHeight: "470px"
-	// 		  },
-	// 		  {
-	// 			isrc: "images/styles/styleBoards/classic/13.png",
-	// 			actualWidth: "300px",
-	// 			actualHeight: "370px",
-	// 			imgCredit: "Designer kimberly Demmy Design. Photo by Daniel O’Connor"
-	// 		  },
-			  
-			  
-			  
-	// 		  {
-	// 			isrc: "images/styles/styleBoards/classic/15.png",
-	// 			actualWidth: "300px",
-	// 			actualHeight: "300px"
-	// 		  }
-
-	// 		  ]; 
-
-
-$scope.pics4 =[{
+	$scope.pics4 =[{
 				isrc: "images/styles/styleBoards/classic/1.png",
 				actualWidth: "300",
 				actualHeight: "390"
@@ -1088,13 +984,13 @@ $scope.pics4 =[{
 	// To maintain the quiz result and style quiz pages state when redirected here after login.
 	if(quizResult.getStyle().length>=1){
 		$scope.userStyle = quizResult.getStyle();
-		$scope.pagenum=11;
+		$scope.pagenum=9;
 		$scope.progress_result = false;
 		$scope.board = quizResult.getBoard();
 
 
 	}
-	if($scope.pagenum===11){
+	if($scope.pagenum===9){
 		$scope.disable=false;
 	}
 	

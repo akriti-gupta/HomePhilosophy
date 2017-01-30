@@ -53,5 +53,15 @@
 			}
 		},
 
+		authorizeUserForLogin: function(){
+			if(mvIdentity.isAuthenticated()){
+				return true;
+			}
+			else{
+				return $q.reject('Unauthorized');
+			}
+		},
+
+
 
 }});
