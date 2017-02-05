@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Online Interior Desig",
   "main": "server.js",
+  "repository":"git clone https://github.com/akriti-gupta/HomePhilosophy/",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
