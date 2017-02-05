@@ -28,6 +28,9 @@ angular.module('app').factory('mvUpload',function(Upload,$q){
                 }
             });
         }
+        else{
+          dfd.resolve(true);
+        }
         return dfd.promise;
     }
 
