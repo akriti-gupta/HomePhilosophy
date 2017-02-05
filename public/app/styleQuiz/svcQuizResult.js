@@ -10,6 +10,15 @@
         var custSelections = [];
         var showNavBar = true;
         var board;
+        var currentQuizId;
+
+        var setUserCurrQuiz = function (quizId){
+        	console.log('In setUserCurrQuiz , quizId is: '+quizId);
+        	currentQuizId = quizId;
+        }
+        var getUserCurrQuiz = function(){
+        	return currentQuizId;
+        }
 
         var storeUserQuizInfo = function(infoObj){
         	if(infoObj){
@@ -20,12 +29,19 @@
         		console.log('In storeUserQuizInfo,imgArr is: ');
         		console.log(imgArr);
 
-        		if(imgArr["2"] && imgArr["2"]===-1){
-        			console.log('Already know style, style is stored in index 3:'+imgArr["3"]);
+        		// if(imgArr["2"] && imgArr["2"]===-1){
+        		// 	console.log('Already know style, style is stored in index 3:'+imgArr["3"]);
 
+        		// }
+        		// else if(imgArr["3"] && imgArr["3"]===-1){
+        		// 	console.log('Style Quiz taken. Info stored in index 4 to 8');
+        		// }
+
+        		if(imgArr.length===6){
+        			console.log('Style Quiz taken. Info stored in index 0 to 5');
         		}
-        		else if(imgArr["3"] && imgArr["3"]===-1){
-        			console.log('Style Quiz taken. Info stored in index 4 to 8');
+        		else{
+					console.log('Already know style, style is stored in index 0');        			
         		}
 				custSelections = infoObj;
 			}
@@ -112,7 +128,9 @@
 			    showNavBar: showNavBar,
 			   	getStyleImage: getStyleImage,
 			   	getBoard: getBoard,
-			   	storeUserQuizInfo: storeUserQuizInfo
+			   	storeUserQuizInfo: storeUserQuizInfo,
+			   	setUserCurrQuiz: setUserCurrQuiz,
+			   	getUserCurrQuiz: getUserCurrQuiz
 
 			  };
         });

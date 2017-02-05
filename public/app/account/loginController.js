@@ -12,14 +12,14 @@ angular.module("app")
 		  					var userSelectionInfo = quizResult.getCustSelections();
 		  					console.log('In LoginController, userSelectionInfo is:');
 		  					console.log(userSelectionInfo);
-		  					// mvUserQuiz.saveUserData(userSelectionInfo, result).then(function(userQuiz){
-		  					// 	console.log('In login ctrl after saving user data, userQuiz is:');
-		  					// 	console.log(userQuiz);
-		  					// 	quizResult.setUserCurrQuiz(userQuiz.data.quizId);
-		  					// 	mvNotifier.notify('Login success!');
-		  					// }, function(reason){
-		  					// 		mvNotifier.error(reason);
-		  					// });
+		  					mvUserQuiz.saveUserData(userSelectionInfo, result).then(function(userQuiz){
+		  						console.log('In login ctrl after saving user data, userQuiz is:');
+		  						console.log(userQuiz);
+		  						quizResult.setUserCurrQuiz(userQuiz.data.quizId);
+		  						mvNotifier.notify('Login success!');
+		  					}, function(reason){
+		  							mvNotifier.error(reason);
+		  					});
 		  					
 		  					$location.path('/style-quiz');
 		  				}

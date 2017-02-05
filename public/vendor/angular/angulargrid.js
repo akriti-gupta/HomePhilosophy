@@ -125,7 +125,6 @@
             element.addClass('angular-grid');
 
 
-
             //get the user input options
             var options;
 
@@ -323,10 +322,10 @@
 
             //function to get column width and number of columns
             function getColWidth() {
-
+              alert(domElm);
               var contWidth = domElm.offsetWidth,
                 clone; // a clone to calculate width without transition
-
+               // alert('contWidth is:'+contWidth);
               if (options.cssGrid) {
                 clone = $(listElms[0]).clone();
                 clone.css(cloneCss).addClass('ag-no-transition ag-clone');
@@ -341,6 +340,10 @@
                   width: width
                 };
               }
+              // alert('options.gridNo: '+options.gridNo);
+              // alert('options.gridWidth: '+options.gridWidth);
+
+              // alert('options.gutterSize:'+options.gutterSize);
 
               var colWidth = options.gridNo == 'auto' ? options.gridWidth : Math.floor(contWidth / options.gridNo) - options.gutterSize,
                 cols = options.gridNo == 'auto' ? Math.floor((contWidth + options.gutterSize) / (colWidth + options.gutterSize)) : options.gridNo,
@@ -348,6 +351,9 @@
 
               colWidth = colWidth + Math.floor(remainingSpace / cols);
 
+
+// alert('After calc');
+// alert('colWidth: '+colWidth+' cols: '+cols+' remainingSpace: '+remainingSpace);
               return {
                 no: cols,
                 width: colWidth

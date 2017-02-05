@@ -1,5 +1,5 @@
 angular.module('app')
-    .controller('SaveDetails',['Upload','$window','$scope',function(Upload,$window,$scope){
+    .controller('SaveDetails',function(Upload,$window,$scope,$location,payment,mvUpload){
        // $scope.filestatus = "";
        // $scope.urlStatus = "";
        // $scope.uploadBtn1 = true;
@@ -13,6 +13,20 @@ angular.module('app')
        $scope.imageFileName = '';
        
      
+     $scope.saveData = function(){
+      //saveFormData()
+      mvUpload.uploadFiles($scope.fileArr);
+      // $scope.uploadFiles();
+
+      //If payment already selected, go to new page, else go to payment page(create dup).
+      if(payment.getPayPkg()>0){
+        console.log('Pkg already chosen');
+        $location.path('/reviewPayment');
+      }
+      else
+        $location.path('/pricing');
+    }
+
       $scope.formatBytes = function(bytes,decimals) {
         if(bytes == 0) return '0 Byte';
         var k = 1000; // or 1024 for binary
@@ -69,7 +83,7 @@ angular.module('app')
           $scope.fileArr.splice(mstrFileArrIdx,1);
         }
       }
-  }])
+  })
 
   .directive("dropzone", function() {
     return {

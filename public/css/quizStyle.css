@@ -442,8 +442,8 @@ filter:alpha(opacity=50); /* for <= IE 8 */
     -webkit-transition: opacity 0.6s ease-out;  
     transition: opacity 0.6s ease-out;
     background-color: #fff;
-    opacity: 0; 
-    visibility: hidden;
+   /* opacity: 0; 
+    visibility: hidden;*/
 }
  
 .grid-img.img-loaded{

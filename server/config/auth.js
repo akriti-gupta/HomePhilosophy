@@ -1,5 +1,5 @@
 	var passport = require('passport');
-	
+
 
 exports.authenticate = function(req, res, next){
 		var auth = passport.authenticate('local',function(err, user){
