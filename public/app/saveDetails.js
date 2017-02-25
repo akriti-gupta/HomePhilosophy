@@ -1,5 +1,5 @@
 angular.module('app')
-    .controller('SaveDetails',['Upload','$window','$scope',function(Upload,$window,$scope){
+    .controller('SaveDetails',function(Upload,$window,$scope,$location,payment,mvUpload){
        // $scope.filestatus = "";
        // $scope.urlStatus = "";
        // $scope.uploadBtn1 = true;
@@ -13,6 +13,24 @@ angular.module('app')
        $scope.imageFileName = '';
        
      
+     $scope.saveData = function(){
+      //saveFormData()
+      
+
+      // if($scope.fileArr.length>0){
+      //   mvUpload.uploadFiles($scope.fileArr);
+      // }
+      
+      // $scope.uploadFiles();
+
+      //If payment already selected, go to new page, else go to payment page(create dup).
+      if(payment.getPayPkg()>0){
+        $location.path('/reviewPayment');
+      }
+      else
+        $location.path('/pricing');
+    }
+
       $scope.formatBytes = function(bytes,decimals) {
         if(bytes == 0) return '0 Byte';
         var k = 1000; // or 1024 for binary
@@ -33,7 +51,7 @@ angular.module('app')
       }
   
       $scope.uploadFiles = function(){
-        if($scope.fileArr){
+        if($scope.fileArr.length>0){
           var status;
           console.log("$scope.fileArr is: " +$scope.fileArr.length);
           console.log($scope.fileArr);
@@ -58,18 +76,16 @@ angular.module('app')
         //TODO: Remove from fileArr also
         if(fileArrType && fileArrType===2){
           var mstrFileArrIdx = $scope.pendingDropFiles[index].mainArrIndex;
-          console.log(mstrFileArrIdx);
           $scope.pendingDropFiles.splice(index,1);
           $scope.fileArr.splice(mstrFileArrIdx,1);
         }
         else{
           var mstrFileArrIdx = $scope.pendingFilesArr[index].mainArrIndex;
-          console.log(mstrFileArrIdx);
           $scope.pendingFilesArr.splice(index,1);
           $scope.fileArr.splice(mstrFileArrIdx,1);
         }
       }
-  }])
+  })
 
   .directive("dropzone", function() {
     return {
@@ -89,9 +105,7 @@ angular.module('app')
           element.bind('drop', function(event) {
             event.preventDefault();
             event.stopPropagation();
-            console.log(event);
             if (event.originalEvent.dataTransfer){
-              console.log('File len is: '+event.originalEvent.dataTransfer.files.length);
               if (event.originalEvent.dataTransfer.files.length > 0) {
                 // scope.fileArr.push(event.originalEvent.dataTransfer.files);
                 for(var i=0; i< event.originalEvent.dataTransfer.files.length; i++){

@@ -2,11 +2,11 @@ var auth = require('./auth'),
 	quiz = require('./quiz'),	
 	multer = require('multer'),
 	users = require('../controllers/users'),
-	 userQuiz = require('../controllers/userQuiz'),
+	userQuiz = require('../controllers/userQuiz'),
 	passport = require('passport'),
-	// payment = require('../controllers/payment'),
+	payment = require('../controllers/payment'),
 	fs1 = require('fs');
-	// userProject = require('../controllers/userProject');
+	userProject = require('../controllers/userProject');
 
 var storage =   multer.diskStorage({
   destination: function (req, file, callback) {
@@ -69,16 +69,20 @@ module.exports = function(app){
 
 	app.post('/signin',auth.authenticate);
 
+	app.post('/createUserQuiz',userQuiz.createUserQuiz);
+
 	app.post('/logout',function(req,res){
+		console.log('Logout called');
 		req.logout();
 		res.end();
 	});
 
-//COMMENTED TO OVERRIDE BOOKSHELF CODE
-	app.post('/createUserQuiz',userQuiz.createUserQuiz);
+	
 	app.post('/saveUserQuizDtls',userQuiz.saveUserQuizDtls);
-	// app.post('/storePackage',payment.storePackage);
-	// app.post('/saveAppointment',userProject.saveAppointment);
+	app.post('/storePackage',payment.storePackage);
+	
+	app.get('/getCustProjectInfo', userProject.getCustProjectInfo);
+	app.post('/saveAppointment',userProject.saveAppointment);
 	// app.post('/saveFirstLook',userProject.saveFirstLook);
 	// app.post('/submitFeedack',userProject.submitFeedack);
 
@@ -171,7 +175,7 @@ function checkUploadPath(req, res, next) {
 // }
 
 
-	// app.get('/getCustProjectInfo', userProject.getCustProjectInfo);
+	
 	
 	// app.get('/getProjectListing', userProject.getProjectListing);
 

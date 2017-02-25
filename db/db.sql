@@ -11,7 +11,7 @@ CREATE TABLE `user` (
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_username_unique` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `style` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -20,7 +20,7 @@ CREATE TABLE `style` (
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `style_stylename_unique` (`styleName`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `room` (
@@ -29,7 +29,7 @@ CREATE TABLE `room` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `quiz_images` (
@@ -40,7 +40,7 @@ CREATE TABLE `quiz_images` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `package` (
@@ -50,7 +50,19 @@ CREATE TABLE `package` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `cust_quiz` (
+  `quizId` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `customerId` int(10) unsigned DEFAULT NULL,
+  `status` int(11) DEFAULT '-1',
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`quizId`),
+  KEY `cust_quiz_customerid_foreign` (`customerId`),
+  CONSTRAINT `cust_quiz_customerid_foreign` FOREIGN KEY (`customerId`) REFERENCES `user` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
 
 CREATE TABLE `cust_room_selection` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -65,18 +77,8 @@ CREATE TABLE `cust_room_selection` (
   KEY `cust_room_selection_quizid_foreign` (`quizId`),
   CONSTRAINT `cust_room_selection_customerid_foreign` FOREIGN KEY (`customerId`) REFERENCES `user` (`id`) ON DELETE CASCADE,
   CONSTRAINT `cust_room_selection_quizid_foreign` FOREIGN KEY (`quizId`) REFERENCES `cust_quiz` (`quizId`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-CREATE TABLE `cust_quiz` (
-  `quizId` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `customerId` int(10) unsigned DEFAULT NULL,
-  `status` int(11) DEFAULT '-1',
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`quizId`),
-  KEY `cust_quiz_customerid_foreign` (`customerId`),
-  CONSTRAINT `cust_quiz_customerid_foreign` FOREIGN KEY (`customerId`) REFERENCES `user` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `cust_pkg_info` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -95,7 +97,7 @@ CREATE TABLE `cust_pkg_info` (
   CONSTRAINT `cust_pkg_info_customerid_foreign` FOREIGN KEY (`customerId`) REFERENCES `user` (`id`) ON DELETE CASCADE,
   CONSTRAINT `cust_pkg_info_pkgid_foreign` FOREIGN KEY (`pkgId`) REFERENCES `package` (`id`) ON DELETE CASCADE,
   CONSTRAINT `cust_pkg_info_quizid_foreign` FOREIGN KEY (`quizId`) REFERENCES `cust_quiz` (`quizId`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `cust_payment_txn` (
@@ -112,7 +114,7 @@ CREATE TABLE `cust_payment_txn` (
   KEY `cust_payment_txn_quizid_foreign` (`quizId`),
   CONSTRAINT `cust_payment_txn_customerid_foreign` FOREIGN KEY (`customerId`) REFERENCES `user` (`id`) ON DELETE CASCADE,
   CONSTRAINT `cust_payment_txn_quizid_foreign` FOREIGN KEY (`quizId`) REFERENCES `cust_quiz` (`quizId`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `cust_quiz_result` (
@@ -130,7 +132,7 @@ CREATE TABLE `cust_quiz_result` (
   CONSTRAINT `cust_quiz_result_customerid_foreign` FOREIGN KEY (`customerId`) REFERENCES `user` (`id`) ON DELETE CASCADE,
   CONSTRAINT `cust_quiz_result_quizid_foreign` FOREIGN KEY (`quizId`) REFERENCES `cust_quiz` (`quizId`) ON DELETE CASCADE,
   CONSTRAINT `cust_quiz_result_styleid_foreign` FOREIGN KEY (`styleId`) REFERENCES `style` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=198 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `cust_img_selection` (
@@ -146,7 +148,7 @@ CREATE TABLE `cust_img_selection` (
   KEY `cust_img_selection_customerid_foreign` (`customerId`),
   CONSTRAINT `cust_img_selection_customerid_foreign` FOREIGN KEY (`customerId`) REFERENCES `user` (`id`) ON DELETE CASCADE,
   CONSTRAINT `cust_img_selection_quizid_foreign` FOREIGN KEY (`quizId`) REFERENCES `cust_quiz` (`quizId`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=379 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `cust_appointment` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -168,4 +170,4 @@ CREATE TABLE `cust_appointment` (
   KEY `cust_appointment_quizid_foreign` (`quizId`),
   CONSTRAINT `cust_appointment_customerid_foreign` FOREIGN KEY (`customerId`) REFERENCES `user` (`id`) ON DELETE CASCADE,
   CONSTRAINT `cust_appointment_quizid_foreign` FOREIGN KEY (`quizId`) REFERENCES `cust_quiz` (`quizId`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

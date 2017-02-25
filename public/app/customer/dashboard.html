@@ -1,0 +1,219 @@
+<!-- TODO: Header to go in  index.js and show up on pages other than /styleQuiz.-->
+<header id="site_header">
+	<a href="/"><div class="hp-logo"></div></a>
+		<!-- <a href="/"><img src="images/logo_header.png" /></a> -->
+	
+	<div id="hp-nav">
+	    <ul class="topnav">
+	        <!-- <li class="menu-list plist-border"> -->
+	        <li class="menu-list">
+	        	<a href="/aboutUs">How it works</a>
+	       </li>
+			<li><a href="/pricing">Pricing</a></li>
+	        <li><a href="/portfolio" id="portfolio-link">Portfolio</a></li>
+	        <li><a href="#">Luxury spaces</a></li>
+	        <li><a href="/faq">FAQ</a></li>
+	        <li><a href="/contactUs">Contact us</a></li>
+	        <li>
+	            <a href="/style-quiz" id="start-quiz">
+	                <button type="button" class="btn-start-quiz btn-topnav font-montserrat txt-upper col-lightcyan fs-14px">Get Started</button>
+	            </a>
+	        </li>
+	    </ul>
+    	<div class="tab_icon">
+        	<a href="javascript:void(0);" onclick="displayDropDown()">&#9776;</a>
+    	</div>
+	</div>
+</header>
+<div class="divider" style="border-top:2px solid #e1e1e1;padding:15px;" ng-show="showMain"></div>
+<div class="divider" style="border-top:2px solid #e1e1e1;padding:0px;" ng-show="showFeedback"></div>
+<section id="dashboard" ng-show="showMain">
+	<p>{{firstName}}'s Personalized Room Design</p>
+	<div class="data-dashboard" >
+		
+		<div class="modal" id="calendarModal" tabindex="-1" role="dialog" aria-labelledby="calendarModalLabel" >
+      		<div class="modal-dialog" role="document" >
+        		<div class="modal-content">
+          			<div class="modal-header" style="border:none;">
+            			<button type="button" class="close"  aria-label="Close" data-dismiss="modal"><span aria-hidden="true" style="padding-left">&times;</span></button>
+            			
+          			</div>
+          
+          			<div class="modal-body comment-modal-body">
+            			<div>
+	            			<div style="float:left">
+							    <div style="display:inline-block; min-height:290px;">
+							      <div datepickerPopup uib-datepicker ng-model="apptDate" class="well well-sm" datepicker-options="dateOptions"></div>
+							    </div>
+							</div>
+
+							<div style="float:right;padding-top:10px;">
+								<label for="inputTime">Pick a time between 9:00AM-6:00PM:</label>
+	   								<div uib-timepicker datepickerPopup ng-model="apptTime" hour-step="hstep" minute-step="mstep" min="min" max="max" show-meridian="ismeridian">
+	   								</div>
+
+							</div>
+
+							<button type="button" class="btn-start-quiz btn-qz btn-nxt font-sansRegular col-lightcyan fs-12px" ng-click="clear()"  style="padding:10px 10px 10px; float:right;margin-right:95px;" >Clear Selection</button>
+							
+						</div>
+						<div style="clear:both;"></div>
+
+						<div>
+							<form name="custMtngDetails" enctype="multipart/form-data" style="width:100%;margin:0 auto;" class="font-noto fs-16px" ng-disabled="custMtngDetails.$invalid" >
+								<div class="form-horizontal">
+      								<div class="form-group form-meet-dtls" style="margin:10px 0px;">
+				    					<label for="inputAddress" class="col-sm-4 control-label" style="text-align:left;">Address:</label>
+				    					<div class="col-sm-8">
+				    						<input type="text" class="form-control" id="inputAddress" ng-model="address" required>
+				    					</div>
+			  						</div>
+
+			  						<div class="form-group"  style="margin:10px 0px;">
+			    						<label for="inputName" class="col-sm-4 control-label" style="text-align:left;">Contact Person:</label>
+			    						<div class="col-sm-8">
+			      							<input type="text" class="form-control" id="inputName" ng-model="person" required>
+			    						</div>
+  									</div>
+
+									<div class="form-group"  style="margin:10px 0px;">
+			    						<label for="inputPhone" class="col-sm-4 control-label" style="text-align:left;">Contact Number:</label>
+			    						<div class="col-sm-8">
+			      							<input type="number" class="form-control" id="inputPhone" ng-model="contact" required>
+			    						</div>
+  									</div>
+
+  									<div class="form-group"  style="margin:10px 0px;">
+			    						<label for="inputFloorPlan" class="col-sm-11 control-label" style="text-align:left;">Meet and Measure not possible? Upload your floorplan with scale here:
+			    						
+	        								<input type="file" multiple ngf-pattern="'image/*'" accept="image/*" ngf-max-size="10MB" style="display:none;"
+		                  					onchange="angular.element(this).scope().addFileToUploadQ(this)"/>
+		            							<img src="images/attach.png" width="7%"/>
+		        						</label>
+	        						</div>
+	        	
+
+									<div id="file-name" style="width:50%;">
+										<div ng-repeat="file in pendingFilesArr track by $index">
+					  						<div style="margin-bottom:10px;width:90%;float:left;background-color:#00a99d;color:#fff;">{{file.name}} ({{file.size}}) </div>
+					  						<div style="width:10%;float:right;background-color:#00a99d;color:#fff;">
+					  						<a href="#" ng-click="removeFileFromQ($index)">x</a>
+					  						</div>
+										</div>
+									</div>
+								</div>
+								<div style="text-align:center;padding:30px 0px 40px;">
+        							<button id="form-calendar" type="submit" class="btn-start-quiz btn-qz btn-nxt font-sansRegular txt-upper col-lightcyan fs-20px" ng-click="saveAppointment($event)" data-row-id="" style="padding:10px 20px 10px; float:right;" >SUBMIT</button>
+        							 <!-- data-dismiss="modal" -->
+      							</div>
+							</form>
+						</div> 
+          			</div> 
+        		</div>
+      		</div>
+    	</div>
+
+
+
+		<div class="row qz-row-dsg"  style="border:1px solid black;padding-bottom:0px;">
+
+		    <div class="col-md-4 col-xs-4 cust-view-tab" style="padding:0px;">ROOM</div>
+		    <div class="col-md-4 col-xs-4 cust-view-tab" style="padding:0px;">PACKAGE</div>
+		    <div class="col-md-4 col-xs-4 cust-view-tab" style="padding:0px;">STATUS</div>
+		</div>
+
+		<!-- <div class="row qz-row-dsg" ng-repeat="item in projects track by $index" style="border:1px solid black;padding-bottom:0px;"> -->
+		
+
+		<div class="row qz-row-dsg" ng-repeat="item in projectArr track by $index" style="border:1px solid black;padding-bottom:0px;">
+		
+		    <div class="col-md-4 col-xs-4 cust-view-tab" style="padding:10px;">
+		        <figure>
+		            <img class="center-block" ng-src={{roomImage[item.roomData.roomName]}} style="height:100px;width:auto;">
+		        </figure>
+		    </div>
+
+			<div class="col-md-4 col-xs-4 cust-view-tab">
+				<div  ng-if="!item.pkgData|| item.pkgData.length===0"><a href="#" ng-click="selectPkg($index)">Choose a Package </a><br/></div>
+
+				<div ng-if="packageName[item.pkgData.pkgId]!=' '">{{packageName[item.pkgData.pkgId]}}<br/></div>
+			</div>
+
+   			<!--  <div class="col-md-3 col-xs-4 cust-view-tab" ng-if="!item.pkgData|| item.pkgData.length===0"><a href="#" ng-click="selectPkg($index)">Choose a Package </a><br/></div>
+
+   			 <div class="col-md-3 col-xs-4 cust-view-tab" ng-if="packageName[item.pkgData.pkgId]!=' '">{{packageName[item.pkgData.pkgId]}}<br/></div> -->
+
+		    <!-- Div for Calendar Popup -->
+		    <!-- <div id="cal_popup" class="col-md-3 col-xs-4 cust-view-tab" ng-if="item.isModal===1"><a href="#" data-toggle="modal" data-target="#calendarModal" data-id="{{$index}}">{{item.statusText}}<br/></a></div> -->
+		    
+		    <!-- Div for Other Links -->
+		    <!-- <div class="col-md-3 col-xs-4 cust-view-tab" ng-if="item.isModal!=1 && item.isUpdModal!=1 "><a href={{item.statusLink}}>{{item.statusText}}<br/></a></div> -->
+
+		    <div class="col-md-4 col-xs-4 cust-view-tab" ng-if="item.status.linkPage===' ' && item.status.modal===' '">{{item.status.statusText}}<br/></div>
+
+		    <div class="col-md-4 col-xs-4 cust-view-tab" ng-if="item.status.linkPage!=' '"><a href="{{item.status.linkPage}}">{{item.status.statusText}}</a><br/></div>
+
+ 			<div id="cal_popup" class="col-md-4 col-xs-4 cust-view-tab" ng-if="item.status.modal!=' '"><a href="#" ng-click="loadMtngData($index)" data-toggle="modal" data-target="#calendarModal" data-id="{{$index}}">{{item.status.statusText}}</a><br/></div>
+		     <!-- <div class="col-md-3 col-xs-4 cust-view-tab" ng-if="item.isModal!=1 && item.isUpdModal===1">{{item.statusText}}<br/></div> -->
+
+
+		    <!-- Div for Other Links -->
+		    <!-- <div class="col-md-3 col-xs-4 cust-view-tab" ng-if="item.isUpdModal!=1">
+		    	<a href={{item.statusLink}}>
+		    	<a href="#" ng-click="getFirstLook($index)">
+		    		{{item.updateText}}asas<br/>
+		    	</a>
+		    </div> -->
+
+
+		    <!-- <div class="col-md-3 col-xs-4 cust-view-tab">{{item.updateText}}<br/></div> -->
+		</div>
+
+		<div class="qz-row-dsg" style="padding-top:20px;" ng-if="hasActiveProject">
+		<a href="/style-quiz"><button type="submit" class="btn-start-quiz btn-nxt " style="padding:10px; float:right;" >Add a Room</button></a>
+		</div>
+
+		<div class="qz-row-dsg" style="padding-top:20px;" ng-if="!hasActiveProject">
+		<a href="/style-quiz"><button type="submit" class="btn-start-quiz btn-nxt " style="padding:10px; float:right;" >Start a New Project</button></a>
+		</div>
+
+		<div style="padding-bottom:40px;"></div>
+		<div class="divider" style="border-top:2px solid rgb(47, 185, 175);"></div>
+	</div>
+</section>
+
+
+<!-- <section id="feedback" ng-show="showFeedback">
+
+	<div style="width:30%;float:left;padding:80px;border-right:4px solid #e1e1e1;height:1200px;">
+
+		<div ng-repeat="item in images track by $index" style="padding-bottom: 50px;">
+
+			<a href="#" ng-click="zoomImg($index)"><img src={{item}} width="100%"></a>
+			<p>Option {{$index+1}}</p>
+		
+		</div>
+	</div>
+
+	<div style="width:70%;float:right;padding:30px;">
+		<p style="padding-bottom:10px;"> First Looks </p>
+
+		<p><img src="{{zoomImgSrc}}" width="80%"></p>
+
+		<div style="padding:50px 0px 50px 105px;">
+			<form>
+				<textarea rows="9" cols="50" class="form-info font-sansRegular fs-16px" style="resize:none;border:1px solid #acacac;width:89%;" id="feedbackComment" name="feedbackComment" ng-model="feedbackComment"></textarea>
+				<div style="text-align:center;padding:30px 0px 40px;width:43%;float:right;">
+        							<button type="submit" class="btn-start-quiz btn-qz btn-nxt font-sansRegular txt-upper col-lightcyan fs-20px" ng-click="saveFeedback()" style="padding:10px 20px 10px;margin-right:10px;	" >SAVE</button>
+
+        							<button type="submit" class="btn-start-quiz btn-qz btn-nxt font-sansRegular txt-upper col-lightcyan fs-20px" ng-click="submitFeedback()" style="padding:10px 10px 10px;" >SUBMIT</button>
+
+      							</div>
+
+			</form>
+		</div>
+	</div>
+	<div style="clear:both;"></div>
+	<div class="divider" style="border-top:2px solid rgb(47, 185, 175);"></div>
+</section>
+ -->

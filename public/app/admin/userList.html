@@ -1,30 +1,222 @@
+<!-- TODO: Header to go in  index.js and show up on pages other than /styleQuiz.-->
 <header id="site_header">
-  <div class="hp-logo"> 
-    <a href="/">
-            <img src="images/logo_header.png" />
-        </a>
-    </div>
-    <div class="qz-mnu">
-      <ul>
-        <li style="padding-bottom:70px;"><a href="#"><img src="images/menuIcon.png" width="60%" height="auto"></a>
-          <ul class="qz-sub-list">
-            <li ng-controller="LoginController" ng-hide="identity.isAuthenticated()"><a href="/login">Sign In</a></li>
-            <!-- <li ng-controller="LoginController" ng-show="identity.isAuthenticated()"><a ng-click="signout()">Sign Out</a></li> -->
-            <li ><a href="#">How it works</a></li>
-            <li><a href="#">Contact us</a></li>
-            <li ng-show="identity.currentUser.isAdmin()"><a href="/admin/users">User Admin </a></li>
-          </ul>
-        </li>
+  <a href="/"><div class="hp-logo"></div></a>
+    <!-- <a href="/"><img src="images/logo_header.png" /></a> -->
+  
+  <div id="hp-nav">
+      <ul class="topnav">
+          <!-- <li class="menu-list plist-border"> -->
+          <li class="menu-list">
+            <!-- <ul class="submenu-list">
+              <li><a href="/aboutUs">About us</a></li>
+              <li><a href="/faq">FAQ</a></li>
+            </ul> -->
+            <!-- <a href="/op-process">How it works</a> -->
+            <a href="/aboutUs">How it works</a>
+         </li>
+      <li><a href="/pricing">Pricing</a></li>
+          <li><a href="/portfolio" id="portfolio-link">Portfolio</a></li>
+          <li><a href="#">Luxury spaces</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/contactUs">Contact us</a></li>
+          <li>
+              <a href="/style-quiz" id="start-quiz">
+                  <button type="button" class="btn-start-quiz btn-topnav font-montserrat txt-upper col-lightcyan fs-14px">Get Started</button>
+              </a>
+          </li>
       </ul>
-    </div>
+      <div class="tab_icon">
+          <a href="javascript:void(0);" onclick="displayDropDown()">&#9776;</a>
+      </div>
+  </div>
 </header>
-
 <div class="divider" style="border-top:2px solid #e1e1e1;padding:15px;"></div>
- 
-<div ng-controller="UserListCtrl" class="qz-container">
 
+<div class="modal" id="customerModal" tabindex="-1" role="dialog" aria-labelledby="customerModal" >
+  <div class="modal-dialog" role="document" >
+    <div class="modal-content">
+      
+      <div class="modal-header" style="border:none;">
+        <button type="button" class="close"  aria-label="Close"><span aria-hidden="true" style="padding-left">&times;</span></button>
+        <!-- data-dismiss="modal" -->
+      </div>
+          
+      <div class="modal-body comment-modal-body">
+         <p style="text-align:left">Name: Hello</p>
+         <span>Email: Hello</span>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<section id="dashboard" ng-show="showListing">
+  <div>
+  <p class="fs-22px" style="margin-bottom:20px;"> Project Listing </p>
+    <div class="row qz-row-dsg" style="border:1px solid black;padding:0px;">
+      <div class="col-md-2 col-xs-4 admin-view-tab" style="padding:0px;">CUSTOMER NAME</div>
+      <div class="col-md-2 col-xs-4 admin-view-tab" style="padding:0px;">PROJECT ID</div>
+      <div class="col-md-2 col-xs-4 admin-view-tab" style="padding:0px;">PROJECT DATE</div>
+      <div class="col-md-2 col-xs-4 admin-view-tab" style="padding:0px;">ROOM</div>
+      <div class="col-md-2 col-xs-4 admin-view-tab" style="padding:0px;">PACKAGE</div>
+      <div class="col-md-2 col-xs-4 admin-view-tab" style="padding:0px;">STATUS</div>
+    </div>
+ 
+    <div  class="row qz-row-dsg" style="border:1px solid black;padding-bottom:0px;" ng-repeat="item in custProjects track by $index">
+
+      <!-- ng-href="/projectDetail/{{$index}}/detail/{{custProjects}}" -->
+      <div class="col-md-2 col-xs-4 admin-view-tab" ><a href="#" ng-click="details($index,1)"> {{item.custInfo.name}}</a></div>
+      <!-- Show Project Info, like rooms, any feedback, first looks, style images, pin images, tell us more, etc -->
+        <div class="col-md-2 col-xs-4 admin-view-tab"><a href="#" ng-click="details($index,2)">{{item.quizInfo.quizId}} </a></div>
+
+        <div class="col-md-2 col-xs-4 admin-view-tab"><a href="#" ng-click="details($index,2)">{{item.quizInfo.created_at}} </a></div>
+        
+        <div class="col-md-2 col-xs-4 admin-view-tab"><a href="#" ng-click="details($index,3)"> {{item.pkgInfo[$index].roomName}} </a></div>
+
+
+        <div class="col-md-2 col-xs-4 admin-view-tab"><a href="#" ng-click="details($index,3)"> {{packages[item.pkgInfo[$index].pkgId-1].name}}</a></div>        
+
+        <div class="col-md-2 col-xs-4 admin-view-tab" ng-if="item.quizInfo.status===0 && item.pkgInfo[$index].status===1 && item.apptInfo[$index].status!=0"><a href="#" ng-click="details($index,4)"> Waiting for Customer to schedule an appointment </a></div>  
+
+        <div class="col-md-2 col-xs-4 admin-view-tab" ng-if="item.quizInfo.status===0 && item.pkgInfo[$index].status===1 && item.apptInfo[$index].status===0 && isApptDue(item.apptInfo[$index].apptDate)===1 && item.apptInfo[$index].floorPlanStatus===-1"><a href="#" ng-click="details($index,4)">Appointment scheduled on apptDate </a></div>   
+
+        <!-- isApptDue(apptDate)===1 -->
+
+        <div class="col-md-2 col-xs-4 admin-view-tab" ng-if="item.quizInfo.status===0 && item.pkgInfo[$index].status===1 && item.apptInfo[$index].status===0 &&  isApptDue(item.apptInfo[$index].apptDate)===1 && item.apptInfo[$index].floorPlanStatus!=-1"><a href="#" ng-click="details($index,4)">Floor Plan Uploaded and appointment scheduled on apptDate </a></div> 
+
+      <div class="col-md-2 col-xs-4 admin-view-tab" ng-if="item.quizInfo.status===0 && item.pkgInfo[$index].status===1 && item.apptInfo[$index].status===0 && (isApptDue(item.apptInfo[$index].apptDate)===0 || item.apptInfo[$index].floorPlanStatus!=-1 && item.apptInfo[$index].firstLookStatus!=1)"><a href="#" ng-click="details($index,4)">First Look Pending </a></div>        
+    </div>
+  </div>
+</section>
+
+<section id="project-details" ng-show="showDetail">
+  <div style="width:80%;margin:0 auto;border:1px solid black;">
+    <ul class="nav nav-tabs">
+      <li role="presentation" class="tab-active"><a href="#" ng-click="toggleTab(1)">Customer Details</a></li>
+      <li role="presentation"><a href="#" ng-click="toggleTab(2)">Quiz Details</a></li>
+      <li role="presentation"><a href="#" ng-click="toggleTab(3)">Room &amp; Package Details</a></li>
+      <li role="presentation"><a href="#" ng-click="toggleTab(4)">Status Update</a></li>
+    </ul>
+  </div>
+
+  <div id="cust-details" class="admin-dtl-ctr" ng-show="showCustDetails">
+    <div style="width:20%;float:left;">
+      <p class="fs-18px" style="text-align:left;"><b>Customer Name:</b></p>
+    </div>
+
+    <div style="width:80%;float:right;">
+      <p class="fs-18px" style="text-align:left;">{{prjDetails.custInfo.name}}</p>
+    </div>
+    
+    <div style="width:20%;float:left;">
+      <p class="fs-18px" style="text-align:left;"><b>Email:</b></p>
+    </div>
+
+    <div style="width:80%;float:right;">
+      <p class="fs-18px" style="text-align:left;">{{prjDetails.custInfo.email}}</p>
+    </div>
+    <!-- <p class="fs-18px" style="text-align:left;">Email: {{prjDetails.custInfo.email}}</p> -->
+  </div>
+
+  <div id="cust-details" ng-show="showQuizDetails">
+    Images:
+    <div ng-repeat="imgs in prjDetails.imgInfo track by $index">
+      <p> Question{{index+1}} {{imgs.questionId}} ---> {{imgs.selectedImgId}}
+    </div>
+    Result:
+    <div  ng-repeat="result in prjDetails.resultInfo">
+      <p style="padding-top:20px;text-align:left;">Style: {{result.styleId}}</p>
+      <p style="padding-top:20px;text-align:left;">Percent:{{result.stylePercent}}</p>
+    </div>
+  </div>
+
+  <div id="cust-details" style="padding-top:50px;" ng-show="showRoomPkgDetails">
+    
+    <div class="row qz-row-dsg"  style="width:30%;border:1px solid black;padding:0px;">
+      <div class="col-md-6 col-xs-4 admin-view-tab" ><b>Room Name</b></div>
+      <div class="col-md-6 col-xs-4 admin-view-tab" ><b>Package Name</b></div>
+    </div>
+    
+    <div class="row qz-row-dsg" ng-repeat="pkg in prjDetails.pkgInfo"  style="width:30%;border:1px solid black;padding:0px;">
+      <div class="col-md-6 col-xs-4 admin-view-tab">{{pkg.roomName}}</div>
+      <div class="col-md-6 col-xs-4 admin-view-tab" >{{packages[pkg.pkgId-1].name}}</div>      
+    </div>
+
+<!-- 
+
+    <p style="padding-top:20px;text-align:left;">{{pkg.pkgId}}</p>
+    <p style="padding-top:20px;text-align:left;">{{pkg.roomName}}</p> -->
+  </div>
+
+
+  <div id="cust-details" style="padding-top:50px;" ng-show="showProgressDetails">
+  <form name="adminAction" enctype="multipart/form-data">
+   <div class="row qz-row-dsg"  style="border:1px solid black;padding:0px;">
+      <div class="col-md-2 col-xs-4 admin-view-tab" ><b>Room Name</b></div>
+      <div class="col-md-2 col-xs-4 admin-view-tab" ><b>Upload First Look </b></div>
+      <div class="col-md-2 col-xs-4 admin-view-tab" ><b>Upload Final Look </b></div>
+      <div class="col-md-2 col-xs-4 admin-view-tab" ><b>Upload Shopping List </b></div>
+      <div class="col-md-2 col-xs-4 admin-view-tab" ><b>View Customer Feedback </b></div>
+      <div class="col-md-2 col-xs-4 admin-view-tab" ><b>Upload</b></div>
+  </div>
+
+<!-- ng-repeat="pkg in pkgDtls" -->
+  <div class="row qz-row-dsg"   style="border:1px solid black;padding:0px;">
+      <div class="col-md-2 col-xs-4 admin-view-tab" >{{pkgDtls.roomName}}</div>
+      <div class="col-md-2 col-xs-4 admin-view-tab" >
+        <div ng-if="doUploadFirst===false">
+        <label>
+          <input type="file" multiple ngf-pattern="'image/*'" accept="image/*" ngf-max-size="10MB" style="display:none;" ng-disabled="doUploadFirst" onchange="angular.element(this).scope().addFileToUploadQ(this)"/>
+              <img src="images/attach.png" width="20%"/>
+        </label>
+        </div>
+      </div>
+
+      <div class="col-md-2 col-xs-4 admin-view-tab" >
+      <div ng-if="doUploadFinal===false">
+        <label>
+          <input type="file" multiple ngf-pattern="'image/*'" accept="image/*" ngf-max-size="10MB" style="display:none;" ng-disabled="doUploadFinal"
+                onchange="angular.element(this).scope().addFileToUploadQ(this)"/>
+              <img src="images/attach.png" width="20%"/>
+        </label>
+        </div>
+      </div>
+
+      <div class="col-md-2 col-xs-4 admin-view-tab" >
+      <div ng-if="doUploadShopping===false">
+        <label>
+          <input type="file" multiple ngf-pattern="'image/*'" accept="image/*" ngf-max-size="10MB" style="display:none;" ng-disabled="doUploadShopping"
+                onchange="angular.element(this).scope().addFileToUploadQ(this)"/>
+              <img src="images/attach.png" width="20%"/>
+        </label>
+        </div>
+      </div>
+
+      <div class="col-md-2 col-xs-4 admin-view-tab" >
+        <a href="#">Customer Feedback<br/></a>
+      </div>
+      
+
+      <div class="col-md-2 col-xs-4 admin-view-tab" >
+        <button type="submit" class="btn-start-quiz font-sansRegular txt-upper col-lightcyan fs-20px" ng-click="uploadFile(pkgDtls.quizId, pkgDtls.roomName)">UPLOAD</button>
+      </div>
+      
+  </div>
+
+
+  <div style="padding-bottom:40px;"></div>
+    <p><a href="/admin/users" ng-click="toggleMainView()">Back</a></p>
+    </form>
+</div>
+</section>
+
+<div style="padding-bottom:40px;"></div>
+
+
+<!-- 
 <div ng-repeat = "user in users">
 <p>{{user.username}}</p>
-</div>
+</div> -->
 
 <div class="divider" style="border-top:2px solid rgb(47, 185, 175);"></div>

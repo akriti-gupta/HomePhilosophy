@@ -1,85 +1,44 @@
-/*  mongoose = require('mongoose'),
-    ModelBase = require('../config/bookshelf'),
-    User = mongoose.model('User'); */
-
 var passport = require('passport'),
-   // mongoose = require('mongoose'),
-    // User = mongoose.model('User'); 
     LocalStrategy = require('passport-local').Strategy,
     FacebookStrategy = require('passport-facebook').Strategy,
-    // bookshelf = require('../config/bookshelf'),
     User = require('../models/User'),
-    encrypt = require('../utilities/encryption');
-
-    var mysqlConn = require('../config/mysqlConn');
-
-
-
-/*	var User = ModelBase.extend({
-                tableName: 'user',
-                authenticate: function(pswd){
-                    console.log('In authenticate: pswd is : '+pswd+' and salt is: '+this.get('salt'));
-                    return encrypt.hashPswd(pswd,this.get('salt'))===this.get('password');
-                }});*/
+    encrypt = require('../utilities/encryption'),
+    mysqlConn = require('../config/mysqlConn');
 
 
 module.exports = function(){
-
-
-    //Bookshelf method
-    // passport.use(new LocalStrategy(
-    //     function(username, password, done){
-
-    //         //User.findOne({username: username}).then(function(user) {
-    //         User.forge({username: username}).fetch().asCallback(function(err,user) {     
-    //             if(user && user.authenticate(password)) {
-    //                 return done(null,user);
-    //             }
-    //             else {
-    //                 return done(null,false);
-    //             }
-    //         })
-    //     }
-    // ));
-
-        passport.use(new LocalStrategy(
-            function(username, password, done){
-                mysqlConn.getConnection(function(err,conn){
-                    if(conn){
-                        conn.query('Select * from user where username = '+conn.escape(username), function(err, results, fields){
-                            if(results && results.length > 0){
-                                if(User.authenticate(password,results[0].salt,results[0].password)){
-                                    return done(null,results[0]);
-                                }
-                                else{
-                                    return(null, false);
-                                }
+    passport.use(new LocalStrategy(
+        function(username, password, done){
+            mysqlConn.getConnection(function(err,conn){
+                // if(err){
+                //     console.log('Err in getting mysql conn: '+err);
+                //     return(err, false);
+                // }
+                if(conn){
+                    conn.query('Select * from user where username = '+conn.escape(username), function(err, results, fields){
+                        if(results && results.length > 0){
+                            if(User.authenticate(password,results[0].salt,results[0].password)){
+                                conn.release();
+                                return done(null,results[0]);
                             }
+                            else{
+                                conn.release();
+                                return done(null, false);
+                            }
+                        }
+                        else{
+                            conn.release();
+                            return done(null,false);
+                        }
 
-                        });
-                    }
-                });
-            }
-        ));
+                    });
+                }
+            });
+        }
+    ));
 
 
-
-    //MONGO method
- //    var User = mongoose.model('User');
-	// passport.use(new LocalStrategy(
-	// 	function(username, password, done){
-	// 		User.findOne({username: username}).exec(function(err,user) {
- //     		 if(user && user.authenticate(password)) {
-	// 				return done(null,user);
-	// 		    }
-	// 		    else {
-	// 		    	return done(null,false);
-	// 		    }
-	// 		});
-	// 	}
-	// ));
-
-	 passport.use(new FacebookStrategy({
+    passport.use(new FacebookStrategy({
 
         // pull in our app id and secret from our auth.js file
         clientID        : '118647685254312',
@@ -94,7 +53,7 @@ module.exports = function(){
         // asynchronous
         process.nextTick(function() {
 
-console.log('In FB auth');
+
             // find the user in the database based on their facebook id
             
             User.findOne({ '_id' : profile.id }).exec( function(err, user) {
@@ -135,53 +94,34 @@ console.log('In FB auth');
 
 	passport.serializeUser(function(user,done){
 		if(user){
-			//done(null,user._id);
-            // console.log(user);
-            // done(null,user.get('id'));
-
             done(null,user.id);
 		}
 	});
 
     passport.deserializeUser(function(id,done){
         mysqlConn.getConnection(function(err,conn){
+            // if(err){
+            //         console.log('Err in getting connection in deserializeUser: '+err);
+            //         return done(null, false);
+            //         }
             if(conn){
                 conn.query('Select * from user where id = '+conn.escape(id), function(err, results, fields){
+                    if(err){
+                        console.log('Err in deserializeUser: '+err);
+                        conn.release();
+                        return done(null, false);
+                    }
                     if(results && results.length > 0){
+                        conn.release();
                         return done(null,results[0]);
                     }
                     else{
-                        return(null, false);
+                        conn.release();
+                        return done(null, false);
                     }
                 });
             }
         });
     });
-
-
-    // passport.deserializeUser(function(id,done){
-    //     //User.findOne({id: id}).asCallback(function(err,user) {
-    //     User.forge({id: id}).fetch().asCallback(function(err,user) {     
-    //         if(user) {
-    //             return done(null,user);
-    //         }
-    //         else {
-    //             return done(null,false);
-    //         }
-    //     });
-
-    // });
-
-	// passport.deserializeUser(function(id,done){
-	// 		User.findOne({_id: id}).exec(function(err,user) {
-	// 			if(user) {
-	// 				return done(null,user);
-	// 		    }
-	// 		    else {
-	// 		    	return done(null,false);
-	// 		    }
-	// 	});
-
-	// });
 }
 

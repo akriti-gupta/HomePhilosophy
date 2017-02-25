@@ -8,7 +8,6 @@
 	  			if(response.data.success){
 	  				var user = new mvUser();
 	  				angular.extend(user, response.data.user);
-	  				// mvIdentity.currentUser = response.data.user[0];
 	  				mvIdentity.currentUser = user;
 	  				dfd.resolve(true);
 	  			}
@@ -18,8 +17,6 @@
 	  		});
 	  		return dfd.promise;
 		},
-		// dfd.resolve(true);
-		// return dfd.promise;
 		
 		createUser: function(newUserData){
 			var newUser = new mvUser(newUserData);

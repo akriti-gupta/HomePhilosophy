@@ -12,7 +12,10 @@ var bookshelf = require('../config/bookshelf'),
     	return this.belongsTo(User, 'customerId');
     },
     style: function(){
-  	 return this.belongsTo(Style,'id');
+  	 return this.belongsTo(Style,'styleId');
+    },
+    quiz: function(){
+      return this.belongsTo(CustQuiz, 'quizId');  
     }
 });
   module.exports = CustQuizResult;

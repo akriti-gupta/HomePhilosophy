@@ -2,17 +2,13 @@ angular.module('app').factory('mvUserQuiz', function($http, mvIdentity, $q, quiz
 	return{
 
 		saveUserData: function(userSelectionData,userQuizResult){
-			console.log('In mvUserQuiz, userQuizResult, aka result is: ');
-			console.log(userQuizResult);
+
 			
 			var dfd = $q.defer();
-		 	$http.post('/createUserQuiz',{customerId: mvIdentity.currentUser.id , status:-1})
+
+			$http.post('/createUserQuiz',{customerId: mvIdentity.currentUser.id , status:-1})
 		 	.then(function(userQuizDtl){
 		 			var quizId = userQuizDtl.data.quizId;
-		 			console.log('quizId is: '+quizId);
-	  				console.log('userQuizDtl is: ');
-	  				console.log(userQuizDtl);
-	  				
 	  				//Store this quizId in some service.
 
 	  				$http.post('/saveUserQuizDtls',

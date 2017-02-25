@@ -88,6 +88,5 @@ var mysqlConn = require('../config/mysqlConn');
 var encrypt = require('../utilities/encryption');
 
 exports.authenticate = function(enteredPswd,salt,recPswd){
-	console.log('In authenticate');
 		return encrypt.hashPswd(enteredPswd,salt)===recPswd;
 	}

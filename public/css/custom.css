@@ -410,6 +410,12 @@ button:focus {outline:0;}
   cursor: pointer;
   color: #64C6BE;
 }
+.nav-login{
+  position: absolute;
+  top:65%;
+  /*right: 30px;*/
+  left:89.5%;
+}
 
 @media screen and (max-width: 1280px) {
     .topnav li {

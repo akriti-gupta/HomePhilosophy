@@ -1,17 +1,10 @@
 <!-- TODO: Header to go in  index.js and show up on pages other than /styleQuiz.-->
 <header id="site_header">
 	<a href="/"><div class="hp-logo"></div></a>
-		<!-- <a href="/"><img src="images/logo_header.png" /></a> -->
-	
+
 	<div id="hp-nav">
 	    <ul class="topnav">
-	        <!-- <li class="menu-list plist-border"> -->
 	        <li class="menu-list">
-	        	<!-- <ul class="submenu-list">
-	        	  <li><a href="/aboutUs">About us</a></li>
-	        	  <li><a href="/faq">FAQ</a></li>
-	        	</ul> -->
-	        	<!-- <a href="/op-process">How it works</a> -->
 	        	<a href="/about-us">How it works</a>
 	       </li>
 			<li><a href="/pricing">Pricing</a></li>
@@ -33,16 +26,17 @@
     	<div class="tab_icon">
         	<a href="javascript:void(0);" onclick="displayDropDown()">&#9776;</a>
     	</div>
+	</div>
 
-    	<div class="dropdown nav-login" style="padding-top:5px;" ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
+		<div class="dropdown nav-login" style="padding-top:5px;" ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
 	    	<p style="text-align: right; padding-right: 85px;font-family:Montserrat-Regular;;font-size:12px;letter-spacing:1px;color:rgb(161,161,161);"><a href = "/login">SIGN IN</a></p>
 		</div>
 
-	    <div class="dropdown" style="padding-top:25px;padding-left:730px;" ng-controller="LoginController" ng-show="identity.isAuthenticated()">
-	    	<a href="" data-toggle="dropdown" >{{identity.currentUser.username}}
+	    <div class="dropdown nav-login" style="padding-top:25px;" ng-controller="LoginController" ng-show="identity.isAuthenticated()">
+	    	<a href="" data-toggle="dropdown" >{{identity.currentUser.firstname}}
 	    		<span class="caret"></span>
 	    	</a>
-			<ul class="dropdown-menu" style="left:730px;width:120px;min-width:0px;">
+			<ul class="dropdown-menu" style="min-width:0px;">
 				<li><a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a></li>
 	   		</ul>
 		</div> 

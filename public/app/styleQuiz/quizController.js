@@ -1,20 +1,10 @@
-
-angular.module('app')
-    .service('imageService',['$q','$http',function($q,$http){
-        this.loadImages = function(){
-            return $http.jsonp("https://api.flickr.com/services/feeds/photos_public.gne?format=json&jsoncallback=JSON_CALLBACK");
-        };
-        
-    }]);
-
-
 angular.module("app")
-		  .controller("QuizController",function($scope,$location,$window,quizResult,$http,mvIdentity,mvUserQuiz,imageService,angularGridInstance){
+		  .controller("QuizController",function($scope,$location,$window,quizResult,mvIdentity,mvUserQuiz){
 
 				
     $scope.progressRate=16.6; 
 	$scope.pagenum = 1;
-	$scope.board=1;	
+	$scope.board;	
 	$scope.progress = false;
 	$scope.progress_result=true;
 	$scope.disable = true;
@@ -26,7 +16,7 @@ angular.module("app")
 	$scope.selectedRoom = [];
 	$scope.userStyle = [];
 	$scope.arrImgLiked = [];
-
+	$scope.showResult = false;
 	var prefStyle = [];
 	var arrComments = [];
 	var roomCommentArr = [];
@@ -88,10 +78,6 @@ else{
 }
 
 angular.element($window).bind('resize',function(){
-	console.log('Resized');
-	console.log('Win size is: ');
-	console.log($window.innerWidth);
-
 	if($window.innerWidth<=700){
 		$scope.$apply(function(){
 			$scope.angularGridOptions = {
@@ -985,6 +971,7 @@ $scope.gridWidth=300;
 	if(quizResult.getStyle().length>=1){
 		$scope.userStyle = quizResult.getStyle();
 		$scope.pagenum=9;
+		$scope.showResult = true;
 		$scope.progress_result = false;
 		$scope.board = quizResult.getBoard();
 
@@ -997,14 +984,16 @@ $scope.gridWidth=300;
 	$scope.nextPage = function(){
 		
 		var currentPage = $scope.pagenum;
-		$scope.pagenum++;
+		
 
 		switch(currentPage){
 
-			case 0: $scope.showDesignStyle = false;
+			case 0: $scope.pagenum++;
+					$scope.showDesignStyle = false;
 					$scope.pagenum = 2;
 
-			case 1: saveRoomInfo();
+			case 1: $scope.pagenum++;
+					saveRoomInfo();
 					$scope.progress = true;
 					angular.element('#quizModal').modal('hide');
 					scrollTop();
@@ -1016,11 +1005,13 @@ $scope.gridWidth=300;
 					
 			case 4:
 			case 5: 		
-			case 6:	  $scope.progressRate+=16.5;
-					  break;
+			case 6:	$scope.pagenum++;  
+					$scope.progressRate+=16.5;
+					 break;
 
 					// Clicked on Colors Page.
-			case 7:	$scope.progress=false;
+			case 7:	$scope.pagenum++;
+					$scope.progress=false;
 					$scope.computeStyle();
 					//$scope.refresh(); 
 					  //scrollTop();	
@@ -1033,17 +1024,22 @@ $scope.gridWidth=300;
 					if(mvIdentity.isAuthenticated()){
 						var result = quizResult.getStyle();
 						var userSelectionInfo = quizResult.getCustSelections();
+						console.log('$scope.showResult is: '+$scope.showResult);
 		  				mvUserQuiz.saveUserData(userSelectionInfo, result).then(function(userQuiz){
-		  					console.log('Inqzctrl, userQuiz is: ');
-		  					console.log(userQuiz);
+							$scope.showResult = true;
 		  					quizResult.setUserCurrQuiz(userQuiz.data.quizId);
+		  					$scope.pagenum++;
 		  				}, function(reason){
 		  					console.log(reason);
 		  				});
+
+		  				
+
 						$scope.progress = false;
 						$scope.progress_result = true;
 					}
 					else{
+						$scope.pagenum++;
 					 	$location.path('/login');
 					}
 					scrollTop();
@@ -1051,9 +1047,9 @@ $scope.gridWidth=300;
 
 
 			case 9:// $scope.progress_result=true;
-
-					 $location.path('/tell-us-more');
-					 break;
+					$scope.pagenum++;
+					$location.path('/tell-us-more');
+					break;
 			}
 	}
 
@@ -1072,14 +1068,11 @@ $scope.gridWidth=300;
 	
 	
 
-	$scope.refresh = function(){
-		// console.log("refreshing gallery now");
-        
-        angularGridInstance.gallerypin.refresh();
-    }
+	// $scope.refresh = function(){
+	//     angularGridInstance.gallerypin.refresh();
+ //    }
 
 	$scope.computeStyle = function(){
-		console.log('In computeStyle');
 		//initialising scorecards of each style to 0
 		var totA = 0;
 		var totB = 0;
@@ -1209,7 +1202,6 @@ $scope.gridWidth=300;
 
 			//To store pinterest image and comments
 			quizResult.storeUserQuizInfo({"roomSelected":$scope.selectedRoom,"quizImgSelected":$scope.selectedImages});
-			console.log('In quizController, before storing style');
 			quizResult.storeStyle($scope.userStyle,$scope.board);
 	}
 
@@ -1264,7 +1256,7 @@ $scope.gridWidth=300;
 	}
 
 	$scope.saveSelection = function (imageId,roomName,roomDispName) {
-		console.log('Save selections called');
+		
 		if($scope.pagenum==1){ // Allow multiple room selections
 			
 			//If room already exists, user clicked a room icon twice to deselect, remove image ID from array
@@ -1297,7 +1289,6 @@ $scope.gridWidth=300;
 		else{
 			//$scope.selectedImages[$scope.pagenum] =  imageId;
 			$scope.selectedImages.push(imageId);
-			console.log('$scope.selectedImages is: '+$scope.selectedImages);
 			if($scope.pagenum!=7)
 				$scope.nextPage();
 		}
@@ -1306,11 +1297,10 @@ $scope.gridWidth=300;
 	$scope.prev = function(){
 		
 		$scope.selectedImages.pop();
-		console.log($scope.selectedImages);
 
 		//Back clicked from style already known.
 		if($scope.pagenum===0){
-			$scope.refresh();
+			//$scope.refresh();
 			$scope.showDesignStyle = false;
 			$scope.pagenum =1;
 		}	
@@ -1348,7 +1338,6 @@ $scope.gridWidth=300;
 		
 		for(var i in $scope.selectedRoom){
 			if($scope[$scope.selectedRoom[i].room_name].value===0){
-				console.log('In If, updating values');
 				$scope[$scope.selectedRoom[i].room_name].id = 1;
 				$scope[$scope.selectedRoom[i].room_name].value = 1;
 				$scope[$scope.selectedRoom[i].room_name].label = "1";
@@ -1357,9 +1346,6 @@ $scope.gridWidth=300;
 				$scope.selectedRoom[i].room_num = $scope[$scope.selectedRoom[i].room_name];
 			// }
 		}
-		console.log("Rooms Selected are: ");
-		console.log($scope.selectedRoom);
-
 		for (var i in $scope.selectedRoom){
 			if($scope.selectedRoom[i].room_num.id > 1){
 				for(var j=1; j<= $scope.selectedRoom[i].room_num.id; j++){
@@ -1389,20 +1375,12 @@ $scope.gridWidth=300;
 
 	$scope.loadComments = function(img_id,room_id){
 		$scope.img_id = img_id;
-		console.log('Img Id is: '+$scope.img_id);
-		console.log('Room Id is: '+room_id);
 		var comments = "";
-		console.log('arrComments.length is: '+arrComments.length);
 		if(arrComments.length > 0){
 			for(var i = 0; i< arrComments.length ; i++){
-				console.log('arrComments[i].image_id is :'+arrComments[i].image_id);
 				if(arrComments[i].image_id ===img_id){
-					console.log('img MAtcheeeeessss');
 					for(var j =0; j< arrComments[i].comments.length;j++){
-						console.log('arrComments[i].comments[j].room_id is :'+arrComments[i].comments[j].room_id);
 						if(arrComments[i].comments[j].room_id === room_id){
-							console.log('Room matcchhhess');
-							console.log('comment fetched iss: '+arrComments[i].comments[j].room_comments);
 							comments = arrComments[i].comments[j].room_comments;
 							break;
 						}
@@ -1455,20 +1433,13 @@ $scope.gridWidth=300;
 			}	
 		}
 		else if(idx_image_obj>=0 && idx_cmt_obj>=0){ //Cmt exits
-			console.log('Both exits');
-			console.log(arrComments[idx_image_obj].comments[idx_cmt_obj].room_comments);
 			if((arrComments[idx_image_obj].comments[idx_cmt_obj].room_comments).localeCompare($scope.room_comments) != 0)
 				arrComments[idx_image_obj].comments[idx_cmt_obj].room_comments = $scope.room_comments;
 		}
 		else if(idx_image_obj>=0 && idx_cmt_obj===-1){ //Only image exists, no comment for the room
 			if($scope.room_comments!=""){
-				console.log('idx_image_obj is '+idx_image_obj+ ' and idx_cmt_obj = '+idx_cmt_obj);			
-				console.log('arrComments[idx_image_obj].comments is: ');
 				var arrCommentsTmp=arrComments[idx_image_obj].comments;
-				console.log(arrCommentsTmp);
 				arrCommentsTmp.push({"room_id":last_active_room_id,"room_comments":$scope.room_comments});
-				console.log('after push');
-				console.log(arrCommentsTmp);
 				arrComments[idx_image_obj].comments=arrCommentsTmp;
 			}
 		}
@@ -1476,15 +1447,11 @@ $scope.gridWidth=300;
 		last_active_room_id = room_id;
 		$scope.loadComments($scope.img_id,room_id);
 		}
-		console.log(arrComments);
 	}
 
 	$scope.submitComments = function(item){
 		var room_id = item.currentTarget.getAttribute("data-room-id");
-		console.log('In submit, room_id is: '+room_id);
 		$scope.saveCmtsOnTabClick(room_id);
-		console.log('After submit, final arr is: ');
-		console.log(arrComments);
 		last_active_room_id = 0;
 	}
 

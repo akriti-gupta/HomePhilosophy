@@ -86,6 +86,7 @@ exports.createUser = function(req,res,next){
 								if(err){return next(err);}
 								res.send(users[0]);
 							});
+							conn.release();
 						});
 			});
 		}
