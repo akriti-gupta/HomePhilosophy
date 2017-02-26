@@ -1,5 +1,5 @@
 angular.module("app")
-		  .controller("PaymentController",function($scope,$location,$http,quizResult,payment,mvPayment,mvIdentity,mvNotifier){
+		  .controller("PaymentController",function($scope,$location,$http,quizResult,payment,mvPayment,mvIdentity,mvNotifier,mvUserQuiz,custViewSvc){
 
   	$scope.payPkg;
   	$scope.pkgValue
@@ -55,17 +55,12 @@ angular.module("app")
 
   	$scope.savePayPkg = function(pkg){
   		payment.storePayPkg(pkg);
-  // 		if(!mvIdentity.isAuthenticated()){
-		// 	$location.path('/login');
-		// }
-		// else if(payment.getPayPkg()!=-1){
 		 	if(quizResult.getStyle().length>=1){
 				$location.path("/reviewPayment");	
 		 	}
 		 	else{
 		 		$location.path("/style-quiz");	
 		 	}
-		//}
 	}	
 	
 	$scope.updateTotal = function(){
@@ -83,17 +78,34 @@ angular.module("app")
 		var status = 1;
 		var isAddOn = 0;
 		var addOnAmtPaid = 0;
+		var isAddRoomErr = 0;
+
+		console.log($scope.selectedRooms);
+
+		//Check if redirect from add new room, In that case add room in cust_room_selection	
+		if(custViewSvc.getRequester()!=' '){
+			mvUserQuiz.addRoomToQuiz(quizId,$scope.selectedRooms).then(function(success){
+				console.log('Room Added');
+  			}, function(reason){
+  				isAddRoomErr = 1;
+  				alert('Error in adding new room'+reason);
+  			});
+		}
 
 		payment.storePkgPerRoom($scope.roomSelectionArr,$scope.roomPkg);
 
 		var roomPkg = payment.getPkgPerRoom();
 
-  		mvPayment.storePackage(quizId, roomPkg, $scope.totalPrice, status,isAddOn,addOnAmtPaid).then(function(response){
-  			console.log('Thanks for the payment');
-  			$location.path('/dashboard');
-  		}, function(reason){
-  			alert('Payment unsuccessful, please contact the site admin. '+reason);
-  		});
+		console.log('Before storing package in ctrl, roomPkg is:');
+		console.log(roomPkg);
+		if(isAddRoomErr===0){
+	  		mvPayment.storePackage(quizId, roomPkg, $scope.totalPrice, status,isAddOn,addOnAmtPaid).then(function(response){
+	  			console.log('Thanks for the payment');
+	  			$location.path('/dashboard');
+	  		}, function(reason){
+	  			alert('Payment unsuccessful, please contact the site admin. '+reason);
+	  		});
+	  	}
 	}		  	
 });
 

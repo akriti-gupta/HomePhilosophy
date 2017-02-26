@@ -36,7 +36,7 @@
         		// 	console.log('Style Quiz taken. Info stored in index 4 to 8');
         		// }
 
-        		if(imgArr.length===6){
+        		if(imgArr!=null && imgArr.length===6){
         			console.log('Style Quiz taken. Info stored in index 0 to 5');
         		}
         		else{
@@ -63,6 +63,9 @@
 		var getCustSelections = function(){
 			return custSelections;
 		 };
+		 var clearCustSelections = function(){
+		 	custSelections.length=0;
+		 }
 		 var getBoard = function(){
 		 	return board;
 		 }
@@ -128,7 +131,8 @@
 			   	getBoard: getBoard,
 			   	storeUserQuizInfo: storeUserQuizInfo,
 			   	setUserCurrQuiz: setUserCurrQuiz,
-			   	getUserCurrQuiz: getUserCurrQuiz
+			   	getUserCurrQuiz: getUserCurrQuiz,
+			   	clearCustSelections: clearCustSelections
 
 			  };
         });

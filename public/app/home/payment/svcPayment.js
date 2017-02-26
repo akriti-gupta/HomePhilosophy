@@ -29,6 +29,10 @@
 			return pkgPerRoom;
 		}
 
+		var clearPkgPerRoom = function(){
+			pkgPerRoom.length=0;
+		}
+
 		var getPackages = function(){
 			//Get this info from DB.
 			packageArr = [
@@ -46,6 +50,7 @@
 			    clearPayPkg: clearPayPkg,
 			    storePkgPerRoom: storePkgPerRoom,
 			    getPkgPerRoom: getPkgPerRoom,
-			    getPackages: getPackages
+			    getPackages: getPackages,
+			    clearPkgPerRoom: clearPkgPerRoom
 			}
 	});

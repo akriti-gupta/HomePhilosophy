@@ -27,7 +27,7 @@
 </header>
 <div class="divider" style="border-top:2px solid #e1e1e1;padding:15px;" ng-show="showMain"></div>
 <div class="divider" style="border-top:2px solid #e1e1e1;padding:0px;" ng-show="showFeedback"></div>
-<section id="dashboard" ng-show="showMain">
+<section id="dashboard" ng-show="showMain" ng-init="getProjectData()">
 	<p>{{firstName}}'s Personalized Room Design</p>
 	<div class="data-dashboard" >
 		
@@ -129,7 +129,7 @@
 		
 		    <div class="col-md-4 col-xs-4 cust-view-tab" style="padding:10px;">
 		        <figure>
-		            <img class="center-block" ng-src={{roomImage[item.roomData.roomName]}} style="height:100px;width:auto;">
+		            <img class="center-block" ng-src={{roomImage[item.roomData]}} style="height:100px;width:auto;">
 		        </figure>
 		    </div>
 
@@ -170,10 +170,10 @@
 		</div>
 
 		<div class="qz-row-dsg" style="padding-top:20px;" ng-if="hasActiveProject">
-		<a href="/style-quiz"><button type="submit" class="btn-start-quiz btn-nxt " style="padding:10px; float:right;" >Add a Room</button></a>
+		<a href="#" ng-click="addRoom()"><button type="submit" class="btn-start-quiz btn-nxt " style="padding:10px; float:right;" >Add a Room</button></a>
 		</div>
 
-		<div class="qz-row-dsg" style="padding-top:20px;" ng-if="!hasActiveProject">
+		<div class="qz-row-dsg" style="padding-top:20px;" ng-if="hasAllLaunched">
 		<a href="/style-quiz"><button type="submit" class="btn-start-quiz btn-nxt " style="padding:10px; float:right;" >Start a New Project</button></a>
 		</div>
 

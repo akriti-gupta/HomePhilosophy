@@ -1,5 +1,5 @@
 angular.module("app")
-		  .controller("QuizController",function($scope,$location,$window,quizResult,mvIdentity,mvUserQuiz){
+		  .controller("QuizController",function($scope,$location,$window,quizResult,mvIdentity,mvUserQuiz,custViewSvc){
 
 				
     $scope.progressRate=16.6; 
@@ -17,6 +17,7 @@ angular.module("app")
 	$scope.userStyle = [];
 	$scope.arrImgLiked = [];
 	$scope.showResult = false;
+	$scope.pageRequester;
 	var prefStyle = [];
 	var arrComments = [];
 	var roomCommentArr = [];
@@ -62,6 +63,23 @@ angular.module("app")
 
 
 $scope.angularGridOptions;
+
+console.log(custViewSvc.getRequester());
+
+$scope.pageRequester=custViewSvc.getRequester();
+
+$scope.checkProjects = function(){
+	if(custViewSvc.getRequester()===' '){
+		mvUserQuiz.getExistingPrjs().then(function(projects){
+			if(projects){
+				$location.path('/dashboard');
+			}
+		});
+	}
+	else{
+		$scope.pageRequester=custViewSvc.getRequester();
+	}
+}
 
 if($window.innerWidth <=700){
 	$scope.angularGridOptions = {
@@ -968,7 +986,7 @@ $scope.gridWidth=300;
 	}
 
 	// To maintain the quiz result and style quiz pages state when redirected here after login.
-	if(quizResult.getStyle().length>=1){
+	if(quizResult.getStyle().length>=1 && $scope.pageRequester===' '){
 		$scope.userStyle = quizResult.getStyle();
 		$scope.pagenum=9;
 		$scope.showResult = true;
@@ -1453,6 +1471,14 @@ $scope.gridWidth=300;
 		var room_id = item.currentTarget.getAttribute("data-room-id");
 		$scope.saveCmtsOnTabClick(room_id);
 		last_active_room_id = 0;
+	}
+
+	$scope.addRoomToQuiz = function(){
+		console.log('Before going to pricing,roomSelected is: ');
+		console.log($scope.selectedRoom);
+		saveRoomInfo();
+		quizResult.storeUserQuizInfo({"roomSelected":$scope.selectedRoom,"quizImgSelected":null});
+		$location.path('/pricing');
 	}
 
 });

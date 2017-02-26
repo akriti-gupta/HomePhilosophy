@@ -6,6 +6,12 @@ angular.module("app")
 		  	$scope.signin= function(username, password){
 		  		mvAuth.authenticateUser(username,password).then(function(success){
 		  			if(success){
+		  				mvUserQuiz.getExistingPrjs().then(function(projects){
+							if(projects){
+								$location.path('/dashboard');
+							}
+						});
+
 		  				if(quizResult.getStyle().length>=1){
 		  					// saveQuizInfo();
 		  					var result = quizResult.getStyle();

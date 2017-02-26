@@ -1,4 +1,4 @@
-angular.module('app').factory('mvUserQuiz', function($http, mvIdentity, $q, quizResult,mvUser){
+angular.module('app').factory('mvUserQuiz', function($http, mvIdentity, $q, quizResult,mvUser,mvCustView){
 	return{
 
 		saveUserData: function(userSelectionData,userQuizResult){
@@ -31,10 +31,47 @@ angular.module('app').factory('mvUserQuiz', function($http, mvIdentity, $q, quiz
 				dfd.reject(response.data.reason);
 			}
 	  		return dfd.promise;
-		}
+		},
 
+		getExistingPrjs: function(){
+			var dfd = $q.defer();
+			var hasActivePrj = false;
+			if(mvIdentity.isAuthenticated()){
+				mvCustView.getCustProjectInfo().then(function(projectData){
+					if(projectData.quizData!=null && projectData.quizData.length>0){
+						for(var i = 0; i<projectData.quizData.length ; i++){
+							var currQzObj = projectData.quizData[i];
+							if(currQzObj.status===0){
+								hasActivePrj=true;
+								break;
+							}
+						}
+						if(hasActivePrj){
+							dfd.resolve(true);
+						}
+						else{
+							dfd.resolve(false);
+						}
+					}
+				});
+			}
+			return dfd.promise;
+		},
 
-		
+		addRoomToQuiz: function(quizId,roomInfo){
+			var dfd = $q.defer();
+
+			$http.post('/addRoomToQuiz',{quizId: quizId , roomInfo:roomInfo})
+		 	.then(function(response){
+		 		if(response.data.success){
+		 			dfd.resolve(true);
+		 		}
+		 		else{
+		 			dfd.reject(response.data.reason);
+		 		}
+	  		});
+	  		return dfd.promise;
 			
+		}
 	}
 });

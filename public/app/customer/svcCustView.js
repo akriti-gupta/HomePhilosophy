@@ -1,19 +1,19 @@
-angular.module('app').service("custView", function() {
-        var project = [];
-       
-        var setUserProject = function (data){
-        	project = data;
-        }
-        var getUserProject = function(){
-        	return project;
+angular.module('app').service("custViewSvc", function() {
+        var route=' ';
+
+        var setRequester = function(originRoute){
+            route = originRoute;
         }
 
-        var clearUserProject = function(){
-                project.length = 0;
+        var getRequester = function(){
+            return route ;
+        }
+        var clearRequester = function(){
+            route=' ';
         }
         return {
-                    setUserProject: setUserProject,
-                    getUserProject: getUserProject,
-                    clearUserProject: clearUserProject
+                    setRequester: setRequester,
+                    getRequester: getRequester,
+                    clearRequester: clearRequester
                 };
 });

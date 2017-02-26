@@ -47,21 +47,20 @@ angular.module('app').factory('mvCustView', function($http, $q, $cacheFactory,$w
 			// else{
 			// 	return dfd.resolve(data);
 			// }	
-		},
-		setUserProjects: function(userProjects){
-			console.log('While setting, userProjects is: ');
-			console.log(userProjects);
-			$window.localStorage && $window.localStorage.setItem('userProjects', JSON.stringify(userProjects));
-      		//return this;
-		},
-		 getUserProjects: function() {
+		}
+		// ,
+		// setUserProjects: function(userProjects){
+		// 	console.log('While setting, userProjects is: ');
+		// 	console.log(userProjects);
+		// 	$window.localStorage && $window.localStorage.setItem('userProjects', JSON.stringify(userProjects));
+  //     		//return this;
+		// },
+		//  getUserProjects: function() {
 		 	
-		 		var prj =  $window.localStorage.getItem('userProjects');
-		 		console.log('While getting, userProjects is: ');
-			console.log(prj);
-		 		return prj;
-		 	
-      		//return $window.localStorage && $window.localStorage.getItem('userProjects');
-    	}
+		//  		var prj =  $window.localStorage.getItem('userProjects');
+		//  		console.log('While getting, userProjects is: ');
+		// 	console.log(prj);
+		//  		return prj;
+  //   	}
 	}
 });

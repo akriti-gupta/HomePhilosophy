@@ -1,5 +1,5 @@
 angular.module("app")
-		  .controller("CustViewController",function($scope,$location,$http,$filter,quizResult,payment,mvIdentity,mvNotifier,mvUpload, mvCustView,custView){
+		  .controller("CustViewController",function($scope,$location,$http,$filter,quizResult,payment,mvIdentity,mvNotifier,mvUpload, mvCustView,custViewSvc){
 		  		
 		  	
 
@@ -17,6 +17,7 @@ $scope.feedbackComment;
 $scope.showFeedback = false;
 $scope.showMain = true;
 $scope.hasActiveProject = false;
+$scope.hasAllLaunched = true;
 
 // $scope.packages = [
 //   						{'id':1,'name':"Simple",'pkgValue':350,value:1},
@@ -30,11 +31,11 @@ $scope.packageName=[' ','Simple','Classic','Premium','Custom'];
 $scope.roomImage ={};
 
 $scope.roomImage["Bedroom"] = "images/rooms/bedroom.png";
-$scope.roomImage["Dining Room"] = "images/rooms/dining.png";
-$scope.roomImage["Master Room"] = "images/rooms/master.png";
-$scope.roomImage["Living Room"] = "images/rooms/living.png";
-$scope.roomImage["Home Office"] = "images/rooms/homeOffice.png";
-$scope.roomImage["Kids Room"] = "images/rooms/kids.png";
+$scope.roomImage["Dining"] = "images/rooms/dining.png";
+$scope.roomImage["Master"] = "images/rooms/master.png";
+$scope.roomImage["Living"] = "images/rooms/living.png";
+$scope.roomImage["Home"] = "images/rooms/homeOffice.png";
+$scope.roomImage["Kids"] = "images/rooms/kids.png";
 
 /*function checkFeedbackStatus(feedbackData){
 	for(var i =0;i<feedbackData.length;i++){
@@ -45,6 +46,26 @@ $scope.roomImage["Kids Room"] = "images/rooms/kids.png";
 	}
 }*/
 
+
+//This function sets the existing active projects quiz info thru svcQuizResult.storeStyle
+//Add a room takes all the existing style info of latest existing active project.
+//Mapping Style info ensures that payment will be accepted when a new room is added.
+//Without style info, pricing reverts to style quiz.
+
+function storeQuizInfo(quizData){
+
+	var resultData = quizData.resultData;
+	var styleObj = [];
+	if(resultData!=null && resultData.length>0){
+		for(var i =0;i<resultData.length;i++){
+			var styleId= resultData[i].styleId;
+			var styleValue= resultData[i].stylePercent;
+			styleObj.push({'id':styleId,'value':styleValue});
+		}
+		quizResult.storeStyle(styleObj,-1);
+		quizResult.setUserCurrQuiz(quizData.quizData.quizId);
+	}
+}
 function validateFormData(){
 	if($scope.apptDate!=null){
 		if($scope.contact===' ' || $scope.address === ' ' || $scope.person === ' ' || $scope.apptTime===null)
@@ -199,7 +220,6 @@ function populateStatus(projectData){
  }
 
  function populateQuizArray(projectData){
- 	var tmpPrjArr = [];
  	var prjArr = [];
 	var userData = projectData.userData[0];
  	
@@ -220,7 +240,10 @@ function populateStatus(projectData){
 					$scope.hasActiveProject = true;
 				}
 			}
-
+			if(currQzObj.status<=0){
+				$scope.hasAllLaunched = false;
+			}
+			
 			if(projectData.pkgData && projectData.pkgData.length>0){
 				for(var j= 0;j<projectData.pkgData.length; j++){
 					if(projectData.pkgData[j].quizId === currQzId){
@@ -274,7 +297,7 @@ function populateStatus(projectData){
 
 			//
 
-			for(var j = 0;j<relRoomArr.length; j++){
+			/*for(var j = 0;j<relRoomArr.length; j++){
 				var currRoomName = relRoomArr[j].roomName;
 				var statusText;
 				var statusLink;
@@ -297,11 +320,26 @@ function populateStatus(projectData){
 								'pkgData':relPkgArr,'resultData':relResultArr,'apptData':relApptArr,'firstLookData':relFLArr,
 								'feedbackData':relFeedbackArr});
 				}
-			}
-			tmpPrjArr.push({'userData':userData,'quizData':currQzObj,'roomData':relRoomArr,'pkgData':relPkgArr,
-				'resultData':relResultArr,'apptData':relApptArr,'firstLookData':relFLArr,
-				'feedbackData':relFeedbackArr});
+			}*/
 
+			for(var j = 0;j<relPkgArr.length; j++){
+				var roomDispName = relPkgArr[j].roomName;
+				var currRoomName;
+				if(roomDispName.indexOf(' ')!=-1){
+					currRoomName = roomDispName.substr(0,roomDispName.indexOf(' '));
+				}
+				else{
+					currRoomName = roomDispName
+				}
+				
+				
+				prjArr.push({'userData':userData,'quizData':currQzObj,'roomData':currRoomName,
+					'pkgData':relPkgArr[j],'resultData':relResultArr,'apptData':relApptArr,'firstLookData':relFLArr,
+					'feedbackData':relFeedbackArr});
+		
+			}
+
+			
 		}// Outermost For loop iterating over unique cust quiz
 
 		//prjArr now contain room wise data.
@@ -312,6 +350,7 @@ function populateStatus(projectData){
  }
 
 //Get customer projects from DB.
+$scope.getProjectData = function(){
 mvCustView.getCustProjectInfo().then(function(projectData){
 	console.log('Result got back is: ');
 	console.log(projectData);
@@ -328,7 +367,22 @@ mvCustView.getCustProjectInfo().then(function(projectData){
 		mvNotifier.notify('Please try again later/ contact the site administrator. '+reason);
 		$location.path="/";
 	});
+}
 
+$scope.addRoom=function(){
+	custViewSvc.setRequester('dashboard');
+	console.log('Route saved is: '+custViewSvc.getRequester());
+	quizResult.clearStyle();
+	payment.clearPayPkg();
+	payment.clearPkgPerRoom();
+	quizResult.clearCustSelections();
+
+	//Call function to store style.
+	var oldQzData = $scope.projectArr[0];
+	storeQuizInfo(oldQzData);
+	
+	$location.path('/style-quiz');
+}
 
 $scope.loadMtngData=function(row_id){
 	if($scope.projectArr[row_id].apptData && $scope.projectArr[row_id].apptData[0].person!=' '){

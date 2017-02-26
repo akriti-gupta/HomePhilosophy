@@ -70,7 +70,8 @@ module.exports = function(app){
 	app.post('/signin',auth.authenticate);
 
 	app.post('/createUserQuiz',userQuiz.createUserQuiz);
-
+	app.post('/addRoomToQuiz',userQuiz.addRoomToQuiz);
+	
 	app.post('/logout',function(req,res){
 		console.log('Logout called');
 		req.logout();

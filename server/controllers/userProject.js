@@ -218,8 +218,8 @@ exports.getCustProjectInfo = function(req,res,next){
 						     	console.log(err);
 						     	res.send({success: false, reason:err.toString()});
 						     }
-						     console.log('Final Prll');
-						     console.log(result);
+						     // console.log('Final Prll');
+						     // console.log(result);
 						     
 				                userProjects.resultData = result[0];
 				                userProjects.roomData = result[1];
@@ -240,8 +240,8 @@ exports.getCustProjectInfo = function(req,res,next){
 						   	res.send({success: false, reason:err.toString()});
 						   }
 						   
-						   console.log('Final series');
-						   console.log(result);
+						   // console.log('Final series');
+						   // console.log(result);
 						   if(result.length>=0)
 				           	userProjects.firstLookData = result[0];
 				           else
@@ -252,7 +252,7 @@ exports.getCustProjectInfo = function(req,res,next){
 				           else{
 				           	userProjects.feedbackData = [];
 				           }
-				            console.log(userProjects);
+				           // console.log(userProjects);
 				            conn.release();
 				            res.send({'success':true,'results':userProjects});
 						});

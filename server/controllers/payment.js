@@ -1,79 +1,3 @@
-// var CustPackages = require('../collections/CustPackages'),
-// 	CustPackageTxn = require('../models/CustPkgTxn'),
-// 	CustQuiz = require('../models/CustQuiz');
-
-// exports.storePackage = function(req,res,next){
-
-// 	var customerId = req.body.customerId;
-// 	var quizId = req.body.quizId;
-// 	var totalPrice = req.body.totalPrice;
-// 	var pkgForRoom = req.body.roomPkg;
-// 	var status = req.body.status;
-// 	var isAddOn = req.body.isAddOn;
-// 	var addOnAmtPaid = req.body.addOnAmtPaid;
-
-	
-// 	var userPkgData=[];
-
-// 	var pkgTxnInfo = {	customerId:customerId,
-// 						quizId:quizId,
-// 						totalPrice:totalPrice,
-// 						amountPaid:totalPrice/2,
-// 						addOnAmtPaid:addOnAmtPaid
-
-// 	};
-// 	// console.log('selectedRooms is: ');
-// 	// console.log(selectedRooms);
-
-// 	if(pkgForRoom!=null){
-// 		for(var i =0; i<pkgForRoom.length;i++){
-
-// 			userPkgData.push({customerId:customerId,
-// 							   quizId:quizId,
-// 							   roomName:pkgForRoom[i].roomName,
-// 							   pkgId:pkgForRoom[i].pkgId,
-// 							   status: status,
-// 							   isAddOn: isAddOn
-// 							});
-// 		} 
-// 	}
-
-// 	CustPackages.forge(userPkgData).invokeThen('save', null, null).then(function() {
-// 			console.log('Package Info saved');
-// 			// Save in cust_pkg_txn
-
-			
-
-// 		}).catch(function(err){
-// 				console.log('Error in saving payment data'+err);
-// 				res.send({success:false,response:err.toString()});
-// 		});	
-
-// CustPackageTxn.forge(pkgTxnInfo).save().then(function() {
-// 				console.log('PackageTxn saved');
-// 			}).catch(function(err){
-// 				console.log('Error in saving pkg txn data'+err);
-// 				 res.send({success:false,response:err.toString()});
-// 			});
-
-// 			// CustQuiz.where({customerId:customerId, quizId:quizId})
-// 			// .fetchAll()
-// 			// .then(function(usrQuizCol){
-// 			// 	if(usrQuizCol.models.length>0){
-// 					// var id = usrQuizCol.models[0].attributes.id;
-// 					CustQuiz.where({quizId:quizId}).save({'status':0},{patch:true}).then(function(){
-// 						console.log('Cust Quiz status updated');
-// 						res.send({success:true});
-// 					}).catch(function(err){
-// 						console.log('Eror in updating cust quiz status'+err);
-// 						res.send({success:false, response: err.toString()});
-// 					});
-// 				//}
-// 			// }).catch(function(err){
-// 			// 			console.log('Eror in fetching cust quiz records'+err);
-// 			// 			res.send({success:false, response: err.toString()});
-// 			// 	});	
-// 		}
 
 var mysqlConn = require('../config/mysqlConn');
 
@@ -97,6 +21,8 @@ exports.storePackage = function(req,res,next){
 						addOnAmtPaid:addOnAmtPaid
 
 	};
+	console.log('In storePackage, pkgForRoom is:');
+	console.log(pkgForRoom);
 	
 	if(pkgForRoom!=null){
 		for(var i =0; i<pkgForRoom.length;i++){
@@ -106,6 +32,7 @@ exports.storePackage = function(req,res,next){
 			console.log(userPkgData);
 		} 
 	}
+
 
 	mysqlConn.getConnection(function(err,conn){
 		if(err){console.log('Error in getting mysql conn in paymnet.js: '+err);return next(err);}
@@ -143,7 +70,7 @@ exports.storePackage = function(req,res,next){
 				//Check if any other active quiz exists for the same customer with a future appointment.
 				conn.query('select * from cust_quiz q,cust_appointment a where '+
 							'q.quizId = a.quizId and q.customerId='+conn.escape(customerId)+
-							' and q.status=0 and q.quizId!='+quizId, function(err, results, fields){
+							' and q.status=0 and q.quizId='+quizId, function(err, results, fields){
 					if(err){
 						console.log('Eror in getting existing cust quizes');
 					}
