@@ -1,32 +1,37 @@
 angular.module("app")
-	.controller("LoginController",function($scope,$location, $http, mvIdentity, mvNotifier, mvAuth, mvUserQuiz, quizResult){
+	.controller("LoginController",function($scope,$location, $http, mvIdentity, mvNotifier, mvAuth, mvUserQuiz, mvEmail, quizResult){
 			
 			$scope.identity =mvIdentity;
 			$scope.showName = true;			
 		  	$scope.signin= function(username, password){
 		  		mvAuth.authenticateUser(username,password).then(function(success){
 		  			if(success){
-		  				mvUserQuiz.getExistingPrjs().then(function(projects){
-							if(projects){
-								$location.path('/dashboard');
-							}
-						});
-
-		  				if(quizResult.getStyle().length>=1){
-		  					// saveQuizInfo();
-		  					var result = quizResult.getStyle();
-		  					var userSelectionInfo = quizResult.getCustSelections();
-		  					mvUserQuiz.saveUserData(userSelectionInfo, result).then(function(userQuiz){
-		  						quizResult.setUserCurrQuiz(userQuiz.data.quizId);
-		  						mvNotifier.notify('Login success!');
-		  						$location.path('/style-quiz');
-		  					}, function(reason){
-		  							mvNotifier.error(reason);
-		  					});
+		  				if(mvIdentity.currentUser.role==="admin"){
+		  					$location.path('/admin/users');
 		  				}
 		  				else{
-		  					$location.path('/dashboard');
-		  				}
+			  				mvUserQuiz.getExistingPrjs().then(function(projects){
+								if(projects){
+									$location.path('/dashboard');
+								}
+							});
+
+			  				if(quizResult.getStyle().length>=1){
+			  					// saveQuizInfo();
+			  					var result = quizResult.getStyle();
+			  					var userSelectionInfo = quizResult.getCustSelections();
+			  					mvUserQuiz.saveUserData(userSelectionInfo, result).then(function(userQuiz){
+			  						quizResult.setUserCurrQuiz(userQuiz.data.quizId);
+			  						mvNotifier.notify('Login success!');
+			  						$location.path('/style-quiz');
+			  					}, function(reason){
+			  							mvNotifier.error(reason);
+			  					});
+			  				}
+			  				else{
+			  					$location.path('/dashboard');
+			  				}
+			  			}
 		  			}
 		  			else{
 		  				alert('Username/Password combination incorrect');
@@ -70,6 +75,14 @@ angular.module("app")
 		  			else{
 		  				$location.path('/');
 		  			}
+		  			mvEmail.sendEmail().then(function(success){
+			  				if(success)
+				  				console.log('Mail sent');
+				  			else
+				  				console.log('Mail not sent');
+
+			  		});
+
 		  		}, function(reason){
 		  			mvNotifier.error(reason);
 		  		});

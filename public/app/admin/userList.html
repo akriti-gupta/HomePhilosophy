@@ -51,41 +51,39 @@
 </div>
 
 
-<section id="dashboard" ng-show="showListing">
+<section id="dashboard"  ng-show="showListing" ng-init="getProjectListing()">
   <div>
-  <p class="fs-22px" style="margin-bottom:20px;"> Project Listing </p>
-    <div class="row qz-row-dsg" style="border:1px solid black;padding:0px;">
+    <p class="fs-22px" style="margin-bottom:20px;"> Project Listing </p>
+    <!-- <div class="row qz-row-dsg" style="border:1px solid black;padding:0px;">
       <div class="col-md-2 col-xs-4 admin-view-tab" style="padding:0px;">CUSTOMER NAME</div>
       <div class="col-md-2 col-xs-4 admin-view-tab" style="padding:0px;">PROJECT ID</div>
-      <div class="col-md-2 col-xs-4 admin-view-tab" style="padding:0px;">PROJECT DATE</div>
+      <div class="col-md-2 col-xs-4 admin-view-tab" style="padding:0px;">PROJECT START DATE</div>
       <div class="col-md-2 col-xs-4 admin-view-tab" style="padding:0px;">ROOM</div>
       <div class="col-md-2 col-xs-4 admin-view-tab" style="padding:0px;">PACKAGE</div>
       <div class="col-md-2 col-xs-4 admin-view-tab" style="padding:0px;">STATUS</div>
-    </div>
+    </div> -->
  
-    <div  class="row qz-row-dsg" style="border:1px solid black;padding-bottom:0px;" ng-repeat="item in custProjects track by $index">
 
-      <!-- ng-href="/projectDetail/{{$index}}/detail/{{custProjects}}" -->
-      <div class="col-md-2 col-xs-4 admin-view-tab" ><a href="#" ng-click="details($index,1)"> {{item.custInfo.name}}</a></div>
-      <!-- Show Project Info, like rooms, any feedback, first looks, style images, pin images, tell us more, etc -->
-        <div class="col-md-2 col-xs-4 admin-view-tab"><a href="#" ng-click="details($index,2)">{{item.quizInfo.quizId}} </a></div>
+    <!-- <div  class="row qz-row-dsg" style="border:1px solid black;padding-bottom:0px;" 
+    ng-repeat="item in projects track by $index"> -->
+    <div ng-repeat="item in projects track by $index">
+      <div style="width:78%; margin:0 auto;padding-top:100px;"><a href="#" class="fs-20px" ng-click="details($index,1,-1)"> Customer Name: {{item.userData[0].firstname}}</a></div>
 
-        <div class="col-md-2 col-xs-4 admin-view-tab"><a href="#" ng-click="details($index,2)">{{item.quizInfo.created_at}} </a></div>
-        
-        <div class="col-md-2 col-xs-4 admin-view-tab"><a href="#" ng-click="details($index,3)"> {{item.pkgInfo[$index].roomName}} </a></div>
-
-
-        <div class="col-md-2 col-xs-4 admin-view-tab"><a href="#" ng-click="details($index,3)"> {{packages[item.pkgInfo[$index].pkgId-1].name}}</a></div>        
-
-        <div class="col-md-2 col-xs-4 admin-view-tab" ng-if="item.quizInfo.status===0 && item.pkgInfo[$index].status===1 && item.apptInfo[$index].status!=0"><a href="#" ng-click="details($index,4)"> Waiting for Customer to schedule an appointment </a></div>  
-
-        <div class="col-md-2 col-xs-4 admin-view-tab" ng-if="item.quizInfo.status===0 && item.pkgInfo[$index].status===1 && item.apptInfo[$index].status===0 && isApptDue(item.apptInfo[$index].apptDate)===1 && item.apptInfo[$index].floorPlanStatus===-1"><a href="#" ng-click="details($index,4)">Appointment scheduled on apptDate </a></div>   
-
-        <!-- isApptDue(apptDate)===1 -->
-
-        <div class="col-md-2 col-xs-4 admin-view-tab" ng-if="item.quizInfo.status===0 && item.pkgInfo[$index].status===1 && item.apptInfo[$index].status===0 &&  isApptDue(item.apptInfo[$index].apptDate)===1 && item.apptInfo[$index].floorPlanStatus!=-1"><a href="#" ng-click="details($index,4)">Floor Plan Uploaded and appointment scheduled on apptDate </a></div> 
-
-      <div class="col-md-2 col-xs-4 admin-view-tab" ng-if="item.quizInfo.status===0 && item.pkgInfo[$index].status===1 && item.apptInfo[$index].status===0 && (isApptDue(item.apptInfo[$index].apptDate)===0 || item.apptInfo[$index].floorPlanStatus!=-1 && item.apptInfo[$index].firstLookStatus!=1)"><a href="#" ng-click="details($index,4)">First Look Pending </a></div>        
+      <div class="row qz-row-dsg" style="border:1px solid black;padding:0px;">
+        <div class="col-md-4 col-xs-4 admin-view-tab">No.</div>
+        <div class="col-md-4 col-xs-4 admin-view-tab">PROJECT DATE</div>
+        <div class="col-md-4 col-xs-4 admin-view-tab">STATUS</div>
+      </div>
+      <div class="row qz-row-dsg" style="border:1px solid black;padding-bottom:0px;" ng-repeat="usrPrj in item.quizData track by $index">
+          <div class="col-md-4 col-xs-4 admin-view-tab">{{$index+1}}</div>
+          <div class="col-md-4 col-xs-4 admin-view-tab">
+            <a href="#" ng-click="details($parent.$index,2)">{{usrPrj.created_at}} </a>
+          </div> 
+          <div class="col-md-4 col-xs-4 admin-view-tab">
+            <a href="#" ng-click="details($parent.$index,3)" ng-if="usrPrj.status===-1">Pending </a>
+            <a href="#" ng-click="details($parent.$index,3)">{{quizStatus[usrPrj.status]}}</a>
+          </div> 
+      </div>
     </div>
   </div>
 </section>
@@ -95,7 +93,6 @@
     <ul class="nav nav-tabs">
       <li role="presentation" class="tab-active"><a href="#" ng-click="toggleTab(1)">Customer Details</a></li>
       <li role="presentation"><a href="#" ng-click="toggleTab(2)">Quiz Details</a></li>
-      <li role="presentation"><a href="#" ng-click="toggleTab(3)">Room &amp; Package Details</a></li>
       <li role="presentation"><a href="#" ng-click="toggleTab(4)">Status Update</a></li>
     </ul>
   </div>
@@ -106,7 +103,7 @@
     </div>
 
     <div style="width:80%;float:right;">
-      <p class="fs-18px" style="text-align:left;">{{prjDetails.custInfo.name}}</p>
+      <p class="fs-18px" style="text-align:left;">{{prjDetails.userData[0].firstname}}</p>
     </div>
     
     <div style="width:20%;float:left;">
@@ -114,24 +111,140 @@
     </div>
 
     <div style="width:80%;float:right;">
-      <p class="fs-18px" style="text-align:left;">{{prjDetails.custInfo.email}}</p>
+      <p class="fs-18px" style="text-align:left;">{{prjDetails.userData[0].username}}</p>
     </div>
-    <!-- <p class="fs-18px" style="text-align:left;">Email: {{prjDetails.custInfo.email}}</p> -->
+    
+    <div style="width:20%;float:left;">
+      <p class="fs-18px" style="text-align:left;"><b>Address:</b></p>
+    </div>
+
+    <div style="width:80%;float:right;">
+      <p class="fs-18px" style="text-align:left;">{{prjDetails.userData[0].username}}</p>
+    </div>
+
+    <div style="width:20%;float:left;">
+      <p class="fs-18px" style="text-align:left;"><b>Phone:</b></p>
+    </div>
+
+    <div style="width:80%;float:right;">
+      <p class="fs-18px" style="text-align:left;">{{prjDetails.userData[0].username}}</p>
+    </div>
+    <div style="clear:both;"></div>
   </div>
 
   <div id="cust-details" ng-show="showQuizDetails">
-    Images:
-    <div ng-repeat="imgs in prjDetails.imgInfo track by $index">
-      <p> Question{{index+1}} {{imgs.questionId}} ---> {{imgs.selectedImgId}}
-    </div>
-    Result:
-    <div  ng-repeat="result in prjDetails.resultInfo">
-      <p style="padding-top:20px;text-align:left;">Style: {{result.styleId}}</p>
-      <p style="padding-top:20px;text-align:left;">Percent:{{result.stylePercent}}</p>
+    <div class="font-OpenSans fs-16px" style="width:80%;margin: 0 auto; padding-bottom:100px;" ng-repeat = "quiz in prjDetails.quizData track by $index">
+      <div style="padding-top:50px;"> Quiz ID: {{quiz.quizId}}</div>
+
+      <div style="padding-top:20px;"> Quiz Date: {{quiz.created_at}}</div>
+
+      <div style="padding-top:20px;"> Status: Calculate and display</div>
+
+      <div style="padding-top:20px;" ng-repeat="appt in prjDetails.apptData track by $index" ng-if="appt.quizId===quiz.quizId" > Appointment Details: 
+      <div style="width:50%; position:relative;margin:0 auto;">
+          <div style="float:left;padding-right:20px;" ng-if="appt.apptStatus===0">
+            <button type="submit" class="btn-start-quiz col-lightcyan" ng-click="actionUsrData(quiz.quizId,1)">Approve M&amp;M</button>
+          </div>
+          <div style="float:left;padding-right:20px;" ng-if="appt.apptStatus===0">
+            <button type="submit" class="btn-start-quiz font-sansRegular col-lightcyan" ng-click="actionUsrData(quiz.quizId,2)">Reject M&amp;M</button>
+          </div>
+          <div style="float:left;padding-right:20px;" ng-if="appt.floorPlanStatus===0">
+            <button type="submit" class="btn-start-quiz col-lightcyan" ng-click="actionUsrData(quiz.quizId,3)">Approve Floor Plan</button>
+          </div>
+          <div style="float:left;padding-right:20px;" ng-if="appt.floorPlanStatus===0">
+            <button type="submit" class="btn-start-quiz font-sansRegular col-lightcyan" ng-click="actionUsrData(quiz.quizId,4)">Reject Floor Plan</button>
+          </div>
+        </div>
+        <div style="clear:both;"></div>
+        <div style="padding-bottom:20px;"></div>
+
+          <div class="row qz-row-dsg admin-view-row" style="border:1px solid black;padding-bottom:0px;">
+            <div class="col-md-2 col-xs-4 admin-view-tab"><b>Date</b></div>
+            <div class="col-md-1 col-xs-4 admin-view-tab"><b>Contact Person</b></div>
+            <div class="col-md-3 col-xs-4 admin-view-tab"><b>Address</b></div>
+            <div class="col-md-2 col-xs-4 admin-view-tab"><b>Phone</b></div>
+            <div class="col-md-2 col-xs-4 admin-view-tab"><b>M&amp;M Status</b></div>
+            <div class="col-md-2 col-xs-4 admin-view-tab"><b>Floor Plan Status</b></div>
+            <!-- <div class="col-md-1 col-xs-4 admin-view-tab"><b>Floor Plan</b></div> -->
+            <!-- <div class="col-md-1 col-xs-4 admin-view-tab"></div>
+            <div class="col-md-1 col-xs-4 admin-view-tab"></div> -->
+          </div>
+          <div class="row qz-row-dsg admin-view-row" style="border:1px solid black;padding-bottom:0px;">
+            <div class="col-md-2 col-xs-4 admin-view-tab">{{appt.apptDate}}</div>
+            <div class="col-md-1 col-xs-4 admin-view-tab">{{appt.contactPerson}}</div>
+            <div class="col-md-3 col-xs-4 admin-view-tab">{{appt.address}}</div>
+            <div class="col-md-2 col-xs-4 admin-view-tab">{{appt.contact}}</div>
+            <div class="col-md-2 col-xs-4 admin-view-tab">{{apptStatus[appt.apptStatus]}}</div>
+            <div class="col-md-2 col-xs-4 admin-view-tab"><b>{{apptStatus[appt.floorPlanStatus]}}</b></div>
+            <!-- <div class="col-md-1 col-xs-4 admin-view-tab"><img ng-src="{{appt.floorPlanLoc}}"></div> -->
+            
+          </div>
+
+          <!--Floor Plans -->
+          <div ng-if="appt.floorPlanLoc!=null">
+
+          </div>
+
+      </div>
+
+      <div style="padding-top:20px;text-align:center;">Images:</div>
+      
+      <div class="row qz-row-dsg" style="padding-top:10px;"> 
+          <div class="col-md-2 col-xs-4" style="padding:5px;" ng-repeat="img in prjDetails.imgData track by $index" ng-if="img.i.quizId===quiz.quizId">
+            <img ng-src="{{img.qi.imageLocation}}" width="100%" height="auto"/>
+          </div>
+      </div> 
+      
+      <div style="padding-top:20px;text-align:center;">Result:</div>
+      
+      <div class="row qz-row-dsg" style="border:1px solid black;padding-bottom:0px;">
+        <div class="col-md-6 col-xs-4 admin-view-tab"><b>STYLE</b></div>
+        <div class="col-md-6 col-xs-4 admin-view-tab"><b>PERCENT</b></div>
+      </div>
+      
+      <div class="row qz-row-dsg" style="border:1px solid black;padding-bottom:0px;" ng-repeat="result in prjDetails.resultData" ng-if="result.quizId===quiz.quizId">
+        <div class="col-md-6 col-xs-4 admin-view-tab"> {{styles[result.styleId]}}</div>
+        <div class="col-md-6 col-xs-4 admin-view-tab">{{result.stylePercent}}</div>
+      </div>
+
+      <div style="padding-top:50px;text-align:center;">Rooms and Packages:</div>
+
+      <div class="row qz-row-dsg" style="border:1px solid black;padding-bottom:0px;">
+        <div class="col-md-6 col-xs-4 admin-view-tab"><b>ROOM</b></div>
+        <div class="col-md-6 col-xs-4 admin-view-tab"><b>PACKAGE</b></div>
+      </div>
+
+      <div class="row qz-row-dsg" style="border:1px solid black;padding-bottom:0px;" ng-repeat="package in prjDetails.pkgData" ng-if="quiz.status>=0 && package.quizId===quiz.quizId" >
+        <div class="col-md-6 col-xs-4 admin-view-tab">{{package.roomName}}</div>
+        <div class="col-md-6 col-xs-4 admin-view-tab">{{packageName[package.pkgId]}}</div>
+      </div>
+      
+
+
+      <div ng-if="quiz.status<0">
+        <div class="row qz-row-dsg" ng-repeat="room in prjDetails.roomData" ng-if="room.quizId===quiz.quizId" style="border:1px solid black;padding-bottom:0px;">
+          <div class="col-md-6 col-xs-4 admin-view-tab">{{room.roomName}} , Num Rooms: {{room.numRoom}}</div>
+          <div class="col-md-6 col-xs-4 admin-view-tab">Payment Pending</div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div id="cust-details" style="padding-top:50px;" ng-show="showRoomPkgDetails">
+
+
+  <!--  <div class="row qz-row-dsg" style="border:1px solid black;padding-bottom:0px;" ng-repeat="usrPrj in item.projectData track by $index">
+          <div class="col-md-6 col-xs-4 admin-view-tab">
+            <a href="#" ng-click="details($index,2,$parent.$index)">{{usrPrj.quizData.created_at}} </a>
+          </div> 
+          <div class="col-md-6 col-xs-4 admin-view-tab">
+            <a href="#" ng-click="details($index,3,$parent.$index)">{{usrPrj.status.statusText}} </a>
+          </div> 
+      </div> -->
+
+
+
+
+  <!-- <div id="cust-details" style="padding-top:50px;" ng-show="showRoomPkgDetails">
     
     <div class="row qz-row-dsg"  style="width:30%;border:1px solid black;padding:0px;">
       <div class="col-md-6 col-xs-4 admin-view-tab" ><b>Room Name</b></div>
@@ -142,18 +255,14 @@
       <div class="col-md-6 col-xs-4 admin-view-tab">{{pkg.roomName}}</div>
       <div class="col-md-6 col-xs-4 admin-view-tab" >{{packages[pkg.pkgId-1].name}}</div>      
     </div>
-
-<!-- 
-
-    <p style="padding-top:20px;text-align:left;">{{pkg.pkgId}}</p>
-    <p style="padding-top:20px;text-align:left;">{{pkg.roomName}}</p> -->
-  </div>
+  </div> -->
 
 
   <div id="cust-details" style="padding-top:50px;" ng-show="showProgressDetails">
   <form name="adminAction" enctype="multipart/form-data">
    <div class="row qz-row-dsg"  style="border:1px solid black;padding:0px;">
-      <div class="col-md-2 col-xs-4 admin-view-tab" ><b>Room Name</b></div>
+      <div class="col-md-1 col-xs-4 admin-view-tab" ><b>Quiz Id</b></div>
+      <!-- <div class="col-md-1 col-xs-4 admin-view-tab" ><b>Approve</b></div> -->
       <div class="col-md-2 col-xs-4 admin-view-tab" ><b>Upload First Look </b></div>
       <div class="col-md-2 col-xs-4 admin-view-tab" ><b>Upload Final Look </b></div>
       <div class="col-md-2 col-xs-4 admin-view-tab" ><b>Upload Shopping List </b></div>
@@ -162,8 +271,9 @@
   </div>
 
 <!-- ng-repeat="pkg in pkgDtls" -->
-  <div class="row qz-row-dsg"   style="border:1px solid black;padding:0px;">
-      <div class="col-md-2 col-xs-4 admin-view-tab" >{{pkgDtls.roomName}}</div>
+  <div class="row qz-row-dsg"  ng-repeat = "quiz in prjDetails.quizData track by $index" style="border:1px solid black;padding:0px;">
+      <div class="col-md-1 col-xs-4 admin-view-tab" >{{quiz.quizId}}</div>
+      <!-- <div class="col-md-1 col-xs-4 admin-view-tab" >Approve</div> -->
       <div class="col-md-2 col-xs-4 admin-view-tab" >
         <div ng-if="doUploadFirst===false">
         <label>
@@ -199,7 +309,7 @@
       
 
       <div class="col-md-2 col-xs-4 admin-view-tab" >
-        <button type="submit" class="btn-start-quiz font-sansRegular txt-upper col-lightcyan fs-20px" ng-click="uploadFile(pkgDtls.quizId, pkgDtls.roomName)">UPLOAD</button>
+        <button type="submit" class="btn-start-quiz font-sansRegular txt-upper col-lightcyan fs-20px" ng-click="submitData(quiz.quizId, pkgDtls.roomName)">SUBMIT</button>
       </div>
       
   </div>

@@ -18,10 +18,12 @@ angular.module("app")
 	$scope.arrImgLiked = [];
 	$scope.showResult = false;
 	$scope.pageRequester;
+	$scope.usrLoggedIn = false;
 	var prefStyle = [];
 	var arrComments = [];
 	var roomCommentArr = [];
 	var last_active_room_id = 0;
+
 	
 	 $scope.units = [
 	 	 {'id': 0, 'label': '',value:0},
@@ -1040,6 +1042,7 @@ $scope.gridWidth=300;
 					$scope.disable = false;
 
 					if(mvIdentity.isAuthenticated()){
+						$scope.usrLoggedIn = true;
 						var result = quizResult.getStyle();
 						var userSelectionInfo = quizResult.getCustSelections();
 						console.log('$scope.showResult is: '+$scope.showResult);

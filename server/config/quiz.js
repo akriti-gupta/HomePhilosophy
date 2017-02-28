@@ -1,8 +1,17 @@
 var fs = require('fs');
+
+
 var path = require('path');
+var rootPath = path.normalize(__dirname + '/../..');
 
 exports.fetchImages = function(req, res, next){
-	console.log('In fetchImages');
+
+	var data = req.body.data;
+	console.log(data.folder);
+	var folderLoc = data.folder;
+	var dir = rootPath + '/public'+folderLoc.substr(1);
+
+	console.log('In fetchImages:'+dir);
 	var walk = function(dir, done) {
  		var results = [];
   		fs.readdir(dir, function(err, list) {
@@ -29,7 +38,8 @@ exports.fetchImages = function(req, res, next){
 	  });
 };
 		
-walk(__dirname+'/../../public/images/styles', function(err, results) {
+// walk(__dirname+'/../../public/images/styles', function(err, results) {
+walk(dir, function(err, results) {
   if (err) throw err;
   console.log(results);
   res.writeHead(200, {'Content-Type': 'text/plain'});

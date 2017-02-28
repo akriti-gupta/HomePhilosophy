@@ -2,23 +2,23 @@
 	var ModelBase = require('../config/bookshelf'),
   	 var User = ModelBase.extend({tableName: 'user'}); */
 
-var User = require('../models/User'),
+// var User = require('../models/User'),
 	// Users = require('../collections/Users'),
 	// CustQuiz = require('../models/CustQuiz'),
 	// CustQuizzes = require('../collections/CustQuizzes'),
-	mysqlConn = require('../config/mysqlConn'),
+	var mysqlConn = require('../config/mysqlConn'),
 	encryption = require('../utilities/encryption');
 	
 
 exports.getUsers = function(req,res){
-		User.find({}).exec(function(err,collection){
-			res.send(collection);
-		});
-		
-		// User.findAll().asCallback(function(err,collection){
-	// Users.forge().fetch().then(function(collection) { 
-	// 	res.send(collection);
-	// });
+	mysqlConn.getConnection(function(err,conn){
+		if(conn){
+			conn.query('select * from user', function(err, results, fields){
+				conn.release();
+				res.send(results);
+			});
+		}
+	});
 }
 
 

@@ -99,7 +99,7 @@ function chkCncptStatus(conceptBoard){
 		else{
 			if(status===0){
 				finalStatus.statusText='First Look Uploaded. Awaiting Feedback';
-				finalStatus.linkPage=' ';
+				finalStatus.linkPage='getFirstLook($index)';
  				finalStatus.modal=' ';
 			}
 			else if(status===1){
@@ -113,7 +113,7 @@ function chkCncptStatus(conceptBoard){
 	else if(isFinalLook===1){
 		if(status===0){
 			finalStatus.statusText='Final Look Uploaded. Awaiting Feedback';
-			finalStatus.linkPage=' ';
+			finalStatus.linkPage='';
 			finalStatus.modal=' ';
 		}
 		else if(status===1){
@@ -138,34 +138,52 @@ function chkCncptStatus(conceptBoard){
 function chkApptStatus(apptData){
 	//Appt made and/or Floor Plan fileUploadedStatus.
 	var status = {};
-	if(apptData.apptStatus==0){
-		//Appt Scheduled. Check if in future>=24 hrs ahead 
-		var apptDate = moment(apptData.apptDate);
-		var msDiff = apptDate.diff(moment(new Date(),"DD/MM/YYYY HH:mm:ss"));
-		var dayDiff = moment.duration(msDiff);
-		var hourDiff = Math.floor(dayDiff.asHours());
+	if(apptData.apptStatus!= null && apptData.apptStatus>=0){
+		if(apptData.apptStatus===0){
+			//Appt Scheduled. Check if in future>=24 hrs ahead 
+			var apptDate = moment(apptData.apptDate);
+			var msDiff = apptDate.diff(moment(new Date(),"DD/MM/YYYY HH:mm:ss"));
+			var dayDiff = moment.duration(msDiff);
+			var hourDiff = Math.floor(dayDiff.asHours());
 
-		if(hourDiff >=24){
-			status.statusText = "Meeting Scheduled. View/ Edit";
-			status.linkPage = " ";
-			status.modal = "#calendarModal";
+			if(hourDiff >=24){
+				status.statusText = "Meeting Scheduled. View/ Edit";
+				status.linkPage = " ";
+				status.modal = "#calendarModal";
+			}
+			else{
+				status.statusText = "Meeting Scheduled.";
+				status.linkPage = " ";
+				status.modal = " ";
+			}
 		}
-		else{
-			status.statusText = "Meeting Scheduled.";
+		else if(apptData.apptStatus===1){
+			status.statusText = "Meet & Measure done.First Look in Progress";
 			status.linkPage = " ";
 			status.modal = " ";
 		}
+		else if(apptData.apptStatus===3){
+			status.statusText = "Rejected. An email has been sent with details. Reschedule.";
+			status.linkPage = " ";
+			status.modal = "#calendarModal";
+		}
 	}
-	else if(apptData.floorPlanStatus>=0){
+	else if(apptData.floorPlanStatus!=null && apptData.floorPlanStatus>=0){
 		if(apptData.floorPlanStatus==0){
 			status.statusText = "Floor Plan uploaded. Pending Approval";
 			status.linkPage = " ";
 			status.modal = " ";
 		}
 		else if(apptData.floorPlanStatus==1){
-			status.statusText = "Floor Plan Approved. Pending First Look";
+			status.statusText = "Floor Plan Approved.First Look in Progress";
 			status.linkPage = " ";
 			status.modal = " ";
+		}
+
+		else if(apptData.floorPlanStatus===3){
+			status.statusText = "Rejected. An email has been sent with details, Upload again.";
+			status.linkPage = " ";
+			status.modal = "#calendarModal";
 		}
 	}
 	else{
@@ -354,15 +372,10 @@ $scope.getProjectData = function(){
 mvCustView.getCustProjectInfo().then(function(projectData){
 	console.log('Result got back is: ');
 	console.log(projectData);
-
-	//$scope.projectArr=[];
 	populateQuizArray(projectData);
 	console.log('Formatted Result :');
 	console.log($scope.projectArr);
-
-	
-
-	}, function(reason){
+}, function(reason){
 		console.log('Cant find user Data');
 		mvNotifier.notify('Please try again later/ contact the site administrator. '+reason);
 		$location.path="/";
@@ -385,7 +398,7 @@ $scope.addRoom=function(){
 }
 
 $scope.loadMtngData=function(row_id){
-	if($scope.projectArr[row_id].apptData && $scope.projectArr[row_id].apptData[0].person!=' '){
+	if($scope.projectArr[row_id].apptData.length >0 && $scope.projectArr[row_id].apptData[0].person!=' '){
 		$scope.person = $scope.projectArr[row_id].apptData[0].contactPerson;
 		$scope.contact = $scope.projectArr[row_id].apptData[0].contact;
 		$scope.address = $scope.projectArr[row_id].apptData[0].address;
@@ -608,16 +621,30 @@ $scope.getFirstLook = function(index){
 	$scope.currentFirstLook = 0;
 	$scope.rowId = index;
 	console.log('In getFirstLook');
-	console.log($scope.projects[index].firstLookStatus);
-	console.log($scope.projects[index].folderLocation);
-	var folderLocation = $scope.projects[index].folderLocation;
-	$scope.images = [];
-	if(folderLocation.indexOf(',')!=-1){
-		$scope.images = folderLocation.split(",");
-
+	console.log($scope.projectArr[index].firstLookData);
+	var firstLookArr = $scope.projectArr[index].firstLookData;
+	var files=' ';
+	if(firstLookArr!=null && firstLookArr.length>0){
+		for(var i=0;i<firstLookArr.length;i++){
+			if(files==' '){
+				files = './uploads/'+firstLookArr[i].files;
+			}
+			else{
+				files = files+','+'./uploads/'+firstLookArr[i].files;
+			}
+		}
 	}
+	console.log(files);
+	// console.log($scope.projects[index].folderLocation);
+	//var files = $scope.projects[index].folderLocation;
+	$scope.images = [];
+	// if(folderLocation.indexOf(',')!=-1){
+	// 	$scope.images = folderLocation.split(",");
+
+	// }
+	$scope.images = files.split(',');
 	for(var i =0;i<$scope.images.length;i++){
-		$scope.images[i] = $scope.images[i].substr(9);
+		//$scope.images[i] = $scope.images[i].substr(9);
 		console.log($scope.images[i]);
 	}
 	console.log($scope.images);

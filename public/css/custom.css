@@ -1453,12 +1453,16 @@ div.faq.show {
   border-right:1px solid black;
   text-align: center;
 }
+
+.admin-view-row{
+  width:100%;
+}
 .cust-view-tab{
   padding:50px;
 }
 
 .admin-view-tab{
-  padding:20px;
+  padding:20px 0px;
 }
 
 

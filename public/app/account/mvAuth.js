@@ -57,8 +57,5 @@
 			else{
 				return $q.reject('Unauthorized');
 			}
-		},
-
-
-
+		}
 }});

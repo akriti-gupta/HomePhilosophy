@@ -1,4 +1,4 @@
-angular.module('app').factory('mvCustView', function($http, $q, $cacheFactory,$window,$rootScope){
+angular.module('app').factory('mvCustView', function($http, $q,$rootScope){
 	return{
 
 		saveAppointment: function(data){
@@ -25,42 +25,19 @@ angular.module('app').factory('mvCustView', function($http, $q, $cacheFactory,$w
 	  			}
 	  		});
 	  		return dfd.promise;
-		}
-		,
+		},
 		getCustProjectInfo: function(){
-			// var cache = $cacheFactory('homePhilCache');
-			// var data = cache.get('userProjects');
 			var dfd = $q.defer();
-			// if(!data){
-				$http.get('/getCustProjectInfo', {cache: false}).then(function(response){
-					if(response.data.success){
-						data = response.data.results;
-      					// cache.put('userProjects', data);
-						dfd.resolve(response.data.results);
-		  			}
-		  			else{
-		  				dfd.reject(response.data.reason);
-		  			}
-				});
-				return dfd.promise;
-			// }
-			// else{
-			// 	return dfd.resolve(data);
-			// }	
+			$http.get('/getCustProjectInfo', {cache: false}).then(function(response){
+				if(response.data.success){
+					data = response.data.results;
+					dfd.resolve(response.data.results);
+	  			}
+	  			else{
+	  				dfd.reject(response.data.reason);
+	  			}
+			});
+			return dfd.promise;
 		}
-		// ,
-		// setUserProjects: function(userProjects){
-		// 	console.log('While setting, userProjects is: ');
-		// 	console.log(userProjects);
-		// 	$window.localStorage && $window.localStorage.setItem('userProjects', JSON.stringify(userProjects));
-  //     		//return this;
-		// },
-		//  getUserProjects: function() {
-		 	
-		//  		var prj =  $window.localStorage.getItem('userProjects');
-		//  		console.log('While getting, userProjects is: ');
-		// 	console.log(prj);
-		//  		return prj;
-  //   	}
 	}
 });
