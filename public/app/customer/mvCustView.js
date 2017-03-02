@@ -13,15 +13,14 @@ angular.module('app').factory('mvCustView', function($http, $q,$rootScope){
 	  		});
 	  		return dfd.promise;
 		},
-		submitFeedack: function(feedbackArr,firstLookId){
+		submitFeedback: function(feedbackArr,concept_type){
 			var dfd = $q.defer();
-			console.log('firstLookId is: '+firstLookId);
-		 	$http.post('/submitFeedack',{data:feedbackArr,id:firstLookId}).then(function(response){
+		 	$http.post('/submitFeedback',{data:feedbackArr,concept_type:concept_type}).then(function(response){
 	  			if(response.data.success){
 	  				dfd.resolve(true);
 	  			}
 	  			else{
-	  				dfd.resolve(false);
+	  				dfd.reject(response.data.reason);
 	  			}
 	  		});
 	  		return dfd.promise;

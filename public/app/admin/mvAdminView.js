@@ -18,7 +18,17 @@ angular.module('app').factory('mvAdminView', function($http, $q){
 			$http.get('/getProjectListing', {cache: false}).then(function(response){
 				if(response.data.success){
 					data = response.data.results;
-					dfd.resolve(response.data.results);
+					dfd.resolve(response.data.results);		
+					/*if(data.length>0){
+						$http.get('/getCncptFeedback',{projectData:data}).then(function(response){
+							if(response.data.success){
+								dfd.resolve(response.data.results);		
+							}
+							else{
+								dfd.reject(response.data.reason);		
+							}
+						});
+					}*/
 	  			}
 	  			else{
 	  				dfd.reject(response.data.reason);
@@ -51,25 +61,37 @@ angular.module('app').factory('mvAdminView', function($http, $q){
 			});
 			return dfd.promise;
 		},
-		saveConceptBoard: function(quizId,stage, files){
+		saveUploadedData: function(quizId,stage, files){
 			var dfd = $q.defer();
 			var postUrl;
-			var isFirstLook = 0;
-			var isFinalLook = 0;
+			var fileArr = [];
+			var data = [];
+			// var isFirstLook = 0;
+			// var isFinalLook = 0;
 
 			if(stage===1){
 				postUrl='/saveConceptBoard';
-				isFirstLook = 1;
+				//isFirstLook = 1;
 			}
 			else if(stage===2){
-				postUrl='/saveConceptBoard';
-				isFinalLook = 1;
+				postUrl='/saveFinalLook';
+				//isFinalLook = 1;
 			}
 			else if(stage===3){
 				postUrl='/saveShoppingList';
 			}
 
-			var data={quizId: quizId, files:files,roomName:null, status:0, created_at: null, updated_at: null,isFirstLook:isFirstLook,isFinalLook:isFinalLook};
+			if(files.indexOf(',')!=-1){
+				fileArr = files.split(',');
+			}
+			else{
+				fileArr[0] = files;
+			}
+
+			for(var i =0;i<fileArr.length;i++){
+				data.push({quizId: quizId, files:fileArr[i],roomName:null, status:0, created_at: null, updated_at: null});
+			}
+			//var data={quizId: quizId, files:files,roomName:null, status:0, created_at: null, updated_at: null};
 			$http.post(postUrl,{data:data}).then(function(response){
 				if(response.data.success){
 					dfd.resolve(true);

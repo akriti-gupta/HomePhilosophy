@@ -18,6 +18,8 @@ $scope.showFeedback = false;
 $scope.showMain = true;
 $scope.hasActiveProject = false;
 $scope.hasAllLaunched = true;
+$scope.lookText='First Look'; 
+//$scope.cncptObj = [];
 
 // $scope.packages = [
 //   						{'id':1,'name':"Simple",'pkgValue':350,value:1},
@@ -74,65 +76,154 @@ function validateFormData(){
 	return true;
 }
 
-function chkCncptStatus(conceptBoard){
+function chkFinalLookStatus(finalLook){
 	
-	var currConceptData = conceptBoard[0];
-	var status = currConceptData.status;
-	var isFirstLook = currConceptData.isFirstLook;
-	var isFinalLook = currConceptData.isFinalLook;
-	var finalStatus = {};
+	for(var i =0;i<finalLook.length;i++){
+		var currFinalLook = finalLook[i];
+		var status = currFinalLook.status;
+		// var isFirstLook = currConceptData.isFirstLook;
+		// var isFinalLook = currConceptData.isFinalLook;
+		var finalStatus = {};
 
-	if(isFirstLook===1){
-		//Check if this is the Final Look as well, in case user liked the first images.
-		if(isFinalLook===1){
-			if(status===2){
-				finalStatus.statusText='Final Look/ Shopping List is ready. Payment Pending';
+		//if(isFirstLook===1){
+			if(currFinalLook.feedbackData.length>0 ){
+				finalStatus.statusText='Received Feedback. Your Shopping List and Final Look will be uploaded soon';
 				finalStatus.linkPage=' ';
- 				finalStatus.modal=' ';
+				finalStatus.modal=' ';
+				break;
 			}
-			else if(status===3){
-				finalStatus.statusText='Total Payment Received. View Final Look + Shopping List';
-				finalStatus.linkPage=' ';
- 				finalStatus.modal=' ';
+			else{
+				finalStatus.statusText='Final Look Uploaded. Awaiting Feedbackss';
+				finalStatus.linkPage='getFinalLook($index)';
+				finalStatus.modal=' ';
 			}
-		}
-		else{
-			if(status===0){
+			/*if(status===0){
 				finalStatus.statusText='First Look Uploaded. Awaiting Feedback';
 				finalStatus.linkPage='getFirstLook($index)';
- 				finalStatus.modal=' ';
+					finalStatus.modal=' ';
 			}
 			else if(status===1){
 				finalStatus.statusText='Received Feedback. Final Look in Progress';
 				finalStatus.linkPage=' ';
- 				finalStatus.modal=' ';
-			}
-		}
-	}
+					finalStatus.modal=' ';
+			}*/
+			
+//		}
 
-	else if(isFinalLook===1){
-		if(status===0){
-			finalStatus.statusText='Final Look Uploaded. Awaiting Feedback';
-			finalStatus.linkPage='';
-			finalStatus.modal=' ';
-		}
-		else if(status===1){
-			finalStatus.statusText='Your Final Look and Shopping List will be ready soon.';
-			finalStatus.linkPage=' ';
-			finalStatus.modal=' ';
-		}
-		else if(status===2){
-			finalStatus.statusText='Final Look/ Shopping List is ready. Payment Pending';
-			finalStatus.linkPage=' ';
-			finalStatus.modal=' ';
-		}
-		else if(status===3){
-			finalStatus.statusText='Total Payment Received. View Final Look + Shopping List';
-			finalStatus.linkPage=' ';
-			finalStatus.modal=' ';
-		}
+		// else if(isFinalLook===1){
+			
+		// 	if('feedbackData' in currConceptData){
+		// 		finalStatus.statusText='Received Feedback. Your Final Look and Shopping List will be ready soon.';
+		// 		finalStatus.linkPage=' ';
+		// 		finalStatus.modal=' ';
+		// 		break;
+		// 	}
+		// 	else{
+		// 		finalStatus.statusText='Final Look Uploaded. Awaiting Feedback';
+		// 		finalStatus.linkPage='';
+		// 		finalStatus.modal=' ';
+		// 	}
+
+/*
+
+			if(status===0){
+				finalStatus.statusText='Final Look Uploaded. Awaiting Feedback';
+				finalStatus.linkPage='';
+				finalStatus.modal=' ';
+			}
+			else if(status===1){
+				finalStatus.statusText='Feedback Received. Your Final Look and Shopping List will be ready soon.';
+				finalStatus.linkPage=' ';
+				finalStatus.modal=' ';
+			}
+			else if(status===2){
+				finalStatus.statusText='Final Look/ Shopping List is ready. Payment Pending';
+				finalStatus.linkPage=' ';
+				finalStatus.modal=' ';
+			}
+			else if(status===3){
+				finalStatus.statusText='Total Payment Received. View Final Look + Shopping List';
+				finalStatus.linkPage=' ';
+				finalStatus.modal=' ';
+			} */
+		//}
 	}
-	return finalStatus;
+		return finalStatus;
+}
+
+function chkCncptStatus(conceptBoard){
+	
+	for(var i =0;i<conceptBoard.length;i++){
+		var currConceptData = conceptBoard[i];
+		var status = currConceptData.status;
+		// var isFirstLook = currConceptData.isFirstLook;
+		// var isFinalLook = currConceptData.isFinalLook;
+		var finalStatus = {};
+
+		//if(isFirstLook===1){
+			if(currConceptData.feedbackData.length>0){
+				finalStatus.statusText='Received Feedback. Final Look in Progress';
+				finalStatus.linkPage=' ';
+				finalStatus.modal=' ';
+				break;
+			}
+			else{
+				finalStatus.statusText='First Look Uploaded. Awaiting Feedback';
+				finalStatus.linkPage='getFirstLook($index)';
+				finalStatus.modal=' ';
+			}
+			/*if(status===0){
+				finalStatus.statusText='First Look Uploaded. Awaiting Feedback';
+				finalStatus.linkPage='getFirstLook($index)';
+					finalStatus.modal=' ';
+			}
+			else if(status===1){
+				finalStatus.statusText='Received Feedback. Final Look in Progress';
+				finalStatus.linkPage=' ';
+					finalStatus.modal=' ';
+			}*/
+			
+//		}
+
+		// else if(isFinalLook===1){
+			
+		// 	if('feedbackData' in currConceptData){
+		// 		finalStatus.statusText='Received Feedback. Your Final Look and Shopping List will be ready soon.';
+		// 		finalStatus.linkPage=' ';
+		// 		finalStatus.modal=' ';
+		// 		break;
+		// 	}
+		// 	else{
+		// 		finalStatus.statusText='Final Look Uploaded. Awaiting Feedback';
+		// 		finalStatus.linkPage='';
+		// 		finalStatus.modal=' ';
+		// 	}
+
+/*
+
+			if(status===0){
+				finalStatus.statusText='Final Look Uploaded. Awaiting Feedback';
+				finalStatus.linkPage='';
+				finalStatus.modal=' ';
+			}
+			else if(status===1){
+				finalStatus.statusText='Feedback Received. Your Final Look and Shopping List will be ready soon.';
+				finalStatus.linkPage=' ';
+				finalStatus.modal=' ';
+			}
+			else if(status===2){
+				finalStatus.statusText='Final Look/ Shopping List is ready. Payment Pending';
+				finalStatus.linkPage=' ';
+				finalStatus.modal=' ';
+			}
+			else if(status===3){
+				finalStatus.statusText='Total Payment Received. View Final Look + Shopping List';
+				finalStatus.linkPage=' ';
+				finalStatus.modal=' ';
+			} */
+		//}
+	}
+		return finalStatus;
 }
 
 function chkApptStatus(apptData){
@@ -202,6 +293,7 @@ function populateStatus(projectData){
  		var currApptData = currRowData.apptData;
  		var currConceptBoard = currRowData.firstLookData;
  		var currFeedbackData = currRowData.feedbackData;
+ 		var currFinalLook = currRowData.finalLookData;
  		var currQzId = currQzData.quizId;
  		var status = {};
 
@@ -209,7 +301,11 @@ function populateStatus(projectData){
 	 		if(currQzData.status>=0){
 	 			//Payment Made. Check in decreasing order from feedback to FirstLook to  appt etc
 
-	 			if(currConceptBoard && currConceptBoard.length>0){
+	 			if(currFinalLook && currFinalLook.length>0){
+	 				projectData[i].status = chkFinalLookStatus(currFinalLook);
+	 			}
+
+	 			else if(currConceptBoard && currConceptBoard.length>0){
 	 				projectData[i].status = chkCncptStatus(currConceptBoard);
 	 			}
 	 			else if(currApptData && currApptData.length>0){
@@ -250,6 +346,7 @@ function populateStatus(projectData){
 			var relResultArr = [];
 			var relApptArr = [];
 			var relFLArr = [];
+			var relFinalLookArr = [];
 			var relFeedbackArr = [];
 			var statusArr = [];
 
@@ -302,16 +399,24 @@ function populateStatus(projectData){
 					if(projectData.firstLookData[j].quizId === currQzId){
 						relFLArr.push(projectData.firstLookData[j]);
 
-						if(projectData.feedbackData && projectData.feedbackData.length>0){
+						/*if(projectData.feedbackData && projectData.feedbackData.length>0){
 							for(var k= 0;k<projectData.feedbackData.length; k++){
 								if(projectData.feedbackData[k].firstlook_id === projectData.firstLookData[j].id){
 									relFeedbackArr.push(projectData.feedbackData[k]);
 								}
 							}
-						}
+						}*/
 					}
 				}
 			} //First Look ends
+
+			if(projectData.finalLookData && projectData.finalLookData.length>0){
+				for(var j= 0;j<projectData.finalLookData.length; j++){
+					if(projectData.finalLookData[j].quizId === currQzId){
+						relFinalLookArr.push(projectData.finalLookData[j]);
+					}
+				}
+			} //Final Look ends
 
 			//
 
@@ -351,9 +456,12 @@ function populateStatus(projectData){
 				}
 				
 				
+				// prjArr.push({'userData':userData,'quizData':currQzObj,'roomData':currRoomName,
+				// 	'pkgData':relPkgArr[j],'resultData':relResultArr,'apptData':relApptArr,'firstLookData':relFLArr,
+				// 	'feedbackData':relFeedbackArr});
+
 				prjArr.push({'userData':userData,'quizData':currQzObj,'roomData':currRoomName,
-					'pkgData':relPkgArr[j],'resultData':relResultArr,'apptData':relApptArr,'firstLookData':relFLArr,
-					'feedbackData':relFeedbackArr});
+					'pkgData':relPkgArr[j],'resultData':relResultArr,'apptData':relApptArr,'firstLookData':relFLArr,'finalLookData':relFinalLookArr});
 		
 			}
 
@@ -493,40 +601,46 @@ $scope.saveAppointment = function(item){
 				if($scope.apptDate!=null){
 					isApptMade = 1;
 				}
-				mvUpload.uploadFiles($scope.fileArr,fileType,quizId).then(function(success){
-					if(success){
+				// mvUpload.uploadFiles($scope.fileArr,fileType,quizId).then(function(success){
+				mvUpload.uploadFiles($scope.fileArr).then(function(uploadedFiles){
+					
 						// console.log('Floor plan uploaded');
-						uploadLocation = './customer_uploads/floorPlan/'+quizId;
+						//uploadLocation = './customer_uploads/floorPlan/'+quizId;
+					if(uploadedFiles.length>0){
+						var files;
 						fileUploadedStatus = 1;
+						files = uploadedFiles.toString();
+					}
+					else {
+						files = uploadedFiles;
+					}
 
-						if(isApptMade===1){
-							apptData = {"customerId":customerId,"quizId":quizId,"address":$scope.address,
-								 "person":$scope.person,"contact":$scope.contact,
-								 "apptDate":dateComponent,"apptTime":timeComponent,
-								 "floorPlanLoc":uploadLocation,"floorPlanStatus":0,
-								 "apptStatus":0};
-						}
-						else{
-							apptData = {"customerId":customerId,"quizId":quizId,"address":$scope.address,
-								 "person":$scope.person,"contact":$scope.contact,
-								 "apptDate":null,"apptTime":null,
-								 "floorPlanLoc":uploadLocation,"floorPlanStatus":0,
-								 "apptStatus":-1};
-						}
-						mvCustView.saveAppointment(apptData).then(function(success){
-							if(success){
-								//$scope.$emit('apptSaved',response );
-								angular.element('#calendarModal').modal('hide');
-								// window.location.reload(true);
-								//TODO: Send email
-							}
-						}, function(reason){
-							alert('Appointment could not be scheduled. Please contact the site admin '+reason);
-						});
+					if(isApptMade===1){
+						apptData = {"customerId":customerId,"quizId":quizId,"address":$scope.address,
+							 "person":$scope.person,"contact":$scope.contact,
+							 "apptDate":dateComponent,"apptTime":timeComponent,
+							 "floorPlanLoc":files,"floorPlanStatus":0,
+							 "apptStatus":0};
 					}
 					else{
-						console.log('Error in uploading floor plan. Please try again');
+						apptData = {"customerId":customerId,"quizId":quizId,"address":$scope.address,
+							 "person":$scope.person,"contact":$scope.contact,
+							 "apptDate":null,"apptTime":null,
+							 "floorPlanLoc":files,"floorPlanStatus":0,
+							 "apptStatus":-1};
 					}
+					mvCustView.saveAppointment(apptData).then(function(success){
+						if(success){
+							//$scope.$emit('apptSaved',response );
+							angular.element('#calendarModal').modal('hide');
+							// window.location.reload(true);
+							//TODO: Send email
+						}
+					}, function(reason){
+						alert('Appointment could not be scheduled. Please contact the site admin '+reason);
+					});
+				},function(reason){
+						alert('Files could not be upoladed. Please contact the site admin '+reason);
 				});
 			}
 
@@ -620,39 +734,50 @@ $scope.getFirstLook = function(index){
 	
 	$scope.currentFirstLook = 0;
 	$scope.rowId = index;
-	console.log('In getFirstLook');
-	console.log($scope.projectArr[index].firstLookData);
-	var firstLookArr = $scope.projectArr[index].firstLookData;
-	var files=' ';
+	// var firstLookArr = $scope.projectArr[index].firstLookData;
+	$scope.images = [];
+	$scope.cncptObj = [];
+	var concept_img;
+	var concept_type;
+	
+
+	if($scope.projectArr[index].finalLookData.length>0){
+		firstLookArr = $scope.projectArr[index].finalLookData;
+		concept_type =2;
+		$scope.lookText = "Final Look";
+	}
+
+	else if($scope.projectArr[index].firstLookData.length>0){
+		firstLookArr = $scope.projectArr[index].firstLookData;
+		concept_type =1;
+		$scope.lookText = "First Look";
+	}
+
 	if(firstLookArr!=null && firstLookArr.length>0){
 		for(var i=0;i<firstLookArr.length;i++){
-			if(files==' '){
-				files = './uploads/'+firstLookArr[i].files;
+			if(firstLookArr[i].files.indexOf(',')===-1){
+				$scope.images.push('./uploads/'+firstLookArr[i].files);
+				concept_img='./uploads/'+firstLookArr[i].files;
+				$scope.cncptObj.push({concept_id:firstLookArr[i].id, concept_img:firstLookArr[i].files,concept_type:concept_type});
 			}
 			else{
-				files = files+','+'./uploads/'+firstLookArr[i].files;
+				var tmpFileArr = firstLookArr[i].files.split(',');
+				for(var j=0;j<tmpFileArr.length;j++){
+					tmpFileArr[j]='./uploads/'+tmpFileArr[j];
+					$scope.cncptObj.push({concept_id:firstLookArr[i].id, concept_img:tmpFileArr[j],concept_type:concept_type});
+				}
+
+				$scope.images = $scope.images.concat(tmpFileArr);
+
 			}
 		}
+		//console.log($scope.cncptObj);
 	}
-	console.log(files);
-	// console.log($scope.projects[index].folderLocation);
-	//var files = $scope.projects[index].folderLocation;
-	$scope.images = [];
-	// if(folderLocation.indexOf(',')!=-1){
-	// 	$scope.images = folderLocation.split(",");
-
-	// }
-	$scope.images = files.split(',');
-	for(var i =0;i<$scope.images.length;i++){
-		//$scope.images[i] = $scope.images[i].substr(9);
-		console.log($scope.images[i]);
-	}
-	console.log($scope.images);
-	console.log($scope.images[0]);
+	//console.log($scope.images);
 	$scope.zoomImgSrc = $scope.images[0];
 	$scope.showFeedback = true;
-$scope.showMain = false;
-
+	$scope.showMain = false;
+	console.log($scope.lookText);
 }
 
 
@@ -661,39 +786,62 @@ $scope.zoomImg = function(index){
 	$scope.zoomImgSrc = $scope.images[index];
 	$scope.currentFirstLook = index;
 	$scope.feedbackComment = $scope.feedbackArr[index];
-	console.log($scope.zoomImgSrc);
+	//console.log($scope.zoomImgSrc);
 }
 
 $scope.saveFeedback = function(){
 	
-	$scope.feedbackArr[$scope.currentFirstLook] = $scope.feedbackComment;
-	console.log($scope.feedbackArr);
-	mvNotifier.notify('Feedback saved');
+	if($scope.feedbackComment===' '){
+		alert('No Feedback entered');
+	}
+	else{
+		$scope.feedbackArr[$scope.currentFirstLook] = $scope.feedbackComment;
+		console.log($scope.feedbackArr);
+		mvNotifier.notify('Feedback saved');
+	}
 }
 
 $scope.submitFeedback = function(){
-	var comments = $scope.feedbackArr[0];
-	for(var i=1;i<$scope.feedbackArr.length;i++){
-		comments = comments+"UserFeedback"+$scope.feedbackArr[i];
+
+	var comments='';
+	var concept_type;
+
+	if($scope.feedbackArr.length===0){
+		alert('Please save your feedback before submitting');
 	}
-	console.log($scope.projects[$scope.rowId].firstLookId);
-
-	var feedBackData={'status':1,'comments':comments}
-	mvCustView.submitFeedack(feedBackData,$scope.projects[$scope.rowId].firstLookId).then(function(response){
-		
-		if(response){
-			mvNotifier.notify('Feedback saved');
-			$location.path('/dashboard');
+	else{
+		concept_type = $scope.cncptObj[0].concept_type;
+		for(var i=0;i<$scope.feedbackArr.length;i++){
+			if(typeof $scope.feedbackArr[i] != 'undefined'){
+				$scope.cncptObj[i].feedback=$scope.feedbackArr[i];
+			}
 		}
-		else{
-			mvNotifier.notify('Error in saving feedback. Please try again');	
+		var cncptFeedArr = [];
+		console.log($scope.cncptObj)
+		for(var i =0;i<$scope.cncptObj.length;i++){
+			if('feedback' in $scope.cncptObj[i]){
+				cncptFeedArr.push({status:0, comments: $scope.cncptObj[i].feedback, created_at:null, updated_at:null,concept_id:$scope.cncptObj[i].concept_id});
+			}
 		}
+		console.log('cncptFeedArr is: ');
+		console.log(cncptFeedArr);
 
-	}, function(resaon){
-		console.log('Cant save feedback');
-		mvNotifier.notify('Error in saving feedback. Please try again');
-		//Close popup
-	});
+		mvCustView.submitFeedback(cncptFeedArr,concept_type).then(function(response){
+			if(response){
+				mvNotifier.notify('Feedback submitted');
+				// $location.path('/dashboard');
+				window.location.reload(true);
+			}
+			else{
+				mvNotifier.notify('Error in saving feedback. Please try again');	
+			}
+
+		}, function(reason){
+			console.log('Cant save feedback: '+reason);
+			mvNotifier.notify('Error in saving feedback. Please try again: '+reason);
+			//Close popup
+		});
+	}
 }
 
 })

@@ -9,10 +9,10 @@ angular.module('app').controller('UserListCtrl', function($scope,$http,$routePar
 	$scope.showRoomDetails = false;
 	$scope.showPkgDetails = false;
 	$scope.showProgressDetails = false;
-
-	$scope.doUploadFirst = false;
-	$scope.doUploadFinal = true;
-	$scope.doUploadShopping = true;
+	$scope.showApptDetails = false;
+	$scope.showConceptDetails = false;
+	$scope.showFinalLook = false;
+	$scope.showShoppingDetails = false;
 
 	$scope.projects = [];
 
@@ -23,63 +23,161 @@ $scope.styles=['','Classic','Contemporary','Transitional','Modern','Scandinavian
 $scope.packageName=[' ','Simple','Classic','Premium','Custom'];
 $scope.quizStatus=['Active','Launched'];
 $scope.apptStatus=['Scheduled/Uploaded. Awaiting Admin Action','Approved','','Rejected'];
-/*function chkCncptStatus(conceptBoard){
-	
-	var currConceptData = conceptBoard[0];
-	var status = currConceptData.status;
-	var isFirstLook = currConceptData.isFirstLook;
-	var isFinalLook = currConceptData.isFinalLook;
-	var finalStatus = {};
 
-	if(isFirstLook===1){
-		//Check if this is the Final Look as well, in case user liked the first images.
-		if(isFinalLook===1){
-			if(status===2){
-				finalStatus.statusText='Final Look/ Shopping List is ready. Payment Pending';
+function chkFinalLookStatus(conceptBoard){
+	
+	for(var i =0;i<conceptBoard.length;i++){
+		var currConceptData = conceptBoard[i];
+		var status = currConceptData.status;
+		var finalStatus = {};
+
+
+//Admin actions: Upload first look, upload Final Look(2), mark final + shopping as ready(3), 
+//upload Final + shopping
+		
+			if(currConceptData.feedbackData.length>0){
+				finalStatus.statusText='Received Feedback. Awaiting Final Look + Shopping List';
 				finalStatus.linkPage=' ';
- 				finalStatus.modal=' ';
+				finalStatus.modal=' ';
+				finalStatus.stage=3;
+				break;
 			}
-			else if(status===3){
-				finalStatus.statusText='Total Payment Received. View Final Look + Shopping List';
+			else{
+				finalStatus.statusText='Awaiting Feedback on Final Look';
 				finalStatus.linkPage=' ';
- 				finalStatus.modal=' ';
+				finalStatus.modal=' ';
+				finalStatus.stage=-1;
 			}
-		}
-		else{
-			if(status===0){
+			/*if(status===0){
 				finalStatus.statusText='First Look Uploaded. Awaiting Feedback';
-				finalStatus.linkPage=' ';
- 				finalStatus.modal=' ';
+				finalStatus.linkPage='getFirstLook($index)';
+					finalStatus.modal=' ';
 			}
 			else if(status===1){
 				finalStatus.statusText='Received Feedback. Final Look in Progress';
 				finalStatus.linkPage=' ';
- 				finalStatus.modal=' ';
-			}
-		}
-	}
+					finalStatus.modal=' ';
+			}*/
+			
 
-	else if(isFinalLook===1){
-		if(status===0){
-			finalStatus.statusText='Final Look Uploaded. Awaiting Feedback';
-			finalStatus.linkPage=' ';
-			finalStatus.modal=' ';
-		}
-		else if(status===1){
-			finalStatus.statusText='Your Final Look and Shopping List will be ready soon.';
-			finalStatus.linkPage=' ';
-			finalStatus.modal=' ';
-		}
-		else if(status===2){
-			finalStatus.statusText='Final Look/ Shopping List is ready. Payment Pending';
-			finalStatus.linkPage=' ';
-			finalStatus.modal=' ';
-		}
-		else if(status===3){
-			finalStatus.statusText='Total Payment Received. View Final Look + Shopping List';
-			finalStatus.linkPage=' ';
-			finalStatus.modal=' ';
-		}
+		/*else if(isFinalLook===1){
+			
+			if('feedbackData' in currConceptData){
+				finalStatus.statusText='Received Feedback. Your Final Look and Shopping List will be ready soon.';
+				finalStatus.linkPage=' ';
+				finalStatus.modal=' ';
+				finalStatus.stage=3;
+				break;
+			}
+			else{
+				finalStatus.statusText='Final Look Uploaded. Awaiting Feedback';
+				finalStatus.linkPage='';
+				finalStatus.modal=' ';
+			}
+
+
+
+			// if(status===0){
+			// 	finalStatus.statusText='Final Look Uploaded. Awaiting Feedback';
+			// 	finalStatus.linkPage='';
+			// 	finalStatus.modal=' ';
+			// }
+			// else if(status===1){
+			// 	finalStatus.statusText='Feedback Received. Your Final Look and Shopping List will be ready soon.';
+			// 	finalStatus.linkPage=' ';
+			// 	finalStatus.modal=' ';
+			// }
+			// else if(status===2){
+			// 	finalStatus.statusText='Final Look/ Shopping List is ready. Payment Pending';
+			// 	finalStatus.linkPage=' ';
+			// 	finalStatus.modal=' ';
+			// }
+			// else if(status===3){
+			// 	finalStatus.statusText='Total Payment Received. View Final Look + Shopping List';
+			// 	finalStatus.linkPage=' ';
+			// 	finalStatus.modal=' ';
+			// } 
+		}*/
+	}
+	return finalStatus;
+}
+
+function chkCncptStatus(conceptBoard){
+	
+	for(var i =0;i<conceptBoard.length;i++){
+		var currConceptData = conceptBoard[i];
+		var status = currConceptData.status;
+		// var isFirstLook = currConceptData.isFirstLook;
+		// var isFinalLook = currConceptData.isFinalLook;
+		var finalStatus = {};
+
+
+//Admin actions: Upload first look, upload Final Look(2), mark final + shopping as ready(3), 
+//upload Final + shopping
+		
+			if(currConceptData.feedbackData.length>0){
+				finalStatus.statusText='Received Feedback. Awaiting Final Look';
+				finalStatus.linkPage=' ';
+				finalStatus.modal=' ';
+				finalStatus.stage=2;
+				break;
+			}
+			else{
+				finalStatus.statusText='Awaiting Feedback on First Look';
+				finalStatus.linkPage='getFirstLook($index)';
+				finalStatus.modal=' ';
+				finalStatus.stage=-1;
+			}
+			/*if(status===0){
+				finalStatus.statusText='First Look Uploaded. Awaiting Feedback';
+				finalStatus.linkPage='getFirstLook($index)';
+					finalStatus.modal=' ';
+			}
+			else if(status===1){
+				finalStatus.statusText='Received Feedback. Final Look in Progress';
+				finalStatus.linkPage=' ';
+					finalStatus.modal=' ';
+			}*/
+			
+
+		/*else if(isFinalLook===1){
+			
+			if('feedbackData' in currConceptData){
+				finalStatus.statusText='Received Feedback. Your Final Look and Shopping List will be ready soon.';
+				finalStatus.linkPage=' ';
+				finalStatus.modal=' ';
+				finalStatus.stage=3;
+				break;
+			}
+			else{
+				finalStatus.statusText='Final Look Uploaded. Awaiting Feedback';
+				finalStatus.linkPage='';
+				finalStatus.modal=' ';
+			}
+
+
+
+			// if(status===0){
+			// 	finalStatus.statusText='Final Look Uploaded. Awaiting Feedback';
+			// 	finalStatus.linkPage='';
+			// 	finalStatus.modal=' ';
+			// }
+			// else if(status===1){
+			// 	finalStatus.statusText='Feedback Received. Your Final Look and Shopping List will be ready soon.';
+			// 	finalStatus.linkPage=' ';
+			// 	finalStatus.modal=' ';
+			// }
+			// else if(status===2){
+			// 	finalStatus.statusText='Final Look/ Shopping List is ready. Payment Pending';
+			// 	finalStatus.linkPage=' ';
+			// 	finalStatus.modal=' ';
+			// }
+			// else if(status===3){
+			// 	finalStatus.statusText='Total Payment Received. View Final Look + Shopping List';
+			// 	finalStatus.linkPage=' ';
+			// 	finalStatus.modal=' ';
+			// } 
+		}*/
 	}
 	return finalStatus;
 }
@@ -87,7 +185,7 @@ $scope.apptStatus=['Scheduled/Uploaded. Awaiting Admin Action','Approved','','Re
 function chkApptStatus(apptData){
 	//Appt made and/or Floor Plan fileUploadedStatus.
 	var status = {};
-	if(apptData.apptStatus==0){
+	if(apptData.apptStatus===0){
 		//Appt Scheduled. Check if in future>=24 hrs ahead 
 		var apptDate = moment(apptData.apptDate);
 		var msDiff = apptDate.diff(moment(new Date(),"DD/MM/YYYY HH:mm:ss"));
@@ -95,14 +193,16 @@ function chkApptStatus(apptData){
 		var hourDiff = Math.floor(dayDiff.asHours());
 
 		if(hourDiff >=24){
-			status.statusText = "Meeting Scheduled. View/ Edit";
-			status.linkPage = " ";
-			status.modal = "#calendarModal";
-		}
-		else{
 			status.statusText = "Meeting Scheduled.";
 			status.linkPage = " ";
 			status.modal = " ";
+			status.stage=-1;
+		}
+		else if(hourDiff < 0){
+			status.statusText = "Meeting done. Pending First Look";
+			status.linkPage = " ";
+			status.modal = " ";
+			status.stage=1;
 		}
 	}
 	else if(apptData.floorPlanStatus>=0){
@@ -110,17 +210,20 @@ function chkApptStatus(apptData){
 			status.statusText = "Floor Plan uploaded. Pending Approval";
 			status.linkPage = " ";
 			status.modal = " ";
+			status.stage=-1;
 		}
 		else if(apptData.floorPlanStatus==1){
 			status.statusText = "Floor Plan Approved. Pending First Look";
 			status.linkPage = " ";
 			status.modal = " ";
+			status.stage=1;
 		}
 	}
 	else{
-		status.statusText = "Schedule Meet and Measure";
+		status.statusText = "Pending Meet and Measure";
 		status.linkPage = " ";
-		status.modal = "#calendarModal";
+		status.modal = " ";
+		status.stage=-1;
 	}
 	return status;
 }
@@ -128,46 +231,79 @@ function chkApptStatus(apptData){
 function populateStatus(projectData){
  
  	for(var i = 0;i<projectData.length;i++){
- 		var currRowData = projectData[i];
- 		var currQzData = currRowData.quizData;
- 		var currApptData = currRowData.apptData;
- 		var currConceptBoard = currRowData.firstLookData;
- 		var currFeedbackData = currRowData.feedbackData;
- 		var currQzId = currQzData.quizId;
- 		var status = {};
+ 		// var currRowData = projectData[i];
+ 		// var currQzData = currRowData.quizData[0];
+ 		 var currApptData = projectData[i].apptData;
+ 		 var currConceptBoard = projectData[i].conceptData;
+ 		 var currFinalLook = projectData[i].finalLookData;
+ 		// var currQzId = currQzData.quizId;
+ 		// var status = {};
 
- 		if(!("status" in currRowData)){
-	 		if(currQzData.status>=0){
-	 			//Payment Made. Check in decreasing order from feedback to FirstLook to  appt etc
+ 		//Array of quizes belong to a user
+ 		var quizData = projectData[i].quizData;
 
-	 			if(currConceptBoard && currConceptBoard.length>0){
-	 				projectData[i].status = chkCncptStatus(currConceptBoard);
+ 		for(var j=0;j<quizData.length;j++){
+ 			var status={};
+
+ 			if(quizData[j].status===1){
+ 				status.statusText = "Project Completed.";
+				status.linkPage = " ";
+				status.modal = " ";
+				status.action=-1;
+ 			}
+ 			else if(quizData[j].status===-1){
+ 				status.statusText = "Payment Pending";
+				status.linkPage = " ";
+				status.modal = " ";
+				status.action=-1;
+ 			}
+ 			else if(quizData[j].status===0){
+
+ 				if(currFinalLook && currFinalLook.length>0){
+	 				status = chkFinalLookStatus(currFinalLook);
+	 			}
+
+ 				else if(currConceptBoard && currConceptBoard.length>0){
+	 				status = chkCncptStatus(currConceptBoard);
 	 			}
 	 			else if(currApptData && currApptData.length>0){
-	 				projectData[i].status = chkApptStatus(currApptData[0]);
+	 				var apptFound = false;
+	 				for(var k=0;k<currApptData.length;k++){
+	 					if(currApptData[k].quizId===quizData[j].quizId){
+	 						apptFound=true;
+	 						status = chkApptStatus(currApptData[k]);
+	 						break;
+	 					}
+	 				}
+	 				if(!apptFound){
+	 					status.statusText = "Pending Meet and Measure";
+						status.linkPage = " ";
+						status.modal = " ";
+						status.action=-1;
+	 				}
+	 				
 	 			}
 	 			else{
-	 				status.statusText = "Schedule Meet and Measure";
-		 			status.linkPage = " ";
-		 			status.modal = "#calendarModal";
-		 			projectData[i].status = status;
+	 				status.statusText = "Pending Meet and Measure";
+					status.linkPage = " ";
+					status.modal = " ";
+					status.action=-1;
 	 			}
-	 		} //quizStatus<0
-	 		else{
-	 			status.statusText = "Pending Payment";
-	 			status.linkPage = " ";
-	 			status.modal = " ";
-	 			projectData[i].status = status;
-	 		}
-	 	}
+ 			} 
+			quizData[j].displayStatus = status;
+ 		}
+
+
  	}
- 	for(var j = i+1; j<projectData.length;j++){
+ }
+ 	/*for(var j = i+1; j<projectData.length;j++){
  		if(projectData[j].quizData.quizId === currQzId){
  			projectData[j].status = projectData[i].status;
  		}
  	}
  }
 
+/*
 function formatProjectList(projectData){
  	var prjArr = [];
 	for(var i = 0; i<projectData.quizData.length ; i++){
@@ -286,7 +422,7 @@ $scope.getProjectListing = function(){
 	mvAdminView.getProjectListing().then(function(projectData){
 	console.log('Result got back is: ');
 	console.log(projectData);
-
+	populateStatus(projectData);
 	$scope.projects = projectData;
 
 	// if(projectData!=null){
@@ -322,15 +458,25 @@ $scope.details = function(index,tabIdx){
 	for(var i =0;i<apptData.length;i++){
 		var floorPlanLoc = apptData[i].floorPlanLoc;
 		if(floorPlanLoc!=null){
-			var data = {folder:floorPlanLoc};
-			mvAdminView.fetchImages(data).then(function(response){
-				console.log(response);
-			},function(reason){
-				console.log('Could not fetch floor plan for '+reason);
-			});
+			var floorPlans = floorPlanLoc.split(',');
+			console.log('florrplans is');
+			console.log(floorPlans);
+			for(var j=0;j<floorPlans.length;j++){
+				floorPlans[j] = './uploads/'+floorPlans[j];
+				//apptData[i].floorPlanFiles = './uploads/'+apptData[i].floorPlanLoc;	
+			}
+			apptData[i].floorPlanFiles =floorPlans;
+			
 		}
 	}
+	
+	for(var i =0;i<$scope.prjDetails.conceptData.length;i++){
+		$scope.prjDetails.conceptData[i].files = './uploads/'+$scope.prjDetails.conceptData[i].files;
+	}
 
+	for(var i =0;i<$scope.prjDetails.finalLookData.length;i++){
+		$scope.prjDetails.finalLookData[i].files = './uploads/'+$scope.prjDetails.finalLookData[i].files;
+	}
 	
 }
 
@@ -351,6 +497,18 @@ $scope.toggleTab = function(tab){
 	else if(tab===4){
 		$scope.showProgressDetails = true;
 	}
+	else if(tab===5){
+		$scope.showApptDetails = true;
+	}
+	else if(tab===6){
+		$scope.showConceptDetails = true;
+	}
+	else if(tab===7){
+		$scope.showFinalLook = true;
+	}
+	else if(tab===8){
+		$scope.showShoppingDetails = true;
+	}
 }
 
 $scope.toggleMainView = function(){
@@ -363,7 +521,10 @@ function resetTabs(){
 	$scope.showQuizDetails = false;
 	$scope.showRoomPkgDetails = false;
 	//$scope.showPkgDetails = false;
+	$scope.showApptDetails = false;
+	$scope.showConceptDetails = false;
 	$scope.showProgressDetails = false;
+	$scope.showFinalLook  = false;
 }
 
 $scope.actionUsrData = function(quizId,action){
@@ -449,17 +610,7 @@ $scope.addFileToUploadQ = function(element) {
         });
       }
 
-$scope.submitData = function(quizId, roomName){
-	var stage;
-	if(! $scope.doUploadFirst)
-	 	stage = 1;
-
-	else if(! $scope.doUploadFinal)
-	 	stage = 2;
-
-	else if(! $scope.doUploadShopping)
-	 	stage = 3;
-
+$scope.submitData = function(quizId, filetype, roomName){
 
 	if($scope.fileArr.length>0){
 		mvUpload.uploadFiles($scope.fileArr).then(function(response){
@@ -472,26 +623,9 @@ $scope.submitData = function(quizId, roomName){
 			else {
 				files = response;
 			}
-		
-		
-		/*var firstLookData = {'customerId', 'quizId':quizId,'folderLocation':location,'roomName':roomName,'status':1,'feedback_id':null}
-			//Save in DB.
-			mvAdminView.saveFirstLook(firstLookData).then(function(response){
-				console.log(response);
-				if(response){
-					mvNotifier.notify('First Look saved');
-				}
-				else{
-					mvNotifier.notify('First Look could not be saved. Please contact the site administrator');	
-				}
-
-			}, function(resaon){
-				console.log('Cant save appointment');
-				mvNotifier.notify('Appointment could not be scheduled. Please contact the site administrator');
-				//Close popup
-			});*/
-			mvAdminView.saveConceptBoard(quizId,stage,files).then(function(success){
+			mvAdminView.saveUploadedData(quizId,filetype,files).then(function(success){
 				mvNotifier.notify('Data saved');
+
 			}, function(reason){
 				alert('Data not saved: '+reason);
 				mvNotifier.notify('Data not saved: '+reason);

@@ -18,7 +18,6 @@ var storage =   multer.diskStorage({
   	var fileName = file.originalname.substr(0,file.originalname.indexOf('.'));
   	var ext = file.originalname.substr(file.originalname.indexOf('.'));
     callback(null, fileName + '-' + Date.now() +ext);
-    //callback(null, fileName+ext);
   }
 });
 
@@ -46,10 +45,13 @@ module.exports = function(app){
 	app.get('/getCustProjectInfo', userProject.getCustProjectInfo);
 	app.post('/saveAppointment',userProject.saveAppointment);
 	app.post('/saveConceptBoard',userProject.saveConceptBoard);
-
-	// app.post('/submitFeedack',userProject.submitFeedack);
+	app.post('/saveFinalLook',userProject.saveFinalLook);
+	app.post('/saveShoppingList',userProject.saveShoppingList);
+	
+	app.post('/submitFeedback',userProject.submitFeedback);
 
 	app.get('/getProjectListing', userProject.getProjectListing);
+	app.get('/getCncptFeedback', userProject.getCncptFeedback);
 	app.post('/modifyUsrAppt',userProject.modifyUsrAppt);
 	app.post('/fetchImages',quiz.fetchImages);
 

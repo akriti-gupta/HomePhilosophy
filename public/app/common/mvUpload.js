@@ -4,8 +4,6 @@ angular.module('app').factory('mvUpload',function(Upload,$q){
 
     uploadFiles: function(fileArr){
       var dfd = $q.defer();
-      if(fileArr.length>0){
-          
           //var uploadURL = 'upload/'+fileType+'/'+quizId;
           var uploadURL = 'upload';
          
@@ -25,10 +23,7 @@ angular.module('app').factory('mvUpload',function(Upload,$q){
                   //$window.alert('An error occured. Please contact the administrator.');
                 }
             });
-        }
-        else{
-          dfd.resolve(true);
-        }
+        
         return dfd.promise;
     }
   }

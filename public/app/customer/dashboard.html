@@ -172,7 +172,7 @@
 
 <section id="feedback" ng-show="showFeedback">
 
-	<div style="width:30%;float:left;padding:80px;border-right:4px solid #e1e1e1;height:1200px;">
+	<div style="width:30%;float:left;padding:80px;height:1200px;">
 
 		<div ng-repeat="item in images track by $index" style="padding-bottom: 50px;">
 
@@ -182,21 +182,20 @@
 		</div>
 	</div>
 
-	<div style="width:70%;float:right;padding:30px;">
-		<p style="padding-bottom:10px;"> First Looks </p>
+	<div style="width:70%;float:right;padding:30px;border-left:4px solid #e1e1e1;">
+		<p class="stp-head-maintxt" style="padding-bottom:10px;">{{lookText}}</p>
 
 		<p><img src="{{zoomImgSrc}}" width="80%"></p>
 
 		<div style="padding:50px 0px 50px 105px;">
 			<form>
 				<textarea rows="9" cols="50" class="form-info font-sansRegular fs-16px" style="resize:none;border:1px solid #acacac;width:89%;" id="feedbackComment" name="feedbackComment" ng-model="feedbackComment"></textarea>
+				
 				<div style="text-align:center;padding:30px 0px 40px;width:43%;float:right;">
-        							<button type="submit" class="btn-start-quiz btn-qz btn-nxt font-sansRegular txt-upper col-lightcyan fs-20px" ng-click="saveFeedback()" style="padding:10px 20px 10px;margin-right:10px;	" >SAVE</button>
+					<button type="submit" class="btn-start-quiz btn-qz btn-nxt font-sansRegular txt-upper col-lightcyan fs-20px" ng-click="saveFeedback()" style="padding:10px 20px 10px;margin-right:10px;	" >SAVE</button>
 
-        							<button type="submit" class="btn-start-quiz btn-qz btn-nxt font-sansRegular txt-upper col-lightcyan fs-20px" ng-click="submitFeedback()" style="padding:10px 10px 10px;" >SUBMIT</button>
-
-      							</div>
-
+					<button type="submit" class="btn-start-quiz btn-qz btn-nxt font-sansRegular txt-upper col-lightcyan fs-20px" ng-click="submitFeedback()" style="padding:10px 10px 10px;" >SUBMIT</button>
+				</div>
 			</form>
 		</div>
 	</div>

@@ -66,9 +66,6 @@ function getResult(conn,quizIds,cb){
 
 function getImages(conn,quizIds,cb){
 	var imgData = [];
-	// var qry_qz_img = 'select i.* from cust_quiz q, cust_img_selection i '+
-	// 								 'where q.quizId = i.quizId and q.quizId in ('+quizIds+')';
-
 	var qry_qz_img = 'select i.*,qi.imageLocation from cust_quiz q, cust_img_selection i, quiz_images qi '+
     ' where q.quizId = i.quizId and i.selectedImgId = qi.imageId and i.questionId = qi.questionId '+
     ' and q.quizId in ('+quizIds+') order by quizId desc, questionId asc';
@@ -158,6 +155,83 @@ function getAppt(conn,quizIds,cb){
 		cb(null,apptData);
 	});
 }
+function getFinalLook(conn,quizIds,cb){
+	var finalLookData = [];
+	var qry_final_look= 'select f.* from cust_quiz q left outer join final_look f on q.quizId = f.quizId '+ 
+									 'where q.quizId in ('+quizIds+')';
+    var options = {sql:qry_final_look,nestTables: true};
+        			
+	conn.query(options, function(err, finalLook, fields){
+		if(err){
+			console.log('Error in fetching final look for quiz '+err);
+			conn.release();
+			cb(err,null);
+		}
+		// console.log(flookInfo);
+		else if(finalLook.length>0){
+			for(var i =0; i<finalLook.length;i++){
+				if(finalLook[i].f.id!=null){
+					finalLookData.push(finalLook[i].f);
+				}
+			}
+		}
+		getFnlLookFdbk(conn,finalLookData,function(err,result){
+			cb(null, result);
+		});
+		//cb(null,finalLookData);
+	});
+}  
+
+function getFnlLookFdbk(conn, finalLookData,cb){
+	
+	var flookFeedData = [];
+	if(finalLookData!=null && finalLookData.length>0){
+		console.log('finalLookData is: ');
+		console.log(finalLookData);
+		var flookIdArr = [];
+		for(var i =0;i<finalLookData.length;i++){
+			flookIdArr.push(finalLookData[i].id);
+		}
+
+		var qry_fl_feed = 'select ff.* from final_look f left outer join final_look_feedback ff on f.id = ff.concept_id '+ 
+									 'where f.id in ('+flookIdArr.join()+')';
+		var options = {sql:qry_fl_feed,nestTables: true};
+		conn.query(options, function(err, flookFeedInfo, fields){
+			console.log('flookFeedInfo is: ');
+			console.log(flookFeedInfo);
+			console.log(flookFeedInfo.length);
+			if(err){
+				console.log('Error in fetching first look feedback for quiz '+err);
+				conn.release();
+				cb(err,null);
+			}
+			// console.log(flookFeedInfo);
+			else if(flookFeedInfo.length>0){
+				for(var i =0; i<flookFeedInfo.length;i++){
+					if(flookFeedInfo[i].ff.id!=null){
+						flookFeedData.push(flookFeedInfo[i].ff);
+					}
+				}
+				for(var i=0;i<finalLookData.length;i++){
+					var feedbackArr = [];
+					for(var j =0; j<flookFeedData.length;j++){
+						if(flookFeedData[j].concept_id===finalLookData[i].id){
+							feedbackArr.push(flookFeedData[j]); 
+						}
+					}
+					finalLookData[i].feedbackData = feedbackArr;
+				}
+				cb(null,finalLookData);	
+			}
+			else{
+				cb(null,finalLookData);
+			}
+		});
+	}
+	else{
+		cb(null,flookFeedData);
+	}
+}
 
 
 function getConceptBoard(conn,quizIds,cb){
@@ -180,7 +254,10 @@ function getConceptBoard(conn,quizIds,cb){
 				}
 			}
 		}
-		cb(null,cncptBrdData);
+		getFeedback(conn,cncptBrdData,function(err,result){
+			cb(null, result);
+		});
+		//cb(null,cncptBrdData);
 	});
 }        		
 
@@ -195,7 +272,7 @@ function getFeedback(conn, cncptBrdData,cb){
 			flookIdArr.push(cncptBrdData[i].id);
 		}
 
-		var qry_fl_feed = 'select ff.* from concept_board f left outer join first_look_feedback ff on f.id = ff.firstLook_id '+ 
+		var qry_fl_feed = 'select ff.* from concept_board f left outer join concept_board_feedback ff on f.id = ff.concept_id '+ 
 									 'where f.id in ('+flookIdArr.join()+')';
 		var options = {sql:qry_fl_feed,nestTables: true};
 		conn.query(options, function(err, flookFeedInfo, fields){
@@ -208,17 +285,25 @@ function getFeedback(conn, cncptBrdData,cb){
 				cb(err,null);
 			}
 			// console.log(flookFeedInfo);
-			else if(flookFeedInfo.length>0 && flookFeedInfo[0].ff.id!=null){
+			else if(flookFeedInfo.length>0){
 				for(var i =0; i<flookFeedInfo.length;i++){
 					if(flookFeedInfo[i].ff.id!=null){
 						flookFeedData.push(flookFeedInfo[i].ff);
 					}
 				}
-				cb(null,flookFeedData)	
+				for(var i=0;i<cncptBrdData.length;i++){
+					var feedbackArr = [];
+					for(var j =0; j<flookFeedData.length;j++){
+						if(flookFeedData[j].concept_id===cncptBrdData[i].id){
+							feedbackArr.push(flookFeedData[j]); 
+						}
+					}
+					cncptBrdData[i].feedbackData = feedbackArr;
+				}
+				cb(null,cncptBrdData);	
 			}
 			else{
-				console.log('Here: ', +cncptBrdData);
-				cb(null,cncptBrdData)
+				cb(null,cncptBrdData);
 			}
 		});
 	}
@@ -284,7 +369,9 @@ exports.getCustProjectInfo = function(req,res,next){
 							async.apply(getResult,conn,quizIds),
 						    async.apply(getRooms,conn,quizIds),
 							async.apply(getPackage,conn,quizIds),
-							async.apply(getAppt,conn,quizIds)
+							async.apply(getAppt,conn,quizIds),
+							async.apply(getConceptBoard,conn,quizIds),
+							async.apply(getFinalLook,conn,quizIds)
 						], function (err, result) {
 						     //This code will be executed after all previous queries are done (the order doesn't matter).
 						     //For example you can do another query that depends of the result of all the previous queries.
@@ -299,9 +386,13 @@ exports.getCustProjectInfo = function(req,res,next){
 			                userProjects.roomData = result[1];
 			                userProjects.pkgData = result[2];
 			                userProjects.apptData = result[3];
+			                userProjects.firstLookData = result[4];
+			                userProjects.finalLookData = result[5];
+			                conn.release();
+			                res.send({'success':true,'results':userProjects});
 						});
 
-						async.waterfall([
+						/*async.waterfall([
 	    					async.apply(getConceptBoard,conn,quizIds),
 							async.apply(getFeedback,conn)
 						], function (err, result) {
@@ -327,7 +418,7 @@ exports.getCustProjectInfo = function(req,res,next){
 				            console.log(userProjects);
 				            conn.release();
 				            res.send({'success':true,'results':userProjects});
-						});
+						});*/
 
 					} // if quizData.length >0 ends.
 				}
@@ -346,13 +437,10 @@ exports.getProjectListing = function(req,res,next){
 		if(err){return next(err);}
 		
         if(conn){
-        	// var qry_usr_qz = 'Select user.id, user.username, user.firstname, cust_quiz.* from user, cust_quiz where user.id = cust_quiz.customerId '+
-        	// 				 ' and cust_quiz.status>=0 order by cust_quiz.quizId desc LIMIT 50';
-
+        	
         	var qry_usr_qz = 'SELECT user.id,GROUP_CONCAT(cust_quiz.quizId) as quizId'+
         					 ' FROM user, cust_quiz WHERE user.id = cust_quiz.customerId '+
 							 ' GROUP BY user.id order by user.id desc';
-        	//var options = {sql:qry_usr_qz,nestTables: true};
 
     		conn.query(qry_usr_qz, function(err, projects, fields){
 				if(err){
@@ -361,15 +449,12 @@ exports.getProjectListing = function(req,res,next){
 					res.send({success: false, reason:err.toString()});
 				}
 				else{
-					console.log('##^#^#^#*#**##(#(#(#(##(#((#(#(#(BHDJSBHCBDSHBCHJSDCJHSC');
-					console.log(projects);
 
-					// var quizIdArr = [];
 					if(projects.length>0){
+						
 
-						var counter = -1;
 						async.each(projects,function(project, callback){
-							counter++;
+							
 						    // Call an asynchronous function, often a save() to DB
 						    var quizIds = project.quizId;
 						    //item.someAsyncCall(function (){
@@ -381,14 +466,16 @@ exports.getProjectListing = function(req,res,next){
 								async.apply(getAppt,conn,quizIds),
 								async.apply(getImages,conn,quizIds),
 								async.apply(getQuiz,conn,quizIds),
-								async.apply(getUser,conn,project.id)
+								async.apply(getUser,conn,project.id),
+								async.apply(getConceptBoard,conn,quizIds),
+								async.apply(getFinalLook,conn,quizIds)
 							], function (err, result) {
 							    if(err){
 							     	conn.release();
 							     	console.log(err);
 							     	res.send({success: false, reason:err.toString()});
 							    }
-							    console.log('Final Admin Prll: '+counter);
+							    console.log('Final Admin Prll: ');
 							    console.log(project);
 							    //console.log(result);
 							     
@@ -398,91 +485,46 @@ exports.getProjectListing = function(req,res,next){
 				                'apptData': result[3],
 				                'imgData': result[4],
 				                'quizData': result[5],
-				                'userData': result[6]});
+				                'userData': result[6],
+				                'conceptData': result[7],
+				            	'finalLookData': result[8]});
 				                 callback();
 							});
-
-							/*async.waterfall([
-		    					async.apply(getConceptBoard,conn,quizIds),
-								async.apply(getFeedback,conn)
-							], 
-							function (err, result) {
-							    if(err){
-									conn.release();
-								   	console.log(err);
-								   	res.send({success: false, reason:err.toString()});
-								}
-							   
-								console.log('Final series Admin: '+counter);
-								console.log(project);
-							   // console.log(result);
-							    if(result.length>=0)
-					           		projectList.push({'firstLookData':result[0]});
-					           	else {
-					           		//projectList.push({'firstLookData':[]});
-					           		var test =[{'fl':1}];
-					           		if(projectList!= null && projectList.length>0){
-					           			projectList[counter].firstLookData = test;
-					           		}
-					           		else{
-					           			projectList.push(test);
-					           		}
-					           	}
-					           	if(result.length>0){
-					           		projectList.push({'feedbackData': result[1]});
-					           	}
-					           	else{
-					           		var test1 = [{'feed':2}];
-					           		//projectList.push({'feedbackData': []});
-					           		if(projectList!= null && projectList.length>0){
-					           			projectList[counter].feedbackData = test1;
-					           		}
-					           		else{
-					           			projectList.push(test);
-					           		}
-					           	}
-					           	  callback();
-					          // 	res.send({'success':true,'results':projectList});
-					        });*/
-						    
-						    //});
-						  },
+						},
 						function(err){
 						    // All tasks are done now
-						    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-				         	console.log(projectList);
-				        	res.send({'success':true,'results':projectList});
-						  }
-						);
+						   console.log(projectList);
+				           res.send({'success':true,'results':projectList});
+						}); //async.each
+
 					}
 				}
 			});
-			// res.send({'success':true,'results':projectList});
     	}
-    }); //getConnection
+   	}); //getConnection
 }
 
-				
+exports.getCncptFeedback = function(req,res,next){
+	var projectData = req.data.projectData;
 
+	mysqlConn.getConnection(function(err,conn){
+		if(err){return next(err);}
+			
+        if(conn){
+        	
+        	for(var i =0; i<projectData.length;i++){
+        		if(projectData[i].conceptData.length>0){
+        			var conceptIdArr = [];
+        			for(var j =0;j<projectData[i].conceptData.length;j++){
+        				conceptIdArr.push(projectData[i].conceptData.id);
+        			}
+        			var feedResults = getFeedback(conceptIdArr.join());
 
-/*
-
-
-exports.getConceptBoard = function(req,res,next){
-	FirstLook.where({quizId:quizId,roomName:roomName}).fetchAll().then(function(firstLooks){
-  					if(firstLooks.models.length>0){
-  						for(var f = 0;f<firstLooks.models.length;f++){
-  							firstLookArr.push(firstLooks.models[f].attributes);
-  						}
-  					}
-  					res.send({success:true,result:firstLookArr});
-  				}).catch(function(err){
-  					console.log('Error in fetching first look');
-  					console.log(err);
-  					res.send({success:false});
-  				});
+        		}
+        	}
+        }
+    });
 }
-*/
 exports.saveAppointment = function(req,res,next){
 	var apptData = req.body.data;
 
@@ -608,6 +650,31 @@ exports.modifyUsrAppt = function(req,res,next){
 
 
 exports.saveConceptBoard = function(req,res,next){
+	var data = req.body.data; //array of objs
+	 
+	data.created_at = new Date();
+	data.updated_at = new Date();
+
+	mysqlConn.getConnection(function(err,conn){
+		if(err){return next(err);}
+		
+        if(conn){
+        	for(var i = 0;i<data.length;i++){
+	        	conn.query('insert into concept_board set ?', data[i], function(err, results, fields){
+					if(err){
+						console.log('Error in inserting concept board data '+err);
+						conn.release();
+						res.send({success: false, reason:err.toString()});
+					}
+				});
+	        }
+	        conn.release();
+			res.send({success: true});
+    	}
+    });
+}	
+
+exports.saveFinalLook = function(req,res,next){
 	var data = req.body.data;
 	
 	data.created_at = new Date();
@@ -617,40 +684,78 @@ exports.saveConceptBoard = function(req,res,next){
 		if(err){return next(err);}
 		
         if(conn){
-        	conn.query('insert into concept_board set ?', data, function(err, results, fields){
-				if(err){
-					console.log('Error in inserting concept board data '+err);
-					conn.release();
-					res.send({success: false, reason:err.toString()});
-				}
-				conn.release();
-				res.send({success: true});
-			});
+        	for(var i = 0;i<data.length;i++){
+	        	conn.query('insert into final_look set ?', data[i], function(err, results, fields){
+					if(err){
+						console.log('Error in inserting final_look '+err);
+						conn.release();
+						res.send({success: false, reason:err.toString()});
+					}
+					
+				});
+	        }
+	        conn.release();
+			res.send({success: true});
     	}
     });
-}	
-/*
-
-exports.submitFeedack = function(req,res,next){
-	var data = req.body.data;
-	var id = req.body.id;
-	FirstLookFeedback.forge(data).save().then(function(response){
-		console.log(response);
-		console.log(response.attributes.id);
-		FirstLook.where({id:id}).save({'feedback_id':response.attributes.id},{patch:true}).then(function(firstLookData){
-						console.log('First Look Data edited successfully');
-						res.send({success:true, result: response});
-					});
-
-
-						// res.send({success:true, result: response});
-
-					}).catch(function(err){
-						console.log('Error in creating new record in first_look: '+err);
-						res.send({success:false,reason:err.toString()});
-					});
 }
 
+exports.saveShoppingList = function(req,res,next){
+	var data = req.body.data;
+	
+	data.created_at = new Date();
+	data.updated_at = new Date();
 
-*/
+	mysqlConn.getConnection(function(err,conn){
+		if(err){return next(err);}
+		
+        if(conn){
+        	for(var i = 0;i<data.length;i++){
+	        	conn.query('insert into shopping_list set ?', data[i], function(err, results, fields){
+					if(err){
+						console.log('Error in inserting final_look '+err);
+						conn.release();
+						res.send({success: false, reason:err.toString()});
+					}
+					
+				});
+	        }
+	        conn.release();
+			res.send({success: true});
+    	}
+    });
+}
+
+exports.submitFeedback = function(req,res,next){
+	var data = req.body.data;
+	var concept_type = req.body.concept_type;
+	var qry;
+
+	if(concept_type===1){
+		qry='insert into concept_board_feedback set ?';
+	}
+	else if(concept_type===2){
+		qry='insert into final_look_feedback set ?';
+	}
+
+	mysqlConn.getConnection(function(err,conn){
+		if(err){return next(err);}
+		
+        if(conn){
+        	for(var i =0;i<data.length;i++){
+        		conn.query(qry, data[i], function(err, results, fields){
+					if(err){
+						console.log('Error in inserting concept board feedback for filetype: '+concept_type+' Err: '+err);
+						conn.release();
+						res.send({success: false, reason:err.toString()});
+					}
+				});
+        	}
+        }
+        conn.release();
+		res.send({success: true});
+    });
+}
+	
+
 
