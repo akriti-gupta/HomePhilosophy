@@ -1297,7 +1297,7 @@ div.faq.show {
 
 
 
- div[dropzone] {
+ div[dropzone], div[dropzone1]{
     border: 2px dashed #bbb;
     border-radius: 5px;
     padding: 100px;
@@ -1556,4 +1556,9 @@ div.faq.show {
 }
 .lux-panel3{
   padding-bottom:40px;padding-top:10px;
+}
+
+.form.submitted .ng-invalid
+{
+    border:1px solid #f00;
 }

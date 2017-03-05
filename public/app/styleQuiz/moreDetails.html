@@ -44,49 +44,19 @@
     	<form name="detailForm" enctype="multipart/form-data" style="width:80%;margin:0 auto;padding-top:100px;" class="font-noto fs-18px" role="form">
 	      	<div class="form-group">
 	        	<span class="fs-20px">1. How much would you like to spend on your room?</span>
-	        	<div class="radio">
+	        	<div class="radio" ng-repeat="val in budget">
   					<label>
-    					<input type="radio" ng-model="radioBudget" name="radioBudget" id="budget1" value="$3,000 - $4,000" checked>
-    					$3,000 - $4,000
+    					<input type="radio" ng-model="budget" name="radioBudget" value="{{val.value}}"  ng-checked="val.selected">{{val.value}}
   					</label>
-				</div>
-				<div class="radio">
-  					<label>
-    					<input type="radio" ng-model="radioBudget" name="radioBudget" id="budget2" value="$4,000 - $5,000" checked>
-    					$4,000 - $5,000
-  					</label>
-				</div>
-				<div class="radio">
-  					<label>
-    					<input type="radio" ng-model="radioBudget" name="radioBudget" id="budget3" value="$5,000 - $7,000" checked>
-    					$5,000 - $7,000
-  					</label>
-				</div>
-				<div class="radio">
-  					<label>
-    					<input type="radio" ng-model="radioBudget" name="radioBudget" id="budget4" value="$7,000 - $10,000" checked>
-    					$7,000 - $10,000
-  					</label>
-				</div>
-				<div class="radio">
-  					<label>
-    					<input type="radio" ng-model="radioBudget" name="radioBudget" id="budget5" value="I’m not on a budget" checked>
-    					I’m not on a budget
-  					</label>
-				</div>
+	      		</div>
 	      	</div>
+
 	        <div class="form-group">
 	        	<span class="fs-20px">2. Do you own or rent?</span>
-	         	<div class="radio">
+	         	<div class="radio" ng-repeat="val in aprt">
   					<label>
-    					<input type="radio" ng-model="radioAprt" name="radioAprt" id="aprtOwn" value="Own my apartment" checked>
-    					Own my apartment
-  					</label>
-				</div>
-				<div class="radio">
-  					<label>
-    					<input type="radio" ng-model="radioAprt" name="radioAprt" id="aprtRent" value="Rent my apartment" checked>
-    					Rent my apartment
+    					<input type="radio" ng-model="aprt" name="radioAprt" value="{{val.value}}" ng-checked="val.selected">
+    					{{val.value}}
   					</label>
 				</div>
 	      	</div>
@@ -95,7 +65,7 @@
 	        	<span class="fs-20px">3. Is there a reason you would like to design your space?</span>
 	        	<div class="checkbox" ng-repeat="item in designReason">
   					<label>
-    					<input type="checkbox" ng-model="item.selected" >{{item.name}}
+    					<input type="checkbox" name="designGroup" value="{{item.id}}" ng-model="item.selected">{{item.name}}
     				</label>
 				</div>
 				<span>Other<input type="text" class="form-info form-control hp-form-input" id="reasonOther" name="reasonOther" ng-model="reasonOther"></span>
@@ -103,24 +73,22 @@
 
 	      	<div class="form-group">
 	        	<span class="fs-20px">4. What do you use your space for? i.e. living room for entertaining, bedroom for watching TV etc</span>
-	         	<textarea rows="7" cols="50" class="form-info font-sansRegular fs-16px" style="resize:none;border:1px solid #acacac;width:58%;" id="spaceUse" name="spaceUse" ng-model="spaceUse"></textarea>
-	         	<!-- <input type="text" class="form-info form-control" id="spaceUse" name="spaceUse" ng-model="spaceUse"> -->
+	         	<textarea rows="7" cols="50" class="form-info font-sansRegular fs-16px" style="resize:none;border:1px solid #acacac;width:58%;" id="spaceUse" name="spaceUse" ng-model="spaceUse" ng-required="true"></textarea>
 	      	</div>
 	      	<div class="form-group">
 	        	<span class="fs-20px">5. Who do you share your space with?</span>
 
 	        	<div class="checkbox" ng-repeat="item in spcShare">
 					<label>
-						<input type="checkbox" ng-model='item.selected'>{{item.name}}
+						<input type="checkbox" name="shareGroup" ng-model="item.selected">{{item.name}}
 					</label>
 				</div>
 	      	</div>
 
 	      	<div class="form-group">
 	        	<span class="fs-20px">6. Any furniture brands you absolutely love or loathe? </span><br/>
-	         		<textarea rows="7" cols="50" class="form-info font-sansRegular fs-16px" style="resize:none;border:1px solid #acacac;width:58%;"  id="brand" name="brand" ng-model="brand">
+	         		<textarea rows="7" cols="50" class="form-info font-sansRegular fs-16px" style="resize:none;border:1px solid #acacac;width:58%;"  id="brand" name="brand" ng-model="brand" ng-required="true">
 	         		</textarea>
-	         	<!-- <input type="text" class="form-info form-control" id="brand" name="brand" ng-model="brand"> -->
 	      	</div>
 
 	      	<div class="form-group">
@@ -132,30 +100,24 @@
 				        		
 				        	</a>
 				        	<a href="#" ng-click="saveColour(2)">
-				        		<!-- <div class="square" style="background:rgb(255, 153, 0);"></div> -->
 				        		<div class="square" style="background-image:url('/images/yellows.png')"></div>
 				        		
 				        	</a>
 				        	<a href="#" ng-click="saveColour(3)">
-				        		<!-- <div class="square" style="background:rgb(255, 255, 153);"></div> -->
 				        		<div class="square" style="background-image:url('/images/reds.png')"></div>
 				        		
 				        	</a>
 				        	<a href="#" ng-click="saveColour(4)">
-				        		<!-- <div class="square" style="background:rgb(199, 0, 57);"></div> -->
 				        		<div class="square" style="background-image:url('/images/neutrals.png')"></div>
-				        		<!-- <img src="images/neutrals.png" alt="reds"> -->
 				        	</a>
 			        	</div>
 			        </div>
 		        	<div class="row color-select">
 			        	<div class="col-sm-10 col-md-10">
 		        			<a href="#" ng-click="saveColour(5)">
-				        		<!-- <div class="square" style="background:#000;"></div> -->
 				        		<div class="square" style="background-image:url('/images/blacks.png')"></div>
 				        	</a>
 				        	<a href="#" ng-click="saveColour(6)">
-				        		<!-- <div class="square" style="background:rgb(51, 51, 51);"></div> -->
 				        		<div class="square" style="background-image:url('/images/greys.png')"></div>
 				        	</a>
 				        	<a href="#" ng-click="saveColour(7)">
@@ -163,7 +125,6 @@
 				        		<div class="square" style="background-image:url('/images/whites.png')"></div>
 				        	</a>
 				        	<a href="#" ng-click="saveColour(8)">
-				        		<!-- <div class="square" style="background:rgb(0, 0, 102);"></div> -->
 				        		<div class="square" style="background-image:url('/images/blues.png')"></div>
 				        	</a>
 			        	</div>
@@ -172,17 +133,27 @@
 
 	      	<div class="form-group">
 	        	<span class="fs-20px">8. Any other details you’d like to share with your designers?</span> <br/>
-	         	 <textarea rows="7" cols="50" class="form-info font-sansRegular fs-16px" style="resize:none;border:1px solid #acacac;width:58%;" id="extraInfo" ng-model="extraInfo"></textarea>
+	         	 <textarea rows="7" cols="50" class="form-info font-sansRegular fs-16px" style="resize:none;border:1px solid #acacac;width:58%;" id="extraInfo" ng-model="extraInfo" ng-required="true"></textarea>
 	      	</div>
 
 	      	<div class="form-group" style="margin-bottom:0px;">
 	        	<div class="fs-20px">9. Upload images of your current place and/or share images and a pinterest board (if any)?
 
-					<label>
+					<!-- <label>
 	        			<input type="file" multiple ngf-pattern="'image/*'" accept="image/*" ngf-max-size="10MB" style="display:none;"
 		                  onchange="angular.element(this).scope().addFileToUploadQ(this)"/>
 		            		<img src="images/attach.png" width="30%"/>
-		        	</label>
+		        	</label> -->
+		        	<div id="fileImages" dropzone>Drop Files Here</div>
+			         	<div style="width:50%;">
+							<div ng-repeat="file in pendingDropFiles track by $index">
+							  <div style="margin-bottom:10px;width:90%;float:left;background-color:#00a99d;color:#fff;">{{file.name}} ({{file.size}}) </div>
+							  <div style="width:10%;float:right;background-color:#00a99d;color:#fff;">
+							  	<a href="#" ng-click="removeFileFromQ($index,1)">x</a>
+							  </div>
+							</div>
+						</div>
+
 	        	</div>
 	        	
 
@@ -190,43 +161,23 @@
 					<div ng-repeat="file in pendingFilesArr track by $index">
 					  <div style="margin-bottom:10px;width:90%;float:left;background-color:#00a99d;color:#fff;">{{file.name}} ({{file.size}}) </div>
 					  <div style="width:10%;float:right;background-color:#00a99d;color:#fff;">
-					  	<a href="#" ng-click="removeFileFromQ($index)">x</a>
+					  	<a href="#" ng-click="removeFileFromQ($index,2)">x</a>
 					  </div>
 					</div>
 				</div>
-<!-- <a id="upload-file-info">{{uploadFileLabel}}</a> -->
-
-	        		<!-- <input type="text"  class="form-info form-control" id="upload-file-info" 
-	        				style="width:50%;float:left;" value="" disabled/>
-	        	
-	        		<label class="form-info btn-start-quiz upload-btn" for="cust-file-selector" style="margin-left:0px;">
-	        		<input id="cust-file-selector" type="file" ngf-select="" ng-model="file" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="10MB" 
-		                  style="display:none;"
-		                  onchange="$('#upload-file-info').val($(this).val().split('\\').pop());
-		                   			 $('#upload-furn-info').val('');
-									 angular.element(this).scope().fileToUpload(this)"/>
-		            	...
-		        	</label>
-		        	 -->
-					<!-- <button type="submit" class="form-info btn-start-quiz upload-btn font-sansRegular txt-upper col-lightcyan fs-16px" ng-click="uploadFile()" ng-disabled="uploadBtn1" >Upload</button> <label id="fileUploadStatus" ng-bind="filestatus"></label>
-	 -->
-
 	      	</div>
 			
 			<div class="form-group">
 				<label for="urlImages" class="col-sm-2 control-label" style="text-align:left;padding:20px 0px 0px;width:100%;">URL</label>
     			<input type="url" class="form-info form-control" name="urlImages" ng-model="url" 
 				style="width:53.5%;float:left;" />
-				<!-- onchange="angular.element(this).scope().urlToShare(this)" -->
-	        	<!-- <button type="submit" class="form-info btn-start-quiz upload-btn font-sansRegular txt-upper col-lightcyan fs-16px" ng-click="shareURL()" ng-disabled="uploadBtn3" style="padding:11px 18px;">Share</button> <label id="shareURL" ng-bind="urlStatus" style="padding-top:20px;padding-left:10px;"></label> -->
-	    				
   			</div>
 
 	      	<div class="form-group" name="uploadFurn" style="clear:both;padding-top:30px;">
 	        	<div class="fs-20px">10. Upload images of any existing furniture or accessories you want us to incorporate in the design?</div>
 	         	<div dropzone>Drop Files Here</div>
 	         	<div style="width:50%;">
-					<div ng-repeat="file in pendingDropFiles track by $index">
+					<div ng-repeat="file in pendingDropFilesFurn track by $index">
 					  <div style="margin-bottom:10px;width:90%;float:left;background-color:#00a99d;color:#fff;">{{file.name}} ({{file.size}}) </div>
 					  <div style="width:10%;float:right;background-color:#00a99d;color:#fff;">
 					  	<a href="#" ng-click="removeFileFromQ($index,2)">x</a>
@@ -240,26 +191,21 @@
 			  	<div class="form-group" style="margin:10px 0px;">
 				    <label for="inputEmail" class="col-sm-2 control-label ">Email</label>
 				    <div class="col-sm-10">
-				      <input type="email" class="form-control hp-form-input" id="inputEmail" placeholder="Email" ng-model="inputEmail">
+				      <input type="email" class="form-control hp-form-input" id="inputEmail" placeholder="Email" ng-model="inputEmail" ng-required="true">
 				    </div>
 			  	</div>
 				<div class="form-group"  style="margin:10px 0px;">
 			    	<label for="inputPhone" class="col-sm-2 control-label">Tel.</label>
 			    	<div class="col-sm-10">
-			      		<input type="text" class="form-control hp-form-input" id="inputPhone" ng-model="inputPhone">
+			      		<input type="number" class="form-control hp-form-input" id="inputPhone" ng-model="inputPhone" ng-required="true">
 			    	</div>
   				</div>
 	      	</div>
-
-      		
       
       		<div style="text-align:center;padding:30px 0px 40px;">
-        		<!-- <a href="#"> --><button type="submit" class="btn-start-quiz btn-qz btn-nxt font-sansRegular txt-upper col-lightcyan fs-20px" ng-click = "saveData()" >NEXT</button> <!-- </a> -->
+        		<button type="submit" class="btn-start-quiz btn-qz btn-nxt font-sansRegular txt-upper col-lightcyan fs-20px" ng-click = "saveData()" >NEXT</button>
       		</div>
-
-      		
     	</form>
-
 	</div>
 </div>
 <div style="padding-bottom:40px;"></div>

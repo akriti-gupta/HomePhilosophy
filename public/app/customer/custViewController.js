@@ -6,7 +6,8 @@ angular.module("app")
 $scope.firstName = mvIdentity.currentUser.firstname;
 $scope.projects = [];
 $scope.fileArr = [];
-$scope.pendingFilesArr = [];
+
+$scope.pendingDropFiles = [];
 $scope.pkgNames = payment.getPackages();
 $scope.address=' ';
 $scope.person=' ';
@@ -19,14 +20,6 @@ $scope.showMain = true;
 $scope.hasActiveProject = false;
 $scope.hasAllLaunched = true;
 $scope.lookText='First Look'; 
-//$scope.cncptObj = [];
-
-// $scope.packages = [
-//   						{'id':1,'name':"Simple",'pkgValue':350,value:1},
-//   					    {'id':2,'name':"Classic",'pkgValue':600,value:2},
-//   					    {'id':3,'name':"Premium",'pkgValue':1000,value:3},
-//   					    {'id':4,'name':"Custom",'pkgValue':0,value:4}
-//   				  ];
 
 $scope.packageName=[' ','Simple','Classic','Premium','Custom'];
 
@@ -38,6 +31,8 @@ $scope.roomImage["Master"] = "images/rooms/master.png";
 $scope.roomImage["Living"] = "images/rooms/living.png";
 $scope.roomImage["Home"] = "images/rooms/homeOffice.png";
 $scope.roomImage["Kids"] = "images/rooms/kids.png";
+
+var roomObj = ['','master','living','kids','home','dining','bedroom'];
 
 /*function checkFeedbackStatus(feedbackData){
 	for(var i =0;i<feedbackData.length;i++){
@@ -171,7 +166,7 @@ function chkFinalLookStatus(finalLook){
 				break;
 			}
 			else{
-				finalStatus.statusText='Final Look Uploaded. Awaiting Feedbackss';
+				finalStatus.statusText='Final Look Uploaded. Awaiting Feedback';
 				finalStatus.linkPage='getFinalLook($index)';
 				finalStatus.modal=' ';
 			}
@@ -404,8 +399,9 @@ function populateStatus(projectData){
 	 		} //quizStatus<0
 	 		else{
 	 			status.statusText = "Pending Payment";
-	 			status.linkPage = " ";
+	 			status.linkPage = "pricing";
 	 			status.modal = " ";
+	 			status.stage='payment';
 	 			projectData[i].status = status;
 	 		}
 	 	}
@@ -520,51 +516,35 @@ function populateStatus(projectData){
 				}
 			}
 
-			//
-
-			/*for(var j = 0;j<relRoomArr.length; j++){
-				var currRoomName = relRoomArr[j].roomName;
-				var statusText;
-				var statusLink;
-				var statusModal;
-				var status = {};
-				
-				if(relPkgArr && relPkgArr.length>0){
-					for(var k = 0; k< relPkgArr.length ; k++){
-						if(relPkgArr[k].roomName===currRoomName){
-							currPkg = relPkgArr[k];
-							isPkgSelected = true;
-							prjArr.push({'userData':userData,'quizData':currQzObj,'roomData':relRoomArr[j],
-								'pkgData':relPkgArr[k],'resultData':relResultArr,'apptData':relApptArr,'firstLookData':relFLArr,
-								'feedbackData':relFeedbackArr});
-						}
+			if(relPkgArr.length > 0 ){
+				for(var j = 0;j<relPkgArr.length; j++){
+					var roomDispName = relPkgArr[j].roomName;
+					var currRoomName;
+					if(roomDispName.indexOf(' ')!=-1){
+						currRoomName = roomDispName.substr(0,roomDispName.indexOf(' '));
 					}
+					else{
+						currRoomName = roomDispName
+					}
+					prjArr.push({'userData':userData,'quizData':currQzObj,'roomData':currRoomName,
+						'pkgData':relPkgArr[j],'resultData':relResultArr,'apptData':relApptArr,'firstLookData':relFLArr,'finalLookData':relFinalLookArr,'shoppingListData':relShoppingList,'paymentData':relPaymentArr});
+			
 				}
-				else{
-					prjArr.push({'userData':userData,'quizData':currQzObj,'roomData':relRoomArr[j],
-								'pkgData':relPkgArr,'resultData':relResultArr,'apptData':relApptArr,'firstLookData':relFLArr,
-								'feedbackData':relFeedbackArr});
-				}
-			}*/
-
-			for(var j = 0;j<relPkgArr.length; j++){
-				var roomDispName = relPkgArr[j].roomName;
-				var currRoomName;
-				if(roomDispName.indexOf(' ')!=-1){
-					currRoomName = roomDispName.substr(0,roomDispName.indexOf(' '));
-				}
-				else{
-					currRoomName = roomDispName
-				}
+			}
+			else{
 				
-				
-				// prjArr.push({'userData':userData,'quizData':currQzObj,'roomData':currRoomName,
-				// 	'pkgData':relPkgArr[j],'resultData':relResultArr,'apptData':relApptArr,'firstLookData':relFLArr,
-				// 	'feedbackData':relFeedbackArr});
-
-				prjArr.push({'userData':userData,'quizData':currQzObj,'roomData':currRoomName,
-					'pkgData':relPkgArr[j],'resultData':relResultArr,'apptData':relApptArr,'firstLookData':relFLArr,'finalLookData':relFinalLookArr,'shoppingListData':relShoppingList,'paymentData':relPaymentArr});
-		
+				for(var j = 0;j<relRoomArr.length; j++){
+					var roomDispName = relRoomArr[j].roomName;
+					var currRoomName;
+					if(roomDispName.indexOf(' ')!=-1){
+						currRoomName = roomDispName.substr(0,roomDispName.indexOf(' '));
+					}
+					else{
+						currRoomName = roomDispName
+					}
+					prjArr.push({'userData':userData,'quizData':currQzObj,'roomObj':relRoomArr,'roomData':currRoomName,
+						'pkgData':relPkgArr[j],'resultData':relResultArr,'apptData':relApptArr,'firstLookData':relFLArr,'finalLookData':relFinalLookArr,'shoppingListData':relShoppingList,'paymentData':relPaymentArr});
+				}
 			}
 
 			
@@ -592,9 +572,42 @@ mvCustView.getCustProjectInfo().then(function(projectData){
 	});
 }
 
+$scope.pricing = function(index){
+	var quizData = $scope.projectArr[index];
+	var roomData = $scope.projectArr[index].roomObj;
+	var objRoomArr = [];
+	var room_name;
+
+	console.log(roomData);
+
+	for(var i = 0; i< roomData.length;i++){
+		
+		if(roomData[i].roomName.toLowerCase().indexOf('office')!=-1){
+			room_name = 'office';
+		}
+		else{
+			room_name = (roomData[i].roomName.substr(0,roomData[i].roomName.indexOf(' '))).toLowerCase();
+		}
+		console.log(room_name);
+		var id = roomObj.indexOf(room_name);
+
+		var room_num ={};
+		var numRoom = roomData[i].numRoom;
+		room_num.id=numRoom;
+		room_num.label=numRoom.toString();
+		room_num.value = numRoom;
+
+		objRoomArr.push({'room_disp_name':roomData[i].roomName,'room_id':id,'room_name':room_name,'room_num':room_num});
+	}
+	console.log(objRoomArr);
+	storeQuizInfo(quizData);
+	quizResult.storeUserQuizInfo({"roomSelected":objRoomArr,"quizImgSelected":null});
+	$location.path('/pricing');
+	
+}
+
 $scope.addRoom=function(){
 	custViewSvc.setRequester('dashboard');
-	console.log('Route saved is: '+custViewSvc.getRequester());
 	quizResult.clearStyle();
 	payment.clearPayPkg();
 	payment.clearPkgPerRoom();
@@ -626,32 +639,21 @@ $scope.formatBytes = function(bytes,decimals) {
         var i = Math.floor(Math.log(bytes) / Math.log(k));
         return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
       }
-$scope.addFileToUploadQ = function(element) { 
-        $scope.$apply(function($scope) {
-          // $scope.fileArr.push(element.files);
-          for(var i=0; i< element.files.length; i++){
-            $scope.fileArr.push(element.files[i]);
-            $scope.pendingFilesArr.push({"name":element.files[i].name,"size":$scope.formatBytes(element.files[i].size,0),"mainArrIndex":$scope.fileArr.length-1});
-          }
-        });
-      }
+// $scope.addFileToUploadQ = function(element) { 
+//         $scope.$apply(function($scope) {
+//           // $scope.fileArr.push(element.files);
+//           for(var i=0; i< element.files.length; i++){
+//             $scope.fileArr.push(element.files[i]);
+//             $scope.pendingFilesArr.push({"name":element.files[i].name,"size":$scope.formatBytes(element.files[i].size,0),"mainArrIndex":$scope.fileArr.length-1});
+//           }
+//         });
+//       }
 
-$scope.removeFileFromQ = function(index,fileArrType){
-        
-        //TODO: Remove from fileArr also
-        if(fileArrType && fileArrType===2){
-          var mstrFileArrIdx = $scope.pendingDropFiles[index].mainArrIndex;
-          // console.log(mstrFileArrIdx);
-          $scope.pendingDropFiles.splice(index,1);
-          $scope.fileArr.splice(mstrFileArrIdx,1);
-        }
-        else{
-          var mstrFileArrIdx = $scope.pendingFilesArr[index].mainArrIndex;
-          console.log(mstrFileArrIdx);
-          $scope.pendingFilesArr.splice(index,1);
-          $scope.fileArr.splice(mstrFileArrIdx,1);
-        }
-      }
+$scope.removeFileFromQ = function(index){
+    var mstrFileArrIdx = $scope.pendingDropFiles[index].mainArrIndex;
+    $scope.pendingDropFiles.splice(index,1);
+    $scope.fileArr.splice(mstrFileArrIdx,1);
+  }
   
 
 $scope.selectPkg = function(index){
@@ -671,7 +673,7 @@ $scope.saveAppointment = function(item){
 	console.log('apptDate is: '+$scope.apptDate);
 	console.log('apptTime is: '+$scope.apptTime)
 	if(!isValidForm){
-		alert('Please enter contact and time details');
+		alert('Please enter contact/ appointment/ floor plan details');
 	}
 	else if(isValidForm){
 		var row_id = item.currentTarget.getAttribute("data-row-id");
@@ -779,10 +781,10 @@ $scope.$on('apptSaved', function(event,data){
 	console.log(data);
 });
 
-// $('#calendarModal').on('hidden.bs.modal', function () {
-// 	console.log('Refreshing now');
-//     window.location.reload(true);
-// });
+$('#calendarModal').on('hidden.bs.modal', function () {
+	//refresh
+	window.location.reload(true);
+});
 
 
 
@@ -960,20 +962,41 @@ $scope.submitFeedback = function(){
  	 });
 	}
 	}
-});
-
-// angular.module('myApp')
-//     .directive('uibDatepickerPopup', function (){
-//         return {
-//             restrict: 'EAC',
-//             require: 'ngModel',
-//             link: function(scope, elem, attrs, ngModel) {
-//                 ngModel.$parsers.push(function toModel(date) {
-//                     return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-//                 });
-//             }
-//         }
-//     });
+})
+.directive("dropzone1", function() {
+    return {
+        restrict : "A",
+        link: function (scope, element) {
+          
+          element.on('dragover', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+          });
+          
+          element.on('dragenter', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+          });
+          
+          element.bind('drop', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            if (event.originalEvent.dataTransfer){
+              if (event.originalEvent.dataTransfer.files.length > 0) {
+                for(var i=0; i< event.originalEvent.dataTransfer.files.length; i++){
+                  scope.$apply(function(scope) {
+                    scope.fileArr.push(event.originalEvent.dataTransfer.files[i]);
+                    scope.pendingDropFiles.push({"name":event.originalEvent.dataTransfer.files[i].name,"size":scope.formatBytes(event.originalEvent.dataTransfer.files[i].size,0),"mainArrIndex":scope.fileArr.length-1});                    
+                    
+                  });                 
+                }
+              }
+            }
+            return false;
+          });
+        }
+      }
+  });
 
 
 

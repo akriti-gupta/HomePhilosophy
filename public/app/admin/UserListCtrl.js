@@ -6,7 +6,6 @@ angular.module('app').controller('UserListCtrl', function($scope,$http,$routePar
 
 	$scope.showCustDetails = false;
 	$scope.showQuizDetails = false;
-	$scope.showRoomDetails = false;
 	$scope.showPkgDetails = false;
 	$scope.showProgressDetails = false;
 	$scope.showApptDetails = false;
@@ -21,6 +20,16 @@ angular.module('app').controller('UserListCtrl', function($scope,$http,$routePar
 	$scope.packageName=[' ','Simple','Classic','Premium','Custom'];
 	$scope.quizStatus=['Active','Launched'];
 	$scope.apptStatus=['Scheduled/Uploaded. Awaiting Admin Action','Approved','','Rejected'];
+
+function resetTabs() {
+	$scope.showCustDetails = false;
+	$scope.showQuizDetails = false;
+	$scope.showApptDetails = false;
+	$scope.showConceptDetails = false;
+	$scope.showProgressDetails = false;
+	$scope.showFinalLook  = false;
+	$scope.showShoppingList = false;
+}
 
 function chkFinalPrjStatus(shoppingList, paymentInfo){
 	
@@ -264,127 +273,7 @@ function populateStatus(projectData){
 
  	}
  }
- 	/*for(var j = i+1; j<projectData.length;j++){
- 		if(projectData[j].quizData.quizId === currQzId){
- 			projectData[j].status = projectData[i].status;
- 		}
- 	}
- }
-
-/*
-function formatProjectList(projectData){
- 	var prjArr = [];
-	for(var i = 0; i<projectData.quizData.length ; i++){
-			var currQzObj = projectData.quizData[i];
-			var currQzId = currQzObj.quizId;
-			var currQzUser = currQzObj.customerId;
-			var relPkgArr = [];
-			var relRoomArr = [];
-			var relResultArr = [];
-			var relImgArr = [];
-			var relApptArr = [];
-			var relFLArr = [];
-			var relFeedbackArr = [];
-			var statusArr = [];
-			
-			if(projectData.pkgData && projectData.pkgData.length>0){
-				for(var j= 0;j<projectData.pkgData.length; j++){
-					if(projectData.pkgData[j].quizId === currQzId){
-						relPkgArr.push(projectData.pkgData[j]);
-					}
-				}
-			}
-
-			if(projectData.roomData && projectData.roomData.length>0){
-				for(var j= 0;j<projectData.roomData.length; j++){
-					if(projectData.roomData[j].quizId === currQzId){
-						relRoomArr.push(projectData.roomData[j]);
-					}
-				}
-			}
-
-			if(projectData.resultData && projectData.resultData.length>0){
-				for(var j= 0;j<projectData.resultData.length; j++){
-					if(projectData.resultData[j].quizId === currQzId){
-						relResultArr.push(projectData.resultData[j]);
-					}
-				}
-			}
-
-			if(projectData.imgData && projectData.imgData.length>0){
-				for(var j= 0;j<projectData.imgData.length; j++){
-					if(projectData.imgData[j].quizId === currQzId){
-						relImgArr.push(projectData.imgData[j]);
-					}
-				}
-			}
-
-			if(projectData.apptData && projectData.apptData.length>0){
-				for(var j= 0;j<projectData.apptData.length; j++){
-					if(projectData.apptData[j].quizId === currQzId){
-						relApptArr.push(projectData.apptData[j]);
-					}
-				}
-			}
-
-			if(projectData.firstLookData && projectData.firstLookData.length>0){
-				for(var j= 0;j<projectData.firstLookData.length; j++){
-					if(projectData.firstLookData[j].quizId === currQzId){
-						relFLArr.push(projectData.firstLookData[j]);
-
-						if(projectData.feedbackData && projectData.feedbackData.length>0){
-							for(var k= 0;k<projectData.feedbackData.length; k++){
-								if(projectData.feedbackData[k].firstlook_id === projectData.firstLookData[j].id){
-									relFeedbackArr.push(projectData.feedbackData[k]);
-								}
-							}
-						}
-					}
-				}
-			} //First Look ends
-
-			for(var j = 0;j<relPkgArr.length; j++){
-				var roomDispName = relPkgArr[j].roomName;
-				var currRoomName;
-				if(roomDispName.indexOf(' ')!=-1){
-					currRoomName = roomDispName.substr(0,roomDispName.indexOf(' '));
-				}
-				else{
-					currRoomName = roomDispName
-				}
-				
-				
-				prjArr.push({'quizData':currQzObj,'roomData':currRoomName,
-					'pkgData':relPkgArr[j],'resultData':relResultArr,'apptData':relApptArr,'firstLookData':relFLArr,
-					'feedbackData':relFeedbackArr});
-		
-			}
-		}
-
-		console.log('prjArr is:' );
-		console.log(prjArr);
-		
-		//populateStatus(userPrjList);
-//		populateStatus(prjArr);
-
-		var userPrjList = [];
-		if(prjArr!=null && prjArr.length>0){
-			for(var i = 0; i<projectData.userData.length ; i++){
-				var tmpList = [];
-				var customerId = projectData.userData[i].id;
-				for(var j = 0; j<prjArr.length;j++){
-					if(prjArr[j].quizData.customerId===customerId){
-						tmpList.push(prjArr[i]);
-					}
-				}
-				userPrjList.push({userData:projectData.userData[i], projectData:tmpList});
-			}
-		}
-
-		$scope.projects = userPrjList;
-
-		
-} */
+ 	
 //Get customer projects from DB.
 $scope.getProjectListing = function(){
 	mvAdminView.getProjectListing().then(function(projectData){
@@ -392,21 +281,11 @@ $scope.getProjectListing = function(){
 	console.log(projectData);
 	populateStatus(projectData);
 	$scope.projects = projectData;
-
-	// if(projectData!=null){
-	// 	formatProjectList(projectData);
-	// }
-	// console.log('Formatted Result :');
-	// console.log($scope.projects);
-
-	
-
 	}, function(reason){
 		alert('Error in fetching user data' +reason);
 		$location.path="/";
 	});
 }
-
 
 
 $scope.details = function(index,tabIdx){
@@ -427,14 +306,10 @@ $scope.details = function(index,tabIdx){
 		var floorPlanLoc = apptData[i].floorPlanLoc;
 		if(floorPlanLoc!=null){
 			var floorPlans = floorPlanLoc.split(',');
-			console.log('florrplans is');
-			console.log(floorPlans);
 			for(var j=0;j<floorPlans.length;j++){
 				floorPlans[j] = './uploads/'+floorPlans[j];
-				//apptData[i].floorPlanFiles = './uploads/'+apptData[i].floorPlanLoc;	
 			}
 			apptData[i].floorPlanFiles =floorPlans;
-			
 		}
 	}
 	
@@ -449,13 +324,24 @@ $scope.details = function(index,tabIdx){
 	for(var i =0;i<$scope.prjDetails.shoppingList.length;i++){
 		$scope.prjDetails.shoppingList[i].files = './uploads/'+$scope.prjDetails.shoppingList[i].files;
 	}
-	
-var colours = [];
+
+
+	var quizDtls = $scope.prjDetails.quizDtls;
+	for(var i =0;i<quizDtls.length;i++){
+		var files = quizDtls[i].file1;
+		if(files!=null){
+			var uploadedFiles = files.split(',');
+			for(var j=0;j<uploadedFiles.length;j++){
+				uploadedFiles[j] = './uploads/'+uploadedFiles[j];
+			}
+			quizDtls[i].file1 =uploadedFiles;
+			
+		}
+	}
+	var colours = [];
 	for(var i =0;i<$scope.prjDetails.quizDtls.length;i++){
 
 		colours = $scope.prjDetails.quizDtls[i].colours.split(',');
-		console.log('colours is: ');
-		console.log(colours);
 		$scope.prjDetails.quizDtls[i].colours = colours;
 	}
 }
@@ -468,12 +354,6 @@ $scope.toggleTab = function(tab){
 	else if(tab===2){
 		$scope.showQuizDetails = true;
 	}
-	else if(tab===3){
-		$scope.showRoomPkgDetails = true;
-	}
-	// else if(tab===4){
-	// 	$scope.showPkgDetails = true;
-	// }
 	else if(tab===4){
 		$scope.showProgressDetails = true;
 	}
@@ -489,23 +369,12 @@ $scope.toggleTab = function(tab){
 	else if(tab===8){
 		$scope.showShoppingList = true;
 	}
+	return;
 }
 
 $scope.toggleMainView = function(){
 	$scope.showDetail = !$scope.showDetail;
 	$scope.showListing = !$scope.showListing
-}
-
-function resetTabs(){
-	$scope.showCustDetails = false;
-	$scope.showQuizDetails = false;
-	$scope.showRoomPkgDetails = false;
-	//$scope.showPkgDetails = false;
-	$scope.showApptDetails = false;
-	$scope.showConceptDetails = false;
-	$scope.showProgressDetails = false;
-	$scope.showFinalLook  = false;
-	$scope.showShoppingList = false;
 }
 
 $scope.actionUsrData = function(quizId,action){
@@ -535,61 +404,36 @@ $scope.actionUsrData = function(quizId,action){
 			mvNotifier.notify('Data modified successfully');
 		}
 	},function(reason){
-		console.log('Error in modifying appointment data: ');
-		console.log(reason);
+		mvNotifier.notify('Error in modifying appointment data: ');
+		mvNotifier.notify(reason);
 	});
 }
 
-function setCurrentStatus(quizStatus,pkgStatus,apptStatus,floorPlanStatus, apptDate){
-	var status="";
-	console.log('In setCurrentStatus, quizStatus: '+quizStatus);
-	console.log('In setCurrentStatus, pkgStatus: '+pkgStatus);
-	console.log('In setCurrentStatus, apptStatus: '+apptStatus);
-	console.log(moment(apptDate).format('MM/DD/YYYY') >= moment().format('MM/DD/YYYY'));
-	console.log(moment(apptDate).format('MM/DD/YYYY') < moment().format('MM/DD/YYYY'));
-
-	if(quizStatus===0 && pkgStatus === 1){
-		if(apptStatus!=0){
-			status = "Waiting for Customer to schedule an appointment.";
-		}
-
-		else if(apptStatus===0  && (moment(apptDate).format('MM/DD/YYYY') >= moment().format('MM/DD/YYYY'))){ 
-			if(floorPlanStatus===-1){
-				status = "Appointment scheduled on apptDate";
-			}
-			else{
-				status = "Floor Plan Uploaded and appointment scheduled on apptDate."
-			}
-		}
-		else if(apptStatus===0  && (moment(apptDate).format('MM/DD/YYYY') < moment().format('MM/DD/YYYY'))) { 
-			console.log('In here');
-			status = "First Look Pending";
-
-		}
-	}
-	return status;
+function formatBytes(bytes,decimals) {
+	if(bytes == 0) return '0 Byte';
+	var k = 1000; // or 1024 for binary
+	var dm = decimals + 1 || 3;
+	var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+	var i = Math.floor(Math.log(bytes) / Math.log(k));
+	return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
 
-$scope.isApptDue = function(apptDate){
-	if(moment(apptDate).format('MM/DD/YYYY') >= moment().format('MM/DD/YYYY')){
-		
-		return 1;
-	}
-	else{ 
-		
-		return 0;
-
-	}
-}
 $scope.addFileToUploadQ = function(element) { 
-        $scope.$apply(function($scope) {
-          // $scope.fileArr.push(element.files);
-          for(var i=0; i< element.files.length; i++){
-            $scope.fileArr.push(element.files[i]);
-            //$scope.pendingFilesArr.push({"name":element.files[i].name,"size":$scope.formatBytes(element.files[i].size,0),"mainArrIndex":$scope.fileArr.length-1});
-          }
-        });
-      }
+	$scope.$apply(function($scope) {
+	  for(var i=0; i< element.files.length; i++){
+	    $scope.fileArr.push(element.files[i]);
+	    $scope.pendingFilesArr.push({"name":element.files[i].name,"size":formatBytes(element.files[i].size,0),"mainArrIndex":$scope.fileArr.length-1});
+	  }
+	});
+}
+
+$scope.removeFileFromQ = function(index){
+      var mstrFileArrIdx = $scope.pendingDropFiles[index].mainArrIndex;
+      $scope.pendingDropFiles.splice(index,1);
+      $scope.fileArr.splice(mstrFileArrIdx,1);
+}
+
+
 
 $scope.submitData = function(quizId, filetype, roomName){
 
@@ -606,6 +450,8 @@ $scope.submitData = function(quizId, filetype, roomName){
 			}
 			mvAdminView.saveUploadedData(quizId,filetype,files).then(function(success){
 				mvNotifier.notify('Data saved');
+				resetTabs();
+				$scope.showListing = true;
 
 			}, function(reason){
 				alert('Data not saved: '+reason);

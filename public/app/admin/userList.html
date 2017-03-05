@@ -53,7 +53,7 @@
         </div> 
         <div class="col-md-4 col-xs-4 admin-view-tab">
           <!-- <a href="#" ng-click="details($parent.$index,3)" ng-if="usrPrj.status===-1">Pending </a> -->
-          <a href="#" ng-click="details($parent.$index,3)">{{usrPrj.displayStatus.statusText}}</a>
+          <a href="#" ng-click="details($parent.$index,2)">{{usrPrj.displayStatus.statusText}}</a>
           <!-- {{quizStatus[usrPrj.status]}} -->
         </div> 
       </div>
@@ -65,13 +65,13 @@
 <section id="project-details" ng-show="showDetail">
   <div style="width:80%;margin:0 auto;border:1px solid black;">
     <ul class="nav nav-tabs">
-      <li role="presentation" class="tab-active"><a href="#" ng-click="toggleTab(1)">Customer Details</a></li>
+      <li role="presentation"><a href="#" ng-click="toggleTab(1)">Customer Details</a></li>
       <li role="presentation"><a href="#" ng-click="toggleTab(2)">Quiz Details</a></li>
-      <li role="presentation"><a href="#" ng-click="toggleTab(4)">Status Update</a></li>
       <li role="presentation"><a href="#" ng-click="toggleTab(5)">Appointment/ Floor Plan</a></li>
       <li role="presentation"><a href="#" ng-click="toggleTab(6)">First Looks &amp; Feedback</a></li>
       <li role="presentation"><a href="#" ng-click="toggleTab(7)">Final Looks &amp; Feedback</a></li>
       <li role="presentation"><a href="#" ng-click="toggleTab(8)">Shopping List</a></li>
+      <li role="presentation"><a href="#" ng-click="toggleTab(4)">Upload Files</a></li>
     </ul>
   </div>
 
@@ -202,6 +202,13 @@
           <div class="col-md-6 col-xs-4 admin-view-tab">{{detail.spaceUtility}}</div>
         </div>
 
+        
+
+        <div class="row qz-row-dsg" style="border:1px solid black;padding-bottom:0px;">
+          <div class="col-md-6 col-xs-4 admin-view-tab">URL Shared</div>
+          <div class="col-md-6 col-xs-4 admin-view-tab">{{detail.file2}}</div>
+        </div>
+
         <div class="row qz-row-dsg" style="border:1px solid black;padding-bottom:0px;">
           <div class="col-md-6 col-xs-4 admin-view-tab">Customer Email </div>
           <div class="col-md-6 col-xs-4 admin-view-tab">{{detail.email}}</div>
@@ -212,8 +219,16 @@
           <div class="col-md-6 col-xs-4 admin-view-tab">{{detail.phone}}</div>
         </div>
       
+        
+      <div  ng-if="detail.file1.length>0" style="width:50%;position:relative;margin:0 auto;padding-top:50px;">
+        <p>Images Uploaded </p>
+        <div ng-repeat="image in detail.file1" style="padding-bottom:50px;">
+          <img src="{{image}}" width="100%" height="auto">
+        </div>
+      </div>
 
     </div>
+  </div>
   </div>
 
 
@@ -266,6 +281,17 @@
 
       <div style="padding-bottom:40px;"></div>
       
+      <div style="width:50%;">
+        <div ng-repeat="file in pendingFilesArr track by $index" style="position:relative;margin:0 auto;width:50%;">
+          <div style="margin-bottom:10px;width:90%;float:left;background-color:#00a99d;color:#fff;padding-left:20px;">{{file.name}} ({{file.size}}) </div>
+          <div style="width:10%;float:right;background-color:#00a99d;color:#fff;">
+            <a href="#" ng-click="removeFileFromQ($index,1)">x</a>
+          </div>
+        </div>
+      </div>
+      <div style="clear:both;"></div>
+
+
       <p><a href="/admin/users" ng-click="toggleMainView()">Back</a></p>
     </form>
   </div>

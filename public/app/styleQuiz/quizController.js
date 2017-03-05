@@ -1377,6 +1377,8 @@ $scope.gridWidth=300;
 				$scope.selRoomNamesArr.push($scope.selectedRoom[i].room_disp_name);
 			}
 		}
+		console.log($scope.selectedRoom);
+		console.log($scope.selRoomNamesArr);
 	}
 
 	$scope.isActive = function(index){

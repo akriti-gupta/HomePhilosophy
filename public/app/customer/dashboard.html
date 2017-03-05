@@ -65,31 +65,41 @@
       								<div class="form-group form-meet-dtls" style="margin:10px 0px;">
 				    					<label for="inputAddress" class="col-sm-4 control-label" style="text-align:left;">Address:</label>
 				    					<div class="col-sm-8">
-				    						<input type="text" class="form-control" id="inputAddress" ng-model="address" required>
+				    						<input type="text" class="form-control" id="inputAddress" ng-model="address" ng-required="true">
 				    					</div>
 			  						</div>
 
 			  						<div class="form-group"  style="margin:10px 0px;">
 			    						<label for="inputName" class="col-sm-4 control-label" style="text-align:left;">Contact Person:</label>
 			    						<div class="col-sm-8">
-			      							<input type="text" class="form-control" id="inputName" ng-model="person" required>
+			      							<input type="text" class="form-control" id="inputName" ng-model="person" ng-required="true">
 			    						</div>
   									</div>
 
 									<div class="form-group"  style="margin:10px 0px;">
 			    						<label for="inputPhone" class="col-sm-4 control-label" style="text-align:left;">Contact Number:</label>
 			    						<div class="col-sm-8">
-			      							<input type="number" class="form-control" id="inputPhone" ng-model="contact" required>
+			      							<input type="number" class="form-control" id="inputPhone" ng-model="contact" ng-required="true">
 			    						</div>
   									</div>
 
   									<div class="form-group"  style="margin:10px 0px;">
-			    						<label for="inputFloorPlan" class="col-sm-11 control-label" style="text-align:left;">Meet and Measure not possible? Upload your floorplan with scale here:
-			    						
-	        								<input type="file" multiple ngf-pattern="'image/*'" accept="image/*" ngf-max-size="10MB" style="display:none;"
-		                  					onchange="angular.element(this).scope().addFileToUploadQ(this)"/>
-		            							<img src="images/attach.png" width="7%"/>
-		        						</label>
+			    						<div style="padding-bottom:60px;">
+				    						<label for="inputFloorPlan" class="col-sm-11 control-label" style="text-align:left;">Meet and Measure not possible? Upload your floorplan with scale here:
+				    						</label>
+				    					</div>
+
+		        						<div style="width:93%;margin-left:20px;" dropzone1>Drop Files Here</div>
+							         	<div style="width:93%;margin-left:20px;">
+											<div ng-repeat="file in pendingDropFiles track by $index">
+											  <div style="margin-bottom:10px;width:90%;float:left;background-color:#00a99d;color:#fff;">{{file.name}} ({{file.size}}) </div>
+											  <div style="width:10%;float:right;background-color:#00a99d;color:#fff;">
+											  	<a href="#" ng-click="removeFileFromQ($index,1)">x</a>
+											  </div>
+											</div>
+										</div>
+
+
 	        						</div>
 	        	
 
@@ -141,8 +151,9 @@
 
    			<div class="col-md-4 col-xs-4 cust-view-tab" ng-if="item.status.linkPage===' ' && item.status.modal===' '">{{item.status.statusText}}<br/></div>
 
-		    <div class="col-md-4 col-xs-4 cust-view-tab" ng-if="item.status.linkPage!=' ' && item.status.stage!='final'" ><a href="#" ng-click="getFirstLook($index)">{{item.status.statusText}}</a><br/></div>
+		    <div class="col-md-4 col-xs-4 cust-view-tab" ng-if="item.status.linkPage!=' ' && item.status.stage!='final' && item.status.stage!='payment'" ><a href="#" ng-click="getFirstLook($index)">{{item.status.statusText}}</a><br/></div>
 
+		    <div class="col-md-4 col-xs-4 cust-view-tab" ng-if="item.status.linkPage!=' ' &&  item.status.stage==='payment'" ><a href="#" ng-click="pricing($index)">{{item.status.statusText}}</a><br/></div>
 
 			<div class="col-md-4 col-xs-4 cust-view-tab" ng-if="item.status.linkPage!=' ' && item.status.stage==='final'" ><a href="/reviewPayment">{{item.status.statusText}}</a><br/></div>
 
