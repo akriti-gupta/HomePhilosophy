@@ -72,6 +72,21 @@ angular.module('app').factory('mvUserQuiz', function($http, mvIdentity, $q, quiz
 	  		});
 	  		return dfd.promise;
 			
+		},
+		saveQuizMiscData:function(data){
+			var dfd = $q.defer();
+
+			$http.post('/saveQuizMiscData',{data:data})
+		 	.then(function(response){
+		 		if(response.data.success){
+		 			dfd.resolve(true);
+		 		}
+		 		else{
+		 			dfd.reject(response.data.reason);
+		 		}
+	  		});
+	  		return dfd.promise;
+			
 		}
 	}
 });

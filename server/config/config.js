@@ -5,13 +5,13 @@ var rootPath = path.normalize(__dirname + '/../..');
 module.exports = {
 	development:{
 		rootPath: rootPath,
-		port: process.env.PORT || 8007
+		port: process.env.PORT || 8006
 		
 	},
 	test:{
 		//Heroku details.
 		rootPath: rootPath,
-		port: process.env.PORT || 8007
+		port: process.env.PORT || 8006
 	},
 	production:{
 		rootPath: rootPath,

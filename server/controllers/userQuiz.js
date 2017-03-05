@@ -226,3 +226,31 @@ exports.addRoomToQuiz = function(req,res,next){
 }
 
 
+exports.saveQuizMiscData = function(req,res,next){
+	var data = req.body.data;
+
+	mysqlConn.getConnection(function(err,conn){
+		
+		if(err){return next(err);}
+		
+        if(conn){
+        	conn.query('delete from cust_quiz_detail where quizId = '+conn.escape(data.quizId), function(err, results, fields){
+				if(err){
+					console.log('Error while deleting existing quiz detail: '+err);
+					res.send({reason:err.toString()});
+				}
+				console.log('Deleted old unpaid quiz detail');
+					
+				conn.query('insert into cust_quiz_detail set ?', data, function(err, results, fields){
+					if(err){
+						console.log('Error in creating new record in cust_quiz_detail: '+err);
+						conn.release();
+						res.send({reason:err.toString()});
+					}
+					conn.release();
+					res.send({success:true});
+    			});
+    		});
+		}
+	});
+}

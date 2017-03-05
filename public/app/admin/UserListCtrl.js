@@ -12,42 +12,39 @@ angular.module('app').controller('UserListCtrl', function($scope,$http,$routePar
 	$scope.showApptDetails = false;
 	$scope.showConceptDetails = false;
 	$scope.showFinalLook = false;
-	$scope.showShoppingDetails = false;
-
+	$scope.showShoppingList = false;
 	$scope.projects = [];
-
 	$scope.fileArr = [];
-$scope.pendingFilesArr = [];
+	$scope.pendingFilesArr = [];
 
-$scope.styles=['','Classic','Contemporary','Transitional','Modern','Scandinavian','Asian Inspired Minimalist'];
-$scope.packageName=[' ','Simple','Classic','Premium','Custom'];
-$scope.quizStatus=['Active','Launched'];
-$scope.apptStatus=['Scheduled/Uploaded. Awaiting Admin Action','Approved','','Rejected'];
+	$scope.styles=['','Classic','Contemporary','Transitional','Modern','Scandinavian','Asian Inspired Minimalist'];
+	$scope.packageName=[' ','Simple','Classic','Premium','Custom'];
+	$scope.quizStatus=['Active','Launched'];
+	$scope.apptStatus=['Scheduled/Uploaded. Awaiting Admin Action','Approved','','Rejected'];
 
-function chkFinalLookStatus(conceptBoard){
+function chkFinalPrjStatus(shoppingList, paymentInfo){
 	
-	for(var i =0;i<conceptBoard.length;i++){
-		var currConceptData = conceptBoard[i];
-		var status = currConceptData.status;
-		var finalStatus = {};
+	var totalPrice=0;
+	var amountPaid = 0;
+	var finalStatus = {};
+	for(var i =0;i<paymentInfo.length;i++){
+		totalPrice = totalPrice + paymentInfo[i].totalPrice;
+		amountPaid = amountPaid + paymentInfo[i].amountPaid;
+	}
 
-
-//Admin actions: Upload first look, upload Final Look(2), mark final + shopping as ready(3), 
-//upload Final + shopping
+	if(shoppingList.length>0){
+		if(totalPrice === amountPaid){
+			finalStatus.statusText='Total Payment Received. Project Completed';
+			finalStatus.linkPage='getFirstLook()';
+			finalStatus.modal=' ';
+		}
+		else{
+			finalStatus.statusText='Final Look/ Shopping List is ready. Final Payment Pending';
+			finalStatus.linkPage=' ';
+			finalStatus.modal=' ';
+		}
+	}
 		
-			if(currConceptData.feedbackData.length>0){
-				finalStatus.statusText='Received Feedback. Awaiting Final Look + Shopping List';
-				finalStatus.linkPage=' ';
-				finalStatus.modal=' ';
-				finalStatus.stage=3;
-				break;
-			}
-			else{
-				finalStatus.statusText='Awaiting Feedback on Final Look';
-				finalStatus.linkPage=' ';
-				finalStatus.modal=' ';
-				finalStatus.stage=-1;
-			}
 			/*if(status===0){
 				finalStatus.statusText='First Look Uploaded. Awaiting Feedback';
 				finalStatus.linkPage='getFirstLook($index)';
@@ -98,6 +95,32 @@ function chkFinalLookStatus(conceptBoard){
 			// 	finalStatus.modal=' ';
 			// } 
 		}*/
+	
+	return finalStatus;
+}
+
+function chkFinalLookStatus(conceptBoard){
+	
+	for(var i =0;i<conceptBoard.length;i++){
+		var currConceptData = conceptBoard[i];
+		var status = currConceptData.status;
+		var finalStatus = {};
+		//Admin actions: Upload first look, upload Final Look(2), mark final + shopping as ready(3), 
+		//upload Final + shopping
+		
+		if(currConceptData.feedbackData.length>0){
+			finalStatus.statusText='Received Feedback. Awaiting Final Look + Shopping List';
+			finalStatus.linkPage=' ';
+			finalStatus.modal=' ';
+			finalStatus.stage=3;
+			break;
+		}
+		else{
+			finalStatus.statusText='Awaiting Feedback on Final Look';
+			finalStatus.linkPage=' ';
+			finalStatus.modal=' ';
+			finalStatus.stage=-1;
+		}
 	}
 	return finalStatus;
 }
@@ -107,77 +130,20 @@ function chkCncptStatus(conceptBoard){
 	for(var i =0;i<conceptBoard.length;i++){
 		var currConceptData = conceptBoard[i];
 		var status = currConceptData.status;
-		// var isFirstLook = currConceptData.isFirstLook;
-		// var isFinalLook = currConceptData.isFinalLook;
 		var finalStatus = {};
-
-
-//Admin actions: Upload first look, upload Final Look(2), mark final + shopping as ready(3), 
-//upload Final + shopping
-		
-			if(currConceptData.feedbackData.length>0){
-				finalStatus.statusText='Received Feedback. Awaiting Final Look';
-				finalStatus.linkPage=' ';
-				finalStatus.modal=' ';
-				finalStatus.stage=2;
-				break;
-			}
-			else{
-				finalStatus.statusText='Awaiting Feedback on First Look';
-				finalStatus.linkPage='getFirstLook($index)';
-				finalStatus.modal=' ';
-				finalStatus.stage=-1;
-			}
-			/*if(status===0){
-				finalStatus.statusText='First Look Uploaded. Awaiting Feedback';
-				finalStatus.linkPage='getFirstLook($index)';
-					finalStatus.modal=' ';
-			}
-			else if(status===1){
-				finalStatus.statusText='Received Feedback. Final Look in Progress';
-				finalStatus.linkPage=' ';
-					finalStatus.modal=' ';
-			}*/
-			
-
-		/*else if(isFinalLook===1){
-			
-			if('feedbackData' in currConceptData){
-				finalStatus.statusText='Received Feedback. Your Final Look and Shopping List will be ready soon.';
-				finalStatus.linkPage=' ';
-				finalStatus.modal=' ';
-				finalStatus.stage=3;
-				break;
-			}
-			else{
-				finalStatus.statusText='Final Look Uploaded. Awaiting Feedback';
-				finalStatus.linkPage='';
-				finalStatus.modal=' ';
-			}
-
-
-
-			// if(status===0){
-			// 	finalStatus.statusText='Final Look Uploaded. Awaiting Feedback';
-			// 	finalStatus.linkPage='';
-			// 	finalStatus.modal=' ';
-			// }
-			// else if(status===1){
-			// 	finalStatus.statusText='Feedback Received. Your Final Look and Shopping List will be ready soon.';
-			// 	finalStatus.linkPage=' ';
-			// 	finalStatus.modal=' ';
-			// }
-			// else if(status===2){
-			// 	finalStatus.statusText='Final Look/ Shopping List is ready. Payment Pending';
-			// 	finalStatus.linkPage=' ';
-			// 	finalStatus.modal=' ';
-			// }
-			// else if(status===3){
-			// 	finalStatus.statusText='Total Payment Received. View Final Look + Shopping List';
-			// 	finalStatus.linkPage=' ';
-			// 	finalStatus.modal=' ';
-			// } 
-		}*/
+		if(currConceptData.feedbackData.length>0){
+			finalStatus.statusText='Received Feedback. Awaiting Final Look';
+			finalStatus.linkPage=' ';
+			finalStatus.modal=' ';
+			finalStatus.stage=2;
+			break;
+		}
+		else{
+			finalStatus.statusText='Awaiting Feedback on First Look';
+			finalStatus.linkPage='getFirstLook($index)';
+			finalStatus.modal=' ';
+			finalStatus.stage=-1;
+		}
 	}
 	return finalStatus;
 }
@@ -231,13 +197,11 @@ function chkApptStatus(apptData){
 function populateStatus(projectData){
  
  	for(var i = 0;i<projectData.length;i++){
- 		// var currRowData = projectData[i];
- 		// var currQzData = currRowData.quizData[0];
  		 var currApptData = projectData[i].apptData;
  		 var currConceptBoard = projectData[i].conceptData;
  		 var currFinalLook = projectData[i].finalLookData;
- 		// var currQzId = currQzData.quizId;
- 		// var status = {};
+ 		 var currShoppingList = projectData[i].shoppingList;
+ 		 var currPaymentList = projectData[i].paymentData;
 
  		//Array of quizes belong to a user
  		var quizData = projectData[i].quizData;
@@ -259,7 +223,11 @@ function populateStatus(projectData){
  			}
  			else if(quizData[j].status===0){
 
- 				if(currFinalLook && currFinalLook.length>0){
+ 				if(currShoppingList && currShoppingList.length>0){
+	 				status = chkFinalPrjStatus(currShoppingList,currPaymentList);
+	 			}
+
+ 				else if(currFinalLook && currFinalLook.length>0){
 	 				status = chkFinalLookStatus(currFinalLook);
 	 			}
 
@@ -477,7 +445,19 @@ $scope.details = function(index,tabIdx){
 	for(var i =0;i<$scope.prjDetails.finalLookData.length;i++){
 		$scope.prjDetails.finalLookData[i].files = './uploads/'+$scope.prjDetails.finalLookData[i].files;
 	}
+
+	for(var i =0;i<$scope.prjDetails.shoppingList.length;i++){
+		$scope.prjDetails.shoppingList[i].files = './uploads/'+$scope.prjDetails.shoppingList[i].files;
+	}
 	
+var colours = [];
+	for(var i =0;i<$scope.prjDetails.quizDtls.length;i++){
+
+		colours = $scope.prjDetails.quizDtls[i].colours.split(',');
+		console.log('colours is: ');
+		console.log(colours);
+		$scope.prjDetails.quizDtls[i].colours = colours;
+	}
 }
 
 $scope.toggleTab = function(tab){
@@ -507,7 +487,7 @@ $scope.toggleTab = function(tab){
 		$scope.showFinalLook = true;
 	}
 	else if(tab===8){
-		$scope.showShoppingDetails = true;
+		$scope.showShoppingList = true;
 	}
 }
 
@@ -525,6 +505,7 @@ function resetTabs(){
 	$scope.showConceptDetails = false;
 	$scope.showProgressDetails = false;
 	$scope.showFinalLook  = false;
+	$scope.showShoppingList = false;
 }
 
 $scope.actionUsrData = function(quizId,action){

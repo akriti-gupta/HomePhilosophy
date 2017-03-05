@@ -43,6 +43,27 @@ function getQuiz(conn,quizIds,cb){
 	});
 }
 
+
+function getCustQuizDtls(conn,quizIds,cb){
+	var quizData = [];
+	var qry_qz = 'select q.* from cust_quiz_detail q where q.quizId in ('+quizIds+')';
+	var options = {sql:qry_qz,nestTables: true};
+
+	conn.query(options, function(err, quizInfo, fields){
+		if(err){
+			console.log('Error in fetching quiz info in getQuiz'+err);
+			conn.release();
+			cb(err,null)
+		}
+		else if(quizInfo.length>0){
+			for(var i =0; i<quizInfo.length;i++){
+				quizData.push(quizInfo[i].q);
+			}
+		}
+		cb(null,quizData);
+	});
+}
+
 function getResult(conn,quizIds,cb){
 	var resultData = [];
 	var qry_qz_result = 'select r.* from cust_quiz q, cust_quiz_result r '+
@@ -133,6 +154,29 @@ function getPackage(conn,quizIds,cb){
 	});
 }
 
+function getPackageTxn(conn,quizIds,cb){
+	var paymentData = [];
+	var qry_qz_payment = 'select * from cust_quiz q left outer join cust_payment_txn p on q.quizId = p.quizId '+ 
+									 'where q.quizId in ('+quizIds+')';
+    var options = {sql:qry_qz_payment,nestTables: true};
+
+	conn.query(options, function(err, txnInfo, fields){
+		if(err){
+			console.log('Error in fetching paymentData for quiz '+err);
+			conn.release();
+			cb(err,null);
+		}
+		else if(txnInfo.length>0){
+			for(var i =0; i<txnInfo.length;i++){
+				if(txnInfo[i].p.id!=null){
+					paymentData.push(txnInfo[i].p);
+				}
+			}
+		}
+		cb(null,paymentData);
+	});
+}
+
 function getAppt(conn,quizIds,cb){
 	var apptData = [];
 	var qry_qz_appt = 'select a.* from cust_quiz q left outer join cust_appointment a on q.quizId = a.quizId '+ 
@@ -155,6 +199,29 @@ function getAppt(conn,quizIds,cb){
 		cb(null,apptData);
 	});
 }
+function getShoppingList(conn,quizIds,cb){
+	var shoppingList = [];
+	var qry_shopping_list= 'select f.* from cust_quiz q left outer join shopping_list f on q.quizId = f.quizId '+ 
+									 'where q.quizId in ('+quizIds+')';
+    var options = {sql:qry_shopping_list,nestTables: true};
+        			
+	conn.query(options, function(err, shoppingListInfo, fields){
+		if(err){
+			console.log('Error in fetching shopping list for quiz '+err);
+			conn.release();
+			cb(err,null);
+		}
+		// console.log(flookInfo);
+		else if(shoppingListInfo.length>0){
+			for(var i =0; i<shoppingListInfo.length;i++){
+				if(shoppingListInfo[i].f.id!=null){
+					shoppingList.push(shoppingListInfo[i].f);
+				}
+			}
+		}
+		cb(null,shoppingList);
+	});
+}  
 function getFinalLook(conn,quizIds,cb){
 	var finalLookData = [];
 	var qry_final_look= 'select f.* from cust_quiz q left outer join final_look f on q.quizId = f.quizId '+ 
@@ -371,7 +438,9 @@ exports.getCustProjectInfo = function(req,res,next){
 							async.apply(getPackage,conn,quizIds),
 							async.apply(getAppt,conn,quizIds),
 							async.apply(getConceptBoard,conn,quizIds),
-							async.apply(getFinalLook,conn,quizIds)
+							async.apply(getFinalLook,conn,quizIds),
+							async.apply(getShoppingList,conn,quizIds),
+							async.apply(getPackageTxn,conn,quizIds)
 						], function (err, result) {
 						     //This code will be executed after all previous queries are done (the order doesn't matter).
 						     //For example you can do another query that depends of the result of all the previous queries.
@@ -388,6 +457,8 @@ exports.getCustProjectInfo = function(req,res,next){
 			                userProjects.apptData = result[3];
 			                userProjects.firstLookData = result[4];
 			                userProjects.finalLookData = result[5];
+			                userProjects.shoppingListData = result[6];
+			                userProjects.paymentData = result[7];
 			                conn.release();
 			                res.send({'success':true,'results':userProjects});
 						});
@@ -468,7 +539,11 @@ exports.getProjectListing = function(req,res,next){
 								async.apply(getQuiz,conn,quizIds),
 								async.apply(getUser,conn,project.id),
 								async.apply(getConceptBoard,conn,quizIds),
-								async.apply(getFinalLook,conn,quizIds)
+								async.apply(getFinalLook,conn,quizIds),
+								async.apply(getShoppingList,conn,quizIds),
+								async.apply(getPackageTxn,conn,quizIds),
+								async.apply(getCustQuizDtls,conn,quizIds)
+
 							], function (err, result) {
 							    if(err){
 							     	conn.release();
@@ -487,7 +562,10 @@ exports.getProjectListing = function(req,res,next){
 				                'quizData': result[5],
 				                'userData': result[6],
 				                'conceptData': result[7],
-				            	'finalLookData': result[8]});
+				            	'finalLookData': result[8],
+				            	'shoppingList':result[9],
+				            	'paymentData': result[10],
+				            	'quizDtls':result[11]});
 				                 callback();
 							});
 						},

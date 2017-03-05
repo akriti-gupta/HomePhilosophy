@@ -33,25 +33,6 @@
 
 <div class="divider" style="border-top:2px solid #e1e1e1;padding:15px;"></div>
 
-<div class="modal" id="customerModal" tabindex="-1" role="dialog" aria-labelledby="customerModal" >
-  <div class="modal-dialog" role="document" >
-    <div class="modal-content">
-      
-      <div class="modal-header" style="border:none;">
-        <button type="button" class="close"  aria-label="Close"><span aria-hidden="true" style="padding-left">&times;</span></button>
-        <!-- data-dismiss="modal" -->
-      </div>
-          
-      <div class="modal-body comment-modal-body">
-         <p style="text-align:left">Name: Hello</p>
-         <span>Email: Hello</span>
-        
-      </div>
-    </div>
-  </div>
-</div>
-
-
 <section id="dashboard"  ng-show="showListing" ng-init="getProjectListing()">
   <div>
     <p class="fs-22px" style="margin-bottom:20px;"> Project Listing </p>
@@ -108,15 +89,15 @@
     </div>
 
     <div style="width:80%;float:right;">
-      <p class="fs-18px" style="text-align:left;">{{prjDetails.userData[0].username}}</p>
+      <p class="fs-18px" style="text-align:left;">{{prjDetails.quizDtls[0].email}}</p>
     </div>
     
-    <div style="width:20%;float:left;">
+    <div style="width:20%;float:left;" ng-if="prjDetails.apptData.length>0">
       <p class="fs-18px" style="text-align:left;"><b>Address:</b></p>
     </div>
 
-    <div style="width:80%;float:right;">
-      <p class="fs-18px" style="text-align:left;">{{prjDetails.userData[0].username}}</p>
+    <div style="width:80%;float:right;"  ng-if="prjDetails.apptData.length>0">
+      <p class="fs-18px" style="text-align:left;">{{prjDetails.apptData[0].address}}</p>
     </div>
 
     <div style="width:20%;float:left;">
@@ -124,7 +105,7 @@
     </div>
 
     <div style="width:80%;float:right;">
-      <p class="fs-18px" style="text-align:left;">{{prjDetails.userData[0].username}}</p>
+      <p class="fs-18px" style="text-align:left;">{{prjDetails.quizDtls[0].phone}}</p>
     </div>
     <div style="clear:both;"></div>
   </div>
@@ -176,6 +157,61 @@
           <div class="col-md-6 col-xs-4 admin-view-tab">Payment Pending</div>
         </div>
       </div>
+
+      <div style="padding-top:50px;text-align:center;">Details from Tell-Us-More</div>
+      <div ng-repeat="detail in prjDetails.quizDtls">
+
+        <div class="row qz-row-dsg" style="border:1px solid black;padding-bottom:0px;">
+          <div class="col-md-6 col-xs-4 admin-view-tab">Budget</div>
+          <div class="col-md-6 col-xs-4 admin-view-tab">{{detail.budget}}</div>
+        </div>
+
+        <div class="row qz-row-dsg" style="border:1px solid black;padding-bottom:0px;">
+          <div class="col-md-6 col-xs-4 admin-view-tab">Ownership</div>
+          <div class="col-md-6 col-xs-4 admin-view-tab">{{detail.ownership}}</div>
+        </div>
+
+        <div class="row qz-row-dsg" style="border:1px solid black;padding-bottom:0px;">
+          <div class="col-md-6 col-xs-4 admin-view-tab">Reason to Renovate</div>
+          <div class="col-md-6 col-xs-4 admin-view-tab">{{detail.designReason}}</div>
+        </div>
+
+        <div class="row qz-row-dsg" style="border:1px solid black;padding-bottom:0px;">
+          <div class="col-md-6 col-xs-4 admin-view-tab">Love/Hate Brands </div>
+          <div class="col-md-6 col-xs-4 admin-view-tab">{{detail.brands}}</div>
+        </div>
+
+        <div class="row qz-row-dsg" style="border:1px solid black;padding-bottom:0px;">
+          <div class="col-md-6 col-xs-4 admin-view-tab">Selected Colours </div>
+          <div class="col-md-6 col-xs-4 admin-view-tab">
+            <div style="position:relative;width:10%;margin:0 auto;">
+              <span ng-repeat="col in detail.colours">
+                <img src="{{col}}" width="100%" height="auto"/>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row qz-row-dsg" style="border:1px solid black;padding-bottom:0px;">
+          <div class="col-md-6 col-xs-4 admin-view-tab">Shares Space with </div>
+          <div class="col-md-6 col-xs-4 admin-view-tab">{{detail.spaceSharing}}</div>
+        </div>
+
+        <div class="row qz-row-dsg" style="border:1px solid black;padding-bottom:0px;">
+          <div class="col-md-6 col-xs-4 admin-view-tab">Uses Space for </div>
+          <div class="col-md-6 col-xs-4 admin-view-tab">{{detail.spaceUtility}}</div>
+        </div>
+
+        <div class="row qz-row-dsg" style="border:1px solid black;padding-bottom:0px;">
+          <div class="col-md-6 col-xs-4 admin-view-tab">Customer Email </div>
+          <div class="col-md-6 col-xs-4 admin-view-tab">{{detail.email}}</div>
+        </div>
+
+       <div class="row qz-row-dsg" style="border:1px solid black;padding-bottom:0px;">
+          <div class="col-md-6 col-xs-4 admin-view-tab">Customer Contact </div>
+          <div class="col-md-6 col-xs-4 admin-view-tab">{{detail.phone}}</div>
+        </div>
+      
 
     </div>
   </div>
@@ -279,9 +315,10 @@
 
       <div style="clear:both;"></div>
 
-      <div id="floorPlans" style="padding-top:50px;">
+      <div id="floorPlans" ng-if="appt.floorPlanFiles.length > 0" style="padding-top:50px;width:50;position:relative; margin:0 auto;">
+        <div><p class="fs-18px"><b>Floor Plan: </b></p></div>
         <div ng-repeat="plan in appt.floorPlanFiles">
-          <img ng-src="{{plan}}"/>
+          <img ng-src="{{plan}}" width="100%" height="auto"/>
         </div>
       </div>
 
@@ -290,8 +327,8 @@
 
   <div id="concept-details" class="admin-dtl-ctr" ng-show="showConceptDetails">
     <div><p class="fs-18px"><b>First Looks:</b></p></div>
-      <div class="edsg-flex-child" ng-repeat="concept in prjDetails.conceptData"> 
-        <img src="{{concept.files}}"/>
+      <div class="edsg-flex-child" ng-repeat="concept in prjDetails.conceptData" style="position:relative;width:50%;margin:0 auto;padding-bottom:20px;"> 
+        <img src="{{concept.files}}" width="100%" height="auto"/>
         <div ng-repeat = "feedback in concept.feedbackData" style="padding:10px;">
             <p class="fs-16px"><u>Client Feedback:</u></p>
             <p>{{feedback.comments}}</p>
@@ -301,8 +338,8 @@
 
   <div id="final-look" class="admin-dtl-ctr" ng-show="showFinalLook">
     <div><p class="fs-18px"><b>Final Looks:</b></p></div>
-      <div class="edsg-flex-child" ng-repeat="concept in prjDetails.finalLookData"> 
-        <img src="{{concept.files}}"/>
+      <div class="edsg-flex-child" ng-repeat="concept in prjDetails.finalLookData" style="position:relative;width:50%;margin:0 auto;padding-bottom:20px;"> 
+        <img src="{{concept.files}}" width="100%" height="auto"/>
         <div ng-repeat = "feedback in concept.feedbackData" style="padding:10px;">
             <p class="fs-16px"><u>Client Feedback:</u></p>
             <p>{{feedback.comments}}</p>
@@ -310,8 +347,12 @@
       </div>
   </div>
 
-
-
+  <div id="shopping-list" class="admin-dtl-ctr" ng-show="showShoppingList">
+    <div><p class="fs-18px"><b>Shopping List:</b></p></div>
+      <div class="edsg-flex-child" ng-repeat="list in prjDetails.shoppingList" style="position:relative;width:50%;margin:0 auto;padding-bottom:20px;"> 
+        <img src="{{list.files}}" width="100%" height="auto"/>
+      </div>
+  </div>
 
 </section>
 

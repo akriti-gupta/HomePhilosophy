@@ -41,6 +41,7 @@ module.exports = function(app){
 	app.post('/saveUserQuizDtls',userQuiz.saveUserQuizDtls);
 	app.post('/storePackage',payment.storePackage);
 	// app.post('/storePackageTxn',payment.storePackageTxn);
+	app.post('/saveQuizMiscData',userQuiz.saveQuizMiscData);
 
 	app.get('/getCustProjectInfo', userProject.getCustProjectInfo);
 	app.post('/saveAppointment',userProject.saveAppointment);

@@ -76,6 +76,84 @@ function validateFormData(){
 	return true;
 }
 
+function chkFinalPrjStatus(shoppingList, paymentInfo){
+	
+	var totalPrice=0;
+	var amountPaid = 0;
+	var finalStatus = {};
+	for(var i =0;i<paymentInfo.length;i++){
+		totalPrice = totalPrice + paymentInfo[i].totalPrice;
+		amountPaid = amountPaid + paymentInfo[i].amountPaid;
+	}
+
+	if(shoppingList.length>0){
+		if(totalPrice === amountPaid){
+			finalStatus.statusText='Project Completed. View your Shopping List/ Final Look';
+			finalStatus.linkPage='final';
+		}
+		else{
+			finalStatus.statusText='Final Look/ Shopping List is ready. Settle payment to view.';
+			finalStatus.linkPage='/reviewPayment';
+			finalStatus.modal=' ';
+			finalStatus.stage='final';
+		}
+	}
+		
+			/*if(status===0){
+				finalStatus.statusText='First Look Uploaded. Awaiting Feedback';
+				finalStatus.linkPage='getFirstLook($index)';
+					finalStatus.modal=' ';
+			}
+			else if(status===1){
+				finalStatus.statusText='Received Feedback. Final Look in Progress';
+				finalStatus.linkPage=' ';
+					finalStatus.modal=' ';
+			}*/
+			
+
+		/*else if(isFinalLook===1){
+			
+			if('feedbackData' in currConceptData){
+				finalStatus.statusText='Received Feedback. Your Final Look and Shopping List will be ready soon.';
+				finalStatus.linkPage=' ';
+				finalStatus.modal=' ';
+				finalStatus.stage=3;
+				break;
+			}
+			else{
+				finalStatus.statusText='Final Look Uploaded. Awaiting Feedback';
+				finalStatus.linkPage='';
+				finalStatus.modal=' ';
+			}
+
+
+
+			// if(status===0){
+			// 	finalStatus.statusText='Final Look Uploaded. Awaiting Feedback';
+			// 	finalStatus.linkPage='';
+			// 	finalStatus.modal=' ';
+			// }
+			// else if(status===1){
+			// 	finalStatus.statusText='Feedback Received. Your Final Look and Shopping List will be ready soon.';
+			// 	finalStatus.linkPage=' ';
+			// 	finalStatus.modal=' ';
+			// }
+			// else if(status===2){
+			// 	finalStatus.statusText='Final Look/ Shopping List is ready. Payment Pending';
+			// 	finalStatus.linkPage=' ';
+			// 	finalStatus.modal=' ';
+			// }
+			// else if(status===3){
+			// 	finalStatus.statusText='Total Payment Received. View Final Look + Shopping List';
+			// 	finalStatus.linkPage=' ';
+			// 	finalStatus.modal=' ';
+			// } 
+		}*/
+	
+	return finalStatus;
+}
+
+
 function chkFinalLookStatus(finalLook){
 	
 	for(var i =0;i<finalLook.length;i++){
@@ -294,6 +372,8 @@ function populateStatus(projectData){
  		var currConceptBoard = currRowData.firstLookData;
  		var currFeedbackData = currRowData.feedbackData;
  		var currFinalLook = currRowData.finalLookData;
+ 		var currShoppingList = currRowData.shoppingListData;
+ 		var currPaymentData = currRowData.paymentData;
  		var currQzId = currQzData.quizId;
  		var status = {};
 
@@ -301,7 +381,11 @@ function populateStatus(projectData){
 	 		if(currQzData.status>=0){
 	 			//Payment Made. Check in decreasing order from feedback to FirstLook to  appt etc
 
-	 			if(currFinalLook && currFinalLook.length>0){
+	 			if(currShoppingList && currShoppingList.length>0){
+	 				projectData[i].status = chkFinalPrjStatus(currShoppingList,currPaymentData);
+	 			}
+
+	 			else if(currFinalLook && currFinalLook.length>0){
 	 				projectData[i].status = chkFinalLookStatus(currFinalLook);
 	 			}
 
@@ -348,6 +432,8 @@ function populateStatus(projectData){
 			var relFLArr = [];
 			var relFinalLookArr = [];
 			var relFeedbackArr = [];
+			var relPaymentArr = [];
+			var relShoppingList = [];
 			var statusArr = [];
 
 			if(!($scope.hasActiveProject)){
@@ -418,6 +504,22 @@ function populateStatus(projectData){
 				}
 			} //Final Look ends
 
+			if(projectData.shoppingListData && projectData.shoppingListData.length>0){
+				for(var j= 0;j<projectData.shoppingListData.length; j++){
+					if(projectData.shoppingListData[j].quizId === currQzId){
+						relShoppingList.push(projectData.shoppingListData[j]);
+					}
+				}
+			}
+
+			if(projectData.paymentData && projectData.paymentData.length>0){
+				for(var j= 0;j<projectData.paymentData.length; j++){
+					if(projectData.paymentData[j].quizId === currQzId){
+						relPaymentArr.push(projectData.paymentData[j]);
+					}
+				}
+			}
+
 			//
 
 			/*for(var j = 0;j<relRoomArr.length; j++){
@@ -461,7 +563,7 @@ function populateStatus(projectData){
 				// 	'feedbackData':relFeedbackArr});
 
 				prjArr.push({'userData':userData,'quizData':currQzObj,'roomData':currRoomName,
-					'pkgData':relPkgArr[j],'resultData':relResultArr,'apptData':relApptArr,'firstLookData':relFLArr,'finalLookData':relFinalLookArr});
+					'pkgData':relPkgArr[j],'resultData':relResultArr,'apptData':relApptArr,'firstLookData':relFLArr,'finalLookData':relFinalLookArr,'shoppingListData':relShoppingList,'paymentData':relPaymentArr});
 		
 			}
 

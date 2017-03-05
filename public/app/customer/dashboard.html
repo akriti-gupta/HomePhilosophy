@@ -141,19 +141,12 @@
 
    			<div class="col-md-4 col-xs-4 cust-view-tab" ng-if="item.status.linkPage===' ' && item.status.modal===' '">{{item.status.statusText}}<br/></div>
 
-		    <div class="col-md-4 col-xs-4 cust-view-tab" ng-if="item.status.linkPage!=' '"><a href="#" ng-click="getFirstLook($index)">{{item.status.statusText}}</a><br/></div>
+		    <div class="col-md-4 col-xs-4 cust-view-tab" ng-if="item.status.linkPage!=' ' && item.status.stage!='final'" ><a href="#" ng-click="getFirstLook($index)">{{item.status.statusText}}</a><br/></div>
+
+
+			<div class="col-md-4 col-xs-4 cust-view-tab" ng-if="item.status.linkPage!=' ' && item.status.stage==='final'" ><a href="/reviewPayment">{{item.status.statusText}}</a><br/></div>
 
  			<div id="cal_popup" class="col-md-4 col-xs-4 cust-view-tab" ng-if="item.status.modal!=' '"><a href="#" ng-click="loadMtngData($index)" data-toggle="modal" data-target="#calendarModal" data-id="{{$index}}">{{item.status.statusText}}</a><br/></div>
-		     
-		    <!-- Div for Other Links -->
-		    <!-- <div class="col-md-3 col-xs-4 cust-view-tab" ng-if="item.isUpdModal!=1">
-		    	<a href={{item.statusLink}}>
-		    	<a href="#" ng-click="getFirstLook($index)">
-		    		{{item.updateText}}asas<br/>
-		    	</a>
-		    </div> -->
-
-
 		  </div>
 
 		<div class="qz-row-dsg" style="padding-top:20px;" ng-if="hasActiveProject">

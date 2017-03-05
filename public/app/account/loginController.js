@@ -90,6 +90,7 @@ angular.module("app")
 
 		  	$scope.fbLogin = function(){
 		  		$http.get('/auth/facebook').then(function(response){
+		  			console.log(response);
 		  		});
 		  	}
 

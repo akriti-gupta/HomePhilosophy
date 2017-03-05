@@ -16,7 +16,7 @@
 
 <div class="divider" style="border-top:2px solid #e1e1e1;padding:15px;"></div>
  
-<div  class="qz-container" ng-controller="SaveDetails as sd">
+<div  class="qz-container">
 	<div class="prg-dtl-ctr">
 		<div class="prg-wrp">
 	      <div class="progress-result">
@@ -41,36 +41,36 @@
 	      </div>
     	</div>
 
-    	<form name="detailForm" enctype="multipart/form-data" style="width:80%;margin:0 auto;padding-top:100px;" class="font-noto fs-18px">
+    	<form name="detailForm" enctype="multipart/form-data" style="width:80%;margin:0 auto;padding-top:100px;" class="font-noto fs-18px" role="form">
 	      	<div class="form-group">
 	        	<span class="fs-20px">1. How much would you like to spend on your room?</span>
 	        	<div class="radio">
   					<label>
-    					<input type="radio" name="radioBudget" id="budget1" value="option1" checked>
+    					<input type="radio" ng-model="radioBudget" name="radioBudget" id="budget1" value="$3,000 - $4,000" checked>
     					$3,000 - $4,000
   					</label>
 				</div>
 				<div class="radio">
   					<label>
-    					<input type="radio" name="radioBudget" id="budget2" value="option2" checked>
+    					<input type="radio" ng-model="radioBudget" name="radioBudget" id="budget2" value="$4,000 - $5,000" checked>
     					$4,000 - $5,000
   					</label>
 				</div>
 				<div class="radio">
   					<label>
-    					<input type="radio" name="radioBudget" id="budget3" value="option3" checked>
+    					<input type="radio" ng-model="radioBudget" name="radioBudget" id="budget3" value="$5,000 - $7,000" checked>
     					$5,000 - $7,000
   					</label>
 				</div>
 				<div class="radio">
   					<label>
-    					<input type="radio" name="radioBudget" id="budget4" value="option4" checked>
+    					<input type="radio" ng-model="radioBudget" name="radioBudget" id="budget4" value="$7,000 - $10,000" checked>
     					$7,000 - $10,000
   					</label>
 				</div>
 				<div class="radio">
   					<label>
-    					<input type="radio" name="radioBudget" id="budget5" value="option5" checked>
+    					<input type="radio" ng-model="radioBudget" name="radioBudget" id="budget5" value="I’m not on a budget" checked>
     					I’m not on a budget
   					</label>
 				</div>
@@ -79,53 +79,28 @@
 	        	<span class="fs-20px">2. Do you own or rent?</span>
 	         	<div class="radio">
   					<label>
-    					<input type="radio" name="radioAprt" id="aprtOwn" value="option1" checked>
+    					<input type="radio" ng-model="radioAprt" name="radioAprt" id="aprtOwn" value="Own my apartment" checked>
     					Own my apartment
   					</label>
 				</div>
 				<div class="radio">
   					<label>
-    					<input type="radio" name="radioAprt" id="aprtRent" value="option2" checked>
+    					<input type="radio" ng-model="radioAprt" name="radioAprt" id="aprtRent" value="Rent my apartment" checked>
     					Rent my apartment
   					</label>
 				</div>
 	      	</div>
+
 	      	<div class="form-group">
 	        	<span class="fs-20px">3. Is there a reason you would like to design your space?</span>
-	         	<div class="checkbox">
+	        	<div class="checkbox" ng-repeat="item in designReason">
   					<label>
-    					<input type="checkbox" value="">I recently relocated or am going to soon
+    					<input type="checkbox" ng-model="item.selected" >{{item.name}}
     				</label>
 				</div>
-				<div class="checkbox">
-  					<label>
-    					<input type="checkbox" value="">I want to rent/sell my place
-    				</label>
-				</div>
-				<div class="checkbox">
-  					<label>
-    					<input type="checkbox" value="">It's time for an upgrade
-    				</label>
-				</div>
-				<div class="checkbox">
-  					<label>
-    					<input type="checkbox" value="">A baby's on the way
-    				</label>
-				</div>
-				<div class="checkbox">
-  					<label>
-    					<input type="checkbox" value="">My lifestyle is changing or has changed
-    				</label>
-				</div>
-				<div class="checkbox">
-  					<label>
-    					<input type="checkbox" value="">I just feel like it
-    				</label>
-				</div>
-
 				<span>Other<input type="text" class="form-info form-control hp-form-input" id="reasonOther" name="reasonOther" ng-model="reasonOther"></span>
-
 	      	</div>
+
 	      	<div class="form-group">
 	        	<span class="fs-20px">4. What do you use your space for? i.e. living room for entertaining, bedroom for watching TV etc</span>
 	         	<textarea rows="7" cols="50" class="form-info font-sansRegular fs-16px" style="resize:none;border:1px solid #acacac;width:58%;" id="spaceUse" name="spaceUse" ng-model="spaceUse"></textarea>
@@ -133,55 +108,11 @@
 	      	</div>
 	      	<div class="form-group">
 	        	<span class="fs-20px">5. Who do you share your space with?</span>
-	         	<div class="checkbox">
-  					<label>
-    					<input type="checkbox" value="" >Just myself
-    				</label>
-				</div>
-				<div class="checkbox">
-  					<label>
-    					<input type="checkbox" value="">Partner
-    				</label>
-				</div>
-				<div class="checkbox">
-  					<label>
-    					<input type="checkbox" value="">Roommate
-    				</label>
-				</div>
-				<div class="checkbox">
-  					<label>
-    					<input type="checkbox" value="">Small children (under 5)
-    				</label>
-				</div>
-				<div class="checkbox">
-  					<label>
-    					<input type="checkbox" value="">Kids (6-18)
-    				</label>
-				</div>
-				<div class="checkbox">
-  					<label>
-    					<input type="checkbox" value="">Adult Kids(18+)
-    				</label>
-				</div>
-				<div class="checkbox">
-  					<label>
-    					<input type="checkbox" value="">Pets
-    				</label>
-				</div>
-				<div class="checkbox">
-  					<label>
-    					<input type="checkbox" value="">Parents/ In-laws
-    				</label>
-				</div>
-				<div class="checkbox">
-  					<label>
-    					<input type="checkbox" value="">Grandparents
-    				</label>
-				</div>
-				<div class="checkbox">
-  					<label>
-    					<input type="checkbox" value="">Other/ NA
-    				</label>
+
+	        	<div class="checkbox" ng-repeat="item in spcShare">
+					<label>
+						<input type="checkbox" ng-model='item.selected'>{{item.name}}
+					</label>
 				</div>
 	      	</div>
 
@@ -215,41 +146,33 @@
 				        		<div class="square" style="background-image:url('/images/neutrals.png')"></div>
 				        		<!-- <img src="images/neutrals.png" alt="reds"> -->
 				        	</a>
-				        	<!-- <a href="#" ng-click="saveColour(5)">
-				        		<div class="square" style="background:rgb(255, 204, 153);"></div>
-				        	</a> -->
-				        	
 			        	</div>
 			        </div>
 		        	<div class="row color-select">
 			        	<div class="col-sm-10 col-md-10">
-		        			<a href="#" ng-click="saveColour(6)">
+		        			<a href="#" ng-click="saveColour(5)">
 				        		<!-- <div class="square" style="background:#000;"></div> -->
 				        		<div class="square" style="background-image:url('/images/blacks.png')"></div>
 				        	</a>
-				        	<a href="#" ng-click="saveColour(7)">
+				        	<a href="#" ng-click="saveColour(6)">
 				        		<!-- <div class="square" style="background:rgb(51, 51, 51);"></div> -->
 				        		<div class="square" style="background-image:url('/images/greys.png')"></div>
 				        	</a>
-				        	<a href="#" ng-click="saveColour(8)">
+				        	<a href="#" ng-click="saveColour(7)">
 				        		<!-- <div class="square" style="background:rgb(204, 204, 204);"></div> -->
 				        		<div class="square" style="background-image:url('/images/whites.png')"></div>
 				        	</a>
-				        	<a href="#" ng-click="saveColour(9)">
+				        	<a href="#" ng-click="saveColour(8)">
 				        		<!-- <div class="square" style="background:rgb(0, 0, 102);"></div> -->
 				        		<div class="square" style="background-image:url('/images/blues.png')"></div>
 				        	</a>
-				        	<!-- <a href="#" ng-click="saveColour(10)">
-				        		<div class="square" style="background:rgb(102, 0, 51);"></div>
-				        	</a> -->
-				        	
 			        	</div>
 			      	</div>
 			    </div>
 
 	      	<div class="form-group">
 	        	<span class="fs-20px">8. Any other details you’d like to share with your designers?</span> <br/>
-	         	 <textarea rows="7" cols="50" class="form-info font-sansRegular fs-16px" style="resize:none;border:1px solid #acacac;width:58%;" id="extraInfo" name="password" ng-model="extrainfo"></textarea>
+	         	 <textarea rows="7" cols="50" class="form-info font-sansRegular fs-16px" style="resize:none;border:1px solid #acacac;width:58%;" id="extraInfo" ng-model="extraInfo"></textarea>
 	      	</div>
 
 	      	<div class="form-group" style="margin-bottom:0px;">
@@ -317,13 +240,13 @@
 			  	<div class="form-group" style="margin:10px 0px;">
 				    <label for="inputEmail" class="col-sm-2 control-label ">Email</label>
 				    <div class="col-sm-10">
-				      <input type="email" class="form-control hp-form-input" id="inputEmail" placeholder="Email" >
+				      <input type="email" class="form-control hp-form-input" id="inputEmail" placeholder="Email" ng-model="inputEmail">
 				    </div>
 			  	</div>
 				<div class="form-group"  style="margin:10px 0px;">
 			    	<label for="inputPhone" class="col-sm-2 control-label">Tel.</label>
 			    	<div class="col-sm-10">
-			      		<input type="text" class="form-control hp-form-input" id="inputPhone" >
+			      		<input type="text" class="form-control hp-form-input" id="inputPhone" ng-model="inputPhone">
 			    	</div>
   				</div>
 	      	</div>
