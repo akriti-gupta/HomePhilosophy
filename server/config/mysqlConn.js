@@ -1,5 +1,5 @@
 var mysql = require('mysql');
-var env = process.env.NODE = process.env.NODE || 'development';
+var env = process.env.NODE = process.env.NODE || 'production';
 var config = require('./config')[env];
 
 // var pool = mysql.createPool({

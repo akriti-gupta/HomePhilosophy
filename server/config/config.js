@@ -13,7 +13,7 @@ module.exports = {
 		//Heroku details.
 		rootPath: rootPath,
 		port: process.env.PORT || 8006,
-		db: 'mysql://be86c3a02b9721:629adc5a@us-cdbr-iron-east-04.cleardb.net/heroku_41653343a548b2a?reconnect=true'
+		db: 'mysql://b20378526fd3ee:a50a903c@us-cdbr-iron-east-03.cleardb.net/heroku_8dae569721f1b75?reconnect=true'
 	},
 	production:{
 		rootPath: rootPath,

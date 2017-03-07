@@ -1,8 +1,37 @@
 angular.module("app")
-	.controller("LoginController",function($scope,$location, $http, mvIdentity, mvNotifier, mvAuth, mvUserQuiz, mvEmail, quizResult){
+	.controller("LoginController",function($scope,$location, $http,$routeParams, mvIdentity, mvNotifier, mvAuth, mvUserQuiz, mvEmail, quizResult){
 			
 			$scope.identity =mvIdentity;
-			$scope.showName = true;			
+			$scope.showName = true;		
+
+			$scope.initLogin = function(){
+
+				var isFBLoggedIn = $routeParams.fb;
+
+				if(isFBLoggedIn){
+					var result = window.localStorage.getItem('result');
+					var userSelectionInfo = window.localStorage.getItem('userSelectionInfo');
+					window.localStorage.removeItem('result');
+					window.localStorage.removeItem('userSelectionInfo');
+					if(result.length>0 && userSelectionInfo.length>0 ){
+						mvUserQuiz.saveUserData(userSelectionInfo, result).then(function(userQuiz){
+		  					quizResult.setUserCurrQuiz(userQuiz.data.quizId);
+		  					mvNotifier.notify('Login success!');
+		  					console.log(userSelectionInfo.quizImgSelected);
+	  						if(userSelectionInfo.quizImgSelected.length===1){
+	  							$location.path('/tell-us-more');
+	  						}
+	  						$location.path('/style-quiz');
+		  					}, function(reason){
+		  							mvNotifier.error(reason);
+		  				});
+					}
+					else{
+						$location.path('/');
+					}
+				}
+			}
+
 		  	$scope.signin= function(username, password){
 		  		mvAuth.authenticateUser(username,password).then(function(success){
 		  			if(success){
@@ -41,6 +70,45 @@ angular.module("app")
 		  			}
 		  		})
 		  	}
+
+	  		$scope.fbLogin = function(){
+				console.log(quizResult.getStyle());
+				
+				var result = quizResult.getStyle();
+		  		var userSelectionInfo = quizResult.getCustSelections();
+		  					
+				window.localStorage.setItem('result',result);
+				window.localStorage.setItem('userSelectionInfo',userSelectionInfo);
+				
+					
+					console.log(window.localStorage.getItem('quizResult'));
+				
+
+		  // 		mvUserQuiz.getExistingPrjs().then(function(projects){
+				// 	if(projects.length===0){
+
+				// 	}
+				// });
+				// 		console.log(quizResult.getStyle());
+				// 		if(quizResult.getStyle().length>=1){
+		  // 					var result = quizResult.getStyle();
+		  // 					var userSelectionInfo = quizResult.getCustSelections();
+		  // 					mvUserQuiz.saveUserData(userSelectionInfo, result).then(function(userQuiz){
+		  // 						quizResult.setUserCurrQuiz(userQuiz.data.quizId);
+		  // 						mvNotifier.notify('Login success!');
+		  // 						if(userSelectionInfo.quizImgSelected.length===1){
+		  // 							$location.path('/tell-us-more');
+		  // 						}
+		  // 						$location.path('/style-quiz');
+		  // 					}, function(reason){
+		  // 							mvNotifier.error(reason);
+		  // 					});
+		  // 				}
+		  // 				else{
+		  // 					$location.path('/dashboard');
+		  // 				}
+		  	}
+
 
 		  	$scope.signout = function(){
 		  		mvAuth.logoutUser().then(function(success){

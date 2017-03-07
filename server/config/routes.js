@@ -74,19 +74,13 @@ module.exports = function(app){
 
 
 // route for facebook authentication and login
-	 app.get('/auth/facebook',passport.authenticate('facebook'),function(req,res){
-	 	console.log('In auth');
-	 	console.log(req);
-	 	console.log('11111111111111111111');
-	 	console.log(res);
-	 });
+	 app.get('/auth/facebook',passport.authenticate('facebook'),function(req,res){});
 
 // handle the callback after facebook has authenticated the user
 	app.get('/auth/facebook/callback',
 		passport.authenticate('facebook', {failureRedirect: '/' }),
 		function(req, res) {
-			console.log('in cb');
-			res.redirect('/style-quiz');
+			res.redirect('/login?fb=true');
 		});
 
 

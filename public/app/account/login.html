@@ -15,7 +15,7 @@
     </div>
 </header>
 
-<div id="login-section">
+<div id="login-section" ng-init="initLogin()">
   <div class="login-ctr">
     <p style="background-color:#000;padding-bottom:10px;height:1.5em;">&nbsp;</p>
     <p class="txt-upper fs-responsive-lg font-playfair">Sign Up to see Results</p>
@@ -24,8 +24,8 @@
     <p ng-show="showName" class="font-sansRegular fs-responsive-sml" style="color:rgb(112, 112, 112);">Already have an account? <a href="#" class="col-lightcyan" ng-click="showLogin()">Sign In </a></p>
 
     <div style="text-align:center;padding-top:20px;">
-      <a target="_self" href="/auth/facebook">
-        <button class="btn btn-primary btn-fb" ng-click="fbLogin()"><i style="font-size:22px" class="fa">&#xf09a;</i>
+      <a target="_self" href="/auth/facebook" ng-click="fbLogin()">
+        <button class="btn btn-primary btn-fb"><i style="font-size:22px" class="fa">&#xf09a;</i>
          <!-- ng-click="fbLogin()" -->
        <span style="padding-left:20px;">Sign Up with Facebook</span>
        </button>

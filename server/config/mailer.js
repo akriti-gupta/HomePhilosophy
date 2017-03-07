@@ -3,7 +3,7 @@ var config = require('./config'),
 	templatesDir = config.rootPath +'/views/mailer',
     EmailTemplate = require('email-templates').EmailTemplate;
 
-let transporter = nodemailer.createTransport({
+var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: config.mailer.auth.user,
