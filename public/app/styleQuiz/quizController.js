@@ -65,9 +65,6 @@ angular.module("app")
 
 
 $scope.angularGridOptions;
-
-console.log(custViewSvc.getRequester());
-
 $scope.pageRequester=custViewSvc.getRequester();
 
 $scope.checkProjects = function(){
@@ -1081,17 +1078,9 @@ $scope.gridWidth=300;
 			$scope.pagenum = 0;		
 			$scope.showDesignStyle = true;
 			angular.element('#quizModal').modal('hide');
+
 		}
-
-		
 	}
-
-	
-	
-
-	// $scope.refresh = function(){
-	//     angularGridInstance.gallerypin.refresh();
- //    }
 
 	$scope.computeStyle = function(){
 		//initialising scorecards of each style to 0
@@ -1218,12 +1207,9 @@ $scope.gridWidth=300;
 		}
 
 		$scope.setBoard(prefStyle[0]);
-		// if(!mvIdentity.isAuthenticated()){
-			// console.log('Storing style in svc before going to login, to store: '+$scope.userStyle);
-
-			//To store pinterest image and comments
-			quizResult.storeUserQuizInfo({"roomSelected":$scope.selectedRoom,"quizImgSelected":$scope.selectedImages});
-			quizResult.storeStyle($scope.userStyle,$scope.board);
+		//To store pinterest image and comments
+		quizResult.storeUserQuizInfo({"roomSelected":$scope.selectedRoom,"quizImgSelected":$scope.selectedImages});
+		quizResult.storeStyle($scope.userStyle,$scope.board);
 	}
 
 	$scope.setBoard = function(styleResult){
@@ -1277,6 +1263,8 @@ $scope.gridWidth=300;
 	}
 
 	$scope.saveSelection = function (imageId,roomName,roomDispName) {
+
+		
 		
 		if($scope.pagenum==1){ // Allow multiple room selections
 			
@@ -1313,6 +1301,34 @@ $scope.gridWidth=300;
 			if($scope.pagenum!=7)
 				$scope.nextPage();
 		}
+	}
+
+	$scope.saveKnownStylImg = function(style){
+		$scope.selectedImages.push(style.image_id);
+		quizResult.storeUserQuizInfo({"roomSelected":$scope.selectedRoom,"quizImgSelected":$scope.selectedImages});
+
+
+		var userStyle = [{id:style.image_id, title: null, style: style.image_name,desc: style.image_desc,
+						image: style.image_style,value:100}];
+		quizResult.storeStyle(userStyle,null);
+
+		if(mvIdentity.isAuthenticated()){
+			var result = quizResult.getStyle();
+			var userSelectionInfo = quizResult.getCustSelections();
+
+			console.log('$scope.showResult is: '+$scope.showResult);
+			mvUserQuiz.saveUserData(userSelectionInfo, result).then(function(userQuiz){
+				$scope.showResult = true;
+					quizResult.setUserCurrQuiz(userQuiz.data.quizId);
+					$location.path('/tell-us-more');
+				}, function(reason){
+					console.log(reason);
+				});
+		}
+		else{
+			$location.path('/login');
+		}
+			
 	}
 
 	$scope.prev = function(){
@@ -1377,8 +1393,8 @@ $scope.gridWidth=300;
 				$scope.selRoomNamesArr.push($scope.selectedRoom[i].room_disp_name);
 			}
 		}
-		console.log($scope.selectedRoom);
-		console.log($scope.selRoomNamesArr);
+		// console.log($scope.selectedRoom);
+		// console.log($scope.selRoomNamesArr);
 	}
 
 	$scope.isActive = function(index){

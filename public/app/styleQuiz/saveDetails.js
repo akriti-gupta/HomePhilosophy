@@ -1,5 +1,5 @@
 angular.module('app')
-    .controller('SaveDetails',function(Upload,$window,$scope,$location,payment,mvUpload,quizResult,mvUserQuiz){
+    .controller('SaveDetails',function($scope,$location,payment,mvUpload,quizResult,mvUserQuiz){
 
   $scope.url ="";
   $scope.pendingFilesArr =[];
@@ -44,6 +44,11 @@ angular.module('app')
                   {id:6,name:'I just feel like it',selected:false}
                   ];
   $scope.reasonOther=' ';
+
+  
+  if(quizResult.getCustSelections().length===0){
+    $location.path('/');
+  }
 
   function validateFormData(){
     angular.forEach($scope.designReason, function(reason) {
@@ -141,7 +146,6 @@ angular.module('app')
           reason = reason +','+$scope.reasonOther;
         }
 
-        console.log(selOwnership);
         var data={budget:selectedBudget,
                   ownership:selOwnership,
                   designReason:reason,

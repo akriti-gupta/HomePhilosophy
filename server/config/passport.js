@@ -44,12 +44,10 @@ module.exports = function(){
         clientID        : '118647685254312',
         clientSecret    : '00b53f5364ad582f67c1ba5d7e269acd',
         callbackURL     : 'http://localhost:8006/auth/facebook/callback'
-
     },
 
     // facebook will send back the token and profile
     function(token, refreshToken, profile, done) {
-
         // asynchronous
         process.nextTick(function() {
 
@@ -62,34 +60,33 @@ module.exports = function(){
                     return(err, false);
                 }
                 if(conn){
-                    conn.query('Select * from user where id = '+conn.escape(profile.id), function(err, results, fields){
+                    conn.query('Select * from user where fbId = '+conn.escape(profile.id), function(err, results, fields){
                         if(err){
                            conn.release();
                             return done(null, false); 
                         }
                         if(results && results.length > 0){
                             conn.release();
+                            console.log('Found');
                             return done(null,results[0]);
                         }
                          else {
-                            // if there is no user found with that facebook id, create them
-                            /*var newUser = new User();
-                 
-                            // set all of the facebook information in our user model
-                            newUser.fb.id    = profile.id; // set the users facebook id                 
-                            newUser.fb.access_token = access_token; // we will save the token that facebook provides to the user                    
-                            newUser.fb.firstName  = profile.name.givenName;
-                            newUser.fb.lastName = profile.name.familyName; // look at the passport user profile to see how names are returned
-                            newUser.fb.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
-                 
-                            // save our user to the database
-                            newUser.save(function(err) {
-                              if (err)
-                                throw err;
-                 
-                              // if successful, return the new user
-                              return done(null, newUser);
-                            });*/
+                            console.log('Create a new user for: ');
+                            console.log(profile);
+                            var userData = {fbId:profile.id, firstname: profile.displayName}
+                           
+                            conn.query('insert into user set ?',userData, function(err, results, fields){
+                                if(err){
+                                    console.log('Error in inserting user data from fb '+err);
+                                    conn.release();
+                                    return done(err,profile);
+                                }
+                                else{
+                                    console.log(results);
+                                    console.log(fields);
+                                    return done(null,false)
+                                }
+                            });
                          } 
                        
                     });

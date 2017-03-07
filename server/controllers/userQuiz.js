@@ -17,7 +17,6 @@ exports.createUserQuiz = function(req,res,next){
 					conn.release();
 					res.send({reason:err.toString()});
 				}
-				console.log('results len is: '+results.length);
 				if(results.length>0){
 					var lastStatus = results[0].status;
 					if(lastStatus===-1){
@@ -67,6 +66,8 @@ exports.saveUserQuizDtls = function(req,res,next){
 	var userImgData = [];
 	var startIndex = 0;
 
+console.log(quizDtls);
+
 	if(quizDtls.length>0){
 		for(var i =0; i<quizDtls.length;i++){
 			var currResultArr = [quizId,quizDtls[i].value,quizDtls[i].id];
@@ -83,7 +84,13 @@ exports.saveUserQuizDtls = function(req,res,next){
 	}
 	if(userSelectionData!=null && userSelectionData.quizImgSelected!=null
 								 && userSelectionData.quizImgSelected.length>0){
-		var qid = 1;
+		var qid;
+		if(userSelectionData.quizImgSelected.length===1){
+			qid=0;
+		}
+		else{
+			qid = 1;
+		}
 
 		//TODO: Save Pinterest Images in Another Array.
 		for(var i=startIndex;i<userSelectionData.quizImgSelected.length;i++,qid++){

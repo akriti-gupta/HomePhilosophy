@@ -687,10 +687,8 @@ exports.saveAppointment = function(req,res,next){
 
 exports.modifyUsrAppt = function(req,res,next){
 	var data = req.body.data;
-	console.log(data);
 	var action = data.action;
 	var updData =[data.status,new Date(),data.quizId];
-	//var updData =[data.status,data.quizId];
 	
 	var qry_upd_apt;
 
@@ -701,8 +699,6 @@ exports.modifyUsrAppt = function(req,res,next){
 	else if(action===2){
 		qry_upd_apt='update cust_appointment set floorPlanStatus = ?,updated_at=? where quizId=?';
 	}
-	console.log(updData);
-	console.log(qry_upd_apt);
 	mysqlConn.getConnection(function(err,conn){
 		if(err){
 			console.log('Err in fetching mysql conn');

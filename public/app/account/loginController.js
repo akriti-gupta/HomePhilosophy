@@ -17,12 +17,14 @@ angular.module("app")
 							});
 
 			  				if(quizResult.getStyle().length>=1){
-			  					// saveQuizInfo();
 			  					var result = quizResult.getStyle();
 			  					var userSelectionInfo = quizResult.getCustSelections();
 			  					mvUserQuiz.saveUserData(userSelectionInfo, result).then(function(userQuiz){
 			  						quizResult.setUserCurrQuiz(userQuiz.data.quizId);
 			  						mvNotifier.notify('Login success!');
+			  						if(userSelectionInfo.quizImgSelected.length===1){
+			  							$location.path('/tell-us-more');
+			  						}
 			  						$location.path('/style-quiz');
 			  					}, function(reason){
 			  							mvNotifier.error(reason);
@@ -77,20 +79,14 @@ angular.module("app")
 		  			}
 		  			mvEmail.sendEmail().then(function(success){
 			  				if(success)
-				  				console.log('Mail sent');
+				  				mvNotifier.notify('Mail sent');
 				  			else
-				  				console.log('Mail not sent');
+				  				mvNotifier.notify('Mail not sent');
 
 			  		});
 
 		  		}, function(reason){
 		  			mvNotifier.error(reason);
-		  		});
-		  	}
-
-		  	$scope.fbLogin = function(){
-		  		$http.get('/auth/facebook').then(function(response){
-		  			console.log(response);
 		  		});
 		  	}
 

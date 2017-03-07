@@ -47,12 +47,56 @@
 	</div>
 </header>
 
+<div class="modal" id="firstLookModal" 
+						aria-labelledby="firstLookModal">
+		<!-- <div class="modal-dialog" style="max-width:690px;"> -->
+		<div class="modal-dialog">
+        	<div class="modal-content">
+				<div class="modal-body">
+					<div class="content">
+  						<div class="concept-center">
+    						<div>
+      							<div class="slide"><img data-lazy="images/firstLooks/3.jpg" width="100%"/></div>
+    						</div>
+
+    						<div>
+      							<div class="slide"><img data-lazy="images/firstLooks/scandi.jpg" width="100%"/></div>
+        					</div>
+						</div>
+    				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<script>
+$('.concept-center').slick({  
+	  lazyLoad: 'progressive',
+	  infinite: false,
+	  
+	  dots: false,
+	  // variableWidth: true,
+
+	  
+	  responsive: [
+	    {
+	      breakpoint: 1000,
+	      settings: {
+	        focusOnSelect: false
+	      }
+	    }
+	  ]
+	});
+
+
+</script>
+
 <section style="background-color:#f9f9f9;">
 <div class="faq-ctr"><div style="margin-bottom:20px;"><b><u>ABOUT THE SERVICE</u></b></div>
 
 <button class="accordion">What is a First look? What does a 2D Board look like?</button>
 <div class="faq">
-  <span>A <a href="#">First Look</a> is a customized concept board with real life items that suit your space, style and fit your budget. It provides you a 2D insight into how the space will look with all individual items together, all measured to fit accurately into your home. You can view these boards at anytime via your account on our website.<br/><a href="#"><u>Your final 2D room board will be like this.</u></a></span>
+  <span>A <a href="#">First Look</a> is a customized concept board with real life items that suit your space, style and fit your budget. It provides you a 2D insight into how the space will look with all individual items together, all measured to fit accurately into your home. You can view these boards at anytime via your account on our website.<br/><a href="#" data-toggle="modal" data-target="#firstLookModal"><u>Your final 2D room board will be like this.</u></a></span>
 </div>
 
 <button class="accordion">Why do you only provide a shopping list?</button>
@@ -90,6 +134,20 @@ If you have chosen the option of a Buy For Me, we will inform you the approximat
 We are excited to meet you before starting on your project, and always available via phone or email!
 </span>
 </div>
+
+<button class="accordion">What does Accessories Selection include?</button>
+<div class="faq">
+  <span>Accessories can totally make or break a space, so we spend a great deal of time finding little additions that complete your room. These could include a fabulous rug, cool shelves, lampshades, curtains, posters- basically the icing on the cake.
+</span>
+</div>
+
+<button class="accordion">How does the Meet and Measure work?</button>
+<div class="faq">
+  <span>hrough your account, once payment is made, we provide you a calendar option to schedule a meeting at your new place. During which, apart from taking measurements and making notes of your space, we also have a quick chat about any specific preferences you may have for the design of your space. Our meeting will typically be between 15-30minutes depending on the size and number of rooms we are transforming! 
+</span>
+</div>
+
+
 </div>
 </section>
 
