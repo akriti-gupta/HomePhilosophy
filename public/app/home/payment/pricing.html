@@ -41,7 +41,10 @@
 	    		<span class="caret"></span>
 	    	</a>
 			<ul class="dropdown-menu" style="min-width:0px;">
-				<li><a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a></li>
+				
+				<li ng-if="identity.currentUser.role==='admin'"><a style="font-family:Montserrat-Regular;font-size:13px;" href="/admin/users">MY ACCOUNT</a></li>
+				<li ng-if="identity.currentUser.role!='admin'"><a style="font-family:Montserrat-Regular;font-size:13px;" href="/dashboard">MY ACCOUNT</a></li>
+				<li style="padding-top:10px;"><a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a></li>
 	   		</ul>
 		</div> 
 	</div>

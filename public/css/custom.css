@@ -407,17 +407,13 @@ button:focus {outline:0;}
 .submenu-list li:nth-child(2){
    margin-bottom:25px;
 }
-.dropdown-menu{
-  left:inherit;
-  right: 0px;
-}
 
 .dropdown-menu li a:hover{
   background-color: #fff;
   cursor: pointer;
   color: #64C6BE;
 }
-.nav-login{
+.nav-login,.nav-login-usr{
   position: absolute;
   top:65%;
   /*right: 30px;*/

@@ -35,12 +35,15 @@
 	    	<p style="text-align: right; padding-right: 85px;font-family:Montserrat-Regular;;font-size:12px;letter-spacing:1px;color:rgb(161,161,161);"><a href = "/login">SIGN IN</a></p>
 		</div>
 
-	    <div class="dropdown nav-login" style="padding-top:25px;" ng-controller="LoginController" ng-show="identity.isAuthenticated()">
+	    <div class="dropdown nav-login-usr" style="padding-top:25px;" ng-controller="LoginController" ng-show="identity.isAuthenticated()">
 	    	<a href="" data-toggle="dropdown" >{{identity.currentUser.firstname}}
 	    		<span class="caret"></span>
 	    	</a>
 			<ul class="dropdown-menu" style="min-width:0px;">
-				<li><a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a></li>
+				
+				<li ng-if="identity.currentUser.role==='admin'"><a style="font-family:Montserrat-Regular;font-size:13px;" href="/admin/users">MY ACCOUNT</a></li>
+				<li ng-if="identity.currentUser.role!='admin'"><a style="font-family:Montserrat-Regular;font-size:13px;" href="/dashboard">MY ACCOUNT</a></li>
+				<li style="padding-top:10px;"><a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a></li>
 	   		</ul>
 		</div> 
 	</div>
