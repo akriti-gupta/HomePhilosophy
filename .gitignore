@@ -6,6 +6,5 @@ public/images.zip
 bower_components/*
 customer_uploads/*
 public/customer_uploads/*
-public/uploads/*
 uploads/*
 server/config/upload.js.bkup.js

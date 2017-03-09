@@ -91,6 +91,37 @@
 
 
 
+<form action="https://sandbox.smoovpay.com/access" method="post" target="smoovpay" >
+<!-- For actual LIVE account, use https://secure.smoovpay.com/access -->
+    <input type="hidden" name="version" value="2.0" />
+    <input type="hidden" name="action" value="pay" />
+    <input type="hidden" name="merchant" value="rashi@homephilosophy.com.sg" />
+    <input type="hidden" name="ref_id" value="" />
+    <input type="hidden" name="item_name_1" value="item 1" />
+    <input type="hidden" name="item_description_1" value="Description for item 1" />
+    <!-- <input type="hidden" name="item_quantity_1" value="1" />
+    <input type="hidden" name="item_amount_1" value="1.00" />
+    <input type="hidden" name="item_name_2" value="item 2" />
+    <input type="hidden" name="item_description_2" value="Description for item 2" />
+    <input type="hidden" name="item_quantity_2" value="1" />
+    <input type="hidden" name="item_amount_2" value="1.00" />
+     --><!--(Optional) input type="hidden" name="delivery_charge" value="0.00" />-->
+    <!--(Optional) input type="hidden" name="tax_amount" value="0.00" />-->
+    <!--(Optional) input type="hidden" name="tax_percentage " value="8.00" />-->
+    <!--(Optional) input type="hidden" name="fulfilled_date_time " value="2016-05-05 22:22" />-->
+    <input type="hidden" name="currency" value="SGD" />
+    <input type="hidden" name="total_amount" value="200.00" />
+    <input type="hidden" name="success_url" value="http://localhost:8006/dashboard" />
+    <input type="hidden" name="cancel_url" value="http://localhost:8006/pricing" />
+    <!--(Optional)<input type="hidden" name="str_url" value="http://www.yourweb.com/StrHandler" />-->
+    <input type="hidden" name="signature" value="Replace with your Hashed Signature*" />
+    <input type="hidden" name="signature_algorithm" value="sha1" />
+    <input type="image" src="https://www.smoovpay.com/img/btn_smoovpay_v1.png" name="submit" alt="SmoovPay!" />
+</form>
+
+
+
+
 	</div>
 </section>
 

@@ -428,8 +428,8 @@ $scope.addFileToUploadQ = function(element) {
 }
 
 $scope.removeFileFromQ = function(index){
-      var mstrFileArrIdx = $scope.pendingDropFiles[index].mainArrIndex;
-      $scope.pendingDropFiles.splice(index,1);
+      var mstrFileArrIdx = $scope.pendingFilesArr[index].mainArrIndex;
+      $scope.pendingFilesArr.splice(index,1);
       $scope.fileArr.splice(mstrFileArrIdx,1);
 }
 

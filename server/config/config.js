@@ -21,8 +21,8 @@ module.exports = {
 	},
 	mailer: {
     	auth: {
-      		user: 'guptaakriti83@gmail.com',
-      		pass: 'Indi$Singa',
+      		user: 'hello@homephilosophy.com.sg',
+      		pass: 'erushierushi'
     	},
     defaultFromAddress: 'Home Philosophy <guptaakriti83@gmail.com>'
   }

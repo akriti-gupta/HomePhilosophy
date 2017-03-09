@@ -4,7 +4,9 @@ var config = require('./config'),
     EmailTemplate = require('email-templates').EmailTemplate;
 
 var transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.zoho.com',
+    secureConnection: false,
+    port: 587,
     auth: {
         user: config.mailer.auth.user,
         pass: config.mailer.auth.pass
@@ -22,7 +24,7 @@ var transporter = nodemailer.createTransport({
 
 
 var mailOptions = {
-    from: '"Akriti" <akriti.pratap@gmail.com>', // sender address
+    from: '"HomePhilosophy" <hello@homephilosophy.com.sg>', // sender address
     to: 'guptaakriti83@gmail.com', // list of receivers
     subject: 'Hello from HP', // Subject line
     text: 'Hello From HomePhilosophy', // plain text body
