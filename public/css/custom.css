@@ -407,6 +407,10 @@ button:focus {outline:0;}
 .submenu-list li:nth-child(2){
    margin-bottom:25px;
 }
+.dropdown-menu{
+  left:inherit;
+  right: 0px;
+}
 
 .dropdown-menu li a:hover{
   background-color: #fff;
@@ -419,6 +423,14 @@ button:focus {outline:0;}
   /*right: 30px;*/
   left:89.5%;
 }
+
+.nav-login-usr{
+  position: absolute;
+  top:65%;
+  right: 5px;
+  
+}
+
 .img2{
     display: none;
   }

@@ -4,9 +4,12 @@
 
   <div id="hp-nav">
       <ul class="topnav">
-          <li class="menu-list">
-            <a href="/about-us">How it works</a>
-         </li>
+        <li>
+              <a href="/style-quiz" id="start-quiz">
+                  <button type="button" class="btn-start-quiz btn-topnav font-montserrat txt-upper col-lightcyan fs-14px">Get Started</button>
+              </a>
+          </li>
+          <li><a href="/about-us">How it works</a></li>
       <li><a href="/pricing">Pricing</a></li>
           <li><a href="/portfolio" id="portfolio-link">Portfolio</a></li>
           <li><a href="/luxury-spaces">Luxury spaces</a></li>
@@ -33,7 +36,7 @@
         <p style="text-align: right; padding-right: 85px;font-family:Montserrat-Regular;;font-size:12px;letter-spacing:1px;color:rgb(161,161,161);"><a href = "/login">SIGN IN</a></p>
     </div>
 
-      <div class="dropdown nav-login" style="padding-top:25px;" ng-controller="LoginController" ng-show="identity.isAuthenticated()">
+      <div class="dropdown nav-login-usr" style="padding-top:25px;" ng-controller="LoginController" ng-show="identity.isAuthenticated()">
         <a href="" data-toggle="dropdown" >{{identity.currentUser.firstname}}
           <span class="caret"></span>
         </a>
