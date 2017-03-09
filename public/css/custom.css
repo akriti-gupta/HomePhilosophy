@@ -368,7 +368,10 @@ button:focus {outline:0;}
   margin: 0 18px;
 }
 
-.topnav li:nth-child(7){
+.topnav li:nth-child(1){
+  display: none;
+}
+.topnav li:nth-child(8){
   display: none;
 }
 
@@ -416,6 +419,12 @@ button:focus {outline:0;}
   /*right: 30px;*/
   left:89.5%;
 }
+.img2{
+    display: none;
+  }
+.img1{
+    display: block;
+  }
 
 @media screen and (max-width: 1280px) {
     .topnav li {
@@ -447,6 +456,13 @@ button:focus {outline:0;}
 
 /* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens */
 @media screen and (max-width:980px) {
+
+  .img2{
+    display: block;
+  }
+  .img1{
+    display: none;
+  }
    #hp-nav {
         margin: 0px;
     }
@@ -502,10 +518,10 @@ button:focus {outline:0;}
         border-bottom: 1px solid #64C6BE;
         padding-top:0px;
     } 
-    #hp-nav ul.responsive li:nth-child(7){
+    #hp-nav ul.responsive li:nth-child(8){
         border-bottom: none;
     }
-    #hp-nav ul.responsive li:nth-child(8){
+    #hp-nav ul.responsive li:nth-child(9){
         /*border-bottom: none;*/
         display: none;
     }   
@@ -1384,7 +1400,7 @@ div.faq.show {
 }
 #contactus{
   height:800px;
-  background-image:url('/images/contactbg2.png');
+  background-image:url('/images/contactbg2-min.png');
   background-size: cover;
   background-position: 0 -20px;
   position: relative;

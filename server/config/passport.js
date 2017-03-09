@@ -43,7 +43,7 @@ module.exports = function(){
         // pull in our app id and secret from our auth.js file
         clientID        : '118647685254312',
         clientSecret    : '00b53f5364ad582f67c1ba5d7e269acd',
-        callbackURL     : 'http://localhost:8006/auth/facebook/callback'
+        callbackURL     : 'http://homephilosophy.com.sg/auth/facebook/callback'
     },
 
     // facebook will send back the token and profile

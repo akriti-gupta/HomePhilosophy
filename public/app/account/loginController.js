@@ -9,19 +9,23 @@ angular.module("app")
 				var isFBLoggedIn = $routeParams.fb;
 
 				if(isFBLoggedIn){
-					var result = window.localStorage.getItem('result');
-					var userSelectionInfo = window.localStorage.getItem('userSelectionInfo');
+					var result = JSON.parse(window.localStorage.getItem('result'));
+					var userSelectionInfo = JSON.parse(window.localStorage.getItem('userSelectionInfo'));
+					quizResult.storeStyle(result);
+					quizResult.storeUserQuizInfo(userSelectionInfo);
 					window.localStorage.removeItem('result');
 					window.localStorage.removeItem('userSelectionInfo');
-					if(result.length>0 && userSelectionInfo.length>0 ){
+
+					if(result.length>0 ){
 						mvUserQuiz.saveUserData(userSelectionInfo, result).then(function(userQuiz){
 		  					quizResult.setUserCurrQuiz(userQuiz.data.quizId);
 		  					mvNotifier.notify('Login success!');
-		  					console.log(userSelectionInfo.quizImgSelected);
 	  						if(userSelectionInfo.quizImgSelected.length===1){
 	  							$location.path('/tell-us-more');
 	  						}
-	  						$location.path('/style-quiz');
+	  						else{
+	  							$location.path('/style-quiz');
+	  						}
 		  					}, function(reason){
 		  							mvNotifier.error(reason);
 		  				});
@@ -72,41 +76,11 @@ angular.module("app")
 		  	}
 
 	  		$scope.fbLogin = function(){
-				console.log(quizResult.getStyle());
-				
 				var result = quizResult.getStyle();
 		  		var userSelectionInfo = quizResult.getCustSelections();
 		  					
-				window.localStorage.setItem('result',result);
-				window.localStorage.setItem('userSelectionInfo',userSelectionInfo);
-				
-					
-					console.log(window.localStorage.getItem('quizResult'));
-				
-
-		  // 		mvUserQuiz.getExistingPrjs().then(function(projects){
-				// 	if(projects.length===0){
-
-				// 	}
-				// });
-				// 		console.log(quizResult.getStyle());
-				// 		if(quizResult.getStyle().length>=1){
-		  // 					var result = quizResult.getStyle();
-		  // 					var userSelectionInfo = quizResult.getCustSelections();
-		  // 					mvUserQuiz.saveUserData(userSelectionInfo, result).then(function(userQuiz){
-		  // 						quizResult.setUserCurrQuiz(userQuiz.data.quizId);
-		  // 						mvNotifier.notify('Login success!');
-		  // 						if(userSelectionInfo.quizImgSelected.length===1){
-		  // 							$location.path('/tell-us-more');
-		  // 						}
-		  // 						$location.path('/style-quiz');
-		  // 					}, function(reason){
-		  // 							mvNotifier.error(reason);
-		  // 					});
-		  // 				}
-		  // 				else{
-		  // 					$location.path('/dashboard');
-		  // 				}
+				window.localStorage.setItem('result',JSON.stringify(result));
+				window.localStorage.setItem('userSelectionInfo',JSON.stringify(userSelectionInfo));
 		  	}
 
 

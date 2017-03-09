@@ -1,7 +1,5 @@
 var mysql = require('mysql');
- // var env = process.env.NODE = process.env.NODE || 'development';
- // var config = require('./config')[env];
-
+ 
 var pool = mysql.createPool({
 				host     : '127.0.0.1',
 				user     : 'root',
@@ -21,3 +19,4 @@ exports.getConnection = function(cb){
 		cb(err,conn);
 	});
 }
+
