@@ -1368,6 +1368,48 @@ $scope.gridWidth=300;
 		}	
 	}
 
+	$scope.roomNumChanged = function (id,room,disp_name){
+		console.log($scope[room]);
+		console.log($scope.selectedRoom);
+		var roomExists = false;
+
+		if($scope[room].value===0){
+			if($scope.selectedRoom.length > 0){
+				for(var i =0;i<$scope.selectedRoom.length; i++){
+					if($scope.selectedRoom[i].room_name === room){
+						$scope.selectedRoom.splice(i, 1);
+						break;
+					}
+				}
+			}
+		}
+		else{
+			if($scope.selectedRoom.length > 0){
+				for(var i =0;i<$scope.selectedRoom.length; i++){
+					if($scope.selectedRoom[i].room_name === room){
+						$scope.selectedRoom[i].room_num = $scope[room].value;
+						roomExists = true;
+						break;
+					}
+				}
+				if(!roomExists){
+					$scope.selectedRoom.push({"room_id":id,"room_name":room,"room_num":$scope[room].value,"room_disp_name":disp_name});
+				}
+			}
+			else{
+				$scope.selectedRoom.push({"room_id":id,"room_name":room,"room_num":$scope[room].value,"room_disp_name":disp_name});
+			}
+			
+		}
+		console.log($scope.selectedRoom);
+		if($scope.selectedRoom.length>0){
+			$scope.disable = false;
+		}
+		else{
+			$scope.disable = true;	
+		}
+	}
+
 	function saveRoomInfo(){
 		var roomDsgArr =[];
 		var room = 'numMaster';
