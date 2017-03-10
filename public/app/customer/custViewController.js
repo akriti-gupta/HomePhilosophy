@@ -607,7 +607,7 @@ $scope.pricing = function(index){
 }
 
 $scope.addRoom=function(){
-	custViewSvc.setRequester('dashboard');
+	/*custViewSvc.setRequester('dashboard');
 	quizResult.clearStyle();
 	payment.clearPayPkg();
 	payment.clearPkgPerRoom();
@@ -615,7 +615,7 @@ $scope.addRoom=function(){
 
 	//Call function to store style.
 	var oldQzData = $scope.projectArr[0];
-	storeQuizInfo(oldQzData);
+	storeQuizInfo(oldQzData);*/
 	
 	$location.path('/style-quiz');
 }

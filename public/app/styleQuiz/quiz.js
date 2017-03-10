@@ -30,31 +30,49 @@ $(document).on('click','#start-quiz',function(e){
 });
 
 $(document).on('click','.thumbnail',function(e){
-	// alert('Clicked');
 	e.preventDefault();
 	var isSelected=false;
+
+	// alert($(this));
 	if($(this).hasClass('style-img-selected')){
 		isSelected=true;
 	}
 	if(isSelected){
 		$(this).removeClass('style-img-selected');
+		$(this).find(".num-rooms option").each(function() { 
+			this.selected = (this.value == 0); 
+		});
 	}
 	else{
 		$(this).addClass('style-img-selected');
-	}
+		if($(this).find(".num-rooms").val()==0){
+			$(this).find(".num-rooms option").each(function() { 
+	   			this.selected = (this.text == 1); 
 
-	if($(this).find(".num-rooms").val()==0){
-		$(this).find(".num-rooms option").each(function() { 
-   			this.selected = (this.text == 1); 
-		});
+			});
+		}
 	}
 });
 
 
-
 $(document).on('click','.num-rooms',function(e){
+	 e.stopPropagation();
+});
+
+$(document).on('change','.num-rooms',function(e){
 	e.stopPropagation();
-	// alert('Clicked');
+	var target = e.target;
+	var parent = target.closest('.thumbnail');
+
+	if(target.options[target.selectedIndex].value!=0){
+		$(parent).addClass('style-img-selected');
+	}
+	else{
+		$(parent).removeClass('style-img-selected');
+	}
+
+
+	
 });
 
 $(document).on('click','.qz-row a img',function(e){
