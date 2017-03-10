@@ -23,19 +23,6 @@
         	if(infoObj){
         		roomArr = infoObj.roomSelected;	
         		imgArr = infoObj.quizImgSelected;
-        		console.log('In storeUserQuizInfo,roomArr is: ');
-        		console.log(roomArr);
-        		console.log('In storeUserQuizInfo,imgArr is: ');
-        		console.log(imgArr);
-
-        		// if(imgArr["2"] && imgArr["2"]===-1){
-        		// 	console.log('Already know style, style is stored in index 3:'+imgArr["3"]);
-
-        		// }
-        		// else if(imgArr["3"] && imgArr["3"]===-1){
-        		// 	console.log('Style Quiz taken. Info stored in index 4 to 8');
-        		// }
-
         		if(imgArr!=null && imgArr.length===6){
         			console.log('Style Quiz taken. Info stored in index 0 to 5');
         		}
@@ -48,8 +35,7 @@
         }
         //Called from quizController to store calculated style before control is passed to login page.
 		var storeStyle = function(newObj,boardVal) {
-			console.log('In storeStyle, newObj is: ');
-			console.log(newObj);
+			
 		    for(i=0;i<newObj.length;i++){
 		    	result.push({"id": newObj[i].id, "title": newObj[i].title, "style":newObj[i].style, "desc": newObj[i].desc, "image": newObj[i].image, "value":newObj[i].value});
 		    	board = boardVal;

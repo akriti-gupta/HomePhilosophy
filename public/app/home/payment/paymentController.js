@@ -83,14 +83,14 @@ angular.module("app")
 		console.log($scope.selectedRooms);
 
 		//Check if redirect from add new room, In that case add room in cust_room_selection	
-		if(custViewSvc.getRequester()!=' '){
-			mvUserQuiz.addRoomToQuiz(quizId,$scope.selectedRooms).then(function(success){
-				console.log('Room Added');
-  			}, function(reason){
-  				isAddRoomErr = 1;
-  				alert('Error in adding new room'+reason);
-  			});
-		}
+		// if(custViewSvc.getRequester()!=' '){
+		// 	mvUserQuiz.addRoomToQuiz(quizId,$scope.selectedRooms).then(function(success){
+		// 		console.log('Room Added');
+  // 			}, function(reason){
+  // 				isAddRoomErr = 1;
+  // 				alert('Error in adding new room'+reason);
+  // 			});
+		// }
 
 		payment.storePkgPerRoom($scope.roomSelectionArr,$scope.roomPkg);
 

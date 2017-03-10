@@ -1135,14 +1135,14 @@ $scope.gridWidth=300;
 		
 		// Kitchen
 		if(sel4 == 1){totA+= 6.35; totB+=0.65;}
-		if(sel4 == 2){totB+= 3.00; totE+= 2.00; totF+=2.25;} //Changed on 24042016
+		if(sel4 == 2){totB+= 3.00; totE+= 2.00; totF+=2.25;} 
 		if(sel4 == 3){totB+= 1.35;totD+=3.65;}
 		if(sel4 == 4){totC+= 3.25;totD+=2.25;totF+=1.5;}
 		if(sel4 == 5){totD+= 0.5;totE+=4.5;}
 		if(sel4 == 6){totC+= 0.5; totD+= 4.5;}
 
 		// Textures
-		if(sel5 == 1){totC+= 1.00; totC+=1.00;totE+= 1.00; totF+=1.00;}
+		if(sel5 == 1){totC+= 1.00;totE+= 1.00; totF+=1.00;}
 		if(sel5 == 2){totA+= 4.00; totB+= 2.00; totC+=2.00;} 
 		if(sel5 == 3){totD+= 1.00;totF+=1.00;}
 		if(sel5 == 4){totA+= 4.00;totC+=1.5;totD+=0.5;}
@@ -1536,13 +1536,13 @@ $scope.gridWidth=300;
 		last_active_room_id = 0;
 	}
 
-	$scope.addRoomToQuiz = function(){
+	/*$scope.addRoomToQuiz = function(){
 		console.log('Before going to pricing,roomSelected is: ');
 		console.log($scope.selectedRoom);
 		saveRoomInfo();
 		quizResult.storeUserQuizInfo({"roomSelected":$scope.selectedRoom,"quizImgSelected":null});
 		$location.path('/pricing');
-	}
+	}*/
 
 });
 

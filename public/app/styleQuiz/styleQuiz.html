@@ -24,6 +24,7 @@
 
 <div class="divider" style="border-top:2px solid #e1e1e1;padding:15px;"></div>
  
+  <!-- ng-init="checkProjects()" -->
 <div ng-controller="QuizController" class="qz-container" ng-init="checkProjects()">
 
   <div class="modal" id="quizModal" tabindex="-1" role="dialog" aria-labelledby="quizModalLabel" >
@@ -496,17 +497,18 @@
     <button type="button" class="btn-qz btn-nxt" ng-show="pagenum===9" ng-disabled="disable" ng-click="nextPage()">Next</button>
   </div>
 
-  <div style="text-align:center;padding:80px 0px 100px;clear:both;" ng-show="pagenum===1 && pageRequester===' '">    
+  <div style="text-align:center;padding:80px 0px 100px;clear:both;" ng-show="pagenum===1" >
+  <!-- && pageRequester===' '" -->    
     <a href="#" data-toggle="modal" data-target="#quizModal">
       <button type="button" class="btn-qz btn-nxt" ng-disabled="disable">Next</button>
     </a>
   </div>
   
 
-  <div style="text-align:center;padding:80px 0px 100px;clear:both;" ng-if="pagenum===1 &&pageRequester!=' '">    <a href="#" ng-click="addRoomToQuiz()">
+ <!--  <div style="text-align:center;padding:80px 0px 100px;clear:both;" ng-if="pagenum===1 &&pageRequester!=' '">    <a href="#" ng-click="addRoomToQuiz()">
       <button type="button" class="btn-qz btn-nxt" ng-disabled="disable">Next</button>
     </a>
-  </div>
+  </div> -->
   
 </div> <!--Main Div QuizController -->
 
