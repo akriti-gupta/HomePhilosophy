@@ -8,6 +8,7 @@ angular.module("app")
   	$scope.roomSelectionArr = [];
   	$scope.roomPkg = [];
   	var totalRooms = 0;
+  	var roomObj = [];
 
   	//TODO: Save package info in DB and retrive this array from there. This is to
   	//accomodate any future changes to the payment packages and put it in service.
@@ -16,18 +17,33 @@ angular.module("app")
   					    {'id':2,'name':"Classic",'pkgValue':600,value:2},
   					    {'id':3,'name':"Premium",'pkgValue':1000,value:3},
   					    {'id':4,'name':"Custom",'pkgValue':0,value:4}
-  	];
+  	];	
 
-  	$scope.selectedRooms = quizResult.getCustSelections().roomSelected;	
-	for (var i in $scope.selectedRooms){
-		if($scope.selectedRooms[i].room_num.id > 1){
-			for(var j=1; j<= $scope.selectedRooms[i].room_num.id; j++){
-				$scope.roomSelectionArr.push($scope.selectedRooms[i].room_disp_name+' '+j);
+  	//$scope.selectedRooms = quizResult.getCustSelections().roomSelected;	
+  	$scope.selectedRooms = quizResult.getInsertedRooms();	
+	for (var i=0;i<$scope.selectedRooms.length;i++){
+		// if($scope.selectedRooms[i].room_num.id > 1){
+		// 	for(var j=1; j<= $scope.selectedRooms[i].room_num.id; j++){
+		// 		$scope.roomSelectionArr.push($scope.selectedRooms[i].room_disp_name+' '+j);
+		// 	    roomObj.push({'roomId':$scope.selectedRooms[i].room_id,'roomName':$scope.selectedRooms[i].room_disp_name+' '+j});
+
+		// 	}
+		// }
+		// else{
+		// 	$scope.roomSelectionArr.push($scope.selectedRooms[i].room_disp_name);
+		// 	roomObj.push({'roomId':$scope.selectedRooms[i].room_id,'roomName':$scope.selectedRooms[i].room_disp_name});
+		// }
+
+			var roomDispName;
+			if($scope.selectedRooms[i].numRoom===0){
+				roomDispName = $scope.selectedRooms[i].roomName;
 			}
-		}
-		else{
-			$scope.roomSelectionArr.push($scope.selectedRooms[i].room_disp_name);
-		}
+			else{
+				roomDispName = $scope.selectedRooms[i].roomName +' '+$scope.selectedRooms[i].numRoom;	
+			}
+			$scope.roomSelectionArr.push(roomDispName);
+			roomObj.push({'roomId':$scope.selectedRooms[i].id,'roomName':roomDispName});
+		
 	}
 
   	if(payment.getPayPkg()!=-1){
@@ -35,19 +51,22 @@ angular.module("app")
   		$scope.payPkg = $scope.packages[pkg-1].name;
   		$scope.pkgValue = $scope.packages[pkg-1].pkgValue;
   	
-	  	if(quizResult.getCustSelections()!=null){
+	  	// if(quizResult.getCustSelections()!=null){
 	  		if($scope.selectedRooms.length>0){
-	  			for(var i =0;i<$scope.selectedRooms.length;i++){
-	  				totalRooms+=$scope.selectedRooms[i].room_num.value;
-	  			}
+	  			// for(var i =0;i<$scope.selectedRooms.length;i++){
+	  			// 	totalRooms+=$scope.selectedRooms[i].room_num.value;
+	  			// }
+
+	  			console.log('Tot rooms are: '+$scope.selectedRooms.length);
+	  			var totalRooms = $scope.selectedRooms.length;
 	  			$scope.totalPrice = $scope.pkgValue * totalRooms;
 
 	  		}
-	  	}
+	  	// }
 	  	if($scope.roomPkg.length===0){
 			//Initialize roomPkg with the default value chosen.
 			for(var i=0;i<$scope.roomSelectionArr.length;i++){
-				$scope.roomPkg[i]=pkg;
+				//$scope.roomPkg[i]=pkg;
 				$scope.roomPkg[i]=$scope.packages[pkg-1];
 			}
 		}
@@ -92,7 +111,8 @@ angular.module("app")
   // 			});
 		// }
 
-		payment.storePkgPerRoom($scope.roomSelectionArr,$scope.roomPkg);
+		// payment.storePkgPerRoom($scope.roomSelectionArr,$scope.roomPkg);
+		payment.storePkgPerRoom(roomObj,$scope.roomPkg);
 
 		var roomPkg = payment.getPkgPerRoom();
 

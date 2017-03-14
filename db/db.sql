@@ -69,19 +69,24 @@ CREATE TABLE IF NOT EXISTS `cust_quiz` (
 CREATE TABLE IF NOT EXISTS `cust_room_selection` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `quizId` int(10) unsigned DEFAULT NULL,
+  `roomId` int(10) unsigned DEFAULT NULL,
   `roomName` varchar(255) DEFAULT NULL,
   `numRoom` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `cust_room_selection_quizid_foreign` (`quizId`),
+  KEY `cust_room_selection.roomId_foreign_idx` (`roomId`),
+  CONSTRAINT `cust_room_selection.roomId_foreign` FOREIGN KEY (`roomId`) REFERENCES `room` (`id`) ON DELETE CASCADE,
   CONSTRAINT `cust_room_selection_quizid_foreign` FOREIGN KEY (`quizId`) REFERENCES `cust_quiz` (`quizId`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
+
 CREATE TABLE IF NOT EXISTS `cust_pkg_info` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `quizId` int(10) unsigned DEFAULT NULL,
+  `roomId` int(10) unsigned NOT NULL,
   `roomName` varchar(255) DEFAULT NULL,
   `pkgId` int(10) unsigned DEFAULT NULL,
   `isAddOn` int(11) DEFAULT '0',
@@ -91,9 +96,12 @@ CREATE TABLE IF NOT EXISTS `cust_pkg_info` (
   PRIMARY KEY (`id`),
   KEY `cust_pkg_info_quizid_foreign` (`quizId`),
   KEY `cust_pkg_info_pkgid_foreign` (`pkgId`),
+  KEY `cust_pkg_info_roomId_foreign_idx` (`roomId`),
   CONSTRAINT `cust_pkg_info_pkgid_foreign` FOREIGN KEY (`pkgId`) REFERENCES `package` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `cust_pkg_info_quizid_foreign` FOREIGN KEY (`quizId`) REFERENCES `cust_quiz` (`quizId`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=146 DEFAULT CHARSET=utf8;
+  CONSTRAINT `cust_pkg_info_quizid_foreign` FOREIGN KEY (`quizId`) REFERENCES `cust_quiz` (`quizId`) ON DELETE CASCADE,
+  CONSTRAINT `cust_pkg_info_roomId_foreign` FOREIGN KEY (`roomId`) REFERENCES `cust_room_selection` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
 
 
 CREATE TABLE IF NOT EXISTS `cust_payment_txn` (
@@ -161,6 +169,7 @@ CREATE TABLE IF NOT EXISTS  `cust_img_selection` (
 CREATE TABLE IF NOT EXISTS `cust_appointment` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `quizId` int(10) unsigned DEFAULT NULL,
+  `roomId` int(10) unsigned DEFAULT NULL,
   `roomName` varchar(255) DEFAULT NULL,
   `apptDate` date DEFAULT NULL,
   `apptTime` time DEFAULT NULL,
@@ -174,8 +183,11 @@ CREATE TABLE IF NOT EXISTS `cust_appointment` (
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `cust_appointment_quizid_foreign` (`quizId`),
-  CONSTRAINT `cust_appointment_quizid_foreign` FOREIGN KEY (`quizId`) REFERENCES `cust_quiz` (`quizId`) ON DELETE CASCADE
+  KEY `cust_appointment_roomId_foreign_idx` (`roomId`),
+  CONSTRAINT `cust_appointment_quizid_foreign` FOREIGN KEY (`quizId`) REFERENCES `cust_quiz` (`quizId`) ON DELETE CASCADE,
+  CONSTRAINT `cust_appointment_roomId_foreign` FOREIGN KEY (`roomId`) REFERENCES `cust_room_selection` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
 
 -- CREATE TABLE IF NOT EXISTS `pin_images` (
 --   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -195,14 +207,18 @@ CREATE TABLE IF NOT EXISTS `concept_board` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `quizId` int(10) unsigned NOT NULL,
   `files` varchar(255) DEFAULT NULL,
+  `roomId` int(10) unsigned DEFAULT NULL,
   `roomName` varchar(45) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `concept_board_quizId_foreign_idx` (`quizId`),
-  CONSTRAINT `concept_board_quizId_foreign` FOREIGN KEY (`quizId`) REFERENCES `cust_quiz` (`quizId`) ON DELETE CASCADE
+  KEY `concept_board_roomId_foreign_idx` (`roomId`),
+  CONSTRAINT `concept_board_quizId_foreign` FOREIGN KEY (`quizId`) REFERENCES `cust_quiz` (`quizId`) ON DELETE CASCADE,
+  CONSTRAINT `concept_board_roomId_foreign` FOREIGN KEY (`roomId`) REFERENCES `cust_room_selection` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
 
 CREATE TABLE IF NOT EXISTS `concept_board_feedback` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -212,22 +228,28 @@ CREATE TABLE IF NOT EXISTS `concept_board_feedback` (
   `updated_at` datetime DEFAULT NULL,
   `concept_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `concept_id_UNIQUE` (`concept_id`),
   KEY `concept_board_feedback_concept_id_foreign_idx` (`concept_id`),
   CONSTRAINT `concept_board_feedback_concept_id_foreign` FOREIGN KEY (`concept_id`) REFERENCES `concept_board` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
 
 CREATE TABLE IF NOT EXISTS `final_look` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `quizId` int(10) unsigned DEFAULT NULL,
   `files` varchar(255) DEFAULT NULL,
+  `roomId` int(10) unsigned DEFAULT NULL,
   `roomName` varchar(45) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `final_look_quizId_foreign_idx` (`quizId`),
-  CONSTRAINT `final_look_quizId_foreign` FOREIGN KEY (`quizId`) REFERENCES `cust_quiz` (`quizId`) ON DELETE CASCADE
+  KEY `final_look_roomId_foreign_idx` (`roomId`),
+  CONSTRAINT `final_look_quizId_foreign` FOREIGN KEY (`quizId`) REFERENCES `cust_quiz` (`quizId`) ON DELETE CASCADE,
+  CONSTRAINT `final_look_roomId_foreign` FOREIGN KEY (`roomId`) REFERENCES `cust_room_selection` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
 
 CREATE TABLE IF NOT EXISTS `final_look_feedback` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -237,13 +259,16 @@ CREATE TABLE IF NOT EXISTS `final_look_feedback` (
   `updated_at` datetime DEFAULT NULL,
   `concept_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `concept_id_UNIQUE` (`concept_id`),
   KEY `final_look_feedback_final_look_id_foreign_idx` (`concept_id`),
   CONSTRAINT `final_look_feedback_concept_id_foreign` FOREIGN KEY (`concept_id`) REFERENCES `final_look` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
+
 CREATE TABLE IF NOT EXISTS `shopping_list` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `quizId` int(10) unsigned DEFAULT NULL,
+  `roomId` int(10) unsigned DEFAULT NULL,
   `files` varchar(255) DEFAULT NULL,
   `roomName` varchar(45) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
@@ -251,5 +276,8 @@ CREATE TABLE IF NOT EXISTS `shopping_list` (
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `shopping_list_quizId_foreign_idx` (`quizId`),
-  CONSTRAINT `shopping_list_quizId_foreign` FOREIGN KEY (`quizId`) REFERENCES `cust_quiz` (`quizId`) ON DELETE CASCADE
+  KEY `shopping_list_roomId_foreign_idx` (`roomId`),
+  CONSTRAINT `shopping_list_quizId_foreign` FOREIGN KEY (`quizId`) REFERENCES `cust_quiz` (`quizId`) ON DELETE CASCADE,
+  CONSTRAINT `shopping_list_roomId_foreign` FOREIGN KEY (`roomId`) REFERENCES `cust_room_selection` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+

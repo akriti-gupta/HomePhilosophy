@@ -151,17 +151,15 @@
 
 
 
-		<div class="row qz-row-dsg"  style="border:1px solid black;padding-bottom:0px;">
+		<div class="row qz-row-dsg"  style="display:table;border:1px solid black;padding-bottom:0px;">
 
-		    <div class="col-md-4 col-xs-4 cust-view-tab" style="padding:0px;">ROOM</div>
-		    <div class="col-md-4 col-xs-4 cust-view-tab" style="padding:0px;">PACKAGE</div>
-		    <div class="col-md-4 col-xs-4 cust-view-tab" style="padding:0px;">STATUS</div>
+		    <div class="col-md-4 col-xs-4 cust-view-tab">ROOM</div>
+		    <div class="col-md-2 col-xs-2 cust-view-tab">STYLE</div>
+		    <div class="col-md-2 col-xs-2 cust-view-tab">PACKAGE</div>
+		    <div class="col-md-4 col-xs-4 cust-view-tab">STATUS</div>
 		</div>
 
-		<!-- <div class="row qz-row-dsg" ng-repeat="item in projects track by $index" style="border:1px solid black;padding-bottom:0px;"> -->
-		
-
-		<div class="row qz-row-dsg" ng-repeat="item in projectArr track by $index" style="border:1px solid black;padding-bottom:0px;">
+		<div class="row qz-row-dsg" ng-repeat="item in projectArr track by $index" style="display:table;border:1px solid black;padding-bottom:0px;">
 		
 		    <div class="col-md-4 col-xs-4 cust-view-tab" style="padding:10px;">
 		        <figure>
@@ -169,7 +167,11 @@
 		        </figure>
 		    </div>
 
-			<div class="col-md-4 col-xs-4 cust-view-tab">
+		    <div class="col-md-2 col-xs-2 cust-view-tab" style="padding:10px;">
+		        {{styleName[item.resultData[0].styleId]}}
+		    </div>
+
+			<div class="col-md-2 col-xs-2 cust-view-tab">
 				<div  ng-if="!item.pkgData|| item.pkgData.length===0"><a href="#" ng-click="selectPkg($index)">Choose a Package </a><br/></div>
 
 				<div ng-if="packageName[item.pkgData.pkgId]!=' '">{{packageName[item.pkgData.pkgId]}}<br/></div>
@@ -177,11 +179,13 @@
 
    			<div class="col-md-4 col-xs-4 cust-view-tab" ng-if="item.status.linkPage===' ' && item.status.modal===' '">{{item.status.statusText}}<br/></div>
 
-		    <div class="col-md-4 col-xs-4 cust-view-tab" ng-if="item.status.linkPage!=' ' && item.status.stage!='final' && item.status.stage!='payment'" ><a href="#" ng-click="getFirstLook($index)">{{item.status.statusText}}</a><br/></div>
+		    <div class="col-md-4 col-xs-4 cust-view-tab" ng-if="item.status.linkPage!=' ' && item.status.stage!='payment' && item.status.stage!='quizDetails'" ><a href="#" ng-click="getFirstLook($index,item.roomObj.id)">{{item.status.statusText}}</a><br/></div>
 
 		    <div class="col-md-4 col-xs-4 cust-view-tab" ng-if="item.status.linkPage!=' ' &&  item.status.stage==='payment'" ><a href="#" ng-click="pricing($index)">{{item.status.statusText}}</a><br/></div>
 
-			<div class="col-md-4 col-xs-4 cust-view-tab" ng-if="item.status.linkPage!=' ' && item.status.stage==='final'" ><a href="/reviewPayment">{{item.status.statusText}}</a><br/></div>
+			<!-- <div class="col-md-4 col-xs-4 cust-view-tab" ng-if="item.status.linkPage!=' ' && item.status.stage==='final'" ><a href="/reviewPayment">{{item.status.statusText}}</a><br/></div> -->
+
+			<div class="col-md-4 col-xs-4 cust-view-tab" ng-if="item.status.linkPage!=' ' && item.status.stage==='quizDetails'" ><a href="#" ng-click="getQuizDetail($index)">{{item.status.statusText}}</a><br/></div>
 
  			<div id="cal_popup" class="col-md-4 col-xs-4 cust-view-tab" ng-if="item.status.modal!=' '"><a href="#" ng-click="loadMtngData($index)" data-toggle="modal" data-target="#calendarModal" data-id="{{$index}}">{{item.status.statusText}}</a><br/></div>
 		  </div>
@@ -203,29 +207,34 @@
 
 <section id="feedback" ng-show="showFeedback">
 
-	<div style="width:30%;float:left;padding:80px;height:1200px;">
+	<div style="width:30%;float:left;padding:80px;height:1200px;border-right:4px solid #e1e1e1;">
+	
 
 		<div ng-repeat="item in images track by $index" style="padding-bottom: 50px;">
 
 			<a href="#" ng-click="zoomImg($index)"><img src={{item}} width="100%"></a>
-			<p>Option {{$index+1}}</p>
+			<p ng-show="!isFinalPage">Option {{$index+1}}</p>
 		
+		</div>
+		<div style="text-align:center;" ng-show="!isFinalPage">
+			<button type="submit" class="btn-start-quiz btn-qz btn-nxt font-sansRegular txt-upper col-lightcyan fs-20px" ng-click="submitFeedback(0)" style="padding:10px 10px 10px;" >SUBMIT FEEDBACK</button>
 		</div>
 	</div>
 
-	<div style="width:70%;float:right;padding:30px;border-left:4px solid #e1e1e1;">
+	<div style="width:70%;float:right;padding:30px;">
 		<p class="stp-head-maintxt" style="padding-bottom:10px;">{{lookText}}</p>
 
 		<p><img src="{{zoomImgSrc}}" width="80%"></p>
 
-		<div style="padding:50px 0px 50px 105px;">
+		<div style="padding:50px 0px 50px 105px;" ng-show="!isFinalPage">
 			<form>
 				<textarea rows="9" cols="50" class="form-info font-sansRegular fs-16px" style="resize:none;border:1px solid #acacac;width:89%;" id="feedbackComment" name="feedbackComment" ng-model="feedbackComment"></textarea>
 				
-				<div style="text-align:center;padding:30px 0px 40px;width:43%;float:right;">
-					<button type="submit" class="btn-start-quiz btn-qz btn-nxt font-sansRegular txt-upper col-lightcyan fs-20px" ng-click="saveFeedback()" style="padding:10px 20px 10px;margin-right:10px;	" >SAVE</button>
+				<div style="text-align:center;padding:30px 0px 40px;width:31%;float:right;">
+					<button type="submit" class="btn-start-quiz btn-qz btn-nxt font-sansRegular txt-upper col-lightcyan fs-20px" ng-click="submitFeedback(-1)" style="padding:10px 20px 10px;margin-right:10px;	" >SAVE</button>
 
-					<button type="submit" class="btn-start-quiz btn-qz btn-nxt font-sansRegular txt-upper col-lightcyan fs-20px" ng-click="submitFeedback()" style="padding:10px 10px 10px;" >SUBMIT</button>
+<!-- ng-click="saveFeedback()" -->
+					
 				</div>
 			</form>
 		</div>

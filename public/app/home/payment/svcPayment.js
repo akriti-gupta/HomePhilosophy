@@ -20,7 +20,7 @@
 			var pkgArr = getPackages();
 			if(roomInfo!=null && pkgInfo!=null){
 				for(var i =0; i<pkgInfo.length;i++){
-					pkgPerRoom.push({"roomName":roomInfo[i],"pkgId":pkgInfo[i].id,"pkgName":pkgArr[pkgInfo[i].id-1].name});
+					pkgPerRoom.push({"roomId":roomInfo[i].roomId,"roomName":roomInfo[i].roomName,"pkgId":pkgInfo[i].id,"pkgName":pkgArr[pkgInfo[i].id-1].name});
 				} 
 			}
 		}

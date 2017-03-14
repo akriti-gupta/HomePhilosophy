@@ -61,7 +61,7 @@ angular.module('app').factory('mvAdminView', function($http, $q){
 			});
 			return dfd.promise;
 		},
-		saveUploadedData: function(quizId,stage, files){
+		saveUploadedData: function(quizId,roomId,stage, files){
 			var dfd = $q.defer();
 			var postUrl;
 			var fileArr = [];
@@ -77,7 +77,7 @@ angular.module('app').factory('mvAdminView', function($http, $q){
 				postUrl='/saveFinalLook';
 				//isFinalLook = 1;
 			}
-			else if(stage===3){
+			else if(stage===3 || stage===4){
 				postUrl='/saveShoppingList';
 			}
 
@@ -89,7 +89,7 @@ angular.module('app').factory('mvAdminView', function($http, $q){
 			}
 
 			for(var i =0;i<fileArr.length;i++){
-				data.push({quizId: quizId, files:fileArr[i],roomName:null, status:0, created_at: null, updated_at: null});
+				data.push({quizId: quizId, files:fileArr[i],roomId: roomId,roomName:null, status:0, created_at: null, updated_at: null});
 			}
 			//var data={quizId: quizId, files:files,roomName:null, status:0, created_at: null, updated_at: null};
 			$http.post(postUrl,{data:data}).then(function(response){

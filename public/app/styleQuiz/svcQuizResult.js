@@ -11,12 +11,21 @@
         var showNavBar = true;
         var board;
         var currentQuizId;
+        var insRoomArr = [];
 
         var setUserCurrQuiz = function (quizId){
         	currentQuizId = quizId;
         }
         var getUserCurrQuiz = function(){
         	return currentQuizId;
+        }
+
+        var setInsertedRooms = function(roomArr){
+        	insRoomArr = roomArr;
+        }
+
+        var getInsertedRooms = function(){
+        	return insRoomArr;
         }
 
         var storeUserQuizInfo = function(infoObj){
@@ -118,7 +127,9 @@
 			   	storeUserQuizInfo: storeUserQuizInfo,
 			   	setUserCurrQuiz: setUserCurrQuiz,
 			   	getUserCurrQuiz: getUserCurrQuiz,
-			   	clearCustSelections: clearCustSelections
+			   	clearCustSelections: clearCustSelections,
+			   	setInsertedRooms: setInsertedRooms,
+			   	getInsertedRooms: getInsertedRooms
 
 			  };
         });

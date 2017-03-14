@@ -3,7 +3,6 @@ var mysqlConn = require('../config/mysqlConn');
 
 exports.storePackage = function(req,res,next){
 
-	console.log('In storePackage');
 
 	var customerId = req.body.customerId;
 	var quizId = req.body.quizId;
@@ -17,7 +16,7 @@ exports.storePackage = function(req,res,next){
 
 	var pkgTxnInfo = {	quizId:quizId,
 						totalPrice:totalPrice,
-						amountPaid:totalPrice/2,
+						amountPaid:totalPrice,
 						addOnAmtPaid:addOnAmtPaid
 
 	};
@@ -26,7 +25,7 @@ exports.storePackage = function(req,res,next){
 	
 	if(pkgForRoom!=null){
 		for(var i =0; i<pkgForRoom.length;i++){
-			var currPkgData = [quizId,pkgForRoom[i].roomName,pkgForRoom[i].pkgId,status,isAddOn];
+			var currPkgData = [quizId,pkgForRoom[i].roomId,pkgForRoom[i].roomName,pkgForRoom[i].pkgId,status,isAddOn];
 			userPkgData.push(currPkgData);
 			console.log('userPkgData is: ');
 			console.log(userPkgData);
@@ -38,10 +37,10 @@ exports.storePackage = function(req,res,next){
 		if(err){console.log('Error in getting mysql conn in paymnet.js: '+err);return next(err);}
         if(conn){
 			conn.query('insert into cust_pkg_info'+
-						'(quizId,roomName,pkgId,status,isAddOn) values ?',[userPkgData], 
+						'(quizId,roomId,roomName,pkgId,status,isAddOn) values ?',[userPkgData], 
 			function(err, results, fields){
 				if(err){
-					console.log('Error in saving payment data'+err);
+					console.log('Error in saving payment data: ' +err);
 					conn.release();
 					res.send({success:false,reason:err.toString()});
 				}
@@ -49,7 +48,7 @@ exports.storePackage = function(req,res,next){
 
 				conn.query('insert into cust_payment_txn set ?',pkgTxnInfo, function(err, results, fields){
 					if(err){
-						console.log('Error in saving pkg txn data'+err);
+						console.log('Error in saving pkg txn data: '+err);
 						conn.release();
 						res.send({success:false,reason:err.toString()});
 					}

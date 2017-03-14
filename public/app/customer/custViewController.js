@@ -20,8 +20,11 @@ $scope.showMain = true;
 $scope.hasActiveProject = false;
 $scope.hasAllLaunched = true;
 $scope.lookText='First Look'; 
+$scope.isFinalPage = false;
 
 $scope.packageName=[' ','Simple','Classic','Premium','Custom'];
+
+$scope.styleName=[' ','Classic','Contemporaray','Transitional','Modern','Scandinavian','Asian Inspired Minimalist'];
 
 $scope.roomImage ={};
 
@@ -33,15 +36,6 @@ $scope.roomImage["Home"] = "images/rooms/homeOffice.png";
 $scope.roomImage["Kids"] = "images/rooms/kids.png";
 
 var roomObj = ['','master','living','kids','home','dining','bedroom'];
-
-/*function checkFeedbackStatus(feedbackData){
-	for(var i =0;i<feedbackData.length;i++){
-		var currFeedbackData = feedbackData[i];
-		var status = {'statusText': 'Final Look in Progress'
-	 				status.linkPage = " ";
-	 				status.modal = "#calendarModal";
-	}
-}*/
 
 
 //This function sets the existing active projects quiz info thru svcQuizResult.storeStyle
@@ -71,286 +65,169 @@ function validateFormData(){
 	return true;
 }
 
-function chkFinalPrjStatus(shoppingList, paymentInfo){
+function chkFinalPrjStatus(shoppingList, paymentInfo, roomData){
 	
-	var totalPrice=0;
-	var amountPaid = 0;
+	// var totalPrice=0;
+	// var amountPaid = 0;
 	var finalStatus = {};
-	for(var i =0;i<paymentInfo.length;i++){
+	/*for(var i =0;i<paymentInfo.length;i++){
 		totalPrice = totalPrice + paymentInfo[i].totalPrice;
 		amountPaid = amountPaid + paymentInfo[i].amountPaid;
-	}
+	}*/
 
 	if(shoppingList.length>0){
-		if(totalPrice === amountPaid){
-			finalStatus.statusText='Project Completed. View your Shopping List/ Final Look';
-			finalStatus.linkPage='final';
-		}
-		else{
-			finalStatus.statusText='Final Look/ Shopping List is ready. Settle payment to view.';
-			finalStatus.linkPage='/reviewPayment';
-			finalStatus.modal=' ';
-			finalStatus.stage='final';
-		}
-	}
-		
-			/*if(status===0){
-				finalStatus.statusText='First Look Uploaded. Awaiting Feedback';
-				finalStatus.linkPage='getFirstLook($index)';
-					finalStatus.modal=' ';
-			}
-			else if(status===1){
-				finalStatus.statusText='Received Feedback. Final Look in Progress';
-				finalStatus.linkPage=' ';
-					finalStatus.modal=' ';
-			}*/
-			
-
-		/*else if(isFinalLook===1){
-			
-			if('feedbackData' in currConceptData){
-				finalStatus.statusText='Received Feedback. Your Final Look and Shopping List will be ready soon.';
-				finalStatus.linkPage=' ';
+		for(var i =0; i < shoppingList.length; i++){
+			if(shoppingList[i].roomId === roomData.id){
+				finalStatus.statusText='Project Completed. View your Shopping List/ Final Look';
+				// finalStatus.linkPage='final';
+				finalStatus.linkPage='getFinalLook($index)';
 				finalStatus.modal=' ';
-				finalStatus.stage=3;
 				break;
 			}
-			else{
-				finalStatus.statusText='Final Look Uploaded. Awaiting Feedback';
-				finalStatus.linkPage='';
-				finalStatus.modal=' ';
+		}
+			/*if(totalPrice === amountPaid){
+				finalStatus.statusText='Project Completed. View your Shopping List/ Final Look';
+				finalStatus.linkPage='final';
 			}
-
-
-
-			// if(status===0){
-			// 	finalStatus.statusText='Final Look Uploaded. Awaiting Feedback';
-			// 	finalStatus.linkPage='';
-			// 	finalStatus.modal=' ';
-			// }
-			// else if(status===1){
-			// 	finalStatus.statusText='Feedback Received. Your Final Look and Shopping List will be ready soon.';
-			// 	finalStatus.linkPage=' ';
-			// 	finalStatus.modal=' ';
-			// }
-			// else if(status===2){
-			// 	finalStatus.statusText='Final Look/ Shopping List is ready. Payment Pending';
-			// 	finalStatus.linkPage=' ';
-			// 	finalStatus.modal=' ';
-			// }
-			// else if(status===3){
-			// 	finalStatus.statusText='Total Payment Received. View Final Look + Shopping List';
-			// 	finalStatus.linkPage=' ';
-			// 	finalStatus.modal=' ';
-			// } 
-		}*/
-	
+			else{
+				finalStatus.statusText='Final Look/ Shopping List is ready. Settle payment to view.';
+				finalStatus.linkPage='/reviewPayment';
+				finalStatus.modal=' ';
+				finalStatus.stage='final';
+			}*/
+	}
 	return finalStatus;
 }
 
 
-function chkFinalLookStatus(finalLook){
+function chkFinalLookStatus(finalLook,pkgData,roomData){
 	
 	for(var i =0;i<finalLook.length;i++){
-		var currFinalLook = finalLook[i];
-		var status = currFinalLook.status;
-		// var isFirstLook = currConceptData.isFirstLook;
-		// var isFinalLook = currConceptData.isFinalLook;
-		var finalStatus = {};
-
-		//if(isFirstLook===1){
-			if(currFinalLook.feedbackData.length>0 ){
-				finalStatus.statusText='Received Feedback. Your Shopping List and Final Look will be uploaded soon';
-				finalStatus.linkPage=' ';
-				finalStatus.modal=' ';
-				break;
+		if(finalLook[i].roomId === roomData.id){
+			var currFinalLook = finalLook[i];
+			var status = currFinalLook.status;
+			var finalStatus = {};
+			var pkgId = pkgData.pkgId;
+			if(pkgId>2){
+				if(currFinalLook.feedbackData.length>0 && currFinalLook.feedbackData[0].status===0){
+					finalStatus.statusText='Received Feedback. Your Shopping List and Final Look will be uploaded soon';
+					finalStatus.linkPage=' ';
+					finalStatus.modal=' ';
+					break;
+				}
+				else{
+					finalStatus.statusText='Final Look Uploaded. Awaiting Feedback';
+					finalStatus.linkPage='getFinalLook($index)';
+					finalStatus.modal=' ';
+				}
 			}
 			else{
-				finalStatus.statusText='Final Look Uploaded. Awaiting Feedback';
+				finalStatus.statusText='Final Look Uploaded and Shopping List Uploaded. Project Completed.';
 				finalStatus.linkPage='getFinalLook($index)';
 				finalStatus.modal=' ';
 			}
-			/*if(status===0){
-				finalStatus.statusText='First Look Uploaded. Awaiting Feedback';
-				finalStatus.linkPage='getFirstLook($index)';
-					finalStatus.modal=' ';
-			}
-			else if(status===1){
-				finalStatus.statusText='Received Feedback. Final Look in Progress';
-				finalStatus.linkPage=' ';
-					finalStatus.modal=' ';
-			}*/
-			
-//		}
-
-		// else if(isFinalLook===1){
-			
-		// 	if('feedbackData' in currConceptData){
-		// 		finalStatus.statusText='Received Feedback. Your Final Look and Shopping List will be ready soon.';
-		// 		finalStatus.linkPage=' ';
-		// 		finalStatus.modal=' ';
-		// 		break;
-		// 	}
-		// 	else{
-		// 		finalStatus.statusText='Final Look Uploaded. Awaiting Feedback';
-		// 		finalStatus.linkPage='';
-		// 		finalStatus.modal=' ';
-		// 	}
-
-/*
-
-			if(status===0){
-				finalStatus.statusText='Final Look Uploaded. Awaiting Feedback';
-				finalStatus.linkPage='';
-				finalStatus.modal=' ';
-			}
-			else if(status===1){
-				finalStatus.statusText='Feedback Received. Your Final Look and Shopping List will be ready soon.';
-				finalStatus.linkPage=' ';
-				finalStatus.modal=' ';
-			}
-			else if(status===2){
-				finalStatus.statusText='Final Look/ Shopping List is ready. Payment Pending';
-				finalStatus.linkPage=' ';
-				finalStatus.modal=' ';
-			}
-			else if(status===3){
-				finalStatus.statusText='Total Payment Received. View Final Look + Shopping List';
-				finalStatus.linkPage=' ';
-				finalStatus.modal=' ';
-			} */
-		//}
+		}
 	}
 		return finalStatus;
 }
 
-function chkCncptStatus(conceptBoard){
-	
+function chkCncptStatus(conceptBoard,roomData){
+	var finalStatus = {};
 	for(var i =0;i<conceptBoard.length;i++){
-		var currConceptData = conceptBoard[i];
-		var status = currConceptData.status;
-		// var isFirstLook = currConceptData.isFirstLook;
-		// var isFinalLook = currConceptData.isFinalLook;
-		var finalStatus = {};
-
-		//if(isFirstLook===1){
-			if(currConceptData.feedbackData.length>0){
+		if(conceptBoard[i].roomId === roomData.id){
+			var currConceptData = conceptBoard[i];
+			var status = currConceptData.status;
+			
+			if(currConceptData.feedbackData.length>0 && currConceptData.feedbackData[0].status===0){
 				finalStatus.statusText='Received Feedback. Final Look in Progress';
 				finalStatus.linkPage=' ';
 				finalStatus.modal=' ';
-				break;
 			}
 			else{
 				finalStatus.statusText='First Look Uploaded. Awaiting Feedback';
 				finalStatus.linkPage='getFirstLook($index)';
 				finalStatus.modal=' ';
 			}
-			/*if(status===0){
-				finalStatus.statusText='First Look Uploaded. Awaiting Feedback';
-				finalStatus.linkPage='getFirstLook($index)';
-					finalStatus.modal=' ';
-			}
-			else if(status===1){
-				finalStatus.statusText='Received Feedback. Final Look in Progress';
-				finalStatus.linkPage=' ';
-					finalStatus.modal=' ';
-			}*/
-			
-//		}
-
-		// else if(isFinalLook===1){
-			
-		// 	if('feedbackData' in currConceptData){
-		// 		finalStatus.statusText='Received Feedback. Your Final Look and Shopping List will be ready soon.';
-		// 		finalStatus.linkPage=' ';
-		// 		finalStatus.modal=' ';
-		// 		break;
-		// 	}
-		// 	else{
-		// 		finalStatus.statusText='Final Look Uploaded. Awaiting Feedback';
-		// 		finalStatus.linkPage='';
-		// 		finalStatus.modal=' ';
-		// 	}
-
-/*
-
-			if(status===0){
-				finalStatus.statusText='Final Look Uploaded. Awaiting Feedback';
-				finalStatus.linkPage='';
-				finalStatus.modal=' ';
-			}
-			else if(status===1){
-				finalStatus.statusText='Feedback Received. Your Final Look and Shopping List will be ready soon.';
-				finalStatus.linkPage=' ';
-				finalStatus.modal=' ';
-			}
-			else if(status===2){
-				finalStatus.statusText='Final Look/ Shopping List is ready. Payment Pending';
-				finalStatus.linkPage=' ';
-				finalStatus.modal=' ';
-			}
-			else if(status===3){
-				finalStatus.statusText='Total Payment Received. View Final Look + Shopping List';
-				finalStatus.linkPage=' ';
-				finalStatus.modal=' ';
-			} */
-		//}
+			break;
+		}
 	}
-		return finalStatus;
+	return finalStatus;
 }
 
-function chkApptStatus(apptData){
+function chkApptStatus(apptData, roomData, projectData, currIndex){
 	//Appt made and/or Floor Plan fileUploadedStatus.
 	var status = {};
-	if(apptData.apptStatus!= null && apptData.apptStatus>=0){
-		if(apptData.apptStatus===0){
-			//Appt Scheduled. Check if in future>=24 hrs ahead 
-			var apptDate = moment(apptData.apptDate);
-			var msDiff = apptDate.diff(moment(new Date(),"DD/MM/YYYY HH:mm:ss"));
-			var dayDiff = moment.duration(msDiff);
-			var hourDiff = Math.floor(dayDiff.asHours());
+	for(var i =0;i<apptData.length;i++){
+		var found = false;
+		
+			if(apptData[i].apptStatus!= null && apptData[i].apptStatus>=0){
+				found=true;
+				if(apptData[i].apptStatus===0){
+						
+					//Appt Scheduled. Check if in future>=24 hrs ahead 
+					var apptDate = moment(apptData[i].apptDate);
+					var msDiff = apptDate.diff(moment(new Date(),"DD/MM/YYYY HH:mm:ss"));
+					var dayDiff = moment.duration(msDiff);
+					var hourDiff = Math.floor(dayDiff.asHours());
 
-			if(hourDiff >=24){
-				status.statusText = "Meeting Scheduled. View/ Edit";
-				status.linkPage = " ";
-				status.modal = "#calendarModal";
-			}
-			else{
-				status.statusText = "Meeting Scheduled.";
-				status.linkPage = " ";
-				status.modal = " ";
-			}
-		}
-		else if(apptData.apptStatus===1){
-			status.statusText = "Meet & Measure done.First Look in Progress";
-			status.linkPage = " ";
-			status.modal = " ";
-		}
-		else if(apptData.apptStatus===3){
-			status.statusText = "Rejected. An email has been sent with details. Reschedule.";
-			status.linkPage = " ";
-			status.modal = "#calendarModal";
-		}
-	}
-	else if(apptData.floorPlanStatus!=null && apptData.floorPlanStatus>=0){
-		if(apptData.floorPlanStatus==0){
-			status.statusText = "Floor Plan uploaded. Pending Approval";
-			status.linkPage = " ";
-			status.modal = " ";
-		}
-		else if(apptData.floorPlanStatus==1){
-			status.statusText = "Floor Plan Approved.First Look in Progress";
-			status.linkPage = " ";
-			status.modal = " ";
-		}
+					if(hourDiff >=24){
+						status.statusText = "Meeting Scheduled. View/ Edit";
+						status.linkPage = " ";
+						status.modal = "#calendarModal";
+					}
+					else{
+						status.statusText = "Meeting Scheduled.";
+						status.linkPage = " ";
+						status.modal = " ";
+					}
+				}
+				else if(apptData[i].apptStatus===1){
+					status.statusText = "Meet & Measure done.First Look in Progress";
+					status.linkPage = " ";
+					status.modal = " ";
+				}
+				else if(apptData[i].apptStatus===3){
+					status.statusText = "Rejected. An email has been sent with details. Reschedule.";
+					status.linkPage = " ";
+					status.modal = "#calendarModal";
+				}
 
-		else if(apptData.floorPlanStatus===3){
-			status.statusText = "Rejected. An email has been sent with details, Upload again.";
-			status.linkPage = " ";
-			status.modal = "#calendarModal";
+				projectData[currIndex].status = status;
+				// for(var j = currIndex+1; j<projectData.length;j++){
+			 // 		if(projectData[j].quizData.quizId === projectData[currIndex].quizData.quizId){
+			 // 			projectData[j].status = status;
+			 // 		}
+			 // 	}
+
+			 	break;
+
+
+			}
+			else if(apptData[i].floorPlanStatus!=null && apptData[i].floorPlanStatus>=0){
+				if(apptData[i].roomId === roomData.id){
+					found=true;
+					if(apptData[i].floorPlanStatus==0){
+						status.statusText = "Floor Plan uploaded. Pending Approval";
+						status.linkPage = " ";
+						status.modal = " ";
+					}
+					else if(apptData[i].floorPlanStatus==1){
+						status.statusText = "Floor Plan Approved.First Look in Progress";
+						status.linkPage = " ";
+						status.modal = " ";
+					}
+
+					else if(apptData[i].floorPlanStatus===3){
+						status.statusText = "Rejected. An email has been sent with details, Upload again.";
+						status.linkPage = " ";
+						status.modal = "#calendarModal";
+					}
+					break;
+				}
+			}
+			
 		}
-	}
-	else{
+	if(!found){
 		status.statusText = "Schedule Meet and Measure";
 		status.linkPage = " ";
 		status.modal = "#calendarModal";
@@ -369,6 +246,9 @@ function populateStatus(projectData){
  		var currFinalLook = currRowData.finalLookData;
  		var currShoppingList = currRowData.shoppingListData;
  		var currPaymentData = currRowData.paymentData;
+ 		var currPkgData = currRowData.pkgData;
+ 		var currRoomData = currRowData.roomObj;
+ 		var currQzDetail = currRowData.quizDetailData;
  		var currQzId = currQzData.quizId;
  		var status = {};
 
@@ -377,20 +257,23 @@ function populateStatus(projectData){
 	 			//Payment Made. Check in decreasing order from feedback to FirstLook to  appt etc
 
 	 			if(currShoppingList && currShoppingList.length>0){
-	 				projectData[i].status = chkFinalPrjStatus(currShoppingList,currPaymentData);
+	 				projectData[i].status = chkFinalPrjStatus(currShoppingList,currPaymentData,currRoomData);
 	 			}
 
-	 			else if(currFinalLook && currFinalLook.length>0){
-	 				projectData[i].status = chkFinalLookStatus(currFinalLook);
+	 			if(isEmpty(projectData[i].status) && currFinalLook && currFinalLook.length>0){
+	 				projectData[i].status = chkFinalLookStatus(currFinalLook,currPkgData,currRoomData);
 	 			}
 
-	 			else if(currConceptBoard && currConceptBoard.length>0){
-	 				projectData[i].status = chkCncptStatus(currConceptBoard);
+	 			if(isEmpty(projectData[i].status) && currConceptBoard && currConceptBoard.length>0){
+	 				projectData[i].status = chkCncptStatus(currConceptBoard,currRoomData);
 	 			}
-	 			else if(currApptData && currApptData.length>0){
-	 				projectData[i].status = chkApptStatus(currApptData[0]);
+	 			if(isEmpty(projectData[i].status) && currApptData && currApptData.length>0){
+	 				 chkApptStatus(currApptData,currRoomData,projectData,i);
+
+
+
 	 			}
-	 			else{
+	 			if(isEmpty(projectData[i].status)){
 	 				status.statusText = "Schedule Meet and Measure";
 		 			status.linkPage = " ";
 		 			status.modal = "#calendarModal";
@@ -398,19 +281,30 @@ function populateStatus(projectData){
 	 			}
 	 		} //quizStatus<0
 	 		else{
-	 			status.statusText = "Pending Payment";
-	 			status.linkPage = "pricing";
-	 			status.modal = " ";
-	 			status.stage='payment';
-	 			projectData[i].status = status;
+
+	 			if(currQzDetail.length===0){
+					status.statusText = "Tell Us More";
+		 			status.linkPage = "quizDetails";
+		 			status.modal = " ";
+		 			status.stage='quizDetails';
+		 			projectData[i].status = status;
+	 			}
+	 			else{
+		 			status.statusText = "Pending Payment";
+		 			status.linkPage = "pricing";
+		 			status.modal = " ";
+		 			status.stage='payment';
+		 			projectData[i].status = status;
+	 			}
 	 		}
 	 	}
+
  	}
- 	for(var j = i+1; j<projectData.length;j++){
- 		if(projectData[j].quizData.quizId === currQzId){
- 			projectData[j].status = projectData[i].status;
- 		}
- 	}
+ 	// for(var j = i+1; j<projectData.length;j++){
+ 	// 	if(projectData[j].quizData.quizId === currQzId){
+ 	// 		projectData[j].status = projectData[i].status;
+ 	// 	}
+ 	// }
  }
 
  function populateQuizArray(projectData){
@@ -430,6 +324,7 @@ function populateStatus(projectData){
 			var relFeedbackArr = [];
 			var relPaymentArr = [];
 			var relShoppingList = [];
+			var relQuizDetail = [];
 			var statusArr = [];
 
 			if(!($scope.hasActiveProject)){
@@ -449,6 +344,14 @@ function populateStatus(projectData){
 				}
 			}
 
+			if(projectData.quizDetailData && projectData.quizDetailData.length>0){
+				for(var j= 0;j<projectData.quizDetailData.length; j++){
+					if(projectData.quizDetailData[j].quizId === currQzId){
+						relQuizDetail.push(projectData.quizDetailData[j]);
+					}
+				}
+			}
+
 			if(projectData.roomData && projectData.roomData.length>0){
 				for(var j= 0;j<projectData.roomData.length; j++){
 					if(projectData.roomData[j].quizId === currQzId){
@@ -463,6 +366,7 @@ function populateStatus(projectData){
 						relResultArr.push(projectData.resultData[j]);
 					}
 				}
+
 			}
 
 			if(projectData.apptData && projectData.apptData.length>0){
@@ -526,8 +430,18 @@ function populateStatus(projectData){
 					else{
 						currRoomName = roomDispName
 					}
-					prjArr.push({'userData':userData,'quizData':currQzObj,'roomData':currRoomName,
+
+					var pkgRoomId = relPkgArr[j].roomId;
+					for(var k = 0;k<relRoomArr.length;k++){
+						if(relRoomArr[k].id === pkgRoomId){
+							prjArr.push({'userData':userData,'quizData':currQzObj,'roomObj':relRoomArr[k],'roomData':currRoomName, 'quizDetailData': relQuizDetail,
 						'pkgData':relPkgArr[j],'resultData':relResultArr,'apptData':relApptArr,'firstLookData':relFLArr,'finalLookData':relFinalLookArr,'shoppingListData':relShoppingList,'paymentData':relPaymentArr});
+					
+							break;
+						}
+					}
+					// prjArr.push({'userData':userData,'quizData':currQzObj,'roomObj':relRoomArr,'roomData':currRoomName, 'quizDetailData': relQuizDetail,
+					// 	'pkgData':relPkgArr[j],'resultData':relResultArr,'apptData':relApptArr,'firstLookData':relFLArr,'finalLookData':relFinalLookArr,'shoppingListData':relShoppingList,'paymentData':relPaymentArr});
 			
 				}
 			}
@@ -542,7 +456,7 @@ function populateStatus(projectData){
 					else{
 						currRoomName = roomDispName
 					}
-					prjArr.push({'userData':userData,'quizData':currQzObj,'roomObj':relRoomArr,'roomData':currRoomName,
+					prjArr.push({'userData':userData,'quizData':currQzObj,'roomObj':relRoomArr[j],'roomData':currRoomName,'quizDetailData': relQuizDetail,
 						'pkgData':relPkgArr[j],'resultData':relResultArr,'apptData':relApptArr,'firstLookData':relFLArr,'finalLookData':relFinalLookArr,'shoppingListData':relShoppingList,'paymentData':relPaymentArr});
 				}
 			}
@@ -565,6 +479,8 @@ mvCustView.getCustProjectInfo().then(function(projectData){
 	populateQuizArray(projectData);
 	console.log('Formatted Result :');
 	console.log($scope.projectArr);
+
+
 }, function(reason){
 		console.log('Cant find user Data');
 		mvNotifier.notify('Please try again later/ contact the site administrator. '+reason);
@@ -572,11 +488,19 @@ mvCustView.getCustProjectInfo().then(function(projectData){
 	});
 }
 
-$scope.pricing = function(index){
+function setQuizData(index){
 	var quizData = $scope.projectArr[index];
-	var roomData = $scope.projectArr[index].roomObj;
+	var currRoomObj = $scope.projectArr[index].roomObj;
+	var quizId = currRoomObj.quizId;
 	var objRoomArr = [];
 	var room_name;
+	var roomData = [];
+
+	for(var i=0;i<$scope.projectArr.length;i++){
+		if($scope.projectArr[i].quizData.quizId === quizId){
+			roomData.push($scope.projectArr[i].roomObj);
+		}
+	}
 
 	console.log(roomData);
 
@@ -602,8 +526,18 @@ $scope.pricing = function(index){
 	console.log(objRoomArr);
 	storeQuizInfo(quizData);
 	quizResult.storeUserQuizInfo({"roomSelected":objRoomArr,"quizImgSelected":null});
+	quizResult.setInsertedRooms(roomData);
+}
+$scope.pricing = function(index){
+	setQuizData(index);
 	$location.path('/pricing');
-	
+}
+
+$scope.getQuizDetail = function(index){
+	var quizData = $scope.projectArr[index];
+	quizResult.setUserCurrQuiz(quizData.quizId);
+	setQuizData(index);
+	$location.path('/tell-us-more');
 }
 
 $scope.addRoom=function(){
@@ -678,6 +612,7 @@ $scope.saveAppointment = function(item){
 	else if(isValidForm){
 		var row_id = item.currentTarget.getAttribute("data-row-id");
 		var quizId = $scope.projectArr[row_id].quizData.quizId;
+		var roomId = $scope.projectArr[row_id].roomObj.id;
 		var customerId = $scope.projectArr[row_id].userData.id;
 
 		if($scope.fileArr.length===0 &&	$scope.apptDate===null){
@@ -727,7 +662,7 @@ $scope.saveAppointment = function(item){
 							 "apptStatus":0};
 					}
 					else{
-						apptData = {"customerId":customerId,"quizId":quizId,"address":$scope.address,
+						apptData = {"customerId":customerId,"quizId":quizId,"roomId":roomId,"address":$scope.address,
 							 "person":$scope.person,"contact":$scope.contact,
 							 "apptDate":null,"apptTime":null,
 							 "floorPlanLoc":files,"floorPlanStatus":0,
@@ -834,31 +769,66 @@ $scope.timeOptions = {
 $scope.ismeridian = true;
 
 
-$scope.getFirstLook = function(index){
+$scope.getFirstLook = function(index, roomId){
 	
+	$scope.feedbackSaved = false;
 	$scope.currentFirstLook = 0;
 	$scope.rowId = index;
-	// var firstLookArr = $scope.projectArr[index].firstLookData;
+	var firstLookArr = [];
 	$scope.images = [];
 	$scope.cncptObj = [];
 	var concept_img;
 	var concept_type;
-	
+	var hasShoppingList = false;
+	var hasFinalLook = false;
 
-	if($scope.projectArr[index].finalLookData.length>0){
-		firstLookArr = $scope.projectArr[index].finalLookData;
-		concept_type =2;
-		$scope.lookText = "Final Look";
+	if($scope.projectArr[index].shoppingListData.length>0){
+		for(var i =0;i<$scope.projectArr[index].shoppingListData.length; i++){
+			if($scope.projectArr[index].shoppingListData[i].roomId === roomId){
+				firstLookArr.push($scope.projectArr[index].shoppingListData[i]);
+				hasShoppingList = true;
+			}
+		}
+		if(hasShoppingList){
+			concept_type =3;
+			$scope.lookText = "Shopping List";
+			$scope.isFinalPage = true;
+		}
 	}
 
-	else if($scope.projectArr[index].firstLookData.length>0){
-		firstLookArr = $scope.projectArr[index].firstLookData;
+	if(!hasShoppingList && $scope.projectArr[index].finalLookData.length>0){
+		for(var i =0;i<$scope.projectArr[index].finalLookData.length; i++){
+			if($scope.projectArr[index].finalLookData[i].roomId === roomId){
+				firstLookArr.push($scope.projectArr[index].finalLookData[i]);
+				hasFinalLook = true;
+			}
+		}
+		if(hasFinalLook){	
+			concept_type =2;
+			$scope.lookText = "Final Look";
+		}
+	}
+
+	if(!hasShoppingList && !hasFinalLook && $scope.projectArr[index].firstLookData.length>0){
+		for(var i =0;i<$scope.projectArr[index].firstLookData.length; i++){
+			if($scope.projectArr[index].firstLookData[i].roomId === roomId){
+				firstLookArr.push($scope.projectArr[index].firstLookData[i]);		
+			}
+		}
+		
 		concept_type =1;
 		$scope.lookText = "First Look";
 	}
 
 	if(firstLookArr!=null && firstLookArr.length>0){
 		for(var i=0;i<firstLookArr.length;i++){
+
+			//Populate existing feedback in array
+			if(concept_type < 3){
+				if(firstLookArr[i].feedbackData.length > 0){
+					$scope.feedbackArr[i] = firstLookArr[i].feedbackData[0].comments;
+				}
+			}
 			if(firstLookArr[i].files.indexOf(',')===-1){
 				$scope.images.push('./uploads/'+firstLookArr[i].files);
 				concept_img='./uploads/'+firstLookArr[i].files;
@@ -875,25 +845,32 @@ $scope.getFirstLook = function(index){
 
 			}
 		}
-		//console.log($scope.cncptObj);
 	}
 	//console.log($scope.images);
 	$scope.zoomImgSrc = $scope.images[0];
-	$scope.showFeedback = true;
+	$scope.zoomImgIndex = 0;
 	$scope.showMain = false;
-	console.log($scope.lookText);
+	if(concept_type < 3){
+		$scope.feedbackComment = $scope.feedbackArr[0];
+	}
+		$scope.showFeedback = true;
+		
+
+	
 }
 
 
 
 $scope.zoomImg = function(index){
+	var oldImgIdx = $scope.zoomImgIndex;
+	$scope.feedbackArr[oldImgIdx] = $scope.feedbackComment;
 	$scope.zoomImgSrc = $scope.images[index];
+	$scope.zoomImgIndex = index;
 	$scope.currentFirstLook = index;
 	$scope.feedbackComment = $scope.feedbackArr[index];
-	//console.log($scope.zoomImgSrc);
 }
 
-$scope.saveFeedback = function(){
+/*$scope.saveFeedback = function(){
 	
 	if($scope.feedbackComment===' '){
 		alert('No Feedback entered');
@@ -903,15 +880,17 @@ $scope.saveFeedback = function(){
 		console.log($scope.feedbackArr);
 		mvNotifier.notify('Feedback saved');
 	}
-}
+}*/
 
-$scope.submitFeedback = function(){
+$scope.submitFeedback = function(status){
 
 	var comments='';
 	var concept_type;
-
+	
+	$scope.feedbackArr[$scope.currentFirstLook] = $scope.feedbackComment;
+	
 	if($scope.feedbackArr.length===0){
-		alert('Please save your feedback before submitting');
+		alert('No feedback entered');
 	}
 	else{
 		concept_type = $scope.cncptObj[0].concept_type;
@@ -924,29 +903,49 @@ $scope.submitFeedback = function(){
 		console.log($scope.cncptObj)
 		for(var i =0;i<$scope.cncptObj.length;i++){
 			if('feedback' in $scope.cncptObj[i]){
-				cncptFeedArr.push({status:0, comments: $scope.cncptObj[i].feedback, created_at:null, updated_at:null,concept_id:$scope.cncptObj[i].concept_id});
+				cncptFeedArr.push({status:status, comments: $scope.cncptObj[i].feedback, created_at:null, updated_at:null,concept_id:$scope.cncptObj[i].concept_id});
 			}
 		}
-		console.log('cncptFeedArr is: ');
-		console.log(cncptFeedArr);
 
 		mvCustView.submitFeedback(cncptFeedArr,concept_type).then(function(response){
 			if(response){
 				mvNotifier.notify('Feedback submitted');
 				// $location.path('/dashboard');
-				window.location.reload(true);
+				
+				if(status===0){
+					$scope.feedbackSaved = true;
+					window.location.reload(true);
+				}
 			}
 			else{
 				mvNotifier.notify('Error in saving feedback. Please try again');	
 			}
 
 		}, function(reason){
-			console.log('Cant save feedback: '+reason);
 			mvNotifier.notify('Error in saving feedback. Please try again: '+reason);
 			//Close popup
 		});
 	}
 }
+
+$scope.$on('$locationChangeStart', function( event ) {
+	if(typeof $scope.feedbackSaved != 'undefined' && !$scope.feedbackSaved && !$scope.isFinalPage){
+	    var answer = confirm("Your feedback has not been submitted. Are you sure you want to leave this page?")
+	    if (!answer) {
+	        event.preventDefault();
+	    }
+	}
+});
+
+ function isEmpty(obj) {
+
+    for (var key in obj) {
+        if (hasOwnProperty.call(obj, key)) return false;
+    }
+
+    return true;
+}
+
 
 })
 

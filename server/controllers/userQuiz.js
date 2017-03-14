@@ -1,5 +1,6 @@
-var mysqlConn = require('../config/mysqlConn');
-
+var mysqlConn = require('../config/mysqlConn'),
+	async = require('async');
+	userProject = {};
 
 exports.createUserQuiz = function(req,res,next){
 	var customerId = req.body.customerId;
@@ -24,10 +25,6 @@ exports.createUserQuiz = function(req,res,next){
 						conn.release();
 						res.send(results[0]);
 						//TODO: refresh updated_at timestamp in cust_quiz table.
-						
-						// usrQuizCol.models[0].where(customerId:userId).save({}, { method: 'update' });
-						//1: update
-						//saveQuizData(req.body.quizInfo,1)
 					}
 				}
 
@@ -54,6 +51,72 @@ exports.createUserQuiz = function(req,res,next){
 }
 
 
+function updQzResult(conn,quizId,data,cb){
+
+	conn.query('delete from cust_quiz_result where quizId = '+conn.escape(quizId), 
+	function(err, results, fields){
+		if(err){
+			console.log('Error while deleting existing quiz result: '+err);
+			cb(err,null);
+		}
+		console.log('Deleted old unpaid quiz selected data');
+		conn.query('insert into cust_quiz_result (quizId, stylePercent, styleId) values ?',[data],
+		function(err, results, fields){
+			if(err){
+				console.log('Error in saving result data'+err);
+				cb(err,null);
+			}
+			console.log('Result saved');
+			cb(null,results);
+		});
+	});
+}
+
+function updQzRoom(conn,quizId,data,cb){
+
+	conn.query('delete from cust_room_selection where quizId = '+conn.escape(quizId), function(err, results, fields){
+		if(err){
+			console.log('Error while deleting prev room selection info '+err);
+			cb(err,null);
+		}
+		console.log('Deleted prev room selections');
+		conn.query('insert into cust_room_selection(quizId,roomId,roomName,numRoom) values ?',[data], function(err, results, fields){
+			if(err){
+				console.log('Error in saving room selection data'+err);
+				cb(err,null);
+			}
+			console.log('Room Info saved');
+			conn.query('select * from cust_room_selection where quizId='+conn.escape(quizId), function(err, results, fields){
+				if(err){
+					cb(err,null);
+				}
+				cb(null,results);
+			});
+			
+		});
+	});
+
+}
+
+function updQzImg(conn,quizId,data,cb){
+
+	conn.query('delete from cust_img_selection where quizId = '+conn.escape(quizId), function(err, results, fields){
+		if(err){
+			console.log('Error while deleting prev img selection info '+err);
+			cb(err,null);
+		}
+		console.log('Deleted prev img selections');
+		conn.query('insert into cust_img_selection(quizId,questionId,selectedImgId) values ? ',[data], function(err, results, fields){
+			if(err){
+				console.log('Error in saving img selection data'+err);
+				cb(err,null);
+			}
+			console.log('Img Info saved');
+			cb(null,results);
+		});
+	});
+
+}
 
 exports.saveUserQuizDtls = function(req,res,next){
 	var userId = req.body.customerId;
@@ -78,8 +141,18 @@ console.log(quizDtls);
 								 && userSelectionData.roomSelected.length>0){
 		for(var i =0; i<userSelectionData.roomSelected.length;i++){
 
-			var currRoomData = [quizId,userSelectionData.roomSelected[i].room_disp_name,userSelectionData.roomSelected[i].room_num.value];
-			userRoomData.push(currRoomData);
+			var numRoom = userSelectionData.roomSelected[i].room_num.value;
+			if(numRoom>1){
+				for(var j=1;j<=numRoom;j++){
+					var currRoomData = [quizId,userSelectionData.roomSelected[i].room_id,userSelectionData.roomSelected[i].room_disp_name,j];	
+					userRoomData.push(currRoomData);
+				}
+			}
+			else{
+				var currRoomData = [quizId,userSelectionData.roomSelected[i].room_id,userSelectionData.roomSelected[i].room_disp_name,0];
+				userRoomData.push(currRoomData);
+			}
+			
 		} 
 	}
 	if(userSelectionData!=null && userSelectionData.quizImgSelected!=null
@@ -103,7 +176,36 @@ console.log(quizDtls);
 		mysqlConn.getConnection(function(err,conn){
 			if(err){return next(err);}
 	        if(conn){
-				conn.query('delete from cust_quiz_result where quizId = '+conn.escape(quizId), function(err, results, fields){
+	        	async.parallel([
+							async.apply(updQzResult,conn,quizId,userQuizResult),
+							async.apply(updQzRoom,conn,quizId,userRoomData),
+							async.apply(updQzImg,conn,quizId,userImgData)
+						], function (err, result) {
+						     if(err){
+						     	conn.release();
+						     	console.log(err);
+						     	res.send({success: false, reason:err.toString()});
+						     }
+						    userProject.resultData = result[0];
+			                userProject.roomData = result[1];
+			                userProject.imgData = result[2];
+			                conn.release();
+			                res.send({'success':true,'results':userProject});
+						});
+
+
+
+
+
+
+
+
+
+
+
+
+
+				/*conn.query('delete from cust_quiz_result where quizId = '+conn.escape(quizId), function(err, results, fields){
 					if(err){
 						console.log('Error while deleting existing quiz result: '+err);
 						res.send({reason:err.toString()});
@@ -124,7 +226,7 @@ console.log(quizDtls);
 						res.send({reason:err.toString()});
 					}
 					console.log('Deleted prev room selections');
-					conn.query('insert into cust_room_selection(quizId,roomName,numRoom) values ?',[userRoomData], function(err, results, fields){
+					conn.query('insert into cust_room_selection(quizId,roomId,roomName,numRoom) values ?',[userRoomData], function(err, results, fields){
 						if(err){
 							console.log('Error in saving room selection data'+err);
 							res.send({response:err.toString()});
@@ -148,7 +250,7 @@ console.log(quizDtls);
 						res.send(true);
 						res.end();
 					});
-				});
+				});*/
 			}
 		});
 	}

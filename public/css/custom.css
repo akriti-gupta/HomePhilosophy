@@ -1479,19 +1479,20 @@ div.faq.show {
   width: auto;
 }
 .cust-view-tab,.admin-view-tab{
+  display: table-cell;
   border-right:1px solid black;
   text-align: center;
+  float: none;
+  vertical-align: middle;
 }
 
 .admin-view-row{
   width:100%;
 }
-.cust-view-tab{
-  padding:50px;
-}
 
 .admin-view-tab{
   padding:20px 0px;
+  
 }
 
 

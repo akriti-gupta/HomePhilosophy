@@ -11,7 +11,6 @@ function getUser(conn,userId,cb){
 	conn.query(options, function(err, userInfo, fields){
 		if(err){
 			console.log('Error in fetching userInfo in getQuiz'+err);
-			conn.release();
 			cb(err,null)
 		}
 		else if(userInfo.length>0){
@@ -31,8 +30,7 @@ function getQuiz(conn,quizIds,cb){
 	conn.query(options, function(err, quizInfo, fields){
 		if(err){
 			console.log('Error in fetching quiz info in getQuiz'+err);
-			conn.release();
-			cb(err,null)
+			cb(err,null);
 		}
 		else if(quizInfo.length>0){
 			for(var i =0; i<quizInfo.length;i++){
@@ -52,8 +50,7 @@ function getCustQuizDtls(conn,quizIds,cb){
 	conn.query(options, function(err, quizInfo, fields){
 		if(err){
 			console.log('Error in fetching quiz info in getQuiz'+err);
-			conn.release();
-			cb(err,null)
+			cb(err,null);
 		}
 		else if(quizInfo.length>0){
 			for(var i =0; i<quizInfo.length;i++){
@@ -73,8 +70,7 @@ function getResult(conn,quizIds,cb){
 	conn.query(options, function(err, resultInfo, fields){
 		if(err){
 			console.log('Error in fetching result for quiz '+err);
-			conn.release();
-			cb(err,null)
+			cb(err,null);
 		}
 		else if(resultInfo.length>0){
 			for(var i =0; i<resultInfo.length;i++){
@@ -97,8 +93,7 @@ function getImages(conn,quizIds,cb){
 	conn.query(options, function(err, imgInfo, fields){
 		if(err){
 			console.log('Error in fetching images for quiz '+err);
-			conn.release();
-			cb(err,null)
+			cb(err,null);
 		}
 		else if(imgInfo.length>0){
 			console.log(imgInfo);
@@ -118,8 +113,7 @@ function getRooms(conn,quizIds,cb){
 	conn.query(options, function(err, roomInfo, fields){
 		if(err){
 			console.log('Error in fetching rooms for quiz '+err);
-			conn.release();
-			cb(err,null)
+			cb(err,null);
 		}
 		else if(roomInfo.length>0){
 			for(var i =0; i<roomInfo.length;i++){
@@ -140,7 +134,6 @@ function getPackage(conn,quizIds,cb){
 	conn.query(options, function(err, pkgInfo, fields){
 		if(err){
 			console.log('Error in fetching pkgs for quiz '+err);
-			conn.release();
 			cb(err,null);
 		}
 		else if(pkgInfo.length>0){
@@ -163,7 +156,6 @@ function getPackageTxn(conn,quizIds,cb){
 	conn.query(options, function(err, txnInfo, fields){
 		if(err){
 			console.log('Error in fetching paymentData for quiz '+err);
-			conn.release();
 			cb(err,null);
 		}
 		else if(txnInfo.length>0){
@@ -186,7 +178,6 @@ function getAppt(conn,quizIds,cb){
 	conn.query(options, function(err, apptInfo, fields){
 		if(err){
 			console.log('Error in fetching pkgs for quiz '+err);
-			conn.release();
 			cb(err,null);
 		}
 		else if(apptInfo.length>0){
@@ -208,7 +199,6 @@ function getShoppingList(conn,quizIds,cb){
 	conn.query(options, function(err, shoppingListInfo, fields){
 		if(err){
 			console.log('Error in fetching shopping list for quiz '+err);
-			conn.release();
 			cb(err,null);
 		}
 		// console.log(flookInfo);
@@ -231,7 +221,6 @@ function getFinalLook(conn,quizIds,cb){
 	conn.query(options, function(err, finalLook, fields){
 		if(err){
 			console.log('Error in fetching final look for quiz '+err);
-			conn.release();
 			cb(err,null);
 		}
 		// console.log(flookInfo);
@@ -440,7 +429,8 @@ exports.getCustProjectInfo = function(req,res,next){
 							async.apply(getConceptBoard,conn,quizIds),
 							async.apply(getFinalLook,conn,quizIds),
 							async.apply(getShoppingList,conn,quizIds),
-							async.apply(getPackageTxn,conn,quizIds)
+							async.apply(getPackageTxn,conn,quizIds),
+							async.apply(getCustQuizDtls,conn,quizIds)
 						], function (err, result) {
 						     //This code will be executed after all previous queries are done (the order doesn't matter).
 						     //For example you can do another query that depends of the result of all the previous queries.
@@ -459,6 +449,7 @@ exports.getCustProjectInfo = function(req,res,next){
 			                userProjects.finalLookData = result[5];
 			                userProjects.shoppingListData = result[6];
 			                userProjects.paymentData = result[7];
+			                userProjects.quizDetailData = result[8];
 			                conn.release();
 			                res.send({'success':true,'results':userProjects});
 						});
@@ -610,7 +601,12 @@ exports.saveAppointment = function(req,res,next){
 		if(err){return next(err);}
 		
         if(conn){
-        	var qry_usr_appt = 'Select * from cust_appointment where quizId='+conn.escape(apptData.quizId);
+        	var qry_usr_appt;
+        	if(apptData.apptStatus===0)
+        		qry_usr_appt = 'Select * from cust_appointment where quizId='+conn.escape(apptData.quizId);
+        	else
+        		qry_usr_appt = 'Select * from cust_appointment where quizId='+conn.escape(apptData.quizId)+' and roomId='+conn.escape(apptData.roomId);
+
         	var options = {sql:qry_usr_appt,nestTables: true};
 
     		conn.query(options, function(err, userAppt, fields){
@@ -658,6 +654,7 @@ exports.saveAppointment = function(req,res,next){
 					//Add data
 					var usrApptData = {
 									quizId:apptData.quizId,
+									roomId:apptData.roomId,
 								   	roomName:'',
 								   	apptDate:apptData.apptDate,
 								   	apptTime: apptData.apptTime,
@@ -688,7 +685,7 @@ exports.saveAppointment = function(req,res,next){
 exports.modifyUsrAppt = function(req,res,next){
 	var data = req.body.data;
 	var action = data.action;
-	var updData =[data.status,new Date(),data.quizId];
+	var updData =[data.status,new Date(),data.quizId,data.roomId];
 	
 	var qry_upd_apt;
 
@@ -697,7 +694,7 @@ exports.modifyUsrAppt = function(req,res,next){
 		qry_upd_apt='update cust_appointment set apptStatus = ?, updated_at=? where quizId=?';
 	}
 	else if(action===2){
-		qry_upd_apt='update cust_appointment set floorPlanStatus = ?,updated_at=? where quizId=?';
+		qry_upd_apt='update cust_appointment set floorPlanStatus = ?,updated_at=? where quizId=? and roomId=?';
 	}
 	mysqlConn.getConnection(function(err,conn){
 		if(err){
@@ -725,15 +722,13 @@ exports.modifyUsrAppt = function(req,res,next){
 
 exports.saveConceptBoard = function(req,res,next){
 	var data = req.body.data; //array of objs
-	 
-	data.created_at = new Date();
-	data.updated_at = new Date();
-
 	mysqlConn.getConnection(function(err,conn){
 		if(err){return next(err);}
 		
         if(conn){
         	for(var i = 0;i<data.length;i++){
+        		data[i].created_at = new Date();
+				data[i].updated_at = new Date();
 	        	conn.query('insert into concept_board set ?', data[i], function(err, results, fields){
 					if(err){
 						console.log('Error in inserting concept board data '+err);
@@ -803,13 +798,14 @@ exports.saveShoppingList = function(req,res,next){
 exports.submitFeedback = function(req,res,next){
 	var data = req.body.data;
 	var concept_type = req.body.concept_type;
-	var qry;
+	var ins_qry;
 
 	if(concept_type===1){
-		qry='insert into concept_board_feedback set ?';
+		qry = 'INSERT INTO concept_board_feedback set ? ON DUPLICATE KEY UPDATE status = ?, comments=?';
 	}
 	else if(concept_type===2){
-		qry='insert into final_look_feedback set ?';
+		qry = 'INSERT INTO final_look_feedback set ? ON DUPLICATE KEY UPDATE status = ?, comments=?';
+		
 	}
 
 	mysqlConn.getConnection(function(err,conn){
@@ -817,7 +813,7 @@ exports.submitFeedback = function(req,res,next){
 		
         if(conn){
         	for(var i =0;i<data.length;i++){
-        		conn.query(qry, data[i], function(err, results, fields){
+        		conn.query(qry, [data[i],data[i].status,data[i].comments], function(err, results, fields){
 					if(err){
 						console.log('Error in inserting concept board feedback for filetype: '+concept_type+' Err: '+err);
 						conn.release();

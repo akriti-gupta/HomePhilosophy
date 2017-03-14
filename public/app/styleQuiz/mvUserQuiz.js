@@ -18,8 +18,10 @@ angular.module('app').factory('mvUserQuiz', function($http, mvIdentity, $q, quiz
 	  					  quizInfo:userQuizResult,
 	  					  userSelection:userSelectionData, 
 	  					  status:userQuizDtl.data.status 
-	  					}).then(function(){
-	  					 		dfd.resolve(userQuizDtl);
+	  					}).then(function(quizDtls){
+	  							var quizDtls = [userQuizDtl,quizDtls]
+	  					 		//dfd.resolve(userQuizDtl);
+	  					 		dfd.resolve(quizDtls);
 	  						}), 
 	  					function(response){
 	  						console.log('Error in saveUserQuizDtls : '+response.data.reason);

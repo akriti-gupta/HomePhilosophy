@@ -1045,7 +1045,9 @@ $scope.gridWidth=300;
 						console.log('$scope.showResult is: '+$scope.showResult);
 		  				mvUserQuiz.saveUserData(userSelectionInfo, result).then(function(userQuiz){
 							$scope.showResult = true;
-		  					quizResult.setUserCurrQuiz(userQuiz.data.quizId);
+							console.log(userQuiz);
+		  					quizResult.setUserCurrQuiz(userQuiz[0].data.quizId);
+		  					quizResult.setInsertedRooms(userQuiz[1].data.results.roomData);
 		  					$scope.pagenum++;
 		  				}, function(reason){
 		  					console.log(reason);
@@ -1319,7 +1321,8 @@ $scope.gridWidth=300;
 			console.log('$scope.showResult is: '+$scope.showResult);
 			mvUserQuiz.saveUserData(userSelectionInfo, result).then(function(userQuiz){
 				$scope.showResult = true;
-					quizResult.setUserCurrQuiz(userQuiz.data.quizId);
+					quizResult.setUserCurrQuiz(userQuiz[0].data.quizId);
+					quizResult.setInsertedRooms(userQuiz[1].data.results.roomData);
 					$location.path('/tell-us-more');
 				}, function(reason){
 					console.log(reason);

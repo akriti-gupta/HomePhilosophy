@@ -1,7 +1,7 @@
 var config = require('./config'),
 	nodemailer = require('nodemailer'),
 	templatesDir = config.rootPath +'/views/mailer',
-    EmailTemplate = require('email-templates').EmailTemplate;
+  EmailTemplate = require('email-templates').EmailTemplate;
 
 var transporter = nodemailer.createTransport({
     host: 'smtp.zoho.com',
@@ -14,13 +14,13 @@ var transporter = nodemailer.createTransport({
 });
 
 
-/*var transporter = nodemailer.createTransport('SMTP', {
-  service: 'Gmail',
-  auth: {
-    user: config.mailer.auth.user,
-    pass: config.mailer.auth.pass
-  }
-});*/
+// let transporter = nodemailer.createTransport({
+//   service: 'Gmail',
+//   auth: {
+//     user: 'guptaakriti83@gmail.com',
+//     pass: 'Indi$Singa'
+//   }
+// });
 
 
 var mailOptions = {
