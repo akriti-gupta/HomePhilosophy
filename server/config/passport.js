@@ -41,12 +41,8 @@ module.exports = function(){
     passport.use(new FacebookStrategy({
 
         // pull in our app id and secret from our auth.js file
-        // clientID        : '118647685254312',
-        // clientSecret    : '00b53f5364ad582f67c1ba5d7e269acd',
-        // callbackURL     : 'http://homephilosophy.com.sg/auth/facebook/callback'
-
-        clientID        : '1123799114413407',
-        clientSecret    : 'bd3dea47fe556f93f9a8895acd34763c',
+        clientID        : '118647685254312',
+        clientSecret    : '00b53f5364ad582f67c1ba5d7e269acd',
         callbackURL     : 'http://homephilosophy.com.sg/auth/facebook/callback'
     },
 
