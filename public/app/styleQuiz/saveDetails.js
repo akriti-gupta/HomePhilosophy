@@ -1,5 +1,5 @@
 angular.module('app')
-    .controller('SaveDetails',function($scope,$location,payment,mvUpload,quizResult,mvUserQuiz){
+    .controller('SaveDetails',function($scope,$location,payment,mvUpload,mvNotifier,quizResult,mvUserQuiz){
 
   $scope.url ="";
   $scope.pendingFilesArr =[];
