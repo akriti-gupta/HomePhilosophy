@@ -366,6 +366,7 @@ button:focus {outline:0;}
   padding-top: 15px;
   padding-bottom:2px;
   margin: 0 18px;
+  vertical-align: top;
 }
 
 .topnav li:nth-child(1){
@@ -413,18 +414,12 @@ button:focus {outline:0;}
   cursor: pointer;
   color: #64C6BE;
 }
-.nav-login,.nav-login-usr{
-  position: absolute;
-  top:65%;
-  /*right: 30px;*/
-  left:89.5%;
+.nav-login{
+  margin-top:10px;
 }
 
 .nav-login-usr{
-  position: absolute;
-  top:65%;
-  right: 5px;
-  
+  margin-top: 35px;
 }
 
 .img2{

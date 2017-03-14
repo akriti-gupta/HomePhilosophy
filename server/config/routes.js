@@ -1,5 +1,5 @@
 var multer = require('multer'),
-	//mailer = require('./mailer'),
+	mailer = require('./mailer'),
 	auth = require('./auth'),
 	quiz = require('./quiz'),	
 	users = require('../controllers/users'),
@@ -11,7 +11,8 @@ var multer = require('multer'),
 
 var storage =   multer.diskStorage({
   destination: function (req, file, callback) {
-    callback(null, './public/uploads/');
+    // callback(null, './public/uploads/');
+    callback(null, '/root/HomePhilosophy/public/uploads/');
   },
   filename: function (req, file, callback) {
   	var fileName = file.originalname.substr(0,file.originalname.indexOf('.'));
@@ -24,11 +25,11 @@ var upload = multer({ storage : storage }).array('fileArr');
 
 module.exports = function(app){
 
-	// app.post('/sendEmail',mailer.sendEmail);
-		app.post('/sendEmail',function(req,res){
-			console.log('Mail sent');
-			return res.send({success:true});
-		});
+	app.post('/sendEmail',mailer.sendEmail);
+		// app.post('/sendEmail',function(req,res){
+		// 	console.log('Mail sent');
+		// 	return res.send({success:true});
+		// });
 
 	app.get('/api/users',auth.requiresRole('admin'),users.getUsers);
 	//Gets called on Sign in, while $save of user resource	
