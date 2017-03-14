@@ -1102,12 +1102,12 @@ padding-left:10px;
 /* */
 
 .portfolio-information {
-    padding: 30px 0px 20px;
+    padding: 0px 0px 25px;
     /*max-width: 1100px;
     width: 90%;*/
     margin: 0px auto;
     /*display: flex;*/
-    height: 170px;
+    /*height: 170px;*/
     background-color: #fff;
 }
 
@@ -1561,9 +1561,13 @@ div.faq.show {
   width:100%;
 }
 .lux-contact-text{
-   padding-top:70%;
+   padding-top:40%;
    font-size:17px;
    font-family: PlayfairDisplay-Regular;
+   padding-left: 25px;
+   padding-right: 25px;
+   line-height: 200%;
+   text-align: justify;
 }
 .lux-panel2-img-ctr{
   background-color:#fff;padding-top:10px;

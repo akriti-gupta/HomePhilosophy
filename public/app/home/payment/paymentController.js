@@ -7,6 +7,7 @@ angular.module("app")
   	$scope.totalPrice = 1;
   	$scope.roomSelectionArr = [];
   	$scope.roomPkg = [];
+  	$scope.showTitle = false;
   	var totalRooms = 0;
   	var roomObj = [];
 
@@ -21,6 +22,13 @@ angular.module("app")
 
   	//$scope.selectedRooms = quizResult.getCustSelections().roomSelected;	
   	$scope.selectedRooms = quizResult.getInsertedRooms();	
+  	if($scope.selectedRooms.length > 0){
+  		$scope.showTitle = true;
+  	}
+  	else{
+  		$scope.showTitle = false;	
+  	}
+  	
 	for (var i=0;i<$scope.selectedRooms.length;i++){
 		// if($scope.selectedRooms[i].room_num.id > 1){
 		// 	for(var j=1; j<= $scope.selectedRooms[i].room_num.id; j++){
