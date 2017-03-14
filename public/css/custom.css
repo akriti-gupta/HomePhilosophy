@@ -377,7 +377,7 @@ button:focus {outline:0;}
 }
 
 
-.tab_icon{
+.tab_icon,.nav-login-tab{
     display: none;
 }
 
@@ -485,6 +485,9 @@ button:focus {outline:0;}
         top: 40px;
         right: 0;
         font-size: 20px;
+    }
+    .nav-login-tab{
+      display: inline-block;
     }
 
     .tab_icon a , .tab-icon-quiz a{
