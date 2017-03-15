@@ -1,60 +1,62 @@
 <header id="site_header">
-	<a href="/"><div class="hp-logo"></div></a>
+  <a href="/"><div class="hp-logo"></div></a>
 
-	<div id="hp-nav">
-	    <ul class="topnav">
-	    	<li>
-	            <a href="/style-quiz" id="start-quiz">
-	                <button type="button" class="btn-start-quiz btn-topnav font-montserrat txt-upper col-lightcyan fs-14px">Get Started</button>
-	            </a>
-	        </li>
-	        <li><a href="/about-us">How it works</a></li>
-			<li><a href="/pricing">Pricing</a></li>
-	        <li><a href="/portfolio" id="portfolio-link">Portfolio</a></li>
-	        <li><a href="/luxury-spaces">Luxury spaces</a></li>
-	        <li><a href="/faq">FAQ</a></li>
-	        <li><a href="/contact-us">Contact us</a></li>
+  <div id="hp-nav">
+    <ul class="topnav">
+      
+      <li><a href="/style-quiz" id="start-quiz"><button type="button" class="btn-start-quiz btn-topnav font-montserrat txt-upper col-lightcyan fs-14px">Get Started</button></a></li>
+      
+      <li><a href="/about-us">How it works</a></li>
+      <li><a href="/pricing">Pricing</a></li>
+      <li><a href="/portfolio" id="portfolio-link">Portfolio</a></li>
+      <li><a href="/luxury-spaces">Luxury spaces</a></li>
+      <li><a href="/faq">FAQ</a></li>
+      <li><a href="/contact-us">Contact us</a></li>
+      <li>
+        <div class="dropdown" ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
+          <a href = "/login">SIGN IN</a>
+        </div>
+      </li>
+      <li style="padding-top:8px;">
+        <a href="/style-quiz" id="start-quiz"><button type="button" class="btn-start-quiz btn-topnav font-montserrat txt-upper col-lightcyan fs-14px">Get Started</button></a>
 
-	        <li>
-	        	<div class="dropdown" ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
-					 <a href = "/login">SIGN IN</a>
-				</div>
-	        </li>
-	        <li style="padding-top:8px;">
-	            <a href="/style-quiz" id="start-quiz">
-	                <button type="button" class="btn-start-quiz btn-topnav font-montserrat txt-upper col-lightcyan fs-14px">Get Started</button>
-	            </a>
+        <div class="dropdown nav-login" ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
+          <a href = "/login" style="color:rgb(161,161,161);">SIGN IN</a>
+        </div>
 
-	            <div class="dropdown nav-login" ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
-	    		<a href = "/login" style="color:rgb(161,161,161);">SIGN IN</a>
-				</div>
+        <div class="dropdown nav-login-usr" ng-controller="LoginController" ng-show="identity.isAuthenticated()">
+          <a href="" data-toggle="dropdown" >{{identity.currentUser.firstname}}
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" style="min-width:0px;">
+            
+            <li ng-if="identity.currentUser.role==='admin'">
+              <a style="font-family:Montserrat-Regular;font-size:13px;" href="/admin/users">MY ACCOUNT</a>
+            </li>
+            
+            <li ng-if="identity.currentUser.role!='admin'"><a style="font-family:Montserrat-Regular;font-size:13px;" href="/dashboard">MY ACCOUNT</a></li>
+            
+            <li style="padding:0px;margin:0;"><a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
 
-	    		<div class="dropdown nav-login-usr" ng-controller="LoginController" ng-show="identity.isAuthenticated()">
-	    			<a href="" data-toggle="dropdown" >{{identity.currentUser.firstname}}
-	    				<span class="caret"></span>
-	    			</a>
-					<ul class="dropdown-menu" style="min-width:0px;">
-						<li ng-if="identity.currentUser.role==='admin'" style="display:inline-block;margin:0px;"><a style="font-family:Montserrat-Regular;font-size:13px;" href="/admin/users">MY ACCOUNT</a></li>
-						<li ng-if="identity.currentUser.role!='admin'"><a style="font-family:Montserrat-Regular;font-size:13px;display:inline-block;margin:0px;" href="/dashboard">MY ACCOUNT</a></li>
-						<li style="padding:0px;margin:0;"><a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a></li>
-	   				</ul>
-				</div>
-	        </li>
-	    </ul>
-    	<div class="tab_icon">
-        	<a href="javascript:void(0);" onclick="displayDropDown()">&#9776;</a>
-    	</div>
-    	<div class="dropdown nav-login-usr nav-login-tab" style="margin-top:55px;" ng-controller="LoginController" ng-show="identity.isAuthenticated()">
-			<a href="" data-toggle="dropdown" >{{identity.currentUser.firstname}}
-				<span class="caret"></span>
-			</a>
-			<ul class="dropdown-menu" style="min-width:0px;right:0;left:inherit;">
-				<li ng-if="identity.currentUser.role==='admin'" style="display:inline-block;margin:0px;"><a style="font-family:Montserrat-Regular;font-size:13px;" href="/admin/users">MY ACCOUNT</a></li>
-				<li ng-if="identity.currentUser.role!='admin'"><a style="font-family:Montserrat-Regular;font-size:13px;display:inline-block;margin:0px;" href="/dashboard">MY ACCOUNT</a></li>
-				<li style="padding:0px;margin:0;"><a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a></li>
-				</ul>
-		</div>
-	</div>
+    <div class="tab_icon">
+        <a href="javascript:void(0);" onclick="displayDropDown()">&#9776;</a>
+    </div>
+    
+    <div class="dropdown nav-login-usr nav-login-tab" style="margin-top:55px;" ng-controller="LoginController" ng-show="identity.isAuthenticated()">
+      <a href="" data-toggle="dropdown" >{{identity.currentUser.firstname}}
+        <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu" style="min-width:0px;right:0;left:inherit;">
+        <li ng-if="identity.currentUser.role==='admin'"><a style="font-family:Montserrat-Regular;font-size:13px;" href="/admin/users">MY ACCOUNT</a></li>
+        <li ng-if="identity.currentUser.role!='admin'"><a style="font-family:Montserrat-Regular;font-size:13px;" href="/dashboard">MY ACCOUNT</a></li>
+        <li style="padding:0px;margin:0;"><a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a></li>
+      </ul>
+    </div>
+  </div>
 </header>
 
 <div class="modal" id="firstLookModal" 
