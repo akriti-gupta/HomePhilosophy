@@ -409,6 +409,11 @@ button:focus {outline:0;}
    margin-bottom:25px;
 }
 
+.dropdown-menu li{
+  display: inline-block;
+  margin: 0px;
+}
+
 .dropdown-menu li a:hover{
   background-color: #fff;
   cursor: pointer;
