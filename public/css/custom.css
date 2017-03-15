@@ -967,13 +967,20 @@ padding-left:10px;
 .prg-dtl-ctr{
   width:80%;margin:auto;
 }
-
+.detailForm{
+  padding: 100px 25px 0px 100px;
+}
+.txtarea-dtl{
+  resize:none;
+  border:1px solid #acacac;
+  width:53%;
+}
 .form-group {
   margin-bottom: 35px;
 }
 
 .hp-form-input{
-  width:58%;
+  width:53%;
 }
 .form-info{
   margin:10px 0px 0px;

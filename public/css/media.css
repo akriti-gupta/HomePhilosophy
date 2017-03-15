@@ -184,8 +184,22 @@
          #footer-data ul li{
             padding-right: 10px;
          }
+         .detailForm{
+            width: 100%;
+            padding: 100px 25px 0px 25px;
+        }
         .prg-dtl-ctr{
-            width:98%
+            width:95%
+        }
+
+        .txtarea-dtl{
+            width:100%;
+        }
+        .hp-form-input{
+              width:100%;
+        }
+        div[dropzone], div[dropzone1]{
+            width: 100%;
         }
 
         .resprg-one, .resprg-two, .resprg-three, .resprg-four, .resprg-five, .resprg-six{
