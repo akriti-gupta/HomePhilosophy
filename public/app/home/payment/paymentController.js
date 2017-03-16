@@ -11,6 +11,13 @@ angular.module("app")
   	var totalRooms = 0;
   	var roomObj = [];
 
+  	var sig ='b899e1ed97ea4f58b8146f1b8c90b40arashi@homephilosophy.com.sgpay10200SGD';
+
+
+$scope.signature = CryptoJS.SHA1(sig).toString();
+
+
+
   	//TODO: Save package info in DB and retrive this array from there. This is to
   	//accomodate any future changes to the payment packages and put it in service.
   	$scope.packages = [
@@ -135,5 +142,19 @@ angular.module("app")
 	  		});
 	  	}
 	}		  	
+})
+
+.directive('bgImage', function(){
+	return function(scope,element, attrs){
+			if(!scope.showTitle){
+				element.css({
+            		'background-image': "url('/images/pricing_bg.png')",
+            		'background-size' : 'cover'
+        		});
+			}
+		}
+	
 });
+
+
 
