@@ -63,7 +63,7 @@ module.exports = function(){
                     conn.query('Select * from user where fbId = '+conn.escape(profile.id), function(err, results, fields){
                         if(err){
                            conn.release();
-                            return done(null, false); 
+                            return done(err, false); 
                         }
                         if(results && results.length > 0){
                             conn.release();
