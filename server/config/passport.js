@@ -41,8 +41,8 @@ module.exports = function(){
     passport.use(new FacebookStrategy({
 
         // pull in our app id and secret from our auth.js file
-        clientID        : '118647685254312',
-        clientSecret    : '00b53f5364ad582f67c1ba5d7e269acd',
+        clientID        : '1123799114413407',
+        clientSecret    : 'bd3dea47fe556f93f9a8895acd34763c',   
         callbackURL     : 'http://homephilosophy.com.sg/auth/facebook/callback'
     },
 
@@ -79,12 +79,19 @@ module.exports = function(){
                                 if(err){
                                     console.log('Error in inserting user data from fb '+err);
                                     conn.release();
-                                    return done(err,profile);
+                                    return done(err,false);
                                 }
                                 else{
                                     console.log(results);
-                                    console.log(fields);
-                                    return done(null,false)
+                                    conn.query('Select * from user where id='+results.insertId, function(err,res,fields){
+                                        if(err){
+                                            return done(err,false);
+                                        }
+                                        else{
+                                            return done(null,res[0]);        
+                                        }
+                                    });
+                                    
                                 }
                             });
                          } 
