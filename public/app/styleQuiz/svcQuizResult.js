@@ -12,6 +12,14 @@
         var board;
         var currentQuizId;
         var insRoomArr = [];
+        var knownStyle = false;
+
+        var setIsKnownStyle = function(isKnown){
+        	knownStyle = isKnown;
+        }
+        var getIsKnownStyle = function(){
+        	return knownStyle;
+        }
 
         var setUserCurrQuiz = function (quizId){
         	currentQuizId = quizId;
@@ -26,6 +34,9 @@
 
         var getInsertedRooms = function(){
         	return insRoomArr;
+        }
+         var clearInsertedRooms = function(){
+        	return insRoomArr.length=0;
         }
 
         var storeUserQuizInfo = function(infoObj){
@@ -129,7 +140,10 @@
 			   	getUserCurrQuiz: getUserCurrQuiz,
 			   	clearCustSelections: clearCustSelections,
 			   	setInsertedRooms: setInsertedRooms,
-			   	getInsertedRooms: getInsertedRooms
+			   	getInsertedRooms: getInsertedRooms,
+			   	clearInsertedRooms:clearInsertedRooms,
+			   	setIsKnownStyle: setIsKnownStyle,
+			   	getIsKnownStyle: getIsKnownStyle
 
 			  };
         });

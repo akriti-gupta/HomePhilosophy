@@ -902,27 +902,27 @@ $scope.gridWidth=300;
 
 	$scope.styleQuest5 = [
 				[{
-	        		image_style: "images/styles/Textures/1.png",
+	        		image_style: "images/styles/textures/1.png",
 	        		image_id: 1
 	    		}, 
 	    		{
-	    			image_style: "images/styles/Textures/2.png",
+	    			image_style: "images/styles/textures/2.png",
 					image_id: 2
 	    		},
 	    		{
-	  				image_style: "images/styles/Textures/3.png",
+	  				image_style: "images/styles/textures/3.png",
 	  				image_id: 3
 	    		}],
 	    		[{
-	    			image_style: "images/styles/Textures/4.png",
+	    			image_style: "images/styles/textures/4.png",
 	        		image_id: 4
 	    		}, 
 	    		{
-					image_style: "images/styles/Textures/5.png",
+					image_style: "images/styles/textures/5.png",
 					image_id: 5
 	    		},
 	    		{
-	  				image_style: "images/styles/Textures/6.png",
+	  				image_style: "images/styles/textures/6.png",
 	  				image_id: 6
 	    		}]];
 
@@ -986,11 +986,16 @@ $scope.gridWidth=300;
 
 	// To maintain the quiz result and style quiz pages state when redirected here after login.
 	if(quizResult.getStyle().length>=1 && $scope.pageRequester===' '){
-		$scope.userStyle = quizResult.getStyle();
-		$scope.pagenum=9;
-		$scope.showResult = true;
-		$scope.progress_result = false;
-		$scope.board = quizResult.getBoard();
+		if(quizResult.getIsKnownStyle()){
+			$location.path('/tell-us-more');
+		}
+		else{
+			$scope.userStyle = quizResult.getStyle();
+			$scope.pagenum=9;
+			$scope.showResult = true;
+			$scope.progress_result = false;
+			$scope.board = quizResult.getBoard();
+		}
 
 
 	}
@@ -1059,7 +1064,7 @@ $scope.gridWidth=300;
 						$scope.progress_result = true;
 					}
 					else{
-						$scope.pagenum++;
+						//$scope.pagenum++;
 					 	$location.path('/login');
 					}
 					scrollTop();
@@ -1075,8 +1080,6 @@ $scope.gridWidth=300;
 
 	$scope.quiz = function(option){
 		if(option===1){
-			//$scope.progress = true;
-			// $scope.pagenum=4;	
 			$scope.pagenum = 0;		
 			$scope.showDesignStyle = true;
 			angular.element('#quizModal').modal('hide');
@@ -1099,16 +1102,6 @@ $scope.gridWidth=300;
 		var sel3 = $scope.selectedImages[2];
 		var sel4 = $scope.selectedImages[3];
 		var sel5 = $scope.selectedImages[4];
-
-
-		// var sel1 = $scope.selectedImages[4];
-		// var sel2 = $scope.selectedImages[5];
-		// var sel3 = $scope.selectedImages[6];
-		// var sel4 = $scope.selectedImages[7];
-		// var sel5 = $scope.selectedImages[8];
-
-
-		// alert(sel1 + " " +sel2 + " " + sel3 + " " +sel4 + " "+sel5);
 
 		// LivingRoom  
 		if(sel1 == 1){totC+= 1.75; totF+=3.25;} 	
@@ -1152,9 +1145,6 @@ $scope.gridWidth=300;
 		if(sel5 == 6){totA+=3.5;totB+=1.5;totC+= 1.00; totD+= 2;}
 
 
-
-		//alert("Modern:" +totMod + " contemporary:" +totCntmpry + " Eclectic:" + totEcltc + " Trad:" +totTrad + " Industrial:" +totIndstrl+ " Transitional:" +totTrnsnl);
-
 		var totAll = totA + totB + totC + totD + totE + totF;
 
 		if(totA > 0)
@@ -1171,19 +1161,12 @@ $scope.gridWidth=300;
 			prefStyle.push({id:6, style: 'Asian Inspired', value:(Math.round(totF/totAll * 100))});
 
 		prefStyle.sort(sortValues);
-		// console.log(prefStyle);
-
-
-		
 
 		for(var j =0;j<prefStyle.length; j++){
 			
 			var test= quizResult.getStyleDesc();
 			var imageObj = quizResult.getStyleImage()[0];
-			// image:quizResult.getStyleImage()[0][prefStyle[j].style]
 			var style_name = prefStyle[j].style;
-			// console.log(style_name);
-			// console.log(quizResult.getStyleDesc());
 			
 			if(prefStyle[j].value >= 70){
 				$scope.userStyle.push({id:prefStyle[j].id, title: quizResult.getStyleTitle()[0] , style: (prefStyle[j].style), desc:quizResult.getStyleDesc()[0][prefStyle[j].style].text,image: imageObj[style_name].image,value: (prefStyle[j].value)});
@@ -1313,6 +1296,7 @@ $scope.gridWidth=300;
 		var userStyle = [{id:style.image_id, title: null, style: style.image_name,desc: style.image_desc,
 						image: style.image_style,value:100}];
 		quizResult.storeStyle(userStyle,null);
+		quizResult.setIsKnownStyle(true);
 
 		if(mvIdentity.isAuthenticated()){
 			var result = quizResult.getStyle();

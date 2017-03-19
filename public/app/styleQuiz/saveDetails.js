@@ -223,8 +223,10 @@ angular.module('app')
 .directive("dropzone", function() {
 return {
     restrict : "A",
-    link: function (scope, element) {
-      
+    link: function (scope, element,attrs) {
+      var checkSize, isTypeValid, validMimeTypes;
+      var size = 0;
+
       element.on('dragover', function(event) {
         event.preventDefault();
         event.stopPropagation();
@@ -235,21 +237,45 @@ return {
         event.stopPropagation();
       });
       
+      validMimeTypes = attrs.fileDropzone;
+
+      checkSize = function(size) {
+          var _ref;
+          if (((_ref = attrs.maxFileSize) === (void 0) || _ref === '') || (size / 1024) / 1024 < attrs.maxFileSize) {
+            return true;
+          } else {
+            alert("Total File size must be smaller than " + attrs.maxFileSize + " MB");
+            return false;
+          }
+        };
+        isTypeValid = function(type) {
+          if (validMimeTypes.indexOf(type) > -1) {
+            return true;
+          } else {
+            alert("Invalid file type.  File must be one of following types " + validMimeTypes);
+            return false;
+          }
+        };
+
       element.bind('drop', function(event) {
         event.preventDefault();
         event.stopPropagation();
         if (event.originalEvent.dataTransfer){
           if (event.originalEvent.dataTransfer.files.length > 0) {
             for(var i=0; i< event.originalEvent.dataTransfer.files.length; i++){
-              scope.$apply(function(scope) {
-                if(event.originalEvent.path[0].id==='fileImages'){
-                  scope.pendingDropFiles.push({"file":event.originalEvent.dataTransfer.files[i], "name":event.originalEvent.dataTransfer.files[i].name,"size":scope.formatBytes(event.originalEvent.dataTransfer.files[i].size,0)});  
-                }
-                else{
-                    scope.pendingDropFilesFurn.push({"file":event.originalEvent.dataTransfer.files[i],"name":event.originalEvent.dataTransfer.files[i].name,"size":scope.formatBytes(event.originalEvent.dataTransfer.files[i].size,0)});
-                }
-                
-              });                 
+              var type = event.originalEvent.dataTransfer.files[i].type;
+              size = size + event.originalEvent.dataTransfer.files[i].size;
+              if (checkSize(size) && isTypeValid(type)) {
+                scope.$apply(function(scope) {
+                  if(event.originalEvent.path[0].id==='fileImages'){
+                    scope.pendingDropFiles.push({"file":event.originalEvent.dataTransfer.files[i], "name":event.originalEvent.dataTransfer.files[i].name,"size":scope.formatBytes(event.originalEvent.dataTransfer.files[i].size,0)});  
+                  }
+                  else{
+                      scope.pendingDropFilesFurn.push({"file":event.originalEvent.dataTransfer.files[i],"name":event.originalEvent.dataTransfer.files[i].name,"size":scope.formatBytes(event.originalEvent.dataTransfer.files[i].size,0)});
+                  }
+                  
+                });    
+              }             
             }
           }
         }

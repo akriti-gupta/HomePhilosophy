@@ -150,7 +150,7 @@
 		                  onchange="angular.element(this).scope().addFileToUploadQ(this)"/>
 		            		<img src="images/attach.png" width="30%"/>
 		        	</label> -->
-		        	<div id="fileImages" dropzone>Drop Files Here</div>
+		        	<div id="fileImages" dropzone file-dropzone="[image/png, image/jpeg]" data-max-file-size="5">Drop Files Here</div>
 			         	<div style="width:50%;">
 							<div ng-repeat="file in pendingDropFiles track by $index">
 							  <div style="margin-bottom:10px;width:90%;float:left;background-color:#00a99d;color:#fff;">{{file.name}} ({{file.size}}) </div>
@@ -181,7 +181,7 @@
 
 	      	<div class="form-group" name="uploadFurn" style="clear:both;padding-top:30px;">
 	        	<div class="fs-20px">10. Upload images of any existing furniture or accessories you want us to incorporate in the design?</div>
-	         	<div dropzone>Drop Files Here</div>
+	         	<div dropzone file-dropzone="[image/png, image/jpeg]" data-max-file-size="5">Drop Files Here</div>
 	         	<div style="width:50%;">
 					<div ng-repeat="file in pendingDropFilesFurn track by $index">
 					  <div style="margin-bottom:10px;width:90%;float:left;background-color:#00a99d;color:#fff;">{{file.name}} ({{file.size}}) </div>

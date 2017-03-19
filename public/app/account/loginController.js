@@ -98,7 +98,19 @@ angular.module("app")
 		  	}
 
 		  	$scope.signup = function(){
-		  		
+		  		console.log('ABC'+$scope.firstname+'XYZ');
+		  		if(typeof $scope.firstname=='undefined' || $scope.firstname===''){
+		  			alert('Please enter your name');
+		  			return false;
+		  		}
+		  		if(typeof $scope.email=='undefined'){
+		  			alert('Please enter your username');
+		  			return false;
+		  		}
+		  		if(typeof $scope.password=='undefined'){
+		  			alert('Please enter your password');
+		  			return false;
+		  		}
 		  		var newUserData = {
 		  			firstName: $scope.firstname,
 		  			username: $scope.email,

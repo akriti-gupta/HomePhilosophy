@@ -1,5 +1,5 @@
 angular.module("app")
-		  .controller("PaymentController",function($scope,$location,$http,quizResult,payment,mvPayment,mvIdentity,mvNotifier,mvUserQuiz,custViewSvc){
+		  .controller("PaymentController",function($scope,$location,$http,$routeParams,quizResult,payment,mvPayment,mvIdentity,mvNotifier,mvUserQuiz,custViewSvc){
 
   	$scope.payPkg;
   	$scope.pkgValue
@@ -11,12 +11,7 @@ angular.module("app")
   	var totalRooms = 0;
   	var roomObj = [];
 
-  	var sig ='b899e1ed97ea4f58b8146f1b8c90b40arashi@homephilosophy.com.sgpay10200SGD';
-
-
-$scope.signature = CryptoJS.SHA1(sig).toString();
-
-
+  	$scope.buyForMe = false;
 
   	//TODO: Save package info in DB and retrive this array from there. This is to
   	//accomodate any future changes to the payment packages and put it in service.
@@ -27,7 +22,10 @@ $scope.signature = CryptoJS.SHA1(sig).toString();
   					    {'id':4,'name':"Custom",'pkgValue':0,value:4}
   	];	
 
-  	//$scope.selectedRooms = quizResult.getCustSelections().roomSelected;	
+//
+
+  	//merchant=guptaakriti83@gmail.com&ref_id=75&reference_code=Test173R37737&response_code=1&currency=SGD&total_amount=700.00&signature=2e95174da579b5254dedba212745d06774c77beb&signature_algorithm=sha1
+
   	$scope.selectedRooms = quizResult.getInsertedRooms();	
   	if($scope.selectedRooms.length > 0){
   		$scope.showTitle = true;
@@ -37,28 +35,16 @@ $scope.signature = CryptoJS.SHA1(sig).toString();
   	}
   	
 	for (var i=0;i<$scope.selectedRooms.length;i++){
-		// if($scope.selectedRooms[i].room_num.id > 1){
-		// 	for(var j=1; j<= $scope.selectedRooms[i].room_num.id; j++){
-		// 		$scope.roomSelectionArr.push($scope.selectedRooms[i].room_disp_name+' '+j);
-		// 	    roomObj.push({'roomId':$scope.selectedRooms[i].room_id,'roomName':$scope.selectedRooms[i].room_disp_name+' '+j});
-
-		// 	}
-		// }
-		// else{
-		// 	$scope.roomSelectionArr.push($scope.selectedRooms[i].room_disp_name);
-		// 	roomObj.push({'roomId':$scope.selectedRooms[i].room_id,'roomName':$scope.selectedRooms[i].room_disp_name});
-		// }
-
-			var roomDispName;
-			if($scope.selectedRooms[i].numRoom===0){
-				roomDispName = $scope.selectedRooms[i].roomName;
-			}
-			else{
-				roomDispName = $scope.selectedRooms[i].roomName +' '+$scope.selectedRooms[i].numRoom;	
-			}
-			$scope.roomSelectionArr.push(roomDispName);
-			roomObj.push({'roomId':$scope.selectedRooms[i].id,'roomName':roomDispName});
-		
+		var roomDispName;
+		if($scope.selectedRooms[i].numRoom===0){
+			roomDispName = $scope.selectedRooms[i].roomName;
+		}
+		else{
+			roomDispName = $scope.selectedRooms[i].roomName +' '+$scope.selectedRooms[i].numRoom;	
+		}
+		$scope.roomSelectionArr.push(roomDispName);
+		roomObj.push({'roomId':$scope.selectedRooms[i].id,'roomName':roomDispName});
+	
 	}
 
   	if(payment.getPayPkg()!=-1){
@@ -86,10 +72,33 @@ $scope.signature = CryptoJS.SHA1(sig).toString();
 			}
 		}
 	}
+var paymentMade = $routeParams.response_code;
+  	var merchant=$routeParams.merchant;
+  	var ref_id = $routeParams.ref_id;
+  	var reference_code = $routeParams.reference_code;
+  	var currency = $routeParams.currency;
+  	var total_amount = $routeParams.total_amount;
+  	var signature_algorithm = $routeParams.signature_algorithm;
+
+  	console.log(paymentMade);
+
+  	if(paymentMade==="1"){
+  		savePaymentInfo();
+  	}
 
   	$scope.savePayPkg = function(pkg){
   		payment.storePayPkg(pkg);
+
+  		payment.storePkgPerRoom(roomObj,$scope.roomPkg);
+  		$scope.pkgPerRoom = payment.getPkgPerRoom();
+  		console.log($scope.pkgPerRoom)
 		 	if(quizResult.getStyle().length>=1){
+		 	// 	var roomsObj =  payment.getPkgPerRoom();
+				// var room = [];
+				// for(var i = 0;i<roomsObj.length;i++){
+				// 	room.push(roomsObj[i].roomId);
+				// }
+
 				$location.path("/reviewPayment");	
 		 	}
 		 	else{
@@ -98,18 +107,42 @@ $scope.signature = CryptoJS.SHA1(sig).toString();
 	}	
 	
 	$scope.updateTotal = function(){
+
 		$scope.totalPrice = 0;
 		for(var i=0;i<$scope.roomPkg.length;i++){
 			$scope.totalPrice = $scope.totalPrice +$scope.roomPkg[i].pkgValue;
 		}
+		if($scope.buyForMe){
+			$scope.totalPrice = $scope.totalPrice + 100;
+		}
 	}
 
+$scope.saveTest = function(){
+
+}
 	$scope.savePaymentInfo = function(){
 		//TODO: Integrate Payment Stripe
 		//Store Package Info in DB and set quiz status to 0(Paid)
 		
+
+		$scope.quizId = quizResult.getUserCurrQuiz();
+		
+		var secret='d389a5777e014f23896d5ab245634ab2';
+	  	var merchant = 'guptaakriti83@gmail.com';
+	  	var action = 'pay';
+	  	var ref_id = $scope.quizId;
+	  	var total_amount = $scope.totalPrice;
+	  	var currency = 'SGD';
+	  	var sig = secret+merchant+action+ref_id+total_amount+currency;
+		
+		$scope.signature = CryptoJS.SHA1(sig).toString();
+	 	$scope.price = $scope.totalPrice.toString();
+	 	console.log($scope.signature);
+
+
 		var quizId = quizResult.getUserCurrQuiz();
 		var status = 1;
+		var status = 0;
 		var isAddOn = 0;
 		var addOnAmtPaid = 0;
 		var isAddRoomErr = 0;
@@ -127,7 +160,7 @@ $scope.signature = CryptoJS.SHA1(sig).toString();
 		// }
 
 		// payment.storePkgPerRoom($scope.roomSelectionArr,$scope.roomPkg);
-		payment.storePkgPerRoom(roomObj,$scope.roomPkg);
+		/*payment.storePkgPerRoom(roomObj,$scope.roomPkg);
 
 		var roomPkg = payment.getPkgPerRoom();
 
@@ -140,9 +173,15 @@ $scope.signature = CryptoJS.SHA1(sig).toString();
 	  		}, function(reason){
 	  			alert('Payment unsuccessful, please contact the site admin. '+reason);
 	  		});
-	  	}
-	}		  	
+	  	}*/
+	};	
+
+	// $scope.$on('$locationChangeStart', function( event ) {
+	// 	quizResult.clearInsertedRooms();
+	// });	  	
 })
+
+
 
 .directive('bgImage', function(){
 	return function(scope,element, attrs){

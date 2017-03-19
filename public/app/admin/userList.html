@@ -314,7 +314,7 @@
         <div class="col-md-2 col-xs-4 admin-view-tab" >
           <div ng-if="room.displayStatus.stage===4">
             <label>
-              <input type="file" multiple ngf-pattern="'image/*'" accept="image/*" ngf-max-size="10MB" style="display:none;" 
+              <input type="file" multiple ngf-pattern="'image/*','application/pdf'" accept="image/*,application/pdf" ngf-max-size="10MB" style="display:none;" 
                 onchange="angular.element(this).scope().addFileToUploadQ(this)"/>
                 <img src="images/attach.png" width="20%"/>
             </label>

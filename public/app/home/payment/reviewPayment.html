@@ -59,86 +59,94 @@
   </div>
 </header>
 
+<div class="prg-wrp" style="padding-top: 100px;">
+  <div class="progress-result">
+    <div class="resprg-one  no-color" ng-style="{'background': resPrgCol2}"></div>
+    <div class="resprg-two no-color" ng-style="{'background': resPrgCol2}"></div>
+    <div class="resprg-three no-color"></div>
+    <div class="resprg-four primary-color" ng-style="{'background': resPrgCol2}"></div>
+    <div class="resprg-five no-color" ng-style="{'background': resPrgCol2}"></div>
+
+    <div class="step-one no-color">1</div>
+    <div class="step-two no-color">2</div>
+    <div class="step-three no-color">3</div>
+    <div class="step-four primary-color">4</div>
+    <div class="step-five no-color">5</div>
+
+
+    <div class="resprg-lbl-one">Style Quiz</div>
+    <div class="resprg-lbl-two">Tell Us More</div>
+    <div class="resprg-lbl-three">Choose a Package</div>
+    <div class="resprg-lbl-four">Payment</div>
+    <div class="resprg-lbl-five">Launch Project</div>
+  </div>
+</div>
+
 <!-- You selected payment package: {{payPkg}} valued at {{pkgValue}} -->
 <section>
  	<div style="padding-top:100px;width:50%;margin:0 auto;">
-		<!-- <div  ng-repeat="room in selectedRooms track by $index">
-			<div class="flex-ctr"  ng-if="room.room_num.value>1" ng-repeat="roomNum in getNumber(room.room_num.value) track by $index">
-				<div class="flex-child">
-					{{room.room_disp_name}} {{$index+1}}
-				</div>
-				
-				<div class="flex-child">
-					<select ng-options="opt.label for opt in package track by opt.value">
-            		</select>
-				</div>
-			</div>
-		
-			<div class="flex-ctr"  ng-if="room.room_num.value===1">
-				<div class="flex-child">
-					{{room.room_disp_name}}
-				</div>
-						
-				<div class="flex-child">
-					<select ng-options="opt.label for opt in package track by opt.value">
-            		</select>
-				</div>
-			</div>
-		</div> -->
-
-		<div  class="flex-ctr" ng-repeat="room in roomSelectionArr track by $index">
-			
-			<div class="flex-child">{{room}}</div>
-			
-			<div class="flex-child">
-				<select ng-init="packages[roomPkg[$index]-1]" ng-change="updateTotal()" ng-model="roomPkg[$index]" ng-options="option.name for option in packages"></select>
-			</div>
-		</div>
-		
-
-		<div>
-			Total Price: {{totalPrice}}
-		</div>
-
-	<!-- TODO: STYLE QUIZ to remain -->
-	<!-- <p><a href="/pricing"><button type="submit" class="btn-select-pkg">CHOOSE ANOTHER</button></a></p> -->
-
-	<p><a href="#" ng-click = "savePaymentInfo()"><button type="submit" class="btn-select-pkg">CONFIRM</button></a></p>
-
-
-
-<form action="https://sandbox.smoovpay.com/access" method="post" target="smoovpay" >
-<!-- For actual LIVE account, use https://secure.smoovpay.com/access -->
-    <input type="hidden" name="version" value="2.0" />
-    <input type="hidden" name="action" value="pay" />
-    <input type="hidden" name="merchant" value="rashi@homephilosophy.com.sg" />
-    <input type="hidden" name="ref_id" value="" />
-    <input type="hidden" name="item_name_1" value="item 1" />
-    <input type="hidden" name="item_description_1" value="Description for item 1" />
-    <!-- <input type="hidden" name="item_quantity_1" value="1" />
-    <input type="hidden" name="item_amount_1" value="1.00" />
-    <input type="hidden" name="item_name_2" value="item 2" />
-    <input type="hidden" name="item_description_2" value="Description for item 2" />
-    <input type="hidden" name="item_quantity_2" value="1" />
-    <input type="hidden" name="item_amount_2" value="1.00" />
-     --><!--(Optional) input type="hidden" name="delivery_charge" value="0.00" />-->
-    <!--(Optional) input type="hidden" name="tax_amount" value="0.00" />-->
-    <!--(Optional) input type="hidden" name="tax_percentage " value="8.00" />-->
-    <!--(Optional) input type="hidden" name="fulfilled_date_time " value="2016-05-05 22:22" />-->
-    <input type="hidden" name="currency" value="SGD" />
-    <input type="hidden" name="total_amount" value="200.00" />
-    <input type="hidden" name="success_url" value="http://localhost:8006/dashboard" />
-    <input type="hidden" name="cancel_url" value="http://localhost:8006/pricing" />
-    <!--(Optional)<input type="hidden" name="str_url" value="http://www.yourweb.com/StrHandler" />-->
-    <input type="hidden" name="signature" value="Replace with your Hashed Signature*" />
-    <input type="hidden" name="signature_algorithm" value="sha1" />
-    <input type="image" src="https://www.smoovpay.com/img/btn_smoovpay_v1.png" name="submit" alt="SmoovPay!" />
-</form>
-
-
-
-
+	<div class="row qz-row-dsg"  style="display:table;border:1px solid black;padding-bottom:0px;">
+		<div class="col-md-4 col-xs-4 cust-view-tab" style="padding:20px;">ROOM</div>
+		<div class="col-md-4 col-xs-4 cust-view-tab" style="padding:20px;">PACKAGE</div>
+		<div class="col-md-4 col-xs-4 cust-view-tab" style="padding:20px;">PRICE</div>
 	</div>
+
+ 	<div  class="row qz-row-dsg" style="display:table;border:1px solid black;padding-bottom:0px;" ng-repeat="room in roomSelectionArr track by $index">
+		<div class="col-md-4 col-xs-4 cust-view-tab" style="padding:20px;">{{room}}</div>
+		<div class="col-md-4 col-xs-4 cust-view-tab" style="padding:20px;">
+			<select ng-init="packages[roomPkg[$index]-1]" ng-change="updateTotal()" ng-model="roomPkg[$index]" ng-options="option.name for option in packages"></select>
+		</div>
+		<div class="col-md-4 col-xs-4 cust-view-tab" style="padding:20px;">{{roomPkg[$index].pkgValue}}</div>
+	</div>
+
+
+	<div class="row qz-row-dsg" style="display:table;padding-bottom:0px;">
+		<div class="col-md-8 col-xs-8 cust-view-tab" style="text-align:right;border:0px;padding:20px;">Buy for me</div>
+		<div class="col-md-4 col-xs-4 cust-view-tab" style="border:0px;padding:20px;">
+			<input type="checkbox" ng-model="buyForMe" ng-change="updateTotal()"> 	
+		</div>
+	</div>
+
+
+	<div class="row qz-row-dsg" style="display:table;">
+		<div class="col-md-8 col-xs-8 cust-view-tab" style="border:0px;padding:20px;text-align:right;">Total Price</div>
+		<div class="col-md-4 col-xs-4 cust-view-tab" style="border:0px;padding:20px;"> {{totalPrice}}</div>
+	</div>
+
+<div style="width:80%;margin:0 auto;position:relative;text-align:center;padding-bottom:100px;">
+	<form action="https://sandbox.smoovpay.com/access" method="post">
+		<input type="hidden" name="action" value="pay" />
+		<input type="hidden" name="currency" value="SGD" />
+		<input type="hidden" name="version" value="2.0" />
+		<div ng-repeat="room in roomSelectionArr track by $index">
+			<input type="hidden" name="item_name_{{index +1}}" value="{{room}}" />
+			<input type="hidden" name="item_description_{{index +1}}" value="{{roomPkg[$index].name}}" />
+			<input type="hidden" name="item_quantity_{{index +1}}" value="1" />
+			<input type="hidden" name="item_amount_{{index +1}}" value="{{roomPkg[$index].pkgValue}}" />
+		</div>
+		<div ng-if="buyForMe===true">
+			<input type="hidden" name="item_name_{{roomSelectionArr.length +1}}" value="Buy For Me" />
+			<input type="hidden" name="item_description_{{roomSelectionArr.length +1}}" value="Get your items delivered">
+			<input type="hidden" name="item_quantity_{{roomSelectionArr.length +1}}" value="1" />
+			<input type="hidden" name="item_amount_{{roomSelectionArr.length +1}}" value="100" />
+		</div>
+		<input type="hidden" name="merchant" value="guptaakriti83@gmail.com" />
+		<input type="hidden" name="ref_id" value="{{quizId}}" />
+		<input type="hidden" name="delivery_charge" value="0.00" />
+		<input type="hidden" name="tax_amount" value="0.00" />
+		<input type="hidden" name="tax_percentage" value="0.00" />
+		<input type="hidden" name="total_amount" value="{{totalPrice}}" />
+		<input type="hidden" name="str_url" value="" />
+		<input type="hidden" name="success_url" value="http://localhost:8006/dashboard" />
+		<input type="hidden" name="cancel_url" value="http://localhost:8006" />
+		<input type="hidden" name="signature" value="{{signature}}" />
+		<input type="hidden" name="signature_algorithm" value="sha1" />
+		<input type="hidden" name="skip_success_page" value="1" />
+		<!-- <input type="hidden" name="str_url" value="http://localhost:8006/paycb" /> -->
+		<input type="submit" class="btn-select-pkg" value="CHECKOUT" ng-click="savePaymentInfo()" name="submit v2" alt="SmoovPay!" />
+	</form>
+	</div>
+</div>
 </section>
 
 <div style="padding-bottom:60px;"></div>
