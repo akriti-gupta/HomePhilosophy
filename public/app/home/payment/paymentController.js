@@ -21,6 +21,15 @@ angular.module("app")
   					    {'id':3,'name':"Premium",'pkgValue':1000,value:3},
   					    {'id':4,'name':"Custom",'pkgValue':0,value:4}
   	];	
+  	$scope.roomImage ={};
+
+  	$scope.roomImage["Bedroom"] = "images/rooms/bedroom.png";
+	$scope.roomImage["Dining"] = "images/rooms/dining.png";
+	$scope.roomImage["Master"] = "images/rooms/master.png";
+	$scope.roomImage["Living"] = "images/rooms/living.png";
+	$scope.roomImage["Home"] = "images/rooms/homeOffice.png";
+	$scope.roomImage["Kids"] = "images/rooms/kids.png";
+
 
 //
 
@@ -82,9 +91,9 @@ var paymentMade = $routeParams.response_code;
 
   	console.log(paymentMade);
 
-  	if(paymentMade==="1"){
-  		savePaymentInfo();
-  	}
+  	// if(paymentMade==="1"){
+  	// 	savePaymentInfo();
+  	// }
 
   	$scope.savePayPkg = function(pkg){
   		payment.storePayPkg(pkg);
@@ -117,7 +126,24 @@ var paymentMade = $routeParams.response_code;
 		}
 	}
 
-$scope.saveTest = function(){
+$scope.initPayment = function(){
+	$scope.quizId = quizResult.getUserCurrQuiz();
+	console.log($scope.quizId);
+	//var secret='d389a5777e014f23896d5ab245634ab2';
+	var secret='b899e1ed97ea4f58b8146f1b8c90b40a';
+  	//var merchant = 'guptaakriti83@gmail.com';
+	var merchant = 'rashi@homephilosophy.com.sg';
+  	var action = 'pay';
+  	var ref_id = $scope.quizId;
+  	var total_amount = $scope.totalPrice;
+  	var currency = 'SGD';
+  	var sig = secret+merchant+action+ref_id+total_amount+currency;
+	
+	$scope.signature = CryptoJS.SHA1(sig).toString();
+ 	$scope.price = $scope.totalPrice.toString();
+ 	console.log($scope.signature);
+
+
 
 }
 	$scope.savePaymentInfo = function(){
@@ -125,21 +151,7 @@ $scope.saveTest = function(){
 		//Store Package Info in DB and set quiz status to 0(Paid)
 		
 
-		$scope.quizId = quizResult.getUserCurrQuiz();
 		
-		var secret='d389a5777e014f23896d5ab245634ab2';
-	  	var merchant = 'guptaakriti83@gmail.com';
-	  	var action = 'pay';
-	  	var ref_id = $scope.quizId;
-	  	var total_amount = $scope.totalPrice;
-	  	var currency = 'SGD';
-	  	var sig = secret+merchant+action+ref_id+total_amount+currency;
-		
-		$scope.signature = CryptoJS.SHA1(sig).toString();
-	 	$scope.price = $scope.totalPrice.toString();
-	 	console.log($scope.signature);
-
-
 		var quizId = quizResult.getUserCurrQuiz();
 		var status = 1;
 		var status = 0;
@@ -160,18 +172,21 @@ $scope.saveTest = function(){
 		// }
 
 		// payment.storePkgPerRoom($scope.roomSelectionArr,$scope.roomPkg);
-		/*payment.storePkgPerRoom(roomObj,$scope.roomPkg);
+		payment.storePkgPerRoom(roomObj,$scope.roomPkg);
 
 		var roomPkg = payment.getPkgPerRoom();
 
 		console.log('Before storing package in ctrl, roomPkg is:');
 		console.log(roomPkg);
-		if(isAddRoomErr===0){
+		$scope.smoovPayForm.commit();
+		/*if(isAddRoomErr===0){
 	  		mvPayment.storePackage(quizId, roomPkg, $scope.totalPrice, status,isAddOn,addOnAmtPaid).then(function(response){
 	  			console.log('Thanks for the payment');
-	  			$location.path('/dashboard');
+	  			//$location.path('/dashboard');
+	  			$scope.smoovPayForm.commit();
 	  		}, function(reason){
 	  			alert('Payment unsuccessful, please contact the site admin. '+reason);
+	  			
 	  		});
 	  	}*/
 	};	
@@ -193,7 +208,19 @@ $scope.saveTest = function(){
 			}
 		}
 	
-});
+})
+
+.directive("ngFormCommit", [function(){
+    return {
+        require:"form",
+        link: function($scope, $el, $attr, $form) {
+            $form.commit = function() {
+                $el[0].submit();
+            };
+        }
+    };
+}])
+;
 
 
 

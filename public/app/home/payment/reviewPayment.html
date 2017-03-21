@@ -59,62 +59,104 @@
   </div>
 </header>
 
-<div class="prg-wrp" style="padding-top: 100px;">
-  <div class="progress-result">
-    <div class="resprg-one  no-color" ng-style="{'background': resPrgCol2}"></div>
-    <div class="resprg-two no-color" ng-style="{'background': resPrgCol2}"></div>
-    <div class="resprg-three no-color"></div>
-    <div class="resprg-four primary-color" ng-style="{'background': resPrgCol2}"></div>
-    <div class="resprg-five no-color" ng-style="{'background': resPrgCol2}"></div>
+<div  class="qz-container">
+	<div class="prg-dtl-ctr">
+		<div class="prg-wrp" style="padding-top: 100px;">
+		  <div class="progress-result">
+		    <div class="resprg-one  no-color" ng-style="{'background': resPrgCol2}"></div>
+		    <div class="resprg-two no-color" ng-style="{'background': resPrgCol2}"></div>
+		    <div class="resprg-three no-color"></div>
+		    <div class="resprg-four primary-color" ng-style="{'background': resPrgCol2}"></div>
+		    <div class="resprg-five no-color" ng-style="{'background': resPrgCol2}"></div>
 
-    <div class="step-one no-color">1</div>
-    <div class="step-two no-color">2</div>
-    <div class="step-three no-color">3</div>
-    <div class="step-four primary-color">4</div>
-    <div class="step-five no-color">5</div>
+		    <div class="step-one no-color">1</div>
+		    <div class="step-two no-color">2</div>
+		    <div class="step-three no-color">3</div>
+		    <div class="step-four primary-color">4</div>
+		    <div class="step-five no-color">5</div>
 
 
-    <div class="resprg-lbl-one">Style Quiz</div>
-    <div class="resprg-lbl-two">Tell Us More</div>
-    <div class="resprg-lbl-three">Choose a Package</div>
-    <div class="resprg-lbl-four">Payment</div>
-    <div class="resprg-lbl-five">Launch Project</div>
-  </div>
-</div>
+		    <div class="resprg-lbl-one">Style Quiz</div>
+		    <div class="resprg-lbl-two">Tell Us More</div>
+		    <div class="resprg-lbl-three">Choose a Package</div>
+		    <div class="resprg-lbl-four">Payment</div>
+		    <div class="resprg-lbl-five">Launch Project</div>
+		  </div>
+		</div>
+
 
 <!-- You selected payment package: {{payPkg}} valued at {{pkgValue}} -->
-<section>
- 	<div style="padding-top:100px;width:50%;margin:0 auto;">
-	<div class="row qz-row-dsg"  style="display:table;border:1px solid black;padding-bottom:0px;">
-		<div class="col-md-4 col-xs-4 cust-view-tab" style="padding:20px;">ROOM</div>
-		<div class="col-md-4 col-xs-4 cust-view-tab" style="padding:20px;">PACKAGE</div>
-		<div class="col-md-4 col-xs-4 cust-view-tab" style="padding:20px;">PRICE</div>
+<section ng-init="initPayment()">
+ 	<div style="padding-top:100px;width:90%;margin:0 auto;">
+	<div class="row qz-row-dsg">
+		<div class="col-md-6 col-xs-6" style="font-size:16px;text-align:center;">ROOM</div>
+		<div class="col-md-4 col-xs-4" style="font-size:16px;">PACKAGE</div>
+		<div class="col-md-2 col-xs-2" style="font-size:16px;">PRICE</div>
 	</div>
 
- 	<div  class="row qz-row-dsg" style="display:table;border:1px solid black;padding-bottom:0px;" ng-repeat="room in roomSelectionArr track by $index">
-		<div class="col-md-4 col-xs-4 cust-view-tab" style="padding:20px;">{{room}}</div>
-		<div class="col-md-4 col-xs-4 cust-view-tab" style="padding:20px;">
+ 	<div  class="row qz-row-dsg" ng-repeat="room in roomSelectionArr track by $index">
+		<div class="col-md-6 col-xs-6">
+	        <figure>
+	            <img class="center-block" ng-src="{{roomImage[room.substr(0,room.indexOf(' '))]}}" style="height:100px;width:auto;">
+	        </figure>
+	    </div>
+
+		<div class="col-md-4 col-xs-4">
 			<select ng-init="packages[roomPkg[$index]-1]" ng-change="updateTotal()" ng-model="roomPkg[$index]" ng-options="option.name for option in packages"></select>
 		</div>
-		<div class="col-md-4 col-xs-4 cust-view-tab" style="padding:20px;">{{roomPkg[$index].pkgValue}}</div>
+
+		<div class="col-md-2 col-xs-2">{{roomPkg[$index].pkgValue}}</div>
 	</div>
 
 
-	<div class="row qz-row-dsg" style="display:table;padding-bottom:0px;">
-		<div class="col-md-8 col-xs-8 cust-view-tab" style="text-align:right;border:0px;padding:20px;">Buy for me</div>
-		<div class="col-md-4 col-xs-4 cust-view-tab" style="border:0px;padding:20px;">
-			<input type="checkbox" ng-model="buyForMe" ng-change="updateTotal()"> 	
+	<div class="row qz-row-dsg" style="padding-top:50px;">
+		<div class="col-md-6 col-xs-6" style="text-align:center;border:0px;padding:20px;"><span style="font-size:18px;">Buy for me</span>
+		<!-- </div>
+		<div class="col-md-4 col-xs-4" style="border:0px;padding:20px;"> -->
+			<input type="checkbox" ng-model="buyForMe" ng-change="updateTotal()" style="width:50px;height:20px;margin:0px;"> 	
 		</div>
 	</div>
 
+	<div class="flex-ctr">
+  		<div class="flex-child-pay1">
+  			<div class="payment-title"> Each Package includes</div>
+  			<div class="payment-item">A complimentary meeting with your designer</div>
+  			<div class="payment-item">A complimentary measurement of your space at a time convenient to you</div>
+  			<div class="payment-item">Several First Look moodboards</div>
+  			<div class="payment-item">Personalized Shopping List</div>
+  			<div class="payment-item">Online feedback session with your designer</div>
+  			<div class="payment-item">Hassle-free delivery to your home with Buy For Me</div>
+  		</div>
 
-	<div class="row qz-row-dsg" style="display:table;">
-		<div class="col-md-8 col-xs-8 cust-view-tab" style="border:0px;padding:20px;text-align:right;">Total Price</div>
-		<div class="col-md-4 col-xs-4 cust-view-tab" style="border:0px;padding:20px;"> {{totalPrice}}</div>
-	</div>
+  		<div class="flex-child-pay2" style="border: 1px solid ;height:35%;">
+  			<div class="payment-title" style="padding: 5px 0px 5px 10px;"> Order Summary</div>
+  			<div class="payment-item" style="font-size:18px;"><p style="text-align:left;">Subtotal <span style="text-align:right;margin-left:45%;">{{totalPrice}}</span></p> </div>
+
+  			<div style="text-align:center;padding:20px;">
+  				<input  type="button" ng-click="savePaymentInfo()" class="btn-start-quiz btn-topnav fs-20px" style="padding-left:25px;padding-right:25px;" value="CHECKOUT"  name="submit" alt="SmoovPay!" />
+  			</div>
+  		</div>
+  	</div>
+
+	<!-- <div class="row qz-row-dsg" style="display:table;">
+		<div class="col-md-4 col-xs-4 cust-view-tab" style="border:0px;padding:20px;text-align: left;padding-left: 100px;">Each Package includes
+			<div>
+				<div style="padding: 5px;">A complimentary meeting with your designer</div>
+				<div style="padding: 5px;">A complimentary measurement of your space at a time convenient to you</div>
+				<div style="padding: 5px;">Several First Look moodboards</div>
+				<div style="padding: 5px;">Personalized Shopping List</div>
+				<div style="padding: 5px;">Online feedback session with your designer</div>
+				<div style="padding: 5px;">Hassle-free delivery to your home with Buy For Me</div>
+			</div>
+		</div>
+
+		<div class="col-md-8 col-xs-8" style="border:0px;padding:20px;text-align:right;">Total Price</div>
+		<div class="col-md-4 col-xs-4" style="border:0px;padding:20px;"> {{totalPrice}}</div>
+	</div> -->
 
 <div style="width:80%;margin:0 auto;position:relative;text-align:center;padding-bottom:100px;">
-	<form action="https://sandbox.smoovpay.com/access" method="post">
+	<!-- <form ng-form-commit  action="https://sandbox.smoovpay.com/access" method="post" name="smoovPayForm"> -->
+	<form ng-form-commit  action="https://secure.smoovpay.com/access" method="post" name="smoovPayForm">
 		<input type="hidden" name="action" value="pay" />
 		<input type="hidden" name="currency" value="SGD" />
 		<input type="hidden" name="version" value="2.0" />
@@ -130,23 +172,27 @@
 			<input type="hidden" name="item_quantity_{{roomSelectionArr.length +1}}" value="1" />
 			<input type="hidden" name="item_amount_{{roomSelectionArr.length +1}}" value="100" />
 		</div>
-		<input type="hidden" name="merchant" value="guptaakriti83@gmail.com" />
+		<!-- <input type="hidden" name="merchant" value="guptaakriti83@gmail.com" /> -->
+		<input type="hidden" name="merchant" value="rashi@homephilosophy.com.sg" />
 		<input type="hidden" name="ref_id" value="{{quizId}}" />
 		<input type="hidden" name="delivery_charge" value="0.00" />
 		<input type="hidden" name="tax_amount" value="0.00" />
 		<input type="hidden" name="tax_percentage" value="0.00" />
 		<input type="hidden" name="total_amount" value="{{totalPrice}}" />
-		<input type="hidden" name="str_url" value="" />
-		<input type="hidden" name="success_url" value="http://homephilosophy.com.sg/dashboard" />
+		<!-- <input type="hidden" name="success_url" value="http://homephilosophy.com.sg/tell-us-more" /> -->
+		<input type="hidden" name="success_url" value="http://localhost:8006/tell-us-more" />
 		<input type="hidden" name="cancel_url" value="http://homephilosophy.com.sg" />
 		<input type="hidden" name="signature" value="{{signature}}" />
 		<input type="hidden" name="signature_algorithm" value="sha1" />
 		<input type="hidden" name="skip_success_page" value="1" />
-		<!-- <input type="hidden" name="str_url" value="http://localhost:8006/paycb" /> -->
-		<input type="submit" class="btn-select-pkg" value="CHECKOUT" ng-click="savePaymentInfo()" name="submit v2" alt="SmoovPay!" />
+		<input type="hidden" name="str_url" value="http://localhost:8006/paycb" />
+		<!-- <input  type="submit" class="btn-select-pkg" value="CHECKOUT"  name="submit v2" alt="SmoovPay!" /> -->
+		<!-- <input  type="button" ng-click="savePaymentInfo()" class="btn-select-pkg" value="CHECKOUT"  name="submit v2" alt="SmoovPay!" /> -->
 	</form>
 	</div>
 </div>
 </section>
 
+</div>
+</div>
 <div style="padding-bottom:60px;"></div>

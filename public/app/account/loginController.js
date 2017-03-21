@@ -24,7 +24,8 @@ angular.module("app")
 		  					quizResult.setInsertedRooms(userQuiz[1].data.results.roomData);
 		  					mvNotifier.notify('Login success!');
 	  						if(userSelectionInfo.quizImgSelected.length===1){
-	  							$location.path('/tell-us-more');
+	  							// $location.path('/tell-us-more');
+	  							$location.path('/pricing');
 	  						}
 	  						else{
 	  							$location.path('/style-quiz');
@@ -60,7 +61,8 @@ angular.module("app")
 			  						quizResult.setInsertedRooms(userQuiz[1].data.results.roomData);
 			  						mvNotifier.notify('Login success!');
 			  						if(userSelectionInfo.quizImgSelected.length===1){
-			  							$location.path('/tell-us-more');
+			  							// $location.path('/tell-us-more');
+			  							$location.path('/pricing');
 			  						}
 			  						$location.path('/style-quiz');
 			  					}, function(reason){

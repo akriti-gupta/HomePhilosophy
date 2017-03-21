@@ -769,26 +769,26 @@ $scope.gridWidth=300;
 	    		},
 	    		{
 	  				 image_style: "images/styles/modern.png",
-	  				 image_id: 3,
+	  				 image_id: 4,
 	  				 image_name: "Modern",
 	  				 image_desc:"Celebrated for its simple and stylish pieces that focus on geometry and clean lines, often with distinct colour palettes. "
 	    		}]
 	    		,
 	    		[{
 	    			image_style: "../images/styles/transitional.png",
-	        		image_id: 4,
+	        		image_id: 3,
 	        		image_name: "Transitional",
 	        		image_desc: "A style that speaks to the unique merging of classic and contemporary, it combines masculine and feminine elements."
 	    		}, 
 	    		{
 					image_style: "images/styles/minimalist.png",
-					image_id: 5,
+					image_id: 6,
 					image_name: "Asian Minimalist",
 					image_desc: "A minimalistic style that incorporates natural elements; this style is all about contemporary sophistication with subtle print and texture."
 	    		},
 	    		{
 	  				image_style: "images/styles/scandi.png",
-	  				image_id: 6,
+	  				image_id: 5,
 	  				image_name: "Scandinavian",
 	  				image_desc: "Renowned for its understated colour palette, simplicity and utility; Scandinavian influence embraces functionality and clean lines."
 	    		}]];
@@ -987,7 +987,8 @@ $scope.gridWidth=300;
 	// To maintain the quiz result and style quiz pages state when redirected here after login.
 	if(quizResult.getStyle().length>=1 && $scope.pageRequester===' '){
 		if(quizResult.getIsKnownStyle()){
-			$location.path('/tell-us-more');
+			// $location.path('/tell-us-more');
+			$location.path('/pricing');
 		}
 		else{
 			$scope.userStyle = quizResult.getStyle();
@@ -1073,7 +1074,8 @@ $scope.gridWidth=300;
 
 			case 9:// $scope.progress_result=true;
 					$scope.pagenum++;
-					$location.path('/tell-us-more');
+					// $location.path('/tell-us-more');
+					$location.path('/pricing');
 					break;
 			}
 	}
@@ -1307,7 +1309,8 @@ $scope.gridWidth=300;
 				$scope.showResult = true;
 					quizResult.setUserCurrQuiz(userQuiz[0].data.quizId);
 					quizResult.setInsertedRooms(userQuiz[1].data.results.roomData);
-					$location.path('/tell-us-more');
+					// $location.path('/tell-us-more');
+					$location.path('/pricing');
 				}, function(reason){
 					console.log(reason);
 				});

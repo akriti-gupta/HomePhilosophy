@@ -11,8 +11,8 @@ var multer = require('multer'),
 
 var storage =   multer.diskStorage({
   destination: function (req, file, callback) {
-    // callback(null, './public/uploads/');
-    callback(null, '/root/HomePhilosophy/public/uploads/');
+    //callback(null, './public/uploads/');
+     callback(null, '/root/HomePhilosophy/public/uploads/');
   },
   filename: function (req, file, callback) {
   	var fileName = file.originalname.substr(0,file.originalname.indexOf('.'));
@@ -47,6 +47,10 @@ module.exports = function(app){
 	app.post('/paycb',function(req,res){
 		console.log('Got back response, ');
 		console.log(res);
+		console.log('request is:');
+		console.log(req);
+		res.redirect('/style-quiz');
+
 	})
 	// app.post('/storePackageTxn',payment.storePackageTxn);
 	app.post('/saveQuizMiscData',userQuiz.saveQuizMiscData);

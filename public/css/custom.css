@@ -1246,6 +1246,18 @@ padding:40px 0px 60px;font-size:22px;margin:0;font-family:PlayfairDisplay-Regula
   flex-basis: 0;
   flex-grow: 1;   
 }
+
+.flex-child-pay1{
+  margin: 10px; 
+  flex-basis: 0;
+  flex-grow: 1.5; 
+}
+
+.flex-child-pay2{
+  margin: 10px; 
+  flex-basis: 0;
+  flex-grow: 0.5; 
+}
 .edsg-flex-child{ /* Used in About Us */
   margin: 10px;  
   width: 350px;
@@ -1376,11 +1388,15 @@ div.faq.show {
   width:100%;
   color:#000;
 }
-.pkg-title{
+.pkg-title,.payment-title{
   letter-spacing:1px;
   font-family: PlayfairDisplay-Regular;
   font-size: 30px;
   padding-top:20px;
+}
+.payment-title{
+  font-size:22px;
+  padding: 20px 5px 5px 5px;
 }
 .pkg-divider{
   margin: 0px 20px;
@@ -1408,10 +1424,15 @@ div.faq.show {
   padding-bottom:30px;
 }
 
-.pkg-item{
+.pkg-item,.payment-item{
   font-family: PlayfairDisplay-Regular;
   font-size: 18px;
   padding:15px;
+}
+
+.payment-item{
+  font-size:18px;
+  padding: 10px 0px 0px 30px;
 }
 .btn-select-pkg{
   font-family: OpenSans-Regular;

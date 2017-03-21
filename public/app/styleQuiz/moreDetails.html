@@ -52,7 +52,7 @@
 	        	<span class="fs-20px">1. How much would you like to spend on your room?</span>
 	        	<div class="radio" ng-repeat="val in budget">
   					<label>
-    					<input type="radio" ng-model="budget" name="radioBudget" value="{{val.value}}"  ng-checked="val.selected">{{val.value}}
+    					<input type="radio" ng-model="selectedBudget.value" name="radioBudget" value="{{val.value}}"  ng-checked="val.selected">{{val.value}}
   					</label>
 	      		</div>
 	      	</div>
@@ -61,7 +61,7 @@
 	        	<span class="fs-20px">2. Do you own or rent?</span>
 	         	<div class="radio" ng-repeat="val in aprt">
   					<label>
-    					<input type="radio" ng-model="aprt" name="radioAprt" value="{{val.value}}" ng-checked="val.selected">
+    					<input type="radio" ng-model="selectedAprt.value" name="radioAprt" value="{{val.value}}" ng-checked="val.selected">
     					{{val.value}}
   					</label>
 				</div>

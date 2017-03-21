@@ -139,24 +139,33 @@ function chkApptStatus(apptData, roomId){
 	var status = {};
 	
 		if(apptData.apptStatus>=0){
-			//Appt Scheduled. Check if in future>=24 hrs ahead 
-			var apptDate = moment(apptData.apptDate);
-			var msDiff = apptDate.diff(moment(new Date(),"DD/MM/YYYY HH:mm:ss"));
-			var dayDiff = moment.duration(msDiff);
-			var hourDiff = Math.floor(dayDiff.asHours());
+			if(apptData.apptStatus===0){
+				//Appt Scheduled. Check if in future>=24 hrs ahead 
+				var apptDate = moment(new Date(apptData.apptDate));
 
-			if(hourDiff >=24){
-				status.statusText = "Meeting Scheduled.";
-				status.linkPage = " ";
-				status.modal = " ";
-				status.stage=-1;
+				var msDiff = apptDate.diff(moment(new Date(),"DD/MM/YYYY HH:mm:ss"));
+				var dayDiff = moment.duration(msDiff);
+				var hourDiff = Math.floor(dayDiff.asHours());
+
+				if(hourDiff >=0){
+					status.statusText = "Meeting Scheduled.";
+					status.linkPage = " ";
+					status.modal = " ";
+					status.stage=-1;
+				}
+				else if(hourDiff < 0 || apptData.apptStatus===1){
+					status.statusText = "Meeting done. Pending First Look";
+					status.linkPage = " ";
+					status.modal = " ";
+					status.stage=1;
+				}
 			}
-			else if(hourDiff < 0 || apptData.apptStatus===1){
-				status.statusText = "Meeting done. Pending First Look";
-				status.linkPage = " ";
-				status.modal = " ";
-				status.stage=1;
-			}
+			else if(apptData.apptStatus===3){
+					status.statusText = "Rejected. Awaiting Reschedule.";
+					status.linkPage = " ";
+					status.modal = " ";
+					status.stage=-1;
+				}
 		}
 		else if(apptData.floorPlanStatus>=0){
 			if(apptData.roomId === roomId){
@@ -184,15 +193,6 @@ function chkApptStatus(apptData, roomId){
 	return status;
 }
 
-function populateRoomStatus(roomData,currApptData){
-	for(var i =0;i<roomData.length;i++){
-		var status  = chkApptStatus(currApptData, roomData[i].id);
-		if(typeof status != 'undefined'){
-			roomData[i].displayStatus = status;
-		}
-
-	}
-}
 
 function populateStatus(projectData){
  
@@ -217,6 +217,12 @@ function populateStatus(projectData){
 				status.modal = " ";
 				status.action=-1;
 				status.stage=-1;
+				for(var k =0; k < currRoomData.length;k++){
+					if(currRoomData[k].quizId === quizData[j].quizId){
+						projectData[i].roomData[k].displayStatus = status;
+					}
+				}
+
 				quizData[j].displayStatus = status;
  			}
  			else if(quizData[j].status===-1){
@@ -225,75 +231,84 @@ function populateStatus(projectData){
 				status.modal = " ";
 				status.action=-1;
 				quizData[j].displayStatus = status;
+				for(var k =0; k < currRoomData.length;k++){
+					if(currRoomData[k].quizId === quizData[j].quizId){
+						projectData[i].roomData[k].displayStatus = status;
+					}
+				}
  			}
  			else if(quizData[j].status===0){
 
  				//populateRoomStatus(currRoomData,currApptData);
 
- 				for(var k =0; k < projectData[i].roomData.length;k++){
- 					var roomStatus ={};
- 					var pkgId = 1;
- 					var apptFound = false;
-					for(var l=0;l<currPkgData.length;l++){
-						if(currPkgData[l].roomId === projectData[i].roomData[k].id){
-							pkgId = currPkgData[l].pkgId;
-							break;
+ 				for(var k =0; k < currRoomData.length;k++){
+ 					if(currRoomData[k].quizId === quizData[j].quizId){
+	 					var roomStatus ={};
+	 					var pkgId = 1;
+	 					var apptFound = false;
+						for(var l=0;l<currPkgData.length;l++){
+							if(currPkgData[l].roomId === projectData[i].roomData[k].id){
+								pkgId = currPkgData[l].pkgId;
+								break;
+							}
 						}
-					}
-					
-					if(currShoppingList && currShoppingList.length>0){
-	 					roomStatus = chkFinalPrjStatus(currShoppingList,projectData[i].roomData[k].id);
-	 					projectData[i].roomData[k].displayStatus = roomStatus;
-	 				}
-
-					if(isEmpty(projectData[i].roomData[k].displayStatus)){
-	 					if(currFinalLook.length>0){
-		 					roomStatus = chkFinalLookStatus(currFinalLook,pkgId,projectData[i].roomData[k].id);
-		 					if(!isEmpty(roomStatus)){
-									projectData[i].roomData[k].displayStatus = roomStatus;
-							}
+						
+						if(currShoppingList && currShoppingList.length>0){
+		 					roomStatus = chkFinalPrjStatus(currShoppingList,projectData[i].roomData[k].id);
+		 					projectData[i].roomData[k].displayStatus = roomStatus;
 		 				}
-		 			}
 
- 					if(isEmpty(projectData[i].roomData[k].displayStatus)){
-	 					if(currConceptBoard && currConceptBoard.length>0){
-	 						roomStatus = chkCncptStatus(currConceptBoard,projectData[i].roomData[k].id,pkgId);
-	 						if(!isEmpty(roomStatus)){
-								projectData[i].roomData[k].displayStatus = roomStatus;
-							}
-	 					}
-	 				}
+						if(isEmpty(projectData[i].roomData[k].displayStatus)){
+		 					if(currFinalLook.length>0){
+			 					roomStatus = chkFinalLookStatus(currFinalLook,pkgId,projectData[i].roomData[k].id);
+			 					if(!isEmpty(roomStatus)){
+										projectData[i].roomData[k].displayStatus = roomStatus;
+								}
+			 				}
+			 			}
 
-
-	 				if(isEmpty(projectData[i].roomData[k].displayStatus)){
-	 					for(var l=0;l<currApptData.length;l++){
-		 					if(currApptData[l].quizId===quizData[j].quizId){	
-		 						apptFound=true;
-		 						roomStatus = chkApptStatus(currApptData[l],projectData[i].roomData[k].id);
+	 					if(isEmpty(projectData[i].roomData[k].displayStatus)){
+		 					if(currConceptBoard && currConceptBoard.length>0){
+		 						roomStatus = chkCncptStatus(currConceptBoard,projectData[i].roomData[k].id,pkgId);
 		 						if(!isEmpty(roomStatus)){
 									projectData[i].roomData[k].displayStatus = roomStatus;
-									break;
 								}
-		 						
 		 					}
 		 				}
-		 				if(!apptFound){
-		 					roomStatus.statusText = "Pending Meet and Measure";
+
+
+		 				if(isEmpty(projectData[i].roomData[k].displayStatus)){
+		 					for(var l=0;l<currApptData.length;l++){
+			 					if(currApptData[l].quizId===quizData[j].quizId){	
+			 						apptFound=true;
+			 						roomStatus = chkApptStatus(currApptData[l],projectData[i].roomData[k].id);
+			 						var date = new Date(currApptData[l].apptDate);
+			 						currApptData[l].apptDate = moment(date).format('YYYY-MM-DD hh:mm:00 A');
+			 						if(!isEmpty(roomStatus)){
+										projectData[i].roomData[k].displayStatus = roomStatus;
+										break;
+									}
+			 						
+			 					}
+			 				}
+			 				// if(!apptFound){
+			 				// 	roomStatus.statusText = "Pending Meet and Measure";
+								// roomStatus.linkPage = " ";
+								// roomStatus.modal = " ";
+								// roomStatus.action=-1;
+								// projectData[i].roomData[k].displayStatus = roomStatus;
+			 				// }
+			 			}
+
+			 			if(isEmpty(projectData[i].roomData[k].displayStatus)){
+		 					roomStatus.statusText = "Pending Meet and Measuress";
 							roomStatus.linkPage = " ";
 							roomStatus.modal = " ";
 							roomStatus.action=-1;
 							projectData[i].roomData[k].displayStatus = roomStatus;
 		 				}
-		 			}
-
-		 			if(isEmpty(projectData[i].roomData[k].displayStatus)){
-	 					roomStatus.statusText = "Pending Meet and Measure";
-						roomStatus.linkPage = " ";
-						roomStatus.modal = " ";
-						roomStatus.action=-1;
-						projectData[i].roomData[k].displayStatus = roomStatus;
-	 				}
 	 				//projectData[i].roomData[k].displayStatus = roomStatus;	
+	 				}
 
 				}
 

@@ -1,5 +1,5 @@
 angular.module('app')
-    .controller('SaveDetails',function($scope,$location,payment,mvUpload,mvNotifier,quizResult,mvUserQuiz){
+    .controller('SaveDetails',function($scope,$location,$routeParams, payment,mvUpload,mvNotifier,quizResult,mvUserQuiz){
 
   $scope.url ="";
   $scope.pendingFilesArr =[];
@@ -15,11 +15,19 @@ angular.module('app')
   $scope.shareSpace = [];
   $scope.colArr = [];
 
-  $scope.aprt = [{value:'Own my apartment',selected:true},
+  $scope.aprt = [{value:'Own my apartment',selected:false},
                  {value:'Rent my apartment',selected:false}];
 
+  $scope.selectedBudget = {
+    'value': '$3,000 - $4,000'
+  } ;    
+
+  $scope.selectedAprt = {
+    'value':'Own my apartment'
+  };
+
   $scope.budget = [{value:'$3,000 - $4,000',selected:false},
-                {value:'$4,000 - $5,000',selected:true},
+                {value:'$4,000 - $5,000',selected:false},
                 {value:'$5,000 - $7,000',selected:false},
                 {value:'$7,000 - $10,000',selected:false},
                 {value:'I’m not on a budget',selected:false}];
@@ -46,9 +54,20 @@ angular.module('app')
   $scope.reasonOther=' ';
 
   
-  if(quizResult.getCustSelections().length===0){
-    $location.path('/');
-  }
+  // if(quizResult.getCustSelections().length===0){
+  //   $location.path('/');
+  // }
+
+
+  var paymentMade = $routeParams.response_code;
+  var merchant=$routeParams.merchant;
+  var quizId = $routeParams.ref_id;
+  var reference_code = $routeParams.reference_code;
+  var currency = $routeParams.currency;
+  var total_amount = $routeParams.total_amount;
+  var signature_algorithm = $routeParams.signature_algorithm;
+
+  quizResult.setUserCurrQuiz(quizId);
 
   function validateFormData(){
     angular.forEach($scope.designReason, function(reason) {
@@ -98,6 +117,7 @@ angular.module('app')
       var colourFile = '/images/'+colFile[colourIndex]+'.png';
       $scope.colour.push({id:colourIndex,file:colourFile});
     } 
+    return false;
   }   
 
   
@@ -114,15 +134,6 @@ angular.module('app')
         var selectedBudget;
         var selOwnership;
 
-        /*var budget = $scope.radioBudget;
-        var ownership = $scope.radioAprt;
-        var utility = $scope.spaceUse; 
-        var brands = $scope.brand; 
-        var extraInfo = $scope.extraInfo; 
-        var email = $scope.inputEmail;
-        var phone = $scope.inputPhone;
-        var urlInfo = $scope.url;*/
-
         for(var i=0;i<$scope.pendingDropFiles.length;i++){
           $scope.fileArr.push($scope.pendingDropFiles[i].file);
         }
@@ -130,13 +141,17 @@ angular.module('app')
           $scope.fileArr.push($scope.pendingDropFilesFurn[i].file);
         }
 
-        angular.forEach($scope.budget, function(budget) {
-          if(budget.selected){ 
-            selectedBudget = budget.value;
-          }
-        });
+        // angular.forEach($scope.budget, function(budget) {
+        //   console.log(budget);
+        //   if(budget.selected){ 
+        //     selectedBudget = budget.value;
+        //   }
+        // });
+
+        console.log($scope.selectedBudget);
 
         angular.forEach($scope.aprt, function(aprt) {
+          console.log(aprt);
           if(aprt.selected){ 
             selOwnership = aprt.value;
           }
@@ -146,8 +161,8 @@ angular.module('app')
           reason = reason +','+$scope.reasonOther;
         }
 
-        var data={budget:selectedBudget,
-                  ownership:selOwnership,
+        var data={budget:$scope.selectedBudget.value,
+                  ownership:$scope.selectedAprt.value,
                   designReason:reason,
                   spaceUtility:$scope.spaceUse,
                   spaceSharing:spcShare,
@@ -169,12 +184,13 @@ angular.module('app')
               data.file1 = response;
             }
             mvUserQuiz.saveQuizMiscData(data).then(function(response){
-              if(payment.getPayPkg()>0){
+             /* if(payment.getPayPkg()>0){
                 $location.path('/reviewPayment');
               }
               else{
                 $location.path('/pricing');    
-              }
+              }*/
+              $location.path('/dashboard');    
             },function(reason){
 
             });
@@ -186,12 +202,13 @@ angular.module('app')
         }
         else{
           mvUserQuiz.saveQuizMiscData(data,quizId).then(function(response){
-            if(payment.getPayPkg()>0){
+            /*if(payment.getPayPkg()>0){
              $location.path('/reviewPayment');
             }
             else{
               $location.path('/pricing');    
-            }
+            }*/
+            $location.path('/dashboard');    
           },function(reason){
 
           });
