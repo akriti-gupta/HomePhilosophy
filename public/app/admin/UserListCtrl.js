@@ -181,6 +181,13 @@ function chkApptStatus(apptData, roomId){
 					status.modal = " ";
 					status.stage=1;
 				}
+
+				else if(apptData.floorPlanStatus==3){
+					status.statusText = "Floor Plan Rejected.";
+					status.linkPage = " ";
+					status.modal = " ";
+					status.stage=-1;
+				}
 			}
 		}
 		else{
