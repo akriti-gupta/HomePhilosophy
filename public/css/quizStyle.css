@@ -299,7 +299,6 @@ filter:alpha(opacity=50); /* for <= IE 8 */
   visibility: visible; position: relative; margin:0px auto;width:90%;
   opacity: 1;}
 
-
 .modal-content {
   border-radius: 0px;
 }
@@ -469,7 +468,13 @@ filter:alpha(opacity=50); /* for <= IE 8 */
     position: absolute;
     top: 10px;
     font-size: 25px; 
+    right:5%;
   }
+
+  
+.pin-comment{
+  right:15%;
+}
 
 
  .image-like span.glyphicon-heart-empty, .image-like span.glyphicon-heart  {
@@ -477,7 +482,8 @@ filter:alpha(opacity=50); /* for <= IE 8 */
 
   .image-like-selected span.glyphicon-heart-empty,  .image-like-selected span.glyphicon-heart {
     color: rgb(0, 169, 157);
-    text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white; }
+    text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white; 
+    }
   
 
 .thumbnail {

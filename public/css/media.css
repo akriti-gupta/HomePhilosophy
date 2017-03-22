@@ -134,12 +134,23 @@
             font-size:9px;
             height:30px;
         }
+        .pin-heart{
+             right:15%;
+        }
+        
         .grid-pos{
             width:95%;
         }
         .image-status{
-            font-size:initial;
+            /*font-size:initial;*/
+            font-size: 35px;
             width: 15px;
+            right:15%;
+        }
+        .pin-comment{
+            right:5%;
+            width:15%;
+            padding-top: 40px;
         }
         .btn-comment{
             margin-left:50%;
