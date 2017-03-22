@@ -16,9 +16,9 @@ angular.module("app")
   	//TODO: Save package info in DB and retrive this array from there. This is to
   	//accomodate any future changes to the payment packages and put it in service.
   	$scope.packages = [
-  						{'id':1,'name':"Simple",'pkgValue':350,value:1},
-  					    {'id':2,'name':"Classic",'pkgValue':600,value:2},
-  					    {'id':3,'name':"Premium",'pkgValue':1000,value:3},
+  						{'id':1,'name':"Simple",'pkgValue':350.00,value:1},
+  					    {'id':2,'name':"Classic",'pkgValue':600.00,value:2},
+  					    {'id':3,'name':"Premium",'pkgValue':1000.00,value:3},
   					    {'id':4,'name':"Custom",'pkgValue':0,value:4}
   	];	
   	$scope.roomImage ={};
@@ -122,7 +122,7 @@ var paymentMade = $routeParams.response_code;
 			$scope.totalPrice = $scope.totalPrice +$scope.roomPkg[i].pkgValue;
 		}
 		if($scope.buyForMe){
-			$scope.totalPrice = $scope.totalPrice + 100;
+			$scope.totalPrice = parseFloat($scope.totalPrice + 100).toFixed(2);
 		}
 	}
 
@@ -135,9 +135,11 @@ $scope.initPayment = function(){
 	var merchant = 'rashi@homephilosophy.com.sg';
   	var action = 'pay';
   	var ref_id = $scope.quizId;
-  	var total_amount = $scope.totalPrice;
+  	$scope.total_amount = parseFloat($scope.totalPrice).toFixed(2);
+  	// var total_amount=600.00;
   	var currency = 'SGD';
-  	var sig = secret+merchant+action+ref_id+total_amount+currency;
+  	var sig = secret+merchant+action+ref_id+$scope.total_amount+currency;
+  	console.log(sig);
 	
 	$scope.signature = CryptoJS.SHA1(sig).toString();
  	$scope.price = $scope.totalPrice.toString();

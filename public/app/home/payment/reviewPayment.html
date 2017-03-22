@@ -138,21 +138,6 @@
   		</div>
   	</div>
 
-	<!-- <div class="row qz-row-dsg" style="display:table;">
-		<div class="col-md-4 col-xs-4 cust-view-tab" style="border:0px;padding:20px;text-align: left;padding-left: 100px;">Each Package includes
-			<div>
-				<div style="padding: 5px;">A complimentary meeting with your designer</div>
-				<div style="padding: 5px;">A complimentary measurement of your space at a time convenient to you</div>
-				<div style="padding: 5px;">Several First Look moodboards</div>
-				<div style="padding: 5px;">Personalized Shopping List</div>
-				<div style="padding: 5px;">Online feedback session with your designer</div>
-				<div style="padding: 5px;">Hassle-free delivery to your home with Buy For Me</div>
-			</div>
-		</div>
-
-		<div class="col-md-8 col-xs-8" style="border:0px;padding:20px;text-align:right;">Total Price</div>
-		<div class="col-md-4 col-xs-4" style="border:0px;padding:20px;"> {{totalPrice}}</div>
-	</div> -->
 
 <div style="width:80%;margin:0 auto;position:relative;text-align:center;padding-bottom:100px;">
 	<!-- <form ng-form-commit  action="https://sandbox.smoovpay.com/access" method="post" name="smoovPayForm"> -->
@@ -170,7 +155,7 @@
 			<input type="hidden" name="item_name_{{roomSelectionArr.length +1}}" value="Buy For Me" />
 			<input type="hidden" name="item_description_{{roomSelectionArr.length +1}}" value="Get your items delivered">
 			<input type="hidden" name="item_quantity_{{roomSelectionArr.length +1}}" value="1" />
-			<input type="hidden" name="item_amount_{{roomSelectionArr.length +1}}" value="100" />
+			<input type="hidden" name="item_amount_{{roomSelectionArr.length +1}}" value="100.00" />
 		</div>
 		<!-- <input type="hidden" name="merchant" value="guptaakriti83@gmail.com" /> -->
 		<input type="hidden" name="merchant" value="rashi@homephilosophy.com.sg" />
@@ -178,14 +163,14 @@
 		<input type="hidden" name="delivery_charge" value="0.00" />
 		<input type="hidden" name="tax_amount" value="0.00" />
 		<input type="hidden" name="tax_percentage" value="0.00" />
-		<input type="hidden" name="total_amount" value="{{totalPrice}}" />
-		<!-- <input type="hidden" name="success_url" value="http://homephilosophy.com.sg/tell-us-more" /> -->
-		<input type="hidden" name="success_url" value="http://localhost:8006/tell-us-more" />
+		<!-- <input type="hidden" name="total_amount" value="{{totalPrice}}" /> -->
+		<input type="hidden" name="total_amount" value="{{total_amount}}" />
+		<input type="hidden" name="success_url" value="http://homephilosophy.com.sg/tell-us-more" />
 		<input type="hidden" name="cancel_url" value="http://homephilosophy.com.sg" />
 		<input type="hidden" name="signature" value="{{signature}}" />
 		<input type="hidden" name="signature_algorithm" value="sha1" />
 		<input type="hidden" name="skip_success_page" value="1" />
-		<input type="hidden" name="str_url" value="http://localhost:8006/paycb" />
+		<input type="hidden" name="str_url" value="http://homephilosophy.com.sg/paycb" />
 		<!-- <input  type="submit" class="btn-select-pkg" value="CHECKOUT"  name="submit v2" alt="SmoovPay!" /> -->
 		<!-- <input  type="button" ng-click="savePaymentInfo()" class="btn-select-pkg" value="CHECKOUT"  name="submit v2" alt="SmoovPay!" /> -->
 	</form>
