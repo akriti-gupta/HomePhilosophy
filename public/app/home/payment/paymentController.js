@@ -80,6 +80,7 @@ angular.module("app")
 				$scope.roomPkg[i]=$scope.packages[pkg-1];
 			}
 		}
+
 	}
 var paymentMade = $routeParams.response_code;
   	var merchant=$routeParams.merchant;
@@ -107,8 +108,12 @@ var paymentMade = $routeParams.response_code;
 				// for(var i = 0;i<roomsObj.length;i++){
 				// 	room.push(roomsObj[i].roomId);
 				// }
-
-				$location.path("/reviewPayment");	
+				if(pkg!=4){
+					$location.path("/review-payment");	
+				}
+				else{
+					$location.path("/custom");
+				}
 		 	}
 		 	else{
 		 		$location.path("/style-quiz");	

@@ -185,7 +185,7 @@ angular.module('app')
             }
             mvUserQuiz.saveQuizMiscData(data).then(function(response){
              /* if(payment.getPayPkg()>0){
-                $location.path('/reviewPayment');
+                $location.path('/review-payment');
               }
               else{
                 $location.path('/pricing');    
@@ -203,7 +203,7 @@ angular.module('app')
         else{
           mvUserQuiz.saveQuizMiscData(data,quizId).then(function(response){
             /*if(payment.getPayPkg()>0){
-             $location.path('/reviewPayment');
+             $location.path('/review-payment');
             }
             else{
               $location.path('/pricing');    

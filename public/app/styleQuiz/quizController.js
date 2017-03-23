@@ -1,5 +1,5 @@
 angular.module("app")
-		  .controller("QuizController",function($scope,$location,$window,quizResult,mvIdentity,mvUserQuiz,custViewSvc){
+		  .controller("QuizController",function($scope,$location,$window,quizResult,payment,mvIdentity,mvUserQuiz,custViewSvc){
 
 				
     $scope.progressRate=16.6; 
@@ -988,7 +988,17 @@ $scope.gridWidth=300;
 	if(quizResult.getStyle().length>=1 && $scope.pageRequester===' '){
 		if(quizResult.getIsKnownStyle()){
 			// $location.path('/tell-us-more');
-			$location.path('/pricing');
+			if(payment.getPayPkg()===-1){
+				$location.path('/pricing');
+			}
+			else{
+				if(payment.getPayPkg()===4){
+					$location.path("/custom");
+				}
+				else{
+					$location.path('/review-payment');
+				}
+			}
 		}
 		else{
 			$scope.userStyle = quizResult.getStyle();
@@ -1075,7 +1085,17 @@ $scope.gridWidth=300;
 			case 9:// $scope.progress_result=true;
 					$scope.pagenum++;
 					// $location.path('/tell-us-more');
-					$location.path('/pricing');
+					if(payment.getPayPkg()===-1){
+						$location.path('/pricing');
+					}
+					else{
+						if(payment.getPayPkg()===4){
+							$location.path("/custom");
+						}
+						else{
+							$location.path('/review-payment');
+						}
+					}
 					break;
 			}
 	}
@@ -1310,7 +1330,17 @@ $scope.gridWidth=300;
 					quizResult.setUserCurrQuiz(userQuiz[0].data.quizId);
 					quizResult.setInsertedRooms(userQuiz[1].data.results.roomData);
 					// $location.path('/tell-us-more');
-					$location.path('/pricing');
+					if(payment.getPayPkg()===-1){
+						$location.path('/pricing');
+					}
+					else{
+						if(payment.getPayPkg()===4){
+					$location.path("/custom");
+				}
+				else{
+					$location.path('/review-payment');
+				}
+					}
 				}, function(reason){
 					console.log(reason);
 				});

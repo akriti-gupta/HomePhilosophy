@@ -481,8 +481,8 @@
             margin:0 15px;
         }
         .lux-ctr-inner{
-           /* width:95%;*/
-           padding: 0px 10px;
+            width:95%;
+           padding: 10px;
         }
        
        #pricing-section{
@@ -563,16 +563,16 @@
         .ctr1{
             flex:1;
         }
-        .lux-ctr-inner{
+        /*.lux-ctr-inner{
             padding:80px 155px;
-        }
+        }*/
         .lux-main-title{
             padding-top:20px;
             font-size:12px;
         }
         .lux-main-text{
             padding-top:5px;
-            font-size:10px;
+            font-size:13px;
         }
         .lux-contact-ctr{
             margin-top:5px;

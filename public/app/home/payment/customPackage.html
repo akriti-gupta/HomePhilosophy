@@ -1,0 +1,62 @@
+<header id="site_header">
+  <a href="/"><div class="hp-logo"></div></a> 
+  <div class="qz-mnu">
+    <ul>
+      <li style="padding-bottom:70px;"><a href="#"><img src="images/menuIcon.png" width="60%" height="auto"></a>
+        <ul class="qz-sub-list">
+          <li ng-controller="LoginController" ng-hide="identity.isAuthenticated()"><a href="/login">Sign In</a></li>
+          <li ng-controller="LoginController" ng-show="identity.isAuthenticated()"><a ng-click="signout()">SIGN OUT</a></li>
+          <!-- <li ng-controller="LoginController" ng-show="identity.isAuthenticated()"><a ng-click="signout()">Sign Out</a></li> -->
+
+          <li ng-controller="LoginController" ng-show="identity.isAuthenticated() && identity.currentUser.isAdmin()"><a href="/admin/users">My Account </a></li>
+          <li ng-controller="LoginController" ng-show="identity.isAuthenticated() && !(identity.currentUser.isAdmin())"><a href="/dashboard">My Account </a></li>
+
+          <li ><a href="/about-us">How it works</a></li>
+          <li style="margin-bottom:35px;"><a href="/contact-us">Contact us</a></li>
+          
+        </ul>
+      </li>
+    </ul>
+
+  </div>
+</header>
+
+<div class="divider" style="border-top:2px solid #e1e1e1;padding:15px;"></div>
+<div style="clear:both;"></div>
+
+<section id='custom'>
+  <p style="font-size:20px;padding:20px;font-family:PlayfairDisplay-Regular;"> Thank you for choosing us for your renovations. Please enter your details below and we will contact you soon.
+
+  <!-- <div style="position:relative;width:80%;margin:0 auto;"> -->
+    <form name='customForm'>
+      <div class="form-horizontal" style="width:50%;margin:0 auto;">
+        <div class="form-group" style="margin:10px 0px;">
+          <label for="inputEmail" class="col-sm-2 control-label ">Name</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control hp-form-input" id="inputName" placeholder="Name" ng-model="inputName" ng-required="true" style="width:65%;">
+          </div>
+        </div>
+
+        <div class="form-group" style="margin:10px 0px;">
+          <label for="inputEmail" class="col-sm-2 control-label ">Email</label>
+          <div class="col-sm-10">
+            <input type="email" class="form-control hp-form-input" id="inputEmail" placeholder="Email" ng-model="inputEmail" ng-required="true" style="width:65%;">
+          </div>
+        </div>
+            
+        <div class="form-group"  style="margin:10px 0px;">
+          <label for="inputPhone" class="col-sm-2 control-label">Tel.</label>
+          <div class="col-sm-10">
+            <input type="number" class="form-control hp-form-input" id="inputPhone" ng-model="inputPhone" ng-required="true" style="width:65%;">
+          </div>
+        </div>
+        
+        <div style="text-align:center;padding:30px 0px 40px;">
+          <button type="submit" class="btn-start-quiz btn-qz btn-nxt font-sansRegular txt-upper col-lightcyan fs-20px" ng-click = "saveData()" >NEXT</button>
+        </div>
+      </div>
+    </form>
+  <!-- </div> -->
+</section>
+<div style="padding-bottom:40px;"></div>
+<div class="divider" style="border-top:2px solid rgb(47, 185, 175);"></div>

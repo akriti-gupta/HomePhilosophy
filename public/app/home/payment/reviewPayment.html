@@ -1,85 +1,50 @@
 <header id="site_header">
-  <a href="/"><div class="hp-logo"></div></a>
+  <a href="/"><div class="hp-logo"></div></a> 
+  <div class="qz-mnu">
+    <ul>
+      <li style="padding-bottom:70px;"><a href="#"><img src="images/menuIcon.png" width="60%" height="auto"></a>
+        <ul class="qz-sub-list">
+          <li ng-controller="LoginController" ng-hide="identity.isAuthenticated()"><a href="/login">Sign In</a></li>
+          <li ng-controller="LoginController" ng-show="identity.isAuthenticated()"><a ng-click="signout()">SIGN OUT</a></li>
+          <!-- <li ng-controller="LoginController" ng-show="identity.isAuthenticated()"><a ng-click="signout()">Sign Out</a></li> -->
 
-  <div id="hp-nav">
-    <ul class="topnav">
-      
-      <li><a href="/style-quiz" id="start-quiz"><button type="button" class="btn-start-quiz btn-topnav font-montserrat txt-upper col-lightcyan fs-14px">Get Started</button></a></li>
-      
-      <li><a href="/about-us">How it works</a></li>
-      <li><a href="/pricing">Pricing</a></li>
-      <li><a href="/portfolio" id="portfolio-link">Portfolio</a></li>
-      <li><a href="/luxury-spaces">Luxury spaces</a></li>
-      <li><a href="/faq">FAQ</a></li>
-      <li><a href="/contact-us">Contact us</a></li>
-      <li>
-        <div class="dropdown" ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
-          <a href = "/login">SIGN IN</a>
-        </div>
-      </li>
-      <li style="padding-top:8px;">
-        <a href="/style-quiz" id="start-quiz"><button type="button" class="btn-start-quiz btn-topnav font-montserrat txt-upper col-lightcyan fs-14px">Get Started</button></a>
+          <li ng-controller="LoginController" ng-show="identity.isAuthenticated() && identity.currentUser.isAdmin()"><a href="/admin/users">My Account </a></li>
+          <li ng-controller="LoginController" ng-show="identity.isAuthenticated() && !(identity.currentUser.isAdmin())"><a href="/dashboard">My Account </a></li>
 
-        <div class="dropdown nav-login" ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
-          <a href = "/login" style="color:rgb(161,161,161);">SIGN IN</a>
-        </div>
-
-        <div class="dropdown nav-login-usr" ng-controller="LoginController" ng-show="identity.isAuthenticated()">
-          <a href="" data-toggle="dropdown" >{{identity.currentUser.firstname}}
-            <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu" style="min-width:0px;">
-            
-            <li ng-if="identity.currentUser.role==='admin'">
-              <a style="font-family:Montserrat-Regular;font-size:13px;" href="/admin/users">MY ACCOUNT</a>
-            </li>
-            
-            <li ng-if="identity.currentUser.role!='admin'"><a style="font-family:Montserrat-Regular;font-size:13px;" href="/dashboard">MY ACCOUNT</a></li>
-            
-            <li style="padding:0px;margin:0;"><a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a></li>
-          </ul>
-        </div>
+          <li ><a href="/about-us">How it works</a></li>
+          <li style="margin-bottom:35px;"><a href="/contact-us">Contact us</a></li>
+          
+        </ul>
       </li>
     </ul>
 
-    <div class="tab_icon">
-        <a href="javascript:void(0);" onclick="displayDropDown()">&#9776;</a>
-    </div>
-    
-    <div class="dropdown nav-login-usr nav-login-tab" style="margin-top:55px;" ng-controller="LoginController" ng-show="identity.isAuthenticated()">
-      <a href="" data-toggle="dropdown" >{{identity.currentUser.firstname}}
-        <span class="caret"></span>
-      </a>
-      <ul class="dropdown-menu" style="min-width:0px;right:0;left:inherit;">
-        <li ng-if="identity.currentUser.role==='admin'"><a style="font-family:Montserrat-Regular;font-size:13px;" href="/admin/users">MY ACCOUNT</a></li>
-        <li ng-if="identity.currentUser.role!='admin'"><a style="font-family:Montserrat-Regular;font-size:13px;" href="/dashboard">MY ACCOUNT</a></li>
-        <li style="padding:0px;margin:0;"><a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a></li>
-      </ul>
-    </div>
   </div>
 </header>
 
+<div class="divider" style="border-top:2px solid #e1e1e1;padding:15px;"></div>
+<div style="clear:both;"></div>
+
 <div  class="qz-container">
 	<div class="prg-dtl-ctr">
-		<div class="prg-wrp" style="padding-top: 100px;">
+		<div class="prg-wrp">
 		  <div class="progress-result">
 		    <div class="resprg-one  no-color" ng-style="{'background': resPrgCol2}"></div>
 		    <div class="resprg-two no-color" ng-style="{'background': resPrgCol2}"></div>
-		    <div class="resprg-three no-color"></div>
-		    <div class="resprg-four primary-color" ng-style="{'background': resPrgCol2}"></div>
+		    <div class="resprg-three primary-color"></div>
+		    <div class="resprg-four no-color" ng-style="{'background': resPrgCol2}"></div>
 		    <div class="resprg-five no-color" ng-style="{'background': resPrgCol2}"></div>
 
 		    <div class="step-one no-color">1</div>
 		    <div class="step-two no-color">2</div>
-		    <div class="step-three no-color">3</div>
-		    <div class="step-four primary-color">4</div>
+		    <div class="step-three primary-color">3</div>
+		    <div class="step-four no-color">4</div>
 		    <div class="step-five no-color">5</div>
 
 
 		    <div class="resprg-lbl-one">Style Quiz</div>
-		    <div class="resprg-lbl-two">Tell Us More</div>
-		    <div class="resprg-lbl-three">Choose a Package</div>
-		    <div class="resprg-lbl-four">Payment</div>
+		    <div class="resprg-lbl-two">Choose a Package</div>
+		    <div class="resprg-lbl-three">Payment</div>
+		    <div class="resprg-lbl-four">Tell Us More</div>
 		    <div class="resprg-lbl-five">Launch Project</div>
 		  </div>
 		</div>
@@ -110,7 +75,7 @@
 
 
 	<div class="row qz-row-dsg style="display:table;border:1px solid black;padding-bottom:0px;"" style="padding-top:50px;">
-		<div class="col-md-6 col-xs-6 " style="text-align:center;border:0px;padding:20px;"><span style="font-size:18px;">Buy for me</span>
+		<div class="col-md-6 col-xs-6 	" style="text-align:center;border:0px;padding:20px;"><span style="font-size:18px;">Buy for me</span>
 		<!-- </div>
 		<div class="col-md-4 col-xs-4" style="border:0px;padding:20px;"> -->
 			<input type="checkbox" ng-model="buyForMe" ng-change="updateTotal()" style="width:50px;height:20px;margin:0px;"> 	
@@ -120,12 +85,12 @@
 	<div class="flex-ctr">
   		<div class="flex-child-pay1">
   			<div class="payment-title"> Each Package includes</div>
-  			<div class="payment-item">A complimentary meeting with your designer</div>
-  			<div class="payment-item">A complimentary measurement of your space at a time convenient to you</div>
-  			<div class="payment-item">Several First Look moodboards</div>
-  			<div class="payment-item">Personalized Shopping List</div>
-  			<div class="payment-item">Online feedback session with your designer</div>
-  			<div class="payment-item">Hassle-free delivery to your home with Buy For Me</div>
+  			<div class="payment-item"><span class="glyphicon glyphicon-ok" style="font-size:12px;"></span>&nbsp;A complimentary meeting with your designer</div>
+  			<div class="payment-item"><span class="glyphicon glyphicon-ok" style="font-size:12px;"></span>&nbsp;A complimentary measurement of your space at a time convenient to you</div>
+  			<div class="payment-item"><span class="glyphicon glyphicon-ok" style="font-size:12px;"></span>&nbsp;Several First Look moodboards</div>
+  			<div class="payment-item"><span class="glyphicon glyphicon-ok" style="font-size:12px;"></span>&nbsp;Personalized Shopping List</div>
+  			<div class="payment-item"><span class="glyphicon glyphicon-ok" style="font-size:12px;"></span>&nbsp;Online feedback session with your designer</div>
+  			<div class="payment-item"><span class="glyphicon glyphicon-ok" style="font-size:12px;"></span>&nbsp;Hassle-free delivery to your home with Buy For Me</div>
   		</div>
 
   		<div class="flex-child-pay2" style="border: 1px solid ;height:35%;">
