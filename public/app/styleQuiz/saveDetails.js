@@ -1,5 +1,5 @@
 angular.module('app')
-    .controller('SaveDetails',function($scope,$location,$routeParams, payment,mvUpload,mvNotifier,quizResult,mvUserQuiz){
+    .controller('SaveDetails',function($scope,$location,$routeParams, payment,mvUpload,mvNotifier,quizResult,mvUserQuiz,mvPayment,PAYMENT_KEYS){
 
   $scope.url ="";
   $scope.pendingFilesArr =[];
@@ -101,6 +101,71 @@ angular.module('app')
 
   }
 
+$scope.processPayment = function(){
+    if($routeParams.merchant){
+      var keys = PAYMENT_KEYS;
+      var secret=keys.MERCHANT_SECRET_KEY;
+      var response_code = $routeParams.response_code;
+      var merchant=$routeParams.merchant;
+      var ref_id = $routeParams.ref_id;
+      var reference_code = $routeParams.reference_code;
+      var currency = $routeParams.currency;
+      var total_amount = $routeParams.total_amount;
+      var signature_algorithm = $routeParams.signature_algorithm;
+      var signature = $routeParams.signature;
+      var card_type = $routeParams.card_type;
+
+      var returnSig = CryptoJS.SHA1(secret+merchant+ref_id+reference_code+response_code+currency+total_amount).toString();
+      
+      if(returnSig === signature){
+        if(response_code==='1'){
+          
+          if(merchant===keys.MERCHANT_EMAIL && currency==='SGD' ){
+            var status = -1;
+            var quizId = ref_id;
+            // var quiz_id = ref_id.substr(0,ref_id.indexOf('_'));
+            // var room_id = ref_id.substr(ref_id.indexOf('_')+1);
+            //Get Stored Package Info
+            mvPayment.getPaymentInfo(quizId,status).then(function(response){
+                var totalPrice = response.toFixed(2);
+                if(totalPrice===total_amount){
+                  status = 0;
+                  mvPayment.updatePackage(quizId, status).then(function(response){
+                    console.log(response);
+                   alert('Thank you for the payment!');
+                    
+                  }, function(reason){
+                    alert('Payment unsuccessful, please contact the site admin. '+reason);
+                    $location.path('/dashboard');
+                    
+                  }); 
+                }
+                else{
+                  alert('Amount to be paid is: '+totalPrice+', while amount paid= '+total_amount);
+                  $location.path('/dashboard');
+                }
+              
+            }, function(reason){
+              
+              alert('Cant fetch payment information. Please contact the site admin')
+              $location.path('/dashboard');
+
+            });
+          }
+          else{
+            alert('Error, merchant or currency incorrect');
+            $location.path('/dashboard');
+          }
+        }
+      }
+      else{
+
+        alert('Secure signature unmatched.Payment could not made, please contact the site admin.');
+        $location.path('/dashboard');
+      }
+
+    }
+}
   $scope.saveColour = function(colourIndex){
     var index;
 

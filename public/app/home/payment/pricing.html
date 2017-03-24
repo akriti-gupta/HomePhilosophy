@@ -1,4 +1,4 @@
-<header id="site_header">
+<header id="site_header" ng-show="!showTitle">
   <a href="/"><div class="hp-logo"></div></a>
 
   <div id="hp-nav">
@@ -59,6 +59,29 @@
   </div>
 </header>
 
+<header id="site_header" ng-show="showTitle">
+  <a href="/"><div class="hp-logo"></div></a> 
+  <div class="qz-mnu">
+    <ul>
+      <li style="padding-bottom:70px;"><a href="#"><img src="images/menuIcon.png" width="60%" height="auto"></a>
+        <ul class="qz-sub-list">
+          <li ng-controller="LoginController" ng-hide="identity.isAuthenticated()"><a href="/login">Sign In</a></li>
+          <li ng-controller="LoginController" ng-show="identity.isAuthenticated()"><a ng-click="signout()">SIGN OUT</a></li>
+          <!-- <li ng-controller="LoginController" ng-show="identity.isAuthenticated()"><a ng-click="signout()">Sign Out</a></li> -->
+
+          <li ng-controller="LoginController" ng-show="identity.isAuthenticated() && identity.currentUser.isAdmin()"><a href="/admin/users">My Account </a></li>
+          <li ng-controller="LoginController" ng-show="identity.isAuthenticated() && !(identity.currentUser.isAdmin())"><a href="/dashboard">My Account </a></li>
+
+          <li ><a href="/about-us">How it works</a></li>
+          <li style="margin-bottom:35px;"><a href="/contact-us">Contact us</a></li>
+          
+        </ul>
+      </li>
+    </ul>
+
+  </div>
+</header>
+
 
 
 
@@ -92,7 +115,7 @@
 
 	<p style="padding-top: 50px;font-size: 28px;text-transform: uppercase;font-family:PlayfairDisplay-Regular;letter-spacing: 3px;">  Please select your Package </p>
 
-	 <div class="pricing-footnote fs-16px font-sansBold">
+	 <div class=" pricing-footnote fs-16px font-sansBold" style="position:inherit;bottom:inherit;padding: 10px 5px 0px;">
   
   	<p> * All our designs are tailor-made to your space. Every package also includes complimentary consultation, measurement of your room/s and multiple feedback sessions with your designer.</p>
   </div>
@@ -167,7 +190,7 @@
 		</div>
   </div>
   
-  <div class="pricing-footnote fs-16px font-sansBold">
+  <div class="pricing-footnote fs-16px font-sansBold" ng-show="!showTitle">
   
   	<p> * All our designs are tailor-made to your space. Every package also includes complimentary consultation, measurement of your room/s and multiple feedback sessions with your designer.</p>
   </div>
@@ -181,7 +204,12 @@
 	    font-family: PlayfairDisplay-Regular;
 	    letter-spacing: 1px;
 	" ng-show="showTitle"> Please select your Package </p>
-	
+
+<div class=" pricing-footnote fs-16px font-sansBold" style="position:inherit;bottom:inherit;padding: 10px 5px 0px;" ng-show="showTitle">
+  
+  	<p> * All our designs are tailor-made to your space. Every package also includes complimentary consultation, measurement of your room/s and multiple feedback sessions with your designer.</p>
+  </div>
+
 <div style="position:relative;width:80%;margin:0 auto;">
 	<button class="accordion" style="text-align:center;margin-top:40px;background-color:#fff;opacity:0.9;">SIMPLE</button>
 	<div class="faq" style="background-color:#fff;height:35%;opacity:0.95;">
@@ -250,6 +278,10 @@
 	</div>
 </div>
 <div style="padding:20px;"></div>
+<div class="pricing-footnote fs-16px font-sansBold" ng-show="!showTitle">
+  
+  	<p> * All our designs are tailor-made to your space. Every package also includes complimentary consultation, measurement of your room/s and multiple feedback sessions with your designer.</p>
+  </div>
 </div>
 	
 <div style="padding-bottom:60px;"></div>

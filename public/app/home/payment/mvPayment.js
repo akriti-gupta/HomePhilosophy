@@ -12,6 +12,32 @@ angular.module('app').factory('mvPayment', function($http, mvIdentity, $q){
 	  			}
 	  		});
 	  		return dfd.promise;
+		},
+
+		getPaymentInfo: function(quizId, status){
+			var dfd = $q.defer();
+		    $http.post('/getPaymentInfo',{quizId:quizId,status:status}).then(function(response){
+		 		if(response.data.success){
+	  				dfd.resolve(response.data.results);
+	  			}
+	  			else{
+	  				dfd.reject(response.data.reason);
+	  			}
+	  		});
+	  		return dfd.promise;
+		},
+
+		updatePackage: function(quizId, status){
+			var dfd = $q.defer();
+		    $http.post('/updatePackage',{quizId:quizId,status:status, customerId:mvIdentity.currentUser.id }).then(function(response){
+		 		if(response.data.success){
+	  				dfd.resolve(true);
+	  			}
+	  			else{
+	  				dfd.reject(response.data.reason);
+	  			}
+	  		});
+	  		return dfd.promise;
 		}
 	}
 });

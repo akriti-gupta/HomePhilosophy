@@ -11,7 +11,7 @@ exports.createUserQuiz = function(req,res,next){
 		if(err){return next(err);}
 		
         if(conn){
-			conn.query('Select * from cust_quiz where customerId = '+conn.escape(customerId)+
+			/*conn.query('Select * from cust_quiz where customerId = '+conn.escape(customerId)+
 						' order by quizId desc', function(err, results, fields){
 				if(err){
 					console.log('Error while creating a new user quiz record: '+err);
@@ -28,7 +28,7 @@ exports.createUserQuiz = function(req,res,next){
 					}
 				}
 
-				if(results.length===0 || (results.length > 0 && results[0].status!=-1)) {
+				if(results.length===0 || (results.length > 0 && results[0].status!=-1)) {*/
 					//Create new record with highest quizId+1
 					var userQuizData = {customerId: customerId, status:status};
 					conn.query('insert into cust_quiz set ?', userQuizData, function(err, results, fields){
@@ -44,8 +44,8 @@ exports.createUserQuiz = function(req,res,next){
 										res.send(quiz[0]);
 									});
 					});
-				}
-			});				
+				//}
+			//});				
 		}
 	});
 }

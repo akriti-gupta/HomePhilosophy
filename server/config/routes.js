@@ -44,6 +44,9 @@ module.exports = function(app){
 	app.post('/addRoomToQuiz',userQuiz.addRoomToQuiz);
 	app.post('/saveUserQuizDtls',userQuiz.saveUserQuizDtls);
 	app.post('/storePackage',payment.storePackage);
+	app.post('/getPaymentInfo',payment.getPaymentInfo);
+	app.post('/updatePackage',payment.updatePackage);
+
 	app.post('/paycb',function(req,res){
 		console.log('Got back response, ');
 		console.log(res);

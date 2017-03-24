@@ -53,13 +53,13 @@
 <!-- You selected payment package: {{payPkg}} valued at {{pkgValue}} -->
 <section ng-init="initPayment()">
  	<div style="padding-top:100px;width:90%;margin:0 auto;">
-	<div class="row qz-row-dsg" style="display:table;border:1px solid black;padding-bottom:0px;">
-		<div class="col-md-6 col-xs-6 cust-view-tab" style="font-size:16px;text-align:center;">ROOM</div>
-		<div class="col-md-4 col-xs-4 cust-view-tab" style="font-size:16px;">PACKAGE</div>
-		<div class="col-md-2 col-xs-2 cust-view-tab" style="font-size:16px;">PRICE</div>
+	<div class="row qz-row-dsg"  style="display:table;border:1px solid black;padding-bottom:0px;">
+	    <div class="col-md-6 col-xs-4 cust-view-tab">ROOM</div>
+	    <div class="col-md-4 col-xs-2 cust-view-tab">PACKAGE</div>
+	    <div class="col-md-2 col-xs-2 cust-view-tab">PRICE</div>
 	</div>
 
- 	<div  class="row qz-row-dsg style="display:table;border:1px solid black;padding-bottom:0px;"" ng-repeat="room in roomSelectionArr track by $index">
+ 	<div  class="row qz-row-dsg" style="display:table;border:1px solid black;padding-bottom:0px;" ng-repeat="room in roomSelectionArr track by $index">
 		<div class="col-md-6 col-xs-6 cust-view-tab">
 	        <figure>
 	            <img class="center-block" ng-src="{{roomImage[room.substr(0,room.indexOf(' '))]}}" style="height:100px;width:auto;">
@@ -76,8 +76,6 @@
 
 	<div class="row qz-row-dsg style="display:table;border:1px solid black;padding-bottom:0px;"" style="padding-top:50px;">
 		<div class="col-md-6 col-xs-6 	" style="text-align:center;border:0px;padding:20px;"><span style="font-size:18px;">Buy for me</span>
-		<!-- </div>
-		<div class="col-md-4 col-xs-4" style="border:0px;padding:20px;"> -->
 			<input type="checkbox" ng-model="buyForMe" ng-change="updateTotal()" style="width:50px;height:20px;margin:0px;"> 	
 		</div>
 	</div>
@@ -122,22 +120,19 @@
 			<input type="hidden" name="item_quantity_{{roomSelectionArr.length +1}}" value="1" />
 			<input type="hidden" name="item_amount_{{roomSelectionArr.length +1}}" value="100.00" />
 		</div>
-		<!-- <input type="hidden" name="merchant" value="guptaakriti83@gmail.com" /> -->
 		<input type="hidden" name="merchant" value="rashi@homephilosophy.com.sg" />
 		<input type="hidden" name="ref_id" value="{{quizId}}" />
 		<input type="hidden" name="delivery_charge" value="0.00" />
 		<input type="hidden" name="tax_amount" value="0.00" />
 		<input type="hidden" name="tax_percentage" value="0.00" />
-		<!-- <input type="hidden" name="total_amount" value="{{totalPrice}}" /> -->
 		<input type="hidden" name="total_amount" value="{{total_amount}}" />
 		<!-- <input type="hidden" name="success_url" value="http://homephilosophy.com.sg/tell-us-more" /> -->
-		<input type="hidden" name="cancel_url" value="http://homephilosophy.com.sg" />
+		<input type="hidden" name="success_url" value="http://homephilosophy.com.sg/tell-us-more" />
+		<input type="hidden" name="cancel_url" value="http://homephilosophy.com.sg/dashboard" />
 		<input type="hidden" name="signature" value="{{signature}}" />
 		<input type="hidden" name="signature_algorithm" value="sha1" />
 		<input type="hidden" name="skip_success_page" value="1" />
-		<input type="hidden" name="str_url" value="http://homephilosophy.com.sg/paycb" />
-		<!-- <input  type="submit" class="btn-select-pkg" value="CHECKOUT"  name="submit v2" alt="SmoovPay!" /> -->
-		<!-- <input  type="button" ng-click="savePaymentInfo()" class="btn-select-pkg" value="CHECKOUT"  name="submit v2" alt="SmoovPay!" /> -->
+		<!-- <input type="hidden" name="str_url" value="http://localhost:8006/custom" /> -->
 	</form>
 	</div>
 </div>

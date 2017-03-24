@@ -2,6 +2,7 @@ angular.module("app").controller("MainController",function($scope,$location,quiz
 		  		quizResult.clearStyle();		  		
 		  		payment.clearPayPkg();
 		  		custViewSvc.clearRequester();
+		  		quizResult.clearInsertedRooms();
 
 		  		if($location.path()!='/style-quiz')
 		  			$scope.isActive = true;

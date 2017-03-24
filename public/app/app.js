@@ -30,7 +30,7 @@ angular.module('app')
 					.when('/signup',{templateUrl: 'app/account/login.html', controller: 'LoginController'})
 					.when('/tell-us-more',{templateUrl: 'app/styleQuiz/moreDetails.html', controller: 'SaveDetails',resolve: routeLoginChecks.user})
 					.when('/review-payment',{templateUrl: 'app/home/payment/reviewPayment.html', controller: 'PaymentController',resolve: routeLoginChecks.user})
-					.when('/custom',{templateUrl: 'app/home/payment/customPackage.html',resolve: routeLoginChecks.user})
+					.when('/custom',{templateUrl: 'app/home/payment/customPackage.html', controller: 'PaymentController',resolve: routeLoginChecks.user})
 					.when('/admin/users',{templateUrl: 'app/admin/userList.html', controller: 'UserListCtrl',resolve: routeRoleChecks.admin})
 					.when('/dashboard',{templateUrl: 'app/customer/dashboard.html', controller: 'CustViewController',resolve: routeLoginChecks.user})
 					.otherwise({templateUrl: 'app/home/main.html', controller: 'MainController'});
@@ -44,6 +44,13 @@ angular.module('app').run(function($rootScope,$location){
 		}
 	});
 });	
+
+var payment_keys = {
+	'MERCHANT_SECRET_KEY':'b899e1ed97ea4f58b8146f1b8c90b40a',
+	'MERCHANT_EMAIL': 'rashi@homephilosophy.com.sg'
+};
+
+angular.module('app').constant('PAYMENT_KEYS',payment_keys);
 
 // angular.module('app')
 // 			.config(function($stateProvider, $urlRouterProvider) {

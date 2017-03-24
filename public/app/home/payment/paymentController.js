@@ -1,5 +1,5 @@
 angular.module("app")
-		  .controller("PaymentController",function($scope,$location,$http,$routeParams,quizResult,payment,mvPayment,mvIdentity,mvNotifier,mvUserQuiz,custViewSvc){
+		  .controller("PaymentController",function($scope,$location,$http,$routeParams,quizResult,payment,mvPayment,mvIdentity,mvNotifier,mvUserQuiz,mvEmail,custViewSvc,PAYMENT_KEYS){
 
   	$scope.payPkg;
   	$scope.pkgValue
@@ -82,19 +82,6 @@ angular.module("app")
 		}
 
 	}
-var paymentMade = $routeParams.response_code;
-  	var merchant=$routeParams.merchant;
-  	var ref_id = $routeParams.ref_id;
-  	var reference_code = $routeParams.reference_code;
-  	var currency = $routeParams.currency;
-  	var total_amount = $routeParams.total_amount;
-  	var signature_algorithm = $routeParams.signature_algorithm;
-
-  	console.log(paymentMade);
-
-  	// if(paymentMade==="1"){
-  	// 	savePaymentInfo();
-  	// }
 
   	$scope.savePayPkg = function(pkg){
   		payment.storePayPkg(pkg);
@@ -132,26 +119,24 @@ var paymentMade = $routeParams.response_code;
 	}
 
 $scope.initPayment = function(){
-	$scope.quizId = quizResult.getUserCurrQuiz();
-	console.log($scope.quizId);
-	//var secret='d389a5777e014f23896d5ab245634ab2';
-	var secret='b899e1ed97ea4f58b8146f1b8c90b40a';
-  	//var merchant = 'guptaakriti83@gmail.com';
-	var merchant = 'rashi@homephilosophy.com.sg';
-  	var action = 'pay';
-  	var ref_id = $scope.quizId;
-  	$scope.total_amount = parseFloat($scope.totalPrice).toFixed(2);
-  	// var total_amount=600.00;
-  	var currency = 'SGD';
-  	var sig = secret+merchant+action+ref_id+$scope.total_amount+currency;
-  	console.log(sig);
-	
-	$scope.signature = CryptoJS.SHA1(sig).toString();
- 	$scope.price = $scope.totalPrice.toString();
- 	console.log($scope.signature);
-
-
-
+		$scope.quizId = quizResult.getUserCurrQuiz();
+		//var secret='b899e1ed97ea4f58b8146f1b8c90b40a';
+		var keys = PAYMENT_KEYS;
+    	var secret=keys.MERCHANT_SECRET_KEY;
+		
+		//var merchant = 'rashi@homephilosophy.com.sg';
+		var merchant = keys.MERCHANT_EMAIL;
+	  	var action = 'pay';
+	  	var ref_id = $scope.quizId;
+	  	$scope.total_amount = parseFloat($scope.totalPrice).toFixed(2);
+	  	var currency = 'SGD';
+	  	var sig = secret+merchant+action+ref_id+$scope.total_amount+currency;
+	  	console.log(sig);
+		
+		$scope.signature = CryptoJS.SHA1(sig).toString();
+	 	$scope.price = $scope.totalPrice.toString();
+	 	console.log($scope.signature);
+ 
 }
 	$scope.savePaymentInfo = function(){
 		//TODO: Integrate Payment Stripe
@@ -160,8 +145,8 @@ $scope.initPayment = function(){
 
 		
 		var quizId = quizResult.getUserCurrQuiz();
-		var status = 1;
-		var status = 0;
+		// var status = 0;
+		var status = -1;
 		var isAddOn = 0;
 		var addOnAmtPaid = 0;
 		var isAddRoomErr = 0;
@@ -185,7 +170,14 @@ $scope.initPayment = function(){
 
 		console.log('Before storing package in ctrl, roomPkg is:');
 		console.log(roomPkg);
-		$scope.smoovPayForm.commit();
+		mvPayment.storePackage(quizId, roomPkg, $scope.totalPrice, status,isAddOn,addOnAmtPaid).then(function(response){
+	  			//$location.path('/dashboard');
+	  			$scope.smoovPayForm.commit();
+	  		}, function(reason){
+	  			alert('Payment unsuccessful, please contact the site admin. '+reason);
+	  			
+	  		});
+		//$scope.smoovPayForm.commit();
 		/*if(isAddRoomErr===0){
 	  		mvPayment.storePackage(quizId, roomPkg, $scope.totalPrice, status,isAddOn,addOnAmtPaid).then(function(response){
 	  			console.log('Thanks for the payment');
@@ -201,9 +193,26 @@ $scope.initPayment = function(){
 	// $scope.$on('$locationChangeStart', function( event ) {
 	// 	quizResult.clearInsertedRooms();
 	// });	  	
+
+$scope.sendMail = function(){
+	if($scope.customForm.$valid){
+
+		mvEmail.sendEmail().then(function(success){
+			if(success){
+				alert('Thank you for submitting you request. We will contact you soon.');
+				$location.path('/dashboard');				
+			}
+			else{
+				mvNotifier.notify('Your request could not be sent. Please submit again');
+			}
+		});
+	}
+	else{
+		alert('Please enter all the details');
+	}
+};
+
 })
-
-
 
 .directive('bgImage', function(){
 	return function(scope,element, attrs){

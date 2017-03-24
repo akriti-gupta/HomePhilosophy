@@ -22,7 +22,7 @@
 </header>
 <div class="divider" style="border-top:2px solid #e1e1e1;padding:15px;"></div>
  
-<div  class="qz-container">
+<div  class="qz-container" ng-init="processPayment()">
 	<div class="prg-dtl-ctr">
 		<div class="prg-wrp">
 		  <div class="progress-result">
@@ -78,9 +78,12 @@
 	      	</div>
 
 	      	<div class="form-group">
-	        	<span class="fs-20px">4. What do you use your space for? i.e. living room for entertaining, bedroom for watching TV etc</span>
+	        	<span class="fs-20px">4. What do you use your space for? i.e. living room for entertaining, bedroom for watching TV etc</span><br/>
 	         	<textarea rows="7" cols="50" class="form-info font-sansRegular fs-16px txtarea-dtl"  id="spaceUse" name="spaceUse" ng-model="spaceUse"></textarea>
 	      	</div>
+
+	    
+
 	      	<div class="form-group">
 	        	<span class="fs-20px">5. Who do you share your space with?</span>
 

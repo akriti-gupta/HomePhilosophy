@@ -124,25 +124,27 @@
 
 		<div class="row qz-row-dsg"  style="display:table;border:1px solid black;padding-bottom:0px;">
 
-		    <div class="col-md-4 col-xs-4 cust-view-tab">ROOM</div>
-		    <div class="col-md-2 col-xs-2 cust-view-tab">STYLE</div>
-		    <div class="col-md-2 col-xs-2 cust-view-tab">PACKAGE</div>
-		    <div class="col-md-4 col-xs-4 cust-view-tab">STATUS</div>
+		    <div class="col-md-3 col-xs-3 cust-view-tab">ROOM</div>
+		    <div class="col-md-2 col-xs-4 cust-view-tab">STYLE</div>
+		    <div class="col-md-3 col-xs-2 cust-view-tab">PACKAGE</div>
+		    <div class="col-md-4 col-xs-3 cust-view-tab">STATUS</div>
 		</div>
 
 		<div class="row qz-row-dsg" ng-repeat="item in projectArr track by $index" style="display:table;border:1px solid black;padding-bottom:0px;">
 		
-		    <div class="col-md-4 col-xs-4 cust-view-tab" style="padding:10px;">
-		        <figure>
-		            <img class="center-block" ng-src={{roomImage[item.roomData]}} style="height:100px;width:auto;">
-		        </figure>
+		    <div class="col-md-3 col-xs-3 cust-view-tab" style="padding:10px;">
+			    
+			        <figure>
+			            <img class="center-block" ng-src={{roomImage[item.roomData]}} style="width:100%;height:auto;">
+			        </figure>
+			    
 		    </div>
 
-		    <div class="col-md-2 col-xs-2 cust-view-tab" style="padding:10px;">
+		    <div class="col-md-2 col-xs-3 cust-view-tab" style="padding:10px;">
 		        {{styleName[item.resultData[0].styleId]}}
 		    </div>
 
-			<div class="col-md-2 col-xs-2 cust-view-tab">
+			<div class="col-md-3 col-xs-4 cust-view-tab">
 				<div  ng-if="!item.pkgData|| item.pkgData.length===0"><a href="#" ng-click="selectPkg($index)">Choose a Package </a><br/></div>
 
 				<div ng-if="packageName[item.pkgData.pkgId]!=' '">{{packageName[item.pkgData.pkgId]}}<br/></div>
