@@ -723,7 +723,7 @@ $scope.saveAppointment = function(item){
 							if(success){
 								//$scope.$emit('apptSaved',response );
 								angular.element('#calendarModal').modal('hide');
-								// window.location.reload(true);
+								window.location.reload(true);
 								//TODO: Send email
 							}
 						}, function(reason){
@@ -746,7 +746,7 @@ $scope.saveAppointment = function(item){
 						if(success){
 							//$scope.$emit('apptSaved',response );
 							angular.element('#calendarModal').modal('hide');
-						//	window.location.reload(true);
+							window.location.reload(true);
 							//TODO: Send email
 						}
 					}, function(reason){

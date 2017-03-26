@@ -308,7 +308,7 @@ function populateStatus(projectData){
 			 			}
 
 			 			if(isEmpty(projectData[i].roomData[k].displayStatus)){
-		 					roomStatus.statusText = "Pending Meet and Measuress";
+		 					roomStatus.statusText = "Pending Meet and Measure";
 							roomStatus.linkPage = " ";
 							roomStatus.modal = " ";
 							roomStatus.action=-1;
