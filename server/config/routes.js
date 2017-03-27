@@ -66,7 +66,7 @@ module.exports = function(app){
 	
 	app.post('/submitFeedback',userProject.submitFeedback);
 
-	app.get('/getProjectListing', userProject.getProjectListing1);
+	app.get('/getProjectListing', userProject.getProjectListing);
 	app.get('/getCncptFeedback', userProject.getCncptFeedback);
 	app.post('/modifyUsrAppt',userProject.modifyUsrAppt);
 	app.post('/fetchImages',quiz.fetchImages);
