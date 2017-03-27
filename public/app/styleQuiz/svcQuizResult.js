@@ -39,16 +39,11 @@
         	return insRoomArr.length=0;
         }
 
-        var storeUserQuizInfo = function(infoObj){
+        var setCustSelections = function(infoObj){
         	if(infoObj){
         		roomArr = infoObj.roomSelected;	
         		imgArr = infoObj.quizImgSelected;
-        		if(imgArr!=null && imgArr.length===6){
-        			console.log('Style Quiz taken. Info stored in index 0 to 5');
-        		}
-        		else{
-					console.log('Already know style, style is stored in index 0');        			
-        		}
+        		pinImages = infoObj.pinImages;
 				custSelections = infoObj;
 			}
         	
@@ -127,18 +122,18 @@
 		return {
 			    storeStyle: storeStyle,
 			    getStyle: getStyle,
-			    getCustSelections: getCustSelections,
 			    clearStyle: clearStyle,
+			    setCustSelections: setCustSelections,
+			    getCustSelections: getCustSelections,
+			    clearCustSelections: clearCustSelections,
 			    fetchStyleInfo: fetchStyleInfo,
 			    getStyleTitle: getStyleTitle,
 			    getStyleDesc: getStyleDesc,
 			    showNavBar: showNavBar,
 			   	getStyleImage: getStyleImage,
 			   	getBoard: getBoard,
-			   	storeUserQuizInfo: storeUserQuizInfo,
 			   	setUserCurrQuiz: setUserCurrQuiz,
 			   	getUserCurrQuiz: getUserCurrQuiz,
-			   	clearCustSelections: clearCustSelections,
 			   	setInsertedRooms: setInsertedRooms,
 			   	getInsertedRooms: getInsertedRooms,
 			   	clearInsertedRooms:clearInsertedRooms,

@@ -1053,15 +1053,24 @@ $scope.gridWidth=300;
 			case 8:
 					
 					$scope.disable = false;
-
+					console.log($scope.arrImgLiked);
+					console.log(arrComments);
+					var imgsLiked = [];
+					for(var i=0;i<$scope.arrImgLiked.length;i++){
+						imgsLiked[i] = $scope.arrImgLiked[i].replace('images/styles/styleBoards/','');
+						
+					}
+					console.log($scope.arrImgLiked);
+					console.log(imgsLiked);
+					quizResult.setCustSelections({"roomSelected":$scope.selectedRoom,"quizImgSelected":$scope.selectedImages,"pinImages":imgsLiked});	
+					quizResult.storeStyle($scope.userStyle,$scope.board);
+					
 					if(mvIdentity.isAuthenticated()){
 						$scope.usrLoggedIn = true;
 						var result = quizResult.getStyle();
 						var userSelectionInfo = quizResult.getCustSelections();
-						console.log('$scope.showResult is: '+$scope.showResult);
 		  				mvUserQuiz.saveUserData(userSelectionInfo, result).then(function(userQuiz){
 							$scope.showResult = true;
-							console.log(userQuiz);
 		  					quizResult.setUserCurrQuiz(userQuiz[0].data.quizId);
 		  					quizResult.setInsertedRooms(userQuiz[1].data.results.roomData);
 		  					$scope.pagenum++;
@@ -1214,9 +1223,9 @@ $scope.gridWidth=300;
 		}
 
 		$scope.setBoard(prefStyle[0]);
-		//To store pinterest image and comments
-		quizResult.storeUserQuizInfo({"roomSelected":$scope.selectedRoom,"quizImgSelected":$scope.selectedImages});
-		quizResult.storeStyle($scope.userStyle,$scope.board);
+		// //To store pinterest image and comments
+		// quizResult.setCustSelections({"roomSelected":$scope.selectedRoom,"quizImgSelected":$scope.selectedImages});
+		// quizResult.storeStyle($scope.userStyle,$scope.board);
 	}
 
 	$scope.setBoard = function(styleResult){
@@ -1312,7 +1321,7 @@ $scope.gridWidth=300;
 
 	$scope.saveKnownStylImg = function(style){
 		$scope.selectedImages.push(style.image_id);
-		quizResult.storeUserQuizInfo({"roomSelected":$scope.selectedRoom,"quizImgSelected":$scope.selectedImages});
+		quizResult.setCustSelections({"roomSelected":$scope.selectedRoom,"quizImgSelected":$scope.selectedImages});
 
 
 		var userStyle = [{id:style.image_id, title: null, style: style.image_name,desc: style.image_desc,
@@ -1501,7 +1510,7 @@ $scope.gridWidth=300;
 		if($scope.selectedRoom.length==1){
 			var hasCmt = false;
 			arrCommentsTmp =[];
-			arrCommentsTmp.push({"room_id":0,"room_comments":$scope.room_comments});
+			arrCommentsTmp.push({"room_id":$scope.selectedRoom[0].room_id,"room_comments":$scope.room_comments});
 			for(var i =0; i< arrComments.length; i++){
 				if(arrComments[i].image_id===$scope.img_id){
 					hasCmt = true;
@@ -1560,7 +1569,7 @@ $scope.gridWidth=300;
 		console.log('Before going to pricing,roomSelected is: ');
 		console.log($scope.selectedRoom);
 		saveRoomInfo();
-		quizResult.storeUserQuizInfo({"roomSelected":$scope.selectedRoom,"quizImgSelected":null});
+		quizResult.setCustSelections({"roomSelected":$scope.selectedRoom,"quizImgSelected":null});
 		$location.path('/pricing');
 	}*/
 

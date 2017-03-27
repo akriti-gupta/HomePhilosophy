@@ -20,7 +20,7 @@ angular.module('app')
 					.when('/',{templateUrl: 'app/home/main.html', controller: 'MainController'})
 					
 					.when('/about-us',{templateUrl: 'app/home/aboutUs/aboutUs.html'})
-					.when('/pricing',{templateUrl: 'app/home/payment/pricing.html', controller: 'PaymentController'})
+					.when('/pricing',{templateUrl: 'app/home/payment/pricing.html', controller: 'PricingController'})
 					.when('/portfolio',{templateUrl: 'app/home/portfolio.html'})
 					.when('/luxury-spaces',{templateUrl: 'app/home/luxurySpaces.html'})
 					.when('/faq',{templateUrl: 'app/home/faq/faq.html'})

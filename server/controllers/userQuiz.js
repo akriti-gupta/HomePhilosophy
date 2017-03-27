@@ -30,7 +30,7 @@ exports.createUserQuiz = function(req,res,next){
 
 				if(results.length===0 || (results.length > 0 && results[0].status!=-1)) {*/
 					//Create new record with highest quizId+1
-					var userQuizData = {customerId: customerId, status:status};
+					var userQuizData = {customerId: customerId, status:status,created_at:new Date(),updated_at:new Date()};
 					conn.query('insert into cust_quiz set ?', userQuizData, function(err, results, fields){
 						if(err){
 							console.log('Error in creating new record in cust_quiz: '+err);
@@ -53,13 +53,13 @@ exports.createUserQuiz = function(req,res,next){
 
 function updQzResult(conn,quizId,data,cb){
 
-	conn.query('delete from cust_quiz_result where quizId = '+conn.escape(quizId), 
+	/*conn.query('delete from cust_quiz_result where quizId = '+conn.escape(quizId), 
 	function(err, results, fields){
 		if(err){
 			console.log('Error while deleting existing quiz result: '+err);
 			cb(err,null);
 		}
-		console.log('Deleted old unpaid quiz selected data');
+		console.log('Deleted old unpaid quiz selected data');*/
 		conn.query('insert into cust_quiz_result (quizId, stylePercent, styleId) values ?',[data],
 		function(err, results, fields){
 			if(err){
@@ -69,17 +69,17 @@ function updQzResult(conn,quizId,data,cb){
 			console.log('Result saved');
 			cb(null,results);
 		});
-	});
+	//});
 }
 
 function updQzRoom(conn,quizId,data,cb){
 
-	conn.query('delete from cust_room_selection where quizId = '+conn.escape(quizId), function(err, results, fields){
+	/*conn.query('delete from cust_room_selection where quizId = '+conn.escape(quizId), function(err, results, fields){
 		if(err){
 			console.log('Error while deleting prev room selection info '+err);
 			cb(err,null);
 		}
-		console.log('Deleted prev room selections');
+		console.log('Deleted prev room selections');*/
 		conn.query('insert into cust_room_selection(quizId,roomId,roomName,numRoom) values ?',[data], function(err, results, fields){
 			if(err){
 				console.log('Error in saving room selection data'+err);
@@ -94,18 +94,18 @@ function updQzRoom(conn,quizId,data,cb){
 			});
 			
 		});
-	});
+	//});
 
 }
 
 function updQzImg(conn,quizId,data,cb){
 
-	conn.query('delete from cust_img_selection where quizId = '+conn.escape(quizId), function(err, results, fields){
+	/*conn.query('delete from cust_img_selection where quizId = '+conn.escape(quizId), function(err, results, fields){
 		if(err){
 			console.log('Error while deleting prev img selection info '+err);
 			cb(err,null);
 		}
-		console.log('Deleted prev img selections');
+		console.log('Deleted prev img selections');*/
 		conn.query('insert into cust_img_selection(quizId,questionId,selectedImgId) values ? ',[data], function(err, results, fields){
 			if(err){
 				console.log('Error in saving img selection data'+err);
@@ -114,8 +114,27 @@ function updQzImg(conn,quizId,data,cb){
 			console.log('Img Info saved');
 			cb(null,results);
 		});
-	});
+	//});
+}
 
+function updQzPinImgs(conn,quizId,data,cb){
+
+	if(!isEmpty(data)){
+		conn.query('insert into pin_images set ?',data, function(err, results, fields){
+			if(err){
+				console.log('Error in saving pin images selection data'+err);
+				cb(err,null);
+			}
+		});	
+	}
+	cb(null,true);
+}
+
+function isEmpty(obj) {
+    for (var key in obj) {
+        if (hasOwnProperty.call(obj, key)) return false;
+    }
+    return true;
 }
 
 exports.saveUserQuizDtls = function(req,res,next){
@@ -127,7 +146,8 @@ exports.saveUserQuizDtls = function(req,res,next){
 	var userQuizResult = [];
 	var userRoomData = [];
 	var userImgData = [];
-	var startIndex = 0;
+	var usrPinImgData = {};
+	
 
 console.log(quizDtls);
 
@@ -164,13 +184,25 @@ console.log(quizDtls);
 		else{
 			qid = 1;
 		}
-
 		//TODO: Save Pinterest Images in Another Array.
-		for(var i=startIndex;i<userSelectionData.quizImgSelected.length;i++,qid++){
+		for(var i=0;i<userSelectionData.quizImgSelected.length;i++,qid++){
 			var currImgData = [quizId, qid,userSelectionData.quizImgSelected[i]];
 			userImgData.push(currImgData);
 		}
 	}
+
+	if(userSelectionData!=null && userSelectionData.pinImages!=null
+								 && userSelectionData.pinImages.length>0){
+		var imgs;
+		if(userSelectionData.pinImages.length>1){
+			imgs = userSelectionData.pinImages.join(',');
+		}
+		else{
+			imgs = userSelectionData.pinImages[0];
+		}
+		usrPinImgData = {quizId: quizId, imagesLiked: imgs};
+	}
+	console.log(usrPinImgData);
 
 	if(status===-1){
 		mysqlConn.getConnection(function(err,conn){
@@ -179,7 +211,8 @@ console.log(quizDtls);
 	        	async.parallel([
 							async.apply(updQzResult,conn,quizId,userQuizResult),
 							async.apply(updQzRoom,conn,quizId,userRoomData),
-							async.apply(updQzImg,conn,quizId,userImgData)
+							async.apply(updQzImg,conn,quizId,userImgData),
+							async.apply(updQzPinImgs,conn,quizId,usrPinImgData)
 						], function (err, result) {
 						     if(err){
 						     	conn.release();
@@ -192,17 +225,6 @@ console.log(quizDtls);
 			                conn.release();
 			                res.send({'success':true,'results':userProject});
 						});
-
-
-
-
-
-
-
-
-
-
-
 
 
 				/*conn.query('delete from cust_quiz_result where quizId = '+conn.escape(quizId), function(err, results, fields){

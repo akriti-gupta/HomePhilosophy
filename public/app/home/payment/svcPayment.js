@@ -3,6 +3,7 @@
 		var package = -1;
 		var pkgPerRoom = [];
 		var packageArr = [];
+		var pkgPerRoom1 =[];
 
 		var storePayPkg = function(pkg){
 			package = pkg;
@@ -25,12 +26,26 @@
 			}
 		}
 
+		var setPkgPerRoom1 = function(roomPkgData){
+			pkgPerRoom1 = roomPkgData;
+		}	
+
+
+		var getPkgPerRoom1 = function(){
+			return pkgPerRoom1;
+		}	
+
+
 		var getPkgPerRoom = function(){
 			return pkgPerRoom;
 		}
 
 		var clearPkgPerRoom = function(){
 			pkgPerRoom.length=0;
+		}
+
+		var clearPkgPerRoom1 = function(){
+			pkgPerRoom1.length=0;
 		}
 
 		var getPackages = function(){
@@ -51,6 +66,9 @@
 			    storePkgPerRoom: storePkgPerRoom,
 			    getPkgPerRoom: getPkgPerRoom,
 			    getPackages: getPackages,
-			    clearPkgPerRoom: clearPkgPerRoom
+			    clearPkgPerRoom: clearPkgPerRoom,
+			    clearPkgPerRoom1: clearPkgPerRoom1,
+			    getPkgPerRoom1: getPkgPerRoom1,
+			    setPkgPerRoom1: setPkgPerRoom1
 			}
 	});

@@ -15,6 +15,12 @@ angular.module('app')
   $scope.shareSpace = [];
   $scope.colArr = [];
 
+  var packages = [
+              {'id':1,'name':"Simple",'pkgValue':350.00,value:1},
+                {'id':2,'name':"Classic",'pkgValue':600.00,value:2},
+                {'id':3,'name':"Premium",'pkgValue':1000.00,value:3}
+    ];  
+
   $scope.aprt = [{value:'Own my apartment',selected:false},
                  {value:'Rent my apartment',selected:false}];
 
@@ -127,10 +133,12 @@ $scope.processPayment = function(){
             // var room_id = ref_id.substr(ref_id.indexOf('_')+1);
             //Get Stored Package Info
             mvPayment.getPaymentInfo(quizId,status).then(function(response){
-                var totalPrice = response.toFixed(2);
+                
+                
+                var totalPrice = (response[0].totalPrice).toFixed(2);
                 if(totalPrice===total_amount){
                   status = 0;
-                  mvPayment.updatePackage(quizId, status).then(function(response){
+                  mvPayment.updatePackage(quizId, status,totalPrice).then(function(response){
                     console.log(response);
                    alert('Thank you for the payment!');
                     

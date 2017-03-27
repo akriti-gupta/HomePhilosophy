@@ -12,7 +12,7 @@ angular.module("app")
 					var result = JSON.parse(window.localStorage.getItem('result'));
 					var userSelectionInfo = JSON.parse(window.localStorage.getItem('userSelectionInfo'));
 					quizResult.storeStyle(result);
-					quizResult.storeUserQuizInfo(userSelectionInfo);
+					quizResult.setCustSelections(userSelectionInfo);
 					window.localStorage.removeItem('result');
 					window.localStorage.removeItem('userSelectionInfo');
 

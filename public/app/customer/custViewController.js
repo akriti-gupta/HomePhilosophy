@@ -366,7 +366,7 @@ function populateStatus(projectData){
 			var statusArr = [];
 
 			if(!($scope.hasActiveProject)){
-				if(currQzObj.status===0){
+				if(currQzObj.status===-1 || currQzObj.status===0){
 					$scope.hasActiveProject = true;
 				}
 			}
@@ -560,7 +560,7 @@ function setQuizData(index){
 	}
 	console.log(objRoomArr);
 	storeQuizInfo(quizData);
-	quizResult.storeUserQuizInfo({"roomSelected":objRoomArr,"quizImgSelected":null});
+	quizResult.setCustSelections({"roomSelected":objRoomArr,"quizImgSelected":null});
 	quizResult.setInsertedRooms(roomData);
 }
 $scope.pricing = function(index){

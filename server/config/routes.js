@@ -46,7 +46,7 @@ module.exports = function(app){
 	app.post('/storePackage',payment.storePackage);
 	app.post('/getPaymentInfo',payment.getPaymentInfo);
 	app.post('/updatePackage',payment.updatePackage);
-
+	
 	app.post('/paycb',function(req,res){
 		console.log('Got back response, ');
 		console.log(res);
@@ -66,7 +66,7 @@ module.exports = function(app){
 	
 	app.post('/submitFeedback',userProject.submitFeedback);
 
-	app.get('/getProjectListing', userProject.getProjectListing);
+	app.get('/getProjectListing', userProject.getProjectListing1);
 	app.get('/getCncptFeedback', userProject.getCncptFeedback);
 	app.post('/modifyUsrAppt',userProject.modifyUsrAppt);
 	app.post('/fetchImages',quiz.fetchImages);

@@ -27,9 +27,9 @@ angular.module('app').factory('mvPayment', function($http, mvIdentity, $q){
 	  		return dfd.promise;
 		},
 
-		updatePackage: function(quizId, status){
+		updatePackage: function(quizId, status,totalPrice){
 			var dfd = $q.defer();
-		    $http.post('/updatePackage',{quizId:quizId,status:status, customerId:mvIdentity.currentUser.id }).then(function(response){
+		    $http.post('/updatePackage',{quizId:quizId,status:status,totalPrice:totalPrice ,customerId:mvIdentity.currentUser.id }).then(function(response){
 		 		if(response.data.success){
 	  				dfd.resolve(true);
 	  			}
