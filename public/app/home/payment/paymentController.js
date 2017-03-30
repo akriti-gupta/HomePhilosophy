@@ -15,7 +15,8 @@ angular.module("app")
   	$scope.signature;
 
   	$scope.buyForMe = false;
-
+  	$scope.buyForMeAmt = 0;
+	$scope.buyForMeAmt = $scope.buyForMeAmt.toFixed(2);
   	//TODO: Save package info in DB and retrive this array from there. This is to
   	//accomodate any future changes to the payment packages and put it in service.
   	$scope.packages = [
@@ -98,9 +99,15 @@ angular.module("app")
 		$scope.total_amount = 0;
 		for(var i=0;i<$scope.roomPkg.length;i++){
 			$scope.total_amount = $scope.total_amount +$scope.roomPkg[i].pkgValue;
+			$scope.subtotal = $scope.total_amount.toFixed(2);
+
 		}
 		if($scope.buyForMe){
-			$scope.total_amount = parseFloat($scope.total_amount + 100).toFixed(2);
+			$scope.buyForMeAmt = (250).toFixed(2);
+			$scope.total_amount = parseFloat($scope.total_amount + 250).toFixed(2);
+		}
+		else{
+			$scope.buyForMeAmt = (0).toFixed(2);
 		}
 		setSmoovFields($scope.total_amount);
 	}

@@ -65,15 +65,15 @@ angular.module('app')
   // }
 
 
-  var paymentMade = $routeParams.response_code;
-  var merchant=$routeParams.merchant;
-  var quizId = $routeParams.ref_id;
-  var reference_code = $routeParams.reference_code;
-  var currency = $routeParams.currency;
-  var total_amount = $routeParams.total_amount;
-  var signature_algorithm = $routeParams.signature_algorithm;
+  // var paymentMade = $routeParams.response_code;
+  // var merchant=$routeParams.merchant;
+  // var quizId = $routeParams.ref_id;
+  // var reference_code = $routeParams.reference_code;
+  // var currency = $routeParams.currency;
+  // var total_amount = $routeParams.total_amount;
+  // var signature_algorithm = $routeParams.signature_algorithm;
 
-  quizResult.setUserCurrQuiz(quizId);
+  // quizResult.setUserCurrQuiz(quizId);
 
   function validateFormData(){
     angular.forEach($scope.designReason, function(reason) {
@@ -108,6 +108,7 @@ angular.module('app')
   }
 
 $scope.processPayment = function(){
+
     if($routeParams.merchant){
       var keys = PAYMENT_KEYS;
       var secret=keys.MERCHANT_SECRET_KEY;
@@ -129,19 +130,12 @@ $scope.processPayment = function(){
           if(merchant===keys.MERCHANT_EMAIL && currency==='SGD' ){
             var status = -1;
             var quizId = ref_id;
-            // var quiz_id = ref_id.substr(0,ref_id.indexOf('_'));
-            // var room_id = ref_id.substr(ref_id.indexOf('_')+1);
-            //Get Stored Package Info
             mvPayment.getPaymentInfo(quizId,status).then(function(response){
-                
-                
                 var totalPrice = (response[0].totalPrice).toFixed(2);
                 if(totalPrice===total_amount){
                   status = 0;
                   mvPayment.updatePackage(quizId, status,totalPrice).then(function(response){
-                    console.log(response);
-                   alert('Thank you for the payment!');
-                    
+                   angular.element('#messageModal').modal('show');
                   }, function(reason){
                     alert('Payment unsuccessful, please contact the site admin. '+reason);
                     $location.path('/dashboard');

@@ -15,7 +15,7 @@ angular.module('app').controller('UserListCtrl', function($scope,$http,$routePar
 	$scope.projects = [];
 	$scope.fileArr = [];
 	$scope.pendingFilesArr = [];
-
+	$scope.notes = [];
 	$scope.styles=['','Classic','Contemporary','Transitional','Modern','Scandinavian','Asian Inspired Minimalist'];
 	$scope.packageName=[' ','Simple','Classic','Premium','Custom'];
 	$scope.quizStatus=['Active','Launched'];
@@ -33,42 +33,23 @@ function resetTabs() {
 
 function chkFinalPrjStatus(shoppingList, roomId){
 	
-	// var totalPrice=0;
-	// var amountPaid = 0;
 	var finalStatus = {};
-	// for(var i =0;i<paymentInfo.length;i++){
-	// 	totalPrice = totalPrice + paymentInfo[i].totalPrice;
-	// 	amountPaid = amountPaid + paymentInfo[i].amountPaid;
-	// }
 	for(var i =0;i<shoppingList.length;i++){
-		if(shoppingList[i].roomId === roomId){
+		if(shoppingList[i].concept.roomId === roomId){
 			finalStatus.statusText='Project Completed.';
 			finalStatus.linkPage='getFirstLook()';
 			finalStatus.modal=' ';
 			break;
 		}
 	}
-	/*if(shoppingList.length>0){
-		if(totalPrice === amountPaid){
-			finalStatus.statusText='Total Payment Received. Project Completed';
-			finalStatus.linkPage='getFirstLook()';
-			finalStatus.modal=' ';
-		}
-		else{
-			finalStatus.statusText='Final Look/ Shopping List is ready. Final Payment Pending';
-			finalStatus.linkPage=' ';
-			finalStatus.modal=' ';
-		}
-	}*/
 	return finalStatus;
 }
 
 function chkFinalLookStatus(conceptBoard, pkgId,roomId){
 	
 	for(var i =0;i<conceptBoard.length;i++){
-		if(conceptBoard[i].roomId === roomId){
+		if(conceptBoard[i].concept.roomId === roomId){
 			var currConceptData = conceptBoard[i];
-			var status = currConceptData.status;
 			var finalStatus = {};
 			//Admin actions: Upload first look, upload Final Look(2), mark final + shopping as ready(3), 
 			//upload Final + shopping
@@ -103,9 +84,9 @@ function chkCncptStatus(conceptBoard,roomId,pkgId){
 	
 	for(var i =0;i<conceptBoard.length;i++){
 		var finalStatus = {};
-		if(conceptBoard[i].roomId === roomId){
+		if(conceptBoard[i].concept.roomId === roomId){
 			var currConceptData = conceptBoard[i];
-			var status = currConceptData.status;
+			var status = currConceptData.concept.status;
 
 			if(currConceptData.feedbackData.length>0){
 				if(pkgId <= 2){
@@ -135,7 +116,6 @@ function chkCncptStatus(conceptBoard,roomId,pkgId){
 }
 
 function chkApptStatus(apptData, roomId){
-	//Appt made and/or Floor Plan fileUploadedStatus.
 	var status = {};
 	
 		if(apptData.apptStatus>=0){
@@ -159,6 +139,12 @@ function chkApptStatus(apptData, roomId){
 					status.modal = " ";
 					status.stage=1;
 				}
+			}
+			else if(apptData.apptStatus===1){
+					status.statusText = "Meeting done. Pending First Look";
+					status.linkPage = " ";
+					status.modal = " ";
+					status.stage=1;
 			}
 			else if(apptData.apptStatus===3){
 					status.statusText = "Rejected. Awaiting Reschedule.";
@@ -211,6 +197,7 @@ function populateStatus(projectData){
  		 var currPaymentList = projectData[i].paymentData;
  		 var currRoomData = projectData[i].roomData;
  		 var currPkgData = projectData[i].pkgData; 
+ 		 var currQzDetail = projectData[i].quizDtls; 
 
  		//Array of quizes belong to a user
  		var quizData = projectData[i].quizData;
@@ -245,8 +232,6 @@ function populateStatus(projectData){
 				}
  			}
  			else if(quizData[j].status===0){
-
- 				//populateRoomStatus(currRoomData,currApptData);
 
  				for(var k =0; k < currRoomData.length;k++){
  					if(currRoomData[k].quizId === quizData[j].quizId){
@@ -298,13 +283,14 @@ function populateStatus(projectData){
 			 						
 			 					}
 			 				}
-			 				// if(!apptFound){
-			 				// 	roomStatus.statusText = "Pending Meet and Measure";
-								// roomStatus.linkPage = " ";
-								// roomStatus.modal = " ";
-								// roomStatus.action=-1;
-								// projectData[i].roomData[k].displayStatus = roomStatus;
-			 				// }
+			 			}
+
+			 			if(isEmpty(projectData[i].roomData[k].displayStatus)  && currQzDetail.length===0){
+							status.statusText = "Awaiting details from Tell Us More";
+				 			status.linkPage = " ";
+				 			status.modal = " ";
+				 			roomStatus.action=-1;
+				 			projectData[i].roomData[k].displayStatus = status;
 			 			}
 
 			 			if(isEmpty(projectData[i].roomData[k].displayStatus)){
@@ -313,52 +299,12 @@ function populateStatus(projectData){
 							roomStatus.modal = " ";
 							roomStatus.action=-1;
 							projectData[i].roomData[k].displayStatus = roomStatus;
-		 				}
-	 				//projectData[i].roomData[k].displayStatus = roomStatus;	
+		 				}	
 	 				}
 
 				}
-
-
- 				// if(currShoppingList && currShoppingList.length>0){
-	 			// 	status = chkFinalPrjStatus(currShoppingList,currPaymentList);
-	 			// }
-
- 				// else if(currShoppingList && currFinalLook.length>0){
-	 			// 	status = chkFinalLookStatus(currFinalLook);
-	 			// }
-
- 				// else if(currConceptBoard && currConceptBoard.length>0){
-	 			// 	status = chkCncptStatus(currConceptBoard);
-	 			// }
-	 			// else if(currApptData && currApptData.length>0){
-	 			// 	var apptFound = false;
-	 			// 	for(var k=0;k<currApptData.length;k++){
-	 			// 		if(currApptData[k].quizId===quizData[j].quizId){
-	 			// 			apptFound=true;
-	 			// 			status = chkApptStatus(currApptData[k],projectData[i].roomData);
-	 			// 			break;
-	 			// 		}
-	 			// 	}
-	 			// 	if(!apptFound){
-	 			// 		status.statusText = "Pending Meet and Measure";
-					// 	status.linkPage = " ";
-					// 	status.modal = " ";
-					// 	status.action=-1;
-	 			// 	}
-	 				
-	 			// }
-	 			// else{
-	 			// 	status.statusText = "Pending Meet and Measure";
-					// status.linkPage = " ";
-					// status.modal = " ";
-					// status.action=-1;
-	 			// }
  			} 
-			// quizData[j].displayStatus = status;
  		}
-
-
  	}
  }
  	
@@ -367,7 +313,7 @@ $scope.getProjectListing = function(){
 	mvAdminView.getProjectListing().then(function(projectData){
 	console.log('Result got back is: ');
 	console.log(projectData);
-	populateStatus(projectData);
+	// populateStatus(projectData);
 	$scope.projects = projectData;
 	}, function(reason){
 		alert('Error in fetching user data' +reason);
@@ -376,7 +322,7 @@ $scope.getProjectListing = function(){
 }
 
 
-$scope.details = function(projectIndex,roomIndex, tabIdx){
+/*$scope.details = function(projectIndex,roomIndex, tabIdx){
 
 	
 	$scope.toggleMainView();
@@ -396,7 +342,6 @@ $scope.details = function(projectIndex,roomIndex, tabIdx){
 			break;
 		}
 	}
-	//var quizData = $scope.prjDetails.quizData[quizIndex];
 	var quizDataArr = [];
 	quizDataArr.push(quizData);
 
@@ -485,7 +430,7 @@ $scope.details = function(projectIndex,roomIndex, tabIdx){
 	$scope.prjDetailsOrg.conceptData=relCncptData;
 	$scope.prjDetailsOrg.finalLookData=relFinalLook;
 	$scope.prjDetailsOrg.shoppingList=relShoppingList;
-	$scope.prjDetailsOrg.quizDtls=relQzDtls;
+	$scope.prjDetaislsOrg.quizDtls=relQzDtls;
 	$scope.prjDetailsOrg.userData=$scope.prjDetails.userData;
 	$scope.prjDetailsOrg.resultData = relResultData;
 	$scope.prjDetailsOrg.imgData=$scope.prjDetails.imgData;
@@ -495,6 +440,39 @@ $scope.details = function(projectIndex,roomIndex, tabIdx){
 	
 	console.log('New list is:');
 	console.log($scope.prjDetailsOrg);
+}*/
+
+$scope.details = function(index,tabIdx){
+	var currRow = $scope.projects[index];
+	var quizObj = currRow.q;
+	$scope.usrObj = currRow.u;
+
+	mvAdminView.getQuizDetail(quizObj.quizId).then(function(quizData){
+		console.log('quizData is: ');
+		console.log(quizData);
+		$scope.quizData = {};
+		populateStatus(quizData);
+		$scope.quizData = quizData[0];
+
+		console.log('After populating status is: ');
+		console.log($scope.quizData);
+
+		if($scope.quizData.quizDtls.length>0){
+			var colours = [];
+			colours = $scope.quizData.quizDtls[0].colours.split(',');
+			$scope.quizData.quizDtls[0].colours = colours;
+		}
+
+		$scope.toggleMainView();
+		$scope.toggleTab(tabIdx);
+	}, function(reason){
+		alert('Error in fetching quiz data' +reason);
+	});
+
+	
+
+
+
 }
 
 $scope.toggleTab = function(tab){
@@ -559,6 +537,58 @@ $scope.actionUsrData = function(quizId,roomId,action){
 	});
 }
 
+$scope.initRoomData = function(index){
+	$scope.fileArr.length=0;
+	$scope.notes.length = 0;
+	$scope.pendingFilesArr.length = 0;
+	$scope.currRoomIndex = index;
+	$scope.currRoom = $scope.quizData.roomData[index];
+	$scope.toUploadFile;
+	if($scope.currRoom.displayStatus.stage===1){
+		$scope.toUploadFile = "First Looks";
+	}
+	else if($scope.currRoom.displayStatus.stage===2){
+		$scope.toUploadFile = "Final Look";
+	}
+
+	else if($scope.currRoom.displayStatus.stage===2){
+		$scope.toUploadFile = "Final Look and Shopping List";
+	}
+}
+
+
+$scope.saveAndUpload = function(){
+	console.log($scope.notes);
+	console.log($scope.currRoom);
+	if($scope.fileArr.length>0){
+		mvUpload.uploadFiles($scope.fileArr).then(function(response){
+			console.log('In ctrl, response is: ');
+			console.log(response);
+			var files;
+			if(response.length>0){
+				files = response.toString();
+			}	
+			else {
+				files = response;
+			}
+			mvAdminView.saveUploadedData($scope.currRoom.quizId,$scope.currRoom.id,$scope.currRoom.displayStatus.stage,response,$scope.notes).then(function(success){
+				mvNotifier.notify('Data saved');
+				angular.element('#uploadModal').modal('hide');
+				$scope.quizData.roomData[$scope.currRoomIndex].filesUploaded = true;
+			}, function(reason){
+				alert('Data not saved: '+reason);
+				mvNotifier.notify('Data not saved: '+reason);
+			});
+		
+		}, function(reason){
+				alert('Data not saved. Error in File Upload: '+reason);
+				mvNotifier.notify('Data not saved. Error in File Upload: '+reason);
+			});
+	}
+
+}
+
+
 function formatBytes(bytes,decimals) {
 	if(bytes == 0) return '0 Byte';
 	var k = 1000; // or 1024 for binary
@@ -582,7 +612,6 @@ $scope.removeFileFromQ = function(index){
       $scope.pendingFilesArr.splice(index,1);
       $scope.fileArr.splice(mstrFileArrIdx,1);
 }
-
 
 
 $scope.submitData = function(quizId, filetype, roomName, roomId){

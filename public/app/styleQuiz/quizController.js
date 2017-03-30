@@ -1062,6 +1062,9 @@ $scope.gridWidth=300;
 					}
 					console.log($scope.arrImgLiked);
 					console.log(imgsLiked);
+					if($scope.selectedRoom.length===0){
+						$scope.selectedRoom = quizResult.getSelectedRooms();
+					}
 					quizResult.setCustSelections({"roomSelected":$scope.selectedRoom,"quizImgSelected":$scope.selectedImages,"pinImages":imgsLiked});	
 					quizResult.storeStyle($scope.userStyle,$scope.board);
 					
@@ -1266,7 +1269,9 @@ $scope.gridWidth=300;
 		$scope.progress = false;
 		prefStyle = [];
 		$scope.userStyle = [];
+		$scope.arrImgLiked.length = 0;
 		$scope.board=1;
+		quizResult.setSelectedRooms($scope.selectedRoom);
 	}
 	
 	function sortValues(a, b) {

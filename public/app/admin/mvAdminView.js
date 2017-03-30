@@ -15,20 +15,11 @@ angular.module('app').factory('mvAdminView', function($http, $q){
 		},
 		getProjectListing: function(){
 			var dfd = $q.defer();
-			$http.get('/getProjectListing', {cache: false}).then(function(response){
+			// $http.get('/getProjectListing', {cache: false}).then(function(response){
+			   $http.get('/getProjectListing').then(function(response){
 				if(response.data.success){
 					data = response.data.results;
-					dfd.resolve(response.data.results);		
-					/*if(data.length>0){
-						$http.get('/getCncptFeedback',{projectData:data}).then(function(response){
-							if(response.data.success){
-								dfd.resolve(response.data.results);		
-							}
-							else{
-								dfd.reject(response.data.reason);		
-							}
-						});
-					}*/
+					dfd.resolve(response.data.results);	
 	  			}
 	  			else{
 	  				dfd.reject(response.data.reason);
@@ -36,6 +27,21 @@ angular.module('app').factory('mvAdminView', function($http, $q){
 			});
 			return dfd.promise;
 		},
+
+		getQuizDetail: function(quizId){
+			var dfd = $q.defer();
+			
+			$http.post('/getQuizDetail',{quizId:quizId}).then(function(response){
+				if(response.data.success){
+					dfd.resolve(response.data.results);	
+	  			}
+	  			else{
+	  				dfd.reject(response.data.reason);
+	  			}
+			});
+			return dfd.promise;
+		},
+
 		modifyUsrAppt: function(data){
 			var dfd = $q.defer();
 			$http.post('/modifyUsrAppt',{data:data}).then(function(response){
@@ -61,37 +67,25 @@ angular.module('app').factory('mvAdminView', function($http, $q){
 			});
 			return dfd.promise;
 		},
-		saveUploadedData: function(quizId,roomId,stage, files){
+		saveUploadedData: function(quizId,roomId,stage, files,notes){
 			var dfd = $q.defer();
 			var postUrl;
 			var fileArr = [];
 			var data = [];
-			// var isFirstLook = 0;
-			// var isFinalLook = 0;
-
+			var date = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
 			if(stage===1){
 				postUrl='/saveConceptBoard';
-				//isFirstLook = 1;
 			}
 			else if(stage===2){
 				postUrl='/saveFinalLook';
-				//isFinalLook = 1;
 			}
 			else if(stage===3 || stage===4){
 				postUrl='/saveShoppingList';
 			}
 
-			if(files.indexOf(',')!=-1){
-				fileArr = files.split(',');
+			for(var i =0;i<files.length;i++){
+				data.push([quizId,roomId,files[i],0,date,date,notes[i]]);
 			}
-			else{
-				fileArr[0] = files;
-			}
-
-			for(var i =0;i<fileArr.length;i++){
-				data.push({quizId: quizId, files:fileArr[i],roomId: roomId,roomName:null, status:0, created_at: null, updated_at: null});
-			}
-			//var data={quizId: quizId, files:files,roomName:null, status:0, created_at: null, updated_at: null};
 			$http.post(postUrl,{data:data}).then(function(response){
 				if(response.data.success){
 					dfd.resolve(true);

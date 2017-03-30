@@ -1,3 +1,7 @@
+@font-face{
+  font-family: GreatVibes-Regular;
+  src: url(../fonts/GreatVibes-Regular.otf);
+}
 
 @font-face{
   font-family: Allura-Regular;
@@ -1518,6 +1522,12 @@ div.faq.show {
   text-align: center;
   float: none;
   vertical-align: middle;
+}
+.nav-tabs{
+  border-bottom: none;
+}
+.nav-tabs>li>a.admin-tabs{
+  border:1px solid black;
 }
 
 .admin-view-row{

@@ -189,19 +189,15 @@ CREATE TABLE IF NOT EXISTS `cust_appointment` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
--- CREATE TABLE IF NOT EXISTS `pin_images` (
---   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
---   `quizId` INT(10) UNSIGNED NULL,
---   `imgLocation` VARCHAR(100) NULL,
---   `comment` VARCHAR(200) NULL,
---   `roomName` VARCHAR(45) NULL,
---   INDEX `quizId_quiz_foreign_idx` (`quizId` ASC),
---   PRIMARY KEY (`id`),
---   CONSTRAINT `pin_images_quizId_foreign`
---     FOREIGN KEY (`quizId`)
---     REFERENCES `testSchema`.`cust_quiz` (`quizId`)
---     ON DELETE CASCADE
---     ON UPDATE RESTRICT);
+CREATE TABLE IF NOT EXISTS `pin_images` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `quizId` int(10) unsigned DEFAULT NULL,
+  `imagesLiked` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `quizId_quiz_foreign_idx` (`quizId`),
+  CONSTRAINT `pin_images_quizId_foreign` FOREIGN KEY (`quizId`) REFERENCES `cust_quiz` (`quizId`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
 
 CREATE TABLE IF NOT EXISTS `concept_board` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -281,3 +277,8 @@ CREATE TABLE IF NOT EXISTS `shopping_list` (
   CONSTRAINT `shopping_list_roomId_foreign` FOREIGN KEY (`roomId`) REFERENCES `cust_room_selection` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
+ALTER TABLE `concept_board`
+ADD COLUMN `notes` VARCHAR(1000) NULL AFTER `updated_at`;
+
+ALTER TABLE `shopping_list`
+ADD COLUMN `notes` VARCHAR(1000) NULL AFTER `updated_at`;

@@ -78,8 +78,8 @@
 	</div>
 
 
-	<div class="row qz-row-dsg style="display:table;border:1px solid black;padding-bottom:0px;"" style="padding-top:50px;">
-		<div class="col-md-6 col-xs-6 	" style="text-align:center;border:0px;padding:20px;"><span style="font-size:18px;">Buy for me</span>
+	<div class="row qz-row-dsg" style="display:table;padding-bottom:50px;padding-top:20px;">
+		<div class="col-md-12 col-xs-6 	" style="text-align:right;border:0px;padding-right:0px;margin-left:10px;"><span style="font-size:18px;">BUY FOR ME</span>
 			<input type="checkbox" ng-model="buyForMe" ng-change="updateTotal()" style="width:50px;height:20px;margin:0px;"> 	
 		</div>
 	</div>
@@ -96,12 +96,30 @@
   		</div>
 
   		<div class="flex-child-pay2" style="border: 1px solid ;height:35%;">
-  			<div class="payment-title" style="padding: 5px 0px 5px 10px;"> Order Summary</div>
-  			<div class="payment-item" style="font-size:18px;"><p style="text-align:left;">Subtotal <span style="text-align:right;margin-left:45%;">{{total_amount}}</span></p> </div>
+  			<div class="payment-title" style="padding: 5px 0px 15px 10px;"> Order Summary</div>
+  				<div class="row qz-row-dsg" style="padding-bottom:10px;width:98%">
+  					<div class="col-md-8 col-xs-6 payment-item">Subtotal</div>
+  					<div class="col-md-4 col-xs-6 payment-item">{{(total_amount - buyForMeAmt).toFixed(2)}}</div>
+	  			</div>
+	  			<div class="row qz-row-dsg" style="padding-bottom:10px;width:98%;">
+	  				<div class="col-md-8 col-xs-6 payment-item">Buy For Me</div>
+	  				<div class="col-md-4 col-xs-6 payment-item">{{buyForMeAmt}}</div>
+	  			</div>
 
-  			<div style="text-align:center;padding:20px;">
-  				<input  type="button" ng-click="savePaymentInfo()" class="btn-start-quiz btn-topnav fs-20px" style="padding-left:25px;padding-right:25px;" value="CHECKOUT"  name="submit" alt="SmoovPay!" />
+	  			<div class="row qz-row-dsg" style="padding-bottom:10px;width:98%;">
+	  				<div class="col-md-8 col-xs-6 payment-item">Total</div>
+	  				<div class="col-md-4 col-xs-6 payment-item">{{total_amount}}</div>
+	  			</div>
+	  			
+	  			<div style="text-align:center;padding:20px;">
+	  				<input  type="button" ng-click="savePaymentInfo()" class="btn-start-quiz btn-topnav fs-20px" style="padding-left:25px;padding-right:25px;" value="CHECKOUT"/>
+	  			</div>
+	  			
   			</div>
+
+  			<!-- <div style="text-align:center;padding:20px;">
+  				<input  type="button" ng-click="savePaymentInfo()" class="btn-start-quiz btn-topnav fs-20px" style="padding-left:25px;padding-right:25px;" value="CHECKOUT"  name="submit" alt="SmoovPay!" />
+  			</div> -->
   		</div>
   	</div>
 
@@ -145,3 +163,4 @@
 </div>
 </div>
 <div style="padding-bottom:60px;"></div>
+<div class="divider" style="border-top:2px solid rgb(47, 185, 175);"></div>

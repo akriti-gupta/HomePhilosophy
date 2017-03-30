@@ -12,6 +12,7 @@
         var board;
         var currentQuizId;
         var insRoomArr = [];
+        var prevSelectedRoom = [];
         var knownStyle = false;
 
         var setIsKnownStyle = function(isKnown){
@@ -48,6 +49,15 @@
 			}
         	
         }
+
+        var setSelectedRooms = function(roomArr){
+        	prevSelectedRoom = roomArr;
+        }
+
+        var getSelectedRooms = function(){
+        	return prevSelectedRoom;
+        }
+
         //Called from quizController to store calculated style before control is passed to login page.
 		var storeStyle = function(newObj,boardVal) {
 			
@@ -138,7 +148,9 @@
 			   	getInsertedRooms: getInsertedRooms,
 			   	clearInsertedRooms:clearInsertedRooms,
 			   	setIsKnownStyle: setIsKnownStyle,
-			   	getIsKnownStyle: getIsKnownStyle
+			   	getIsKnownStyle: getIsKnownStyle,
+			   	setSelectedRooms: setSelectedRooms,
+			   	getSelectedRooms: getSelectedRooms
 
 			  };
         });

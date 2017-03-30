@@ -111,27 +111,11 @@ function validateFormData(){
 }
 
 function chkFinalPrjStatus(shoppingList, paymentInfo, roomData){
-	
-	// var totalPrice=0;
-	// var amountPaid = 0;
 	var finalStatus = {};
-	/*for(var i =0;i<paymentInfo.length;i++){
-		totalPrice = totalPrice + paymentInfo[i].totalPrice;
-		amountPaid = amountPaid + paymentInfo[i].amountPaid;
-	}*/
-
 	if(shoppingList.length>0){
 		for(var i =0; i < shoppingList.length; i++){
-			if(shoppingList[i].roomId === roomData.id){
-
-				// for(var j =0;j<shoppingListInfo[i].f.files.length; j++){
-				// 		if(shoppingListInfo[i].f.files[j].indexOf('.pdf')!=-1){
-							
-				// 		}
-				// }
-
-
-				finalStatus.statusText='Project Completed. View your Shopping List/ Final Look';
+			if(shoppingList[i].concept.roomId === roomData.id){
+				finalStatus.statusText='Project Completed. View your Shopping List and Final Look';
 				finalStatus.linkPage='getFinalLook($index)';
 				finalStatus.modal=' ';
 				break;
@@ -145,9 +129,8 @@ function chkFinalPrjStatus(shoppingList, paymentInfo, roomData){
 function chkFinalLookStatus(finalLook,pkgData,roomData){
 	
 	for(var i =0;i<finalLook.length;i++){
-		if(finalLook[i].roomId === roomData.id){
+		if(finalLook[i].concept.roomId === roomData.id){
 			var currFinalLook = finalLook[i];
-			var status = currFinalLook.status;
 			var finalStatus = {};
 			var pkgId = pkgData.pkgId;
 			if(pkgId>2){
@@ -176,9 +159,9 @@ function chkFinalLookStatus(finalLook,pkgData,roomData){
 function chkCncptStatus(conceptBoard,roomData){
 	var finalStatus = {};
 	for(var i =0;i<conceptBoard.length;i++){
-		if(conceptBoard[i].roomId === roomData.id){
+		if(conceptBoard[i].concept.roomId === roomData.id){
 			var currConceptData = conceptBoard[i];
-			var status = currConceptData.status;
+			var status = currConceptData.concept.status;
 			
 			if(currConceptData.feedbackData.length>0 && currConceptData.feedbackData[0].status===0){
 				finalStatus.statusText='Received Feedback. Final Look in Progress';
@@ -411,32 +394,21 @@ function populateStatus(projectData){
 				for(var j= 0;j<projectData.apptData.length; j++){
 					if(projectData.apptData[j].quizId === currQzId){
 						relApptArr.push(projectData.apptData[j]);
-					//	console.log(projectData.apptData[j].apptTime);
-					//	console.log(moment(projectData.apptData[j].apptTime));
-
 					}
 				}
 			}
 
 			if(projectData.firstLookData && projectData.firstLookData.length>0){
 				for(var j= 0;j<projectData.firstLookData.length; j++){
-					if(projectData.firstLookData[j].quizId === currQzId){
+					if(projectData.firstLookData[j].concept.quizId === currQzId){
 						relFLArr.push(projectData.firstLookData[j]);
-
-						/*if(projectData.feedbackData && projectData.feedbackData.length>0){
-							for(var k= 0;k<projectData.feedbackData.length; k++){
-								if(projectData.feedbackData[k].firstlook_id === projectData.firstLookData[j].id){
-									relFeedbackArr.push(projectData.feedbackData[k]);
-								}
-							}
-						}*/
 					}
 				}
 			} //First Look ends
 
 			if(projectData.finalLookData && projectData.finalLookData.length>0){
 				for(var j= 0;j<projectData.finalLookData.length; j++){
-					if(projectData.finalLookData[j].quizId === currQzId){
+					if(projectData.finalLookData[j].concept.quizId === currQzId){
 						relFinalLookArr.push(projectData.finalLookData[j]);
 					}
 				}
@@ -444,7 +416,7 @@ function populateStatus(projectData){
 
 			if(projectData.shoppingListData && projectData.shoppingListData.length>0){
 				for(var j= 0;j<projectData.shoppingListData.length; j++){
-					if(projectData.shoppingListData[j].quizId === currQzId){
+					if(projectData.shoppingListData[j].concept.quizId === currQzId){
 						relShoppingList.push(projectData.shoppingListData[j]);
 					}
 				}
@@ -570,7 +542,7 @@ $scope.pricing = function(index){
 
 $scope.getQuizDetail = function(index){
 	var quizData = $scope.projectArr[index];
-	quizResult.setUserCurrQuiz(quizData.quizId);
+	quizResult.setUserCurrQuiz(quizData.quizData.quizId);
 	setQuizData(index);
 	$location.path('/tell-us-more');
 }
@@ -783,7 +755,7 @@ $scope.getFirstLook = function(index, roomId){
 	$scope.feedbackSaved = false;
 	$scope.currentFirstLook = 0;
 	$scope.rowId = index;
-	var firstLookArr = [];
+	$scope.firstLookArr = [];
 	$scope.images = [];
 	$scope.cncptObj = [];
 	var concept_img;
@@ -793,8 +765,8 @@ $scope.getFirstLook = function(index, roomId){
 
 	if($scope.projectArr[index].shoppingListData.length>0){
 		for(var i =0;i<$scope.projectArr[index].shoppingListData.length; i++){
-			if($scope.projectArr[index].shoppingListData[i].roomId === roomId){
-				firstLookArr.push($scope.projectArr[index].shoppingListData[i]);
+			if($scope.projectArr[index].shoppingListData[i].concept.roomId === roomId){
+				$scope.firstLookArr.push($scope.projectArr[index].shoppingListData[i]);
 				hasShoppingList = true;
 			}
 		}
@@ -807,8 +779,8 @@ $scope.getFirstLook = function(index, roomId){
 
 	if(!hasShoppingList && $scope.projectArr[index].finalLookData.length>0){
 		for(var i =0;i<$scope.projectArr[index].finalLookData.length; i++){
-			if($scope.projectArr[index].finalLookData[i].roomId === roomId){
-				firstLookArr.push($scope.projectArr[index].finalLookData[i]);
+			if($scope.projectArr[index].finalLookData[i].concept.roomId === roomId){
+				$scope.firstLookArr.push($scope.projectArr[index].finalLookData[i]);
 				hasFinalLook = true;
 			}
 		}
@@ -820,8 +792,8 @@ $scope.getFirstLook = function(index, roomId){
 
 	if(!hasShoppingList && !hasFinalLook && $scope.projectArr[index].firstLookData.length>0){
 		for(var i =0;i<$scope.projectArr[index].firstLookData.length; i++){
-			if($scope.projectArr[index].firstLookData[i].roomId === roomId){
-				firstLookArr.push($scope.projectArr[index].firstLookData[i]);		
+			if($scope.projectArr[index].firstLookData[i].concept.roomId === roomId){
+				$scope.firstLookArr.push($scope.projectArr[index].firstLookData[i]);		
 			}
 		}
 		
@@ -829,25 +801,25 @@ $scope.getFirstLook = function(index, roomId){
 		$scope.lookText = "First Look";
 	}
 
-	if(firstLookArr!=null && firstLookArr.length>0){
-		for(var i=0;i<firstLookArr.length;i++){
+	if($scope.firstLookArr!=null && $scope.firstLookArr.length>0){
+		for(var i=0;i<$scope.firstLookArr.length;i++){
 
 			//Populate existing feedback in array
 			if(concept_type < 3){
-				if(firstLookArr[i].feedbackData.length > 0){
-					$scope.feedbackArr[i] = firstLookArr[i].feedbackData[0].comments;
+				if($scope.firstLookArr[i].feedbackData.length > 0){
+					$scope.feedbackArr[i] = $scope.firstLookArr[i].feedbackData[0].comments;
 				}
 			}
-			if(firstLookArr[i].files.indexOf(',')===-1){
-				$scope.images.push('./uploads/'+firstLookArr[i].files);
-				concept_img='./uploads/'+firstLookArr[i].files;
-				$scope.cncptObj.push({concept_id:firstLookArr[i].id, concept_img:firstLookArr[i].files,concept_type:concept_type});
+			if($scope.firstLookArr[i].concept.files.indexOf(',')===-1){
+				$scope.images.push('./uploads/'+$scope.firstLookArr[i].concept.files);
+				concept_img='./uploads/'+$scope.firstLookArr[i].concept.files;
+				$scope.cncptObj.push({concept_id:$scope.firstLookArr[i].concept.id, concept_img:$scope.firstLookArr[i].concept.files,concept_type:concept_type});
 			}
 			else{
-				var tmpFileArr = firstLookArr[i].files.split(',');
+				var tmpFileArr = $scope.firstLookArr[i].concept.files.split(',');
 				for(var j=0;j<tmpFileArr.length;j++){
 					tmpFileArr[j]='./uploads/'+tmpFileArr[j];
-					$scope.cncptObj.push({concept_id:firstLookArr[i].id, concept_img:tmpFileArr[j],concept_type:concept_type});
+					$scope.cncptObj.push({concept_id:$scope.firstLookArr[i].concept.id, concept_img:tmpFileArr[j],concept_type:concept_type});
 				}
 
 				$scope.images = $scope.images.concat(tmpFileArr);
@@ -857,6 +829,7 @@ $scope.getFirstLook = function(index, roomId){
 	}
 	//console.log($scope.images);
 	$scope.zoomImgSrc = $scope.images[0];
+	$scope.designerNotes = $scope.firstLookArr[0].concept.notes;
 	$scope.zoomImgIndex = 0;
 	$scope.showMain = false;
 	if(concept_type < 3){
@@ -869,6 +842,7 @@ $scope.zoomImg = function(index){
 	var oldImgIdx = $scope.zoomImgIndex;
 	$scope.feedbackArr[oldImgIdx] = $scope.feedbackComment;
 	$scope.zoomImgSrc = $scope.images[index];
+	$scope.designerNotes = $scope.firstLookArr[index].concept.notes;
 	$scope.zoomImgIndex = index;
 	$scope.currentFirstLook = index;
 	$scope.feedbackComment = $scope.feedbackArr[index];

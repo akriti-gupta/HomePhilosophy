@@ -21,10 +21,14 @@
   </div>
 </header>
 
-<div class="divider" style="border-top:2px solid #e1e1e1;padding:15px;" ng-show="showMain"></div>
-<div class="divider" style="border-top:2px solid #e1e1e1;padding:0px;" ng-show="showFeedback"></div>
+<!-- <div class="divider" style="border-top:2px solid #e1e1e1;padding:0px;" ng-show="showMain"></div> -->
+<!-- <div class="divider" style="border-top:2px solid #e1e1e1;padding:0px;" ng-show="showFeedback"></div> -->
+<div class="divider" style="border-top:2px solid #e1e1e1;padding:0px;"></div>
 <div style="clear:both;"></div>
-<section id="dashboard" ng-show="showMain" ng-init="getProjectData()">
+
+
+
+ <section id="dashboard" ng-show="showMain" ng-init="getProjectData()" style="padding-top:15px;">
 	<p>{{firstName}}'s Personalized Room Design</p>
 	<div class="data-dashboard" >
 		
@@ -178,9 +182,10 @@
 </section>
 
 
-<section id="feedback" ng-show="showFeedback">
-
-	<div style="width:30%;float:left;padding:80px;height:1200px;border-right:4px solid #e1e1e1;">
+<section id="feedback" ng-show="showFeedback" >
+<div style="display:flex;width:100%;">
+	<!-- <div style="width:30%;float:left;padding:80px;height:1200px;"> -->
+	<div style="flex:0.5;padding:80px;">
 	
 
 		<div ng-repeat="item in images track by $index" style="padding-bottom: 50px;">
@@ -194,10 +199,12 @@
 		</div>
 	</div>
 
-	<div style="width:70%;float:right;padding:30px;">
+	<!-- <div style="width:70%;float:right;padding:30px;border-left:4px solid #e1e1e1;"> -->
+	<div style="flex:1.5;padding:30px;border-left:4px solid #e1e1e1;">
 		<p class="stp-head-maintxt" style="padding-bottom:10px;">{{lookText}}</p>
 
-		<p><img src="{{zoomImgSrc}}" width="80%"></p>
+		<p><img src="{{zoomImgSrc}}"></p>
+		<p style="font-family:PlayfairDisplay-Regular;padding:40px;font-size:20px;" ng-if="designerNotes!=null && designerNotes!=' '"><u>Designer Comments</u> : {{designerNotes}}</p>
 
 		<div style="padding:50px 0px 50px 105px;" ng-show="!isFinalPage">
 			<form>
@@ -212,7 +219,10 @@
 			</form>
 		</div>
 	</div>
-	<div style="clear:both;"></div>
+</div>
+	
 	<div class="divider" style="border-top:2px solid rgb(47, 185, 175);"></div>
+
 </section>
+
 
