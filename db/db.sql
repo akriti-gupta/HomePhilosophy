@@ -282,3 +282,6 @@ ADD COLUMN `notes` VARCHAR(1000) NULL AFTER `updated_at`;
 
 ALTER TABLE `shopping_list`
 ADD COLUMN `notes` VARCHAR(1000) NULL AFTER `updated_at`;
+
+ALTER TABLE `final_look`
+ADD COLUMN `notes` VARCHAR(1000) NULL AFTER `updated_at`;

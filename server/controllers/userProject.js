@@ -907,7 +907,7 @@ exports.saveConceptBoard = function(req,res,next){
 	mysqlConn.getConnection(function(err,conn){
 		if(err){return next(err);}
         if(conn){
-	        conn.query('insert into concept_board set ?', data, function(err, results, fields){
+	        conn.query('insert into concept_board(quizId,roomId,files,status,created_at,updated_at,notes) values ?', [data], function(err, results, fields){
 				if(err){
 					console.log('Error in inserting concept board data '+err);
 					conn.release();
