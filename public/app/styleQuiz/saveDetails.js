@@ -14,6 +14,7 @@ angular.module('app')
   $scope.dsgReason = [];
   $scope.shareSpace = [];
   $scope.colArr = [];
+  $scope.quizId = -1;
 
   var packages = [
               {'id':1,'name':"Simple",'pkgValue':350.00,value:1},
@@ -99,6 +100,7 @@ $scope.processPayment = function(){
       var response_code = $routeParams.response_code;
       var merchant=$routeParams.merchant;
       var ref_id = $routeParams.ref_id;
+      $scope.quizId = ref_id;
       var reference_code = $routeParams.reference_code;
       var currency = $routeParams.currency;
       var total_amount = $routeParams.total_amount;
@@ -122,24 +124,28 @@ $scope.processPayment = function(){
                    angular.element('#messageModal').modal('show');
                   }, function(reason){
                     alert('Payment unsuccessful, please contact the site admin. '+reason);
+                    $location.search({});
                     $location.path('/dashboard');
                     
                   }); 
                 }
                 else{
                   alert('Amount to be paid is: '+totalPrice+', while amount paid= '+total_amount);
+                  $location.search({});
                   $location.path('/dashboard');
                 }
               
             }, function(reason){
               
-              alert('Cant fetch payment information. Please contact the site admin')
+              alert('Cant fetch payment information. Please contact the site admin');
+              $location.search({});
               $location.path('/dashboard');
 
             });
           }
           else{
             alert('Error, merchant or currency incorrect');
+            $location.search({});
             $location.path('/dashboard');
           }
         }
@@ -147,11 +153,13 @@ $scope.processPayment = function(){
       else{
 
         alert('Secure signature unmatched.Payment could not be made, please contact the site admin.');
+        $location.search({});
         $location.path('/dashboard');
       }
     }
     else{
       if(! $routeParams.dashboard){
+        $location.search({});
         $location.path('/dashboard');
       }
     }
@@ -183,7 +191,13 @@ $scope.processPayment = function(){
       var isValid = validateFormData();
 
       if(isValid){
-        var quizId = quizResult.getUserCurrQuiz();
+        var quizId;
+        if($scope.quizId===-1){
+            quizId = quizResult.getUserCurrQuiz();
+        }
+        else{
+          quizId = $scope.quizId;
+        }
         var reason = $scope.dsgReason.join();
         var spcShare = $scope.shareSpace.join();
         var colours = $scope.colArr.join();
@@ -229,7 +243,8 @@ $scope.processPayment = function(){
               data.file1 = response;
             }
             mvUserQuiz.saveQuizMiscData(data).then(function(response){
-              $location.path('/dashboard?launched=true');    
+              $location.search({});
+              $location.path('/dashboard').search({'launched':'true'});    
             },function(reason){
 
             });
@@ -241,7 +256,8 @@ $scope.processPayment = function(){
         }
         else{
           mvUserQuiz.saveQuizMiscData(data,quizId).then(function(response){
-            $location.path('/dashboard?launched=true');    
+            $location.search({});
+            $location.path('/dashboard').search({'launched':'true'});    
           },function(reason){
 
           });

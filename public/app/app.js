@@ -32,6 +32,7 @@ angular.module('app')
 					.when('/review-payment',{templateUrl: 'app/home/payment/reviewPayment.html', controller: 'PaymentController',resolve: routeLoginChecks.user})
 					.when('/custom',{templateUrl: 'app/home/payment/customPackage.html', controller: 'PricingController'})
 					.when('/admin/users',{templateUrl: 'app/admin/userList.html', controller: 'UserListCtrl',resolve: routeRoleChecks.admin})
+					.when('/dashboard/:launched',{templateUrl: 'app/customer/dashboard.html', controller: 'CustViewController',resolve: routeLoginChecks.user})
 					.when('/dashboard',{templateUrl: 'app/customer/dashboard.html', controller: 'CustViewController',resolve: routeLoginChecks.user})
 					.otherwise({templateUrl: 'app/home/main.html', controller: 'MainController'});
     		});
