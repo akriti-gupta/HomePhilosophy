@@ -1,5 +1,5 @@
 angular.module("app")
-		  .controller("CustViewController",function($scope,$location,$http,$filter,quizResult,payment,mvIdentity,mvNotifier,mvUpload, mvCustView,custViewSvc){
+		  .controller("CustViewController",function($scope,$location,$http,$filter,$routeParams,quizResult,payment,mvIdentity,mvNotifier,mvUpload, mvCustView,custViewSvc){
 		  		
 		  	
 
@@ -41,34 +41,13 @@ $scope.roomImage["Kids"] = "images/rooms/kids.png";
 
 var roomObj = ['','master','living','kids','home','dining','bedroom'];
 
-// Time
-/*var minTime = new Date();
-minTime.setHours( 9 );
-minTime.setMinutes( 0 );
-$scope.min = minTime;
-
-var maxTime = new Date();
-maxTime.setHours( 18 );
-maxTime.setMinutes( 0 );
-$scope.max = maxTime;
-
-$scope.apptTime = minTime;*/
-
-
 $scope.hstep = 1;
 $scope.mstep = 15;
-
-/*$scope.min = new Date();
-$scope.min.setHours(15);
-$scope.min.setMinutes(15);*/
-
 $scope.timeOptions = {
     hstep: [1, 2, 3],
     mstep: [5]
 };
-
 $scope.ismeridian = true;
-
 
 $scope.clear = function() {
     $scope.apptDate = null;
@@ -480,19 +459,22 @@ function populateStatus(projectData){
 
 //Get customer projects from DB.
 $scope.getProjectData = function(){
-mvCustView.getCustProjectInfo().then(function(projectData){
-	console.log('Result got back is: ');
-	console.log(projectData);
-	populateQuizArray(projectData);
-	console.log('Formatted Result :');
-	console.log($scope.projectArr);
+	mvCustView.getCustProjectInfo().then(function(projectData){
+		console.log('Result got back is: ');
+		console.log(projectData);
+		populateQuizArray(projectData);
+		console.log('Formatted Result :');
+		console.log($scope.projectArr);
 
 
-}, function(reason){
-		console.log('Cant find user Data');
-		mvNotifier.notify('Please try again later/ contact the site administrator. '+reason);
-		$location.path="/";
-	});
+	}, function(reason){
+			console.log('Cant find user Data');
+			mvNotifier.notify('Please try again later/ contact the site administrator. '+reason);
+			$location.path="/";
+		});
+	if($routeParams.launched){
+		angular.element('#launchedModal').modal('show');
+	}
 }
 
 function setQuizData(index){
@@ -509,8 +491,6 @@ function setQuizData(index){
 		}
 	}
 
-	console.log(roomData);
-
 	for(var i = 0; i< roomData.length;i++){
 		
 		if(roomData[i].roomName.toLowerCase().indexOf('office')!=-1){
@@ -519,7 +499,6 @@ function setQuizData(index){
 		else{
 			room_name = (roomData[i].roomName.substr(0,roomData[i].roomName.indexOf(' '))).toLowerCase();
 		}
-		console.log(room_name);
 		var id = roomObj.indexOf(room_name);
 
 		var room_num ={};
@@ -530,12 +509,12 @@ function setQuizData(index){
 
 		objRoomArr.push({'room_disp_name':roomData[i].roomName,'room_id':id,'room_name':room_name,'room_num':room_num});
 	}
-	console.log(objRoomArr);
 	storeQuizInfo(quizData);
 	quizResult.setCustSelections({"roomSelected":objRoomArr,"quizImgSelected":null});
 	quizResult.setInsertedRooms(roomData);
 }
 $scope.pricing = function(index){
+	payment.clearPayPkg();
 	setQuizData(index);
 	$location.path('/pricing');
 }
@@ -544,7 +523,7 @@ $scope.getQuizDetail = function(index){
 	var quizData = $scope.projectArr[index];
 	quizResult.setUserCurrQuiz(quizData.quizData.quizId);
 	setQuizData(index);
-	$location.path('/tell-us-more');
+	$location.path('/tell-us-more?dashboard=true');
 }
 
 $scope.addRoom=function(){
@@ -569,11 +548,8 @@ $scope.loadMtngData=function(row_id){
 		$scope.contact = $scope.projectArr[row_id].apptData[0].contact;
 		$scope.address = $scope.projectArr[row_id].apptData[0].address;
 		$scope.apptDate = moment($scope.projectArr[row_id].apptData[0].apptDate).format('YYYY-MM-DD hh:mm:ss A');
-		//$scope.apptTime = $scope.projectArr[row_id].apptData[0].apptTime;
 		$scope.apptTime = $scope.apptDate;
-
 	}	
-	console.log($scope.apptTime);
 	
 }
 
@@ -598,10 +574,6 @@ $scope.selectPkg = function(index){
 	console.log(projectRow);
 	var quizId = projectRow.quizData.quizId;
 	var relatedStyle = projectRow.resultData;
-	
-
-	//quizResult.storeStyle(relatedStyle);
-
 }
 
 function validateTime(date,time){
@@ -648,26 +620,20 @@ $scope.saveAppointment = function(item){
 
 			var date = new Date($scope.apptDate);
 			var time = (moment(new Date($scope.apptTime)).format("HH:mm:ss")).split(':');
-			console.log(time);
-
+		
 			if(validateTime(date,time)){
 				
 				date.setHours(time[0]);
 				date.setMinutes(time[1]);
 				
 				var apptDateTime = moment(date).format('YYYY-MM-DD HH:mm:ss');
-				console.log(apptDateTime);
 				
 				if($scope.fileArr && $scope.fileArr.length>0){
 					var fileType = "floorPlan";
 					if($scope.apptDate!=null){
 						isApptMade = 1;
 					}
-					// mvUpload.uploadFiles($scope.fileArr,fileType,quizId).then(function(success){
 					mvUpload.uploadFiles($scope.fileArr).then(function(uploadedFiles){
-						
-							// console.log('Floor plan uploaded');
-							//uploadLocation = './customer_uploads/floorPlan/'+quizId;
 						if(uploadedFiles.length>0){
 							var files;
 							fileUploadedStatus = 1;
@@ -736,18 +702,10 @@ $scope.saveAppointment = function(item){
 	}
 }
 
-$scope.$on('apptSaved', function(event,data){
-	console.log('Event caught, data is: ');
-	console.log(data);
-});
-
 $('#calendarModal').on('hidden.bs.modal', function () {
 	//refresh
-	//window.location.reload(true);
+	window.location.reload(true);
 });
-
-
-
 
 
 $scope.getFirstLook = function(index, roomId){
@@ -913,6 +871,10 @@ $scope.$on('$locationChangeStart', function( event ) {
 	        event.preventDefault();
 	    }
 	}
+	 if ($location.$$search.launched) {
+        delete $location.$$search.launched;
+        $location.$$compose();
+    }
 });
 
 function isEmpty(obj) {

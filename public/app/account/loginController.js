@@ -24,7 +24,6 @@ angular.module("app")
 		  					quizResult.setInsertedRooms(userQuiz[1].data.results.roomData);
 		  					mvNotifier.notify('Login success!');
 	  						if(userSelectionInfo.quizImgSelected.length===1){
-	  							// $location.path('/tell-us-more');
 	  							$location.path('/pricing');
 	  						}
 	  						else{
@@ -100,7 +99,6 @@ angular.module("app")
 		  	}
 
 		  	$scope.signup = function(){
-		  		console.log('ABC'+$scope.firstname+'XYZ');
 		  		if(typeof $scope.firstname=='undefined' || $scope.firstname===''){
 		  			alert('Please enter your name');
 		  			return false;
@@ -122,19 +120,16 @@ angular.module("app")
 		  		mvAuth.createUser(newUserData).then(function(){
 		  			mvNotifier.notify('User account created!');
 		  			if(quizResult.getStyle().length>=1){
-		  				//saveQuizInfo();
 		  				var userSelectionInfo = quizResult.getCustSelections();
 		  				var result = quizResult.getStyle();
 		  				mvUserQuiz.saveUserData(userSelectionInfo,result).then(function(userQuiz){
-		  					console.log(userQuiz);
 		  					quizResult.setUserCurrQuiz(userQuiz[0].data.quizId);
 		  					quizResult.setInsertedRooms(userQuiz[1].data.results.roomData);
 		  					mvNotifier.notify('User account created!');
+		  					$location.path('/style-quiz');
 		  				}, function(reason){
 		  					mvNotifier.error(reason);
 		  				});
-		  					
-		  				$location.path('/style-quiz');
 		  			}
 		  			else{
 		  				$location.path('/');

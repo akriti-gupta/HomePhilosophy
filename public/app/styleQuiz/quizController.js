@@ -17,7 +17,7 @@ angular.module("app")
 	$scope.userStyle = [];
 	$scope.arrImgLiked = [];
 	$scope.showResult = false;
-	$scope.pageRequester;
+	var pageRequester;
 	$scope.usrLoggedIn = false;
 	var prefStyle = [];
 	var arrComments = [];
@@ -65,18 +65,15 @@ angular.module("app")
 
 
 $scope.angularGridOptions;
-$scope.pageRequester=custViewSvc.getRequester();
+var pageRequester=custViewSvc.getRequester();
 
 $scope.checkProjects = function(){
-	if(custViewSvc.getRequester()===' '){
+	if(pageRequester===' '){
 		mvUserQuiz.getExistingPrjs().then(function(projects){
 			if(projects){
 				$location.path('/dashboard');
 			}
 		});
-	}
-	else{
-		$scope.pageRequester=custViewSvc.getRequester();
 	}
 }
 
@@ -985,9 +982,8 @@ $scope.gridWidth=300;
 	}
 
 	// To maintain the quiz result and style quiz pages state when redirected here after login.
-	if(quizResult.getStyle().length>=1 && $scope.pageRequester===' '){
+	if(quizResult.getStyle().length>=1 && pageRequester===' '){
 		if(quizResult.getIsKnownStyle()){
-			// $location.path('/tell-us-more');
 			if(payment.getPayPkg()===-1){
 				$location.path('/pricing');
 			}
@@ -1053,18 +1049,12 @@ $scope.gridWidth=300;
 			case 8:
 					
 					$scope.disable = false;
-					console.log($scope.arrImgLiked);
-					console.log(arrComments);
 					var imgsLiked = [];
 					for(var i=0;i<$scope.arrImgLiked.length;i++){
 						imgsLiked[i] = $scope.arrImgLiked[i].replace('images/styles/styleBoards/','');
 						
 					}
-					console.log($scope.arrImgLiked);
-					console.log(imgsLiked);
-					if($scope.selectedRoom.length===0){
-						$scope.selectedRoom = quizResult.getSelectedRooms();
-					}
+					
 					quizResult.setCustSelections({"roomSelected":$scope.selectedRoom,"quizImgSelected":$scope.selectedImages,"pinImages":imgsLiked});	
 					quizResult.storeStyle($scope.userStyle,$scope.board);
 					
@@ -1271,7 +1261,10 @@ $scope.gridWidth=300;
 		$scope.userStyle = [];
 		$scope.arrImgLiked.length = 0;
 		$scope.board=1;
-		quizResult.setSelectedRooms($scope.selectedRoom);
+		var rooms = quizResult.getCustSelections().roomSelected;
+		$scope.selectedRoom=rooms;
+		quizResult.clearStyle();
+		quizResult.clearCustSelections();
 	}
 	
 	function sortValues(a, b) {
@@ -1327,7 +1320,6 @@ $scope.gridWidth=300;
 	$scope.saveKnownStylImg = function(style){
 		$scope.selectedImages.push(style.image_id);
 		quizResult.setCustSelections({"roomSelected":$scope.selectedRoom,"quizImgSelected":$scope.selectedImages});
-
 
 		var userStyle = [{id:style.image_id, title: null, style: style.image_name,desc: style.image_desc,
 						image: style.image_style,value:100}];

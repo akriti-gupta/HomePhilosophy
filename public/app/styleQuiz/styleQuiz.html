@@ -24,8 +24,7 @@
 
 <div class="divider" style="border-top:2px solid #e1e1e1;padding:15px;"></div>
  
-  <!-- ng-init="checkProjects()" -->
-<div ng-controller="QuizController" class="qz-container" ng-init="checkProjects()">
+<div class="qz-container" ng-init="checkProjects()">
 
   <div class="modal" id="quizModal" tabindex="-1" role="dialog" aria-labelledby="quizModalLabel" >
       <div class="modal-dialog" role="document" >
@@ -48,7 +47,7 @@
 
                 <div style="clear:both; padding-bottom:40px;"></div>
                 <div class="fs-22px" style="display:inline-block;"> 
-                  <p>I already know!</p>
+                  I already know!
                 </div>
                 <div  class="fs-22px" style="float:right;">
                   <button type="button" class="take-qz-btn" ng-click="quiz(1)">SELECT STYLE</button>
@@ -454,9 +453,10 @@
 
 
         <div class="resprg-lbl-one">Style Quiz</div>
-        <div class="resprg-lbl-two">Tell Us More</div>
-        <div class="resprg-lbl-three">Choose a Package</div>
-        <div class="resprg-lbl-four">Payment</div>
+        
+        <div class="resprg-lbl-two">Choose a Package</div>
+        <div class="resprg-lbl-three">Payment</div>
+        <div class="resprg-lbl-four ">Tell Us More</div>
         <div class="resprg-lbl-five">Launch Project</div>
       </div>
     </div>

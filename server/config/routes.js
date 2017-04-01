@@ -7,7 +7,8 @@ var multer = require('multer'),
 	passport = require('passport'),
 	payment = require('../controllers/payment'),
 	filesys = require('fs'),
-	userProject = require('../controllers/userProject');
+	userProject = require('../controllers/userProject'),
+	common = require('../controllers/common');
 
 var storage =   multer.diskStorage({
   destination: function (req, file, callback) {
@@ -26,10 +27,7 @@ var upload = multer({ storage : storage }).array('fileArr');
 module.exports = function(app){
 
 	app.post('/sendEmail',mailer.sendEmail);
-		// app.post('/sendEmail',function(req,res){
-		// 	console.log('Mail sent');
-		// 	return res.send({success:true});
-		// });
+	app.post('/postContactDtls',common.postContactDtls);
 
 	app.get('/api/users',auth.requiresRole('admin'),users.getUsers);
 	//Gets called on Sign in, while $save of user resource	

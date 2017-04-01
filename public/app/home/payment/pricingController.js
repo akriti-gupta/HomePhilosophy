@@ -5,6 +5,9 @@ angular.module("app")
   	$scope.showTitle = false;
   	$scope.roomPackageArr = [];
   	
+  	$scope.name;
+  	$scope.email;
+  	$scope.phone;
   	//TODO: Save package info in DB and retrive this array from there. This is to
   	//accomodate any future changes to the payment packages and put it in service.
   	$scope.packages = [
@@ -62,26 +65,37 @@ angular.module("app")
   			$scope.roomPackageArr[i].pkgName = $scope.packages[pkg-1].name;
   			$scope.roomPackageArr[i].pkgValue = $scope.packages[pkg-1].pkgValue;
   		}
-  		console.log($scope.roomPackageArr);
   		payment.setPkgPerRoom1($scope.roomPackageArr);
 
-  		if(quizResult.getStyle().length>=1){
-	 		if(pkg!=4){
-				$location.path("/review-payment");	
-			}
-			else{
-				$location.path("/custom");
-			}
+  		if(pkg===4){
+  			$location.path("/custom");
+  		}
+  		else if(quizResult.getStyle().length>=1){
+	 		$location.path("/review-payment");	
 	 	}
 	 	else{
 	 		$location.path("/style-quiz");	
 	 	}
 	}	
 	
+$scope.submitReqCustom = function(){
+	//IF form is valid
+	if($scope.name===' '|| $scope.email===' '){
+		alert('Please enter your name and email address');
+	}
+	else if($scope.customForm.$valid){
+		$scope.sendMail();
+	}
+	
+}
+
+$scope.gotoPricing = function(){
+	payment.clearPayPkg();
+	$location.path('/pricing');
+}
 	
 $scope.sendMail = function(){
 	if($scope.customForm.$valid){
-
 		mvEmail.sendEmail().then(function(success){
 			if(success){
 				alert('Thank you for submitting you request. We will contact you soon.');

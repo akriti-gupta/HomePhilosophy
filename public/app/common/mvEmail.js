@@ -11,6 +11,18 @@ angular.module('app').factory('mvEmail', function($http, mvIdentity, $q, mvUser)
 	  			}
 	  		});
 	  		return dfd.promise;
+		},
+		postContactDtls: function(){
+			var dfd = $q.defer();
+		 	$http.post('/postContactDtls').then(function(response){
+	  			if(response.data.success){
+	  				dfd.resolve(true);
+	  			}
+	  			else{
+	  				dfd.resolve(false);
+	  			}
+	  		});
+	  		return dfd.promise;
 		}
 	}
 });

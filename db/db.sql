@@ -277,6 +277,17 @@ CREATE TABLE IF NOT EXISTS `shopping_list` (
   CONSTRAINT `shopping_list_roomId_foreign` FOREIGN KEY (`roomId`) REFERENCES `cust_room_selection` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
+CREATE TABLE IF NOT EXISTS `contact_us` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `phone` varchar(10) DEFAULT NULL,
+  `message` varchar(1000) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
 ALTER TABLE `concept_board`
 ADD COLUMN `notes` VARCHAR(1000) NULL AFTER `updated_at`;
 

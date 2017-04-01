@@ -30,7 +30,7 @@ angular.module('app')
 					.when('/signup',{templateUrl: 'app/account/login.html', controller: 'LoginController'})
 					.when('/tell-us-more',{templateUrl: 'app/styleQuiz/moreDetails.html', controller: 'SaveDetails',resolve: routeLoginChecks.user})
 					.when('/review-payment',{templateUrl: 'app/home/payment/reviewPayment.html', controller: 'PaymentController',resolve: routeLoginChecks.user})
-					.when('/custom',{templateUrl: 'app/home/payment/customPackage.html', controller: 'PaymentController',resolve: routeLoginChecks.user})
+					.when('/custom',{templateUrl: 'app/home/payment/customPackage.html', controller: 'PricingController'})
 					.when('/admin/users',{templateUrl: 'app/admin/userList.html', controller: 'UserListCtrl',resolve: routeRoleChecks.admin})
 					.when('/dashboard',{templateUrl: 'app/customer/dashboard.html', controller: 'CustViewController',resolve: routeLoginChecks.user})
 					.otherwise({templateUrl: 'app/home/main.html', controller: 'MainController'});

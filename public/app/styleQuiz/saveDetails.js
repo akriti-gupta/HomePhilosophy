@@ -59,22 +59,6 @@ angular.module('app')
                   ];
   $scope.reasonOther=' ';
 
-  
-  // if(quizResult.getCustSelections().length===0){
-  //   $location.path('/');
-  // }
-
-
-  // var paymentMade = $routeParams.response_code;
-  // var merchant=$routeParams.merchant;
-  // var quizId = $routeParams.ref_id;
-  // var reference_code = $routeParams.reference_code;
-  // var currency = $routeParams.currency;
-  // var total_amount = $routeParams.total_amount;
-  // var signature_algorithm = $routeParams.signature_algorithm;
-
-  // quizResult.setUserCurrQuiz(quizId);
-
   function validateFormData(){
     angular.forEach($scope.designReason, function(reason) {
       if(reason.selected){
@@ -162,11 +146,16 @@ $scope.processPayment = function(){
       }
       else{
 
-        alert('Secure signature unmatched.Payment could not made, please contact the site admin.');
+        alert('Secure signature unmatched.Payment could not be made, please contact the site admin.');
         $location.path('/dashboard');
       }
-
     }
+    else{
+      if(! $routeParams.dashboard){
+        $location.path('/dashboard');
+      }
+    }
+
 }
   $scope.saveColour = function(colourIndex){
     var index;
@@ -207,18 +196,7 @@ $scope.processPayment = function(){
         for(var i=0;i<$scope.pendingDropFilesFurn.length;i++){
           $scope.fileArr.push($scope.pendingDropFilesFurn[i].file);
         }
-
-        // angular.forEach($scope.budget, function(budget) {
-        //   console.log(budget);
-        //   if(budget.selected){ 
-        //     selectedBudget = budget.value;
-        //   }
-        // });
-
-        console.log($scope.selectedBudget);
-
         angular.forEach($scope.aprt, function(aprt) {
-          console.log(aprt);
           if(aprt.selected){ 
             selOwnership = aprt.value;
           }
@@ -251,13 +229,7 @@ $scope.processPayment = function(){
               data.file1 = response;
             }
             mvUserQuiz.saveQuizMiscData(data).then(function(response){
-             /* if(payment.getPayPkg()>0){
-                $location.path('/review-payment');
-              }
-              else{
-                $location.path('/pricing');    
-              }*/
-              $location.path('/dashboard');    
+              $location.path('/dashboard?launched=true');    
             },function(reason){
 
             });
@@ -269,13 +241,7 @@ $scope.processPayment = function(){
         }
         else{
           mvUserQuiz.saveQuizMiscData(data,quizId).then(function(response){
-            /*if(payment.getPayPkg()>0){
-             $location.path('/review-payment');
-            }
-            else{
-              $location.path('/pricing');    
-            }*/
-            $location.path('/dashboard');    
+            $location.path('/dashboard?launched=true');    
           },function(reason){
 
           });

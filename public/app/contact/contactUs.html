@@ -82,33 +82,32 @@
 					<li>
 						<label for="contact_name">NAME *</label>
 						<div>
-							<input name="contact_name" id="contact_name" type="text" tabindex="1"  class="form-control" required>
+							<input name="contact_name" id="contact_name" type="text" tabindex="1"  class="form-control" ng-required="true" ng-model="contact_name">
 						</div>
 					</li>
 
 					<li>
 						<label for="contact_email">EMAIL *</label>
 						<div>
-							<input name="contact_email" id="contact_email" type="text" tabindex="2" class="form-control" required>
+							<input name="contact_email" id="contact_email" type="email" tabindex="2" class="form-control" ng-required="true" ng-model="contact_email">
 						</div>
 					</li>
 
 					<li>
 						<label for="contact_phone">PHONE </label>
 						<div>
-							<input name="contact_phone" id="contact_phone" type="text" tabindex="3" class="form-control" >
+							<input name="contact_phone" id="contact_phone" ng-model="contact_phone" type="number" tabindex="3" class="form-control" ng-model="contact_phone">
 						</div>
 					</li>
 				</ul>
 
 				<div style="margin-top:20px;padding:20px 15px 0px;border-top:1px dashed black;">
 					<p class="contact-msg-title">MESSAGE *</p>
-					<textarea rows="9" cols="50" class="form-info font-sansRegular fs-16px contact-msg-box"  id="contactUsMsg" name="contactUsMsg"></textarea>
+					<textarea rows="9" cols="50" class="form-info font-sansRegular fs-16px contact-msg-box"  id="contactUsMsg" name="contactUsMsg" ng-model="contact_msg" ng-required="true"></textarea>
 	  			</div>
 
 				<div style="padding:5px 0px 10px 15px;text-align:center;">
-					<button type="submit" class="btn-start-quiz btn-qz font-sansRegular col-lightcyan fs-20px" ng-click="submitComment()" style="padding:10px 20px 10px;">SUBMIT</button>
-					<p></p>
+					<button type="submit" class="btn-start-quiz btn-qz font-sansRegular col-lightcyan fs-20px" ng-click="contactUs()" style="padding:10px 20px 10px;">SUBMIT</button>
 				</div>
 			</form>
 		</div>
@@ -116,14 +115,3 @@
 </section>
 
 <div style="padding-bottom:60px;"></div>
-<!-- <div class="divider" style="border-top:2px solid rgb(47, 185, 175);"></div> -->
-
-
- <!--  <div class="col-lg-2">
-   
-      <input type="text" class="form-control">
- 
- 
-
-
-</div>  -->
