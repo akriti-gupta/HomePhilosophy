@@ -385,3 +385,32 @@ exports.saveQuizMiscData = function(req,res,next){
 		}
 	});
 }
+
+exports.getQuizDetails = function(req,res,next){
+	var quizId = req.body.quizId;
+
+	mysqlConn.getConnection(function(err,conn){
+		
+		if(err){return next(err);}
+		
+        if(conn){
+        	conn.query('select count(*) as count from cust_quiz_detail where quizId='+quizId, function(err,results , fields){
+				if(err){
+					console.log('Error in gettimg data from cust_quiz_detail: '+err);
+					conn.release();
+					res.send({reason:err.toString()});
+				}
+				console.log(results);
+				if(results[0].count >0){
+					conn.release();
+					return res.send({exists:true});	
+				}
+				else{
+					conn.release();
+					return res.send({exists:false});	
+				}
+				
+			});
+		}
+	});
+}

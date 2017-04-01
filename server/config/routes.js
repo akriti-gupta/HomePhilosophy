@@ -41,6 +41,7 @@ module.exports = function(app){
 	app.post('/createUserQuiz',userQuiz.createUserQuiz);
 	app.post('/addRoomToQuiz',userQuiz.addRoomToQuiz);
 	app.post('/saveUserQuizDtls',userQuiz.saveUserQuizDtls);
+	app.post('/getQuizDetails',userQuiz.getQuizDetails);
 	app.post('/storePackage',payment.storePackage);
 	app.post('/getPaymentInfo',payment.getPaymentInfo);
 	app.post('/updatePackage',payment.updatePackage);

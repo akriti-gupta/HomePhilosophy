@@ -110,52 +110,61 @@ $scope.processPayment = function(){
 
       var returnSig = CryptoJS.SHA1(secret+merchant+ref_id+reference_code+response_code+currency+total_amount).toString();
       
-      if(returnSig === signature){
-        if(response_code==='1'){
-          
-          if(merchant===keys.MERCHANT_EMAIL && currency==='SGD' ){
-            var status = -1;
-            var quizId = ref_id;
-            mvPayment.getPaymentInfo(quizId,status).then(function(response){
-                var totalPrice = (response[0].totalPrice).toFixed(2);
-                if(totalPrice===total_amount){
-                  status = 0;
-                  mvPayment.updatePackage(quizId, status,totalPrice).then(function(response){
-                   angular.element('#messageModal').modal('show');
-                  }, function(reason){
-                    alert('Payment unsuccessful, please contact the site admin. '+reason);
-                    $location.search({});
-                    $location.path('/dashboard');
-                    
-                  }); 
-                }
-                else{
-                  alert('Amount to be paid is: '+totalPrice+', while amount paid= '+total_amount);
+
+      // Check that details dont exits already in the DB. This is to prevent user resubmitting the data by accessing teh link from bookmark.
+      mvUserQuiz.getQuizDetails($scope.quizId).then(function(response){
+        if(response){
+          $location.search({});
+          $location.path('/dashboard');
+        }
+        else{
+          if(returnSig === signature){
+            if(response_code==='1'){
+              if(merchant===keys.MERCHANT_EMAIL && currency==='SGD' ){
+                var status = -1;
+                var quizId = ref_id;
+                mvPayment.getPaymentInfo(quizId,status).then(function(response){
+                    var totalPrice = (response[0].totalPrice).toFixed(2);
+                    if(totalPrice===total_amount){
+                      status = 0;
+                      mvPayment.updatePackage(quizId, status,totalPrice).then(function(response){
+                       angular.element('#messageModal').modal('show');
+                      }, function(reason){
+                        alert('Payment unsuccessful, please contact the site admin. '+reason);
+                        $location.search({});
+                        $location.path('/dashboard');
+                        
+                      }); 
+                    }
+                    else{
+                      alert('Amount to be paid is: '+totalPrice+', while amount paid= '+total_amount);
+                      $location.search({});
+                      $location.path('/dashboard');
+                    }
+                  
+                }, function(reason){
+                  
+                  alert('Cant fetch payment information. Please contact the site admin');
                   $location.search({});
                   $location.path('/dashboard');
-                }
-              
-            }, function(reason){
-              
-              alert('Cant fetch payment information. Please contact the site admin');
-              $location.search({});
-              $location.path('/dashboard');
 
-            });
+                });
+              }
+              else{
+                alert('Error, merchant or currency incorrect');
+                $location.search({});
+                $location.path('/dashboard');
+              }
+            }
           }
           else{
-            alert('Error, merchant or currency incorrect');
+            alert('Secure signature unmatched.Payment could not be made, please contact the site admin.');
             $location.search({});
             $location.path('/dashboard');
           }
         }
-      }
-      else{
-
-        alert('Secure signature unmatched.Payment could not be made, please contact the site admin.');
-        $location.search({});
-        $location.path('/dashboard');
-      }
+      });
+      
     }
     else{
       if(! $routeParams.dashboard){
@@ -163,8 +172,7 @@ $scope.processPayment = function(){
         $location.path('/dashboard');
       }
     }
-
-}
+  }
   $scope.saveColour = function(colourIndex){
     var index;
 

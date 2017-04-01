@@ -89,6 +89,19 @@ angular.module('app').factory('mvUserQuiz', function($http, mvIdentity, $q, quiz
 	  		});
 	  		return dfd.promise;
 			
+		},
+		getQuizDetails: function(quizId){
+			var dfd = $q.defer();
+			$http.post('/getQuizDetails',{quizId:quizId})
+		 	.then(function(response){
+		 		if(response.data.exists){
+		 			dfd.resolve(true);
+		 		}
+		 		else{
+		 			dfd.resolve(false);
+		 		}
+	  		});
+	  		return dfd.promise;
 		}
 	}
 });
