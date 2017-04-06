@@ -422,7 +422,8 @@
       </div>
 
       <div class="row qz-row-dsg admin-view-row" style="display:table;border:1px solid black;padding-bottom:0px;">
-        <div class="col-md-2 col-xs-4 admin-view-tab">{{appt.apptDate}}</div>
+        <div class="col-md-2 col-xs-4 admin-view-tab" ng-if="appt.apptStatus!=-1">{{appt.apptDate}}</div>
+        <div class="col-md-2 col-xs-4 admin-view-tab" ng-if="appt.apptStatus===-1">&nbsp;</div>
         <div class="col-md-1 col-xs-4 admin-view-tab">{{appt.contactPerson}}</div>
         <div class="col-md-3 col-xs-4 admin-view-tab">{{appt.address}}</div>
         <div class="col-md-2 col-xs-4 admin-view-tab">{{appt.contact}}</div>
