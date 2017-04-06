@@ -510,7 +510,7 @@ exports.getCustProjectInfo = function(req,res,next){
 	}); 
 }
 
-exports.getProjectListing = function(req,res,next){
+/*exports.getProjectListing = function(req,res,next){
 	
 	if(projectList.length>0){projectList.length=0;}
 	mysqlConn.getConnection(function(err,conn){
@@ -635,15 +635,14 @@ exports.getProjectListing = function(req,res,next){
 			});
     	}
    	}); //getConnection
-}
+}*/
 
 
-exports.getProjectListing1 = function(req,res,next){
+exports.getProjectListing = function(req,res,next){
 	
+	console.log(req);
 	if(projectList.length>0){projectList.length=0;}
-	//var quizStatus = req.data.status;
 	mysqlConn.getConnection(function(err,conn){
-		
 		if(err){return next(err);}
 		
         if(conn){
@@ -662,7 +661,7 @@ exports.getProjectListing1 = function(req,res,next){
 				}
 			});
     	}
-   	}); //getConnection
+   	}); 
 }
 
 
@@ -1043,5 +1042,43 @@ exports.getQuizDetail = function(req,res,next){
 	});
 }
 	
+exports.deleteProject = function(req,res,next){
+	console.log('In deleteProject');
+	var quizId =  req.body.quizId;
+	var roomId = req.body.roomId;
+	console.log(quizId);
+	console.log(roomId);
 
+	mysqlConn.getConnection(function(err,conn){
+		if(err){return next(err);}
+	    if(conn){
+	    	conn.query('select count(*) as count from cust_room_selection where quizId='+quizId, function(err, results, fields){
+				if(err){
+					conn.release();
+					return res.send({success: false, reason:err.toString()});
+				}
+				console.log(results);
+				if(results[0].count >1){
+					conn.query('delete from cust_room_selection where quizId='+quizId+' and id='+roomId, function(err, results, fields){
 
+						if(err){
+							conn.release();
+							return res.send({success: false, reason:err.toString()});
+						}
+						return res.send({success: true});
+					});
+				}
+				else{
+					conn.query('delete from cust_quiz where quizId='+quizId, function(err, results, fields){
+						if(err){
+							conn.release();
+							return res.send({success: false, reason:err.toString()});
+						}
+						return res.send({success: true});
+					});
+
+				}
+	    	});
+	    }
+	});
+}

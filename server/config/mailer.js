@@ -32,17 +32,7 @@ var mailOptions = {
     name: 'Test User'
 };
 
-
-// var welcomeEmail = new EmailTemplate(templateDir+'/welcome');
-// console.log(welcomeEmail);
-
-
-
-
-
-
-
-
+  
 exports.sendEmail = function(req,res,next){
 
 	transporter.sendMail(mailOptions, function(error, info){

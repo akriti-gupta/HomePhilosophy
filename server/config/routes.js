@@ -65,11 +65,12 @@ module.exports = function(app){
 	
 	app.post('/submitFeedback',userProject.submitFeedback);
 
-	app.get('/getProjectListing', userProject.getProjectListing1);
+	app.get('/getProjectListing', userProject.getProjectListing);
 	app.post('/getQuizDetail', userProject.getQuizDetail);
 
 	app.get('/getCncptFeedback', userProject.getCncptFeedback);
 	app.post('/modifyUsrAppt',userProject.modifyUsrAppt);
+	app.post('/deleteProject',userProject.deleteProject);
 	app.post('/fetchImages',quiz.fetchImages);
 
 
@@ -89,6 +90,13 @@ module.exports = function(app){
 	});
 
 
+	app.get('/downloadFile/:fileName', function(req, res){
+  		var file = './public/uploads/' + req.params.fileName;
+  		// console.log(req);
+  		//var file = './public/uploads/Room furniture breakdown Sheet1-1491312718279.pdf';
+  		console.log(file);
+  		res.download(file);
+	});
 
 // route for facebook authentication and login
 	 app.get('/auth/facebook',passport.authenticate('facebook'),function(req,res){});

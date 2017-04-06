@@ -1,4 +1,9 @@
 @font-face{
+  font-family: Yellowtail-Regular;
+  src: url(../fonts/Yellowtail-Regular.otf);
+}
+
+@font-face{
   font-family: GreatVibes-Regular;
   src: url(../fonts/GreatVibes-Regular.otf);
 }
@@ -720,11 +725,17 @@ padding-top:6px; padding-bottom:6px;letter-spacing:1px;
   text-transform: capitalize;
 }
 
-.stp-head-subtxt{
+.stp-head-subtxt,.stp-main-subtxt{
   padding-bottom:20px;
-  font-family:OpenSans-Regular;
   font-size:16px;
-  color: #252525;
+}
+.stp-head-subtxt{
+    color: #252525;
+}
+.stp-main-subtxt{
+  font-family:Montserrat-Regular;
+  color: rgb(85,85,85);
+  text-transform: uppercase;
 }
 
 .step_icon{
@@ -755,8 +766,17 @@ padding-top:6px; padding-bottom:6px;letter-spacing:1px;
   text-align: justify;
   top: 160px;
   position: absolute;
+  
 }
 
+.step-txt-main{
+ font-family: "Allura-Regular";
+ font-size:35px;
+ text-align: center;
+ margin:0px;
+ width: 100%;
+ color:rgb(0, 134, 125);
+}
 
 .mask {
   position: relative;

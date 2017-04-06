@@ -91,6 +91,10 @@
         </div> 
       </div>
   </div>
+  <div style="width:50%;margin:0 auto; padding-top:50px;text-align:center;">
+    <button type="button" class="btn-start-quiz" style="padding:10px;margin-right:15px;" ng-click="launchedPrjs()">Show Launched Projects</button>
+    <button type="button" class="btn-start-quiz" style="padding:10px;" ng-click="pendingPrjs()">Show Pending Projects</button>
+  </div>
 </section>
 
 <section id="project-details" ng-show="showDetail">
@@ -157,6 +161,14 @@
             <img ng-src="{{img.qi.imageLocation}}" width="100%" height="auto"/>
           </div>
       </div> 
+
+      <div style="padding-top:20px;text-align:center;">Images from Board:</div>
+      
+      <div class="row qz-row-dsg" style="padding-top:10px;"> 
+          <div class="col-md-2 col-xs-4" style="padding:5px;" ng-repeat="img in quizData.pinImages[0].i.imagesLiked track by $index">
+            <img ng-src="/images/styles/styleBoards/{{img}}" width="100%" height="auto"/>
+          </div>
+      </div>
       
       <div style="padding-top:20px;text-align:center;">Result:</div>
       
@@ -286,7 +298,7 @@
 
             <li style="margin:10px;">
                <label class="btn-start-quiz" style="padding:10px;">
-                <input type="file" multiple ngf-pattern="'image/*'" accept="image/*" ngf-max-size="10MB" style="display:none;" onchange="angular.element(this).scope().addFileToUploadQ(this)"/>
+                <input type="file" multiple ngf-pattern="'image/*','application/pdf'" accept="image/*,application/pdf" ngf-max-size="10MB" style="display:none;" onchange="angular.element(this).scope().addFileToUploadQ(this)"/>
                   ADD FILES
                 </label>
             </li>
@@ -438,10 +450,10 @@
 
       <div style="clear:both;"></div>
 
-      <div id="floorPlans" ng-if="appt.floorPlanFiles.length > 0" style="padding-top:50px;width:50;position:relative; margin:0 auto;">
+      <div id="floorPlans" ng-if="appt.floorPlanFiles.length > 0" style="padding-top:50px;width:50;position:relative; margin:0 auto;padding-bottom:50px;">
         <div><p class="fs-18px"><b>Floor Plan: </b></p></div>
         <div ng-repeat="plan in appt.floorPlanFiles track by $index">
-          <img ng-src="{{plan}}" width="100%" height="auto"/>
+          <img ng-src="./uploads/{{plan}}" width="100%" height="auto"/>
         </div>
       </div>
 

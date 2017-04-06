@@ -26,8 +26,8 @@ $scope.packageName=[' ','Simple','Classic','Premium','Custom'];
 
 $scope.styleName=[' ','Classic','Contemporary','Transitional','Modern','Scandinavian','Asian Inspired Minimalist'];
 
-$scope.apptDate = new Date();
-$scope.apptTime = new Date();
+// $scope.apptDate = new Date();
+// $scope.apptTime = new Date();
 
 $scope.roomImage ={};
 
@@ -523,7 +523,7 @@ $scope.getQuizDetail = function(index){
 	var quizData = $scope.projectArr[index];
 	quizResult.setUserCurrQuiz(quizData.quizData.quizId);
 	setQuizData(index);
-	$location.path('/tell-us-more?dashboard=true');
+	$location.path('/tell-us-more').search({'dashboard':'true'}); 
 }
 
 $scope.addRoom=function(){
@@ -608,7 +608,7 @@ $scope.saveAppointment = function(item){
 		var roomId = $scope.projectArr[row_id].roomObj.id;
 		var customerId = $scope.projectArr[row_id].userData.id;
 
-		if($scope.fileArr.length===0 &&	$scope.apptDate===null){
+		if($scope.fileArr.length===0 &&	($scope.apptDate===null || typeof $scope.apptDate=== 'undefined')){
 			alert('Please schedule a meeting and/or upload Floor Plan');	
 		}
 
@@ -618,21 +618,80 @@ $scope.saveAppointment = function(item){
 			var isApptMade = -1;
 			var apptData ={};
 
-			var date = new Date($scope.apptDate);
-			var time = (moment(new Date($scope.apptTime)).format("HH:mm:ss")).split(':');
-		
-			if(validateTime(date,time)){
-				
-				date.setHours(time[0]);
-				date.setMinutes(time[1]);
-				
-				var apptDateTime = moment(date).format('YYYY-MM-DD HH:mm:ss');
-				
-				if($scope.fileArr && $scope.fileArr.length>0){
-					var fileType = "floorPlan";
-					if($scope.apptDate!=null){
-						isApptMade = 1;
+			// If only floor plan uploaded.
+
+			// If only Appt. scheduled
+
+			//If both
+
+			
+			if(typeof $scope.apptDate!= 'undefined' && $scope.apptDate!= null && $scope.fileArr.length===0){
+				var date = new Date($scope.apptDate);
+				var time = (moment(new Date($scope.apptTime)).format("HH:mm:ss")).split(':');
+				if(validateTime(date,time)){
+					date.setHours(time[0]);
+					date.setMinutes(time[1]);
+					var apptDateTime = moment(date).format('YYYY-MM-DD HH:mm:ss');
+					isApptMade = 1;
+					apptData = {"customerId":customerId,"quizId":quizId,"address":$scope.address,
+							 "person":$scope.person,"contact":$scope.contact,
+							 "apptDate":apptDateTime,"apptTime":apptDateTime,
+							 "floorPlanLoc":'',"floorPlanStatus":-1,
+							 "apptStatus":0};
+
+					mvCustView.saveAppointment(apptData).then(function(success){
+						if(success){
+							angular.element('#calendarModal').modal('hide');
+							window.location.reload(true);
+							//TODO: Send email
+						}
+					}, function(reason){
+						alert('Appointment could not be scheduled. Please contact the site admin '+reason);
+					});
+				}
+				else{
+					return false; //alert promoted from function, invalid date. 
+				}
+			}
+
+			else if($scope.fileArr && $scope.fileArr.length>0 && (typeof $scope.apptDate=== 'undefined' || $scope.apptDate=== null)){
+				mvUpload.uploadFiles($scope.fileArr).then(function(uploadedFiles){
+					if(uploadedFiles.length>0){
+						var files;
+						fileUploadedStatus = 1;
+						files = uploadedFiles.toString();
 					}
+					else {
+						files = uploadedFiles;
+					}
+					
+					apptData = {"customerId":customerId,"quizId":quizId,"roomId":roomId,"address":$scope.address,
+							 "person":$scope.person,"contact":$scope.contact,
+							 "apptDate":null,"apptTime":null,
+							 "floorPlanLoc":files,"floorPlanStatus":0,
+							 "apptStatus":-1};
+
+					mvCustView.saveAppointment(apptData).then(function(success){
+						if(success){
+							angular.element('#calendarModal').modal('hide');
+							window.location.reload(true);
+							//TODO: Send email
+						}
+					}, function(reason){
+						alert('Floor plans could not be uploaded. Please contact the site admin '+reason);
+					});
+
+				});
+			}
+
+			else if($scope.fileArr.length>0 && $scope.apptDate!=null){
+				var date = new Date($scope.apptDate);
+				var time = (moment(new Date($scope.apptTime)).format("HH:mm:ss")).split(':');
+				
+				if(validateTime(date,time)){
+					date.setHours(time[0]);
+					date.setMinutes(time[1]);
+					var apptDateTime = moment(date).format('YYYY-MM-DD HH:mm:ss');
 					mvUpload.uploadFiles($scope.fileArr).then(function(uploadedFiles){
 						if(uploadedFiles.length>0){
 							var files;
@@ -642,21 +701,91 @@ $scope.saveAppointment = function(item){
 						else {
 							files = uploadedFiles;
 						}
+						apptData = {"customerId":customerId,"quizId":quizId,"address":$scope.address,
+									 "person":$scope.person,"contact":$scope.contact,
+									 "apptDate":apptDateTime,"apptTime":apptDateTime,
+									 "floorPlanLoc":files,"floorPlanStatus":0,
+									 "apptStatus":0};
 
-						if(isApptMade===1){
-							apptData = {"customerId":customerId,"quizId":quizId,"address":$scope.address,
-								 "person":$scope.person,"contact":$scope.contact,
-								 "apptDate":apptDateTime,"apptTime":apptDateTime,
-								 "floorPlanLoc":files,"floorPlanStatus":0,
-								 "apptStatus":0};
-						}
-						else{
-							apptData = {"customerId":customerId,"quizId":quizId,"roomId":roomId,"address":$scope.address,
-								 "person":$scope.person,"contact":$scope.contact,
-								 "apptDate":null,"apptTime":null,
-								 "floorPlanLoc":files,"floorPlanStatus":0,
-								 "apptStatus":-1};
-						}
+						mvCustView.saveAppointment(apptData).then(function(success){
+							if(success){
+								angular.element('#calendarModal').modal('hide');
+								window.location.reload(true);
+								//TODO: Send email
+							}
+						}, function(reason){
+							alert('Meeting could not be scheduled. Please contact the site admin '+reason);
+						});
+					});
+
+				}
+				else{
+					return false; //alert promoted from function, invalid date. 
+				}
+			}
+
+
+
+			/*if($scope.apptDate!= null){
+				var date = new Date($scope.apptDate);
+				var time = (moment(new Date($scope.apptTime)).format("HH:mm:ss")).split(':');
+				if(validateTime(date,time)){
+					
+					date.setHours(time[0]);
+					date.setMinutes(time[1]);
+					
+					var apptDateTime = moment(date).format('YYYY-MM-DD HH:mm:ss');
+					isApptMade = 1;
+					
+					if($scope.fileArr && $scope.fileArr.length>0){
+						var fileType = "floorPlan";
+						mvUpload.uploadFiles($scope.fileArr).then(function(uploadedFiles){
+							if(uploadedFiles.length>0){
+								var files;
+								fileUploadedStatus = 1;
+								files = uploadedFiles.toString();
+							}
+							else {
+								files = uploadedFiles;
+							}
+
+							if(isApptMade===1){
+								apptData = {"customerId":customerId,"quizId":quizId,"address":$scope.address,
+									 "person":$scope.person,"contact":$scope.contact,
+									 "apptDate":apptDateTime,"apptTime":apptDateTime,
+									 "floorPlanLoc":files,"floorPlanStatus":0,
+									 "apptStatus":0};
+							}
+							else{
+								apptData = {"customerId":customerId,"quizId":quizId,"roomId":roomId,"address":$scope.address,
+									 "person":$scope.person,"contact":$scope.contact,
+									 "apptDate":null,"apptTime":null,
+									 "floorPlanLoc":files,"floorPlanStatus":0,
+									 "apptStatus":-1};
+							}
+							mvCustView.saveAppointment(apptData).then(function(success){
+								if(success){
+									//$scope.$emit('apptSaved',response );
+									angular.element('#calendarModal').modal('hide');
+									window.location.reload(true);
+									//TODO: Send email
+								}
+							}, function(reason){
+								alert('Appointment could not be scheduled. Please contact the site admin '+reason);
+							});
+						},function(reason){
+								alert('Files could not be upoladed. Please contact the site admin '+reason);
+						});
+					}
+
+					else if ($scope.apptDate!=null){
+						apptData = {"customerId":customerId,"quizId":quizId,"address":$scope.address,
+										 "person":$scope.person,"contact":$scope.contact,
+										 "apptDate":apptDateTime,"apptTime":apptDateTime,
+										 "floorPlanLoc":'',"floorPlanStatus":-1,
+										 "apptStatus":0};
+
+						
 						mvCustView.saveAppointment(apptData).then(function(success){
 							if(success){
 								//$scope.$emit('apptSaved',response );
@@ -667,37 +796,15 @@ $scope.saveAppointment = function(item){
 						}, function(reason){
 							alert('Appointment could not be scheduled. Please contact the site admin '+reason);
 						});
-					},function(reason){
-							alert('Files could not be upoladed. Please contact the site admin '+reason);
-					});
+
+
+					}
 				}
-
-				else if ($scope.apptDate!=null){
-					apptData = {"customerId":customerId,"quizId":quizId,"address":$scope.address,
-									 "person":$scope.person,"contact":$scope.contact,
-									 "apptDate":apptDateTime,"apptTime":apptDateTime,
-									 "floorPlanLoc":'',"floorPlanStatus":-1,
-									 "apptStatus":0};
-
-					
-					mvCustView.saveAppointment(apptData).then(function(success){
-						if(success){
-							//$scope.$emit('apptSaved',response );
-							angular.element('#calendarModal').modal('hide');
-							window.location.reload(true);
-							//TODO: Send email
-						}
-					}, function(reason){
-						alert('Appointment could not be scheduled. Please contact the site admin '+reason);
-					});
-
-
+				else{
+					return false;
 				}
-			}
-			else{
-				
-				return false;
-			}
+			}*/
+			
 		}
 	}
 }
@@ -769,14 +876,21 @@ $scope.getFirstLook = function(index, roomId){
 				}
 			}
 			if($scope.firstLookArr[i].concept.files.indexOf(',')===-1){
-				$scope.images.push('./uploads/'+$scope.firstLookArr[i].concept.files);
+				if($scope.firstLookArr[i].concept.files.indexOf('.pdf')!=-1)
+					$scope.images.push($scope.firstLookArr[i].concept.files);
+				else
+					$scope.images.push('./uploads/'+$scope.firstLookArr[i].concept.files);
+
 				concept_img='./uploads/'+$scope.firstLookArr[i].concept.files;
 				$scope.cncptObj.push({concept_id:$scope.firstLookArr[i].concept.id, concept_img:$scope.firstLookArr[i].concept.files,concept_type:concept_type});
 			}
 			else{
 				var tmpFileArr = $scope.firstLookArr[i].concept.files.split(',');
 				for(var j=0;j<tmpFileArr.length;j++){
-					tmpFileArr[j]='./uploads/'+tmpFileArr[j];
+					if(tmpFileArr[j].indexOf('.pdf')!=-1)
+						tmpFileArr[j]=tmpFileArr[j];
+					else
+						tmpFileArr[j]='./uploads/'+tmpFileArr[j];
 					$scope.cncptObj.push({concept_id:$scope.firstLookArr[i].concept.id, concept_img:tmpFileArr[j],concept_type:concept_type});
 				}
 
@@ -860,6 +974,23 @@ $scope.submitFeedback = function(status){
 		}, function(reason){
 			mvNotifier.notify('Error in saving feedback. Please try again: '+reason);
 			//Close popup
+		});
+	}
+}
+
+$scope.removeRoom = function(index){
+	var answer = confirm("Are you sure you want to delete this project?")
+    if (!answer) {
+        event.preventDefault();
+    }
+    else{
+		var row = $scope.projectArr[index];
+		var quizId = row.quizData.quizId;
+		var roomId = row.roomObj.id;
+		mvCustView.deleteProject(quizId, roomId).then(function(response){
+			window.location.reload(true);
+		},function(reason){
+			mvNotifier.notify('Project could not be deleted: '+reason);
 		});
 	}
 }

@@ -93,8 +93,10 @@ angular.module('app')
   }
 
 $scope.processPayment = function(){
-
-    if($routeParams.merchant){
+    if($routeParams.merchant!=null && $routeParams.response_code!=null && $routeParams.ref_id!=null
+        && $routeParams.reference_code!=null && $routeParams.currency!=null && $routeParams.total_amount!=null &&
+        $routeParams.signature_algorithm!=null && $routeParams.signature!=null && $routeParams.card_type!=null){
+    
       var keys = PAYMENT_KEYS;
       var secret=keys.MERCHANT_SECRET_KEY;
       var response_code = $routeParams.response_code;
@@ -112,6 +114,7 @@ $scope.processPayment = function(){
       
 
       // Check that details dont exits already in the DB. This is to prevent user resubmitting the data by accessing teh link from bookmark.
+
       mvUserQuiz.getQuizDetails($scope.quizId).then(function(response){
         if(response){
           $location.search({});

@@ -24,12 +24,18 @@
 <div class="modal" id="launchedModal" tabindex="-1" role="dialog" aria-labelledby="launchedModalLabel" >
 	<div class="modal-dialog" role="document" >
 		<div class="modal-content">
-			<div class="modal-header" style="border:none;">
+			<!-- <div class="modal-header" style="border:none;">
 				<button type="button" class="close"  aria-label="Close" data-dismiss="modal"><span aria-hidden="true" style="padding-left">&times;</span></button>
 			</div>
+ -->
+			<div class="modal-body comment-modal-body fs-20px" style="background-color:#64c6be;padding:15px;">
+				<div style="float:right;">
+					<button type="button" aria-label="Close" data-dismiss="modal" style="background:transparent;border:none;"><span>&times;</span></button>
+				</div>
 
-			<div class="modal-body comment-modal-body fs-20px" style="padding:50px;">
-			<p>Congratulations! Your project is launched. <br/><br/> Please schedule an appointment with our designers or upload your floor plan.</p>
+			<div style="padding:20px;padding-top:40px;background-color:rgb(235,235,235);">
+				<p>Congratulations! Your project is launched. <br/><br/> Please schedule an appointment with our designers or upload your floor plan.</p>
+			</div>
 			</div>
 		</div>
 	</div>
@@ -143,9 +149,10 @@
 		<div class="row qz-row-dsg"  style="display:table;border:1px solid black;padding-bottom:0px;">
 
 		    <div class="col-md-3 col-xs-3 cust-view-tab">ROOM</div>
-		    <div class="col-md-2 col-xs-4 cust-view-tab">STYLE</div>
+		    <div class="col-md-1 col-xs-4 cust-view-tab">STYLE</div>
 		    <div class="col-md-3 col-xs-2 cust-view-tab">PACKAGE</div>
 		    <div class="col-md-4 col-xs-3 cust-view-tab">STATUS</div>
+		    <div class="col-md-3 col-xs-3 cust-view-tab">DELETE</div>
 		</div>
 
 		<div class="row qz-row-dsg" ng-repeat="item in projectArr track by $index" style="display:table;border:1px solid black;padding-bottom:0px;">
@@ -158,7 +165,7 @@
 			    
 		    </div>
 
-		    <div class="col-md-2 col-xs-3 cust-view-tab" style="padding:10px;">
+		    <div class="col-md-1 col-xs-3 cust-view-tab" style="padding:10px;">
 		        {{styleName[item.resultData[0].styleId]}}
 		    </div>
 
@@ -179,6 +186,12 @@
 			<div class="col-md-4 col-xs-4 cust-view-tab" ng-if="item.status.linkPage!=' ' && item.status.stage==='quizDetails'" ><a href="#" ng-click="getQuizDetail($index)">{{item.status.statusText}}</a><br/></div>
 
  			<div id="cal_popup" class="col-md-4 col-xs-4 cust-view-tab" ng-if="item.status.modal!=' '"><a href="#" ng-click="loadMtngData($index)" data-toggle="modal" data-target="#calendarModal" data-id="{{$index}}">{{item.status.statusText}}</a><br/></div>
+
+ 			<div class="col-md-3 col-xs-4 cust-view-tab" ng-if="item.quizData.status===-1"><a href="#" ng-click="removeRoom($index)"><span class="glyphicon glyphicon-trash style="font-size:12px;"></span></a><br/></div>
+
+ 			<div class="col-md-3 col-xs-4 cust-view-tab" ng-if="item.quizData.status!=-1">&nbsp;</div>
+
+
 		  </div>
 
 		   
@@ -202,9 +215,10 @@
 	<div style="flex:0.5;padding:80px;">
 	
 
-		<div ng-repeat="item in images track by $index" style="padding-bottom: 50px;">
-
-			<a href="#" ng-click="zoomImg($index)"><img src={{item}} width="100%"></a>
+		<div ng-repeat="item in images track by $index" style="padding-bottom: 50px;text-align:center;">
+			<a href="#" ng-click="zoomImg($index)" ng-if="item.indexOf('.pdf')===-1"><img src={{item}} width="100%"></a>
+			<!-- ng-click="downloadFile(item)" -->
+			<a target="_self" href="/downloadFile/{{item}}" ng-if="item.indexOf('.pdf')!=-1">Download Shopping List</a>
 			<p ng-show="!isFinalPage">Option {{$index+1}}</p>
 		
 		</div>
@@ -217,7 +231,7 @@
 	<div style="flex:1.5;padding:30px;border-left:4px solid #e1e1e1;">
 		<p class="stp-head-maintxt" style="padding-bottom:10px;">{{lookText}}</p>
 
-		<p><img src="{{zoomImgSrc}}"></p>
+		<p><img src="{{zoomImgSrc}}" width="100%"></p>
 		<p style="font-family:PlayfairDisplay-Regular;padding:40px;font-size:20px;" ng-if="designerNotes!=null && designerNotes!=' '"><u>Designer Comments</u> : {{designerNotes}}</p>
 
 		<div style="padding:50px 0px 50px 105px;" ng-show="!isFinalPage">

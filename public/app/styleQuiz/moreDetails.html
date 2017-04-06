@@ -25,16 +25,23 @@
 <div class="modal" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" >
 	<div class="modal-dialog" role="document" >
 		<div class="modal-content">
-			<div class="modal-header" style="border:none;">
+			<!-- <div class="modal-header" style="border:none;">
 				<button type="button" class="close"  aria-label="Close" data-dismiss="modal"><span aria-hidden="true" style="padding-left">&times;</span></button>
-			</div>
+			</div> -->
 
-			<div class="modal-body comment-modal-body fs-20px" style="padding:50px;">
-			<p>Thank You for your payment!<br/><br/> We can't wait to get started- but first, a little bit more about your project...</p>
+			<div class="modal-body comment-modal-body fs-20px" style="background-color:#64c6be;padding:15px;">
+				<div style="float:right;">
+					<button type="button" aria-label="Close" data-dismiss="modal" style="background:transparent;border:none;"><span>&times;</span></button>
+				</div>
+
+				<div style="padding:20px;padding-top:40px;background-color:rgb(235,235,235);">
+					<p>Thank You for your payment!<br/><br/> We can't wait to get started- but first, a little bit more about your project...</p>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
 
 <div  class="qz-container" ng-init="processPayment()">
 	<div class="prg-dtl-ctr">

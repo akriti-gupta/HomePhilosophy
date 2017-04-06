@@ -13,10 +13,10 @@ angular.module('app').factory('mvAdminView', function($http, $q){
 	  		});
 	  		return dfd.promise;
 		},
-		getProjectListing: function(){
+		getProjectListing: function(status){
 			var dfd = $q.defer();
-			// $http.get('/getProjectListing', {cache: false}).then(function(response){
-			   $http.get('/getProjectListing').then(function(response){
+			 $http.get('/getProjectListing', {cache: false}).then(function(response){
+			   //$http.get('/getProjectListing',{qs: {status:status}}).then(function(response){
 				if(response.data.success){
 					data = response.data.results;
 					dfd.resolve(response.data.results);	

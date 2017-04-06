@@ -21,6 +21,8 @@ angular.module('app').controller('UserListCtrl', function($scope,$http,$routePar
 	$scope.quizStatus=['Active','Launched'];
 	$scope.apptStatus=['Scheduled/Uploaded. Awaiting Admin Action','Approved','','Rejected'];
 
+	var projectStatus = 0;
+
 function resetTabs() {
 	$scope.showCustDetails = false;
 	$scope.showQuizDetails = false;
@@ -310,7 +312,7 @@ function populateStatus(projectData){
  	
 //Get customer projects from DB.
 $scope.getProjectListing = function(){
-	mvAdminView.getProjectListing().then(function(projectData){
+	mvAdminView.getProjectListing(projectStatus).then(function(projectData){
 	console.log('Result got back is: ');
 	console.log(projectData);
 	// populateStatus(projectData);
@@ -462,6 +464,21 @@ $scope.details = function(index,tabIdx){
 			colours = $scope.quizData.quizDtls[0].colours.split(',');
 			$scope.quizData.quizDtls[0].colours = colours;
 		}
+
+		if($scope.quizData.pinImages.length>0){
+			var imgs = [];
+			imgs = $scope.quizData.pinImages[0].i.imagesLiked.split(',');
+			$scope.quizData.pinImages[0].i.imagesLiked = imgs;
+		}
+
+		if($scope.quizData.apptData.length>0){
+			var floorPlanLoc = $scope.quizData.apptData[0].floorPlanLoc;
+				if(floorPlanLoc!=null && floorPlanLoc!=""){
+					var floorPlans = floorPlanLoc.split(',');
+					$scope.quizData.apptData[0].floorPlanFiles = floorPlans;
+				}
+		}
+
 
 		$scope.toggleMainView();
 		$scope.toggleTab(tabIdx);
@@ -645,7 +662,10 @@ $scope.submitData = function(quizId, filetype, roomName, roomId){
 	}
 }
  
+$scope.launchedPrjs = function(){
 
+	
+}
  function isEmpty(obj) {
 
     for (var key in obj) {
