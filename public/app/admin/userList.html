@@ -451,9 +451,9 @@
 
       <div style="clear:both;"></div>
 
-      <div id="floorPlans" ng-if="appt.floorPlanFiles.length > 0" style="padding-top:50px;width:50;position:relative; margin:0 auto;padding-bottom:50px;">
+      <div id="floorPlans" ng-if="appt.floorPlanFiles.length > 0" style="padding-top:50px;width:50%;position:relative; margin:0 auto;padding-bottom:50px;">
         <div><p class="fs-18px"><b>Floor Plan: </b></p></div>
-        <div ng-repeat="plan in appt.floorPlanFiles track by $index">
+        <div ng-repeat="plan in appt.floorPlanFiles track by $index" style="padding-bottom:50px;">
           <img ng-src="./uploads/{{plan}}" width="100%" height="auto"/>
         </div>
       </div>
