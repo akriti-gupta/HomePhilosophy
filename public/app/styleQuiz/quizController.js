@@ -68,6 +68,7 @@ $scope.angularGridOptions;
 var pageRequester=custViewSvc.getRequester();
 
 $scope.checkProjects = function(){
+	scrollTop();
 	if(pageRequester===' '){
 		mvUserQuiz.getExistingPrjs().then(function(projects){
 			if(projects){
@@ -1020,6 +1021,7 @@ $scope.gridWidth=300;
 			case 0: $scope.pagenum++;
 					$scope.showDesignStyle = false;
 					$scope.pagenum = 2;
+					scrollTop();
 
 			case 1: $scope.pagenum++;
 					saveRoomInfo();
@@ -1036,6 +1038,7 @@ $scope.gridWidth=300;
 			case 5: 		
 			case 6:	$scope.pagenum++;  
 					$scope.progressRate+=16.5;
+					scrollTop();
 					 break;
 
 					// Clicked on Colors Page.
@@ -1043,7 +1046,7 @@ $scope.gridWidth=300;
 					$scope.progress=false;
 					$scope.computeStyle();
 					//$scope.refresh(); 
-					  //scrollTop();	
+					scrollTop();	
 					  break;
 
 			case 8:

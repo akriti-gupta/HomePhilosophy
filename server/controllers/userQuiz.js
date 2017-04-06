@@ -294,12 +294,8 @@ exports.addRoomToQuiz = function(req,res,next){
 					conn.release();
 					res.send({reason:err.toString()});
 				}
-				console.log('Results for room are:');
-				console.log(results);
 				if(results!=null && results.length>0){
 					var newNumRoom=1;
-					console.log('TO be added room is:');
-					console.log(roomInfo);
 					for(var i =0;i<roomInfo.length;i++){
 						var currRoomName = roomInfo[i].room_disp_name;
 						var currRoomNum = roomInfo[i].room_num.value;
@@ -307,23 +303,13 @@ exports.addRoomToQuiz = function(req,res,next){
 						var isUpdate = false;
 
 						for(var j =0 ;j<results.length;j++){
-							console.log('In loop, new roomName is: '+currRoomName+'abc');
-							console.log('In loop, existing roomName is: '+results[j].roomName+'abc');
-							console.log('Is equal: '+(currRoomName===results[j].roomName));
 							if(results[j].roomName===currRoomName){
-								console.log('Room name found, adding num room');
-								console.log('Existing numroom='+results[j].numRoom);
-								console.log('New numroom='+currRoomNum);
-								console.log('Add res is: '+(results[j].numRoom + currRoomNum));
 								newNumRoom = results[j].numRoom + currRoomNum;
-								console.log('New num room');
-								console.log(newNumRoom);
 								isUpdate = true;
 								break;
 							}
 						}
 						if(isUpdate){
-							console.log('Updating now');
 							var roomData = [newNumRoom,quizId,currRoomName];
 							var qry_upd_room = 'update cust_room_selection set numRoom=? where quizId=? and roomName=?';
         			
@@ -331,7 +317,7 @@ exports.addRoomToQuiz = function(req,res,next){
 								if(err){
 									console.log('Error in updating room num while adding new room '+err);
 									conn.release();
-									res.send({success: false, reason:err.toString()});
+									return res.send({success: false, reason:err.toString()});
 								}
 							});
 						}
@@ -352,7 +338,7 @@ exports.addRoomToQuiz = function(req,res,next){
 			});
 		}
 		conn.release();
-		res.send({success:true});
+		return res.send({success:true});
 	});
 }
 
@@ -368,7 +354,7 @@ exports.saveQuizMiscData = function(req,res,next){
         	conn.query('delete from cust_quiz_detail where quizId = '+conn.escape(data.quizId), function(err, results, fields){
 				if(err){
 					console.log('Error while deleting existing quiz detail: '+err);
-					res.send({reason:err.toString()});
+					return res.send({reason:err.toString()});
 				}
 				console.log('Deleted old unpaid quiz detail');
 					
@@ -376,10 +362,10 @@ exports.saveQuizMiscData = function(req,res,next){
 					if(err){
 						console.log('Error in creating new record in cust_quiz_detail: '+err);
 						conn.release();
-						res.send({reason:err.toString()});
+						return res.send({reason:err.toString()});
 					}
 					conn.release();
-					res.send({success:true});
+					return res.send({success:true});
     			});
     		});
 		}
@@ -398,7 +384,7 @@ exports.getQuizDetails = function(req,res,next){
 				if(err){
 					console.log('Error in gettimg data from cust_quiz_detail: '+err);
 					conn.release();
-					res.send({reason:err.toString()});
+					return res.send({reason:err.toString()});
 				}
 				console.log(results);
 				if(results[0].count >0){

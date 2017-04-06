@@ -10,9 +10,17 @@
     }   
 }
 @media only screen and (max-width: 1050px){
-    .pricing-ctr{
+   /* .pricing-ctr{
         width:60%;
-    }  
+    }*/  
+    #pricing-section{
+        display: none;
+       }
+
+        #pricing-section-media{
+            display: inline-block;
+
+        }
 }
 
     @media only screen and (min-width : 320px) and (max-width: 480px) {
@@ -32,6 +40,10 @@
             margin:0px;
             background-size: 60%;
         }
+        .hp-logo-luxury{
+            width:80%;
+        }
+
         /*Home page*/
         #hero{
             background-image:url('/images/hero_sml.jpg');
@@ -533,7 +545,9 @@
         .hp-logo{
             width:55%;
         }
-
+        .hp-logo-luxury{
+            width:60%;
+        }
         .btn-fb{
             padding: 12px 80px;
         }

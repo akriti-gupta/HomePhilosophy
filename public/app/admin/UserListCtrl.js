@@ -462,7 +462,16 @@ $scope.details = function(index,tabIdx){
 		if($scope.quizData.quizDtls.length>0){
 			var colours = [];
 			colours = $scope.quizData.quizDtls[0].colours.split(',');
-			$scope.quizData.quizDtls[0].colours = colours;
+				$scope.quizData.quizDtls[0].colours = colours;
+
+			var files = $scope.quizData.quizDtls[0].file1;
+			if(files!=null){
+				var uploadedFiles = files.split(',');
+				$scope.quizData.quizDtls[0].file1 =uploadedFiles;
+				
+			}
+
+
 		}
 
 		if($scope.quizData.pinImages.length>0){

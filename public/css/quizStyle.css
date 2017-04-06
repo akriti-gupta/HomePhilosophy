@@ -634,19 +634,19 @@ filter:alpha(opacity=50); /* for <= IE 8 */
   text-transform: uppercase;
 }
 .resprg-lbl-one{
-  left:5%;
+  left:4%;
 }
 .resprg-lbl-two{
-  left:24%;
+  left:22%;
 }
 .resprg-lbl-three{
   left:47%;
 }
 .resprg-lbl-four{
-  left:68.5%;
+  left:67%;
 } 
 .resprg-lbl-five{
-  left: 86%;
+  left: 85%;
 } 
 /*Progress Bar Ends*/
 

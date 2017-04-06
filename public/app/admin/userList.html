@@ -162,7 +162,7 @@
           </div>
       </div> 
 
-      <div style="padding-top:20px;text-align:center;">Images from Board:</div>
+      <div style="padding-top:20px;text-align:center;" ng-if="quizData.pinImages.length > 0">Images from Board:</div>
       
       <div class="row qz-row-dsg" style="padding-top:10px;"> 
           <div class="col-md-2 col-xs-4" style="padding:5px;" ng-repeat="img in quizData.pinImages[0].i.imagesLiked track by $index">
@@ -233,7 +233,6 @@
               <span ng-repeat="col in detail.colours track by $index">
                 <img src="{{col}}" width="100%" height="auto"/>
               </span>
-              <!-- <img src="{{detail.colours}}" width="100%" height="auto"/> -->
             </div>
           </div>
         </div>
@@ -269,7 +268,7 @@
       <div  ng-if="detail.file1.length>0" style="width:50%;position:relative;margin:0 auto;padding-top:50px;">
         <p>Images Uploaded </p>
         <div ng-repeat="image in detail.file1 track by $index" style="padding-bottom:50px;">
-          <img src="{{image}}" width="100%" height="auto">
+          <img src="./uploads/{{image}}" width="100%" height="auto">
         </div>
       </div>
 

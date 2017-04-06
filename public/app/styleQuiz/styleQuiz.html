@@ -435,59 +435,62 @@
 
 
 
-  <div ng-show="pagenum===9" class="prg-dtl-ctr">
-    <div class="prg-wrp">
-      <div class="progress-result">
-        <!-- <div class="progress-bar"></div> -->
-        <div class="resprg-one primary-color"></div>
-        <div class="resprg-two no-color" ng-style="{'background': resPrgCol2}"></div>
-        <div class="resprg-three no-color" ng-style="{'background': resPrgCol2}"></div>
-        <div class="resprg-four no-color" ng-style="{'background': resPrgCol2}"></div>
-        <div class="resprg-five no-color" ng-style="{'background': resPrgCol2}"></div>
+  <div ng-show="pagenum===9">
+    <div class="prg-dtl-ctr">
+      <div class="prg-wrp">
+        <div class="progress-result">
+          <div class="resprg-one primary-color"></div>
+          <div class="resprg-two no-color" ng-style="{'background': resPrgCol2}"></div>
+          <div class="resprg-three no-color" ng-style="{'background': resPrgCol2}"></div>
+          <div class="resprg-four no-color" ng-style="{'background': resPrgCol2}"></div>
+          <div class="resprg-five no-color" ng-style="{'background': resPrgCol2}"></div>
 
-        <div class="step-one primary-color">1</div>
-        <div class="step-two no-color">2</div>
-        <div class="step-three no-color">3</div>
-        <div class="step-four no-color">4</div>
-        <div class="step-five no-color">5</div>
+          <div class="step-one primary-color">1</div>
+          <div class="step-two no-color">2</div>
+          <div class="step-three no-color">3</div>
+          <div class="step-four no-color">4</div>
+          <div class="step-five no-color">5</div>
 
 
-        <div class="resprg-lbl-one">Style Quiz</div>
-        
-        <div class="resprg-lbl-two">Choose a Package</div>
-        <div class="resprg-lbl-three">Payment</div>
-        <div class="resprg-lbl-four ">Tell Us More</div>
-        <div class="resprg-lbl-five">Launch Project</div>
+          <div class="resprg-lbl-one">Style Quiz</div>
+          <div class="resprg-lbl-two">Choose a Package</div>
+          <div class="resprg-lbl-three">Payment</div>
+          <div class="resprg-lbl-four ">Tell Us More</div>
+          <div class="resprg-lbl-five">Launch Project</div>
+        </div>
       </div>
     </div>
 
-    <div  style="width:90%;margin:0 auto;padding:80px 0px 40px;" ng-repeat="item in userStyle" ng-if="$first">
-      <p class="font-playfair result-title">{{item.title}} <span class="txt-upper fs-22px font-sansRegular">{{item.style}}</span></p>
-      <p class="font-sansRegular result-desc"> {{item.desc}}</p>
-        <img ng-src="{{item.image}}" style="width:100%;"/>
-      <p ng-if="userStyle.length==1" class="font-playfair fs-18px" style="text-align:right;color:rgb(77, 77, 77);">Not really your style? Re-take the <a href="/style-quiz" id="start-quiz" ng-click="retakeQuiz()"><u>Style Quiz</u></a></p>
-    </div>
+    <div style="width:80%;margin: 0 auto;">
+      <div  style="width:90%;margin:0 auto;padding:80px 0px 40px;" ng-repeat="item in userStyle" ng-if="$first">
+        <p class="font-playfair result-title">{{item.title}} <span class="txt-upper fs-22px font-sansRegular">{{item.style}}</span></p>
+        <p class="font-sansRegular result-desc"> {{item.desc}}</p>
+          <img ng-src="{{item.image}}" style="width:100%;"/>
+        <p ng-if="userStyle.length==1" class="font-playfair fs-18px" style="text-align:right;color:rgb(77, 77, 77);">Not really your style? Re-take the <a href="/style-quiz" id="start-quiz" ng-click="retakeQuiz()"><u>Style Quiz</u></a></p>
+      </div>
 
-    <div style="width:90%;margin:0 auto;" ng-repeat="item in userStyle.slice(1,entries.length)" ng-if="userStyle.length==2">
-      <div style="width:49%;margin:0 auto;">
-        <p class="font-playfair result-title">{{item.title}}  <span class="result-style-name">{{item.style}}</span></p>
-        <img ng-src="{{item.image}}" style="width:100%;">
-        <p class="font-playfair fs-18px" style="text-align:right;color:rgb(183, 183, 183);">Not your style? Re-take the <a href="/style-quiz"  ng-click="retakeQuiz()"><u>Style Quiz</u></a></p>
+      <div style="width:90%;margin:0 auto;" ng-repeat="item in userStyle.slice(1,entries.length)" ng-if="userStyle.length==2">
+        <div style="width:49%;margin:0 auto;">
+          <p class="font-playfair result-title">{{item.title}}  <span class="result-style-name">{{item.style}}</span></p>
+          <img ng-src="{{item.image}}" style="width:100%;">
+          <p class="font-playfair fs-18px" style="text-align:right;color:rgb(183, 183, 183);">Not your style? Re-take the <a href="/style-quiz"  ng-click="retakeQuiz()"><u>Style Quiz</u></a></p>
+        </div>
       </div>
+    
+      <div style="width:90%;margin:0 auto;" ng-repeat="item in userStyle.slice(1,entries.length)" ng-if="userStyle.length==3">
+        <div style="width:49%;float:left;" ng-if="$first">
+          <p class="font-playfair result-title">{{item.title}}<span class="result-style-name">{{item.style}}</span></p>
+          <img ng-src="{{item.image}}" style="width:100%;">
+        </div>
+        <div style="width:49%;float:right;" ng-if="$last">
+          <p class="font-playfair result-title">{{item.title}}   <span class="result-style-name">{{item.style}}</span></p>
+          <img ng-src="{{item.image}}" style="width:100%;">
+          <p class="font-playfair fs-18px" style="text-align:right;color:rgb(77, 77, 77);">Not your style? Re-take the <a href="/style-quiz"  ng-click="retakeQuiz()"><u>Style Quiz</u></a></p>
+        </div>
+      </div> 
     </div>
-  
-    <div style="width:90%;margin:0 auto;" ng-repeat="item in userStyle.slice(1,entries.length)" ng-if="userStyle.length==3">
-      <div style="width:49%;float:left;" ng-if="$first">
-        <p class="font-playfair result-title">{{item.title}}   <span class="result-style-name">{{item.style}}</p>
-        <img ng-src="{{item.image}}" style="width:100%;">
-      </div>
-      <div style="width:49%;float:right;" ng-if="$last">
-        <p class="font-playfair result-title">{{item.title}}   <span class="result-style-name">{{item.style}}</span></p>
-        <img ng-src="{{item.image}}" style="width:100%;">
-        <p class="font-playfair fs-18px" style="text-align:right;color:rgb(77, 77, 77);">Not your style? Re-take the <a href="/style-quiz"  ng-click="retakeQuiz()"><u>Style Quiz</u></a></p>
-      </div>
-    </div> 
-  </div>
+  </div> <!--pagenum==9 -->
+
     
 <div class="icon-prev" ng-show="pagenum!=1 && pagenum!=8 && pagenum!=9"><a href="#" ng-click="prev();"> &lt;&lt; </a></div>
 

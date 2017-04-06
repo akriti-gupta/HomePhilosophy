@@ -44,7 +44,7 @@ module.exports = function(){
         clientID        : '1123799114413407',
         clientSecret    : 'bd3dea47fe556f93f9a8895acd34763c',   
         callbackURL     : 'http://homephilosophy.com.sg/auth/facebook/callback',
-        profileFields: ['id', 'emails', 'name']
+        profileFields: ['email']
     },
 
     // facebook will send back the token and profile

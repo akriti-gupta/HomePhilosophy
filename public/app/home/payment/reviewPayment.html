@@ -48,119 +48,117 @@
 		    <div class="resprg-lbl-five">Launch Project</div>
 		  </div>
 		</div>
-
-
-<!-- You selected payment package: {{payPkg}} valued at {{pkgValue}} -->
-<section ng-init="initPayment()">
- 	<div style="padding-top:100px;width:90%;margin:0 auto;">
-	<div class="row qz-row-dsg"  style="display:table;border:1px solid black;padding-bottom:0px;">
-	    <div class="col-md-6 col-xs-4 cust-view-tab">ROOM</div>
-	    <div class="col-md-4 col-xs-2 cust-view-tab">PACKAGE</div>
-	    <div class="col-md-2 col-xs-2 cust-view-tab">PRICE</div>
-	</div>
-
- 	<div  class="row qz-row-dsg" style="display:table;border:1px solid black;padding-bottom:0px;" ng-repeat="room in roomPerPkg track by $index">
-		<div class="col-md-6 col-xs-6 cust-view-tab">
-	        <figure>
-
-	            <img ng-if="room.roomName.indexOf(' ')!=-1" class="center-block" ng-src="{{roomImage[room.roomName.substr(0,room.roomName.indexOf(' '))]}}" style="height:100px;width:auto;"/>
-
-	            <img ng-if="room.roomName.indexOf(' ')===-1" class="center-block" ng-src="{{roomImage[room.roomName]}}" style="height:100px;width:auto;"/>
-
-	        </figure>
-	    </div>
-
-		<div class="col-md-4 col-xs-4 cust-view-tab">
-			<select ng-init="packages[room.pkgValue-1]" ng-change="updateTotal()" ng-model="roomPkg[$index]" ng-options="option.name for option in packages"></select>
-		</div>
-
-		<div class="col-md-2 col-xs-2 cust-view-tab">{{roomPkg[$index].pkgValue}}</div>
 	</div>
 
 
-	<div class="row qz-row-dsg" style="display:table;padding-bottom:50px;padding-top:20px;">
-		<div class="col-md-12 col-xs-6 	" style="text-align:right;border:0px;padding-right:0px;margin-left:10px;"><span style="font-size:18px;">BUY FOR ME</span>
-			<input type="checkbox" ng-model="buyForMe" ng-change="updateTotal()" style="width:50px;height:20px;margin:0px;"> 	
+	<section ng-init="initPayment()" style="width:80%;margin:0 auto;">
+	 	<div style="padding-top:100px;width:90%;margin:0 auto;">
+		<div class="row qz-row-dsg"  style="display:table;border:1px solid black;padding-bottom:0px;">
+		    <div class="col-md-6 col-xs-4 cust-view-tab">ROOM</div>
+		    <div class="col-md-4 col-xs-2 cust-view-tab">PACKAGE</div>
+		    <div class="col-md-2 col-xs-2 cust-view-tab">PRICE</div>
+		</div>
+
+	 	<div  class="row qz-row-dsg" style="display:table;border:1px solid black;padding-bottom:0px;" ng-repeat="room in roomPerPkg track by $index">
+			<div class="col-md-6 col-xs-6 cust-view-tab">
+		        <figure>
+
+		            <img ng-if="room.roomName.indexOf(' ')!=-1" class="center-block" ng-src="{{roomImage[room.roomName.substr(0,room.roomName.indexOf(' '))]}}" style="height:100px;width:auto;"/>
+
+		            <img ng-if="room.roomName.indexOf(' ')===-1" class="center-block" ng-src="{{roomImage[room.roomName]}}" style="height:100px;width:auto;"/>
+
+		        </figure>
+		    </div>
+
+			<div class="col-md-4 col-xs-4 cust-view-tab">
+				<select ng-init="packages[room.pkgValue-1]" ng-change="updateTotal()" ng-model="roomPkg[$index]" ng-options="option.name for option in packages"></select>
+			</div>
+
+			<div class="col-md-2 col-xs-2 cust-view-tab">{{roomPkg[$index].pkgValue}}</div>
+		</div>
+
+
+		<div class="row qz-row-dsg" style="display:table;padding-bottom:50px;padding-top:20px;">
+			<div class="col-md-12 col-xs-6 	" style="text-align:right;border:0px;padding-right:0px;margin-left:10px;"><span style="font-size:18px;">BUY FOR ME</span>
+				<input type="checkbox" ng-model="buyForMe" ng-change="updateTotal()" style="width:50px;height:20px;margin:0px;"> 	
+			</div>
+		</div>
+
+		<div class="flex-ctr">
+	  		<div class="flex-child-pay1">
+	  			<div class="payment-title"> Each Package includes</div>
+	  			<div class="payment-item"><span class="glyphicon glyphicon-ok" style="font-size:12px;"></span>&nbsp;A complimentary meeting with your designer</div>
+	  			<div class="payment-item"><span class="glyphicon glyphicon-ok" style="font-size:12px;"></span>&nbsp;A complimentary measurement of your space at a time convenient to you</div>
+	  			<div class="payment-item"><span class="glyphicon glyphicon-ok" style="font-size:12px;"></span>&nbsp;Several First Look moodboards</div>
+	  			<div class="payment-item"><span class="glyphicon glyphicon-ok" style="font-size:12px;"></span>&nbsp;Personalized Shopping List</div>
+	  			<div class="payment-item"><span class="glyphicon glyphicon-ok" style="font-size:12px;"></span>&nbsp;Online feedback session with your designer</div>
+	  			<div class="payment-item"><span class="glyphicon glyphicon-ok" style="font-size:12px;"></span>&nbsp;Hassle-free delivery to your home with Buy For Me</div>
+	  		</div>
+
+	  		<div class="flex-child-pay2" style="border: 1px solid ;height:35%;">
+	  			<div class="payment-title" style="padding: 5px 0px 15px 10px;"> Order Summary</div>
+	  				<div class="row qz-row-dsg" style="padding-bottom:10px;width:98%">
+	  					<div class="col-md-8 col-xs-6 payment-item">Subtotal</div>
+	  					<div class="col-md-4 col-xs-6 payment-item" style="padding-left:inherit;">{{(total_amount - buyForMeAmt).toFixed(2)}}</div>
+		  			</div>
+		  			<div class="row qz-row-dsg" style="padding-bottom:10px;width:98%;">
+		  				<div class="col-md-8 col-xs-6 payment-item">Buy For Me</div>
+		  				<div class="col-md-4 col-xs-6 payment-item" style="padding-left:inherit;">{{buyForMeAmt}}</div>
+		  			</div>
+
+		  			<div class="row qz-row-dsg" style="padding-bottom:10px;width:98%;">
+		  				<div class="col-md-8 col-xs-6 payment-item">Total</div>
+		  				<div class="col-md-4 col-xs-6 payment-item" style="padding-left:inherit;">{{total_amount}}</div>
+		  			</div>
+		  			
+		  			<div style="text-align:center;padding:20px;">
+		  				<input  type="button" ng-click="savePaymentInfo()" class="btn-start-quiz btn-topnav fs-20px" style="padding-left:25px;padding-right:25px;" value="CHECKOUT"/>
+		  			</div>
+		  			
+	  			</div>
+
+	  			<!-- <div style="text-align:center;padding:20px;">
+	  				<input  type="button" ng-click="savePaymentInfo()" class="btn-start-quiz btn-topnav fs-20px" style="padding-left:25px;padding-right:25px;" value="CHECKOUT"  name="submit" alt="SmoovPay!" />
+	  			</div> -->
+	  		</div>
+	  	</div>
+
+
+	<div style="width:80%;margin:0 auto;position:relative;text-align:center;padding-bottom:100px;">
+		<!-- <form ng-form-commit  action="https://sandbox.smoovpay.com/access" method="post" name="smoovPayForm"> -->
+		<form ng-form-commit  action="https://secure.smoovpay.com/access" method="post" name="smoovPayForm">
+			<input type="hidden" name="action" value="pay" />
+			<input type="hidden" name="currency" value="SGD" />
+			<input type="hidden" name="version" value="2.0" />
+			<div ng-repeat="room in roomPerPkg track by $index">
+			
+				<input type="hidden" name="item_name_{{$index +1}}" value="{{room.roomName}}" />
+				<input type="hidden" name="item_description_{{$index +1}}" value="{{roomPkg[$index].name}}" />
+				<input type="hidden" name="item_quantity_{{$index +1}}" value="1" />
+				<input type="hidden" name="item_amount_{{$index +1}}" value="{{roomPkg[$index].pkgValue}}" />
+			</div>
+			<div ng-if="buyForMe===true">
+				<input type="hidden" name="item_name_{{roomPerPkg.length +1}}" value="Buy For Me" />
+				<input type="hidden" name="item_description_{{roomPerPkg.length +1}}" value="Get your items delivered">
+				<input type="hidden" name="item_quantity_{{roomPerPkg.length +1}}" value="1" />
+				<input type="hidden" name="item_amount_{{roomPerPkg.length +1}}" value="250.00" />
+			</div>
+			<input type="hidden" name="merchant" value="rashi@homephilosophy.com.sg" />
+			<input type="hidden" name="ref_id" value="{{quizId}}" />
+			<input type="hidden" name="delivery_charge" value="0.00" />
+			<input type="hidden" name="tax_amount" value="0.00" />
+			<input type="hidden" name="tax_percentage" value="0.00" />
+			<input type="hidden" name="total_amount" value="{{total_amount}}" />
+			<input type="hidden" name="success_url" value="http://homephilosophy.com.sg/tell-us-more" />
+			<input type="hidden" name="cancel_url" value="http://homephilosophy.com.sg/dashboard" />
+			<input type="hidden" name="signature" value="{{signature}}" />
+			<input type="hidden" name="signature_algorithm" value="sha1" />
+			<input type="hidden" name="skip_success_page" value="1" />
+			<!-- <input type="hidden" name="str_url" value="http://localhost:8006/custom" /> -->
+		</form>
 		</div>
 	</div>
-
-	<div class="flex-ctr">
-  		<div class="flex-child-pay1">
-  			<div class="payment-title"> Each Package includes</div>
-  			<div class="payment-item"><span class="glyphicon glyphicon-ok" style="font-size:12px;"></span>&nbsp;A complimentary meeting with your designer</div>
-  			<div class="payment-item"><span class="glyphicon glyphicon-ok" style="font-size:12px;"></span>&nbsp;A complimentary measurement of your space at a time convenient to you</div>
-  			<div class="payment-item"><span class="glyphicon glyphicon-ok" style="font-size:12px;"></span>&nbsp;Several First Look moodboards</div>
-  			<div class="payment-item"><span class="glyphicon glyphicon-ok" style="font-size:12px;"></span>&nbsp;Personalized Shopping List</div>
-  			<div class="payment-item"><span class="glyphicon glyphicon-ok" style="font-size:12px;"></span>&nbsp;Online feedback session with your designer</div>
-  			<div class="payment-item"><span class="glyphicon glyphicon-ok" style="font-size:12px;"></span>&nbsp;Hassle-free delivery to your home with Buy For Me</div>
-  		</div>
-
-  		<div class="flex-child-pay2" style="border: 1px solid ;height:35%;">
-  			<div class="payment-title" style="padding: 5px 0px 15px 10px;"> Order Summary</div>
-  				<div class="row qz-row-dsg" style="padding-bottom:10px;width:98%">
-  					<div class="col-md-8 col-xs-6 payment-item">Subtotal</div>
-  					<div class="col-md-4 col-xs-6 payment-item" style="padding-left:inherit;">{{(total_amount - buyForMeAmt).toFixed(2)}}</div>
-	  			</div>
-	  			<div class="row qz-row-dsg" style="padding-bottom:10px;width:98%;">
-	  				<div class="col-md-8 col-xs-6 payment-item">Buy For Me</div>
-	  				<div class="col-md-4 col-xs-6 payment-item" style="padding-left:inherit;">{{buyForMeAmt}}</div>
-	  			</div>
-
-	  			<div class="row qz-row-dsg" style="padding-bottom:10px;width:98%;">
-	  				<div class="col-md-8 col-xs-6 payment-item">Total</div>
-	  				<div class="col-md-4 col-xs-6 payment-item" style="padding-left:inherit;">{{total_amount}}</div>
-	  			</div>
-	  			
-	  			<div style="text-align:center;padding:20px;">
-	  				<input  type="button" ng-click="savePaymentInfo()" class="btn-start-quiz btn-topnav fs-20px" style="padding-left:25px;padding-right:25px;" value="CHECKOUT"/>
-	  			</div>
-	  			
-  			</div>
-
-  			<!-- <div style="text-align:center;padding:20px;">
-  				<input  type="button" ng-click="savePaymentInfo()" class="btn-start-quiz btn-topnav fs-20px" style="padding-left:25px;padding-right:25px;" value="CHECKOUT"  name="submit" alt="SmoovPay!" />
-  			</div> -->
-  		</div>
-  	</div>
-
-
-<div style="width:80%;margin:0 auto;position:relative;text-align:center;padding-bottom:100px;">
-	<!-- <form ng-form-commit  action="https://sandbox.smoovpay.com/access" method="post" name="smoovPayForm"> -->
-	<form ng-form-commit  action="https://secure.smoovpay.com/access" method="post" name="smoovPayForm">
-		<input type="hidden" name="action" value="pay" />
-		<input type="hidden" name="currency" value="SGD" />
-		<input type="hidden" name="version" value="2.0" />
-		<div ng-repeat="room in roomPerPkg track by $index">
-		
-			<input type="hidden" name="item_name_{{$index +1}}" value="{{room.roomName}}" />
-			<input type="hidden" name="item_description_{{$index +1}}" value="{{roomPkg[$index].name}}" />
-			<input type="hidden" name="item_quantity_{{$index +1}}" value="1" />
-			<input type="hidden" name="item_amount_{{$index +1}}" value="{{roomPkg[$index].pkgValue}}" />
-		</div>
-		<div ng-if="buyForMe===true">
-			<input type="hidden" name="item_name_{{roomPerPkg.length +1}}" value="Buy For Me" />
-			<input type="hidden" name="item_description_{{roomPerPkg.length +1}}" value="Get your items delivered">
-			<input type="hidden" name="item_quantity_{{roomPerPkg.length +1}}" value="1" />
-			<input type="hidden" name="item_amount_{{roomPerPkg.length +1}}" value="250.00" />
-		</div>
-		<input type="hidden" name="merchant" value="rashi@homephilosophy.com.sg" />
-		<input type="hidden" name="ref_id" value="{{quizId}}" />
-		<input type="hidden" name="delivery_charge" value="0.00" />
-		<input type="hidden" name="tax_amount" value="0.00" />
-		<input type="hidden" name="tax_percentage" value="0.00" />
-		<input type="hidden" name="total_amount" value="{{total_amount}}" />
-		<input type="hidden" name="success_url" value="http://homephilosophy.com.sg/tell-us-more" />
-		<input type="hidden" name="cancel_url" value="http://homephilosophy.com.sg/dashboard" />
-		<input type="hidden" name="signature" value="{{signature}}" />
-		<input type="hidden" name="signature_algorithm" value="sha1" />
-		<input type="hidden" name="skip_success_page" value="1" />
-		<!-- <input type="hidden" name="str_url" value="http://localhost:8006/custom" /> -->
-	</form>
-	</div>
-</div>
-</section>
-
-</div>
+	</section>
 </div>
 <div style="padding-bottom:60px;"></div>
 <div class="divider" style="border-top:2px solid rgb(47, 185, 175);"></div>
