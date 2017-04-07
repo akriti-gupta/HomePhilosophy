@@ -146,16 +146,16 @@
 
 
 
-		<div class="row qz-row-dsg"  style="display:table;border:1px solid black;padding-bottom:0px;">
+		<div class="row row-dashboard"  style="display:table;border:1px solid black;padding-bottom:0px;">
 
 		    <div class="col-md-3 col-xs-3 cust-view-tab">ROOM</div>
-		    <div class="col-md-1 col-xs-4 cust-view-tab">STYLE</div>
-		    <div class="col-md-3 col-xs-2 cust-view-tab">PACKAGE</div>
-		    <div class="col-md-4 col-xs-3 cust-view-tab">STATUS</div>
+		    <div class="col-md-2 col-xs-4 cust-view-tab">STYLE</div>
+		    <div class="col-md-2 col-xs-2 cust-view-tab">PACKAGE</div>
+		    <div class="col-md-3 col-xs-3 cust-view-tab">STATUS</div>
 		    <div class="col-md-3 col-xs-3 cust-view-tab">DELETE</div>
 		</div>
 
-		<div class="row qz-row-dsg" ng-repeat="item in projectArr track by $index" style="display:table;border:1px solid black;padding-bottom:0px;">
+		<div class="row row-dashboard" ng-repeat="item in projectArr track by $index" style="display:table;border:1px solid black;padding-bottom:0px;">
 		
 		    <div class="col-md-3 col-xs-3 cust-view-tab" style="padding:10px;">
 			    
@@ -165,29 +165,27 @@
 			    
 		    </div>
 
-		    <div class="col-md-1 col-xs-3 cust-view-tab" style="padding:10px;">
+		    <div class="col-md-2 col-xs-3 cust-view-tab" style="padding:10px;">
 		        {{styleName[item.resultData[0].styleId]}}
 		    </div>
 
-			<div class="col-md-3 col-xs-4 cust-view-tab">
+			<div class="col-md-2 col-xs-4 cust-view-tab">
 				<div  ng-if="!item.pkgData|| item.pkgData.length===0"><a href="#" ng-click="selectPkg($index)">Choose a Package </a><br/></div>
 
 				<div ng-if="packageName[item.pkgData.pkgId]!=' '">{{packageName[item.pkgData.pkgId]}}<br/></div>
 			</div>
 
-   			<div class="col-md-4 col-xs-4 cust-view-tab" ng-if="item.status.linkPage===' ' && item.status.modal===' '">{{item.status.statusText}}<br/></div>
+   			<div class="col-md-3 col-xs-4 cust-view-tab" ng-if="item.status.linkPage===' ' && item.status.modal===' '">{{item.status.statusText}}<br/></div>
 
-		    <div class="col-md-4 col-xs-4 cust-view-tab" ng-if="item.status.linkPage!=' ' && item.status.stage!='payment' && item.status.stage!='quizDetails'" ><a href="#" ng-click="getFirstLook($index,item.roomObj.id)">{{item.status.statusText}}</a><br/></div>
+		    <div class="col-md-3 col-xs-4 cust-view-tab" ng-if="item.status.linkPage!=' ' && item.status.stage!='payment' && item.status.stage!='quizDetails'" ><a href="#" ng-click="getFirstLook($index,item.roomObj.id)" style="color:#64c6be;">{{item.status.statusText}}</a><br/></div>
 
-		    <div class="col-md-4 col-xs-4 cust-view-tab" ng-if="item.status.linkPage!=' ' &&  item.status.stage==='payment'" ><a href="#" ng-click="pricing($index)">{{item.status.statusText}}</a><br/></div>
+		    <div class="col-md-3 col-xs-4 cust-view-tab" ng-if="item.status.linkPage!=' ' &&  item.status.stage==='payment'" ><a href="#" ng-click="pricing($index)" style="color:#64c6be;">{{item.status.statusText}}</a><br/></div>
 
-			<!-- <div class="col-md-4 col-xs-4 cust-view-tab" ng-if="item.status.linkPage!=' ' && item.status.stage==='final'" ><a href="/reviewPayment">{{item.status.statusText}}</a><br/></div> -->
+			<div class="col-md-3 col-xs-4 cust-view-tab" ng-if="item.status.linkPage!=' ' && item.status.stage==='quizDetails'" style="color:#64c6be;" ><a href="#" ng-click="getQuizDetail($index)">{{item.status.statusText}}</a><br/></div>
 
-			<div class="col-md-4 col-xs-4 cust-view-tab" ng-if="item.status.linkPage!=' ' && item.status.stage==='quizDetails'" ><a href="#" ng-click="getQuizDetail($index)">{{item.status.statusText}}</a><br/></div>
+ 			<div id="cal_popup" class="col-md-3 col-xs-4 cust-view-tab" ng-if="item.status.modal!=' '"><a href="#" ng-click="loadMtngData($index)" data-toggle="modal" data-target="#calendarModal" data-id="{{$index}}" style="color:#64c6be;">{{item.status.statusText}}</a><br/></div>
 
- 			<div id="cal_popup" class="col-md-4 col-xs-4 cust-view-tab" ng-if="item.status.modal!=' '"><a href="#" ng-click="loadMtngData($index)" data-toggle="modal" data-target="#calendarModal" data-id="{{$index}}">{{item.status.statusText}}</a><br/></div>
-
- 			<div class="col-md-3 col-xs-4 cust-view-tab" ng-if="item.quizData.status===-1"><a href="#" ng-click="removeRoom($index)"><span class="glyphicon glyphicon-trash style="font-size:12px;"></span></a><br/></div>
+ 			<div class="col-md-3 col-xs-4 cust-view-tab" ng-if="item.quizData.status===-1"><a href="#" ng-click="removeRoom($index)"><span class="glyphicon glyphicon-trash" style="font-size:12px;"></span></a><br/></div>
 
  			<div class="col-md-3 col-xs-4 cust-view-tab" ng-if="item.quizData.status!=-1">&nbsp;</div>
 
@@ -195,7 +193,7 @@
 		  </div>
 
 		   
-		<div class="qz-row-dsg" style="padding-top:20px;" ng-if="hasActiveProject">
+		<div class="row-dashboard" style="padding:20px 0px;" ng-if="hasActiveProject">
 		<a href="#" ng-click="addRoom()"><button type="submit" class="btn-start-quiz btn-nxt " style="padding:10px; float:right;" >Start a New Project</button></a>
 		</div>
 

@@ -4,7 +4,7 @@
   <div id="hp-nav">
     <ul class="topnav">
       
-      <li><a href="/style-quiz" id="start-quiz"><button type="button" class="btn-start-quiz btn-topnav font-montserrat txt-upper col-lightcyan fs-14px">Get Started</button></a></li>
+      <li><a href="/style-quiz" id="start-quiz"><button type="button" class="btn-start-quiz btn-topnav  fs-14px">GET STARTED</button></a></li>
       
       <li><a href="/about-us">How it works</a></li>
       <li><a href="/pricing">Pricing</a></li>
@@ -13,43 +13,36 @@
       <li><a href="/faq">FAQ</a></li>
       <li><a href="/contact-us">Contact us</a></li>
       <li>
-        <div class="dropdown" ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
+        <div ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
           <a href = "/login">SIGN IN</a>
         </div>
-
-        <div class="dropdown" ng-controller="LoginController" ng-show="identity.isAuthenticated()"><a href="#" style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a></div>
-
-      </li>
-      <li style="padding-top:8px;">
-        <a href="/style-quiz" id="start-quiz"><button type="button" class="btn-start-quiz btn-topnav font-montserrat txt-upper col-lightcyan fs-14px">Get Started</button></a>
-
-        <!-- <div class="dropdown nav-login" ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
-          <a href = "/login" style="color:rgb(161,161,161);">SIGN IN</a>
-        </div> -->
-
-        <div class="dropdown nav-login" ng-controller="LoginController" ng-show="identity.isAuthenticated()">
-          <a href="" data-toggle="dropdown" >{{identity.currentUser.firstname}}
-            <span class="caret"></span>
-          </a>
+		<div class="dropdown" ng-controller="LoginController" ng-show="identity.isAuthenticated()">
+          <a href="/admin/users" ng-if="identity.currentUser.role==='admin'">MY ACCOUNT</a>
+          <a href="/dashboard" ng-if="identity.currentUser.role!='admin'">MY ACCOUNT</a>
+		  <span class="caret nav-dropdown"  data-toggle="dropdown"></span>
           <ul class="dropdown-menu" style="min-width:0px;">
-            
-            <li ng-if="identity.currentUser.role==='admin'">
-              <a style="font-family:Montserrat-Regular;font-size:13px;" href="/admin/users">MY ACCOUNT</a>
-            </li>
-            
-            <li ng-if="identity.currentUser.role!='admin'"><a style="font-family:Montserrat-Regular;font-size:13px;" href="/dashboard">MY ACCOUNT</a></li>
-            
-            <!-- <li style="padding:0px;margin:0;"><a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a></li> -->
+            <li style="padding:0px;margin:0;"><a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a></li>
           </ul>
         </div>
       </li>
+
+      <li style="padding-top:8px;">
+        <a href="/style-quiz" id="start-quiz"><button type="button" class="btn-start-quiz btn-topnav font-montserrat txt-upper col-lightcyan fs-14px">Get Started</button></a>
+      </li>
+
+       <li style="padding-top:8px;">
+       	<div ng-controller="LoginController" ng-show="identity.isAuthenticated()">
+        	<a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a>
+        </div>
+      </li>
+
     </ul>
 
     <div class="tab_icon">
         <a href="javascript:void(0);" onclick="displayDropDown()">&#9776;</a>
     </div>
     
-    <div class="dropdown nav-login-usr nav-login-tab" style="margin-top:55px;" ng-controller="LoginController" ng-show="identity.isAuthenticated()">
+    <!-- <div class="dropdown nav-login-usr nav-login-tab" style="margin-top:55px;" ng-controller="LoginController" ng-show="identity.isAuthenticated()">
       <a href="" data-toggle="dropdown" >{{identity.currentUser.firstname}}
         <span class="caret"></span>
       </a>
@@ -58,7 +51,7 @@
         <li ng-if="identity.currentUser.role!='admin'"><a style="font-family:Montserrat-Regular;font-size:13px;" href="/dashboard">MY ACCOUNT</a></li>
         <li style="padding:0px;margin:0;"><a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a></li>
       </ul>
-    </div>
+    </div> -->
   </div>
 </header>
 
@@ -160,13 +153,15 @@
 		  		<div class="step_icon">
 						<img src="images/like1.png" class="img-steps"/>
 				</div>
-				<div class="font-montserrat step-title">
-					Find your style
+				<div class="font-montserrat step-title-main">
+					Find your style effortlessly
 				</div>
 				<div class="step-txt-main">
 					<!-- With a plethora of styles out there, let us make it simple to find yours! Our effortless <a href="/style-quiz" style="color:rgb(0, 134, 125);"><b>Style Quiz</b></a> helps you identify the best look for your space. As your design partner, we eliminate hours of confusion by showing you amazing room inspirations.  -->
 					<!-- Take our effortless <a href="/style-quiz" style="color:rgb(0, 134, 125);"><b>Style Quiz</b></a> to identify the best look for your space with amazing room inspirations! -->
-					<span style="font-size: 28px;">with our</span><br/> <a href="/style-quiz" style="color:rgb(0, 134, 125);"><b>Style Quiz</b></a>
+					<span style="font-size: 14px;color: rgb(85, 85, 85);font-style:italic;">with our</span>
+
+					<p style="padding-top:10px;"> <a href="/style-quiz" style="color:rgb(0, 134, 125);">Style Quiz</a></p>
 
 				</div>
 			</div>
@@ -179,14 +174,15 @@
 				<div class="step_icon">
 					<img src="images/measure1.png" class="img-steps" />
 				</div> 
-				<div class="font-montserrat step-title">
+				<div class="font-montserrat step-title-main">
 					<!-- We get to know you and your space -->
 					We meet, measure your space and design
 				</div>
 				<div class="step-txt-main">
 					<!-- Through our fun and <a href="/style-quiz"  style="color:rgb(0, 134, 125);"><b>Collaborative Online Process </b></a>we design your dream space! Share all the details you want in advance, your budget, and schedule a meet and measure with us (Yes! We are real people and we want to meet you). -->
 					<!-- We meet, measure your space, and get down to what you really want through -->
-					<span style="font-size: 28px;">with our</span><br/> <a href="/style-quiz"  style="color:rgb(0, 134, 125);"><b>Collaborative Online Experience </b></a>
+					<span style="font-size: 14px;color: rgb(85, 85, 85);font-style:italic;">with our</span>
+					<p style="padding-top:10px;"><a href="/style-quiz"  style="color:rgb(0, 134, 125);">Online Experience </a></p>
 				</div>
 			</div>
 		</div>
@@ -198,17 +194,18 @@
 				<div class="step_icon">
 					<img src="images/designs1.png" class="img-steps" />
 				</div>  
-				<div class="font-montserrat step-title">
+				<div class="font-montserrat step-title-main" style="width:240px;">
 					<!-- Receive your newly designed space -->
-					Your new space with real items that fit perfectly
+					See your new space with real items that fit perfectly
 				</div>
 				<div class="step-txt-main">
 					<!-- You get several custom <a href="#" data-toggle="modal" data-target="#firstLookModal"
 					style="color:rgb(0, 134, 125);"><b>Concept Boards </b></a>to review at your own convenience. Once you have decided what you love and don’t, we’ll refine it. We work together to complete the look so that the design is exactly what you had in mind. -->
 					<!-- Recieve <a href="#" data-toggle="modal" data-target="#firstLookModal"
 					style="color:rgb(0, 134, 125);"><b>Concept Boards </b></a>- 	with real items to buy that fit your space. Simply tell us what you love and don't and we will perfect it for you. -->
-					<span style="font-size: 28px;">with our </span><br/><a href="#" data-toggle="modal" data-target="#firstLookModal"
-					style="color:rgb(0, 134, 125);"><b>Concept Boards </b></a>
+					<span style="font-size: 14px;color: rgb(85, 85, 85);font-style:italic;">with our </span>
+					<p style="padding-top:10px;"> <a href="#" data-toggle="modal" data-target="#firstLookModal"
+					style="color:rgb(0, 134, 125);">Concept Boards</a></p>
 				</div>
 			</div>
 		</div>
@@ -220,7 +217,7 @@
 				<div class="step_icon">
 					<img src="images/shoppingList.png" class="img-steps" />
 				</div>  
-				<div class="font-montserrat step-title">
+				<div class="font-montserrat step-title-main" style="width:240px;">
 					Recieve your final look, layout and shop with ease
 				</div>
 				<div class="step-txt-main">
@@ -230,14 +227,15 @@
 					<!-- Receive your Final Look, layout plan and complete <a href="#" data-toggle="modal" data-target="#shoppingListModal"
 					style="color:rgb(0, 134, 125);"><b>Shopping List</b></a>. Or simply click our 'Buy for Me' to have us buy and deliver for you. -->
 
-					<span style="font-size: 28px;">with our</span><br/> <a href="#" data-toggle="modal" data-target="#shoppingListModal"
-					style="color:rgb(0, 134, 125);"><b>Shopping List</b></a>
+					<span style="font-size: 14px;color: rgb(85, 85, 85);font-style:italic;">with our</span>
+					<p style="padding-top:10px;"> <a href="#" data-toggle="modal" data-target="#shoppingListModal"
+					style="color:rgb(0, 134, 125);">Shopping List</a></p>
 					
 				</div>
 			</div>
 		</div> 
 	</div>
-	<p class="fs-16px font-sansRegular txt-center" style="padding:0px 10px;color:rgb(0, 169, 157);">
+	<p class="fs-16px font-sansRegular txt-center" style="padding:0px 10px;color:rgb(85,85,85);">
 		Doing a full renovation? Let's chat over coffee for us to understand your ideas and provide a custom quote &nbsp;<a href="mailto:hello@homephilosophy.com.sg" style="padding-left:-3px;""><img src="images/email_home.png" style="margin-top:-4px;margin-left:-1px;"/></a>
 	</p>
 </section>

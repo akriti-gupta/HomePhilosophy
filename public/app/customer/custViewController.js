@@ -94,7 +94,7 @@ function chkFinalPrjStatus(shoppingList, paymentInfo, roomData){
 	if(shoppingList.length>0){
 		for(var i =0; i < shoppingList.length; i++){
 			if(shoppingList[i].concept.roomId === roomData.id){
-				finalStatus.statusText='Project Completed. View your Shopping List and Final Look';
+				finalStatus.statusText='Your amazing new space is ready! ';
 				finalStatus.linkPage='getFinalLook($index)';
 				finalStatus.modal=' ';
 				break;
@@ -120,13 +120,13 @@ function chkFinalLookStatus(finalLook,pkgData,roomData){
 					break;
 				}
 				else{
-					finalStatus.statusText='Final Look Uploaded. Awaiting Feedback';
+					finalStatus.statusText='Final Look ready! Let us know your feedback';
 					finalStatus.linkPage='getFinalLook($index)';
 					finalStatus.modal=' ';
 				}
 			}
 			else{
-				finalStatus.statusText='Final Look Uploaded and Shopping List Uploaded. Project Completed.';
+				finalStatus.statusText='Your amazing new space is ready!';
 				finalStatus.linkPage='getFinalLook($index)';
 				finalStatus.modal=' ';
 			}
@@ -143,12 +143,12 @@ function chkCncptStatus(conceptBoard,roomData){
 			var status = currConceptData.concept.status;
 			
 			if(currConceptData.feedbackData.length>0 && currConceptData.feedbackData[0].status===0){
-				finalStatus.statusText='Received Feedback. Final Look in Progress';
+				finalStatus.statusText='Almost there! We are working on your Final Look';
 				finalStatus.linkPage=' ';
 				finalStatus.modal=' ';
 			}
 			else{
-				finalStatus.statusText='First Look Uploaded. Awaiting Feedback';
+				finalStatus.statusText='First Looks ready! Let us know your feedback';
 				finalStatus.linkPage='getFirstLook($index)';
 				finalStatus.modal=' ';
 			}
@@ -175,18 +175,18 @@ function chkApptStatus(apptData, roomData, projectData, currIndex){
 					var hourDiff = Math.floor(dayDiff.asHours());
 
 					if(hourDiff >=24){
-						status.statusText = "Meeting Scheduled. View/ Edit";
+						status.statusText = "Meeting has been scheduled [View/Edit]";
 						status.linkPage = " ";
 						status.modal = "#calendarModal";
 					}
 					else{
-						status.statusText = "Meeting Scheduled.";
+						status.statusText = "Meeting has been scheduled";
 						status.linkPage = " ";
 						status.modal = " ";
 					}
 				}
 				else if(apptData[i].apptStatus===1){
-					status.statusText = "Meet & Measure done.First Look in Progress";
+					status.statusText = "Hang tight! We are working on your First Looks";
 					status.linkPage = " ";
 					status.modal = " ";
 				}
@@ -216,7 +216,7 @@ function chkApptStatus(apptData, roomData, projectData, currIndex){
 						status.modal = " ";
 					}
 					else if(apptData[i].floorPlanStatus==1){
-						status.statusText = "Floor Plan Approved.First Look in Progress";
+						status.statusText = "Hang tight! We are working on your First Looks";
 						status.linkPage = " ";
 						status.modal = " ";
 					}
@@ -232,7 +232,7 @@ function chkApptStatus(apptData, roomData, projectData, currIndex){
 			
 		}
 	if(!found){
-		status.statusText = "Schedule Meet and Measure";
+		status.statusText = "Schedule your Meet and Measure";
 		status.linkPage = " ";
 		status.modal = "#calendarModal";
 	}
@@ -276,21 +276,21 @@ function populateStatus(projectData){
 	 			}
 	 			
 	 			if(isEmpty(projectData[i].status)  && currQzDetail.length===0){
-					status.statusText = "Tell Us More";
+					status.statusText = "Complete Tell Us More details";
 		 			status.linkPage = "quizDetails";
 		 			status.modal = " ";
 		 			status.stage='quizDetails';
 		 			projectData[i].status = status;
 	 			}
 	 			if(isEmpty(projectData[i].status)){
-	 				status.statusText = "Schedule Meet and Measure";
+	 				status.statusText = "Schedule your Meet and Measure";
 		 			status.linkPage = " ";
 		 			status.modal = "#calendarModal";
 		 			projectData[i].status = status;
 	 			}
 	 		} //quizStatus<0
 	 		else{
-	 			status.statusText = "Pending Payment";
+	 			status.statusText = "Please complete your payment";
 	 			status.linkPage = "pricing";
 	 			status.modal = " ";
 	 			status.stage='payment';

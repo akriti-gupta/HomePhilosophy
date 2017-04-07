@@ -361,7 +361,7 @@ button:focus {outline:0;}
 
 #hp-nav{
   margin: 0 30px;
-  padding: 30px 0;
+  padding: 35px 0;
   position: absolute;
   right: 0;
 }
@@ -406,6 +406,11 @@ button:focus {outline:0;}
 .topnav li:nth-child(1){
   display: none;
 }
+
+.topnav li:nth-child(10){
+  display: none;
+}
+
 /*.topnav li:nth-child(8){
   display: none;
 }
@@ -529,6 +534,9 @@ button:focus {outline:0;}
       display: inline-block;
     }
 
+    .nav-dropdown{
+      display: none;
+    }
     .tab_icon a , .tab-icon-quiz a{
         color: #64C6BE;
     }
@@ -563,13 +571,18 @@ button:focus {outline:0;}
         border-bottom: 1px solid #64C6BE;
         padding-top:0px;
     } 
-    #hp-nav ul.responsive li:nth-child(8){
+    /*#hp-nav ul.responsive li:nth-child(8){
         border-bottom: none;
-    }
+    }*/
     #hp-nav ul.responsive li:nth-child(9){
         /*border-bottom: none;*/
         display: none;
     }   
+
+    #hp-nav ul.responsive li:nth-child(10){
+        /*border-bottom: none;*/
+        display: inline;
+    } 
 
     #hp-nav ul.responsive li a {
         display: block;
@@ -735,7 +748,6 @@ padding-top:6px; padding-bottom:6px;letter-spacing:1px;
 .stp-main-subtxt{
   font-family:Montserrat-Regular;
   color: rgb(85,85,85);
-  text-transform: uppercase;
 }
 
 .step_icon{
@@ -748,13 +760,18 @@ padding-top:6px; padding-bottom:6px;letter-spacing:1px;
   border:2px solid rgb(100, 198, 190);
 }
 
-.step-title{
+.step-title,.step-title-main{
   width:200px;
   margin:0 auto;
   text-align: center;
   font-size: 12px;
   color: rgb(85, 85, 85);
   text-transform: uppercase;
+}
+
+.step-title-main{
+
+  font-size: 14px;
 }
 
 .step-text{
@@ -770,12 +787,13 @@ padding-top:6px; padding-bottom:6px;letter-spacing:1px;
 }
 
 .step-txt-main{
- font-family: "Allura-Regular";
- font-size:35px;
+ font-family: "Montserrat-Regular";
+ font-size:30px;
  text-align: center;
  margin:0px;
  width: 100%;
  color:rgb(0, 134, 125);
+ padding-top:10px;
 }
 
 .mask {
@@ -976,11 +994,12 @@ padding-left:10px;
 
 .hp-logo-luxury{
   
-  height:100%;
+  height:80%;
   width:30%;
   background:url('/images/luxury/logo.png') no-repeat center;
   margin: 0px auto;
   background-size: 100%;
+  margin-top:12px;
 }
 
 /*.hp-logo img {
@@ -1595,6 +1614,11 @@ div.faq.show {
 
 .data-dashboard{
   padding-top:50px;
+}
+
+.row-dashboard{
+  margin:0 auto;
+  width:90%;
 }
 
 .cust-data{
