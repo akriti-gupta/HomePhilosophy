@@ -9,18 +9,22 @@
         font-size: 9px;
     }   
 }
-@media only screen and (max-width: 1050px){
-   /* .pricing-ctr{
-        width:60%;
-    }*/  
+@media only screen and (max-width: 1160px){
     #pricing-section{
         display: none;
-       }
+    }
 
-        #pricing-section-media{
-            display: inline-block;
+    #pricing-section-media{
+        display: inline-block;
 
-        }
+    }
+}
+
+@media only screen and  (min-width: 800px) and (max-width: 1410px){
+   .step_wrapper{
+    width:70%;
+    margin:0 auto;
+   }
 }
 
     @media only screen and (min-width : 320px) and (max-width: 480px) {
