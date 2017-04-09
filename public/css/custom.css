@@ -1076,7 +1076,7 @@ padding-left:10px;
 .prg-dtl-ctr{
   width:80%;margin:auto;
   padding: 40px 0px 20px;
-  background-color: #e0dfdf;
+  /*background-color: #e0dfdf;*/
 }
 .detailForm{
   padding: 100px 25px 0px 100px;
@@ -1696,7 +1696,8 @@ div.faq.show {
 }
 .ctr2{
   display: flex;
-  flex:0.4;
+  /*flex:0.4;*/
+  flex:0.435;
   padding-left:10px;
 }
 /*.ctr1-test{

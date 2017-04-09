@@ -67,12 +67,11 @@
   </div>
 </header>
 
+<div ng-show="showTitle" class="divider" style="border-top:2px solid #e1e1e1;padding:0px;"></div>
 
 
 
-<div id="pricing-section" bg-image ng-init="initPayment()">
-	
-	<div style="background-color:#e0dfdf;">	<!-- #d0cdcd -->
+<!-- <div style="background-color:#e0dfdf;"> -->	<!-- #d0cdcd -->
 	<div class="prg-dtl-ctr" ng-show="showTitle">
 		<div class="prg-wrp">
 			<div class="progress-result">
@@ -97,8 +96,11 @@
 		  	</div>
 		</div>
 	</div>
-</div>
+<!-- </div> -->
 
+<div id="pricing-section" bg-image ng-init="initPayment()">
+	
+	
 <!-- <div style="background-color: #f5f5f5;width:90%;margin:0 auto;"> -->
 <div>
 	<p style="padding-top: 50px;font-size: 28px;text-transform: uppercase;font-family:PlayfairDisplay-Regular;letter-spacing: 3px;" ng-show="showTitle">  Please select your Package </p>
@@ -183,6 +185,7 @@
 	  </div>
 	</div>
 </div>
+
 
 <div id="pricing-section-media" bg-image>
 <p style="

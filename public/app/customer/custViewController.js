@@ -60,8 +60,6 @@ $scope.dateOptions = {
 };
 
 
-
-
 //This function sets the existing active projects quiz info thru svcQuizResult.storeStyle
 //Add a room takes all the existing style info of latest existing active project.
 //Mapping Style info ensures that payment will be accepted when a new room is added.
@@ -114,7 +112,7 @@ function chkFinalLookStatus(finalLook,pkgData,roomData){
 			var pkgId = pkgData.pkgId;
 			if(pkgId>2){
 				if(currFinalLook.feedbackData.length>0 && currFinalLook.feedbackData[0].status===0){
-					finalStatus.statusText='Received Feedback. Your Shopping List and Final Look will be uploaded soon';
+					finalStatus.statusText='Hang tight! We are working on your awesome new room';
 					finalStatus.linkPage=' ';
 					finalStatus.modal=' ';
 					break;
@@ -191,7 +189,7 @@ function chkApptStatus(apptData, roomData, projectData, currIndex){
 					status.modal = " ";
 				}
 				else if(apptData[i].apptStatus===3){
-					status.statusText = "Rejected. An email has been sent with details. Reschedule.";
+					status.statusText = "Oops, we are unable to schedule on your preferred date! We will contact you soon";
 					status.linkPage = " ";
 					status.modal = "#calendarModal";
 				}
@@ -222,7 +220,7 @@ function chkApptStatus(apptData, roomData, projectData, currIndex){
 					}
 
 					else if(apptData[i].floorPlanStatus===3){
-						status.statusText = "Rejected. An email has been sent with details, Upload again.";
+						status.statusText = "Oops, we need more information! We will contact you soon";
 						status.linkPage = " ";
 						status.modal = "#calendarModal";
 					}
@@ -618,13 +616,6 @@ $scope.saveAppointment = function(item){
 			var isApptMade = -1;
 			var apptData ={};
 
-			// If only floor plan uploaded.
-
-			// If only Appt. scheduled
-
-			//If both
-
-			
 			if(typeof $scope.apptDate!= 'undefined' && $scope.apptDate!= null && $scope.fileArr.length===0){
 				var date = new Date($scope.apptDate);
 				var time = (moment(new Date($scope.apptTime)).format("HH:mm:ss")).split(':');
@@ -723,88 +714,6 @@ $scope.saveAppointment = function(item){
 					return false; //alert promoted from function, invalid date. 
 				}
 			}
-
-
-
-			/*if($scope.apptDate!= null){
-				var date = new Date($scope.apptDate);
-				var time = (moment(new Date($scope.apptTime)).format("HH:mm:ss")).split(':');
-				if(validateTime(date,time)){
-					
-					date.setHours(time[0]);
-					date.setMinutes(time[1]);
-					
-					var apptDateTime = moment(date).format('YYYY-MM-DD HH:mm:ss');
-					isApptMade = 1;
-					
-					if($scope.fileArr && $scope.fileArr.length>0){
-						var fileType = "floorPlan";
-						mvUpload.uploadFiles($scope.fileArr).then(function(uploadedFiles){
-							if(uploadedFiles.length>0){
-								var files;
-								fileUploadedStatus = 1;
-								files = uploadedFiles.toString();
-							}
-							else {
-								files = uploadedFiles;
-							}
-
-							if(isApptMade===1){
-								apptData = {"customerId":customerId,"quizId":quizId,"address":$scope.address,
-									 "person":$scope.person,"contact":$scope.contact,
-									 "apptDate":apptDateTime,"apptTime":apptDateTime,
-									 "floorPlanLoc":files,"floorPlanStatus":0,
-									 "apptStatus":0};
-							}
-							else{
-								apptData = {"customerId":customerId,"quizId":quizId,"roomId":roomId,"address":$scope.address,
-									 "person":$scope.person,"contact":$scope.contact,
-									 "apptDate":null,"apptTime":null,
-									 "floorPlanLoc":files,"floorPlanStatus":0,
-									 "apptStatus":-1};
-							}
-							mvCustView.saveAppointment(apptData).then(function(success){
-								if(success){
-									//$scope.$emit('apptSaved',response );
-									angular.element('#calendarModal').modal('hide');
-									window.location.reload(true);
-									//TODO: Send email
-								}
-							}, function(reason){
-								alert('Appointment could not be scheduled. Please contact the site admin '+reason);
-							});
-						},function(reason){
-								alert('Files could not be upoladed. Please contact the site admin '+reason);
-						});
-					}
-
-					else if ($scope.apptDate!=null){
-						apptData = {"customerId":customerId,"quizId":quizId,"address":$scope.address,
-										 "person":$scope.person,"contact":$scope.contact,
-										 "apptDate":apptDateTime,"apptTime":apptDateTime,
-										 "floorPlanLoc":'',"floorPlanStatus":-1,
-										 "apptStatus":0};
-
-						
-						mvCustView.saveAppointment(apptData).then(function(success){
-							if(success){
-								//$scope.$emit('apptSaved',response );
-								angular.element('#calendarModal').modal('hide');
-								window.location.reload(true);
-								//TODO: Send email
-							}
-						}, function(reason){
-							alert('Appointment could not be scheduled. Please contact the site admin '+reason);
-						});
-
-
-					}
-				}
-				else{
-					return false;
-				}
-			}*/
-			
 		}
 	}
 }
