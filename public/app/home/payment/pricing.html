@@ -1,4 +1,4 @@
-<header id="site_header">
+<header id="site_header" ng-hide="showTitle">
   <a href="/"><div class="hp-logo"></div></a>
 
   <div id="hp-nav">
@@ -71,115 +71,117 @@
 
 
 <div id="pricing-section" bg-image ng-init="initPayment()">
+	
+	<div style="background-color:#e0dfdf;">	<!-- #d0cdcd -->
+	<div class="prg-dtl-ctr" ng-show="showTitle">
+		<div class="prg-wrp">
+			<div class="progress-result">
+			    <div class="resprg-one  no-color" ng-style="{'background': resPrgCol2}"></div>
+			    <div class="resprg-two primary-color"></div>
+			    <div class="resprg-three no-color" ng-style="{'background': resPrgCol2}"></div>
+			    <div class="resprg-four no-color" ng-style="{'background': resPrgCol2}"></div>
+			    <div class="resprg-five no-color" ng-style="{'background': resPrgCol2}"></div>
 
-<!-- <div style="padding-top: 100px;" ng-show="showTitle"> -->
-<div ng-show="showTitle">
-<div class="prg-dtl-ctr" style="background-color:#d0cdcd;">
-			<div class="prg-wrp">
-		  <div class="progress-result">
-		    <div class="resprg-one  no-color" ng-style="{'background': resPrgCol2}"></div>
-		    <div class="resprg-two primary-color"></div>
-		    <div class="resprg-three no-color" ng-style="{'background': resPrgCol2}"></div>
-		    <div class="resprg-four no-color" ng-style="{'background': resPrgCol2}"></div>
-		    <div class="resprg-five no-color" ng-style="{'background': resPrgCol2}"></div>
-
-		    <div class="step-one no-color">1</div>
-		    <div class="step-two primary-color">2</div>
-		    <div class="step-three no-color">3</div>
-		    <div class="step-four no-color">4</div>
-		    <div class="step-five no-color">5</div>
+			    <div class="step-one no-color">1</div>
+			    <div class="step-two primary-color">2</div>
+			    <div class="step-three no-color">3</div>
+			    <div class="step-four no-color">4</div>
+			    <div class="step-five no-color">5</div>
 
 
-		    <div class="resprg-lbl-one">Style Quiz</div>
-		    <div class="resprg-lbl-two">Choose a Package</div>
-		    <div class="resprg-lbl-three">Payment</div>
-		    <div class="resprg-lbl-four">Tell Us More</div>
-		    <div class="resprg-lbl-five">Launch Project</div>
-		  </div>
+			    <div class="resprg-lbl-one">Style Quiz</div>
+			    <div class="resprg-lbl-two">Choose a Package</div>
+			    <div class="resprg-lbl-three">Payment</div>
+			    <div class="resprg-lbl-four">Tell Us More</div>
+			    <div class="resprg-lbl-five">Launch Project</div>
+		  	</div>
 		</div>
-    </div>
-
-	<p style="padding-top: 50px;font-size: 28px;text-transform: uppercase;font-family:PlayfairDisplay-Regular;letter-spacing: 3px;">  Please select your Package </p>
-
-	 <div class=" pricing-footnote fs-16px font-sansBold" style="position:inherit;bottom:inherit;padding: 10px 5px 0px;">
-  
-  	<p> * All our designs are tailor-made to your space. Every package also includes complimentary consultation, measurement of your room/s and multiple feedback sessions with your designer.</p>
-  </div>
-  
+	</div>
 </div>
 
+<!-- <div style="background-color: #f5f5f5;width:90%;margin:0 auto;"> -->
+<div>
+	<p style="padding-top: 50px;font-size: 28px;text-transform: uppercase;font-family:PlayfairDisplay-Regular;letter-spacing: 3px;" ng-show="showTitle">  Please select your Package </p>
 
-
-	<p style ="padding-top:50px;" ng-show="!showTitle"></p>
-  	<div class="flex-ctr pricing-ctr">
-  		<div class="flex-child" style="background-color:#fff;height:35%;opacity:0.95;">
-		  	<p class="pkg-title"> SIMPLE</p>
-		  	<p class="pkg-desc pkg-divider">for a breath of fresh air</p>
-		  	<p class="pkg-price pkg-divider"> 350<span class="price-dollar"><sup>$</sup></span></p>
-		  	<p class="pkg-item pkg-divider"> 2 First look concept boards</p>
-		  	<p class="pkg-item pkg-divider"> 1 Final look 2-D room board</p>
-		  	<p class="pkg-item pkg-divider">Personalized shopping list</p>
-		  	<!-- <p class="pkg-item pkg-divider">Buy for Me option available</p> -->
-		  	<div style="padding-bottom:40px;"></div>
-	  		<p><a href="#" ng-click="savePayPkg(1)"><button type="submit" class="btn-select-pkg">SELECT</button></a></p>
-	  		<div style="padding-bottom:30px;"></div>
-		</div>
-
-		<div class="flex-child" style="background-color:#fff;height:35%;opacity:0.95;">
-		  	<p class="pkg-title"> CLASSIC</p>
-		  	<p class="pkg-desc pkg-divider">for a notable transformation</p>
-		  	<p class="pkg-price pkg-divider">600<span class="price-dollar"><sup>$</sup></span></p>
-		  	<p class="pkg-item pkg-divider"> 2 First look concept boards</p>
-		  	<p class="pkg-item pkg-divider"> 1 Final look 2-D room board</p>
-		  	<p class="pkg-item pkg-divider">Personalized shopping list</p>
-		  	<p class="pkg-item pkg-divider">Furniture layout plan</p>
-		  	<p class="pkg-item pkg-divider">Paint and/or Wallpaper <br/>selections</p>
-		  	<!-- <p class="pkg-item pkg-divider">Buy for Me option available</p> -->
-		  	
-		  	<div style="padding-bottom:40px;"></div>
-		  	<p><a href="#" ng-click="savePayPkg(2)"><button type="submit" class="btn-select-pkg">SELECT</button></a></p>
-		  	<div style="padding-bottom:30px;"></div>
-		</div>
-
-		<div class="flex-child" style="background-color:#fff;height:35%;opacity:0.95;">
-		  	<p class="pkg-title"> PREMIUM</p>
-		  	<p class="pkg-desc pkg-divider">for a complete overhaul</p>
-		  	<p class="pkg-price pkg-divider"> 1000<span class="price-dollar"><sup>$</sup></span></p>
-		  	<p class="pkg-item pkg-divider"> 3 First look concept boards</p>
-		  	<p class="pkg-item pkg-divider"> 1 Final look 2-D room board</p>
-		  	<p class="pkg-item pkg-divider">Personalized shopping list</p>
-		  	<p class="pkg-item pkg-divider">Furniture layout plan</p>
-		  	<p class="pkg-item pkg-divider">Paint and/or Wallpaper selections</p>
-		  	<p class="pkg-item pkg-divider">Additional Feedback Session</p>
-		  	<p class="pkg-item pkg-divider">Accessories selections</p>
-		  	<!-- <p class="pkg-item pkg-divider">Buy for Me option available</p> -->
-		  	<div style="padding-bottom:40px;"></div>
-		  	<p><a href="#" ng-click = "savePayPkg(3)"><button type="submit" class="btn-select-pkg">SELECT</button></a></p>
-		  	<div style="padding-bottom:30px;"></div>
-		</div>
-
-		<div class="flex-child" style="background-color:#fff;height:35%;opacity:0.95;">
-		  	<p class="pkg-title"> CUSTOM</p>
-		  	<p class="pkg-desc pkg-divider">for a complete turnkey</p>
-		  	<p class="pkg-price pkg-divider" style="font-size:10px;"><span  style="font-size:50px;margin:25px 0px;"> Contact Us</span><br/><span class="pkg-desc" style="font-size:14px;color:black;margin:20px;">for full renovation works we will provide you a customized quote as per your requirements</span></p>
-		  	<p class="pkg-item pkg-divider">Dedicated designers</p>
-		  	<p class="pkg-item pkg-divider">Certified in-house contractors</p>
-		  	
-		  	<p class="pkg-item pkg-divider">Complete renovation works</p>
-		  	<p class="pkg-item pkg-divider">Personalized unique designs (3D)</p>
-		  	<p class="pkg-item pkg-divider">Space planning</p>
-		  	<p class="pkg-item pkg-divider">Furniture selections</p>
-		  	<p class="pkg-item pkg-divider">Accessories selections</p>
-		  	<div style="padding-bottom:40px;"></div>
-		  	<p><a href="#" ng-click = "savePayPkg(4)"><button type="submit" class="btn-select-pkg">SELECT</button></a></p>
-		  	<div style="padding-bottom:30px;"></div>
-		</div>
-  </div>
+	 <div class=" pricing-footnote fs-16px font-sansBold" style="position:inherit;bottom:inherit;padding: 10px 5px 0px;" ng-show="showTitle">
+  		<p> * All our designs are tailor-made to your space. Every package also includes complimentary consultation, measurement of your room/s and multiple feedback sessions with your designer.</p>
+  	</div>
   
-  <div class="pricing-footnote fs-16px font-sansBold" ng-show="!showTitle">
-  
-  	<p> * All our designs are tailor-made to your space. Every package also includes complimentary consultation, measurement of your room/s and multiple feedback sessions with your designer.</p>
-  </div>
+
+
+
+
+		<p style ="padding-top:50px;" ng-show="!showTitle"></p>
+	  	<div class="flex-ctr pricing-ctr">
+	  		<div class="flex-child" style="background-color:#fff;height:35%;opacity:0.95;">
+			  	<p class="pkg-title"> SIMPLE</p>
+			  	<p class="pkg-desc pkg-divider">for a breath of fresh air</p>
+			  	<p class="pkg-price pkg-divider"> 350<span class="price-dollar"><sup>$</sup></span></p>
+			  	<p class="pkg-item pkg-divider"> 2 First look concept boards</p>
+			  	<p class="pkg-item pkg-divider"> 1 Final look 2-D room board</p>
+			  	<p class="pkg-item pkg-divider">Personalized shopping list</p>
+			  	<!-- <p class="pkg-item pkg-divider">Buy for Me option available</p> -->
+			  	<div style="padding-bottom:40px;"></div>
+		  		<p><a href="#" ng-click="savePayPkg(1)"><button type="submit" class="btn-select-pkg">SELECT</button></a></p>
+		  		<div style="padding-bottom:30px;"></div>
+			</div>
+
+			<div class="flex-child" style="background-color:#fff;height:35%;opacity:0.95;">
+			  	<p class="pkg-title"> CLASSIC</p>
+			  	<p class="pkg-desc pkg-divider">for a notable transformation</p>
+			  	<p class="pkg-price pkg-divider">600<span class="price-dollar"><sup>$</sup></span></p>
+			  	<p class="pkg-item pkg-divider"> 2 First look concept boards</p>
+			  	<p class="pkg-item pkg-divider"> 1 Final look 2-D room board</p>
+			  	<p class="pkg-item pkg-divider">Personalized shopping list</p>
+			  	<p class="pkg-item pkg-divider">Furniture layout plan</p>
+			  	<p class="pkg-item pkg-divider">Paint and/or Wallpaper <br/>selections</p>
+			  	<!-- <p class="pkg-item pkg-divider">Buy for Me option available</p> -->
+			  	
+			  	<div style="padding-bottom:40px;"></div>
+			  	<p><a href="#" ng-click="savePayPkg(2)"><button type="submit" class="btn-select-pkg">SELECT</button></a></p>
+			  	<div style="padding-bottom:30px;"></div>
+			</div>
+
+			<div class="flex-child" style="background-color:#fff;height:35%;opacity:0.95;">
+			  	<p class="pkg-title"> PREMIUM</p>
+			  	<p class="pkg-desc pkg-divider">for a complete overhaul</p>
+			  	<p class="pkg-price pkg-divider"> 1000<span class="price-dollar"><sup>$</sup></span></p>
+			  	<p class="pkg-item pkg-divider"> 3 First look concept boards</p>
+			  	<p class="pkg-item pkg-divider"> 1 Final look 2-D room board</p>
+			  	<p class="pkg-item pkg-divider">Personalized shopping list</p>
+			  	<p class="pkg-item pkg-divider">Furniture layout plan</p>
+			  	<p class="pkg-item pkg-divider">Paint and/or Wallpaper selections</p>
+			  	<p class="pkg-item pkg-divider">Additional Feedback Session</p>
+			  	<p class="pkg-item pkg-divider">Accessories selections</p>
+			  	<!-- <p class="pkg-item pkg-divider">Buy for Me option available</p> -->
+			  	<div style="padding-bottom:40px;"></div>
+			  	<p><a href="#" ng-click = "savePayPkg(3)"><button type="submit" class="btn-select-pkg">SELECT</button></a></p>
+			  	<div style="padding-bottom:30px;"></div>
+			</div>
+
+			<div class="flex-child" style="background-color:#fff;height:35%;opacity:0.95;">
+			  	<p class="pkg-title"> CUSTOM</p>
+			  	<p class="pkg-desc pkg-divider">for a complete turnkey</p>
+			  	<p class="pkg-price pkg-divider" style="font-size:10px;"><span  style="font-size:50px;margin:25px 0px;"> Contact Us</span><br/><span class="pkg-desc" style="font-size:14px;color:black;margin:20px;">for full renovation works we will provide you a customized quote as per your requirements</span></p>
+			  	<p class="pkg-item pkg-divider">Dedicated designers</p>
+			  	<p class="pkg-item pkg-divider">Certified in-house contractors</p>
+			  	
+			  	<p class="pkg-item pkg-divider">Complete renovation works</p>
+			  	<p class="pkg-item pkg-divider">Personalized unique designs (3D)</p>
+			  	<p class="pkg-item pkg-divider">Space planning</p>
+			  	<p class="pkg-item pkg-divider">Furniture selections</p>
+			  	<p class="pkg-item pkg-divider">Accessories selections</p>
+			  	<div style="padding-bottom:40px;"></div>
+			  	<p><a href="#" ng-click = "savePayPkg(4)"><button type="submit" class="btn-select-pkg">SELECT</button></a></p>
+			  	<div style="padding-bottom:30px;"></div>
+			</div>
+	  </div>
+	  
+	  <div class="pricing-footnote fs-16px font-sansBold" ng-show="!showTitle">
+	  
+	  	<p> * All our designs are tailor-made to your space. Every package also includes complimentary consultation, measurement of your room/s and multiple feedback sessions with your designer.</p>
+	  </div>
+	</div>
 </div>
 
 <div id="pricing-section-media" bg-image>
