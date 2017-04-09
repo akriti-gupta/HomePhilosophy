@@ -31,6 +31,7 @@ angular.module("app")
 	  						}
 		  					}, function(reason){
 		  							mvNotifier.error(reason);
+		  							alert(reason);
 		  				});
 					}
 					else{
@@ -66,6 +67,7 @@ angular.module("app")
 			  						$location.path('/style-quiz');
 			  					}, function(reason){
 			  							mvNotifier.error(reason);
+			  							alert(reason);
 			  					});
 			  				}
 			  				else{
@@ -129,6 +131,7 @@ angular.module("app")
 		  					$location.path('/style-quiz');
 		  				}, function(reason){
 		  					mvNotifier.error(reason);
+		  					alert(reason);
 		  				});
 		  			}
 		  			else{
@@ -143,6 +146,7 @@ angular.module("app")
 			  		});
 
 		  		}, function(reason){
+		  			alert(reason);
 		  			mvNotifier.error(reason);
 		  		});
 		  	}
@@ -165,6 +169,7 @@ angular.module("app")
 		  			mvNotifier.notify('User account created!');
 		  		}, function(reason){
 		  			mvNotifier.error(reason);
+		  			alert(reason);
 		  		});
 
 		  	}
