@@ -358,7 +358,8 @@
             <div style="position:relative;width:90%;margin:0 auto;text-align:center;" ng-show="selRoomNamesArr.length>1">
               
               <ul class="comment-room-list" style="margin-bottom:20px;" >
-                <li ng-repeat="selRoom in selRoomNamesArr track by $index" class="pinboard-comment-litem" ng-class="isActive($index)" data-room-id="{{$index}}"><a href="#"  ng-click="saveCmtsOnTabClick($index)">{{selRoom}}</a></li>
+                <li ng-repeat="selRoom in selRoomNamesArr track by $index" class="pinboard-comment-litem" ng-class="isActive($index)" data-room-id="{{$index}}" data-qz-room-id="{{selRoom.room_id}}"><a href="#"  ng-click="saveCmtsOnTabClick1($index,false)">{{selRoom.room_name}}</a></li>
+                <!-- saveCmtsOnTabClick($index) -->
               </ul>
             
             </div>
@@ -369,7 +370,8 @@
             <div class="pin-comment-txt-ctr">
               <textarea rows="9" cols="35" class="font-sansRegular fs-16px"  placeholder=" Add a comment" ng-model="room_comments"></textarea>
 
-            <button type="button" class="btn-start-quiz btn-comment font-sansRegular fs-16px" data-img-id="" data-room-id="" class="close" data-dismiss="modal" ng-click="submitComments($event)">Submit</button>
+            <!-- <button type="button" class="btn-start-quiz btn-comment font-sansRegular fs-16px" data-img-id="" data-room-id="" data-img-loc="" data-qz-room-id="" class="close" data-dismiss="modal" ng-click="submitComments1($event)">Submit</button> -->
+            <button type="button" class="btn-start-quiz btn-comment font-sansRegular fs-16px" class="close" data-dismiss="modal" ng-click="submitComments1()">Submit</button>
             
           </div>
           </div>
@@ -415,7 +417,7 @@
            <img ng-src="{{pic.isrc}}" class="grid-img" data-actual-width = "{{pic.actualWidth}}"  data-actual-height="{{pic.actualHeight}}" data-img-credit="{{pic.imgCredit}}" src="{{pic.isrc}}"/>
         </a>
           
-        <a href="#" class="comment" data-image="{{pic.isrc}}" data-image-id={{$index}} data-toggle="modal" ng-click="loadComments($index,0);">
+        <a href="#" class="comment" data-image="{{pic.isrc}}" data-image-id={{$index}} data-toggle="modal" ng-click="loadComments1($index,0,pic.isrc);">
           <img src="images/styles/styleBoards/comment.png" id="icon_comment"  class="image-status pin-comment" data-swap="images/styles/styleBoards/sel_comment.png">
         </a>     
 
@@ -427,9 +429,9 @@
 
     <div style="clear:both; padding-bottom:120px; padding-top:30px" class="txt-center">
       
-      <button type="button" class="btn-start-quiz font-sansRegular txt-upper col-lightcyan fs-16px btn-hero" style="border:0px;" ng-click="nextPage()" ng-show="usrLoggedIn">Sign up to see your results</button>
+      <button type="button" class="pin-submit btn-start-quiz font-sansRegular txt-upper btn-hero" style="border:0px;" ng-click="nextPage()" ng-show="usrLoggedIn">Sign up to see your results</button>
 
-      <button type="button" class="btn-start-quiz font-sansRegular txt-upper col-lightcyan fs-16px btn-hero" style="border:0px;" ng-click="nextPage()" ng-show="!usrLoggedIn">See your results</button>
+      <button type="button" class="pin-submit btn-start-quiz font-sansRegular txt-upper btn-hero" style="border:0px;" ng-click="nextPage()" ng-show="!usrLoggedIn">See your results</button>
     </div>
   </div>
 

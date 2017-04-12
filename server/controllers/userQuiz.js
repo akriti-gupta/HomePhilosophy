@@ -11,41 +11,24 @@ exports.createUserQuiz = function(req,res,next){
 		if(err){return next(err);}
 		
         if(conn){
-			/*conn.query('Select * from cust_quiz where customerId = '+conn.escape(customerId)+
-						' order by quizId desc', function(err, results, fields){
+			var userQuizData = {customerId: customerId, status:status,created_at:new Date(),updated_at:new Date()};
+			conn.query('insert into cust_quiz set ?', userQuizData, function(err, results, fields){
 				if(err){
-					console.log('Error while creating a new user quiz record: '+err);
+					console.log('Error in creating new record in cust_quiz: '+err);
 					conn.release();
-					res.send({reason:err.toString()});
+					return res.send({success:false,reason:err.toString()});
 				}
-				if(results.length>0){
-					var lastStatus = results[0].status;
-					if(lastStatus===-1){
-						console.log('Overwriting: Updating Timestamp');
-						conn.release();
-						res.send(results[0]);
-						//TODO: refresh updated_at timestamp in cust_quiz table.
-					}
-				}
-
-				if(results.length===0 || (results.length > 0 && results[0].status!=-1)) {*/
-					//Create new record with highest quizId+1
-					var userQuizData = {customerId: customerId, status:status,created_at:new Date(),updated_at:new Date()};
-					conn.query('insert into cust_quiz set ?', userQuizData, function(err, results, fields){
-						if(err){
-							console.log('Error in creating new record in cust_quiz: '+err);
+				else{
+					conn.query('select * from cust_quiz where quizId = ?',results.insertId, 
+					function(err, quiz, fields){
+						if(err){conn.release();return next(err);}
+						else{
 							conn.release();
-							res.send({reason:err.toString()});
+							return res.send({success:true,quizData:quiz[0]});
 						}
-						conn.query('select * from cust_quiz where quizId='+conn.escape(results.insertId), 
-									function(err, quiz, fields){
-										if(err){conn.release();return next(err);}
-										conn.release();
-										res.send(quiz[0]);
-									});
 					});
-				//}
-			//});				
+				}
+			});			
 		}
 	});
 }
@@ -66,7 +49,6 @@ function updQzResult(conn,quizId,data,cb){
 				console.log('Error in saving result data'+err);
 				cb(err,null);
 			}
-			console.log('Result saved');
 			cb(null,results);
 		});
 	//});
@@ -85,7 +67,6 @@ function updQzRoom(conn,quizId,data,cb){
 				console.log('Error in saving room selection data'+err);
 				cb(err,null);
 			}
-			console.log('Room Info saved');
 			conn.query('select * from cust_room_selection where quizId='+conn.escape(quizId), function(err, results, fields){
 				if(err){
 					cb(err,null);
@@ -111,7 +92,6 @@ function updQzImg(conn,quizId,data,cb){
 				console.log('Error in saving img selection data'+err);
 				cb(err,null);
 			}
-			console.log('Img Info saved');
 			cb(null,results);
 		});
 	//});
@@ -120,15 +100,38 @@ function updQzImg(conn,quizId,data,cb){
 function updQzPinImgs(conn,quizId,data,cb){
 
 	if(!isEmpty(data)){
-		conn.query('insert into pin_images set ?',data, function(err, results, fields){
+		conn.query('insert into pin_images(quizId,imagesLiked) values ?',[data], function(err, results, fields){
 			if(err){
 				console.log('Error in saving pin images selection data'+err);
 				cb(err,null);
 			}
+			else{
+				conn.query('select * from pin_images where quizId = ?',quizId, function(err, results, fields){
+				if(err){
+					cb(err,null);
+				}
+				cb(null,results);
+			});
+
+			}
 		});	
 	}
-	cb(null,true);
+	else{
+		cb(null,true);
+	}
 }
+function updPinComments(conn,quizId,commentData,cb){
+	console.log(commentData);
+	conn.query('insert into pin_comments(pin_img_id,room_id,comments) values ?',[commentData],function(err,results,fields){
+		if(err){
+			cb(err,null);
+		}
+		else{
+			cb(null,true);
+		}
+	});
+
+}	
 
 function isEmpty(obj) {
     for (var key in obj) {
@@ -146,7 +149,8 @@ exports.saveUserQuizDtls = function(req,res,next){
 	var userQuizResult = [];
 	var userRoomData = [];
 	var userImgData = [];
-	var usrPinImgData = {};
+	var usrPinImgData = [];
+	var usrPinComments = [];
 	
 
 console.log(quizDtls);
@@ -193,16 +197,12 @@ console.log(quizDtls);
 
 	if(userSelectionData!=null && userSelectionData.pinImages!=null
 								 && userSelectionData.pinImages.length>0){
-		var imgs;
-		if(userSelectionData.pinImages.length>1){
-			imgs = userSelectionData.pinImages.join(',');
+		for(var i=0;i<userSelectionData.pinImages.length;i++){
+			var pinData = [quizId,userSelectionData.pinImages[i]];
+			usrPinImgData.push(pinData);
 		}
-		else{
-			imgs = userSelectionData.pinImages[0];
-		}
-		usrPinImgData = {quizId: quizId, imagesLiked: imgs};
 	}
-	console.log(usrPinImgData);
+	
 
 	if(status===-1){
 		mysqlConn.getConnection(function(err,conn){
@@ -216,14 +216,58 @@ console.log(quizDtls);
 						], function (err, result) {
 						     if(err){
 						     	conn.release();
-						     	console.log(err);
-						     	res.send({success: false, reason:err.toString()});
+						     	return res.send({success: false, reason:err.toString()});
+						    }
+						    else{
+						     	userProject.resultData = result[0];
+			                	userProject.roomData = result[1];
+			                	userProject.imgData = result[2];
+			                	userProject.pinImgData = result[3];
+						     	
+						     	if(userSelectionData!=null && userSelectionData.pinComments!=null
+								 && userSelectionData.pinComments.length>0){
+									for(var i=0;i<userSelectionData.pinComments.length;i++){
+										var cmt_img_loc = userSelectionData.pinComments[i].img_loc;
+										var cmt_room_id = userSelectionData.pinComments[i].room_id;
+										var cmt_num_room = userSelectionData.pinComments[i].num_room;
+										for(var j=0;j<userProject.roomData.length;j++){
+											if(cmt_room_id === userProject.roomData[j].roomId && cmt_num_room === userProject.roomData[j].numRoom){
+												userSelectionData.pinComments[i].room_id = userProject.roomData[j].id;
+											}
+										}
+
+										for(var j=0;j<userProject.pinImgData.length;j++){
+											if(cmt_img_loc === userProject.pinImgData[j].imagesLiked){
+												userSelectionData.pinComments[i].img_id = userProject.pinImgData[j].id;
+											}
+										}
+									}
+
+									for(var i=0;i<userSelectionData.pinComments.length;i++){
+										var pinCommentData = [userSelectionData.pinComments[i].img_id,userSelectionData.pinComments[i].room_id,userSelectionData.pinComments[i].comments];
+										usrPinComments.push(pinCommentData);
+									}
+									updPinComments(conn,quizId,usrPinComments,function(err,result){
+							     		if(err){
+							     			console.log('Could not insert comments for pin images:'+err);
+							     		}
+				                		conn.release();
+				                		return res.send({'success':true,'results':userProject});
+							     	});
+
+								}
+								else{
+									conn.release();
+									return res.send({'success':true,'results':userProject});
+								}
+
+						     	
 						     }
-						    userProject.resultData = result[0];
-			                userProject.roomData = result[1];
-			                userProject.imgData = result[2];
-			                conn.release();
-			                res.send({'success':true,'results':userProject});
+						    // userProject.resultData = result[0];
+			       //          userProject.roomData = result[1];
+			       //          userProject.imgData = result[2];
+			       //          conn.release();
+			       //          return res.send({'success':true,'results':userProject});
 						});
 
 
@@ -322,7 +366,6 @@ exports.addRoomToQuiz = function(req,res,next){
 							});
 						}
 						else{
-							console.log('Inserting now');
 							var roomData={quizId:quizId,roomName:currRoomName,numRoom:currRoomNum};
 							conn.query('insert into cust_room_selection set ?', roomData, function(err, results, fields){
 								if(err){
@@ -356,16 +399,16 @@ exports.saveQuizMiscData = function(req,res,next){
 					console.log('Error while deleting existing quiz detail: '+err);
 					return res.send({reason:err.toString()});
 				}
-				console.log('Deleted old unpaid quiz detail');
-					
 				conn.query('insert into cust_quiz_detail set ?', data, function(err, results, fields){
 					if(err){
 						console.log('Error in creating new record in cust_quiz_detail: '+err);
 						conn.release();
 						return res.send({reason:err.toString()});
 					}
-					conn.release();
-					return res.send({success:true});
+					else{
+						conn.release();
+						return res.send({success:true});
+					}
     			});
     		});
 		}
@@ -386,7 +429,6 @@ exports.getQuizDetails = function(req,res,next){
 					conn.release();
 					return res.send({reason:err.toString()});
 				}
-				console.log(results);
 				if(results[0].count >0){
 					conn.release();
 					return res.send({exists:true});	

@@ -102,6 +102,10 @@
   border: 2.5px solid #00a99d;
 }
 
+.color-selected{
+  border: 4px solid #00a99d;
+}
+
 .cap-prf-styl{
   border:1px solid #acacac;
   color:#707070;

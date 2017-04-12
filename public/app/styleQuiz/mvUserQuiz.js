@@ -2,36 +2,36 @@ angular.module('app').factory('mvUserQuiz', function($http, mvIdentity, $q, quiz
 	return{
 
 		saveUserData: function(userSelectionData,userQuizResult){
-
-			
 			var dfd = $q.defer();
 
 			$http.post('/createUserQuiz',{customerId: mvIdentity.currentUser.id , status:-1})
-		 	.then(function(userQuizDtl){
-		 			var quizId = userQuizDtl.data.quizId;
-	  				//Store this quizId in some service.
-
-	  				$http.post('/saveUserQuizDtls',
-	  					 {
-	  					  customerId: mvIdentity.currentUser.id, 
-	  					  quizId:quizId, 
-	  					  quizInfo:userQuizResult,
-	  					  userSelection:userSelectionData, 
-	  					  status:userQuizDtl.data.status 
-	  					}).then(function(quizDtls){
-	  							var quizDtls = [userQuizDtl,quizDtls]
+		 	.then(function(response){
+	 			if(response.data.success){
+	 				var quizData = response.data.quizData;
+	 				var quizId = quizData.quizId;
+  					$http.post('/saveUserQuizDtls',
+  					 {customerId: mvIdentity.currentUser.id, 
+  					  quizId:quizId, 
+  					  quizInfo:userQuizResult,
+  					  userSelection:userSelectionData, 
+  					  status:response.data.quizData.status 
+  					}).then(function(response){
+	  						if(response.data.success){
+	  							var quizDtls = [quizData,response]
 	  					 		//dfd.resolve(userQuizDtl);
-	  					 		dfd.resolve(quizDtls);
-	  						}), 
-	  					function(response){
-	  						console.log('Error in saveUserQuizDtls : '+response.data.reason);
-							dfd.reject(response.data.reason);
-						}
-	  		}), 
-	  		function(response){
-	  			console.log('Error in createUserQuiz :'+response.data.reason);
-				dfd.reject(response.data.reason);
-			}
+	  					 		dfd.resolve(quizDtls)
+	  						}
+	  						else{
+								dfd.reject(response.data.reason);
+							}
+						});
+	 			}
+	 			else{
+	 				console.log('Error in createUserQuiz :'+response.data.reason);
+					dfd.reject(response.data.reason);
+	 			}
+		 			
+	  		});
 	  		return dfd.promise;
 		},
 

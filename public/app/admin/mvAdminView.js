@@ -15,7 +15,7 @@ angular.module('app').factory('mvAdminView', function($http, $q){
 		},
 		getProjectListing: function(status){
 			var dfd = $q.defer();
-			 $http.get('/getProjectListing', {cache: false}).then(function(response){
+			 $http.get('/getProjectListing/'+status, {cache: false}).then(function(response){
 			   //$http.get('/getProjectListing',{qs: {status:status}}).then(function(response){
 				if(response.data.success){
 					data = response.data.results;

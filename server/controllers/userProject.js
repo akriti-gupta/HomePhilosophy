@@ -120,9 +120,60 @@ function getPinImages(conn,quizIds,cb){
 			for(var i =0; i<imgInfo.length;i++){
 				pinImgData.push(imgInfo[i]);
 			}
+			getPinComments(conn,pinImgData,function(err,result){
+				cb(null, result);
+			});
 		}
-		cb(null,pinImgData);
+		else{
+			cb(null,pinImgData);
+		}
 	});
+}
+
+function getPinComments(conn,pinImgData,cb){
+	var pinCommentData = [];
+
+	if(pinImgData!=null && pinImgData.length>0){
+		var pinImgIdArr = [];
+		for(var i =0;i<pinImgData.length;i++){
+			pinImgIdArr.push(pinImgData[i].i.id);
+		}
+		var qry_pin_cmnt = 'select c.* from pin_comments c left outer join pin_images i on c.pin_img_id = i.id '+ 
+									 'where c.pin_img_id in ('+pinImgIdArr.join()+')';
+		var options = {sql:qry_pin_cmnt,nestTables: true};
+		conn.query(options, function(err, commentInfo, fields){
+			if(err){
+				console.log('Error in fetching comments for pin images '+err);
+				conn.release();
+				cb(err,null);
+			}
+			
+			else if(commentInfo.length>0){
+				for(var i =0; i<commentInfo.length;i++){
+					if(commentInfo[i].c.id!=null){
+						pinCommentData.push(commentInfo[i].c);
+					}
+				}
+				for(var i=0;i<pinImgData.length;i++){
+					var commentArr = [];
+					for(var j =0; j<pinCommentData.length;j++){
+						if(pinCommentData[j].pin_img_id===pinImgData[i].i.id){
+							commentArr.push(pinCommentData[j]); 
+						}
+					}
+					pinImgData[i].commentData = commentArr;
+				}
+				cb(null,pinImgData);	
+			}
+			else{
+				cb(null,pinImgData);
+			}
+		});
+	}
+	else{
+		cb(null,pinCommentData);
+	}
+
 }
 
 function getRooms(conn,quizIds,cb){
@@ -223,12 +274,10 @@ function getShoppingList(conn,quizIds,cb){
 			console.log('Error in fetching shopping list for quiz '+err);
 			cb(err,null);
 		}
-		// console.log(flookInfo);
 		else if(shoppingListInfo.length>0){
 			for(var i =0; i<shoppingListInfo.length;i++){
 				if(shoppingListInfo[i].f.id!=null){
 					shoppingList.push({'concept':shoppingListInfo[i].f,'room':shoppingListInfo[i].r});
-					//shoppingList.push(shoppingListInfo[i].f);
 				}
 			}
 		}
@@ -237,9 +286,6 @@ function getShoppingList(conn,quizIds,cb){
 }  
 function getFinalLook(conn,quizIds,cb){
 	var finalLookData = [];
-	//var qry_final_look= 'select f.* from cust_quiz q left outer join final_look f on q.quizId = f.quizId '+ 
-	//								 'where q.quizId in ('+quizIds+')';
-
 	var qry_final_look = 'select f.*, r.roomName,r.numRoom from cust_quiz q, final_look f,cust_room_selection r'+
 					   ' where q.quizId = f.quizId and f.roomId = r.id and q.quizId in('+quizIds+')';
    
@@ -250,7 +296,6 @@ function getFinalLook(conn,quizIds,cb){
 			console.log('Error in fetching final look for quiz '+err);
 			cb(err,null);
 		}
-		// console.log(flookInfo);
 		else if(finalLook.length>0){
 			for(var i =0; i<finalLook.length;i++){
 				if(finalLook[i].f.id!=null){
@@ -261,7 +306,6 @@ function getFinalLook(conn,quizIds,cb){
 		getFnlLookFdbk(conn,finalLookData,function(err,result){
 			cb(null, result);
 		});
-		//cb(null,finalLookData);
 	});
 }  
 
@@ -283,7 +327,6 @@ function getFnlLookFdbk(conn, finalLookData,cb){
 				conn.release();
 				cb(err,null);
 			}
-			// console.log(flookFeedInfo);
 			else if(flookFeedInfo.length>0){
 				for(var i =0; i<flookFeedInfo.length;i++){
 					if(flookFeedInfo[i].ff.id!=null){
@@ -451,9 +494,7 @@ exports.getCustProjectInfo = function(req,res,next){
 							async.apply(getPackageTxn,conn,quizIds),
 							async.apply(getCustQuizDtls,conn,quizIds)
 						], function (err, result) {
-						     //This code will be executed after all previous queries are done (the order doesn't matter).
-						     //For example you can do another query that depends of the result of all the previous queries.
-						     if(err){
+						      if(err){
 						     	conn.release();
 						     	console.log(err);
 						     	res.send({success: false, reason:err.toString()});
@@ -472,35 +513,6 @@ exports.getCustProjectInfo = function(req,res,next){
 			                conn.release();
 			                res.send({'success':true,'results':userProjects});
 						});
-
-						/*async.waterfall([
-	    					async.apply(getConceptBoard,conn,quizIds),
-							async.apply(getFeedback,conn)
-						], function (err, result) {
-						   
-						   	if(err){
-						   		conn.release();
-						   		console.log(err);
-						   		res.send({success: false, reason:err.toString()});
-							}
-						   
-						    console.log('Final series');
-						    console.log(result);
-							if(result.length>=0)
-				        		userProjects.firstLookData = result;
-				           	else
-				           		userProjects.firstLookData = [];
-				           	// if(result.length>0){
-				           	// 	userProjects.feedbackData = result[1];
-				           	// }
-				           	// else{
-				           	// 	userProjects.feedbackData = [];
-				           	// }
-				            console.log(userProjects);
-				            conn.release();
-				            res.send({'success':true,'results':userProjects});
-						});*/
-
 					} // if quizData.length >0 ends.
 				}
 
@@ -510,143 +522,15 @@ exports.getCustProjectInfo = function(req,res,next){
 	}); 
 }
 
-/*exports.getProjectListing = function(req,res,next){
-	
-	if(projectList.length>0){projectList.length=0;}
-	mysqlConn.getConnection(function(err,conn){
-		
-		if(err){return next(err);}
-		
-        if(conn){
-        	
-
-        	async.parallel([
-								async.apply(getResult,conn,quizIds),
-							    async.apply(getRooms,conn,quizIds),
-								async.apply(getPackage,conn,quizIds),
-								async.apply(getAppt,conn,quizIds),
-								async.apply(getImages,conn,quizIds),
-								async.apply(getQuiz,conn,quizIds),
-								async.apply(getUser,conn,project.id),
-								async.apply(getConceptBoard,conn,quizIds),
-								async.apply(getFinalLook,conn,quizIds),
-								async.apply(getShoppingList,conn,quizIds),
-								async.apply(getPackageTxn,conn,quizIds),
-								async.apply(getCustQuizDtls,conn,quizIds),
-								async.apply(getPinImages,conn,quizIds)
-
-							], function (err, result) {
-							    if(err){
-							     	conn.release();
-							     	console.log(err);
-							     	res.send({success: false, reason:err.toString()});
-							    }
-							    console.log('Final Admin Prll: ');
-							    console.log(project);
-							    //console.log(result);
-							     
-				                projectList.push({'resultData':result[0],
-				                'roomData': result[1],
-				                'pkgData': result[2],
-				                'apptData': result[3],
-				                'imgData': result[4],
-				                'quizData': result[5],
-				                'userData': result[6],
-				                'conceptData': result[7],
-				            	'finalLookData': result[8],
-				            	'shoppingList':result[9],
-				            	'paymentData': result[10],
-				            	'quizDtls':result[11],
-				            	'pinImages':result[12]});
-				                 callback();
-							});
-
-        	
-        	var qry_usr_qz = 'SELECT user.id,count(cust_quiz.quizId) as pendingCount'+
-        					 ' FROM user, cust_quiz WHERE user.id = cust_quiz.customerId '+
-							 'AND cust_quiz.status=-1 GROUP BY user.id order by user.id desc';
-
-    		conn.query(qry_usr_qz, function(err, projects, fields){
-				if(err){
-					console.log('Error in fetching projects for admin view'+err);
-					conn.release();
-					res.send({success: false, reason:err.toString()});
-				}
-				else{
-
-					if(projects.length>0){
-						
-
-						async.each(projects,function(project, callback){
-							
-						    // Call an asynchronous function, often a save() to DB
-						    var quizIds = project.quizId;
-						    //item.someAsyncCall(function (){
-
-						    async.parallel([
-								async.apply(getResult,conn,quizIds),
-							    async.apply(getRooms,conn,quizIds),
-								async.apply(getPackage,conn,quizIds),
-								async.apply(getAppt,conn,quizIds),
-								async.apply(getImages,conn,quizIds),
-								async.apply(getQuiz,conn,quizIds),
-								async.apply(getUser,conn,project.id),
-								async.apply(getConceptBoard,conn,quizIds),
-								async.apply(getFinalLook,conn,quizIds),
-								async.apply(getShoppingList,conn,quizIds),
-								async.apply(getPackageTxn,conn,quizIds),
-								async.apply(getCustQuizDtls,conn,quizIds),
-								async.apply(getPinImages,conn,quizIds)
-
-							], function (err, result) {
-							    if(err){
-							     	conn.release();
-							     	console.log(err);
-							     	res.send({success: false, reason:err.toString()});
-							    }
-							    console.log('Final Admin Prll: ');
-							    console.log(project);
-							    //console.log(result);
-							     
-				                projectList.push({'resultData':result[0],
-				                'roomData': result[1],
-				                'pkgData': result[2],
-				                'apptData': result[3],
-				                'imgData': result[4],
-				                'quizData': result[5],
-				                'userData': result[6],
-				                'conceptData': result[7],
-				            	'finalLookData': result[8],
-				            	'shoppingList':result[9],
-				            	'paymentData': result[10],
-				            	'quizDtls':result[11],
-				            	'pinImages':result[12]});
-				                 callback();
-							});
-						},
-						function(err){
-						    // All tasks are done now
-						   console.log(projectList);
-				           res.send({'success':true,'results':projectList});
-						}); //async.each
-
-					}
-				}
-			});
-    	}
-   	}); //getConnection
-}*/
-
-
 exports.getProjectListing = function(req,res,next){
 	
-	console.log(req);
-	if(projectList.length>0){projectList.length=0;}
+	var status = req.params.status;
+	// if(projectList.length>0){projectList.length=0;}
 	mysqlConn.getConnection(function(err,conn){
 		if(err){return next(err);}
 		
         if(conn){
-        	var qry_usr_qz = 'SELECT u.id, u.username,u.firstname,u.address, u.phone,q.* FROM user u, cust_quiz q WHERE u.id=q.customerId and q.status=0 order by quizId desc';
+        	var qry_usr_qz = 'SELECT u.id, u.username,u.firstname,u.address, u.phone,q.* FROM user u, cust_quiz q WHERE u.id=q.customerId and q.status='+status+ ' order by quizId desc';
         	var options = {sql:qry_usr_qz,nestTables: true};
 
     		conn.query(options, function(err, projects, fields){
@@ -814,12 +698,10 @@ exports.saveAppointment = function(req,res,next){
 						if(err){
 							console.log('Error in updating user apptInfo '+err);
 							conn.release();
-							res.send({success: false, reason:err.toString()});
+							return res.send({success: false, reason:err.toString()});
 						}
 						else{
-	    					console.log("Record Updated!!");
-	    					// console.log(result);
-	    					res.send({success: true});
+	    					return res.send({success: true});
     					}
 					});
 				}
@@ -845,10 +727,10 @@ exports.saveAppointment = function(req,res,next){
 						if(err){
 							console.log('Error in inserting user apptInfo '+err);
 							conn.release();
-							res.send({success: false, reason:err.toString()});
+							return res.send({success: false, reason:err.toString()});
 						}
 						else{
-							res.send({success:true});	
+							return res.send({success:true});	
 						}
 					
 					});
@@ -966,10 +848,12 @@ exports.submitFeedback = function(req,res,next){
 	var ins_qry;
 
 	if(concept_type===1){
-		qry = 'INSERT INTO concept_board_feedback set ? ON DUPLICATE KEY UPDATE status = ?, comments=?';
+		// qry = 'INSERT INTO concept_board_feedback set ? ON DUPLICATE KEY UPDATE status = ?, comments=?';
+		qry = 'INSERT INTO concept_board_feedback(status,comments,created_at,updated_at,concept_id,file1) VALUES ? ON DUPLICATE KEY UPDATE status = VALUES(status), comments=VALUES(comments), updated_at=VALUES(updated_at)';
 	}
 	else if(concept_type===2){
-		qry = 'INSERT INTO final_look_feedback set ? ON DUPLICATE KEY UPDATE status = ?, comments=?';
+		//qry = 'INSERT INTO final_look_feedback set ? ON DUPLICATE KEY UPDATE status = ?, comments=?';
+		qry = 'INSERT INTO final_look_feedback(status,comments,created_at,updated_at,concept_id,file1) VALUES ? ON DUPLICATE KEY UPDATE status = VALUES(status), comments=VALUES(comments), updated_at=VALUES(updated_at)';
 		
 	}
 
@@ -977,23 +861,34 @@ exports.submitFeedback = function(req,res,next){
 		if(err){return next(err);}
 		
         if(conn){
-        	for(var i =0;i<data.length;i++){
+        	/*for(var i =0;i<data.length;i++){
         		conn.query(qry, [data[i],data[i].status,data[i].comments], function(err, results, fields){
 					if(err){
-						console.log('Error in inserting concept board feedback for filetype: '+concept_type+' Err: '+err);
-						conn.release();
-						res.send({success: false, reason:err.toString()});
+						//console.log('Error in inserting concept board feedback for filetype: '+concept_type+' Err: '+err);
+						// conn.release();
+						res.status(400);
+						return res.send({success: false, reason:'Error in inserting concept board feedback'});
 					}
 				});
-        	}
+        	}*/
+        	// conn.query(qry, [data,data.status,data[i].comments], function(err, results, fields){
+        	conn.query(qry, [data], function(err, results, fields){
+				if(err){
+					//console.log('Error in inserting concept board feedback for filetype: '+concept_type+' Err: '+err);
+					// conn.release();
+					res.status(400);
+					return res.send({success: false, reason:'Error in inserting concept board feedback for filetype: '+concept_type});
+				}
+				// conn.release();
+				return res.send({success: true});
+			});
         }
-        conn.release();
-		res.send({success: true});
+
+        
     });
 }
 
 exports.getQuizDetail = function(req,res,next){
-	console.log(req.body);
 	var quizId = req.body.quizId;
 
 	mysqlConn.getConnection(function(err,conn){
@@ -1043,11 +938,8 @@ exports.getQuizDetail = function(req,res,next){
 }
 	
 exports.deleteProject = function(req,res,next){
-	console.log('In deleteProject');
 	var quizId =  req.body.quizId;
 	var roomId = req.body.roomId;
-	console.log(quizId);
-	console.log(roomId);
 
 	mysqlConn.getConnection(function(err,conn){
 		if(err){return next(err);}
@@ -1057,7 +949,6 @@ exports.deleteProject = function(req,res,next){
 					conn.release();
 					return res.send({success: false, reason:err.toString()});
 				}
-				console.log(results);
 				if(results[0].count >1){
 					conn.query('delete from cust_room_selection where quizId='+quizId+' and id='+roomId, function(err, results, fields){
 

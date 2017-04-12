@@ -112,10 +112,12 @@ exports.getPaymentInfo = function(req,res,next){
 				if(err){
 					console.log('Eror in getting existing payment txn for quiz: '+quizId);
 					conn.release();
-					res.send({success:false}); 
+					return res.send({success:false}); 
 				}
-				console.log(results);
-				res.send({success:true,results:results});
+				else{
+					console.log(results);
+					return res.send({success:true,results:results});
+				}
 				
 			});
         }
@@ -125,47 +127,55 @@ exports.getPaymentInfo = function(req,res,next){
 function updateQuiz(conn,quizId,cb){
 	var updatedDate = new Date();
 	var qry_qz = 'update cust_quiz set status = 0, updated_at = now() where quizId='+quizId;
+	console.log('In updateQuiz, quizId is: '+quizId);
 
 	conn.query(qry_qz, function(err, quizInfo, fields){
 		if(err){
 			console.log('Eror in updating quiz status for quiz: '+quizId);
 			cb(err,null);
 		}
-		cb(null,true);
+		else{
+			console.log('In updateQuiz, before calling cb');
+			cb(null,true);
+		}
 	});
 }
 
 function updatePkg(conn,quizId,totalPrice,cb){
 	var qry_qz = 'update cust_pkg_info set status=0 where quizId ='+quizId
-
+	console.log('In updatePkg');
 	conn.query(qry_qz, function(err, quizInfo, fields){
 		if(err){
 			console.log('Eror in updating pkg status for quiz: '+quizId);
 			cb(err,null);
 		}
-		console.log('totalPrice is: '+totalPrice);
-		updatePkgTxn(conn,quizId,totalPrice,function(err,result){
-			if(err){
-				console.log('Eror in updating pkg txn status for quiz: '+quizId);
-				cb(err,null);
-			}
-			cb(null, true);
-		});
+		else{
+			console.log('totalPrice is: '+totalPrice);
+			updatePkgTxn(conn,quizId,totalPrice,function(err,result){
+				if(err){
+					console.log('Eror in updating pkg txn status for quiz: '+quizId);
+					cb(err,null);
+				}
+				else{
+					cb(null, true);
+				}
+			});
+		}
 	});
 }
 
 function updatePkgTxn(conn,quizId,totalPrice,cb){
 	var txnData = [totalPrice,new Date(),quizId];
-							
-
 	var qry_qz = 'update cust_payment_txn set amountPaid =?, updated_at=? where quizId=?';
 
 	conn.query(qry_qz, txnData, function(err, quizInfo, fields){
 		if(err){
-			console.log('Eror in updating pkg txn for quiz: '+quizId);
+			console.log('Error in updating pkg txn for quiz: '+quizId);
 			cb(err,null);
 		}
-		cb(null,true);
+		else{
+			cb(null,true);
+		}
 	});
 }
 
@@ -252,17 +262,20 @@ exports.updatePackage = function(req,res,next){
 						    if(err){
 						    	conn.release();
 						     	console.log(err);
-						     	res.send({success: false, reason:err.toString()});
+						     	return res.send({success: false, reason:err.toString()});
 						    }
-						    updateAppt(conn,quizId, customerId, function(err,result){
-						    	if(err){
-							    	conn.release();
-							     	console.log(err);
-							     	res.send({success: false, reason:err.toString()});
-							    }	
+						    else
+						    	{	console.log('In updatePkg, wuiz and pkg updated');
+						    		updateAppt(conn,quizId, customerId, function(err,result){
+								    	if(err){
+									    	conn.release();
+									     	console.log(err);
+									     	res.send({success: false, reason:err.toString()});
+									    }	
 
-							     res.send({'success':true});
-						    });
+									     res.send({'success':true});
+								    });
+						    	}
 			               
 						});
 

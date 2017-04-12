@@ -6,7 +6,7 @@ var multer = require('multer'),
 	userQuiz = require('../controllers/userQuiz'),
 	passport = require('passport'),
 	payment = require('../controllers/payment'),
-	filesys = require('fs'),
+	// filesys = require('fs'),
 	userProject = require('../controllers/userProject'),
 	common = require('../controllers/common');
 
@@ -45,18 +45,7 @@ module.exports = function(app){
 	app.post('/storePackage',payment.storePackage);
 	app.post('/getPaymentInfo',payment.getPaymentInfo);
 	app.post('/updatePackage',payment.updatePackage);
-	
-	app.post('/paycb',function(req,res){
-		console.log('Got back response, ');
-		console.log(res);
-		console.log('request is:');
-		console.log(req);
-		res.redirect('/style-quiz');
-
-	})
-	// app.post('/storePackageTxn',payment.storePackageTxn);
 	app.post('/saveQuizMiscData',userQuiz.saveQuizMiscData);
-
 	app.get('/getCustProjectInfo', userProject.getCustProjectInfo);
 	app.post('/saveAppointment',userProject.saveAppointment);
 	app.post('/saveConceptBoard',userProject.saveConceptBoard);
@@ -65,7 +54,7 @@ module.exports = function(app){
 	
 	app.post('/submitFeedback',userProject.submitFeedback);
 
-	app.get('/getProjectListing', userProject.getProjectListing);
+	app.get('/getProjectListing/:status', userProject.getProjectListing);
 	app.post('/getQuizDetail', userProject.getQuizDetail);
 
 	app.get('/getCncptFeedback', userProject.getCncptFeedback);
@@ -81,27 +70,24 @@ module.exports = function(app){
         		console.log(err);
             	return res.send({success:false, reason: err.toString()});
         	}
-        	var files=[];
-        	for(var i=0;i<req.files.length;i++){
-        		files.push(req.files[i].filename);
-        	}
-        	return res.send({success:true,filename:files});
+        	else{
+	        	var files=[];
+	        	for(var i=0;i<req.files.length;i++){
+	        		files.push(req.files[i].filename);
+	        	}
+	        	return res.send({success:true,filename:files});
+	        }
     	});
 	});
 
 
 	app.get('/downloadFile/:fileName', function(req, res){
-  		var file = './public/uploads/' + req.params.fileName;
-  		// console.log(req);
-  		//var file = './public/uploads/Room furniture breakdown Sheet1-1491312718279.pdf';
-  		console.log(file);
+  		var file = '/root/HomePhilosophy/public/uploads/' + req.params.fileName;
   		res.download(file);
 	});
 
-// route for facebook authentication and login
-	 app.get('/auth/facebook',passport.authenticate('facebook'),function(req,res){});
 
-// handle the callback after facebook has authenticated the user
+	app.get('/auth/facebook',passport.authenticate('facebook'),function(req,res){});
 	app.get('/auth/facebook/callback',
 		passport.authenticate('facebook', {failureRedirect: '/' }),
 		function(req, res) {

@@ -287,6 +287,25 @@ CREATE TABLE IF NOT EXISTS `contact_us` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
+CREATE TABLE IF NOT EXISTS `pin_comments` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `pin_img_id` INT(10) UNSIGNED NULL,
+  `room_id` INT(10) UNSIGNED NULL,
+  `comments` VARCHAR(200) NULL,
+  PRIMARY KEY (`id`),
+  INDEX `pin_comments_room_id_foreign_idx` (`room_id` ASC),
+  INDEX `pin_comments_pin_img_id_foreign_idx` (`pin_img_id` ASC),
+  CONSTRAINT `pin_comments_room_id_foreign`
+    FOREIGN KEY (`room_id`)
+    REFERENCES `testSchema`.`room` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE RESTRICT,
+  CONSTRAINT `pin_comments_pin_img_id_foreign`
+    FOREIGN KEY (`pin_img_id`)
+    REFERENCES `testSchema`.`pin_images` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE RESTRICT);
+
 
 ALTER TABLE `concept_board`
 ADD COLUMN `notes` VARCHAR(1000) NULL AFTER `updated_at`;
@@ -296,3 +315,13 @@ ADD COLUMN `notes` VARCHAR(1000) NULL AFTER `updated_at`;
 
 ALTER TABLE `final_look`
 ADD COLUMN `notes` VARCHAR(1000) NULL AFTER `updated_at`;
+
+ALTER TABLE `contact_us`
+ADD COLUMN `created_at` DATETIME NULL AFTER `message`;
+
+ALTER TABLE `concept_board_feedback` 
+ADD COLUMN `file1` VARCHAR(500) NULL AFTER `concept_id`;
+
+ALTER TABLE `final_look_feedback` 
+ADD COLUMN `file1` VARCHAR(500) NULL AFTER `concept_id`;
+

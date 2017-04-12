@@ -450,8 +450,6 @@ $scope.details = function(index,tabIdx){
 	$scope.usrObj = currRow.u;
 
 	mvAdminView.getQuizDetail(quizObj.quizId).then(function(quizData){
-		console.log('quizData is: ');
-		console.log(quizData);
 		$scope.quizData = {};
 		populateStatus(quizData);
 		$scope.quizData = quizData[0];
@@ -468,24 +466,48 @@ $scope.details = function(index,tabIdx){
 			if(files!=null){
 				var uploadedFiles = files.split(',');
 				$scope.quizData.quizDtls[0].file1 =uploadedFiles;
-				
 			}
-
-
 		}
 
 		if($scope.quizData.pinImages.length>0){
-			var imgs = [];
-			imgs = $scope.quizData.pinImages[0].i.imagesLiked.split(',');
-			$scope.quizData.pinImages[0].i.imagesLiked = imgs;
+			for(var i=0;i<$scope.quizData.pinImages.length;i++){
+				if($scope.quizData.pinImages[i].commentData.length>0){
+					for(var j=0;j<$scope.quizData.pinImages[i].commentData.length;j++){
+						var commentObj = $scope.quizData.pinImages[i].commentData[j];	
+						var room_id=commentObj.room_id;
+
+						for(var k=0;k<$scope.quizData.roomData.length;k++){
+							if($scope.quizData.roomData[k].id===room_id){
+								var room_disp_name = $scope.quizData.roomData[k].roomName;
+								if($scope.quizData.roomData[k].numRoom > 0){
+									room_disp_name = room_disp_name+' '+$scope.quizData.roomData[k].numRoom;
+								}
+							$scope.quizData.pinImages[i].commentData[j].room_name = room_disp_name;
+							break;
+							}
+						}
+					}
+				}
+			}
 		}
 
 		if($scope.quizData.apptData.length>0){
 			var floorPlanLoc = $scope.quizData.apptData[0].floorPlanLoc;
-				if(floorPlanLoc!=null && floorPlanLoc!=""){
-					var floorPlans = floorPlanLoc.split(',');
-					$scope.quizData.apptData[0].floorPlanFiles = floorPlans;
+			if(floorPlanLoc!=null && floorPlanLoc!=""){
+				var floorPlans = floorPlanLoc.split(',');
+				$scope.quizData.apptData[0].floorPlanFiles = floorPlans;
+			}
+		}
+
+		if($scope.quizData.conceptData.length>0){
+			for(var i =0;i<$scope.quizData.conceptData.length;i++){
+				if($scope.quizData.conceptData[i].feedbackData.length > 0){
+					var feedbObj = $scope.quizData.conceptData[i].feedbackData;
+					var feedFile = feedbObj[0].file1.split(',');
+					$scope.quizData.conceptData[i].feedbackData[0].file1 = feedFile;
+					$scope.quizData.conceptData[0].feedbackFile = feedFile;
 				}
+			}
 		}
 
 
@@ -672,8 +694,17 @@ $scope.submitData = function(quizId, filetype, roomName, roomId){
 }
  
 $scope.launchedPrjs = function(){
-
+	projectStatus =1;
+	$scope.getProjectListing();
 	
+}
+$scope.pendingPrjs = function(){
+	projectStatus =-1;
+	$scope.getProjectListing();
+}
+$scope.activePrjs = function(){
+	projectStatus =0;
+	$scope.getProjectListing();
 }
  function isEmpty(obj) {
 

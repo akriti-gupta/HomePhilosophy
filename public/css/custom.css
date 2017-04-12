@@ -268,7 +268,7 @@
   width: 80%;
   margin:0 auto;
   padding: 0px;
-  font-size:25px;
+  font-size:20px;
 }
 .divider {
   border-top:2px solid rgb(47, 185, 175);
@@ -305,8 +305,8 @@
 .custom-divider:after{
     content: "";
     position: absolute;
-    width: calc(50% - 180px);
-    top: 30px;
+    width: calc(50% - 140px);
+    top: 24px;
     height: 2px;
     background: #000;
 }
@@ -632,7 +632,7 @@ button:focus {outline:0;}
   clear: both;
   position: relative;
   top:20%;
-  width:45%;
+  width:50%;
   margin: 0 auto;
   text-align: center;
   background-color: #f5f5f5;
@@ -666,6 +666,7 @@ button:focus {outline:0;}
 }
 .custom-subtext{
   font-size: 18px;
+  text-transform: inherit;
 }
 .custom-dtls{
   position:relative;top:22%;width:45%;margin:0 auto;text-align:center;
@@ -787,7 +788,7 @@ padding-top:6px; padding-bottom:6px;letter-spacing:1px;
 }
 
 .step-txt-main{
- font-family: "Montserrat-Regular";
+ font-family: "PlayfairDisplay-Regular";
  font-size:28px;
  text-align: center;
  margin:0px;
@@ -994,12 +995,11 @@ padding-left:10px;
 
 .hp-logo-luxury{
   
-  height:80%;
+  height:100%;
   width:30%;
-  background:url('/images/luxury/logo.png') no-repeat center;
+  background:url('/images/luxury/logo-luxury.png') no-repeat center;
   margin: 0px auto;
   background-size: 100%;
-  margin-top:12px;
 }
 
 /*.hp-logo img {
@@ -1279,8 +1279,7 @@ padding:40px 0px 60px;font-size:22px;margin:0;font-family:PlayfairDisplay-Regula
   
 }
 .about-maintext{
-  /*font-family: PlayfairDisplay;*/
-  font-family: OpenSans-Regular;
+  font-family: PlayfairDisplay;
   font-style: normal;
   font-size: 19px;
   color: rgb(37, 37, 37);
@@ -1289,7 +1288,7 @@ padding:40px 0px 60px;font-size:22px;margin:0;font-family:PlayfairDisplay-Regula
   margin: 0 auto;
   padding-top: 60px;
   padding-bottom: 60px;
-  max-width: 710px; 
+  /*max-width: 710px; */
 }
 .about-title{
   font-size: 25px;

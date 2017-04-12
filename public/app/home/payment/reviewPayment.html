@@ -54,13 +54,13 @@
 	<section ng-init="initPayment()" style="width:80%;margin:0 auto;">
 	 	<div style="padding-top:100px;width:90%;margin:0 auto;">
 		<div class="row qz-row-dsg"  style="display:table;border:1px solid black;padding-bottom:0px;">
-		    <div class="col-md-6 col-xs-4 cust-view-tab">ROOM</div>
+		    <div class="col-md-4 col-xs-4 cust-view-tab">ROOM</div>
 		    <div class="col-md-4 col-xs-2 cust-view-tab">PACKAGE</div>
-		    <div class="col-md-2 col-xs-2 cust-view-tab">PRICE</div>
+		    <div class="col-md-4 col-xs-2 cust-view-tab">PRICE</div>
 		</div>
 
 	 	<div  class="row qz-row-dsg" style="display:table;border:1px solid black;padding-bottom:0px;" ng-repeat="room in roomPerPkg track by $index">
-			<div class="col-md-6 col-xs-6 cust-view-tab">
+			<div class="col-md-4 col-xs-4 cust-view-tab" style="padding:10px 0px;">
 		        <figure>
 
 		            <img ng-if="room.roomName.indexOf(' ')!=-1" class="center-block" ng-src="{{roomImage[room.roomName.substr(0,room.roomName.indexOf(' '))]}}" style="height:100px;width:auto;"/>
@@ -74,13 +74,14 @@
 				<select ng-init="packages[room.pkgValue-1]" ng-change="updateTotal()" ng-model="roomPkg[$index]" ng-options="option.name for option in packages"></select>
 			</div>
 
-			<div class="col-md-2 col-xs-2 cust-view-tab">{{roomPkg[$index].pkgValue}}</div>
+			<div class="col-md-4 col-xs-2 cust-view-tab">{{roomPkg[$index].pkgValue}}</div>
 		</div>
 
 
 		<div class="row qz-row-dsg" style="display:table;padding-bottom:50px;padding-top:20px;">
-			<div class="col-md-12 col-xs-6 	" style="text-align:right;border:0px;padding-right:0px;margin-left:10px;"><span style="font-size:18px;">BUY FOR ME</span>
-				<input type="checkbox" ng-model="buyForMe" ng-change="updateTotal()" style="width:50px;height:20px;margin:0px;"> 	
+			<div class="col-md-12 col-xs-6 	" style="text-align:right;border:0px;padding-right:0px;font-family:PlayfairDisplay-Regular;font-size:16px;">Want hassle-free delivery to your home?
+				<input type="checkbox" ng-model="buyForMe" ng-change="updateTotal()" style="height:20px;margin:0px;margin-left:10px;vertical-align:middle;"> 
+			 		<span style="font-size:16px;font-family:OpenSans-Regular;">BUY FOR ME</span>
 			</div>
 		</div>
 
@@ -89,8 +90,8 @@
 	  			<div class="payment-title"> Each Package includes</div>
 	  			<div class="payment-item"><span class="glyphicon glyphicon-ok" style="font-size:12px;"></span>&nbsp;A complimentary meeting with your designer</div>
 	  			<div class="payment-item"><span class="glyphicon glyphicon-ok" style="font-size:12px;"></span>&nbsp;A complimentary measurement of your space at a time convenient to you</div>
-	  			<div class="payment-item"><span class="glyphicon glyphicon-ok" style="font-size:12px;"></span>&nbsp;Several First Look moodboards</div>
-	  			<div class="payment-item"><span class="glyphicon glyphicon-ok" style="font-size:12px;"></span>&nbsp;Personalized Shopping List</div>
+	  			<div class="payment-item"><span class="glyphicon glyphicon-ok" style="font-size:12px;"></span>&nbsp;Several concept boards</div>
+	  			<div class="payment-item"><span class="glyphicon glyphicon-ok" style="font-size:12px;"></span>&nbsp;Personalized shopping list</div>
 	  			<div class="payment-item"><span class="glyphicon glyphicon-ok" style="font-size:12px;"></span>&nbsp;Online feedback session with your designer</div>
 	  			<div class="payment-item"><span class="glyphicon glyphicon-ok" style="font-size:12px;"></span>&nbsp;Hassle-free delivery to your home with Buy For Me</div>
 	  		</div>
@@ -150,6 +151,7 @@
 			<input type="hidden" name="tax_percentage" value="0.00" />
 			<input type="hidden" name="total_amount" value="{{total_amount}}" />
 			<input type="hidden" name="success_url" value="http://homephilosophy.com.sg/tell-us-more" />
+			<!-- <input type="hidden" name="success_url" value="http://localhost:8006/tell-us-more" /> -->
 			<input type="hidden" name="cancel_url" value="http://homephilosophy.com.sg/dashboard" />
 			<input type="hidden" name="signature" value="{{signature}}" />
 			<input type="hidden" name="signature_algorithm" value="sha1" />

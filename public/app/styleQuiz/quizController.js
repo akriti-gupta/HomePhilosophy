@@ -10,6 +10,7 @@ angular.module("app")
 	$scope.disable = true;
 	$scope.showDesignStyle = false;
 	$scope.room_comments = "";
+	$scope.room_commentsArr = [];
 	$scope.imgCmtsArr = [];
 	$scope.selRoomNamesArr = [];
 	$scope.selectedImages = [];
@@ -23,6 +24,10 @@ angular.module("app")
 	var arrComments = [];
 	var roomCommentArr = [];
 	var last_active_room_id = 0;
+	var old_room_id = 0;
+
+	$scope.imgRoomComments =[];
+	var activeRoomId = 0;
 
 	
 	 $scope.units = [
@@ -1045,6 +1050,9 @@ $scope.gridWidth=300;
 			case 7:	$scope.pagenum++;
 					$scope.progress=false;
 					$scope.computeStyle();
+					if(mvIdentity.isAuthenticated()){
+						$scope.usrLoggedIn = true;
+					}
 					//$scope.refresh(); 
 					scrollTop();	
 					  break;
@@ -1058,20 +1066,31 @@ $scope.gridWidth=300;
 						
 					}
 					
-					quizResult.setCustSelections({"roomSelected":$scope.selectedRoom,"quizImgSelected":$scope.selectedImages,"pinImages":imgsLiked});	
+					// Room Tabs Name in Pin Comment Box are generated from $scope.selRoomNamesArr,
+					//while the Room Tab index is $index based. Mapping selRoomNamesArr.room_id in imgRoomComments.
+					for(var i =0;i<$scope.imgRoomComments.length;i++){
+						var room_idx = $scope.imgRoomComments[i].room_id;
+						var quizRoomId = $scope.selRoomNamesArr[room_idx].room_id;
+						$scope.imgRoomComments[i].room_id = quizRoomId;
+						$scope.imgRoomComments[i].num_room = $scope.selRoomNamesArr[room_idx].num_room;
+						$scope.imgRoomComments[i].img_loc = $scope.imgRoomComments[i].img_loc.replace('images/styles/styleBoards/','');
+					}
+
+					console.log($scope.imgRoomComments);
+					quizResult.setCustSelections({"roomSelected":$scope.selectedRoom,"quizImgSelected":$scope.selectedImages,"pinImages":imgsLiked,"pinComments":$scope.imgRoomComments});	
 					quizResult.storeStyle($scope.userStyle,$scope.board);
 					
 					if(mvIdentity.isAuthenticated()){
-						$scope.usrLoggedIn = true;
 						var result = quizResult.getStyle();
 						var userSelectionInfo = quizResult.getCustSelections();
 		  				mvUserQuiz.saveUserData(userSelectionInfo, result).then(function(userQuiz){
 							$scope.showResult = true;
-		  					quizResult.setUserCurrQuiz(userQuiz[0].data.quizId);
+		  					quizResult.setUserCurrQuiz(userQuiz[0].quizId);
 		  					quizResult.setInsertedRooms(userQuiz[1].data.results.roomData);
 		  					$scope.pagenum++;
 		  				}, function(reason){
 		  					console.log(reason);
+		  					alert(reason);
 		  				});
 
 		  				
@@ -1286,7 +1305,6 @@ $scope.gridWidth=300;
 		if($scope.pagenum==1){ // Allow multiple room selections
 			
 			//If room already exists, user clicked a room icon twice to deselect, remove image ID from array
-			//var index = $scope.selectedRoom.indexOf(imageId);
 			var index = -1;
 			for(var i in $scope.selectedRoom){
 				if($scope.selectedRoom[i].room_id===imageId){
@@ -1294,15 +1312,10 @@ $scope.gridWidth=300;
 					break;
 				}
 			}
-			// console.log("index is: "+index);
 			if(index>-1){
 				$scope.selectedRoom.splice(index, 1);
-				// console.log("After splicing, room arr is: "+$scope.selectedRoom);
 			}
-			
-				//$scope.selectedRoom.push(imageId);
-				else $scope.selectedRoom.push({"room_id":imageId,"room_name":roomName,"room_num":1,"room_disp_name":roomDispName});
-				// console.log("After new image, room arr is: "+$scope.selectedRoom);
+			else $scope.selectedRoom.push({"room_id":imageId,"room_name":roomName,"room_num":1,"room_disp_name":roomDispName});
 			
 			if($scope.selectedRoom.length>=1){
 				$scope.disable=false
@@ -1313,10 +1326,15 @@ $scope.gridWidth=300;
 			// console.log("Final, room arr is: "+$scope.selectedRoom);
 		}
 		else{
-			//$scope.selectedImages[$scope.pagenum] =  imageId;
 			$scope.selectedImages.push(imageId);
+
+			if($scope.pagenum===8){
+				$scope.arrImgLiked.length = 0;
+				$scope.imgRoomComments.length = 0;
+			}
 			if($scope.pagenum!=7)
 				$scope.nextPage();
+
 		}
 	}
 
@@ -1332,11 +1350,9 @@ $scope.gridWidth=300;
 		if(mvIdentity.isAuthenticated()){
 			var result = quizResult.getStyle();
 			var userSelectionInfo = quizResult.getCustSelections();
-
-			console.log('$scope.showResult is: '+$scope.showResult);
 			mvUserQuiz.saveUserData(userSelectionInfo, result).then(function(userQuiz){
 				$scope.showResult = true;
-					quizResult.setUserCurrQuiz(userQuiz[0].data.quizId);
+					quizResult.setUserCurrQuiz(userQuiz[0].quizId);
 					quizResult.setInsertedRooms(userQuiz[1].data.results.roomData);
 					// $location.path('/tell-us-more');
 					if(payment.getPayPkg()===-1){
@@ -1387,7 +1403,7 @@ $scope.gridWidth=300;
 	function scrollTop(){
 		if($scope.pagenum>=3 && $scope.pagenum<=8){
 			setTimeout(function() {
-	   		 $(window).scrollTop(350);  
+	   		 $(window).scrollTop(50);  
 			}, 0);
 		}
 		else{
@@ -1398,8 +1414,6 @@ $scope.gridWidth=300;
 	}
 
 	$scope.roomNumChanged = function (id,room,disp_name){
-		console.log($scope[room]);
-		console.log($scope.selectedRoom);
 		var roomExists = false;
 
 		if($scope[room].value===0){
@@ -1430,7 +1444,6 @@ $scope.gridWidth=300;
 			}
 			
 		}
-		console.log($scope.selectedRoom);
 		if($scope.selectedRoom.length>0){
 			$scope.disable = false;
 		}
@@ -1443,25 +1456,22 @@ $scope.gridWidth=300;
 		var roomDsgArr =[];
 		var room = 'numMaster';
 		
-		
 		for(var i in $scope.selectedRoom){
 			if($scope[$scope.selectedRoom[i].room_name].value===0){
 				$scope[$scope.selectedRoom[i].room_name].id = 1;
 				$scope[$scope.selectedRoom[i].room_name].value = 1;
 				$scope[$scope.selectedRoom[i].room_name].label = "1";
 			}
-			// else{
-				$scope.selectedRoom[i].room_num = $scope[$scope.selectedRoom[i].room_name];
-			// }
+			$scope.selectedRoom[i].room_num = $scope[$scope.selectedRoom[i].room_name];
 		}
 		for (var i in $scope.selectedRoom){
 			if($scope.selectedRoom[i].room_num.id > 1){
 				for(var j=1; j<= $scope.selectedRoom[i].room_num.id; j++){
-					$scope.selRoomNamesArr.push($scope.selectedRoom[i].room_disp_name+' '+j);
+					$scope.selRoomNamesArr.push({room_id:$scope.selectedRoom[i].room_id,num_room:j,room_name:$scope.selectedRoom[i].room_disp_name+' '+j});
 				}
 			}
 			else{
-				$scope.selRoomNamesArr.push($scope.selectedRoom[i].room_disp_name);
+				$scope.selRoomNamesArr.push({room_id:$scope.selectedRoom[i].room_id,num_room:0,room_name:$scope.selectedRoom[i].room_disp_name});
 			}
 		}
 		// console.log($scope.selectedRoom);
@@ -1483,8 +1493,56 @@ $scope.gridWidth=300;
 		}
 	}
 
-	$scope.loadComments = function(img_id,room_id){
+	$scope.loadComments1 = function(img_id,room_id,img_loc){
 		$scope.img_id = img_id;
+		$scope.img_loc = img_loc;
+		var existingComment = false;
+		if($scope.imgRoomComments.length>0){
+			for(var i=0;i<$scope.imgRoomComments.length;i++){
+				if(img_id===$scope.imgRoomComments[i].img_id && room_id===$scope.imgRoomComments[i].room_id){
+					$scope.room_comments = $scope.imgRoomComments[i].comments;
+					existingComment = true;
+					break;
+				}
+			}
+		}
+		if(!existingComment){
+			$scope.room_comments = "";
+		}
+		old_room_id=room_id;
+	}
+
+
+	$scope.saveCmtsOnTabClick1 = function(room_id,isSubmitted){
+		var existingComment = false;
+		activeRoomId = room_id;
+		for(var i=0;i<$scope.imgRoomComments.length;i++){
+			if($scope.img_id===$scope.imgRoomComments[i].img_id && old_room_id===$scope.imgRoomComments[i].room_id){
+				$scope.imgRoomComments[i].comments = $scope.room_comments;
+				existingComment = true;
+				break;
+			}
+		}
+		if(!existingComment){
+			$scope.imgRoomComments.push({img_id:$scope.img_id,room_id:old_room_id,img_loc:$scope.img_loc,comments:$scope.room_comments});
+		}
+		if(!isSubmitted){
+			$scope.loadComments1($scope.img_id,room_id,$scope.img_loc);
+		}
+		else{
+			old_room_id = 0;
+		}
+	}
+
+	$scope.submitComments1 = function(){
+		$scope.saveCmtsOnTabClick1(activeRoomId,true);
+	}
+
+
+	/*
+	$scope.loadComments = function(img_id,room_id,img_loc){
+		$scope.img_id = img_id;
+		$scope.img_loc = img_loc;
 		var comments = "";
 		if(arrComments.length > 0){
 			for(var i = 0; i< arrComments.length ; i++){
@@ -1519,7 +1577,7 @@ $scope.gridWidth=300;
 				}
 			}
 			if(!hasCmt)
-				arrComments.push({"image_id":$scope.img_id,"comments":arrCommentsTmp});
+				arrComments.push({"image_id":$scope.img_id,"image_loc":$scope.img_loc,"comments":arrCommentsTmp});
 		}
 		else{
 		for(var i =0; i< arrComments.length; i++){
@@ -1539,7 +1597,7 @@ $scope.gridWidth=300;
 			if($scope.room_comments!=""){
 				var arrCommentsTmp=[];
 				arrCommentsTmp.push({"room_id":last_active_room_id,"room_comments":$scope.room_comments})
-				arrComments.push({"image_id":$scope.img_id,"comments":arrCommentsTmp});
+				arrComments.push({"image_id":$scope.img_id,"image_loc":$scope.img_loc,"comments":arrCommentsTmp});
 			}	
 		}
 		else if(idx_image_obj>=0 && idx_cmt_obj>=0){ //Cmt exits
@@ -1555,15 +1613,19 @@ $scope.gridWidth=300;
 		}
 		// console.log(arrComments);
 		last_active_room_id = room_id;
-		$scope.loadComments($scope.img_id,room_id);
+		$scope.loadComments($scope.img_id,room_id,$scope.img_loc);
 		}
+		console.log(arrComments);
+		$scope.pinComments = arrComments;
 	}
 
 	$scope.submitComments = function(item){
 		var room_id = item.currentTarget.getAttribute("data-room-id");
+		var qz_room_id = item.currentTarget.getAttribute("data-qz-room-id");
+		var img_loc = item.currentTarget.getAttribute("data-img-loc");
 		$scope.saveCmtsOnTabClick(room_id);
 		last_active_room_id = 0;
-	}
+	}*/
 
 	/*$scope.addRoomToQuiz = function(){
 		console.log('Before going to pricing,roomSelected is: ');

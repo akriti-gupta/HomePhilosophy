@@ -240,8 +240,8 @@ $scope.processPayment = function(){
                   colours:colours,
                   extraInfo:$scope.extraInfo,
                   file1:null,file2:$scope.url,
-                  email:$scope.inputEmail,
-                  phone:$scope.inputPhone,
+                  // email:$scope.inputEmail,
+                  // phone:$scope.inputPhone,
                   quizId:quizId};
 
         if($scope.fileArr.length>0){

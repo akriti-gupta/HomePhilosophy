@@ -44,8 +44,7 @@
         	if(infoObj){
         		roomArr = infoObj.roomSelected;	
         		imgArr = infoObj.quizImgSelected;
-        		pinImages = infoObj.pinImages;
-				custSelections = infoObj;
+        		custSelections = infoObj;
 			}
         	
         }

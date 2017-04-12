@@ -1,7 +1,6 @@
 var numImgLiked = 0;
 $(document).ready(function(){
 	// alert('Doc ready');
-
 var touch = window.ontouchstart
             || (navigator.MaxTouchPoints > 0)
             || (navigator.msMaxTouchPoints > 0);
@@ -118,8 +117,9 @@ $(document).on('click', '.comment', function(e) {
 		var current_img=$(this).attr('data-image');
 		$(".img-comment-box1").attr('src', current_img);
 		
-		$(".btn-comment").attr('data-img-id', $(this).attr('data-image-id'));
-		$(".btn-comment").attr('data-room-id', 0);
+		// $(".btn-comment").attr('data-img-id', $(this).attr('data-image-id'));
+		// $(".btn-comment").attr('data-room-id', 0);
+		// $(".btn-comment").attr('data-img-loc', $(this).attr('data-image'));
     }
    
     // if($(document).width() > 736) {
@@ -152,28 +152,33 @@ $(document).on('click', '.pinboard-comment-litem', function(e) {
 
 $(document).on('click','.btn-comment',function(e){
 	var pinRoomArr = $('.pinboard-comment-litem');
-	for(var i = 0; i<pinRoomArr.length;i++){
-	 	var curr_room_tab = pinRoomArr[i];
-	 	if($(curr_room_tab).hasClass('active')){
-	 		$(this).attr('data-room-id', $(curr_room_tab).attr('data-room-id'));
-	 	}
-	}
+	// for(var i = 0; i<pinRoomArr.length;i++){
+	//  	var curr_room_tab = pinRoomArr[i];
+	//  	if($(curr_room_tab).hasClass('active')){
+	//  		$(this).attr('data-room-id', $(curr_room_tab).attr('data-room-id'));
+	//  		$(this).attr('data-qz-room-id', $(curr_room_tab).attr('data-qz-room-id'));
+	//  	}
+	// }
 	//After comment is submitted, active to be attached to room id 0.
 	$(pinRoomArr[0]).siblings(".active").removeClass('active');
     $(pinRoomArr[0]).addClass('active');
 });
 
+$(document).on('click','.pin-submit',function(e){
+	numImgLiked=0;
+});
+
 $(document).on('click','.square',function(e){
 	e.preventDefault();
 	var isSelected=false;
-	if($(this).hasClass('style-img-selected')){
+	if($(this).hasClass('color-selected')){
 		isSelected=true;
 	}
 	if(isSelected){
-		$(this).removeClass('style-img-selected');
+		$(this).removeClass('color-selected');
 	}
 	else{
-		$(this).addClass('style-img-selected');
+		$(this).addClass('color-selected');
 	}
 });
 
