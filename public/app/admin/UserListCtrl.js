@@ -349,7 +349,7 @@ $scope.details = function(index,tabIdx){
 
 		if($scope.quizData.pinImages.length>0){
 			for(var i=0;i<$scope.quizData.pinImages.length;i++){
-				if($scope.quizData.pinImages[i].commentData.length>0){
+				if(typeof $scope.quizData.pinImages[i].commentData!= 'undefined' && $scope.quizData.pinImages[i].commentData.length>0){
 					for(var j=0;j<$scope.quizData.pinImages[i].commentData.length;j++){
 						var commentObj = $scope.quizData.pinImages[i].commentData[j];	
 						var room_id=commentObj.room_id;
