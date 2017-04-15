@@ -12,6 +12,7 @@ $scope.pendingDropFiles = [];
 $scope.pkgNames = payment.getPackages();
 $scope.address=' ';
 $scope.person=' ';
+$scope.email=' ';
 $scope.contact;
 $scope.projectArr =[];
 $scope.feedbackArr = [];
@@ -82,7 +83,8 @@ function storeQuizInfo(quizData){
 }
 function validateFormData(){
 	if($scope.apptDate!=null){
-		if($scope.contact===' ' || $scope.address === ' ' || $scope.person === ' ' || $scope.apptTime===null)
+		if($scope.contact===' ' || $scope.address === ' ' || $scope.person === ' ' || $scope.apptTime===null ||
+			$scope.email===' ')
 			return false;
 	}
 	return true;
@@ -467,16 +469,18 @@ $scope.getProjectData = function(){
 		populateQuizArray(projectData);
 		console.log('Formatted Result :');
 		console.log($scope.projectArr);
-
-
+	
 	}, function(reason){
 			console.log('Cant find user Data');
 			mvNotifier.notify('Please try again later/ contact the site administrator. '+reason);
 			$location.path="/";
 		});
-	if($routeParams.launched){
+	// $location.url($location.path());
+	// if($routeParams.launched){
+	if(quizResult.getLaunchKey()){
 		angular.element('#launchedModal').modal('show');
 	}
+	console.log($location.path());
 }
 
 function setQuizData(index){
@@ -534,11 +538,6 @@ $scope.addRoom=function(){
 	payment.clearPayPkg();
 	payment.clearPkgPerRoom();
 	quizResult.clearCustSelections();
-
-	//Call function to store style.
-	// var oldQzData = $scope.projectArr[0];
-	// storeQuizInfo(oldQzData);
-	
 	$location.path('/style-quiz');
 }
 
@@ -549,6 +548,7 @@ $scope.loadMtngData=function(row_id){
 		$scope.person = $scope.projectArr[row_id].apptData[0].contactPerson;
 		$scope.contact = $scope.projectArr[row_id].apptData[0].contact;
 		$scope.address = $scope.projectArr[row_id].apptData[0].address;
+		$scope.email = $scope.projectArr[row_id].apptData[0].email;
 		$scope.apptDate = moment($scope.projectArr[row_id].apptData[0].apptDate).format('YYYY-MM-DD hh:mm:ss A');
 		$scope.apptTime = $scope.apptDate;
 	}	
@@ -629,7 +629,7 @@ $scope.saveAppointment = function(item){
 					var apptDateTime = moment(date).format('YYYY-MM-DD HH:mm:ss');
 					isApptMade = 1;
 					apptData = {"customerId":customerId,"quizId":quizId,"address":$scope.address,
-							 "person":$scope.person,"contact":$scope.contact,
+							 "person":$scope.person,"contact":$scope.contact,"email":$scope.email,
 							 "apptDate":apptDateTime,"apptTime":apptDateTime,
 							 "floorPlanLoc":'',"floorPlanStatus":-1,
 							 "apptStatus":0};
@@ -661,7 +661,7 @@ $scope.saveAppointment = function(item){
 					}
 					
 					apptData = {"customerId":customerId,"quizId":quizId,"roomId":roomId,"address":$scope.address,
-							 "person":$scope.person,"contact":$scope.contact,
+							 "person":$scope.person,"contact":$scope.contact,"email":$scope.email,
 							 "apptDate":null,"apptTime":null,
 							 "floorPlanLoc":files,"floorPlanStatus":0,
 							 "apptStatus":-1};
@@ -697,7 +697,7 @@ $scope.saveAppointment = function(item){
 							files = uploadedFiles;
 						}
 						apptData = {"customerId":customerId,"quizId":quizId,"address":$scope.address,
-									 "person":$scope.person,"contact":$scope.contact,
+									 "person":$scope.person,"contact":$scope.contact,"email":$scope.email,
 									 "apptDate":apptDateTime,"apptTime":apptDateTime,
 									 "floorPlanLoc":files,"floorPlanStatus":0,
 									 "apptStatus":0};
@@ -727,6 +727,11 @@ $('#calendarModal').on('hidden.bs.modal', function () {
 	window.location.reload(true);
 });
 
+$('#launchedModal').on('hidden.bs.modal', function () {
+	$location.search({});
+	quizResult.setLaunchKey(false);
+});
+
 
 $scope.getFirstLook = function(index, roomId){
 	
@@ -744,8 +749,13 @@ $scope.getFirstLook = function(index, roomId){
 	if($scope.projectArr[index].shoppingListData.length>0){
 		for(var i =0;i<$scope.projectArr[index].shoppingListData.length; i++){
 			if($scope.projectArr[index].shoppingListData[i].concept.roomId === roomId){
-				$scope.firstLookArr.push($scope.projectArr[index].shoppingListData[i]);
 				hasShoppingList = true;
+				if($scope.projectArr[index].shoppingListData[i].concept.files.indexOf('.pdf')===-1){
+					$scope.firstLookArr.push($scope.projectArr[index].shoppingListData[i]);
+				}
+				else{
+					$scope.shoppingList = $scope.projectArr[index].shoppingListData[i].concept.files;
+				}
 			}
 		}
 		if(hasShoppingList){
@@ -1009,10 +1019,6 @@ $scope.$on('$locationChangeStart', function( event ) {
 	        event.preventDefault();
 	    }
 	}
-	 if ($location.$$search.launched) {
-        delete $location.$$search.launched;
-        $location.$$compose();
-    }
 });
 
 

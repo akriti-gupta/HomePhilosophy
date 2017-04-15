@@ -255,7 +255,9 @@ $scope.processPayment = function(){
             }
             mvUserQuiz.saveQuizMiscData(data).then(function(response){
               $location.search({});
-              $location.path('/dashboard').search({'launched':'true'});    
+              quizResult.setLaunchKey(true);
+              // $location.path('/dashboard').search({'launched':'true'});    
+              $location.path('/dashboard');
             },function(reason){
 
             });
@@ -267,8 +269,10 @@ $scope.processPayment = function(){
         }
         else{
           mvUserQuiz.saveQuizMiscData(data,quizId).then(function(response){
-            $location.search({});
-            $location.path('/dashboard').search({'launched':'true'});    
+             $location.search({});
+            // $location.path('/dashboard').search({'launched':'true'});    
+            quizResult.setLaunchKey(true);
+            $location.path('/dashboard');
           },function(reason){
 
           });

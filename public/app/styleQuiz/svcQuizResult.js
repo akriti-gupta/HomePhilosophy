@@ -14,6 +14,7 @@
         var insRoomArr = [];
         var prevSelectedRoom = [];
         var knownStyle = false;
+        var launchKey = false;
 
         var setIsKnownStyle = function(isKnown){
         	knownStyle = isKnown;
@@ -127,6 +128,13 @@
 		 	return showNavBar;
 		 }
 
+		 var setLaunchKey = function(key){
+		 	launchKey = key;
+		 }
+
+		 var getLaunchKey = function(){
+		 	return launchKey;
+		 }
 
 		return {
 			    storeStyle: storeStyle,
@@ -149,7 +157,9 @@
 			   	setIsKnownStyle: setIsKnownStyle,
 			   	getIsKnownStyle: getIsKnownStyle,
 			   	setSelectedRooms: setSelectedRooms,
-			   	getSelectedRooms: getSelectedRooms
+			   	getSelectedRooms: getSelectedRooms,
+			   	setLaunchKey: setLaunchKey,
+			   	getLaunchKey: getLaunchKey
 
 			  };
         });

@@ -174,7 +174,7 @@ CREATE TABLE IF NOT EXISTS `cust_appointment` (
   `apptDate` date DEFAULT NULL,
   `apptTime` time DEFAULT NULL,
   `contactPerson` varchar(255) DEFAULT NULL,
-  `contact` int(11) DEFAULT NULL,
+  `contact` int(15) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `floorPlanLoc` varchar(255) DEFAULT NULL,
   `floorPlanStatus` int(11) DEFAULT '-1',
@@ -286,25 +286,18 @@ CREATE TABLE IF NOT EXISTS `contact_us` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-
 CREATE TABLE IF NOT EXISTS `pin_comments` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `pin_img_id` INT(10) UNSIGNED NULL,
-  `room_id` INT(10) UNSIGNED NULL,
-  `comments` VARCHAR(200) NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pin_img_id` int(10) unsigned DEFAULT NULL,
+  `room_id` int(10) unsigned DEFAULT NULL,
+  `comments` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  INDEX `pin_comments_room_id_foreign_idx` (`room_id` ASC),
-  INDEX `pin_comments_pin_img_id_foreign_idx` (`pin_img_id` ASC),
-  CONSTRAINT `pin_comments_room_id_foreign`
-    FOREIGN KEY (`room_id`)
-    REFERENCES `testSchema`.`room` (`id`)
-    ON DELETE CASCADE
-    ON UPDATE RESTRICT,
-  CONSTRAINT `pin_comments_pin_img_id_foreign`
-    FOREIGN KEY (`pin_img_id`)
-    REFERENCES `testSchema`.`pin_images` (`id`)
-    ON DELETE CASCADE
-    ON UPDATE RESTRICT);
+  KEY `pin_comments_room_id_foreign_idx` (`room_id`),
+  KEY `pin_comments_pin_img_id_foreign_idx` (`pin_img_id`),
+  CONSTRAINT `pin_comments_pin_img_id_foreign` FOREIGN KEY (`pin_img_id`) REFERENCES `pin_images` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `pin_comments_room_id_foreign` FOREIGN KEY (`room_id`) REFERENCES `cust_room_selection` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
 
 
 ALTER TABLE `concept_board`
@@ -325,3 +318,5 @@ ADD COLUMN `file1` VARCHAR(500) NULL AFTER `concept_id`;
 ALTER TABLE `final_look_feedback` 
 ADD COLUMN `file1` VARCHAR(500) NULL AFTER `concept_id`;
 
+ALTER TABLE `cust_appointment` 
+ADD COLUMN `email` VARCHAR(50) NULL AFTER `contact`;

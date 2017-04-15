@@ -684,6 +684,7 @@ exports.saveAppointment = function(req,res,next){
 								   	apptData.person,
 								   	apptData.contact,
 								   	apptData.address,
+								   	apptData.email,
 								   	apptData.floorPlanStatus,
 								   	apptData.floorPlanLoc,
 								   	apptData.apptStatus,
@@ -691,7 +692,7 @@ exports.saveAppointment = function(req,res,next){
 									];
 
 					var qry_upd_appt = 'update cust_appointment set apptDate = ?, apptTime=?,'+
-									 'contactPerson=?, contact=?, address=?,floorPlanStatus=?,'+
+									 'contactPerson=?, contact=?, address=?,email=?,floorPlanStatus=?,'+
 									 'floorPlanLoc=?, apptStatus=? where quizId=?';
         			
 					conn.query(qry_upd_appt,usrApptUpdData, function(err, result, rows, fields) {
@@ -718,6 +719,7 @@ exports.saveAppointment = function(req,res,next){
 								   	contactPerson: apptData.person,
 								   	contact: apptData.contact,
 								   	address:apptData.address,
+								   	email:apptData.email,
 								   	floorPlanStatus: apptData.floorPlanStatus,
 								   	floorPlanLoc: apptData.floorPlanLoc,
 								   	apptStatus: apptData.apptStatus,
@@ -829,14 +831,16 @@ exports.saveShoppingList = function(req,res,next){
 	mysqlConn.getConnection(function(err,conn){
 		if(err){return next(err);}
 		
-        if(conn){
+        else if(conn){
 	        conn.query('insert into shopping_list(quizId,roomId,files,status,created_at,updated_at,notes) values ?', [data], function(err, results, fields){
 				if(err){
 					conn.release();
 					return res.send({success: false, reason:err.toString()});
 				}
-				conn.release();
-				return res.send({success: true});
+				else{
+					conn.release();
+					return res.send({success: true});
+				}
 			});
     	}
     });

@@ -322,128 +322,6 @@ $scope.getProjectListing = function(){
 		$location.path="/";
 	});
 }
-
-
-/*$scope.details = function(projectIndex,roomIndex, tabIdx){
-
-	
-	$scope.toggleMainView();
-	$scope.toggleTab(tabIdx);
-	console.log(projectIndex);
-	console.log(roomIndex);
-	
-	//Customer name clicked. 
-	$scope.prjDetails = $scope.projects[projectIndex];
-
-	var quizId =  $scope.prjDetails.roomData[roomIndex].quizId;
-	var quizData;
-
-	for(var i=0;i<$scope.prjDetails.quizData.length;i++){
-		if($scope.prjDetails.quizData[i].quizId===quizId){
-			quizData =$scope.prjDetails.quizData[i];
-			break;
-		}
-	}
-	var quizDataArr = [];
-	quizDataArr.push(quizData);
-
-	
-	console.log('$scope.prjDetails is:');
-	console.log($scope.prjDetails);
-	
-	$scope.prjDetailsOrg = {};
-
-
-	var apptData = $scope.prjDetails.apptData;
-
-	var relApptData = [];
-	for(var i =0;i<apptData.length;i++){
-		if(apptData[i].quizId === quizData.quizId){
-			var floorPlanLoc = apptData[i].floorPlanLoc;
-			if(floorPlanLoc!=null && floorPlanLoc!=""){
-				var floorPlans = floorPlanLoc.split(',');
-				for(var j=0;j<floorPlans.length;j++){
-					floorPlans[j] = './uploads/'+floorPlans[j];
-				}
-				apptData[i].floorPlanFiles =floorPlans;
-			}
-			relApptData.push(apptData[i]);
-		}
-	}
-	
-	var relCncptData = [];
-	for(var i =0;i<$scope.prjDetails.conceptData.length;i++){
-		if($scope.prjDetails.conceptData[i].quizId === quizData.quizId){
-			$scope.prjDetails.conceptData[i].files = './uploads/'+$scope.prjDetails.conceptData[i].files;
-			relCncptData.push($scope.prjDetails.conceptData[i]);
-		}
-	}
-
-	var relFinalLook = [];
-	for(var i =0;i<$scope.prjDetails.finalLookData.length;i++){
-		if($scope.prjDetails.finalLookData[i].quizId === quizData.quizId){
-			$scope.prjDetails.finalLookData[i].files = './uploads/'+$scope.prjDetails.finalLookData[i].files;
-			relFinalLook.push($scope.prjDetails.finalLookData[i]);
-		}
-	}
-
-	var relShoppingList = [];
-	for(var i =0;i<$scope.prjDetails.shoppingList.length;i++){
-		if($scope.prjDetails.shoppingList[i].quizId === quizData.quizId){
-			$scope.prjDetails.shoppingList[i].files = './uploads/'+$scope.prjDetails.shoppingList[i].files;
-			relShoppingList.push($scope.prjDetails.shoppingList[i]);
-		}
-	}
-
-
-	var quizDtls = $scope.prjDetails.quizDtls;
-	var colours = [];
-	var relQzDtls = [];
-
-	for(var i =0;i<quizDtls.length;i++){
-		if(quizDtls[i].quizId === quizData.quizId){
-			var files = quizDtls[i].file1;
-			if(files!=null){
-				var uploadedFiles = files.split(',');
-				for(var j=0;j<uploadedFiles.length;j++){
-					uploadedFiles[j] = './uploads/'+uploadedFiles[j];
-				}
-				quizDtls[i].file1 =uploadedFiles;
-				
-			}
-			
-			colours = $scope.prjDetails.quizDtls[i].colours.split(',');
-			$scope.prjDetails.quizDtls[i].colours = colours;
-			relQzDtls.push($scope.prjDetails.quizDtls[i]);
-
-		}
-	}
-
-	var relResultData = [];
-	for(var i =0;i<$scope.prjDetails.resultData.length;i++){
-		if($scope.prjDetails.resultData[i].quizId === quizData.quizId){			
-			relResultData.push($scope.prjDetails.resultData[i]);
-		}
-	}
-
-
-	$scope.prjDetailsOrg.quizData=quizDataArr;
-	$scope.prjDetailsOrg.apptData=relApptData;
-	$scope.prjDetailsOrg.conceptData=relCncptData;
-	$scope.prjDetailsOrg.finalLookData=relFinalLook;
-	$scope.prjDetailsOrg.shoppingList=relShoppingList;
-	$scope.prjDetaislsOrg.quizDtls=relQzDtls;
-	$scope.prjDetailsOrg.userData=$scope.prjDetails.userData;
-	$scope.prjDetailsOrg.resultData = relResultData;
-	$scope.prjDetailsOrg.imgData=$scope.prjDetails.imgData;
-	$scope.prjDetailsOrg.roomData=$scope.prjDetails.roomData;
-	$scope.prjDetailsOrg.pkgData=$scope.prjDetails.pkgData;
-	
-	
-	console.log('New list is:');
-	console.log($scope.prjDetailsOrg);
-}*/
-
 $scope.details = function(index,tabIdx){
 	var currRow = $scope.projects[index];
 	var quizObj = currRow.q;
@@ -503,9 +381,11 @@ $scope.details = function(index,tabIdx){
 			for(var i =0;i<$scope.quizData.conceptData.length;i++){
 				if($scope.quizData.conceptData[i].feedbackData.length > 0){
 					var feedbObj = $scope.quizData.conceptData[i].feedbackData;
-					var feedFile = feedbObj[0].file1.split(',');
-					$scope.quizData.conceptData[i].feedbackData[0].file1 = feedFile;
-					$scope.quizData.conceptData[0].feedbackFile = feedFile;
+					if(feedbObj[0].file1!=null && feedbObj[0].file1!=''){
+						var feedFile = feedbObj[0].file1.split(',');
+						$scope.quizData.conceptData[i].feedbackData[0].file1 = feedFile;
+						$scope.quizData.conceptData[0].feedbackFile = feedFile;
+					}
 				}
 			}
 		}
@@ -516,11 +396,6 @@ $scope.details = function(index,tabIdx){
 	}, function(reason){
 		alert('Error in fetching quiz data' +reason);
 	});
-
-	
-
-
-
 }
 
 $scope.toggleTab = function(tab){
@@ -573,7 +448,6 @@ $scope.actionUsrData = function(quizId,roomId,action){
 		data.status = 3;
 		data.action = 2;
 	}
-	console.log(data);
 	mvAdminView.modifyUsrAppt(data).then(function(success){
 		if(success){
 			mvNotifier.notify('Data modified successfully');
@@ -606,12 +480,8 @@ $scope.initRoomData = function(index){
 
 
 $scope.saveAndUpload = function(){
-	console.log($scope.notes);
-	console.log($scope.currRoom);
 	if($scope.fileArr.length>0){
 		mvUpload.uploadFiles($scope.fileArr).then(function(response){
-			console.log('In ctrl, response is: ');
-			console.log(response);
 			var files;
 			if(response.length>0){
 				files = response.toString();
@@ -633,7 +503,6 @@ $scope.saveAndUpload = function(){
 				mvNotifier.notify('Data not saved. Error in File Upload: '+reason);
 			});
 	}
-
 }
 
 

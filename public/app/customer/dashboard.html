@@ -105,6 +105,13 @@
   									</div>
 
   									<div class="form-group"  style="margin:10px 0px;">
+			    						<label for="inputEmail" class="col-sm-4 control-label" style="text-align:left;">Email:</label>
+			    						<div class="col-sm-8">
+			      							<input type="email" class="form-control" id="inputEmail" ng-model="email" ng-required="true">
+			    						</div>
+  									</div>
+
+  									<div class="form-group"  style="margin:10px 0px;">
 			    						<div style="padding-bottom:60px;">
 				    						<label for="inputFloorPlan" class="col-sm-11 control-label" style="text-align:left;">Meet and Measure not possible? Upload your floorplan with scale here:
 				    						</label>
@@ -215,8 +222,8 @@
 
 		<div ng-repeat="item in images track by $index" style="padding-bottom: 50px;text-align:center;">
 			<a href="#" ng-click="zoomImg($index)" ng-if="item.indexOf('.pdf')===-1"><img src={{item}} width="100%"></a>
-			<!-- ng-click="downloadFile(item)" -->
-			<a target="_self" href="/downloadFile/{{item}}" ng-if="item.indexOf('.pdf')!=-1">Download Shopping List</a>
+			
+			<!-- <a target="_self" href="/downloadFile/{{item}}" ng-if="item.indexOf('.pdf')!=-1">Download Shopping List</a> -->
 			<p ng-show="!isFinalPage">Option {{$index+1}}</p>
 		
 		</div>
@@ -225,36 +232,49 @@
 		</div>
 	</div>
 
-	<!-- <div style="width:70%;float:right;padding:30px;border-left:4px solid #e1e1e1;"> -->
 	<div style="flex:1.5;padding:30px;border-left:4px solid #e1e1e1;">
 		<p class="stp-head-maintxt" style="padding-bottom:10px;">{{lookText}}</p>
 
 		<p><img src="{{zoomImgSrc}}" width="100%"></p>
-		<p style="font-family:Montserrat-Regular;padding:40px;font-size:16px;" ng-if="designerNotes!=null && designerNotes!=' '">DESIGNER COMMENTS : <span style="font-family:PlayfairDisplay-Regular;">{{designerNotes}}</span></p>
+		<p style="font-family:Montserrat-Regular;padding-top:40px;font-size:16px;" ng-if="designerNotes!=null && designerNotes!=' '">DESIGNER COMMENTS : <span style="font-family:PlayfairDisplay-Regular;">{{designerNotes}}</span></p>
 
-		<div style="padding:50px 0px 50px 105px;" ng-show="!isFinalPage">
+		<div ng-show="isFinalPage">
+			<p style="font-family:PlayfairDisplay-Regular;font-size:22px;">
+				<a target="_self" href="/downloadFile/{{shoppingList}}" ng-if="item.indexOf('.pdf')!=-1">Download Your Shopping List</a>
+			</p>
+		</div>
+		<div style="padding-top:20px;display:block;text-align:center;" ng-show="!isFinalPage">
 			<form name="feedbackForm" enctype="multipart/form-data">
 				<textarea rows="9" cols="50" class="form-info font-sansRegular fs-16px" style="resize:none;border:1px solid #acacac;width:89%;" id="feedbackComment" name="feedbackComment" ng-model="feedbackComment" placeholder="Tell us what you like and don’t about your new space! We can incorporate all the things you like across the moodboards into the final look- so give us as many details of what we should keep, change, and if you want something specific added"></textarea>
 
-				<div>
+				<div style="padding-top:20px;width:90%;margin:0 auto;text-align:left;">
 					<label>
                 		<input type="file" multiple ngf-pattern="'image/*'" accept="image/*" ngf-max-size="10MB" style="display:none;" onchange="angular.element(this).scope().addFileToUploadQ(this)"/>
                 		<u>Click to send us your inspiration images</u>
                 	</label>
+
+                	<div style="width:60%;" style="padding-top:40px;">
+	                	<div ng-repeat="file in pendingFilesArr track by $index">
+			             	<div style="margin-bottom:10px;width:90%;float:left;background-color:#00a99d;color:#fff;padding-left:20px;">{{file.name}} ({{file.size}}) </div>
+			              	<div style="width:10%;float:right;background-color:#00a99d;color:#fff;">
+			                	<a href="#" ng-click="removeFileFromQ($index,1)">x</a>
+			              	</div>
+			            </div>
+		            </div>
 				</div>
 
-				<div style="width:60%;">
+			<!-- 	<div style="width:60%;" style="padding-top:20px;">
 		            <div ng-repeat="file in pendingFilesArr track by $index">
 		              <div style="margin-bottom:10px;width:90%;float:left;background-color:#00a99d;color:#fff;padding-left:20px;">{{file.name}} ({{file.size}}) </div>
 		              <div style="width:10%;float:right;background-color:#00a99d;color:#fff;">
 		                <a href="#" ng-click="removeFileFromQ($index,1)">x</a>
 		              </div>
 		            </div>
-          		</div>
+          		</div> -->
 
 
 				
-				<div style="text-align:center;padding:30px 0px 40px;width:31%;float:right;">
+				<div style="text-align:center;padding:30px 0px 40px;width:20%;float:right;">
 					<button type="submit" class="btn-start-quiz btn-qz btn-nxt font-sansRegular txt-upper col-lightcyan fs-20px" ng-click="submitFeedback(-1)" style="padding:10px 20px 10px;margin-right:10px;	" >SAVE</button>
 
 <!-- ng-click="saveFeedback()" -->
@@ -265,7 +285,7 @@
 	</div>
 </div>
 	
-	<div class="divider" style="border-top:2px solid rgb(47, 185, 175);"></div>
+	<div class="divider"></div>
 
 </section>
 
