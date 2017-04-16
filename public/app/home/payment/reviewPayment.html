@@ -51,19 +51,19 @@
 	</div>
 
 
-	<section ng-init="initPayment()" style="width:80%;margin:0 auto;">
-	 	<div style="padding-top:100px;width:90%;margin:0 auto;">
+	<section ng-init="initPayment()" class="pay-area">
+	 	<div>
 		<div class="row qz-row-dsg"  style="display:table;border:1px solid black;padding-bottom:0px;">
 		    <div class="col-md-4 col-xs-4 cust-view-tab">ROOM</div>
-		    <div class="col-md-4 col-xs-2 cust-view-tab">PACKAGE</div>
-		    <div class="col-md-4 col-xs-2 cust-view-tab">PRICE</div>
+		    <div class="col-md-4 col-xs-4 cust-view-tab">PACKAGE</div>
+		    <div class="col-md-4 col-xs-4 cust-view-tab">PRICE</div>
 		</div>
 
 	 	<div  class="row qz-row-dsg" style="display:table;border:1px solid black;padding-bottom:0px;" ng-repeat="room in roomPerPkg track by $index">
-			<div class="col-md-4 col-xs-4 cust-view-tab" style="padding:10px 0px;">
+			<div class="col-md-4 col-xs-4 cust-view-tab" style="padding:20px 0px;">
 		        <figure>
 
-		            <img ng-if="room.roomName.indexOf(' ')!=-1" class="center-block" ng-src="{{roomImage[room.roomName.substr(0,room.roomName.indexOf(' '))]}}" style="height:100px;width:auto;"/>
+		            <img ng-if="room.roomName.indexOf(' ')!=-1" class="center-block" ng-src="{{roomImage[room.roomName.substr(0,room.roomName.indexOf(' '))]}}" width="100%" height="auto"/>
 
 		            <img ng-if="room.roomName.indexOf(' ')===-1" class="center-block" ng-src="{{roomImage[room.roomName]}}" style="height:100px;width:auto;"/>
 
@@ -74,12 +74,12 @@
 				<select ng-init="packages[room.pkgValue-1]" ng-change="updateTotal()" ng-model="roomPkg[$index]" ng-options="option.name for option in packages"></select>
 			</div>
 
-			<div class="col-md-4 col-xs-2 cust-view-tab">{{roomPkg[$index].pkgValue}}</div>
+			<div class="col-md-4 col-xs-4 cust-view-tab">{{roomPkg[$index].pkgValue}}</div>
 		</div>
 
 
 		<div class="row qz-row-dsg" style="display:table;padding-bottom:50px;padding-top:20px;">
-			<div class="col-md-12 col-xs-6 	" style="text-align:right;border:0px;padding-right:0px;font-family:PlayfairDisplay-Regular;font-size:16px;">Want hassle-free delivery to your home?
+			<div class="col-md-12 col-xs-12" style="text-align:right;border:0px;padding-right:0px;font-family:PlayfairDisplay-Regular;font-size:16px;">Want hassle-free delivery to your home?
 				<input type="checkbox" ng-model="buyForMe" ng-change="updateTotal()" style="height:20px;margin:0px;margin-left:10px;vertical-align:middle;"> 
 			 		<span style="font-size:16px;font-family:OpenSans-Regular;">BUY FOR ME</span>
 			</div>
@@ -99,17 +99,17 @@
 	  		<div class="flex-child-pay2" style="border: 1px solid ;height:35%;">
 	  			<div class="payment-title" style="padding: 5px 0px 15px 10px;"> Order Summary</div>
 	  				<div class="row qz-row-dsg" style="padding-bottom:10px;width:98%">
-	  					<div class="col-md-8 col-xs-6 payment-item">Subtotal</div>
-	  					<div class="col-md-4 col-xs-6 payment-item" style="padding-left:inherit;">{{(total_amount - buyForMeAmt).toFixed(2)}}</div>
+	  					<div class="col-md-8 col-xs-8 payment-item">Subtotal</div>
+	  					<div class="col-md-4 col-xs-4 payment-item" style="padding-left:inherit;">{{(total_amount - buyForMeAmt).toFixed(2)}}</div>
 		  			</div>
 		  			<div class="row qz-row-dsg" style="padding-bottom:10px;width:98%;">
-		  				<div class="col-md-8 col-xs-6 payment-item">Buy For Me</div>
-		  				<div class="col-md-4 col-xs-6 payment-item" style="padding-left:inherit;">{{buyForMeAmt}}</div>
+		  				<div class="col-md-8 col-xs-8 payment-item">Buy For Me</div>
+		  				<div class="col-md-4 col-xs-4 payment-item" style="padding-left:inherit;">{{buyForMeAmt}}</div>
 		  			</div>
 
 		  			<div class="row qz-row-dsg" style="padding-bottom:10px;width:98%;">
-		  				<div class="col-md-8 col-xs-6 payment-item">Total</div>
-		  				<div class="col-md-4 col-xs-6 payment-item" style="padding-left:inherit;">{{total_amount}}</div>
+		  				<div class="col-md-8 col-xs-8 payment-item">Total</div>
+		  				<div class="col-md-4 col-xs-4 payment-item" style="padding-left:inherit;">{{total_amount}}</div>
 		  			</div>
 		  			
 		  			<div style="text-align:center;padding:20px;">
@@ -117,10 +117,6 @@
 		  			</div>
 		  			
 	  			</div>
-
-	  			<!-- <div style="text-align:center;padding:20px;">
-	  				<input  type="button" ng-click="savePaymentInfo()" class="btn-start-quiz btn-topnav fs-20px" style="padding-left:25px;padding-right:25px;" value="CHECKOUT"  name="submit" alt="SmoovPay!" />
-	  			</div> -->
 	  		</div>
 	  	</div>
 

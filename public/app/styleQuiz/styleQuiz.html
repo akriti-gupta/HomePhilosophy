@@ -40,8 +40,6 @@
               <div style="position:relative; width:65%; margin:auto;">
                 <div class="fs-22px" style="display:inline-block;"> Not sure? Take our</div>
                 <div  class="fs-22px" style="float:right;">
-
-                 <!-- ng-click="nextPage();quiz(1)" -->
                   <button type="button" class="take-qz-btn" ng-click="nextPage();" style="padding-left:23px;padding-right:23px;" >STYLE QUIZ</button>
                 </div>
 
@@ -465,33 +463,34 @@
       </div>
     </div>
 
-    <div style="width:80%;margin: 0 auto;">
-      <div  style="width:90%;margin:0 auto;padding:80px 0px 40px;" ng-repeat="item in userStyle" ng-if="$first">
-        <p class="font-playfair result-title">{{item.title}} <span class="txt-upper fs-22px font-sansRegular">{{item.style}}</span></p>
-        <p class="font-sansRegular result-desc"> {{item.desc}}</p>
-          <img ng-src="{{item.image}}" style="width:100%;"/>
-        <p ng-if="userStyle.length==1" class="font-playfair fs-18px" style="text-align:right;color:rgb(77, 77, 77);">Not really your style? Re-take the <a href="/style-quiz" id="start-quiz" ng-click="retakeQuiz()"><u>Style Quiz</u></a></p>
+    <div style="width:73%;margin:0 auto;">
+      <div  style="padding:40px 0px 40px;">
+        <p class="font-playfair result-title">{{userStyle[0].title}} <span class="txt-upper fs-22px font-sansRegular">{{userStyle[0].style}}</span></p>
+        <p class="font-sansRegular result-desc"> {{userStyle[0].desc}}</p>
+          <img ng-src="{{userStyle[0].image}}" style="width:100%;"/>
+        <p  class="font-playfair retake-text" style="text-align:right;color:rgb(77, 77, 77);">Not really your style? Re-take the <a href="/style-quiz" id="start-quiz" ng-click="retakeQuiz()"><u>Style Quiz</u></a></p>
       </div>
 
-      <div style="width:90%;margin:0 auto;" ng-repeat="item in userStyle.slice(1,entries.length)" ng-if="userStyle.length==2">
-        <div style="width:49%;margin:0 auto;">
-          <p class="font-playfair result-title">{{item.title}}  <span class="result-style-name">{{item.style}}</span></p>
-          <img ng-src="{{item.image}}" style="width:100%;">
-          <p class="font-playfair fs-18px" style="text-align:right;color:rgb(183, 183, 183);">Not your style? Re-take the <a href="/style-quiz"  ng-click="retakeQuiz()"><u>Style Quiz</u></a></p>
-        </div>
+   <!--   <div style="width:75%;margin:0 auto;" ng-if="userStyle.length==2">
+        <p class="font-playfair result-title">{{userStyle[1].title}}  <span class="result-style-name">{{userStyle[1].style}}</span></p>
+        <img ng-src="{{userStyle[1].image}}" style="width:100%;">
+        <div style="padding-top:15px;"><p class="font-playfair retake-text" style="text-align:right;color:rgb(183, 183, 183);">Not your style? Re-take the <a href="/style-quiz"  ng-click="retakeQuiz()"><u>Style Quiz</u></a></p></div>
       </div>
-    
-      <div style="width:90%;margin:0 auto;" ng-repeat="item in userStyle.slice(1,entries.length)" ng-if="userStyle.length==3">
-        <div style="width:49%;float:left;" ng-if="$first">
-          <p class="font-playfair result-title">{{item.title}}<span class="result-style-name">{{item.style}}</span></p>
-          <img ng-src="{{item.image}}" style="width:100%;">
+      
+      <div ng-if="userStyle.length==3" style="width:95%;margin:0 auto;">
+        <div style="width:49%;float:left;">
+          <p class="font-playfair result-title">{{userStyle[1].title}}<span class="result-style-name">{{userStyle[1].style}}</span></p>
+          <img ng-src="{{userStyle[1].image}}" style="width:100%;">
         </div>
-        <div style="width:49%;float:right;" ng-if="$last">
-          <p class="font-playfair result-title">{{item.title}}   <span class="result-style-name">{{item.style}}</span></p>
-          <img ng-src="{{item.image}}" style="width:100%;">
-          <p class="font-playfair fs-18px" style="text-align:right;color:rgb(77, 77, 77);">Not your style? Re-take the <a href="/style-quiz"  ng-click="retakeQuiz()"><u>Style Quiz</u></a></p>
+        <div style="width:49%;float:right;">
+          <p class="font-playfair result-title">{{userStyle[2].title}}   <span class="result-style-name">{{userStyle[2].style}}</span></p>
+          <img ng-src="{{userStyle[2].image}}" style="width:100%;">
         </div>
-      </div> 
+        <div style="clear:both;padding-top:15px;"><p class="font-playfair retake-text" style="text-align:right;color:rgb(77, 77, 77);">Not your style? Re-take the <a href="/style-quiz"  ng-click="retakeQuiz()"><u>Style Quiz</u></a></p>
+        </div>
+      </div>-->
+      
+      
     </div>
   </div> <!--pagenum==9 -->
 

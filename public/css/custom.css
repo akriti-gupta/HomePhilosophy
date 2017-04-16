@@ -365,7 +365,7 @@ button:focus {outline:0;}
   position: absolute;
   right: 0;
 }
-.topnav,.submenu-list,.contactus-list {
+.topnav,.submenu-list,.contactus-list,.custom-list {
   list-style:none;
   text-align:left;
   margin: 0;
@@ -375,14 +375,24 @@ button:focus {outline:0;}
 .topnav,.contactus-list{
   display: inline-block;
  }
+ .custom-list{
+  display: table;
+  width: 100%;
+ }
 
-.contactus-list li{
+.contactus-list li,.custom-list li{
   width: auto;
   display: -moz-inline-stack;
   display:inline-block;
   padding-top: 15px;
   padding-bottom:2px;
   margin: 0 5px;
+}
+.custom-list li{
+  display: table-cell;
+}
+.custom-list li:nth-child(1),.custom-list li:nth-child(2){
+  padding-right: 15px;
 }
 .submenu-list{
   display: none;
@@ -671,12 +681,16 @@ button:focus {outline:0;}
   text-transform: inherit;
 }
 .custom-dtls{
-  position:relative;top:22%;width:45%;margin:0 auto;text-align:center;
+  position:relative;
+  top:22%;
+  width:50%;
+  margin:0 auto;
+  text-align:center;
 }
 .custom-btns{
   color:#f5f5f5;
-  width:82%;
-  margin: 0 auto;
+  /*width:82%;
+  margin: 0 auto;*/
 }
 .btn-container{
     position: absolute;
@@ -1504,6 +1518,10 @@ div.faq.show {
 #pricing-section-media .pricing-footnote{
   position: initial;
 }
+.pay-area{
+   width:80%;margin:0 auto;
+  padding-top:100px;
+}
 .pkg-title,.payment-title{
   letter-spacing:1px;
   font-family: PlayfairDisplay-Regular;
@@ -1644,6 +1662,17 @@ div.faq.show {
   text-align: center;
   float: none;
   vertical-align: middle;
+}
+
+.fdbk-pnl1{
+  width:30%;float:left;padding:140px 80px 80px;
+}
+.fdbk-pnl2{
+  width:70%;float:left;padding:80px;border-left:4px solid #e1e1e1;
+}
+.btn-fdbk{
+  font-size:20px;
+  padding:10px 10px 10px;
 }
 .nav-tabs{
   border-bottom: none;
