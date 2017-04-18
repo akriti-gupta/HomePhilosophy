@@ -9,7 +9,7 @@
           <!-- <li ng-controller="LoginController" ng-show="identity.isAuthenticated()"><a ng-click="signout()">Sign Out</a></li> -->
 
           <li ng-controller="LoginController" ng-show="identity.isAuthenticated() && identity.currentUser.isAdmin()"><a href="/admin/users">My Account </a></li>
-          <li ng-controller="LoginController" ng-show="identity.isAuthenticated() && !(identity.currentUser.isAdmin())"><a href="/dashboard">My Account </a></li>
+          <li ng-controller="LoginController" ng-show="identity.isAuthenticated() && !(identity.currentUser.isAdmin())"><a href="/dashboard" di-href="/dashboard/">My Account </a></li>
 
           <li ><a href="/about-us">How it works</a></li>
           <li style="margin-bottom:35px;"><a href="/contact-us">Contact us</a></li>
@@ -142,47 +142,92 @@
 
 	<p style="font-family:PlayfairDisplay-Regular;font-size:22px;padding-top:50px;"> {{firstName}}'s Personalized Room Design</p>
 	<div class="data-dashboard" >
-		<div class="row row-dashboard"  style="display:table;border:1px solid black;padding-bottom:0px;">
-		    <div class="col-md-3 col-xs-3 cust-view-tab">ROOM</div>
-		    <div class="col-md-2 col-xs-4 cust-view-tab">STYLE</div>
-		    <div class="col-md-2 col-xs-2 cust-view-tab">PACKAGE</div>
-		    <div class="col-md-3 col-xs-3 cust-view-tab">STATUS</div>
-		    <div class="col-md-3 col-xs-3 cust-view-tab">DELETE</div>
-		</div>
+		<!-- <div class="row row-dashboard"  style="display:table;border:1px solid black;padding-bottom:0px;">
+		    <div class="col-md-3 col-sm-4 col-xs-4 cust-view-tab">ROOM</div>
+		    <div class="col-md-2 col-sm-3 col-xs-3 cust-view-tab">STYLE</div>
+		    <div class="col-md-2 col-sm-2 col-xs-2 cust-view-tab">PACKAGE</div>
+		    <div class="col-md-3 col-sm-3 col-xs-3 cust-view-tab">STATUS</div>
+		    <div class="col-md-3 col-sm-1 col-xs-1 cust-view-tab">DELETE</div>
+		</div> -->
 
-		<div class="row row-dashboard" ng-repeat="item in projectArr track by $index" style="display:table;border:1px solid black;padding-bottom:0px;">
-		    <div class="col-md-3 col-xs-3 cust-view-tab" style="padding:10px;">
+		<table class="table table-bordered">
+			<thead>
+			    <tr>
+			      <th style="text-align:center;">ROOM</th>
+			      <th style="text-align:center;">STYLE</th>
+			      <th style="text-align:center;">PACKAGE</th>
+			      <th style="text-align:center;">STATUS</th>
+			      <th style="text-align:center;">DELETE</th>
+			    </tr>
+		  	</thead>
+		  	<tbody>
+		    	<tr ng-repeat="item in projectArr track by $index">
+			      	<th scope="row" style="text-align:center;vertical-align:middle;">
+			      	 	<figure>
+			            	<img class="center-block" ng-src={{roomImage[item.roomData]}}>
+			        	</figure>
+			      	</th>
+				      <td style="text-align:center;vertical-align:middle;">{{styleName[item.resultData[0].styleId]}}</td>
+				      <td style="text-align:center;vertical-align:middle;">
+				      	<div  ng-if="!item.pkgData|| item.pkgData.length===0"><a href="#" ng-click="selectPkg($index)">Choose a Package </a></div>
+						<div ng-if="packageName[item.pkgData.pkgId]!=' '">{{packageName[item.pkgData.pkgId]}}</div>
+					 	</div>
+				      </td>
+				      <td  style="text-align:center;vertical-align:middle;">
+				      	<div ng-if="item.status.linkPage===' ' && item.status.modal===' '">{{item.status.statusText}}<br/></div>
+
+				    	<div  ng-if="item.status.linkPage!=' ' && item.status.stage!='payment' && item.status.stage!='quizDetails'" ><a href="#" ng-click="getFirstLook($index,item.roomObj.id)" style="color:#64c6be;">{{item.status.statusText}}</a></div>
+
+				    	<div ng-if="item.status.linkPage!=' ' &&  item.status.stage==='payment'" ><a href="#" ng-click="pricing($index)" style="color:#64c6be;">{{item.status.statusText}}</a></div>
+
+						<div  ng-if="item.status.linkPage!=' ' && item.status.stage==='quizDetails'" style="color:#64c6be;" ><a href="#" ng-click="getQuizDetail($index)">{{item.status.statusText}}</a></div>
+
+		 				<div id="cal_popup"  ng-if="item.status.modal!=' '"><a href="#" ng-click="loadMtngData($index)" data-toggle="modal" data-target="#calendarModal" data-id="{{$index}}" style="color:#64c6be;">{{item.status.statusText}}</a></div>
+
+				    </td>
+			      	<td  style="text-align:center;vertical-align:middle;">
+			      		<div  ng-if="item.quizData.status===-1"><a href="#" ng-click="removeRoom($index)"><span class="glyphicon glyphicon-trash" style="font-size:12px;"></span></a></div>
+
+ 						<div  ng-if="item.quizData.status!=-1">&nbsp;</div>
+			      	</td>
+		    	</tr>
+		 	</tbody>
+		</table>
+
+
+
+		<!-- <div class="row row-dashboard" ng-repeat="item in projectArr track by $index" style="display:table;border:1px solid black;padding-bottom:0px;">
+		    <div class="col-md-3 col-sm-4 col-xs-4 cust-view-tab" style="padding:10px;">
 			    <figure>
 		            <img class="center-block" ng-src={{roomImage[item.roomData]}} style="width:100%;height:auto;">
 		        </figure>
 		    </div>
 
-		    <div class="col-md-2 col-xs-3 cust-view-tab" style="padding:10px;">
+		    <div class="col-md-2 col-sm-3 col-xs-3 cust-view-tab" style="padding:0px;">
 		        {{styleName[item.resultData[0].styleId]}}
 		    </div>
 
-			<div class="col-md-2 col-xs-4 cust-view-tab">
+			<div class="col-md-2 col-sm-2 col-xs-2 cust-view-tab">
 				<div  ng-if="!item.pkgData|| item.pkgData.length===0"><a href="#" ng-click="selectPkg($index)">Choose a Package </a><br/></div>
-
 				<div ng-if="packageName[item.pkgData.pkgId]!=' '">{{packageName[item.pkgData.pkgId]}}<br/></div>
-			</div>
+			 	</div>
 
-   			<div class="col-md-3 col-xs-4 cust-view-tab" ng-if="item.status.linkPage===' ' && item.status.modal===' '">{{item.status.statusText}}<br/></div>
+   			<div class="col-md-3 col-xs-3 cust-view-tab" ng-if="item.status.linkPage===' ' && item.status.modal===' '">{{item.status.statusText}}<br/></div>
 
-		    <div class="col-md-3 col-xs-4 cust-view-tab" ng-if="item.status.linkPage!=' ' && item.status.stage!='payment' && item.status.stage!='quizDetails'" ><a href="#" ng-click="getFirstLook($index,item.roomObj.id)" style="color:#64c6be;">{{item.status.statusText}}</a><br/></div>
+		    <div class="col-md-3 col-xs-3 cust-view-tab" ng-if="item.status.linkPage!=' ' && item.status.stage!='payment' && item.status.stage!='quizDetails'" ><a href="#" ng-click="getFirstLook($index,item.roomObj.id)" style="color:#64c6be;">{{item.status.statusText}}</a><br/></div>
 
-		    <div class="col-md-3 col-xs-4 cust-view-tab" ng-if="item.status.linkPage!=' ' &&  item.status.stage==='payment'" ><a href="#" ng-click="pricing($index)" style="color:#64c6be;">{{item.status.statusText}}</a><br/></div>
+		    <div class="col-md-3 col-xs-3 cust-view-tab" ng-if="item.status.linkPage!=' ' &&  item.status.stage==='payment'" ><a href="#" ng-click="pricing($index)" style="color:#64c6be;">{{item.status.statusText}}</a><br/></div>
 
-			<div class="col-md-3 col-xs-4 cust-view-tab" ng-if="item.status.linkPage!=' ' && item.status.stage==='quizDetails'" style="color:#64c6be;" ><a href="#" ng-click="getQuizDetail($index)">{{item.status.statusText}}</a><br/></div>
+			<div class="col-md-3 col-xs-3 cust-view-tab" ng-if="item.status.linkPage!=' ' && item.status.stage==='quizDetails'" style="color:#64c6be;" ><a href="#" ng-click="getQuizDetail($index)">{{item.status.statusText}}</a><br/></div>
 
- 			<div id="cal_popup" class="col-md-3 col-xs-4 cust-view-tab" ng-if="item.status.modal!=' '"><a href="#" ng-click="loadMtngData($index)" data-toggle="modal" data-target="#calendarModal" data-id="{{$index}}" style="color:#64c6be;">{{item.status.statusText}}</a><br/></div>
+ 			<div id="cal_popup" class="col-md-3 col-xs-3 cust-view-tab" ng-if="item.status.modal!=' '"><a href="#" ng-click="loadMtngData($index)" data-toggle="modal" data-target="#calendarModal" data-id="{{$index}}" style="color:#64c6be;">{{item.status.statusText}}</a><br/></div>
 
- 			<div class="col-md-3 col-xs-4 cust-view-tab" ng-if="item.quizData.status===-1"><a href="#" ng-click="removeRoom($index)"><span class="glyphicon glyphicon-trash" style="font-size:12px;"></span></a><br/></div>
+ 			<div class="col-md-3 col-xs-1 cust-view-tab" ng-if="item.quizData.status===-1"><a href="#" ng-click="removeRoom($index)"><span class="glyphicon glyphicon-trash" style="font-size:12px;"></span></a><br/></div>
 
- 			<div class="col-md-3 col-xs-4 cust-view-tab" ng-if="item.quizData.status!=-1">&nbsp;</div>
+ 			<div class="col-md-3 col-xs-1 cust-view-tab" ng-if="item.quizData.status!=-1">&nbsp;</div>
 		  </div>
 
-		   
+		    -->
 		<div class="row-dashboard" style="padding:20px 0px;" ng-if="hasActiveProject">
 		<a href="#" ng-click="addRoom()"><button type="submit" class="btn-start-quiz btn-nxt " style="padding:10px; float:right;" >Start a New Project</button></a>
 		</div>

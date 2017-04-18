@@ -1797,3 +1797,11 @@ div.faq.show {
 {
     border:1px solid #f00;
 }
+.table{
+  width:80%;
+  margin:0 auto;
+}
+.table img{
+  width:70%;
+  height: auto;
+}
