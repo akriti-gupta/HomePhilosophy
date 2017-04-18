@@ -29,6 +29,12 @@
       
 }  
 
+@media only screen and (min-width : 770px) and (max-width:900px){
+.resprg-lbl-four{
+        left:65%;
+    }
+}
+
 @media only screen and (min-width : 770px) and (max-width:799px){
      .rect-custom{
         width:85%;
@@ -70,13 +76,38 @@
     }
 }
 
+@media only screen and (min-width : 485px) and (max-width: 760px){
+    .resprg-lbl-one,.resprg-lbl-two,.resprg-lbl-three, .resprg-lbl-four, .resprg-lbl-five{
+        font-size: 10px;
+        text-transform: capitalize;
+        width:20%
+    }
+       
+    .resprg-lbl-one{
+      left:3%;
+    }
+    .resprg-lbl-two{
+      left:24%;
+    }
+    .resprg-lbl-three{
+      left:45%;
+    }
+    .resprg-lbl-four{
+      left:68%;
+      width:10%;
+    } 
+    .resprg-lbl-five{
+      left: 84%;
+    } 
+}
+
 /*@media only screen and (min-width : 500px) and (max-width: 800px){
      .custom-maintxt{
         font-size: 40px;
     } */
 }
 
-@media only screen and (max-width: 1160px){
+@media only screen and (min-width:768px) and (max-width: 1160px){
     #pricing-section{
         display: none;
     }
@@ -316,6 +347,9 @@
         .prg-dtl-ctr{
             width:95%
         }
+        .prg-stp-txt{
+            font-size: 8px;
+        }
 
         .txtarea-dtl{
             width:100%;
@@ -338,9 +372,6 @@
             width:20%
         }
        
-        .resprg-lbl-four{
-            width:10%;
-        }
         .step-one, .step-two, .step-three, .step-four, .step-five{
             font-size:10px;
             margin-top:-6px;
@@ -371,6 +402,7 @@
         }
         .resprg-lbl-four{
           left:68%;
+          width:10%;
         } 
         .resprg-lbl-five{
           left: 88%;
@@ -510,6 +542,7 @@
         .flex-child-pay2{
             flex-basis: initial;
             order:-1;
+            -webkit-order:-1;
         }
         .table{
             width:95%;
@@ -799,6 +832,22 @@
         .fdbk-pnl2{
             padding:50px 25px 50px;
         }
+        .resprg-lbl-one{
+          left:1%;
+        } 
+        .resprg-lbl-two{
+          left:21%;
+        }  
+        .resprg-lbl-three{
+          left:45%;
+        }
+        .resprg-lbl-four{
+          /*width:10%;*/
+          left:64%;
+        } 
+        .resprg-lbl-five{
+          left: 88%;
+        } 
     }
 
     /* Medium Devices, Desktops */
@@ -824,7 +873,8 @@
         width: 240px;
     }
     .resprg-lbl-one,.resprg-lbl-two,.resprg-lbl-three, .resprg-lbl-four, .resprg-lbl-five{
-        width:18%;
+        max-width:18%;
+        text-align: center;
     }
 }
 

@@ -1089,6 +1089,11 @@ padding-left:10px;
   padding: 40px 0px 20px;
   /*background-color: #e0dfdf;*/
 }
+.prg-stp-txt{
+  color: #fff;
+  text-align: center;
+  padding-top: 2px;
+}
 .detailForm{
   padding: 100px 25px 0px 100px;
 }
@@ -1803,5 +1808,5 @@ div.faq.show {
 }
 .table img{
   width:70%;
-  height: auto;
+  height: auto`;
 }
