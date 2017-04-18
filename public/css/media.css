@@ -544,6 +544,7 @@
             order:-1;
             -webkit-order:-1;
             -ms-flex-order: -1;
+            width:90%;
         }
         .table{
             width:95%;
