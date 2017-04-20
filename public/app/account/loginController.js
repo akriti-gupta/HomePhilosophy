@@ -7,7 +7,7 @@ angular.module("app")
 			$scope.initLogin = function(){
 
 				var isFBLoggedIn = $routeParams.fb;
-				if($scope.identity.isAuthenticated()){
+				if($scope.identity.isAuthenticated() && !isFBLoggedIn){
 					$location.path('/');
 				}
 				// else if(quizResult.getStyle().length>1){
