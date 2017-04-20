@@ -93,8 +93,6 @@ angular.module("app")
 	  		$scope.fbLogin = function(){
 				var result = quizResult.getStyle();
 		  		var userSelectionInfo = quizResult.getCustSelections();
-		  		console.log(results);
-		  		console.log(userSelectionInfo);				
 				window.localStorage.setItem('result',JSON.stringify(result));
 				window.localStorage.setItem('userSelectionInfo',JSON.stringify(userSelectionInfo));
 		  	}

@@ -167,8 +167,9 @@ function updatePkg(conn,quizId,totalPrice,cb){
 function updatePkgTxn(conn,quizId,totalPrice,cb){
 	var txnData = [totalPrice,new Date(),quizId];
 	var qry_qz = 'update cust_payment_txn set amountPaid =?, updated_at=? where quizId=?';
-
+	console.log('In updatePkgTxn');
 	conn.query(qry_qz, txnData, function(err, quizInfo, fields){
+		console.log('After executing updatePkgTxn query');
 		if(err){
 			console.log('Error in updating pkg txn for quiz: '+quizId);
 			cb(err,null);
@@ -181,6 +182,7 @@ function updatePkgTxn(conn,quizId,totalPrice,cb){
 
 function updateAppt(conn,quizId,customerId,cb){
 	//Check if any other active quiz exists for the same customer with a future appointment.
+	console.log('In updateAppt');
 	var currDate = new Date();
 	conn.query('select * from cust_quiz q,cust_appointment a where '+
 				'q.quizId = a.quizId and q.customerId='+conn.escape(customerId)+
@@ -235,13 +237,18 @@ function updateAppt(conn,quizId,customerId,cb){
 
 
 					}
+					else{
+						cb(null,true);
+					}
 				});
 					
 				
 			}
 
 		}
-		cb(null,true);
+		else{
+			cb(null,true);
+		}
 	});	
 }
 exports.updatePackage = function(req,res,next){
@@ -265,7 +272,7 @@ exports.updatePackage = function(req,res,next){
 						     	return res.send({success: false, reason:err.toString()});
 						    }
 						    else
-						    	{	console.log('In updatePkg, wuiz and pkg updated');
+						    	{	console.log('In updatePkg, quiz and pkg updated');
 						    		updateAppt(conn,quizId, customerId, function(err,result){
 								    	if(err){
 									    	conn.release();
