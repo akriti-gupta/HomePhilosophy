@@ -34,4 +34,4 @@ $(document).on('show.bs.modal','#firstLookModal',function(e){
   $('.concept-center').resize();
 });
 
-window.onpopstate = function (e) { window.history.forward(1); }
+// window.onpopstate = function (e) { window.history.forward(1); }

@@ -348,7 +348,8 @@ return {
               size = size + event.originalEvent.dataTransfer.files[i].size;
               if (checkSize(size) && isTypeValid(type)) {
                 scope.$apply(function(scope) {
-                  if(event.originalEvent.path[0].id==='fileImages'){
+                  console.log(event);
+                if(event.originalEvent.path[0].id==='fileImages'){
                     scope.pendingDropFiles.push({"file":event.originalEvent.dataTransfer.files[i], "name":event.originalEvent.dataTransfer.files[i].name,"size":scope.formatBytes(event.originalEvent.dataTransfer.files[i].size,0)});  
                   }
                   else{

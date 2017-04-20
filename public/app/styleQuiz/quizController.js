@@ -74,13 +74,13 @@ var pageRequester=custViewSvc.getRequester();
 
 $scope.checkProjects = function(){
 	scrollTop();
-	if(pageRequester===' '){
-		mvUserQuiz.getExistingPrjs().then(function(projects){
-			if(projects){
-				$location.path('/dashboard');
-			}
-		});
-	}
+	// if(pageRequester===' '){
+	// 	mvUserQuiz.getExistingPrjs().then(function(projects){
+	// 		if(projects){
+	// 			$location.path('/dashboard');
+	// 		}
+	// 	});
+	// }
 }
 
 if($window.innerWidth <=700){

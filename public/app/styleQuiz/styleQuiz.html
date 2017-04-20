@@ -98,19 +98,27 @@
           <div class="caption txt-center">
             <p class="font-montserrat txt-upper">Living Room</p>
           </div>
-          <p class="font-sansRegular fs-10px" style="padding-top:20px;text-align:right;color:rgb(161, 161, 161);">
+          <!-- <p class="font-sansRegular fs-10px" style="padding-top:20px;text-align:right;color:rgb(161, 161, 161);">
             <span>
-              <!-- <SELECT NAME="numRooms" id="numLiving" class="numRooms">
-                <OPTION SELECTED> 1 </OPTION>
-                <OPTION> 2</OPTION>
-                <OPTION> 3</OPTION>
-                <OPTION> 4</OPTION>
-                <OPTION> 5</OPTION>
-              </SELECT> -->
               <select ng-model="living" ng-options="opt.label for opt in units track by opt.value" class="num-rooms" ng-change="roomNumChanged(2,'living','Living Room')">
                 </select>
             </span>
-          </p>
+          </p> -->
+          <div class="txt-center">
+             <p class="font-sansRegular" style="padding-top:20px;color:rgb(161, 161, 161);font-size:9px;">
+            select number of rooms</p>
+            
+          <div class="font-sansRegular fs-10px" style="padding-bottom:12px;position:relative;color:rgb(161, 161, 161);margin-top:-26px;">
+
+          
+            <span style="padding-left:86%;">
+            
+              <select ng-model="living" ng-options="opt.label for opt in units track by opt.value" class="num-rooms" ng-change="roomNumChanged(2,'living','Living Room')">
+                </select>
+            </span>
+          </div>
+          </div>
+
         </div>
       </div>
 
@@ -121,12 +129,28 @@
           <div class="caption txt-center">
             <p class="font-montserrat txt-upper">Kids Room</p>
           </div>
-          <p class="font-sansRegular fs-10px" style="text-align:right;padding-top:20px;color:rgb(161, 161, 161);">
+          <!-- <p class="font-sansRegular fs-10px" style="text-align:right;padding-top:20px;color:rgb(161, 161, 161);">
             <span>
               <select ng-model="kids" ng-options="opt.label for opt in units track by opt.value" class="num-rooms" ng-change="roomNumChanged(3,'kids','Kids Room')">
                 </select>
             </span>
-          </p>
+          </p> -->
+
+          <div class="txt-center">
+             <p class="font-sansRegular" style="padding-top:20px;color:rgb(161, 161, 161);font-size:9px;">
+            select number of rooms</p>
+            
+          <div class="font-sansRegular fs-10px" style="padding-bottom:12px;position:relative;color:rgb(161, 161, 161);margin-top:-26px;">
+
+          
+            <span style="padding-left:86%;">
+            
+              <select ng-model="kids" ng-options="opt.label for opt in units track by opt.value" class="num-rooms" ng-change="roomNumChanged(3,'kids','Kids Room')">
+                </select>
+            </span>
+          </div>
+          </div>
+
         </div>
 
       </div>
@@ -144,12 +168,28 @@
           <div class="caption txt-center">
             <p class="font-montserrat txt-upper">Home Office</p>
           </div>
-              <p class="font-sansRegular fs-10px" style="text-align:right;padding-top:20px;color:rgb(161, 161, 161);">
+              <!-- <p class="font-sansRegular fs-10px" style="text-align:right;padding-top:20px;color:rgb(161, 161, 161);">
             <span>
               <select ng-model="office" ng-options="opt.label for opt in units track by opt.value" class="num-rooms" ng-change="roomNumChanged(4,'office','Home Office')">
                 </select>
             </span>
-          </p>
+          </p> -->
+
+           <div class="txt-center">
+             <p class="font-sansRegular" style="padding-top:20px;color:rgb(161, 161, 161);font-size:9px;">
+            select number of rooms</p>
+            
+          <div class="font-sansRegular fs-10px" style="padding-bottom:12px;position:relative;color:rgb(161, 161, 161);margin-top:-26px;">
+
+          
+            <span style="padding-left:86%;">
+            
+              <select ng-model="office" ng-options="opt.label for opt in units track by opt.value" class="num-rooms" ng-change="roomNumChanged(4,'office','Home Office')">
+                </select>
+            </span>
+          </div>
+          </div>
+
           </div>
         </div>
       
@@ -161,12 +201,28 @@
           <div class="caption txt-center">
             <p class="font-montserrat txt-upper">Dining Room</p>
           </div>
-              <p class="font-sansRegular fs-10px" style="text-align:right;padding-top:20px;color:rgb(161, 161, 161);">
+              <!-- <p class="font-sansRegular fs-10px" style="text-align:right;padding-top:20px;color:rgb(161, 161, 161);">
             <span>
               <select ng-model="dining" ng-options="opt.label for opt in units track by opt.value" class="num-rooms" ng-change="roomNumChanged(5,'dining','Dining Room')">
                 </select>
             </span>
-          </p>
+          </p> -->
+
+          <div class="txt-center">
+             <p class="font-sansRegular" style="padding-top:20px;color:rgb(161, 161, 161);font-size:9px;">
+            select number of rooms</p>
+            
+          <div class="font-sansRegular fs-10px" style="padding-bottom:12px;position:relative;color:rgb(161, 161, 161);margin-top:-26px;">
+
+          
+            <span style="padding-left:86%;">
+            
+               <select ng-model="dining" ng-options="opt.label for opt in units track by opt.value" class="num-rooms" ng-change="roomNumChanged(5,'dining','Dining Room')">
+                </select>
+            </span>
+          </div>
+          </div>
+
           </div>
         </div>
       
@@ -178,12 +234,29 @@
          <div class="caption txt-center">
             <p class="font-montserrat txt-upper">Bedroom</p>
           </div>
-             <p class="font-sansRegular fs-10px" style="text-align:right;padding-top:20px;color:rgb(161, 161, 161);">
+             <!-- <p class="font-sansRegular fs-10px" style="text-align:right;padding-top:20px;color:rgb(161, 161, 161);">
             <span>
               <select ng-model="bedroom" ng-options="opt.label for opt in units track by opt.value" class="num-rooms" ng-change="roomNumChanged(6,'bedroom','Bedroom')">
                 </select>
             </span>
-          </p>
+          </p> -->
+
+          <div class="txt-center">
+             <p class="font-sansRegular" style="padding-top:20px;color:rgb(161, 161, 161);font-size:9px;">
+            select number of rooms</p>
+            
+          <div class="font-sansRegular fs-10px" style="padding-bottom:12px;position:relative;color:rgb(161, 161, 161);margin-top:-26px;">
+
+          
+            <span style="padding-left:86%;">
+            
+               <select ng-model="bedroom" ng-options="opt.label for opt in units track by opt.value" class="num-rooms" ng-change="roomNumChanged(6,'bedroom','Bedroom')">
+                </select>
+            </span>
+          </div>
+          </div>
+
+
           </div>
         </div>
 
@@ -406,7 +479,7 @@
      <span class="glyphicon glyphicon-heart" style="font-size:20px;"></span> up to 3 of your favourite images below for our designer to use as a reference
       </p>
       <p style="padding-top:10px;margin-bottom:0px;color:rgb(77,77,77);" class="font-sansRegular fs-14px">Love the colours of a living room image and want us to use it when we design your bedroom?</p>
-      <p class="font-sansRegular fs-14px" style="color:rgb(77,77,77);">Just add a comment to let us know and we will ensure to incorporate it.</p>
+      <p class="font-sansRegular fs-14px image-like-selected" style="color:rgb(77,77,77);">Add a comment to your <span class="glyphicon glyphicon-heart" style="font-size:20px;"></span> images and we will ensure to incorporate it.</p>
       <p style="padding-bottom:40px;color:rgb(77,77,77);"><a href="#" ng-click="saveSelection(-1);" style="border-bottom:1px solid;"> Skip and sign up to see your results.</a></p>
     </div>
 
@@ -441,8 +514,8 @@
     <div class="prg-dtl-ctr" style="background-color:#fff;">
       <div class="prg-wrp">
       <div class="progress-result">
-          <div class="resprg-one  no-color prg-stp-txt" ng-style="{'background': resPrgCol2}">1</div>
-          <div class="resprg-two primary-color prg-stp-txt">2</div>
+          <div class="resprg-one  primary-color prg-stp-txt" ng-style="{'background': resPrgCol2}">1</div>
+          <div class="resprg-two no-color prg-stp-txt">2</div>
           <div class="resprg-three no-color prg-stp-txt" ng-style="{'background': resPrgCol2}">3</div>
           <div class="resprg-four no-color prg-stp-txt" ng-style="{'background': resPrgCol2}">4</div>
           <div class="resprg-five no-color prg-stp-txt" ng-style="{'background': resPrgCol2}">5</div>

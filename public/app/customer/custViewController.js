@@ -1018,6 +1018,9 @@ $scope.$on('$locationChangeStart', function( event ) {
 	    if (!answer) {
 	        event.preventDefault();
 	    }
+	    else{
+	    	$route.reload();
+	    }
 	}
 });
 

@@ -10,6 +10,9 @@ angular.module("app")
 				if($scope.identity.isAuthenticated()){
 					$location.path('/');
 				}
+				// else if(quizResult.getStyle().length>1){
+
+				// }
 				if(isFBLoggedIn){
 					var result = JSON.parse(window.localStorage.getItem('result'));
 					var userSelectionInfo = JSON.parse(window.localStorage.getItem('userSelectionInfo'));
@@ -37,7 +40,7 @@ angular.module("app")
 		  				});
 					}
 					else{
-						$location.path('/');
+						$location.path('/dashboard');
 					}
 				}
 			}
@@ -49,11 +52,11 @@ angular.module("app")
 		  					$location.path('/admin/users');
 		  				}
 		  				else{
-			  				mvUserQuiz.getExistingPrjs().then(function(projects){
-								if(projects){
-									$location.path('/dashboard');
-								}
-							});
+			  		// 		mvUserQuiz.getExistingPrjs().then(function(projects){
+							// 	if(projects){
+							// 		$location.path('/dashboard');
+							// 	}
+							// });
 
 			  				if(quizResult.getStyle().length>=1){
 			  					var result = quizResult.getStyle();
@@ -87,7 +90,8 @@ angular.module("app")
 	  		$scope.fbLogin = function(){
 				var result = quizResult.getStyle();
 		  		var userSelectionInfo = quizResult.getCustSelections();
-		  					
+		  		console.log(results);
+		  		console.log(userSelectionInfo);				
 				window.localStorage.setItem('result',JSON.stringify(result));
 				window.localStorage.setItem('userSelectionInfo',JSON.stringify(userSelectionInfo));
 		  	}

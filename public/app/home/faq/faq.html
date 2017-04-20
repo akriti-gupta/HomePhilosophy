@@ -21,8 +21,8 @@
           <span class="caret nav-dropdown"></span></a>
           <ul class="dropdown-menu" style="min-width:0px;">
               <li style="padding:0px;margin:0;">
-                <a href="/admin/users" ng-if="identity.currentUser.role==='admin'" style="font-family:Montserrat-Regular;font-size:13px;">DASHBOARD</a>
-                <a href="/dashboard" ng-if="identity.currentUser.role!='admin'" style="font-family:Montserrat-Regular;font-size:13px;">DASHBOARD</a>
+                <a href="/admin/users" ng-if="identity.currentUser.role==='admin'" style="font-family:Montserrat-Regular;font-size:13px;">MY PROJECTS</a>
+                <a href="/dashboard" ng-if="identity.currentUser.role!='admin'" style="font-family:Montserrat-Regular;font-size:13px;">MY PROJECTS</a>
               </li>
               <li style="padding:0px;margin:0;"><a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a></li>
           </ul>
@@ -92,63 +92,76 @@ $('.concept-center').slick({
 </script>
 
 <section style="background-color:#f9f9f9;">
-<div class="faq-ctr"><div style="margin-bottom:20px;"><b><u>ABOUT THE SERVICE</u></b></div>
+<div class="faq-ctr">
+  <div style="margin-bottom:20px;"><b><u>ABOUT THE EXPERIENCE</u></b></div>
+    <button class="accordion">What is a First look? What does a 2D Board look like?</button>
+    <div class="faq">
+      <span>A <a href="#">First Look</a> is a customized concept board with real life items that suit your space, style and fit your budget. It provides you a 2D insight into how the space will look with all individual items together, all measured to fit accurately into your home. You can view these boards at anytime via your account.<br/><a href="#" data-toggle="modal" data-target="#firstLookModal"><u>Here's what your 2D room board will look like!</u></a></span>
+    </div>
+    <button class="accordion">How long will my project take?</button>
+    <div class="faq">
+      <span>You can have your new place ready in as quick as 2 weeks! It all depends on how quickly and detailed your feedback to us is.<br/><br/>
+      We endeavor to propose items that are in stock, or available within a few weeks. However, if you have a time crunch- let us know in advance so we can tailor our solutions accordingly. <br/><br/>
 
-<button class="accordion">What is a First look? What does a 2D Board look like?</button>
-<div class="faq">
-  <span>A <a href="#">First Look</a> is a customized concept board with real life items that suit your space, style and fit your budget. It provides you a 2D insight into how the space will look with all individual items together, all measured to fit accurately into your home. You can view these boards at anytime via your account.<br/><a href="#" data-toggle="modal" data-target="#firstLookModal"><u>Here's what your 2D room board will look like!</u></a></span>
-</div>
+      The availability of products will be indicated on your Shopping List, so we suggest snapping them up quickly to avoid disappointment in case stock changes.<br/><br/>
 
-<button class="accordion">Why do you only provide a shopping list?</button>
-<div class="faq">
-  <span>We understand the importance of seeing furniture in real life, before buying; after all no two butts feel the same on a sofa! With our curated shopping list you simply go to the stores, make sure you love our picks, and buy only what you want.<br/><br/>No more confusing trips poring over your floor plans and the furniture measurements!</span>
-</div>
+      If you have chosen the option of a Buy For Me, we will inform you the approximate delivery time we receive from vendors. Please do note delivery is dependant on individual vendors and completely outside of our control. </span>
+    </div>
 
-<button class="accordion">Where do you buy my furniture from?</button>
-<div class="faq">
-  <span>Home Philosophy does not work with preferred vendors- we source pieces from all over town. Right from Ikea to local shops and online retailers; we even get first dibs at awesome pieces during furniture fairs.<br/><br/>Our goal is to tirelessly scour the city for the best furniture to fit your style and budget.
-</span>
-</div>
+    <button class="accordion">Why do you only provide a shopping list?</button>
+    <div class="faq">
+      <span>We understand the importance of seeing furniture in real life, before buying; after all no two butts feel the same on a sofa! With our curated shopping list you simply go to the stores, make sure you love our picks, and buy only what you want.<br/><br/>No more confusing trips poring over your floor plans and the furniture measurements!</span>
+    </div>
 
-<button class="accordion">How long will my project take?</button>
-<div class="faq">
-  <span>You can have your new place ready in as quick as 2 weeks! It all depends on how quickly and detailed your feedback to us is.<br/><br/>
+    <button class="accordion">How does the Meet and Measure work?</button>
+    <div class="faq">
+      <span>Through your account, once payment is made, we provide you a calendar option to schedule a meeting at your new place. During which, apart from taking measurements and making notes of your space, we also have a quick chat about any specific preferences you may have for the design of your space.<br/>Our meeting will typically be between 15-30 minutes depending on the size and number of rooms we are transforming! 
+      </span>
+    </div>
 
-We endeavor to propose items that are in stock, or available within a few weeks. However, if you have a time crunch- let us know in advance so we can tailor our solutions accordingly. <br/><br/>
+  <button class="accordion">How does Buy For Me work?</button>
+  <div class="faq">
+    <span>We want designing your home to be a hassle-free experience! So if you are happy with our concept boards, simply click this option at checkout and leave the rest to us. For a small fee, we handle all the coordination of purchase, delivery and setup. 
 
-The availability of products will be indicated on your Shopping List, so we suggest snapping them up quickly to avoid disappointment in case stock changes.<br/><br/>
+  <br/><br/>Time to celebrate your move-in ready home!</span>
+  </div>
+  </div>
+</section>
 
-If you have chosen the option of a Buy For Me, we will inform you the approximate delivery time we receive from vendors. Please do note delivery is dependant on individual vendors and completely outside of our control. </span>
-</div>
+<section style="background-color:#f9f9f9;padding-bottom:40px;">
+<div class="faq-ctr">
+  <div style="margin-bottom:20px;"><b><u>ABOUT THE SERVICE</u></b></div>
+  
+  <button class="accordion">Where do you buy my furniture from?</button>
+    <div class="faq">
+      <span>Home Philosophy does not work with preferred vendors- we source pieces from all over town. Right from Ikea to local shops and online retailers; we even get first dibs at awesome pieces during furniture fairs.<br/><br/>Our goal is to tirelessly scour the city for the best furniture to fit your style and budget.
+    </span>
+    </div>
 
-<button class="accordion">How does Buy For Me work?</button>
-<div class="faq">
-  <span>We want designing your home to be a hassle-free experience! So if you are happy with our concept boards, simply click this option at checkout and leave the rest to us. For a small fee, we handle all the coordination of purchase, delivery and setup. 
+  <button class="accordion">Who is designing my home?</button>
+  <div class="faq">
+    <span>Home Philosophy is a team of talented interior designers who are professionally trained and with a combined experience of over 10 years. We believe that having a beautiful home shouldn’t be complicated- so we’ve simplified the process to make it stress-free without compromising on the personalization. <br/><br/>
 
-<br/><br/>Time to celebrate your move-in ready home!</span>
-</div>
+  We are excited to meet you before starting on your project, and always available via phone or email!
+  </span>
+  </div>
 
-<button class="accordion">Who is designing my home?</button>
-<div class="faq">
-  <span>Home Philosophy is a team of talented interior designers who are professionally trained and with a combined experience of over 10 years. We believe that having a beautiful home shouldn’t be complicated- so we’ve simplified the process to make it stress-free without compromising on the personalization. <br/><br/>
+  <button class="accordion">What does Accessories Selection include?</button>
+  <div class="faq">
+    <span>Accessories can totally make or break a space, so we spend a great deal of time finding little additions that complete your room. These could include a fabulous rug, cool shelves, lampshades, curtains, posters- basically the icing on the cake.
+  </span>
+  </div>
 
-We are excited to meet you before starting on your project, and always available via phone or email!
-</span>
-</div>
+  <button class="accordion"> Can you provide full renovation services?</button>
+  <div class="faq">
+    <span>Yes! We work with our certified contractors and do everything from space planning to furniture selection. Please choose the Custom package during checkout, and we will get back to you with some additional questions in order to provide you with a quote.
+  </span>
+  </div>
 
-<button class="accordion">What does Accessories Selection include?</button>
-<div class="faq">
-  <span>Accessories can totally make or break a space, so we spend a great deal of time finding little additions that complete your room. These could include a fabulous rug, cool shelves, lampshades, curtains, posters- basically the icing on the cake.
-</span>
-</div>
-
-<button class="accordion">How does the Meet and Measure work?</button>
-<div class="faq">
-  <span>Through your account, once payment is made, we provide you a calendar option to schedule a meeting at your new place. During which, apart from taking measurements and making notes of your space, we also have a quick chat about any specific preferences you may have for the design of your space.<br/>Our meeting will typically be between 15-30 minutes depending on the size and number of rooms we are transforming! 
-</span>
-</div>
-
-
+  <button class="accordion"> I need a few extra tweaks to my place, can you help?</button>
+  <div class="faq">
+    <span>Of course! Drop us an email directly at anytime and we can add in any extras you may need. Everything from rewiring for new lighting to new curtains or simply saving a favourite chair by reupholstering- it can all be done :)</span>
+  </div>
 </div>
 </section>
 
@@ -168,16 +181,9 @@ Our one-time flat design fee is fully transparent, so your budget is spent entir
 </span>
 </div>
 
-<button class="accordion"> I need a few extra tweaks to my place, can you help?</button>
-<div class="faq">
-  <span>Of course! Drop us an email directly at anytime and we can add in any extras you may need. Everything from rewiring for new lighting to new curtains or simply saving a favourite chair by reupholstering- it can all be done :)</span>
-</div>
 
-<button class="accordion"> Can you provide full renovation services?</button>
-<div class="faq">
-  <span>Yes! We work with our certified contractors and do everything from space planning to furniture selection. Please choose the Custom package during checkout, and we will get back to you with some additional questions in order to provide you with a quote.
-</span>
-</div>
+
+
 
 <button class="accordion">I’m moving to Singapore soon, but don’t live there yet. Can I still have you design my home?
 </button>

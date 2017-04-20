@@ -21,8 +21,8 @@
 	      	<span class="caret nav-dropdown"></span></a>
 	      	<ul class="dropdown-menu" style="min-width:0px;">
 	          	<li style="padding:0px;margin:0;">
-	          		<a href="/admin/users" ng-if="identity.currentUser.role==='admin'" style="font-family:Montserrat-Regular;font-size:13px;">DASHBOARD</a>
-	          	 	<a href="/dashboard" ng-if="identity.currentUser.role!='admin'" style="font-family:Montserrat-Regular;font-size:13px;">DASHBOARD</a>
+	          		<a href="/admin/users" ng-if="identity.currentUser.role==='admin'" style="font-family:Montserrat-Regular;font-size:13px;">MY PROJECTS</a>
+	          	 	<a href="/dashboard" ng-if="identity.currentUser.role!='admin'" style="font-family:Montserrat-Regular;font-size:13px;">MY PROJECTS</a>
 	          	</li>
 	            <li style="padding:0px;margin:0;"><a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a></li>
 	        </ul>
@@ -98,7 +98,6 @@
 	$('.concept-center').slick({  
 	  lazyLoad: 'progressive',
 	  infinite: false,
-	  
 	  dots: false,
 	  // variableWidth: true,
 

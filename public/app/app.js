@@ -69,22 +69,3 @@ angular.module('app').directive('diHref', ['$location', '$route',
     }
 }]);
 
-
-// angular.module('app')
-// 			.config(function($stateProvider, $urlRouterProvider) {
-
-//     $urlRouterProvider.otherwise('/main.htnl');
-//     $stateProvider          
-//         .state('style-board-ctmp', {
-//             url: '/style-board-ctmp',
-//             template: 'style-board-ctmp.html'
-//         })
-
-// });
-
-
- 
-//console.log("In app.js1");
-
-
-

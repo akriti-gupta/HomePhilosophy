@@ -169,7 +169,7 @@
 			      	</th>
 				      <td style="text-align:center;vertical-align:middle;">{{styleName[item.resultData[0].styleId]}}</td>
 				      <td style="text-align:center;vertical-align:middle;">
-				      	<div  ng-if="!item.pkgData|| item.pkgData.length===0"><a href="#" ng-click="selectPkg($index)">Choose a Package </a></div>
+				      	<div  ng-if="!item.pkgData|| item.pkgData.length===0"><a href="#" ng-click="selectPkg($index)">Finalize a Package at Payment</a></div>
 						<div ng-if="packageName[item.pkgData.pkgId]!=' '">{{packageName[item.pkgData.pkgId]}}</div>
 					 	</div>
 				      </td>
@@ -265,8 +265,8 @@
 		<p style="font-family:Montserrat-Regular;padding-top:40px;font-size:16px;" ng-if="designerNotes!=null && designerNotes!=' '">DESIGNER COMMENTS : <span style="font-family:PlayfairDisplay-Regular;">{{designerNotes}}</span></p>
 
 		<div ng-show="isFinalPage">
-			<p style="font-family:PlayfairDisplay-Regular;font-size:22px;">
-				<a target="_self" href="/downloadFile/{{shoppingList}}" ng-if="item.indexOf('.pdf')!=-1">Download Your Shopping List</a>
+			<p style="font-family:PlayfairDisplay-Regular;font-size:22px;padding-top:15px;">
+				<a target="_self" href="/downloadFile/{{shoppingList}}" class="dwnld-shp-txt" ng-if="item.indexOf('.pdf')!=-1">Download Your Shopping List</a>
 			</p>
 		</div>
 		<div style="padding-top:20px;display:block;text-align:center;" ng-show="!isFinalPage">

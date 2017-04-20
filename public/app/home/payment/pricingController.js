@@ -32,7 +32,7 @@ angular.module("app")
 		  		pkgId = payment.getPayPkg();
 		  		pkgName = $scope.packages[pkgId-1].name;
 		  		pkgValue = $scope.packages[pkgId-1].pkgValue;
-		  		goToPath = '/review-payment';
+		  		// goToPath = '/review-payment';
 			}
 
 			for (var i=0;i<$scope.selectedRooms.length;i++){
