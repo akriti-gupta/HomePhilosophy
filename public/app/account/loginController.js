@@ -29,9 +29,11 @@ angular.module("app")
 		  					quizResult.setInsertedRooms(userQuiz[1].data.results.roomData);
 		  					mvNotifier.notify('Login success!');
 	  						if(userSelectionInfo!=null && userSelectionInfo.quizImgSelected!=null && userSelectionInfo.quizImgSelected.length===1){
+	  							$location.search({});
 	  							$location.path('/pricing');
 	  						}
 	  						else{
+	  							$location.search({});
 	  							$location.path('/style-quiz');
 	  						}
 		  					}, function(reason){
@@ -40,6 +42,7 @@ angular.module("app")
 		  				});
 					}
 					else{
+						$location.search({});
 						$location.path('/dashboard');
 					}
 				}
