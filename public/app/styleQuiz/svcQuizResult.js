@@ -60,10 +60,11 @@
 
         //Called from quizController to store calculated style before control is passed to login page.
 		var storeStyle = function(newObj,boardVal) {
-			
-		    for(i=0;i<newObj.length;i++){
-		    	result.push({"id": newObj[i].id, "title": newObj[i].title, "style":newObj[i].style, "desc": newObj[i].desc, "image": newObj[i].image, "value":newObj[i].value});
-		    	board = boardVal;
+			if(newObj!=null && newObj.length>0){
+			    for(i=0;i<newObj.length;i++){
+			    	result.push({"id": newObj[i].id, "title": newObj[i].title, "style":newObj[i].style, "desc": newObj[i].desc, "image": newObj[i].image, "value":newObj[i].value});
+			    	board = boardVal;
+				}
 			}
 		};
 
