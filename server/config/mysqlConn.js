@@ -4,7 +4,7 @@ var pool = mysql.createPool({
 				host     : '127.0.0.1',
 				user     : 'root',
 				password : 'Schmooz@14',
-				database : 'testSchema',
+				database : 'HomePhilosophy',
 				charset  : 'utf8'
 			});
 
