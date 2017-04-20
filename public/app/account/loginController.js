@@ -21,14 +21,14 @@ angular.module("app")
 					window.localStorage.removeItem('result');
 					window.localStorage.removeItem('userSelectionInfo');
 
-					if(result.length>0 ){
+					if(result!=null && result.length>0 ){
 						mvUserQuiz.saveUserData(userSelectionInfo, result).then(function(userQuiz){
 							console.log('New userQuiz is: ');
 							console.log(userQuiz);
 		  					quizResult.setUserCurrQuiz(userQuiz[0].quizId);
 		  					quizResult.setInsertedRooms(userQuiz[1].data.results.roomData);
 		  					mvNotifier.notify('Login success!');
-	  						if(userSelectionInfo.quizImgSelected.length===1){
+	  						if(userSelectionInfo!=null && userSelectionInfo.quizImgSelected!=null && userSelectionInfo.quizImgSelected.length===1){
 	  							$location.path('/pricing');
 	  						}
 	  						else{
