@@ -243,19 +243,29 @@ function getPackageTxn(conn,quizIds,cb){
 
 function getAppt(conn,quizIds,cb){
 	var apptData = [];
-	var qry_qz_appt = 'select a.* from cust_quiz q left outer join cust_appointment a on q.quizId = a.quizId '+ 
-									 'where q.quizId in ('+quizIds+')';
-	var options = {sql:qry_qz_appt,nestTables: true};
+	// var qry_qz_appt = 'select a.* from cust_quiz q left outer join cust_appointment a on q.quizId = a.quizId '+ 
+	// 								 'where q.quizId in ('+quizIds+')';
+
+	var qry_qz_appt = "select a.*, convert_tz(a.apptDate,@@session.time_zone,'+00:00')  apptDate1 from cust_quiz q left outer join cust_appointment a on q.quizId = a.quizId "+ 
+	 								 "where q.quizId in ("+quizIds+")";
+	var options = {sql:qry_qz_appt,nestTables: false};
+
 
 	conn.query(options, function(err, apptInfo, fields){
+		console.log('apptInfi is:');
+		console.log(apptInfo);
 		if(err){
 			console.log('Error in fetching pkgs for quiz '+err);
 			cb(err,null);
 		}
 		else if(apptInfo.length>0){
 			for(var i =0; i<apptInfo.length;i++){
-				if(apptInfo[i].a.id!=null){
-					apptData.push(apptInfo[i].a);
+				//if(apptInfo[i].a.id!=null){
+				if(apptInfo[i].id!=null){
+					// apptData.push(apptInfo[i].a);
+
+					apptInfo[i].apptDate = apptInfo[i].apptDate1;
+					apptData.push(apptInfo[i]);
 				}
 			}
 		}
