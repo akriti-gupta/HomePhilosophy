@@ -252,8 +252,6 @@ function getAppt(conn,quizIds,cb){
 
 
 	conn.query(options, function(err, apptInfo, fields){
-		console.log('apptInfi is:');
-		console.log(apptInfo);
 		if(err){
 			console.log('Error in fetching pkgs for quiz '+err);
 			cb(err,null);
