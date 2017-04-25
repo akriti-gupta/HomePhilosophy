@@ -75,7 +75,7 @@ module.exports = function(){
                          else {
                             console.log('Create a new user for: ');
                             console.log(profile);
-                            var userData = {fbId:profile.id, firstname: profile.displayName}
+                            var userData = {fbId:profile.id, firstname: profile.displayName,username:profile.emails[0].value}
                            
                             conn.query('insert into user set ?',userData, function(err, results, fields){
                                 if(err){
