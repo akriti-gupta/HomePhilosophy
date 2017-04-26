@@ -201,8 +201,8 @@
 
 	      	<div class="form-group" name="uploadFurn" style="clear:both;padding-top:30px;">
 	        	<div class="fs-20px">10. Upload images of any existing furniture or accessories you want us to incorporate in the design?</div>
-	         	<div dropzone file-dropzone="[image/png, image/jpeg]" data-max-file-size="5">Drop Files Here</div>
-	         	<div style="width:50%;">
+	         	<div id="furnImages" dropzone file-dropzone="[image/png, image/jpeg]" data-max-file-size="5">Drop Files Here</div>
+	         	<div style="width:50%;padding-bottom:30px;">
 					<div ng-repeat="file in pendingDropFilesFurn track by $index">
 					  <div style="margin-bottom:10px;width:90%;float:left;background-color:#00a99d;color:#fff;">{{file.name}} ({{file.size}}) </div>
 					  <div style="width:10%;float:right;background-color:#00a99d;color:#fff;">
@@ -228,7 +228,7 @@
   				</div>
 	      	</div> -->
       
-      		<div style="text-align:center;padding:30px 0px 40px;">
+      		<div style="text-align:center;padding:0px 0px 40px;">
         		<button type="submit" class="btn-start-quiz btn-qz btn-nxt font-sansRegular txt-upper col-lightcyan fs-20px" ng-click = "saveData()" >NEXT</button>
       		</div>
     	</form>

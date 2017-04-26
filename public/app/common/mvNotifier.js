@@ -1,6 +1,10 @@
 //Wrap toastr inside a service to put it in a gloabl variable to be used as dependency injection.
 
+toastr.options = {
+  "positionClass": "toast-top-full-width"
+  }
 angular.module('app').value('mvToastr',toastr);
+
 
 //Create a notifier service - an object with a function
 angular.module('app').factory('mvNotifier',function(mvToastr){

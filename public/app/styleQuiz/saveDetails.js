@@ -341,6 +341,7 @@ return {
       element.bind('drop', function(event) {
         event.preventDefault();
         event.stopPropagation();
+        size = 0;
         if (event.originalEvent.dataTransfer){
           if (event.originalEvent.dataTransfer.files.length > 0) {
             for(var i=0; i< event.originalEvent.dataTransfer.files.length; i++){
@@ -348,10 +349,7 @@ return {
               size = size + event.originalEvent.dataTransfer.files[i].size;
               if (checkSize(size) && isTypeValid(type)) {
                 scope.$apply(function(scope) {
-                  console.log(event);
-                  console.log(event.currentTarget.attributes[0].id);
-                // if(event.originalEvent.path[0].id==='fileImages'){
-                  if(event.currentTarget.attributes[0].id==='fileImages'){
+                  if(event.currentTarget.attributes.id.nodeValue==='fileImages'){
                     scope.pendingDropFiles.push({"file":event.originalEvent.dataTransfer.files[i], "name":event.originalEvent.dataTransfer.files[i].name,"size":scope.formatBytes(event.originalEvent.dataTransfer.files[i].size,0)});  
                   }
                   else{

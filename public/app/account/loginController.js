@@ -75,7 +75,7 @@ angular.module("app")
 			  						$location.path('/style-quiz');
 			  					}, function(reason){
 			  							mvNotifier.error(reason);
-			  							alert(reason);
+			  							//alert(reason);
 			  					});
 			  				}
 			  				else{
