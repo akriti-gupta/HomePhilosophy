@@ -506,10 +506,12 @@ $scope.saveAndUpload = function(){
 
 				var userObj = getUserDtls($scope.quizData.quizData[0].quizId);
 				var template;
+				console.log('stage is: '+$scope.currRoom.displayStatus.stage);
 				if($scope.currRoom.displayStatus.stage===1){
 					template='firstLook';
 				}
-				if($scope.currRoom.displayStatus.stage===2 || $scope.currRoom.displayStatus.stage===3){
+
+				if($scope.currRoom.displayStatus.stage>=2){
 					template='finalLook';
 				}
 
