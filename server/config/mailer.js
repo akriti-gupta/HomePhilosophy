@@ -2,7 +2,7 @@ var nodemailer = require('nodemailer'),
     config = require('./config'),
     ejs = require('ejs');
 
-// create reusable transport method (opens pool of SMTP connections)
+//create reusable transport method (opens pool of SMTP connections)
 
 var transporter = nodemailer.createTransport({
     host: 'smtp.zoho.com',
