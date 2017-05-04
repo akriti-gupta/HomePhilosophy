@@ -505,11 +505,15 @@ $scope.saveAndUpload = function(){
 				$scope.quizData.roomData[$scope.currRoomIndex].filesUploaded = true;
 
 				var userObj = getUserDtls($scope.quizData.quizData[0].quizId);
-				var template;
-				console.log('stage is: '+$scope.currRoom.displayStatus.stage);
+				var template='';
+				console.log(userObj);
+				console.log('stage is: ');
+				console.log($scope.currRoom.displayStatus.stage);
 				if($scope.currRoom.displayStatus.stage===1){
 					template='firstLook';
 				}
+
+				console.log($scope.currRoom.displayStatus.stage>=2);
 
 				if($scope.currRoom.displayStatus.stage>=2){
 					template='finalLook';
