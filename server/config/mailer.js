@@ -101,8 +101,8 @@ exports.sendEmail = function(req, res){
     }
 
     var mailData = {name:name,address:address,apptDate:apptDate};
-    console.log(process.cwd() + '/server/views/'+template+'.ejs');
-    ejs.renderFile(process.cwd() + '/server/views/'+template+'.ejs',{mailData},function(err,html){
+    console.log('/root/HomePhilosophy/server/views/'+template+'.ejs');
+    ejs.renderFile(process.cwd() + '/root/HomePhilosophy/server/views/'+template+'.ejs',{mailData},function(err,html){
         if(err){
             console.log(err);
         }
