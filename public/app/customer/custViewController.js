@@ -1,5 +1,5 @@
 angular.module("app")
-		  .controller("CustViewController",function($scope,$location,$http,$filter,$routeParams,quizResult,payment,mvIdentity,mvNotifier,mvUpload, mvCustView,custViewSvc){
+		  .controller("CustViewController",function($scope,$location,$http,$filter,$routeParams,quizResult,payment,mvIdentity,mvNotifier,mvUpload, mvCustView,mvEmail,custViewSvc){
 		  		
 		  	
 
@@ -636,9 +636,19 @@ $scope.saveAppointment = function(item){
 
 					mvCustView.saveAppointment(apptData).then(function(success){
 						if(success){
-							angular.element('#calendarModal').modal('hide');
-							window.location.reload(true);
-							//TODO: Send email
+							 angular.element('#calendarModal').modal('hide');
+							//window.location.reload(true);
+							var mailData = {'template':'appt','to':mvIdentity.currentUser.username,'name':mvIdentity.currentUser.firstname,'address':$scope.address,'apptDate':apptDateTime};
+							mvEmail.sendEmail(mailData).then(function(success){
+				  				if(success)
+					  				mvNotifier.notify('Mail sent');
+					  			else
+					  				mvNotifier.notify('Mail not sent');
+					  			//angular.element('#calendarModal').modal('hide');
+						  	}, function(reason){
+					  			alert(reason);
+					  			mvNotifier.error(reason);
+					  		});
 						}
 					}, function(reason){
 						alert('Appointment could not be scheduled. Please contact the site admin '+reason);
@@ -705,8 +715,19 @@ $scope.saveAppointment = function(item){
 						mvCustView.saveAppointment(apptData).then(function(success){
 							if(success){
 								angular.element('#calendarModal').modal('hide');
-								window.location.reload(true);
-								//TODO: Send email
+								//window.location.reload(true);
+								
+								var mailData = {'template':'appt','to':mvIdentity.currentUser.username,'name':mvIdentity.currentUser.firstname,'address':$scope.address,'apptDate':apptDateTime};
+					  			mvEmail.sendEmail(mailData).then(function(success){
+						  				if(success)
+							  				mvNotifier.notify('Mail sent');
+							  			else
+							  				mvNotifier.notify('Mail not sent');
+
+						  		}, function(reason){
+						  			alert(reason);
+						  			mvNotifier.error(reason);
+						  		});
 							}
 						}, function(reason){
 							alert('Meeting could not be scheduled. Please contact the site admin '+reason);

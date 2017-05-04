@@ -23,9 +23,7 @@ angular.module("app")
 
 					if(result!=null && result.length>0 ){
 						mvUserQuiz.saveUserData(userSelectionInfo, result).then(function(userQuiz){
-							console.log('New userQuiz is: ');
-							console.log(userQuiz);
-		  					quizResult.setUserCurrQuiz(userQuiz[0].quizId);
+							quizResult.setUserCurrQuiz(userQuiz[0].quizId);
 		  					quizResult.setInsertedRooms(userQuiz[1].data.results.roomData);
 		  					mvNotifier.notify('Login success!');
 	  						if(userSelectionInfo!=null && userSelectionInfo.quizImgSelected!=null && userSelectionInfo.quizImgSelected.length===1){
@@ -144,12 +142,16 @@ angular.module("app")
 		  			else{
 		  				$location.path('/');
 		  			}
-		  			mvEmail.sendEmail().then(function(success){
+		  			var mailData = {'template':'login','to':mvIdentity.currentUser.username,'name':mvIdentity.currentUser.firstname}
+		  			mvEmail.sendEmail(mailData).then(function(success){
 			  				if(success)
 				  				mvNotifier.notify('Mail sent');
 				  			else
 				  				mvNotifier.notify('Mail not sent');
 
+			  		}, function(reason){
+			  			alert(reason);
+			  			mvNotifier.error(reason);
 			  		});
 
 		  		}, function(reason){

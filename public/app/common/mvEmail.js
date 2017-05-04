@@ -1,13 +1,13 @@
 angular.module('app').factory('mvEmail', function($http, mvIdentity, $q, mvUser){
 	return{
-		sendEmail: function(){
+		sendEmail: function(mailData){
 			var dfd = $q.defer();
-		 	$http.post('/sendEmail').then(function(response){
+		 	$http.post('/sendEmail',{data:mailData}).then(function(response){
 	  			if(response.data.success){
 	  				dfd.resolve(true);
 	  			}
 	  			else{
-	  				dfd.resolve(false);
+	  				dfd.reject(response.data.error);
 	  			}
 	  		});
 	  		return dfd.promise;

@@ -1,4 +1,4 @@
-angular.module('app').controller('UserListCtrl', function($scope,$http,$routeParams,mvIdentity,mvUser, mvAdminView,payment,mvUpload,mvNotifier){
+angular.module('app').controller('UserListCtrl', function($scope,$http,$routeParams,mvIdentity,mvUser, mvAdminView,payment,mvUpload,mvNotifier,mvEmail){
 	$scope.users = mvUser.query();
 	$scope.packages = payment.getPackages();
 	$scope.showListing = true;
@@ -310,6 +310,16 @@ function populateStatus(projectData){
  	}
  }
  	
+function getUserDtls(quizId){
+	if($scope.projects!=null && $scope.projects.length>0){
+		for(var i=0;i<$scope.projects.length;i++){
+			if(quizId === $scope.projects[i].q.quizId){
+				return $scope.projects[i].u;
+				break;
+			}
+		}
+	}
+}
 //Get customer projects from DB.
 $scope.getProjectListing = function(){
 	mvAdminView.getProjectListing(projectStatus).then(function(projectData){
@@ -493,6 +503,27 @@ $scope.saveAndUpload = function(){
 				mvNotifier.notify('Data saved');
 				angular.element('#uploadModal').modal('hide');
 				$scope.quizData.roomData[$scope.currRoomIndex].filesUploaded = true;
+
+				var userObj = getUserDtls($scope.quizData.quizData[0].quizId);
+				var template;
+				if($scope.currRoom.displayStatus.stage===1){
+					template='firstLook';
+				}
+				if($scope.currRoom.displayStatus.stage===2){
+					template='finalLook';
+				}
+
+				var mailData = {'template':template,'to':userObj.username,'name':userObj.firstname};
+	  			mvEmail.sendEmail(mailData).then(function(success){
+		  				if(success)
+			  				mvNotifier.notify('Mail sent');
+			  			else
+			  				mvNotifier.notify('Mail not sent');
+
+		  		}, function(reason){
+		  			alert(reason);
+		  			mvNotifier.error(reason);
+		  		});
 			}, function(reason){
 				alert('Data not saved: '+reason);
 				mvNotifier.notify('Data not saved: '+reason);

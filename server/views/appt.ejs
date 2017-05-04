@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<style type="text/css">
+			p{
+				text-align: center;
+				padding:10px 0px;
+				color: black;
+			}
+			a{
+				text-decoration: none;
+			}
+			.email-title{
+			 	background-color:#000;
+				padding:15px 0px;
+			  	margin:0;color:rgb(248,248,248);
+			  	font-family:PlayfairDisplay-Regular;
+			  	font-size:20px;
+			}
+
+		</style>
+	</head>
+	<body style="width:80%;margin:0 auto;font-family:PlayfairDisplay-Regular;
+				font-size: 16px;padding-top:50px;">
+		<section id="hp-logo">
+			<div style="width:30%;margin:0 auto;padding:15px;">
+				<img src="cid:hplogocustom@homephilosophy.com" width="100%" height="auto">
+			</div>
+		</section>
+
+		<section id="content">
+			<p class="email-title">YOU'RE ALL SET</p>
+			<div style="display:flex;align-items:center;border-left:1px solid #ebeced;">
+				<div style="width:30%;">
+					<div style="width:80%;margin:0 auto;padding-top:70%;">
+						<img src="cid:meetmeasure@homephilosophy.com" width="100%" height="auto">
+					</div>
+				</div>
+				<div style="width:70%;float:right;background-color:#ebeced;">
+					<p> Hi <%=mailData.name%> ,</p>
+					<p style="padding-top:10px;">Our Meet and Measure appointment is confirmed!</p>
+					<p style="font-size:20px;padding-top:10px;">See you at <%=mailData.address%> on <%=mailData.apptDate%></p>
+					<p style="padding-top:50px;">Need to make changes to your appointment?</p>
+					<p>Just <a href="http://homephilosophy.com.sg/login" style="color:#64c6be;">LOG IN </a>and edit upto 24 hours in advance.</p>
+					<p style="padding-top:10px;">We look forward to meeting you soon!</p>
+					<p style="padding-top:10px;">Home Philosophy Team</p>
+				</div>
+			</div>
+			<div style="clear:both;"></div>
+			
+			<div style="position:relative;width:100%;">
+				<img src="cid:meetbanner@homephilosophy.com" width="100%" height="auto">
+				<!-- <div style="position:absolute;top:40%;width:100%;padding:10px 0px;margin:0px;background-color:#fff;opacity:0.9;">
+					<div>
+						<p style="margin:0px;padding-bottom:10px;font-size:20px;font-weight:bold;">SIT BACK AND RELAX.</p>
+						<p style="color:#64c6be;font-size:35px;margin:0px;font-weight:bold;"> It's going to be amazing.</p>
+					</div>
+				</div> -->
+			</div>
+		</section>
+
+		<section id="footer">
+		 Footer Links
+		</section>
+
+
+	</body>
+</html>

@@ -24,6 +24,14 @@ module.exports = {
       		user: 'hello@homephilosophy.com.sg',
       		pass: 'erushierushi'
     	},
-    defaultFromAddress: 'Home Philosophy <guptaakriti83@gmail.com>'
+    defaultAddress: 'Home Philosophy <guptaakriti83@gmail.com>',
+
+    templateData:[
+    				{template:'login', subject:'Welcome to Home Philosophy'},
+    				{template:'appt', subject:'Your Meet and Measure appointment is scheduled'},
+    				{template:'firstLook', subject:'Your First Looks are ready!'},	
+    				{template:'finalLook', subject:'Your Final Looks are ready!'},
+    				{template:'shoppingList', subject:'Yor Shopping List is ready!'}
+    			]
   }
 }
