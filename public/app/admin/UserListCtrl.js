@@ -509,7 +509,7 @@ $scope.saveAndUpload = function(){
 				if($scope.currRoom.displayStatus.stage===1){
 					template='firstLook';
 				}
-				if($scope.currRoom.displayStatus.stage===2){
+				if($scope.currRoom.displayStatus.stage===2 || $scope.currRoom.displayStatus.stage===3){
 					template='finalLook';
 				}
 
