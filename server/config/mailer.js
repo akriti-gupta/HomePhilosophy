@@ -49,7 +49,7 @@ exports.sendEmail = function(req, res){
     var apptDate='';
     var bccAddress='';
     var attachments = [{filename: 'logo_header.png',
-                        path: './public/images/logo_header.png',
+                        path: '/root/HomePhilosophy/public/images/logo_header.png',
                         cid: 'hplogocustom@homephilosophy.com' 
                     }];
 
@@ -77,27 +77,27 @@ exports.sendEmail = function(req, res){
     }
 
     if(template==='login'){
-        attachments.push({filename: 'login_banner_top.png',path: './public/images/mails/login_banner_top.png',cid: 'logintopbanner@homephilosophy.com'});   
-        attachments.push({filename: 'like1.png',path: './public/images/like1.png',cid: 'loginlike@homephilosophy.com'});
-        attachments.push({filename: 'measure1.png',path: './public/images/measure1.png',cid: 'loginmeasure@homephilosophy.com'});
-        attachments.push({filename: 'design1.png',path: './public/images/designs1.png',cid: 'logindesign@homephilosophy.com'});
-        attachments.push({filename: 'shoppingList.png',path: './public/images/shoppingList.png',cid: 'loginshopping@homephilosophy.com'});
-        attachments.push({filename: 'login_banner.png',path: './public/images/mails/login_banner.png',cid: 'loginbanner@homephilosophy.com'});
+        attachments.push({filename: 'login_banner_top.png',path: '/root/HomePhilosophy/public/images/mails/login_banner_top.png',cid: 'logintopbanner@homephilosophy.com'});   
+        attachments.push({filename: 'like1.png',path: '/root/HomePhilosophy/public/images/like1.png',cid: 'loginlike@homephilosophy.com'});
+        attachments.push({filename: 'measure1.png',path: '/root/HomePhilosophy/public/images/measure1.png',cid: 'loginmeasure@homephilosophy.com'});
+        attachments.push({filename: 'design1.png',path: '/root/HomePhilosophy/public/images/designs1.png',cid: 'logindesign@homephilosophy.com'});
+        attachments.push({filename: 'shoppingList.png',path: '/root/HomePhilosophy/public/images/shoppingList.png',cid: 'loginshopping@homephilosophy.com'});
+        attachments.push({filename: 'login_banner.png',path: '/root/HomePhilosophy/public/images/mails/login_banner.png',cid: 'loginbanner@homephilosophy.com'});
     }
 
     else if(template==='appt'){
         bccAddress = 'rashi@homephilosophy.com.sg';
-        attachments.push({filename: 'measure1.png',path: './public/images/measure1.png',cid: 'meetmeasure@homephilosophy.com'});
-        attachments.push({filename: 'appt_banner_1.png',path: './public/images/mails/appt_banner_1.png',cid: 'meetbanner@homephilosophy.com'});
+        attachments.push({filename: 'measure1.png',path: '/root/HomePhilosophy/public/images/measure1.png',cid: 'meetmeasure@homephilosophy.com'});
+        attachments.push({filename: 'appt_banner_1.png',path: '/root/HomePhilosophy/public/images/mails/appt_banner_1.png',cid: 'meetbanner@homephilosophy.com'});
     }
 
     else if(template==='firstLook'){
         bccAddress = '';
-        attachments.push({filename: 'firstLook_banner.png',path:'./public/images/mails/firstLook_banner.png',cid:'firstLookbanner@homephilosophy.com'});
+        attachments.push({filename: 'firstLook_banner.png',path:'/root/HomePhilosophy/public/images/mails/firstLook_banner.png',cid:'firstLookbanner@homephilosophy.com'});
     }
     else if(template==='finalLook'){
         bccAddress = '';
-        attachments.push({filename: 'finalLook_banner_1.png',path:'./public/images/mails/finalLook_banner1.png',cid:'finalLookbanner@homephilosophy.com'});
+        attachments.push({filename: 'finalLook_banner_1.png',path:'/root/HomePhilosophy/public/images/mails/finalLook_banner1.png',cid:'finalLookbanner@homephilosophy.com'});
     }
 
     var mailData = {name:name,address:address,apptDate:apptDate};
