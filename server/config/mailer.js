@@ -4,24 +4,24 @@ var nodemailer = require('nodemailer'),
 
 // create reusable transport method (opens pool of SMTP connections)
 
-// var transporter = nodemailer.createTransport({
-//     host: 'smtp.zoho.com',
-//     secureConnection: false,
-//     port: 587,
-//     auth: {
-//         user: config.mailer.auth.user,
-//         pass: config.mailer.auth.pass
-//     }
-// });
-
-
-let transporter = nodemailer.createTransport({
-  service: 'Gmail',
-  auth: {
-    user: 'guptaakriti83@gmail.com',
-    pass: 'Indi$Singa'
-  }
+var transporter = nodemailer.createTransport({
+    host: 'smtp.zoho.com',
+    secureConnection: false,
+    port: 587,
+    auth: {
+        user: config.mailer.auth.user,
+        pass: config.mailer.auth.pass
+    }
 });
+
+
+// let transporter = nodemailer.createTransport({
+//   service: 'Gmail',
+//   auth: {
+//     user: 'guptaakriti83@gmail.com',
+//     pass: 'Indi$Singa'
+//   }
+// });
 
 var sendMail = function(fromAddress,toAddress, bccAddress,subject, content,attachments,next){
   var mailOptions = {
@@ -86,8 +86,7 @@ exports.sendEmail = function(req, res){
     }
 
     else if(template==='appt'){
-        //bccAddress = 'rashi@homephilosophy.com.sg';
-        bccAddress = '';
+        bccAddress = 'rashi@homephilosophy.com.sg';
         attachments.push({filename: 'measure1.png',path: './public/images/measure1.png',cid: 'meetmeasure@homephilosophy.com'});
         attachments.push({filename: 'appt_banner_1.png',path: './public/images/mails/appt_banner_1.png',cid: 'meetbanner@homephilosophy.com'});
     }
