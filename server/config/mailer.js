@@ -109,9 +109,12 @@ exports.sendEmail = function(req, res){
         else{
             sendMail(fromAddress,toAddress,bccAddress,subject, html, attachments,function(err, response){
                 if(err){
+                    console.log('err in sending mail:');
+                    console.log(err);
                   return res.send({success:false,error:err});
                 }
                 else{
+                    console.log('Mail success');
                     return res.send({success:true});
                 }
               }); 
