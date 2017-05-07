@@ -124,63 +124,222 @@ exports.getPaymentInfo = function(req,res,next){
     });
 }
 
-function updateQuiz(conn,quizId,cb){
+// function updateQuiz(conn,quizId,cb){
+// 	var updatedDate = new Date();
+// 	var qry_qz = 'update cust_quiz set status = 0, updated_at = now() where quizId='+quizId;
+// 	console.log('In updateQuiz, quizId is: '+quizId);
+
+// 	conn.query(qry_qz, function(err, quizInfo, fields){
+// 		if(err){
+// 			console.log('Eror in updating quiz status for quiz: '+quizId);
+// 			cb(err,null);
+// 		}
+// 		else{
+// 			console.log('In updateQuiz, before calling cb');
+// 			cb(null,true);
+// 		}
+// 	});
+// }
+
+function updateQuiz(quizId,cb){
 	var updatedDate = new Date();
-	var qry_qz = 'update cust_quiz set status = 0, updated_at = now() where quizId='+quizId;
+	var quizIdArr =[quizId];
+	var qry_qz = 'update cust_quiz set status = 0, updated_at = now() where quizId= ?';
 	console.log('In updateQuiz, quizId is: '+quizId);
-
-	conn.query(qry_qz, function(err, quizInfo, fields){
+	mysqlConn.getConnection(function(err,conn){
 		if(err){
-			console.log('Eror in updating quiz status for quiz: '+quizId);
+			console.log('Error in getting mysql conn in paymnet.js: '+err);
 			cb(err,null);
 		}
-		else{
-			console.log('In updateQuiz, before calling cb');
-			cb(null,true);
-		}
-	});
-}
-
-function updatePkg(conn,quizId,totalPrice,cb){
-	var qry_qz = 'update cust_pkg_info set status=0 where quizId ='+quizId
-	console.log('In updatePkg');
-	conn.query(qry_qz, function(err, quizInfo, fields){
-		if(err){
-			console.log('Eror in updating pkg status for quiz: '+quizId);
-			cb(err,null);
-		}
-		else{
-			console.log('totalPrice is: '+totalPrice);
-			updatePkgTxn(conn,quizId,totalPrice,function(err,result){
+        
+        else if(conn){
+			conn.query(qry_qz,quizIdArr, function(err, quizInfo, fields){
 				if(err){
-					console.log('Eror in updating pkg txn status for quiz: '+quizId);
+					console.log('Eror in updating quiz status for quiz: '+quizId);
+					conn.release();
 					cb(err,null);
 				}
 				else{
-					cb(null, true);
+					console.log('In updateQuiz, before calling cb');
+					conn.release();
+					cb(null,true);
 				}
 			});
 		}
 	});
 }
 
-function updatePkgTxn(conn,quizId,totalPrice,cb){
-	var txnData = [totalPrice,new Date(),quizId];
-	var qry_qz = 'update cust_payment_txn set amountPaid =?, updated_at=? where quizId=?';
-	console.log('In updatePkgTxn');
-	conn.query(qry_qz, txnData, function(err, quizInfo, fields){
-		console.log('After executing updatePkgTxn query');
+// function updatePkg(conn,quizId,totalPrice,cb){
+// 	var qry_qz = 'update cust_pkg_info set status=0 where quizId ='+quizId
+// 	console.log('In updatePkg');
+// 	conn.query(qry_qz, function(err, quizInfo, fields){
+// 		if(err){
+// 			console.log('Eror in updating pkg status for quiz: '+quizId);
+// 			cb(err,null);
+// 		}
+// 		else{
+// 			console.log('totalPrice is: '+totalPrice);
+// 			updatePkgTxn(conn,quizId,totalPrice,function(err,result){
+// 				if(err){
+// 					console.log('Eror in updating pkg txn status for quiz: '+quizId);
+// 					cb(err,null);
+// 				}
+// 				else{
+// 					cb(null, true);
+// 				}
+// 			});
+// 		}
+// 	});
+// }
+
+function updatePkg(quizId,totalPrice,cb){
+	var quizIdArr = [quizId];
+	var qry_qz = 'update cust_pkg_info set status=0 where quizId =?';
+	console.log('In updatePkg');
+	mysqlConn.getConnection(function(err,conn){
 		if(err){
-			console.log('Error in updating pkg txn for quiz: '+quizId);
+			console.log('Error in getting mysql conn in updatePkg: '+err);
 			cb(err,null);
 		}
-		else{
-			cb(null,true);
+        
+        else if(conn){
+			conn.query(qry_qz,quizIdArr, function(err, quizInfo, fields){
+				conn.release();
+				if(err){
+					console.log('Eror in updating pkg status for quiz: '+quizId);
+					cb(err,null);
+				}
+				else{
+					console.log('totalPrice is: '+totalPrice);
+					updatePkgTxn(quizId,totalPrice,function(err,result){
+						if(err){
+							console.log('Eror in updating pkg txn status for quiz: '+quizId);
+							cb(err,null);
+						}
+						else{
+							cb(null, true);
+						}
+					});
+				}
+			});
 		}
 	});
 }
 
-function updateAppt(conn,quizId,customerId,cb){
+function updatePkgTxn(quizId,totalPrice,cb){
+	var txnData = [totalPrice,new Date(),quizId];
+	var qry_qz = 'update cust_payment_txn set amountPaid =?, updated_at=? where quizId=?';
+	console.log('In updatePkgTxn');
+	mysqlConn.getConnection(function(err,conn){
+		if(err){
+			console.log('Error in getting mysql conn in updatePkgTxn: '+err);
+			cb(err,null);
+		}
+		else if(conn){
+			conn.query(qry_qz, txnData, function(err, quizInfo, fields){
+				console.log('After executing updatePkgTxn query');
+				if(err){
+					console.log('Error in updating pkg txn for quiz: '+quizId);
+					cb(err,null);
+				}
+				else{
+					cb(null,true);
+				}
+			});
+		}	
+	});
+}
+
+function updateAppt(quizId,customerId,cb){
+	//Check if any other active quiz exists for the same customer with a future appointment.
+	console.log('In updateAppt');
+	var currDate = new Date();
+	mysqlConn.getConnection(function(err,conn){
+		if(err){
+			console.log('Error in getting mysql conn in updateAppt: '+err);
+			cb(err,null);
+		}
+
+		else if(conn){
+			conn.query('select * from cust_quiz q,cust_appointment a where '+
+						'q.quizId = a.quizId and q.customerId='+conn.escape(customerId)+
+						' and q.status=0 and a.apptStatus=0 and q.quizId!='+quizId, function(err, results, fields){
+				if(err){
+					console.log('Eror in getting existing cust quizes in updateAppt');
+					conn.release();	
+					cb(err,null);
+				}
+				
+				else if(results!=null && results.length>0){
+					console.log('existing appt results:');
+					console.log(results);
+					var index;
+					for(var i=0;i<results.length;i++){
+						if(results[i].apptDate > new Date()){
+							index = i;
+							break;
+						}
+					}
+					if(index>=0){
+						conn.query('select * from cust_pkg_info where status=1 and quizId=?',[quizId],function(err,result,fields){
+							if(err){
+								console.log('Eror in getting rooms from pkgs');
+								conn.release();	
+								cb(err,null);
+							}
+							else if(result && result.length > 0){
+								var apptArr = [];
+								for(var i = 0;i<result.length;i++){
+									var apptData = [
+										quizId,
+									   	result[i].roomId,
+									   	// roomName:'',
+									   	results[index].apptDate,
+									   	results[index].apptTime,
+									   	results[index].person,
+									   	results[index].contact,
+									   	results[index].address,
+									   	results[index].floorPlanStatus,
+									   	results[index].floorPlanLoc,
+									   	results[index].apptStatus
+									];
+									apptArr.push(apptData);
+								}
+								conn.query('insert into cust_appointment(quizId,roomId,apptDate,apptTime,contactPerson,contact,address,floorPlanStatus,floorPlanLoc,apptStatus) values ?', apptArr, function(err, results, fields){
+									if(err){
+										console.log('Error in inserting new apptInfo '+err);
+										conn.release();
+										cb(err,null);
+									}
+									else{
+										conn.release();
+										cb(null,true);
+									}
+									
+								});
+							}
+							else cb(null,true);
+
+
+							
+						});
+							
+						
+					}
+					else{
+						cb(null,true);
+					}
+
+				}
+				else{
+					cb(null,true);
+				}
+			});
+		}
+	});	
+}
+
+/*function updateAppt(conn,quizId,customerId,cb){
 	//Check if any other active quiz exists for the same customer with a future appointment.
 	console.log('In updateAppt');
 	var currDate = new Date();
@@ -250,8 +409,8 @@ function updateAppt(conn,quizId,customerId,cb){
 			cb(null,true);
 		}
 	});	
-}
-exports.updatePackage = function(req,res,next){
+}*/
+/*exports.updatePackage = function(req,res,next){
 	var quizId = req.body.quizId;
 	var status = req.body.status;
 	var totalPrice = req.body.totalPrice;
@@ -284,39 +443,36 @@ exports.updatePackage = function(req,res,next){
 								    });
 						    	}
 			               
-						});
-
-
-
-        	/*conn.query('update cust_pkg_info set status=0 where quizId ='+quizId, function(err, results, fields){
-					if(err){
-						console.log('Eror in getting existing pkg status for quiz: '+quizId);
-						res.send({success:false}); 
-					}
 			});
-
-        	conn.query('update cust_payment_txn set amountPaid=0 where quizId ='+quizId,
-				function(err, results, fields){
-					if(err){
-						console.log('Eror in getting updating payment txn amount for quiz: '+quizId);
-						res.send({success:false}); 
-					}
-			});
-
-			conn.query('update cust_quiz set status = 0 where quizId='+quizId, function(err, results, fields){
-					if(err){
-						res.send({success:false}); 
-					}
-					console.log('Cust Quiz status updated');
-			});*/
-
-
-			
-
-
         }
     });
+}*/
+
+exports.updatePackage = function(req,res,next){
+	var quizId = req.body.quizId;
+	var status = req.body.status;
+	var totalPrice = req.body.totalPrice;
+	var customerId = req.body.customerId;
+
+	async.parallel([
+					async.apply(updateQuiz,quizId),
+					async.apply(updatePkg,quizId,totalPrice)
+				], function (err, result) {
+				    if(err){
+				     	console.log(err);
+				     	return res.send({success: false, reason:err.toString()});
+				    }
+				    else
+				    	{	console.log('In updatePkg, quiz and pkg updated');
+				    		updateAppt(quizId, customerId, function(err,result){
+						    	if(err){
+							     	console.log(err);
+							     	return res.send({success: false, reason:err.toString()});
+							    }	
+
+							     else return res.send({'success':true});
+						    });
+				    	}
+	               
+	});
 }
-
-
-
