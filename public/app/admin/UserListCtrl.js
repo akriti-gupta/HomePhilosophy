@@ -84,6 +84,7 @@ function chkFinalLookStatus(conceptBoard, pkgId,roomId){
 
 function chkCncptStatus(conceptBoard,roomId,pkgId){
 	
+	var found = false;
 	for(var i =0;i<conceptBoard.length;i++){
 		var finalStatus = {};
 		if(conceptBoard[i].concept.roomId === roomId){
@@ -102,18 +103,19 @@ function chkCncptStatus(conceptBoard,roomId,pkgId){
 				
 				finalStatus.linkPage=' ';
 				finalStatus.modal=' ';
-				
+				found = true;
 				break;
 			}
-			else{
-				finalStatus.statusText='Awaiting Feedback on First Look';
-				finalStatus.linkPage='getFirstLook($index)';
-				finalStatus.modal=' ';
-				finalStatus.stage=-1;
-			}
-			break;
 		}
 	}
+	if(!found){
+		finalStatus.statusText='Awaiting Feedback on First Look';
+		finalStatus.linkPage='getFirstLook($index)';
+		finalStatus.modal=' ';
+		finalStatus.stage=-1;
+	}
+			
+
 	return finalStatus;
 }
 

@@ -44,7 +44,11 @@ exports.sendEmail = function(req, res){
     var subject='Notification from Home Philosophy';
     var templateData = config.mailer.templateData;
 
+    var mailData = {};
     var name = '';
+    var email='';
+    var phone='';
+    var message='';
     var address='';
     var apptDate='';
     var bccAddress='';
@@ -60,6 +64,7 @@ exports.sendEmail = function(req, res){
         }
     }
 
+
     if (data.hasOwnProperty('to')){
         toAddress = data.to;
     }
@@ -74,6 +79,15 @@ exports.sendEmail = function(req, res){
     }
     if (data.hasOwnProperty('apptDate')){
         apptDate = data.apptDate;
+    }
+    if (data.hasOwnProperty('email')){
+        email = data.email;
+    }
+    if (data.hasOwnProperty('phone')){
+        phone = data.phone;
+    }
+    if (data.hasOwnProperty('message')){
+        message = data.message;
     }
 
     if(template==='login'){
@@ -99,15 +113,23 @@ exports.sendEmail = function(req, res){
         bccAddress = '';
         attachments.push({filename: 'finalLook_banner_1.png',path:'/root/HomePhilosophy/public/images/mails/finalLook_banner_1.png',cid:'finalLookbanner@homephilosophy.com'});
     }
+    
+    if(template==='contact'){
+        mailData = {'name':name,'email':email,'phone':phone,'message':message};
+    }
 
-    var mailData = {name:name,address:address,apptDate:apptDate};
-    console.log('/root/HomePhilosophy/server/views/'+template+'.ejs');
+    else {
+        mailData = {name:name,address:address,apptDate:apptDate};
+    }
+
     ejs.renderFile('/root/HomePhilosophy/server/views/'+template+'.ejs',{mailData},function(err,html){
+    // ejs.renderFile(process.cwd() +'/server/views/'+template+'.ejs',{mailData},function(err,html){
         if(err){
             console.log(err);
         }
         else{
             sendMail(fromAddress,toAddress,bccAddress,subject, html, attachments,function(err, response){
+            // sendMail(fromAddress,toAddress,bccAddress,subject, html,function(err, response){
                 if(err){
                     console.log('err in sending mail:');
                     console.log(err);
