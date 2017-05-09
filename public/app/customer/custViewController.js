@@ -1,5 +1,5 @@
 angular.module("app")
-		  .controller("CustViewController",function($scope,$location,$http,$filter,$routeParams,quizResult,payment,mvIdentity,mvNotifier,mvUpload, mvCustView,mvEmail,custViewSvc){
+		  .controller("CustViewController",function($scope,$location,$http,$filter,$routeParams,$route,quizResult,payment,mvIdentity,mvNotifier,mvUpload, mvCustView,mvEmail,custViewSvc){
 		  		
 		  	
 

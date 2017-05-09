@@ -48,7 +48,7 @@ function chkFinalPrjStatus(shoppingList, roomId){
 }
 
 function chkFinalLookStatus(conceptBoard, pkgId,roomId){
-	
+	var found = false;
 	for(var i =0;i<conceptBoard.length;i++){
 		if(conceptBoard[i].concept.roomId === roomId){
 			var currConceptData = conceptBoard[i];
@@ -61,13 +61,8 @@ function chkFinalLookStatus(conceptBoard, pkgId,roomId){
 					finalStatus.linkPage=' ';
 					finalStatus.modal=' ';
 					finalStatus.stage=4;
+					found = true;
 					break;
-				}
-				else{
-					finalStatus.statusText='Awaiting Feedback on Final Look';
-					finalStatus.linkPage=' ';
-					finalStatus.modal=' ';
-					finalStatus.stage=-1;
 				}
 			}
 			else{
@@ -75,9 +70,18 @@ function chkFinalLookStatus(conceptBoard, pkgId,roomId){
 				finalStatus.linkPage=' ';
 				finalStatus.modal=' ';
 				finalStatus.stage=-1;
+				found = true;
+				break;
 			}
-			break;
+			
 		}
+	}
+
+	if(!found){
+		finalStatus.statusText='Awaiting Feedback on Final Look';
+		finalStatus.linkPage=' ';
+		finalStatus.modal=' ';
+		finalStatus.stage=-1;
 	}
 	return finalStatus;
 }
