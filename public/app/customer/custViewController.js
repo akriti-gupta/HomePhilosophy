@@ -577,7 +577,19 @@ $scope.selectPkg = function(index){
 	var quizId = projectRow.quizData.quizId;
 	var relatedStyle = projectRow.resultData;
 }
-
+function isValidTotalSize(fileArr){
+	var totSize = 0;
+	for(var i=0;i<fileArr.length;i++){
+		totSize = totSize+fileArr[i].size;
+	}
+	if((totSize/1024)/1024 <=5){
+		return true;
+	}
+	else{
+		alert('Total File upload size should be less than 5MB');
+		return false;
+	}
+}
 function validateTime(date,time){
 	var today = new Date();
 	if(date<=today){
@@ -693,7 +705,7 @@ $scope.saveAppointment = function(item){
 				var date = new Date($scope.apptDate);
 				var time = (moment(new Date($scope.apptTime)).format("HH:mm:ss")).split(':');
 				
-				if(validateTime(date,time)){
+				if(isValidTotalSize($scope.fileArr) && validateTime(date,time)){
 					date.setHours(time[0]);
 					date.setMinutes(time[1]);
 					var apptDateTime = moment(date).format('YYYY-MM-DD HH:mm:ss');
@@ -1108,6 +1120,7 @@ function isEmpty(obj) {
           element.bind('drop', function(event) {
             event.preventDefault();
             event.stopPropagation();
+            size = 0;
             if (event.originalEvent.dataTransfer){
               if (event.originalEvent.dataTransfer.files.length > 0) {
                 for(var i=0; i< event.originalEvent.dataTransfer.files.length; i++){
