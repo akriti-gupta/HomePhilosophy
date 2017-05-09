@@ -60,6 +60,31 @@ angular.module('app')
                   ];
   $scope.reasonOther=' ';
 
+  function isValidTotalSize(){
+
+    var totSize = 0;
+    for(var i=0;i<$scope.pendingDropFiles.length;i++){
+      totSize = totSize + $scope.pendingDropFiles[i].file.size;
+    }
+    if((totSize/1024)/1024 > 5){
+      alert("Total file size of images/pinterest board should be upto 5MB");
+      return false;
+    }
+    else{
+      var totSizeFurn = 0;
+       for(var i=0;i<$scope.pendingDropFilesFurn.length;i++){
+          totSizeFurn = totSizeFurn + $scope.pendingDropFilesFurn[i].file.size;
+        }
+        if((totSizeFurn/1024)/1024 > 5){
+          alert("Total file size of existing funiture/accessories should be upto 5MB");
+          return false;
+        }
+        else{
+          return true;
+        }
+    }
+  }
+
   function validateFormData(){
     angular.forEach($scope.designReason, function(reason) {
       if(reason.selected){
@@ -200,8 +225,7 @@ $scope.processPayment = function(){
 
     if(!$scope.detailForm.$invalid){
       var isValid = validateFormData();
-
-      if(isValid){
+      if(isValidTotalSize() && isValid){
         var quizId;
         if($scope.quizId===-1){
             quizId = quizResult.getUserCurrQuiz();
