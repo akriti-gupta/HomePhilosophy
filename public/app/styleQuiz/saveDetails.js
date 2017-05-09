@@ -118,6 +118,18 @@ angular.module('app')
   }
 
 $scope.processPayment = function(){
+  console.log('In Tell us more processPayment');
+  console.log($routeParams);
+  console.log($routeParams.merchant!=null);
+  console.log($routeParams.response_code!=null);
+  console.log($routeParams.ref_id!=null);
+  console.log($routeParams.reference_code!=null);
+  console.log($routeParams.currency!=null);
+  console.log($routeParams.total_amount!=null);
+  console.log($routeParams.signature_algorithm!=null);
+  console.log($routeParams.signature!=null);
+  console.log($routeParams.card_type!=null);
+
     if($routeParams.merchant!=null && $routeParams.response_code!=null && $routeParams.ref_id!=null
         && $routeParams.reference_code!=null && $routeParams.currency!=null && $routeParams.total_amount!=null &&
         $routeParams.signature_algorithm!=null && $routeParams.signature!=null && $routeParams.card_type!=null){
@@ -137,27 +149,51 @@ $scope.processPayment = function(){
 
       var returnSig = CryptoJS.SHA1(secret+merchant+ref_id+reference_code+response_code+currency+total_amount).toString();
       
+      console.log('merchant is: '+merchant);
+      console.log('keys.MERCHANT_EMAIL: '+keys.MERCHANT_EMAIL);
+      console.log('currency: '+currency);
+
+      console.log('Sig is: '+signature);
+      console.log('Ret sig is: '+returnSig);
 
       // Check that details dont exits already in the DB. This is to prevent user resubmitting the data by accessing teh link from bookmark.
-
+      console.log('Before mvUserQuiz.getQuizDetails');
       mvUserQuiz.getQuizDetails($scope.quizId).then(function(response){
+        console.log('Got response back from getQuizDetails: ');
+        console.log(response);
         if(response){
+          console.log('In If');
           $location.search({});
           $location.path('/dashboard');
         }
         else{
+          console.log('In else');
+          console.log('Chking retSig = sig: ' + returnSig === signature);
           if(returnSig === signature){
+            console.log('Chking response_code' +response_code);
             if(response_code==='1'){
+              console.log('Chking merchant: ' +merchant===keys.MERCHANT_EMAIL);
+              console.log('Chking currency: ' +currency==='SGD');
               if(merchant===keys.MERCHANT_EMAIL && currency==='SGD' ){
                 var status = -1;
                 var quizId = ref_id;
+                console.log('Beofre getPaymentInfo, quizId is: '+quizId+'abc');
                 mvPayment.getPaymentInfo(quizId,status).then(function(response){
+                    console.log('Resp ret from getPaymentInfo');
+                    console.log(response);
                     var totalPrice = (response[0].totalPrice).toFixed(2);
+                    console.log('total_amount is: '+total_amount);
+                    console.log('totalPrice is: '+totalPrice);
+                    console.log(totalPrice===total_amount);
                     if(totalPrice===total_amount){
                       status = 0;
+                      console.log('Before updatePackage');
                       mvPayment.updatePackage(quizId, status,totalPrice).then(function(response){
+                        console.log('In resp of updatePackage');
                        angular.element('#messageModal').modal('show');
                       }, function(reason){
+                        console.log('Payment unsuccessful');
+                        console.log(reason);
                         alert('Payment unsuccessful, please contact the site admin. '+reason);
                         $location.search({});
                         $location.path('/dashboard');
@@ -165,13 +201,15 @@ $scope.processPayment = function(){
                       }); 
                     }
                     else{
+                      console.log('Amount to be paid is: '+totalPrice+', while amount paid= '+total_amount);
                       alert('Amount to be paid is: '+totalPrice+', while amount paid= '+total_amount);
                       $location.search({});
                       $location.path('/dashboard');
                     }
                   
                 }, function(reason){
-                  
+                  console.log('Cant fetch payment information. Please contact the site admin');
+                  console.log(reason);
                   alert('Cant fetch payment information. Please contact the site admin');
                   $location.search({});
                   $location.path('/dashboard');
@@ -179,6 +217,7 @@ $scope.processPayment = function(){
                 });
               }
               else{
+                console.log('Error, merchant or currency incorrect');
                 alert('Error, merchant or currency incorrect');
                 $location.search({});
                 $location.path('/dashboard');
@@ -186,15 +225,16 @@ $scope.processPayment = function(){
             }
           }
           else{
+            console.log('Secure signature unmatched.Payment could not be made, please contact the site admin.')
             alert('Secure signature unmatched.Payment could not be made, please contact the site admin.');
             $location.search({});
             $location.path('/dashboard');
           }
         }
       });
-      
     }
     else{
+      console.log('In last else, no routeParams');
       if(! $routeParams.dashboard){
         $location.search({});
         $location.path('/dashboard');
