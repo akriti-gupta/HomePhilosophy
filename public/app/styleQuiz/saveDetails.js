@@ -149,12 +149,12 @@ $scope.processPayment = function(){
 
       var returnSig = CryptoJS.SHA1(secret+merchant+ref_id+reference_code+response_code+currency+total_amount).toString();
       
-      console.log('merchant is: '+merchant);
-      console.log('keys.MERCHANT_EMAIL: '+keys.MERCHANT_EMAIL);
-      console.log('currency: '+currency);
+      console.log('merchant is: '+merchant+'abc');
+      console.log('keys.MERCHANT_EMAIL: '+keys.MERCHANT_EMAIL+'abc');
+      console.log('currency: '+currency+'abc');
 
-      console.log('Sig is: '+signature);
-      console.log('Ret sig is: '+returnSig);
+      console.log('Sig is: '+signature+'abc');
+      console.log('Ret sig is: '+returnSig+'abc');
 
       // Check that details dont exits already in the DB. This is to prevent user resubmitting the data by accessing teh link from bookmark.
       console.log('Before mvUserQuiz.getQuizDetails');
@@ -168,12 +168,15 @@ $scope.processPayment = function(){
         }
         else{
           console.log('In else');
-          console.log('Chking retSig = sig: ' + returnSig === signature);
+          console.log('Chking retSig = sig: ');
+          console.log(returnSig === signature);
           if(returnSig === signature){
             console.log('Chking response_code' +response_code);
             if(response_code==='1'){
-              console.log('Chking merchant: ' +merchant===keys.MERCHANT_EMAIL);
-              console.log('Chking currency: ' +currency==='SGD');
+              console.log('Chking merchant: ' );
+              console.log(merchant===keys.MERCHANT_EMAIL);
+              console.log('Chking currency: ');
+              console.log(currency==='SGD');
               if(merchant===keys.MERCHANT_EMAIL && currency==='SGD' ){
                 var status = -1;
                 var quizId = ref_id;
