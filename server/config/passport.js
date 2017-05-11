@@ -44,7 +44,10 @@ module.exports = function(){
         clientID        : '1123799114413407',
         clientSecret    : 'bd3dea47fe556f93f9a8895acd34763c',   
         callbackURL     : 'http://homephilosophy.com.sg/auth/facebook/callback',
-        profileFields: ['id', 'displayName', 'email']
+        profileFields: ['id', 'displayName', 'email'],
+        passReqToCallback : true,
+        enableProof: false,
+        session: false,
 
     },
 
@@ -59,9 +62,9 @@ module.exports = function(){
                mysqlConn.getConnection(function(err,conn){
                 if(err){
                     console.log('Err in getting mysql conn: '+err);
-                    return(err, false);
+                    return done(err, false);
                 }
-                if(conn){
+                else if(conn){
                     conn.query('Select * from user where fbId = '+conn.escape(profile.id), function(err, results, fields){
                         if(err){
                            conn.release();

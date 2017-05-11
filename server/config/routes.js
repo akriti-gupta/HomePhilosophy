@@ -10,6 +10,8 @@ var multer = require('multer'),
 	userProject = require('../controllers/userProject'),
 	common = require('../controllers/common');
 
+
+
 var storage =   multer.diskStorage({
   destination: function (req, file, callback) {
     //callback(null, './public/uploads/');
@@ -87,7 +89,7 @@ module.exports = function(app){
 	});
 
 
-	app.get('/auth/facebook',passport.authenticate('facebook', { scope: 'email'}),function(req,res){});
+	app.get('/auth/facebook',auth.generateRandomUID, passport.authenticate('facebook', { scope: 'email'}),function(req,res){});
 	app.get('/auth/facebook/callback',
 		passport.authenticate('facebook', {failureRedirect: '/' }),
 		function(req, res) {

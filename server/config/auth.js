@@ -1,5 +1,6 @@
 	var passport = require('passport');
 
+	var uuidV4 = require('uuid/v4');
 
 exports.authenticate = function(req, res, next){
 		var auth = passport.authenticate('local',function(err, user){
@@ -34,4 +35,11 @@ exports.requiresRole = function(role){
 			next();
 		}
 	}
+}
+
+exports.generateRandomUID = function(req, res, next){
+	var uuid = uuidV4();
+	console.log(uuid);
+	req.session.uuid = uuid;
+	next();
 }
