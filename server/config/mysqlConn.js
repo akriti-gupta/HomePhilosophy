@@ -6,7 +6,7 @@ var pool = mysql.createPool({
 				password : 'Schmooz@14',
 				database : 'HomePhilosophy',
 				charset  : 'utf8',
-				timezone : '-08:00'
+				timezone : '+08:00'
 			});
 
 //var pool = mysql.createPool('mysql://b20378526fd3ee:a50a903c@us-cdbr-iron-east-03.cleardb.net/heroku_8dae569721f1b75?reconnect=true');	
