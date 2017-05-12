@@ -5,6 +5,7 @@
 		var packageArr = [];
 		var pkgPerRoom1 =[];
 
+		var quizId=-1;
 		var storePayPkg = function(pkg){
 			package = pkg;
 		}
@@ -59,6 +60,12 @@
 			return packageArr;
 		}
 
+		var setTempQuizId = function(id){
+			quizId = id;
+		}
+		var getTempQuizId = function(){
+			return quizId;
+		}
 		return {
 			    storePayPkg: storePayPkg,
 			    getPayPkg: getPayPkg,
@@ -69,6 +76,8 @@
 			    clearPkgPerRoom: clearPkgPerRoom,
 			    clearPkgPerRoom1: clearPkgPerRoom1,
 			    getPkgPerRoom1: getPkgPerRoom1,
-			    setPkgPerRoom1: setPkgPerRoom1
+			    setPkgPerRoom1: setPkgPerRoom1,
+			    setTempQuizId: setTempQuizId,
+			    getTempQuizId: getTempQuizId
 			}
 	});

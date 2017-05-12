@@ -128,7 +128,9 @@ angular.module("app")
 		console.log(roomPkgArr);
 
 		mvPayment.storePackage(quizId, roomPkgArr, $scope.total_amount, status,isAddOn,addOnAmtPaid).then(function(response){
-	  			$scope.smoovPayForm.commit();
+			payment.setTempQuizId(quizId);
+	  			//$scope.smoovPayForm.commit();
+	  			$location.path('/tell-us-more');
 	  		}, function(reason){
 	  			alert('Payment unsuccessful, please contact the site admin. '+reason);
 	  			
