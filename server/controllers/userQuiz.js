@@ -5,30 +5,44 @@ var mysqlConn = require('../config/mysqlConn'),
 exports.createUserQuiz = function(req,res,next){
 	var customerId = req.body.customerId;
 	var status = req.body.status;
+	var retake = req.body.retake;
+	var quizId = req.body.quizId;
 	
 	mysqlConn.getConnection(function(err,conn){
 		
 		if(err){return next(err);}
 		
         if(conn){
-			var userQuizData = {customerId: customerId, status:status,created_at:new Date(),updated_at:new Date()};
-			conn.query('insert into cust_quiz set ?', userQuizData, function(err, results, fields){
-				if(err){
-					console.log('Error in creating new record in cust_quiz: '+err);
-					conn.release();
-					return res.send({success:false,reason:err.toString()});
-				}
-				else{
-					conn.query('select * from cust_quiz where quizId = ?',results.insertId, 
-					function(err, quiz, fields){
-						if(err){conn.release();return next(err);}
-						else{
-							conn.release();
-							return res.send({success:true,quizData:quiz[0]});
-						}
-					});
-				}
-			});			
+        	if(!retake){
+				var userQuizData = {customerId: customerId, status:status,created_at:new Date(),updated_at:new Date()};
+				conn.query('insert into cust_quiz set ?', userQuizData, function(err, results, fields){
+					if(err){
+						console.log('Error in creating new record in cust_quiz: '+err);
+						conn.release();
+						return res.send({success:false,reason:err.toString()});
+					}
+					else{
+						conn.query('select * from cust_quiz where quizId = ?',results.insertId, 
+						function(err, quiz, fields){
+							if(err){conn.release();return next(err);}
+							else{
+								conn.release();
+								return res.send({success:true,quizData:quiz[0]});
+							}
+						});
+					}
+				});	
+			}
+			else{
+				conn.query('select * from cust_quiz where quizId = ?',quizId, 
+						function(err, quiz, fields){
+							if(err){conn.release();return next(err);}
+							else{
+								conn.release();
+								return res.send({success:true,quizData:quiz[0]});
+							}
+						});
+			}		
 		}
 	});
 }
@@ -36,92 +50,105 @@ exports.createUserQuiz = function(req,res,next){
 
 function updQzResult(conn,quizId,data,cb){
 
-	/*conn.query('delete from cust_quiz_result where quizId = '+conn.escape(quizId), 
+	conn.query('delete from cust_quiz_result where quizId = ?',quizId, 
 	function(err, results, fields){
 		if(err){
 			console.log('Error while deleting existing quiz result: '+err);
 			cb(err,null);
 		}
-		console.log('Deleted old unpaid quiz selected data');*/
-		conn.query('insert into cust_quiz_result (quizId, stylePercent, styleId) values ?',[data],
-		function(err, results, fields){
-			if(err){
-				console.log('Error in saving result data'+err);
-				cb(err,null);
-			}
-			cb(null,results);
-		});
-	//});
+		else{
+			console.log('Deleted old unpaid quiz selected data');
+			conn.query('insert into cust_quiz_result (quizId, stylePercent, styleId) values ?',[data],
+			function(err, results, fields){
+				if(err){
+					console.log('Error in saving result data'+err);
+					cb(err,null);
+				}
+				cb(null,results);
+			});	
+		}
+	});
 }
 
 function updQzRoom(conn,quizId,data,cb){
 
-	/*conn.query('delete from cust_room_selection where quizId = '+conn.escape(quizId), function(err, results, fields){
+	conn.query('delete from cust_room_selection where quizId = ?',quizId, function(err, results, fields){
 		if(err){
 			console.log('Error while deleting prev room selection info '+err);
 			cb(err,null);
 		}
-		console.log('Deleted prev room selections');*/
-		conn.query('insert into cust_room_selection(quizId,roomId,roomName,numRoom) values ?',[data], function(err, results, fields){
-			if(err){
-				console.log('Error in saving room selection data'+err);
-				cb(err,null);
-			}
-			conn.query('select * from cust_room_selection where quizId='+conn.escape(quizId), function(err, results, fields){
+		else{
+			console.log('Deleted prev room selections');
+			conn.query('insert into cust_room_selection(quizId,roomId,roomName,numRoom) values ?',[data], function(err, results, fields){
 				if(err){
+					console.log('Error in saving room selection data'+err);
 					cb(err,null);
 				}
-				cb(null,results);
+				conn.query('select * from cust_room_selection where quizId=?',quizId, function(err, results, fields){
+					if(err){
+						cb(err,null);
+					}
+					cb(null,results);
+				});
+				
 			});
-			
-		});
-	//});
-
+		}
+	});
 }
 
 function updQzImg(conn,quizId,data,cb){
 
-	/*conn.query('delete from cust_img_selection where quizId = '+conn.escape(quizId), function(err, results, fields){
+	conn.query('delete from cust_img_selection where quizId =? ',quizId, function(err, results, fields){
 		if(err){
 			console.log('Error while deleting prev img selection info '+err);
 			cb(err,null);
 		}
-		console.log('Deleted prev img selections');*/
-		conn.query('insert into cust_img_selection(quizId,questionId,selectedImgId) values ? ',[data], function(err, results, fields){
-			if(err){
-				console.log('Error in saving img selection data'+err);
-				cb(err,null);
-			}
-			cb(null,results);
-		});
-	//});
+		else{
+			console.log('Deleted prev img selections');
+			conn.query('insert into cust_img_selection(quizId,questionId,selectedImgId) values ? ',[data], function(err, results, fields){
+				if(err){
+					console.log('Error in saving img selection data'+err);
+					cb(err,null);
+				}
+				cb(null,results);
+			});	
+		}
+		
+	});
 }
 
 function updQzPinImgs(conn,quizId,data,cb){
 
 	if(!isEmpty(data)){
-		conn.query('insert into pin_images(quizId,imagesLiked) values ?',[data], function(err, results, fields){
+		conn.query('delete from pin_images where quizId =? ',quizId, function(err, results, fields){
 			if(err){
-				console.log('Error in saving pin images selection data'+err);
+				console.log('Error while deleting prev pin images info '+err);
 				cb(err,null);
 			}
 			else{
-				conn.query('select * from pin_images where quizId = ?',quizId, function(err, results, fields){
-				if(err){
-					cb(err,null);
-				}
-				cb(null,results);
-			});
-
+				conn.query('insert into pin_images(quizId,imagesLiked) values ?',[data], 
+				function(err, results, fields){
+					if(err){
+						console.log('Error in saving pin images selection data'+err);
+						cb(err,null);
+					}
+					else{
+						conn.query('select * from pin_images where quizId = ?',quizId, function(err, results, fields){
+						if(err){
+							cb(err,null);
+						}
+						cb(null,results);
+						});
+					}
+				});
 			}
-		});	
+		});
 	}
 	else{
 		cb(null,true);
 	}
 }
 function updPinComments(conn,quizId,commentData,cb){
-	console.log(commentData);
 	conn.query('insert into pin_comments(pin_img_id,room_id,comments) values ?',[commentData],function(err,results,fields){
 		if(err){
 			cb(err,null);
@@ -130,7 +157,7 @@ function updPinComments(conn,quizId,commentData,cb){
 			cb(null,true);
 		}
 	});
-
+	
 }	
 
 function isEmpty(obj) {

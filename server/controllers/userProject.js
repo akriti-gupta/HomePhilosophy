@@ -243,12 +243,12 @@ function getPackageTxn(conn,quizIds,cb){
 
 function getAppt(conn,quizIds,cb){
 	var apptData = [];
-	// var qry_qz_appt = 'select a.* from cust_quiz q left outer join cust_appointment a on q.quizId = a.quizId '+ 
-	// 								 'where q.quizId in ('+quizIds+')';
+	var qry_qz_appt = 'select a.* from cust_quiz q left outer join cust_appointment a on q.quizId = a.quizId '+ 
+									 'where q.quizId in ('+quizIds+')';
 
-	var qry_qz_appt = "select a.*, convert_tz(a.apptDate,@@session.time_zone,'+00:00')  apptDate1 from cust_quiz q left outer join cust_appointment a on q.quizId = a.quizId "+ 
-	 								 "where q.quizId in ("+quizIds+")";
-	var options = {sql:qry_qz_appt,nestTables: false};
+	// var qry_qz_appt = "select a.*, convert_tz(a.apptDate,@@session.time_zone,'+00:00')  apptDate1 from cust_quiz q left outer join cust_appointment a on q.quizId = a.quizId "+ 
+	//  								 "where q.quizId in ("+quizIds+")";
+	var options = {sql:qry_qz_appt,nestTables: true};
 
 
 	conn.query(options, function(err, apptInfo, fields){
@@ -258,12 +258,12 @@ function getAppt(conn,quizIds,cb){
 		}
 		else if(apptInfo.length>0){
 			for(var i =0; i<apptInfo.length;i++){
-				//if(apptInfo[i].a.id!=null){
-				if(apptInfo[i].id!=null){
-					// apptData.push(apptInfo[i].a);
+				if(apptInfo[i].a.id!=null){
+				// if(apptInfo[i].id!=null){
+					apptData.push(apptInfo[i].a);
 
-					apptInfo[i].apptDate = apptInfo[i].apptDate1;
-					apptData.push(apptInfo[i]);
+					// apptInfo[i].apptDate = apptInfo[i].apptDate1;
+					// apptData.push(apptInfo[i]);
 				}
 			}
 		}
@@ -873,21 +873,8 @@ exports.submitFeedback = function(req,res,next){
 		if(err){return next(err);}
 		
         if(conn){
-        	/*for(var i =0;i<data.length;i++){
-        		conn.query(qry, [data[i],data[i].status,data[i].comments], function(err, results, fields){
-					if(err){
-						//console.log('Error in inserting concept board feedback for filetype: '+concept_type+' Err: '+err);
-						// conn.release();
-						res.status(400);
-						return res.send({success: false, reason:'Error in inserting concept board feedback'});
-					}
-				});
-        	}*/
-        	// conn.query(qry, [data,data.status,data[i].comments], function(err, results, fields){
         	conn.query(qry, [data], function(err, results, fields){
 				if(err){
-					//console.log('Error in inserting concept board feedback for filetype: '+concept_type+' Err: '+err);
-					// conn.release();
 					res.status(400);
 					return res.send({success: false, reason:'Error in inserting concept board feedback for filetype: '+concept_type});
 				}

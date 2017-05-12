@@ -1,10 +1,10 @@
 angular.module('app').factory('mvUserQuiz', function($http, mvIdentity, $q, quizResult,mvUser,mvCustView){
 	return{
 
-		saveUserData: function(userSelectionData,userQuizResult){
+		saveUserData: function(userSelectionData,userQuizResult, quizRetaken, quizId){
 			var dfd = $q.defer();
 
-			$http.post('/createUserQuiz',{customerId: mvIdentity.currentUser.id , status:-1})
+			$http.post('/createUserQuiz',{customerId: mvIdentity.currentUser.id , status:-1,retake:quizRetaken, quizId:quizId })
 		 	.then(function(response){
 	 			if(response.data.success){
 	 				var quizData = response.data.quizData;

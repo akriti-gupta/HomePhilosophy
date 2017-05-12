@@ -482,7 +482,7 @@ filter:alpha(opacity=50); /* for <= IE 8 */
 }*/
 
 .thumbnail .caption{
-  padding: 30px 30px 0px;
+  padding: 30px 0px 0px;
   letter-spacing:1px;
   color:rgb(112,112,112);
   font-size:16px;
@@ -659,9 +659,11 @@ filter:alpha(opacity=50); /* for <= IE 8 */
 }
 
 .text-dsg div {
-    margin-top: calc(80% - 40%);
+    /*margin-top: calc(80% - 40%);*/
+    margin-top:40%;
     padding:0px 20px;
     text-align: center;
+    font-size: 1vw;
 }
 
 

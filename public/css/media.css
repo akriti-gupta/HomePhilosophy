@@ -15,10 +15,36 @@
   }
 }*/
 
+
+@media only screen and (min-width : 480px) and (max-width: 769px){
+ .text-dsg{
+            display: none;
+        }
+}
+
+@media only screen and (min-width : 1000px) and (max-width: 1165px){
+    .text-dsg div{
+            margin-top: 20%;
+            padding: 0px;
+        }
+}
+
 @media only screen and (min-width : 800px) and (max-width: 1080px){
     .thumbnail .caption{
         padding: 10px 10px 0px;
         font-size: 9px;
+    }  
+}
+
+@media only screen and (min-width : 800px) and (max-width: 900px) {
+    .qz-row-room{
+        width:75%;
+    }
+}
+
+@media only screen and (min-width : 1080px) and (max-width: 1125px){
+    .thumbnail .caption{
+        font-size: 14px;
     }  
 }
 

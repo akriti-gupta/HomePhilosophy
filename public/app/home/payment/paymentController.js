@@ -76,20 +76,7 @@ angular.module("app")
 			var totalRooms = $scope.roomPerPkg.length;
 			var defaultPkgVal = $scope.roomPerPkg[0].pkgValue;
 			var totalPrice = totalRooms*defaultPkgVal;
-
-			/*var keys = PAYMENT_KEYS;
-	    	var secret=keys.MERCHANT_SECRET_KEY;
-			var merchant = keys.MERCHANT_EMAIL;
-		  	var action = 'pay';
-		  	var ref_id = $scope.quizId;
-		  	$scope.total_amount = parseFloat(totalPrice).toFixed(2);
-		  	var currency = 'SGD';
-		  	var sig = secret+merchant+action+ref_id+$scope.total_amount+currency;
-		  	
-			
-			$scope.signature = CryptoJS.SHA1(sig).toString();
-		 	$scope.price = $scope.total_amount.toString();*/
-		 	setSmoovFields(totalPrice);
+			setSmoovFields(totalPrice);
 		 }
 	}
 

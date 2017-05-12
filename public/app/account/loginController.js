@@ -22,7 +22,8 @@ angular.module("app")
 					window.localStorage.removeItem('userSelectionInfo');
 
 					if(result!=null && result.length>0 ){
-						mvUserQuiz.saveUserData(userSelectionInfo, result).then(function(userQuiz){
+						// mvUserQuiz.saveUserData(userSelectionInfo, result).then(function(userQuiz){
+						mvUserQuiz.saveUserData(userSelectionInfo, result, false,quizResult.getUserCurrQuiz()).then(function(userQuiz){
 							quizResult.setUserCurrQuiz(userQuiz[0].quizId);
 		  					quizResult.setInsertedRooms(userQuiz[1].data.results.roomData);
 		  					mvNotifier.notify('Login success!');
@@ -62,7 +63,8 @@ angular.module("app")
 			  				if(quizResult.getStyle().length>=1){
 			  					var result = quizResult.getStyle();
 			  					var userSelectionInfo = quizResult.getCustSelections();
-			  					mvUserQuiz.saveUserData(userSelectionInfo, result).then(function(userQuiz){
+			  					// mvUserQuiz.saveUserData(userSelectionInfo, result).then(function(userQuiz){
+			  					mvUserQuiz.saveUserData(userSelectionInfo, result, false,quizResult.getUserCurrQuiz()).then(function(userQuiz){
 			  						quizResult.setUserCurrQuiz(userQuiz[0].quizId);
 			  						quizResult.setInsertedRooms(userQuiz[1].data.results.roomData);
 			  						mvNotifier.notify('Login success!');
@@ -129,7 +131,8 @@ angular.module("app")
 		  			if(quizResult.getStyle().length>=1){
 		  				var userSelectionInfo = quizResult.getCustSelections();
 		  				var result = quizResult.getStyle();
-		  				mvUserQuiz.saveUserData(userSelectionInfo,result).then(function(userQuiz){
+		  				// mvUserQuiz.saveUserData(userSelectionInfo,result).then(function(userQuiz){
+		  				mvUserQuiz.saveUserData(userSelectionInfo, result, false,quizResult.getUserCurrQuiz()).then(function(userQuiz){
 		  					quizResult.setUserCurrQuiz(userQuiz[0].quizId);
 		  					quizResult.setInsertedRooms(userQuiz[1].data.results.roomData);
 		  					mvNotifier.notify('User account created!');
@@ -174,7 +177,8 @@ angular.module("app")
 				var roomArr = cust_selections.roomSelected;	
         		var imgArr = cust_selections.quizImgSelected;
 
-				mvUserQuiz.saveUserData(result).then(function(){
+				// mvUserQuiz.saveUserData(result).then(function(){
+				mvUserQuiz.saveUserData(userSelectionInfo,result,false,quizResult.getUserCurrQuiz()).then(function(userQuiz){
 		  			mvNotifier.notify('User account created!');
 		  		}, function(reason){
 		  			mvNotifier.error(reason);
