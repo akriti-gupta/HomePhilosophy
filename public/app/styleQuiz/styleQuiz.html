@@ -98,12 +98,6 @@
           <div class="caption txt-center">
             <p class="font-montserrat txt-upper">Living Room</p>
           </div>
-          <!-- <p class="font-sansRegular fs-10px" style="padding-top:20px;text-align:right;color:rgb(161, 161, 161);">
-            <span>
-              <select ng-model="living" ng-options="opt.label for opt in units track by opt.value" class="num-rooms" ng-change="roomNumChanged(2,'living','Living Room')">
-                </select>
-            </span>
-          </p> -->
           <div class="txt-center">
              <p class="font-sansRegular" style="padding-top:20px;color:rgb(161, 161, 161);font-size:9px;">
             select number of rooms</p>
@@ -129,12 +123,6 @@
           <div class="caption txt-center">
             <p class="font-montserrat txt-upper">Kids Room</p>
           </div>
-          <!-- <p class="font-sansRegular fs-10px" style="text-align:right;padding-top:20px;color:rgb(161, 161, 161);">
-            <span>
-              <select ng-model="kids" ng-options="opt.label for opt in units track by opt.value" class="num-rooms" ng-change="roomNumChanged(3,'kids','Kids Room')">
-                </select>
-            </span>
-          </p> -->
 
           <div class="txt-center">
              <p class="font-sansRegular" style="padding-top:20px;color:rgb(161, 161, 161);font-size:9px;">
@@ -537,27 +525,6 @@
           <img ng-src="{{userStyle[0].image}}" style="width:100%;"/>
         <p  class="font-playfair retake-text" style="text-align:right;color:rgb(77, 77, 77);">Not really your style? Re-take the <a href="/style-quiz" id="start-quiz" ng-click="retakeQuiz()"><u>Style Quiz</u></a></p>
       </div>
-
-   <!--   <div style="width:75%;margin:0 auto;" ng-if="userStyle.length==2">
-        <p class="font-playfair result-title">{{userStyle[1].title}}  <span class="result-style-name">{{userStyle[1].style}}</span></p>
-        <img ng-src="{{userStyle[1].image}}" style="width:100%;">
-        <div style="padding-top:15px;"><p class="font-playfair retake-text" style="text-align:right;color:rgb(183, 183, 183);">Not your style? Re-take the <a href="/style-quiz"  ng-click="retakeQuiz()"><u>Style Quiz</u></a></p></div>
-      </div>
-      
-      <div ng-if="userStyle.length==3" style="width:95%;margin:0 auto;">
-        <div style="width:49%;float:left;">
-          <p class="font-playfair result-title">{{userStyle[1].title}}<span class="result-style-name">{{userStyle[1].style}}</span></p>
-          <img ng-src="{{userStyle[1].image}}" style="width:100%;">
-        </div>
-        <div style="width:49%;float:right;">
-          <p class="font-playfair result-title">{{userStyle[2].title}}   <span class="result-style-name">{{userStyle[2].style}}</span></p>
-          <img ng-src="{{userStyle[2].image}}" style="width:100%;">
-        </div>
-        <div style="clear:both;padding-top:15px;"><p class="font-playfair retake-text" style="text-align:right;color:rgb(77, 77, 77);">Not your style? Re-take the <a href="/style-quiz"  ng-click="retakeQuiz()"><u>Style Quiz</u></a></p>
-        </div>
-      </div>-->
-      
-      
     </div>
   </div> <!--pagenum==9 -->
 
@@ -575,13 +542,6 @@
       <button type="button" class="btn-qz btn-nxt" ng-disabled="disable">Next</button>
     </a>
   </div>
-  
-
- <!--  <div style="text-align:center;padding:80px 0px 100px;clear:both;" ng-if="pagenum===1 &&pageRequester!=' '">    <a href="#" ng-click="addRoomToQuiz()">
-      <button type="button" class="btn-qz btn-nxt" ng-disabled="disable">Next</button>
-    </a>
-  </div> -->
-  
 </div> <!--Main Div QuizController -->
 
 <div class="divider" style="border-top:2px solid rgb(47, 185, 175);"></div>
