@@ -52,8 +52,10 @@ exports.sendEmail = function(req, res){
     var address='';
     var apptDate='';
     var bccAddress='';
+    var quizId =-1;
     var attachments = [{filename: 'logo_header.png',
                         path: '/root/HomePhilosophy/public/images/logo_header.png',
+                        // path: './public/images/logo_header.png',
                         cid: 'hplogocustom@homephilosophy.com' 
                     }];
 
@@ -89,6 +91,9 @@ exports.sendEmail = function(req, res){
     if (data.hasOwnProperty('message')){
         message = data.message;
     }
+    if (data.hasOwnProperty('quizId')){
+        quizId = data.quizId;
+    }
 
     if(template==='login'){
         attachments.push({filename: 'login_banner_top.png',path: '/root/HomePhilosophy/public/images/mails/login_banner_top.png',cid: 'logintopbanner@homephilosophy.com'});   
@@ -117,7 +122,9 @@ exports.sendEmail = function(req, res){
     if(template==='contact'){
         mailData = {'name':name,'email':email,'phone':phone,'message':message};
     }
-
+    else if(template==='firstFeedback' || template==='finalFeedback'){
+        mailData={'quizId':quizId};
+    }
     else {
         mailData = {name:name,address:address,apptDate:apptDate};
     }

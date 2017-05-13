@@ -23,6 +23,7 @@ $scope.hasActiveProject = false;
 $scope.hasAllLaunched = true;
 $scope.lookText='First Looks'; 
 $scope.isFinalPage = false;
+$scope.currQzId;
 
 $scope.packageName=[' ','Simple','Classic','Premium','Custom'];
 
@@ -779,6 +780,7 @@ $scope.getFirstLook = function(index, roomId){
 	var hasShoppingList = false;
 	var hasFinalLook = false;
 
+	$scope.currQzId = $scope.projectArr[index].quizData.quizId;
 	if($scope.projectArr[index].shoppingListData.length>0){
 		for(var i =0;i<$scope.projectArr[index].shoppingListData.length; i++){
 			if($scope.projectArr[index].shoppingListData[i].concept.roomId === roomId){
@@ -896,7 +898,6 @@ function submitFeedback(cncptObj,concept_type,uploadedFiles,status){
 				if(uploadedFiles!=null){
 					cncptFeedArr.push([status, cncptObj[i].feedback, (moment(new Date()).format('YYYY-MM-DD HH:mm:ss')), (moment(new Date()).format('YYYY-MM-DD HH:mm:ss')),cncptObj[i].concept_id,uploadedFiles]);
 				}
-				//cncptFeedArr.push({status:status, comments: $scope.cncptObj[i].feedback, created_at:null, updated_at:null,concept_id:$scope.cncptObj[i].concept_id});
 				else
 					cncptFeedArr.push([status, cncptObj[i].feedback, (moment(new Date()).format('YYYY-MM-DD HH:mm:ss')), (moment(new Date()).format('YYYY-MM-DD HH:mm:ss')),cncptObj[i].concept_id,null]);
 			}
@@ -904,6 +905,25 @@ function submitFeedback(cncptObj,concept_type,uploadedFiles,status){
 	mvCustView.submitFeedback(cncptFeedArr,concept_type).then(function(response){
 		if(response){
 			mvNotifier.notify('Feedback submitted');
+			var template='firstFeedback';
+			if(concept_type===1){
+				template = 'firstFeedback';
+			}
+			else if(concept_type===1){
+				template = 'finalFeedback';
+			}
+			var mailData = {'template':template,'quizId':$scope.currQzId};
+			mvEmail.sendEmail(mailData).then(function(success){
+  				if(success)
+	  				mvNotifier.notify('Mail sent');
+	  			else
+	  				mvNotifier.notify('Mail not sent');
+	  			//angular.element('#calendarModal').modal('hide');
+		  	}, function(reason){
+	  			alert(reason);
+	  			mvNotifier.error(reason);
+	  		});
+
 			if(status===0){
 				$scope.feedbackSaved = true;
 				window.location.reload(true);
@@ -938,28 +958,7 @@ $scope.submitFeedback = function(status){
 				$scope.cncptObj[i].feedback=$scope.feedbackArr[i];
 			}
 		}
-		/*var cncptFeedArr = [];
-		for(var i =0;i<$scope.cncptObj.length;i++){
-			if('feedback' in $scope.cncptObj[i]){
-				//cncptFeedArr.push({status:status, comments: $scope.cncptObj[i].feedback, created_at:null, updated_at:null,concept_id:$scope.cncptObj[i].concept_id});
-				cncptFeedArr.push([status, $scope.cncptObj[i].feedback, null, null,$scope.cncptObj[i].concept_id]);
-			}
-		}*/
-
 		if(status===0){
-			//Upload Files durind Final submission only
-			/*mvUpload.uploadFiles($scope.fileArr).then(function(uploadedFiles){
-				var files;
-				if(uploadedFiles.length>0){
-					files = uploadedFiles.toString();
-				}
-				else {
-					files = uploadedFiles;
-				}
-			}, function(reason){
-				mvNotifier.notify('Error in uploading files during feedback. Please try again: '+reason);
-				alert('Error in uploading files during feedback. Please try again: '+reason);
-			});*/
 			if($scope.fileArr.length>0){
 				mvUpload.uploadFiles($scope.fileArr).then(function(uploadedFiles){
 					var files;
@@ -982,24 +981,6 @@ $scope.submitFeedback = function(status){
 		}
 		else{
 			submitFeedback($scope.cncptObj,concept_type,null,status);
-			/*mvCustView.submitFeedback(cncptFeedArr,concept_type).then(function(response){
-				if(response){
-					mvNotifier.notify('Feedback submitted');
-					// $location.path('/dashboard');
-					
-					if(status===0){
-						$scope.feedbackSaved = true;
-						window.location.reload(true);
-					}
-				}
-				else{
-					mvNotifier.notify('Error in saving feedback. Please try again');	
-				}
-
-			}, function(reason){
-				mvNotifier.notify('Error in saving feedback. Please try again: '+reason);
-				//Close popup
-			});*/
 		}
 	}
 }
