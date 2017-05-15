@@ -34,6 +34,7 @@ angular.module('app')
 					.when('/admin/users',{templateUrl: 'app/admin/userList.html', controller: 'UserListCtrl',resolve: routeRoleChecks.admin})
 					.when('/dashboard/:launched',{templateUrl: 'app/customer/dashboard.html', controller: 'CustViewController',resolve: routeLoginChecks.user})
 					.when('/dashboard',{templateUrl: 'app/customer/dashboard.html', controller: 'CustViewController',resolve: routeLoginChecks.user})
+					.when('/terms-and-privacy',{templateUrl: 'app/home/terms.html'})
 					.otherwise({templateUrl: 'app/home/main.html', controller: 'MainController'});
     		});
 
