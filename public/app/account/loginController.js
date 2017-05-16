@@ -2,7 +2,8 @@ angular.module("app")
 	.controller("LoginController",function($scope,$location, $http,$routeParams, mvIdentity, mvNotifier, mvAuth, mvUserQuiz, mvEmail, quizResult){
 			
 			$scope.identity =mvIdentity;
-			$scope.showName = true;		
+			$scope.showName = true;	
+			$scope.showWait	=false;
 
 			$scope.initLogin = function(){
 
@@ -48,6 +49,7 @@ angular.module("app")
 			}
 
 		  	$scope.signin= function(username, password){
+		  		$scope.showWait = true;
 		  		mvAuth.authenticateUser(username,password).then(function(success){
 		  			if(success){
 		  				if(mvIdentity.currentUser.role==="admin"){
@@ -120,6 +122,7 @@ angular.module("app")
 		  			alert('Please enter your password');
 		  			return false;
 		  		}
+		  		$scope.showWait = true;
 		  		var newUserData = {
 		  			firstName: $scope.firstname,
 		  			username: $scope.email,

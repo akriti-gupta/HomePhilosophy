@@ -16,6 +16,7 @@ angular.module('app')
   $scope.colArr = [];
   $scope.quizId = -1;
 
+  $scope.showWait = false;
   var packages = [
               {'id':1,'name':"Simple",'pkgValue':350.00,value:1},
                 {'id':2,'name':"Classic",'pkgValue':600.00,value:2},
@@ -271,7 +272,7 @@ $scope.processPayment = function(){
 
   
   $scope.saveData = function(){
-
+    $scope.showWait = true;
     if(!$scope.detailForm.$invalid){
       var isValid = validateFormData();
       if(isValidTotalSize() && isValid){
@@ -329,6 +330,7 @@ $scope.processPayment = function(){
             mvUserQuiz.saveQuizMiscData(data).then(function(response){
               $location.search({});
               quizResult.setLaunchKey(true);
+              $scope.showWait = false;
               // $location.path('/dashboard').search({'launched':'true'});    
               $location.path('/dashboard');
             },function(reason){
@@ -342,6 +344,7 @@ $scope.processPayment = function(){
         }
         else{
           mvUserQuiz.saveQuizMiscData(data,quizId).then(function(response){
+            $scope.showWait = false;
              $location.search({});
             // $location.path('/dashboard').search({'launched':'true'});    
             quizResult.setLaunchKey(true);
