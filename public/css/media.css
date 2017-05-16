@@ -15,6 +15,18 @@
   }
 }*/
 
+@media only screen and (min-width : 500px) and (max-width: 935px){
+    .footer-ctr{
+        width: 10%;
+    }
+}
+
+@media only screen and (max-width: 500px){
+    .footer-logo-ctr{
+        width:90%;
+    }
+    
+}
 
 @media only screen and (min-width : 480px) and (max-width: 769px){
  .text-dsg{
@@ -359,7 +371,7 @@
         .hp-logo-footer a img{
             width:80%;
         }
-        .flh1,.flh3{padding-right:0px;}
+        /*.flh1,.flh3{padding-right:0px;}*/
 
         #footer-data ul{
             display: inherit;
@@ -783,10 +795,10 @@
         .step-five{
             left:91.4%;
         }
-        .hp-logo-footer{
+        /*.hp-logo-footer{
             padding: 0 10px 0 50px;
 
-        }
+        }*/
        /* .hp-logo-footer a img{
             width:80%;
         }*/
@@ -795,7 +807,7 @@
             padding-left: 200px;
             width:80%;
         }
-        .flh1,.flh3{padding-right:0px;}
+        /*.flh1,.flh3{padding-right:0px;}*/
 
         #footer-data ul{
             display: inherit;
