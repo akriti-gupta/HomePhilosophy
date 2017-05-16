@@ -635,7 +635,7 @@ button:focus {outline:0;}
   background-color: #fff;
   opacity: 0.95;
   /*height: 320px;*/
-  height: 50%;
+  /*height: 50%;*/
   text-align: center;
   width: 50%;
   /*min-width: 540px;*/
@@ -652,11 +652,12 @@ button:focus {outline:0;}
 }
 .container-ctr-txt{
   margin: 0 auto;
-  padding-top: 80px;
-  max-width: 510px;
+  /*padding-top: 80px;*/
+  padding: 10% 0px 14%;
+  /*max-width: 510px;*/
+  max-width: 70%;
 }
 .ctr-txt-custom{
-  
   margin: 0 auto;
   /*max-width: inherit;*/
 }
@@ -694,11 +695,12 @@ button:focus {outline:0;}
 }
 .btn-container{
     position: absolute;
-    left: calc(50% - 120px);
+    left: calc(50% - 110px);
     margin: 0 auto;
 }
 .btn-getStarted{
-  top: 430px;
+  /*top: 430px;*/
+  top: 90%;
 }
 
 .btn-start-quiz,.btn-comment{

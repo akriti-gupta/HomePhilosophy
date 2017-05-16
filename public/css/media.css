@@ -20,6 +20,9 @@
  .text-dsg{
             display: none;
         }
+ .exp-maintext, .col-inspiring{
+    font-size:25px;
+ }
 }
 
 @media only screen and (min-width : 1000px) and (max-width: 1165px){
@@ -187,9 +190,9 @@
         }
 
         
-        .container-ctr-txt{
+        /*.container-ctr-txt{
             padding: 40px;
-        }
+        }*/
 
         .exp-maintext,.col-inspiring{
             font-size:22px;
@@ -217,7 +220,7 @@
             width: 90%;
         }
         .btn-container{
-            top: 410px;
+            /*top: 410px;*/
             left: calc(50% - 70px);
         }
         .btn-hero{
