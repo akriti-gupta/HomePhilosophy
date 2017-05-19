@@ -476,3 +476,31 @@ exports.updatePackage = function(req,res,next){
 	               
 	});
 }
+
+exports.updateAddOnAmt = function(req,res,next){
+	var quizId = req.body.quizId;
+	var amount = req.body.addOnAmtPaid;
+	var txnData = [amount,new Date(),quizId];
+	
+	var qry_qz = 'update cust_payment_txn set addOnAmtPaid =?, updated_at=? where quizId=?';
+	console.log('In updateAddOnAmt');
+	mysqlConn.getConnection(function(err,conn){
+		if(err){
+			console.log('Error in getting mysql conn in updatePkgTxn: '+err);
+			return res.send({success: false, reason:err.toString()});
+		}
+		else if(conn){
+			conn.query(qry_qz, txnData, function(err, quizInfo, fields){
+				console.log('After executing updatePkgTxn query');
+				if(err){
+					console.log('Error in updating pkg txn for quiz: '+quizId);
+					return res.send({success: false, reason:err.toString()});
+				}
+				else{
+					return res.send({success: true});
+				}
+			});
+		}	
+	});
+}
+

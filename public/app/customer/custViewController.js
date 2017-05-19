@@ -1,5 +1,5 @@
 angular.module("app")
-		  .controller("CustViewController",function($scope,$location,$http,$filter,$routeParams,$route,quizResult,payment,mvIdentity,mvNotifier,mvUpload, mvCustView,mvEmail,custViewSvc){
+		  .controller("CustViewController",function($scope,$location,$http,$filter,$routeParams,$route,quizResult,payment,mvIdentity,mvNotifier,mvUpload, mvCustView,mvEmail,mvPayment,custViewSvc,PAYMENT_KEYS){
 		  		
 		  	
 
@@ -24,6 +24,7 @@ $scope.hasAllLaunched = true;
 $scope.lookText='First Looks'; 
 $scope.isFinalPage = false;
 $scope.currQzId;
+$scope.signature;
 
 $scope.packageName=[' ','Simple','Classic','Premium','Custom'];
 
@@ -470,18 +471,66 @@ $scope.getProjectData = function(){
 		populateQuizArray(projectData);
 		console.log('Formatted Result :');
 		console.log($scope.projectArr);
-	
 	}, function(reason){
 			console.log('Cant find user Data');
 			mvNotifier.notify('Please try again later/ contact the site administrator. '+reason);
 			$location.path="/";
 		});
-	// $location.url($location.path());
-	// if($routeParams.launched){
 	if(quizResult.getLaunchKey()){
 		angular.element('#launchedModal').modal('show');
 	}
-	console.log($location.path());
+
+	else if($routeParams.merchant!=null && $routeParams.response_code!=null && $routeParams.ref_id!=null
+        && $routeParams.reference_code!=null && $routeParams.currency!=null && $routeParams.total_amount!=null &&
+        $routeParams.signature_algorithm!=null && $routeParams.signature!=null && $routeParams.card_type!=null){
+ 
+	    var keys = PAYMENT_KEYS;
+	    var secret=keys.MERCHANT_SECRET_KEY;
+	    var response_code = $routeParams.response_code;
+	    var merchant=$routeParams.merchant;
+	    var ref_id = $routeParams.ref_id;
+	    var reference_code = $routeParams.reference_code;
+	    var currency = $routeParams.currency;
+	    var total_amount = $routeParams.total_amount;
+	    var signature_algorithm = $routeParams.signature_algorithm;
+	    var signature = $routeParams.signature;
+	    var card_type = $routeParams.card_type;
+
+	    var returnSig = CryptoJS.SHA1(secret+merchant+ref_id+reference_code+response_code+currency+total_amount).toString();
+	      
+		if(returnSig === signature){
+        	if(response_code==='1'){
+            	if(merchant===keys.MERCHANT_EMAIL && currency==='SGD' ){
+	                var status = -1;
+	                var quizId = ref_id;
+	                var buyForMe = 250.00;
+                      	mvPayment.updateAddOnAmt(quizId,buyForMe).then(function(response){
+                        	console.log('In resp of updatePackage');
+                       		angular.element('#msgBuyModal').modal('show');
+
+                      	}, function(reason){
+                        	console.log('Payment unsuccessful');
+                        	console.log(reason);
+                        	alert('Payment unsuccessful, please contact the site admin. '+reason);
+                        	$location.search({});
+                        	$location.path('/dashboard');
+                      	}); 
+                    }
+                else{
+	                console.log('Error, merchant or currency incorrect');
+	                alert('Error, merchant or currency incorrect');
+	                $location.search({});
+	                $location.path('/dashboard');
+	            }
+		    }
+        }
+        else{
+            console.log('Secure signature unmatched.Payment could not be made, please contact the site admin.')
+            alert('Secure signature unmatched.Payment could not be made, please contact the site admin.');
+            $location.search({});
+            $location.path('/dashboard');
+        }
+    }
 }
 
 function setQuizData(index){
@@ -761,6 +810,7 @@ $('#calendarModal').on('hidden.bs.modal', function () {
 	window.location.reload(true);
 });
 
+
 $('#launchedModal').on('hidden.bs.modal', function () {
 	$location.search({});
 	quizResult.setLaunchKey(false);
@@ -768,7 +818,7 @@ $('#launchedModal').on('hidden.bs.modal', function () {
 
 
 $scope.getFirstLook = function(index, roomId){
-	
+	// $location.search({});
 	$scope.feedbackSaved = false;
 	$scope.currentFirstLook = 0;
 	$scope.rowId = index;
@@ -779,6 +829,7 @@ $scope.getFirstLook = function(index, roomId){
 	var concept_type;
 	var hasShoppingList = false;
 	var hasFinalLook = false;
+	$scope.showBuy = true;
 
 	$scope.currQzId = $scope.projectArr[index].quizData.quizId;
 	if($scope.projectArr[index].shoppingListData.length>0){
@@ -797,6 +848,13 @@ $scope.getFirstLook = function(index, roomId){
 			concept_type =3;
 			$scope.lookText = "Your final room design";
 			$scope.isFinalPage = true;
+		}
+		console.log($scope.projectArr[index].paymentData[0].addOnAmtPaid);
+		if($scope.projectArr[index].paymentData[0].addOnAmtPaid===250){
+			$scope.showBuy = false;
+		}
+		else{
+			setSmoovFields($scope.currQzId);
 		}
 	}
 
@@ -1026,6 +1084,24 @@ $scope.removeFileFromQ = function(index){
       $scope.fileArr.splice(mstrFileArrIdx,1);
 }
 
+$scope.buyForMe = function(){
+	$scope.buyShpngForm.commit();
+}
+
+function setSmoovFields(quizId){
+	var keys = PAYMENT_KEYS;
+	var secret=keys.MERCHANT_SECRET_KEY;
+	var merchant = keys.MERCHANT_EMAIL;
+  	var action = 'pay';
+  	$scope.ref_id = quizId;
+  	var total_amount = (250).toFixed(2);
+  	var currency = 'SGD';
+  	var sig = secret+merchant+action+$scope.ref_id+total_amount+currency;
+	
+	$scope.signature = CryptoJS.SHA1(sig).toString();
+}
+
+
 $scope.$on('$locationChangeStart', function( event ) {
 	if(typeof $scope.feedbackSaved != 'undefined' && !$scope.feedbackSaved && !$scope.isFinalPage){
 	    var answer = confirm("Your feedback has not been submitted. Any files uploaded will not be sent to us. Are you sure you want to leave this page?")
@@ -1034,6 +1110,7 @@ $scope.$on('$locationChangeStart', function( event ) {
 	    }
 	    else{
 	    	$route.reload();
+	    	//event.preventDefault();
 	    }
 	}
 });

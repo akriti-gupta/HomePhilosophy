@@ -38,6 +38,20 @@ angular.module('app').factory('mvPayment', function($http, mvIdentity, $q){
 	  			}
 	  		});
 	  		return dfd.promise;
+		},
+
+		updateAddOnAmt: function(quizId,amount){
+			var dfd = $q.defer();
+		    $http.post('/updateAddOnAmt',{quizId:quizId,addOnAmtPaid:amount}).then(function(response){
+		 		if(response.data.success){
+	  				dfd.resolve(true);
+	  			}
+	  			else{
+	  				dfd.reject(response.data.reason);
+	  			}
+	  		});
+	  		return dfd.promise;
 		}
+
 	}
 });
