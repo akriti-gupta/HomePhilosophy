@@ -63,6 +63,7 @@ module.exports = function(app){
 	app.post('/modifyUsrAppt',userProject.modifyUsrAppt);
 	app.post('/deleteProject',userProject.deleteProject);
 	app.post('/fetchImages',quiz.fetchImages);
+	app.post('/updateAddOnAmt',payment.updateAddOnAmt);
 
 
 	// app.post('/upload/:quizId/:fileType',function(req,res){
