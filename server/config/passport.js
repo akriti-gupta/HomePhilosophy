@@ -41,11 +41,17 @@ module.exports = function(){
     passport.use(new FacebookStrategy({
 
         // pull in our app id and secret from our auth.js file
+        
+
         clientID        : '1123799114413407',
         clientSecret    : 'bd3dea47fe556f93f9a8895acd34763c',   
         callbackURL     : 'http://homephilosophy.com.sg/auth/facebook/callback',
+
+        // clientID        : '118647685254312',
+        // clientSecret    : '00b53f5364ad582f67c1ba5d7e269acd',   
+        // callbackURL     : 'http://localhost:8006/auth/facebook/callback',
         profileFields: ['id', 'displayName', 'email'],
-        passReqToCallback : true,
+       // passReqToCallback : true,
         enableProof: true,
         session: false,
 
@@ -55,10 +61,10 @@ module.exports = function(){
     function(token, refreshToken, profile, done) {
         // asynchronous
         process.nextTick(function() {
+            console.log('abc : '+profile);
             console.log(profile);
 
             // find the user in the database based on their facebook id
-            
                mysqlConn.getConnection(function(err,conn){
                 if(err){
                     console.log('Err in getting mysql conn: '+err);
@@ -104,7 +110,9 @@ module.exports = function(){
                     });
                 }
                 else{
-                   return done('Facebook Profile not found',false); 
+                    var err1 = new Error('Facebook Profile not found');
+                    console.log('Profile is undefined');
+                    return done(err1,false);
                 }
 
               
