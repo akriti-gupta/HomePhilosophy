@@ -64,7 +64,7 @@ module.exports = function(){
                     console.log('Err in getting mysql conn: '+err);
                     return done(err, false);
                 }
-                else if(conn){
+                else if(conn && typeof profile !='undefined'){
                     conn.query('Select * from user where fbId = '+conn.escape(profile.id), function(err, results, fields){
                         if(err){
                            conn.release();
@@ -102,6 +102,9 @@ module.exports = function(){
                          } 
                        
                     });
+                }
+                else{
+                   return done('Facebook Profile not found',false); 
                 }
 
               
