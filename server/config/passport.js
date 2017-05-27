@@ -46,7 +46,7 @@ module.exports = function(){
         callbackURL     : 'http://homephilosophy.com.sg/auth/facebook/callback',
         profileFields: ['id', 'displayName', 'email'],
         passReqToCallback : true,
-        enableProof: false,
+        enableProof: true,
         session: false,
 
     },
