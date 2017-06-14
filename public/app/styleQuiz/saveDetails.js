@@ -131,12 +131,12 @@ $scope.processPayment = function(){
   console.log($routeParams.signature!=null);
   console.log($routeParams.card_type!=null);
 
-    // if($routeParams.merchant!=null && $routeParams.response_code!=null && $routeParams.ref_id!=null
-    //     && $routeParams.reference_code!=null && $routeParams.currency!=null && $routeParams.total_amount!=null &&
-    //     $routeParams.signature_algorithm!=null && $routeParams.signature!=null && $routeParams.card_type!=null){
+    if($routeParams.merchant!=null && $routeParams.response_code!=null && $routeParams.ref_id!=null
+        && $routeParams.reference_code!=null && $routeParams.currency!=null && $routeParams.total_amount!=null &&
+        $routeParams.signature_algorithm!=null && $routeParams.signature!=null && $routeParams.card_type!=null){
     
-    if(true){
-      /*var keys = PAYMENT_KEYS;
+    // if(true){
+      var keys = PAYMENT_KEYS;
       var secret=keys.MERCHANT_SECRET_KEY;
       var response_code = $routeParams.response_code;
       var merchant=$routeParams.merchant;
@@ -156,8 +156,8 @@ $scope.processPayment = function(){
       console.log('currency: '+currency+'abc');
 
       console.log('Sig is: '+signature+'abc');
-      console.log('Ret sig is: '+returnSig+'abc');*/
-      $scope.quizId = payment.getTempQuizId();
+      console.log('Ret sig is: '+returnSig+'abc');
+      //$scope.quizId = payment.getTempQuizId();
       // Check that details dont exits already in the DB. This is to prevent user resubmitting the data by accessing teh link from bookmark.
       console.log('Before mvUserQuiz.getQuizDetails');
       mvUserQuiz.getQuizDetails($scope.quizId).then(function(response){
@@ -171,18 +171,18 @@ $scope.processPayment = function(){
         else{
           console.log('In else');
           console.log('Chking retSig = sig: ');
-          // console.log(returnSig === signature);
-          // if(returnSig === signature){
-          if(true){
-            // console.log('Chking response_code' +response_code);
-            // if(response_code==='1'){
-            if(true){
+          console.log(returnSig === signature);
+          if(returnSig === signature){
+          // if(true){
+            console.log('Chking response_code' +response_code);
+            if(response_code==='1'){
+            // if(true){
               console.log('Chking merchant: ' );
-              // console.log(merchant===keys.MERCHANT_EMAIL);
+              console.log(merchant===keys.MERCHANT_EMAIL);
               console.log('Chking currency: ');
-              // console.log(currency==='SGD');
-              // if(merchant===keys.MERCHANT_EMAIL && currency==='SGD' ){
-              if(true){
+              console.log(currency==='SGD');
+              if(merchant===keys.MERCHANT_EMAIL && currency==='SGD' ){
+              // if(true){
                 var status = -1;
                 // var quizId = ref_id;
                 var quizId = $scope.quizId
@@ -191,11 +191,11 @@ $scope.processPayment = function(){
                     console.log('Resp ret from getPaymentInfo');
                     console.log(response);
                     var totalPrice = (response[0].totalPrice).toFixed(2);
-                    // console.log('total_amount is: '+total_amount);
-                    // console.log('totalPrice is: '+totalPrice);
-                    // console.log(totalPrice===total_amount);
-                    // if(totalPrice===total_amount){
-                    if(true){
+                    console.log('total_amount is: '+total_amount);
+                    console.log('totalPrice is: '+totalPrice);
+                    console.log(totalPrice===total_amount);
+                    if(totalPrice===total_amount){
+                    // if(true){
                       status = 0;
                       console.log('Before updatePackage');
                       mvPayment.updatePackage(quizId, status,totalPrice).then(function(response){

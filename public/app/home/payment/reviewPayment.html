@@ -73,10 +73,10 @@
 
 
 		<div class="row qz-row-dsg" style="display:table;padding-bottom:50px;padding-top:20px;">
-			<div class="col-md-12 col-xs-12" style="text-align:right;border:0px;padding-right:0px;font-family:PlayfairDisplay-Regular;font-size:16px;">Want hassle-free delivery to your home?
-				<input type="checkbox" ng-model="buyForMe" ng-change="updateTotal()" style="height:20px;margin:0px;margin-left:10px;vertical-align:middle;"> 
-			 		<span style="font-size:16px;font-family:OpenSans-Regular;">BUY FOR ME</span>
-			</div>
+				<div class="col-md-12 col-xs-12" style="text-align:right;border:0px;padding-right:0px;font-family:PlayfairDisplay-Regular;font-size:16px;">Want hassle-free delivery to your home?
+					<input type="checkbox" ng-model="buyForMe" ng-change="updateTotal()" style="height:20px;margin:0px;margin-left:10px;vertical-align:middle;"> 
+				 		<span style="font-size:16px;font-family:OpenSans-Regular;">BUY FOR ME</span>
+				</div>
 		</div>
 
 		<div class="flex-ctr">
@@ -116,7 +116,7 @@
 
 
 	<div style="width:80%;margin:0 auto;position:relative;text-align:center;padding-bottom:100px;">
-		<!-- <form ng-form-commit  action="https://sandbox.smoovpay.com/access" method="post" name="smoovPayForm"> -->
+		<!-- 	 <form ng-form-commit  action="https://sandbox.smoovpay.com/access" method="post" name="smoovPayForm"> -->
 		<form ng-form-commit  action="https://secure.smoovpay.com/access" method="post" name="smoovPayForm">
 			<input type="hidden" name="action" value="pay" />
 			<input type="hidden" name="currency" value="SGD" />
@@ -140,8 +140,8 @@
 			<input type="hidden" name="tax_amount" value="0.00" />
 			<input type="hidden" name="tax_percentage" value="0.00" />
 			<input type="hidden" name="total_amount" value="{{total_amount}}" />
-			<input type="hidden" name="success_url" value="http://homephilosophy.com.sg/tell-us-more" />
-			<!-- <input type="hidden" name="success_url" value="http://localhost:8006/tell-us-more" /> -->
+			<!-- <input type="hidden" name="success_url" value="http://homephilosophy.com.sg/tell-us-more" /> -->
+			<input type="hidden" name="success_url" value="http://localhost:8006/tell-us-more" />
 			<!-- <input type="hidden" name="cancel_url" value="http://homephilosophy.com.sg/dashboard" /> -->
 			<input type="hidden" name="cancel_url" value="http://homephilosophy.com.sg/tell-us-more" />
 			<input type="hidden" name="signature" value="{{signature}}" />

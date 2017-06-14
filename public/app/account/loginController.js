@@ -86,6 +86,7 @@ angular.module("app")
 			  			}
 		  			}
 		  			else{
+		  				$scope.showWait = false;
 		  				alert('Username/Password combination incorrect');
 		  				//mvNotifier.notify('Username/Password combination incorrect');
 		  			}
