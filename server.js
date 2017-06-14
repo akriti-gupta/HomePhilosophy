@@ -1,4 +1,4 @@
-require('newrelic');
+//require('newrelic');
 
 var express = require('express');	
 var env = process.env.NODE = process.env.NODE || 'production';
