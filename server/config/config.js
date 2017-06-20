@@ -34,7 +34,8 @@ module.exports = {
     				{template:'finalLook', subject:'Your Final Looks are ready!'},
     				{template:'shoppingList', subject:'Your Shopping List is ready!'},
     				{template:'firstFeedback', subject:'Feedback received for First Looks!'},
-    				{template:'finalFeedback', subject:'Feedback received for Final Looks!'}
+    				{template:'finalFeedback', subject:'Feedback received for Final Looks!'},
+    				{template:'custom', subject:'You have received a Custom Package interest!'}
     			]
   }
 }

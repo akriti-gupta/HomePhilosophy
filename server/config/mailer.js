@@ -4,24 +4,24 @@ var nodemailer = require('nodemailer'),
 
 //create reusable transport method (opens pool of SMTP connections)
 
-var transporter = nodemailer.createTransport({
-    host: 'smtp.zoho.com',
-    secureConnection: false,
-    port: 587,
-    auth: {
-        user: config.mailer.auth.user,
-        pass: config.mailer.auth.pass
-    }
-});
-
-
 // var transporter = nodemailer.createTransport({
-//   service: 'Gmail',
-//   auth: {
-//     user: 'guptaakriti83@gmail.com',
-//     pass: 'Indi$Singa'
-//   }
+//     host: 'smtp.zoho.com',
+//     secureConnection: false,
+//     port: 587,
+//     auth: {
+//         user: config.mailer.auth.user,
+//         pass: config.mailer.auth.pass
+//     }
 // });
+
+
+var transporter = nodemailer.createTransport({
+  service: 'Gmail',
+  auth: {
+    user: 'guptaakriti83@gmail.com',
+    pass: 'Schmooz@14'
+  }
+});
 
 var sendMail = function(fromAddress,toAddress, bccAddress,subject, content,attachments,next){
   var mailOptions = {
@@ -119,11 +119,14 @@ exports.sendEmail = function(req, res){
         attachments.push({filename: 'finalLook_banner_1.png',path:'/root/HomePhilosophy/public/images/mails/finalLook_banner_1.png',cid:'finalLookbanner@homephilosophy.com'});
     }
     
-    if(template==='contact'){
+    else if(template==='contact'){
         mailData = {'name':name,'email':email,'phone':phone,'message':message};
     }
     else if(template==='firstFeedback' || template==='finalFeedback'){
         mailData={'quizId':quizId};
+    }
+    else if(template==='custom'){
+        mailData = {'name':name,'from':email};
     }
     else {
         mailData = {name:name,address:address,apptDate:apptDate};
