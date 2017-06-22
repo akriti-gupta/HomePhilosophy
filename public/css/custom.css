@@ -1027,7 +1027,7 @@ margin-bottom: 0px;
 .hp-logo-luxury{
   
   height:100%;
-  width:30%;
+  width:420px;
   background:url('/images/luxury/logo-luxury.png') no-repeat center;
   margin: 0px auto;
   background-size: 100%;
@@ -1159,7 +1159,7 @@ margin-bottom: 0px;
 
 /*Portfolio*/
 
-.portfolio-title{
+.portfolio-title,.luxury-title{
   background-color:#000;
   padding:30px 0px;
   margin:0;color:rgb(248,248,248);
@@ -1328,6 +1328,7 @@ padding:40px 0px 60px;font-size:22px;margin:0;font-family:PlayfairDisplay-Regula
   font-style: normal;
   font-size: 19px;
   color: rgb(37, 37, 37);
+  line-height: 180%;
 }
 .container-about-txt{
   margin: 0 auto;
@@ -1338,10 +1339,11 @@ padding:40px 0px 60px;font-size:22px;margin:0;font-family:PlayfairDisplay-Regula
   max-width: 710px; */
 }
 .about-title{
-  font-size: 25px;
-  font-family: Playfair-Display;
-  padding-bottom: 20px;
+  font-size: 15px;
+  font-family: Montserrat-Regular;
+  /*padding-bottom: 20px;*/
   letter-spacing: 1px;
+  margin-bottom:0px;
 }
 
 .btn-faq{
@@ -1773,12 +1775,12 @@ a.dwnld-shp-txt:hover{
   /*padding: 0px 155px;*/
 
 }
-.lux-main-title{
+/*.lux-main-title{
   font-family: PlayfairDisplay-Regular;
   font-size: 30px;
   letter-spacing: 1px;
   font-style:italic;
-}
+}*/
 
 .lux-main-text{
   /*padding-top:30px;*/
@@ -1786,12 +1788,12 @@ a.dwnld-shp-txt:hover{
   line-height: 200%;
   font-family: PlayfairDisplay-Regular;
 }
-.lux-sub-title{
+/*.lux-sub-title{
   font-family: PlayfairDisplay-Regular;
   font-size: 30px;
   letter-spacing: 1px;
   font-style:italic;
-}
+}*/
 .lux-contact-ctr{
   background-color:#000;color:#fff;
   width:100%;

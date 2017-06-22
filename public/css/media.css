@@ -74,6 +74,9 @@
 .resprg-lbl-four{
         left:65%;
     }
+.login-ctr{
+    width: 70%;
+}
 }
 
 @media only screen and (min-width : 770px) and (max-width:799px){
@@ -97,6 +100,9 @@
      .custom-maintxt{
         font-size: 30px;
     }  
+    .luxury-title{
+        font-size:14px;
+    }
 }
 
 @media only screen and (min-width : 1100px) and (max-width: 1320px){
@@ -166,7 +172,8 @@
    }
 }
 
-    @media only screen and (min-width : 320px) and (max-width: 480px) {
+    /*@media only screen and (min-width : 320px) and (max-width: 480px) {*/
+    @media only screen and (min-width : 320px) and (max-width: 500px) {
 
         .icon-mail-home{
             width:20px;
@@ -492,12 +499,15 @@
         }
 
         /* LUXURY SPACES*/
-        .lux-main-title{
+        .luxury-title{
+            font-size: 11px;
+        }
+        /*.lux-main-title{
             font-size:20px;
-        }
-        .lux-sub-title{
+        }*/
+        /*.lux-sub-title{
             font-size: 14px;
-        }
+        }*/
         .lux-main-text{
             padding-top:5px;
             font-size:10px;
@@ -795,20 +805,10 @@
         .step-five{
             left:91.4%;
         }
-        /*.hp-logo-footer{
-            padding: 0 10px 0 50px;
-
-        }*/
-       /* .hp-logo-footer a img{
-            width:80%;
-        }*/
-
         #footer-data{
             padding-left: 200px;
             width:80%;
         }
-        /*.flh1,.flh3{padding-right:0px;}*/
-
         #footer-data ul{
             display: inherit;
             margin-bottom: 30px;
@@ -829,10 +829,6 @@
         .pin-comment-txt-ctr textarea{
             height:235px;
         }
-        /*.pinboard-comment-litem{
-            width: 80px;
-        }*/
-
         .about-maintext{
             font-size: 16px;
         }
@@ -840,11 +836,6 @@
         .ctr1{
             flex:1;
         }
-       /*
-        .lux-main-text{
-            padding-top:5px;
-            font-size:13px;
-        }*/
         .lux-contact-ctr{
             margin-top:5px;
             padding-top:40%;
@@ -892,7 +883,6 @@
           left:45%;
         }
         .resprg-lbl-four{
-          /*width:10%;*/
           left:64%;
         } 
         .resprg-lbl-five{
