@@ -96,7 +96,8 @@ $scope.gotoPricing = function(){
 	
 $scope.sendMail = function(){
 	if($scope.customForm.$valid){
-		mvEmail.sendEmail().then(function(success){
+		var mailData = {'template':'custom','from':$scope.email,'name':$scope.name}
+		mvEmail.sendEmail(mailData).then(function(success){
 			if(success){
 				alert('Thank you for submitting you request. We will contact you soon.');
 				$location.path('/dashboard');				
