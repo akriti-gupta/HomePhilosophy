@@ -514,7 +514,8 @@ button:focus {outline:0;}
 }
 
 /* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens */
-@media screen and (max-width:980px) {
+/*@media screen and (max-width:980px) {*/
+  @media screen and (max-width:1070px) {
 
   .img2{
     display: block;
@@ -1093,6 +1094,19 @@ margin-bottom: 0px;
   background-color: #0054a6;
   border-color: #0054a6;
   border-radius: 0px;
+}
+.fb-tooltip{
+  visibility: hidden;
+  position: absolute;
+  width: 240px;
+  text-align: center;
+  top:25.5%;
+  left:55%;
+  font-size: 10px;
+  color:#000;
+}
+.fb-area:hover .fb-tooltip{
+  visibility: visible;
 }
 .btn-login{
   padding:8px 95px;
