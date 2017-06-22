@@ -272,10 +272,11 @@ $scope.processPayment = function(){
 
   
   $scope.saveData = function(){
-    $scope.showWait = true;
+    
     if(!$scope.detailForm.$invalid){
       var isValid = validateFormData();
       if(isValidTotalSize() && isValid){
+        $scope.showWait = true;
         var quizId;
         if($scope.quizId===-1){
             quizId = quizResult.getUserCurrQuiz();
@@ -334,9 +335,11 @@ $scope.processPayment = function(){
               // $location.path('/dashboard').search({'launched':'true'});    
               $location.path('/dashboard');
             },function(reason){
-
+              alert(reason);
+              $scope.showWait = false;
             });
           },function(reason){
+            $scope.showWait = false;
             mvNotifier.notify('Files/ data could not be uploaded. Please try again. '+reason);
             alert('Files/ data could not be uploaded. Please try again. '+reason);
           });
@@ -350,7 +353,8 @@ $scope.processPayment = function(){
             quizResult.setLaunchKey(true);
             $location.path('/dashboard');
           },function(reason){
-
+            alert(reason);
+            $scope.showWait = false;
           });
         }
       }

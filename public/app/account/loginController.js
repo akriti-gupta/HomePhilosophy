@@ -76,6 +76,7 @@ angular.module("app")
 			  						}
 			  						$location.path('/style-quiz');
 			  					}, function(reason){
+			  							$scope.showWait = false;
 			  							mvNotifier.error(reason);
 			  							//alert(reason);
 			  					});
@@ -142,6 +143,7 @@ angular.module("app")
 		  					mvNotifier.notify('User account created!');
 		  					$location.path('/style-quiz');
 		  				}, function(reason){
+		  					$scope.showWait = false;
 		  					mvNotifier.error(reason);
 		  					alert(reason);
 		  				});
@@ -162,6 +164,7 @@ angular.module("app")
 			  		});
 
 		  		}, function(reason){
+		  			$scope.showWait = false;
 		  			alert(reason);
 		  			mvNotifier.error(reason);
 		  		});
