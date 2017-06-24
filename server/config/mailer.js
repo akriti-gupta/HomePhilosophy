@@ -126,7 +126,7 @@ exports.sendEmail = function(req, res){
         mailData={'quizId':quizId};
     }
     else if(template==='custom'){
-        mailData = {'name':name,'from':from};
+        mailData = {'name':name,'from':email};
     }
     else {
         mailData = {name:name,address:address,apptDate:apptDate};
