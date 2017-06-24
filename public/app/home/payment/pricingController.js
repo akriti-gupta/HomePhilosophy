@@ -8,6 +8,7 @@ angular.module("app")
   	$scope.name;
   	$scope.email;
   	$scope.phone;
+  	$scope.showWait = false;
   	//TODO: Save package info in DB and retrive this array from there. This is to
   	//accomodate any future changes to the payment packages and put it in service.
   	$scope.packages = [
@@ -21,7 +22,7 @@ angular.module("app")
 
 		$scope.selectedRooms = quizResult.getInsertedRooms();	
 
-		console.log($scope.selectedRooms);
+	//	console.log($scope.selectedRooms);
 
 		if($scope.selectedRooms.length > 0){
 	  		$scope.showTitle = true;
@@ -84,6 +85,7 @@ $scope.submitReqCustom = function(){
 		alert('Please enter your name and email address');
 	}
 	else if($scope.customForm.$valid){
+		$scope.showWait = true;
 		$scope.sendMail();
 	}
 	
@@ -96,7 +98,7 @@ $scope.gotoPricing = function(){
 	
 $scope.sendMail = function(){
 	if($scope.customForm.$valid){
-		var mailData = {'template':'custom','from':$scope.email,'name':$scope.name}
+		var mailData = {'template':'custom','email':$scope.email,'name':$scope.name,'phone':$scope.phone}
 		mvEmail.sendEmail(mailData).then(function(success){
 			if(success){
 				alert('Thank you for submitting you request. We will contact you soon.');
@@ -104,10 +106,12 @@ $scope.sendMail = function(){
 			}
 			else{
 				mvNotifier.notify('Your request could not be sent. Please submit again');
+				$scope.showWait = false;
 			}
 		});
 	}
 	else{
+		$scope.showWait = false;
 		alert('Please enter all the details');
 	}
 };

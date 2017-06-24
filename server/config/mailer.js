@@ -4,24 +4,23 @@ var nodemailer = require('nodemailer'),
 
 //create reusable transport method (opens pool of SMTP connections)
 
-// var transporter = nodemailer.createTransport({
-//     host: 'smtp.zoho.com',
-//     secureConnection: false,
-//     port: 587,
-//     auth: {
-//         user: config.mailer.auth.user,
-//         pass: config.mailer.auth.pass
-//     }
-// });
-
-
 var transporter = nodemailer.createTransport({
-  service: 'Gmail',
-  auth: {
-    user: 'guptaakriti83@gmail.com',
-    pass: 'Schmooz@14'
-  }
+    host: 'smtp.zoho.com',
+    secureConnection: false,
+    port: 587,
+    auth: {
+        user: config.mailer.auth.user,
+        pass: config.mailer.auth.pass
+    }
 });
+
+// var transporter = nodemailer.createTransport({
+//   service: 'Gmail',
+//   auth: {
+//     user: 'guptaakriti83@gmail.com',
+//     pass: 'Schmooz@14'
+//   }
+// });
 
 var sendMail = function(fromAddress,toAddress, bccAddress,subject, content,attachments,next){
   var mailOptions = {
@@ -126,7 +125,7 @@ exports.sendEmail = function(req, res){
         mailData={'quizId':quizId};
     }
     else if(template==='custom'){
-        mailData = {'name':name,'from':email};
+        mailData = {'name':name,'email':email,'phone':phone};
     }
     else {
         mailData = {name:name,address:address,apptDate:apptDate};
