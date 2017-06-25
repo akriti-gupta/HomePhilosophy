@@ -810,6 +810,16 @@ $('#calendarModal').on('hidden.bs.modal', function () {
 	window.location.reload(true);
 });
 
+$('#firstFeedModal').on('hidden.bs.modal', function () {
+	//refresh
+	window.location.reload(true);
+});
+
+$('#finalFeedModal').on('hidden.bs.modal', function () {
+	//refresh
+	window.location.reload(true);
+});
+
 
 $('#launchedModal').on('hidden.bs.modal', function () {
 	$location.search({});
@@ -984,7 +994,13 @@ function submitFeedback(cncptObj,concept_type,uploadedFiles,status){
 
 			if(status===0){
 				$scope.feedbackSaved = true;
-				window.location.reload(true);
+				if(concept_type===1){
+					angular.element('#firstFeedModal').modal('show');
+				}
+				else if(concept_type===2){
+					angular.element('#finalFeedModal').modal('show');
+				}
+				// window.location.reload(true);
 			}
 		}
 		else{
