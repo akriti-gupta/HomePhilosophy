@@ -765,9 +765,16 @@ padding-top:6px; padding-bottom:6px;letter-spacing:1px;
 .stp-head-subtxt{
     color: #252525;
 }
-.stp-main-subtxt{
+.stp-main-subtxt, .stp-main-subtxt1{
   font-family:Montserrat-Regular;
   color: rgb(85,85,85);
+  padding-left: 30px;
+  padding-right: 35px;
+}
+.stp-main-subtxt1{
+  font-size: 16px;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
 }
 
 .step_icon{
@@ -1319,16 +1326,17 @@ padding:40px 0px 60px;font-size:22px;margin:0;font-family:PlayfairDisplay-Regula
 /* About Us */
 #about-banner{
   height:650px;
+  /*height:680px;*/
   background-image:url('/images/aboutBg.png');
   background-size: cover;
-  background-position: 0 -20px;
+  /*background-position: 0 -20px;*/
   position: relative;
   background-repeat:no-repeat;
 }
 .about-rect{
   position: relative;
   /*top: 80px;*/
-  top: 16%;
+  top: 15%;
   margin: 0 auto;
   background-color: #fff;
   opacity: 0.85;
@@ -1337,12 +1345,24 @@ padding:40px 0px 60px;font-size:22px;margin:0;font-family:PlayfairDisplay-Regula
   width: 70%;
   
 }
-.about-maintext{
+.about-maintext,.about-maintext1{
   font-family: PlayfairDisplay;
   font-style: normal;
-  font-size: 19px;
   color: rgb(37, 37, 37);
   line-height: 180%;
+  
+}
+.about-maintext{
+  font-size: 19px;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+.about-maintext1{
+  /*font-size:28px;*/
+  font-size:calc(100% + 1vw);
+  padding-left:0px;
+  padding-right: 0px;
+  margin-bottom: 0px;
 }
 .container-about-txt{
   margin: 0 auto;
@@ -1353,7 +1373,8 @@ padding:40px 0px 60px;font-size:22px;margin:0;font-family:PlayfairDisplay-Regula
   max-width: 710px; */
 }
 .about-title{
-  font-size: 15px;
+  /*font-size: 15px;*/
+  font-size: 1.1vw;
   font-family: Montserrat-Regular;
   /*padding-bottom: 20px;*/
   letter-spacing: 1px;

@@ -28,6 +28,41 @@
     
 }
 
+
+@media only screen and (max-width: 685px){
+    .stp-main-subtxt1{
+        padding-bottom: 20px;
+    }
+    
+}
+
+@media only screen and (max-width : 990px) {
+    .about-maintext1{
+        font-size: calc(100% + 0.8vw);
+    }
+    .about-title{
+        font-size: 10px;
+    }
+}
+
+@media only screen and (max-width : 1000px) {
+    .portfolio-carousel .slick-prev{
+         left:20px;
+    }
+    .portfolio-carousel .slick-next{
+        right:20px;
+    }
+    .portfolio-carousel .slick-prev:before,.portfolio-carousel .slick-next:before  {
+        font-size:22px;
+    }
+    .about-maintext{
+            font-size: 16px;
+            padding-left:0px;
+            padding-right: 0px;
+        }
+
+}
+
 @media only screen and (min-width : 480px) and (max-width: 769px){
  .text-dsg{
             display: none;
@@ -63,7 +98,7 @@
     }  
 }
 
-@media only screen and (min-width : 800px) and (max-width: 1225px){
+@media only screen and (min-width : 800px) and (max-width: 1260px){
     .about-rect{
         width:80%;
     }
@@ -123,6 +158,7 @@
     }
 }
 
+
 @media only screen and (min-width : 485px) and (max-width: 760px){
     .resprg-lbl-one,.resprg-lbl-two,.resprg-lbl-three, .resprg-lbl-four, .resprg-lbl-five{
         font-size: 10px;
@@ -147,12 +183,6 @@
       left: 84%;
     } 
 }
-
-/*@media only screen and (min-width : 500px) and (max-width: 800px){
-     .custom-maintxt{
-        font-size: 40px;
-    } 
-}*/
 
 @media only screen and (min-width:768px) and (max-width: 1160px){
     #pricing-section{
@@ -467,9 +497,6 @@
         }
         .portfolio-information {
             display: none;
-          /*  padding: 0px;
-            display: inline-block;
-            height: inherit;    */
         }
         .portfolio-information .stats {
             border-right: none;
@@ -487,27 +514,18 @@
         .portfolio-carousel .slide img {
             border: 10px solid #fff;
         }
-        /* .container-about-txt{
-            padding-top: 40px;
-        }*/
         .about-maintext{
             font-size: 13px;
         }
-        .about-title{
+        /*.about-title{
             font-size: 20px;
             padding-bottom: 10px;
-        }
+        }*/
 
         /* LUXURY SPACES*/
         .luxury-title{
             font-size: 11px;
         }
-        /*.lux-main-title{
-            font-size:20px;
-        }*/
-        /*.lux-sub-title{
-            font-size: 14px;
-        }*/
         .lux-main-text{
             padding-top:5px;
             font-size:10px;
