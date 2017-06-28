@@ -25,6 +25,21 @@
     .footer-logo-ctr{
         width:90%;
     }
+
+
+
+    /* .mask{
+        left:125px;
+       } */
+   /* .step-text{
+        width: 240px;
+    }*/
+    .resprg-lbl-one,.resprg-lbl-two,.resprg-lbl-three, .resprg-lbl-four, .resprg-lbl-five{
+        max-width:18%;
+        text-align: center;
+    }
+
+
     
 }
 
@@ -276,10 +291,10 @@
             padding: 10px;
             font-size: 16px;
         }
-        .hp_workflow {
+        /*.hp_workflow {
             height: 60%;
             width: 80%;
-        }
+        }*/
         #hp_experience{
             margin: 30px 0px;
         }
@@ -289,17 +304,17 @@
         .stp-head-subtxt{
             padding: 0px 15px 20px;
         }
-        #step1,#step2, #step3, #step4 { 
+        /*#step1,#step2, #step3, #step4 { 
             float: none;
             margin:0;
             width:auto;
-        }
-        .step-text{
+        }*/
+        /*.step-text{
             width:210px;
-        }
-        .mask{
+        }*/
+       /* .mask{
             left:77px;
-        }
+        }*/
        
         .section-divider > span{
             width:200px;
@@ -928,21 +943,6 @@
     @media only screen and (min-width : 1200px) {
 
     }
-
-/*Added for ifone 6plus*/
- @media only screen and (min-width : 400px) {
-
-     .mask{
-        left:93px;
-       } 
-    .step-text{
-        width: 240px;
-    }
-    .resprg-lbl-one,.resprg-lbl-two,.resprg-lbl-three, .resprg-lbl-four, .resprg-lbl-five{
-        max-width:18%;
-        text-align: center;
-    }
-}
 
 
 
