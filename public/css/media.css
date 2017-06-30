@@ -22,30 +22,18 @@
 }
 
 @media only screen and (max-width: 500px){
-    .footer-logo-ctr{
+    /*.footer-logo-ctr{
         width:30%;
         padding: 0px;
-    }
+    }*/
     .footer-ctr{
         float: right;
-        width: 55%;
+        width: 70%;
     }
-
-
-
-    /* .mask{
-        left:125px;
-       } */
-   /* .step-text{
-        width: 240px;
-    }*/
     .resprg-lbl-one,.resprg-lbl-two,.resprg-lbl-three, .resprg-lbl-four, .resprg-lbl-five{
         max-width:18%;
         text-align: center;
     }
-
-
-    
 }
 
 
@@ -257,12 +245,6 @@
             width:65%;
             height:45%;
         }
-
-        
-        /*.container-ctr-txt{
-            padding: 40px;
-        }*/
-
         .exp-maintext,.col-inspiring{
             font-size:22px;
         }
@@ -289,17 +271,12 @@
             width: 90%;
         }
         .btn-container{
-            /*top: 410px;*/
             left: calc(50% - 70px);
         }
         .btn-hero{
             padding: 10px;
             font-size: 16px;
         }
-        /*.hp_workflow {
-            height: 60%;
-            width: 80%;
-        }*/
         #hp_experience{
             margin: 30px 0px;
         }
@@ -309,18 +286,6 @@
         .stp-head-subtxt{
             padding: 0px 15px 20px;
         }
-        /*#step1,#step2, #step3, #step4 { 
-            float: none;
-            margin:0;
-            width:auto;
-        }*/
-        /*.step-text{
-            width:210px;
-        }*/
-       /* .mask{
-            left:77px;
-        }*/
-       
         .section-divider > span{
             width:200px;
             font-size:14px;
@@ -421,24 +386,20 @@
         .btn-fb{
             padding: 12px 8px;
         }
-       
-        .hp-logo-footer{
-            padding: 0 10px 0 20px;
+
+        #site_footer .flex-ctr{
+            display: initial;
         }
-        .hp-logo-footer a img{
+       
+        .hp-logo-footer,.footer-logo-ctr{
+            /*padding: 0 10px 0 20px;*/
+            width: 30%;
+            padding:0px 20px;
+        }
+        .hp-logo-footer a img,.footer-logo-ctr a img{
             width:80%;
         }
-        /*.flh1,.flh3{padding-right:0px;}*/
-
-        #footer-data ul{
-            display: inherit;
-            padding-right: 20px;
-            margin-bottom: 30px;
-        }
-         #footer-data ul li{
-            padding-right: 10px;
-         }
-         .detailForm{
+        .detailForm{
             width: 100%;
             padding: 100px 25px 0px 25px;
         }
@@ -537,11 +498,6 @@
         .about-maintext{
             font-size: 13px;
         }
-        /*.about-title{
-            font-size: 20px;
-            padding-bottom: 10px;
-        }*/
-
         /* LUXURY SPACES*/
         .luxury-title{
             font-size: 11px;
@@ -722,12 +678,6 @@
             font-size: 13px;
             padding: 0px 10px;
         }
-       
-        
-        .flex-ctr{ /* Used in Pricing */
-           /* padding-bottom: 100px; */
-        }
-        
         .pricing-footnote{
             padding: 5px;
             font-size: 10px;
@@ -771,18 +721,16 @@
         }
         .lux-ctr-inner{
             width:95%;
-           padding: 10px;
+            padding: 10px;
         }
        
-       #pricing-section{
-        display: none;
-       }
+        #pricing-section{
+            display: none;
+        }
 
         #pricing-section-media{
             display: inline-block;
-
         }
-
         .rect-custom{
             width: 85%;
             top:10%;
@@ -791,7 +739,6 @@
             width: 85%;
             top:12%;
         }
-
         .result-title{
             font-size:16px;
         }
@@ -843,25 +790,13 @@
         .step-five{
             left:91.4%;
         }
-        #footer-data{
-            padding-left: 200px;
-            width:80%;
-        }
-        #footer-data ul{
-            display: inherit;
-            margin-bottom: 30px;
-        }
-         #footer-data ul li{
-            padding-right: 10px;
-         }
-
-         .qz-row-room{
+        .qz-row-room{
             width: 95%;
-         }
-         .thumbnail{
+        }
+        .thumbnail{
             padding: 50px 10px 0px;
-         }
-          .thumbnail .caption{
+        }
+        .thumbnail .caption{
             font-size: 11px;
         }
         .pin-comment-txt-ctr textarea{
@@ -870,7 +805,6 @@
         .about-maintext{
             font-size: 16px;
         }
-
         .ctr1{
             flex:1;
         }
@@ -991,12 +925,8 @@
         .btn-qz{
             padding: 12px 40px;
         }
-        .hp-logo-footer{
+        .hp-logo-footer,.footer-logo-ctr{
             width:32%;
-        }
-        #footer-data ul{
-            padding-right: 10px;
-            padding-left: 2px;
         }
 
     }   
