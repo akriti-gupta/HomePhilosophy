@@ -38,21 +38,9 @@
 		<script src="/app/home/payment/paymentController.js"></script>
 
 		<script src="/app/contact/contactController.js"></script>
-		
-		<!-- Uncomment later after DB implementation -->
-		
-		
 		<script src="/app/customer/custViewController.js"></script>
 		<script src="/app/customer/dashboard.js"></script>
 		<script src="/app/customer/mvCustView.js"></script>
-
-
-
-
-
-
-
-		<!-- <script src="/app/customer/feedbackController.js"></script> -->
 		<script src="/app/customer/svcCustView.js"></script>
 		<script src="/app/styleQuiz/svcQuizResult.js"></script>
 		<script src="/app/styleQuiz/quiz.js"></script>
@@ -60,15 +48,11 @@
 		<script src="/app/account/mvAuth.js"></script>
 		<script src="/app/account/mvUser.js"></script>
 		<script src="/app/styleQuiz/mvUserQuiz.js"></script>
-
-		<!-- Uncomment later after DB implementation -->
 		<script src="/app/home/payment/svcPayment.js"></script>
 		<script src="/app/home/payment/mvPayment.js"></script>
-		
 		<script src="/app/common/mvNotifier.js"></script>
 		<script src="/app/common/mvEmail.js"></script>
 		<script src="/app/styleQuiz/saveDetails.js"></script>
-		
 		<script src="/app/admin/UserListCtrl.js"></script>
 		<script src="/app/admin/mvAdminView.js"></script>
 
@@ -79,41 +63,19 @@
 		<script src="/vendor/crypto-js/3.1.9-1/crypto-js.js"></script>
 		<script src="/vendor/crypto-js/3.1.9-1/sha1.min.js"></script>
 		<script src="/vendor/crypto-js/3.1.9-1/hmac-sha1.min.js"></script>
-		
 		<link rel="stylesheet" href="/css/slick.css"/>
 		<link rel="stylesheet" href="/css/slick-theme.css"/>
-		
 		<link rel="stylesheet" href="/css/font-awesome.min.css"/>
 		<link rel="stylesheet" href="/css/bootstrap.min.css"/>
 		<link rel="stylesheet" href="/css/quizStyle.css"/>
 		<link rel="stylesheet" href="/css/custom.css"/>
 		<link rel="stylesheet" href="/css/media.css"/>
-		
 		<base href="/">
-
-
 	</head>
 
 	<body ng-app="app">	
 		<section id="content-wrapper">
-			<!-- <div class="dropdown" ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
-	    		<a href="/login">Sign In</a>
-			</div>
-
-	    	<div class="dropdown" ng-controller="LoginController" ng-show="identity.isAuthenticated()">
-	    		<a href="" data-toggle="dropdown">{{identity.currentUser.username}}
-	    			<span class="caret"></span>
-	    		</a>
-				<ul class="dropdown-menu">
-					<li><a ng-click="signout()">Sign Out</a></li>
-	   				
-	  			</ul>
-			</div> -->
-
-
-			<!-- <div > -->
-			
-<% if(!!bootstrappedUser){%>  
+			<% if(!!bootstrappedUser){%>  
 				<script type="text/javascript">
 					window.bootstrappedUserObject = <%- JSON.stringify(bootstrappedUser)%>
 				</script>
@@ -121,73 +83,36 @@
 			
 		
 			<div ng-view></div>
-				
-				
-			</section>
-
-		<!-- <footer id="site_footer">
-			<div class="site_header" style="margin-bottom:50px;">
-				<div class="hp-logo-footer"> 
-		 			<a href="/">
-			            <img src="images/logo_footer.png"/>
-			        </a>	
-			    </div>
-
-			    <div id="footer-data">
-			    	<ul>
-			    		<li class="footer-list-header flh1 font-montserrat col-darkgrey txt-upper"> More Information</li>
-			    		<li class="footer-list"><a class="font-montserrat col-darkgrey fs-12px" href="/faq">FAQs</a></li>
-			    		<li class="footer-list"><a class="font-montserrat col-darkgrey fs-12px" href="/terms-and-privacy">Terms and Privacy</a></li>
-			    	</ul>
-			    	<ul>
-			    		<li class="footer-list-header font-montserrat col-darkgrey txt-upper">Contact Us</li>
-			    		<li class="footer-list"><a  class="font-montserrat col-darkgrey fs-12px" href="mailto:hello@homephilosophy.com.sg">hello@homephilosophy.com.sg</a></li>
-			    		<li class="footer-list font-montserrat col-darkgrey fs-12px"> +65 9272 6032</li>
-
-			    	</ul>
-			    	<ul>
-			    		<li class="footer-list-header flh3 font-montserrat col-darkgrey txt-upper"> Follow Us</li>
-			    		<li class="footer-list"><a href="https://www.instagram.com/homephilosophysg/" target="_blank"><img src="images/instagram.png"/></a> &nbsp;&nbsp;<a href="https://www.pinterest.com/HPSingapore/" target="_blank"><img src="images/pinterest.png"/></a>&nbsp;&nbsp;
-			    		<a href="https://homephilosophysg.wixsite.com/blog/" target="_blank"><img src="images/blog.png" width="12%"/></a> </li>
-					</ul>
-			    	
-			    </div>
-			</div>
-			<div style="text-align:right;margin-bottom:10px;padding-right:10px;color:rgb(170,170,170);">
-			All rights reserved. Copyright of Home Philosophy Pte Ltd 2017.
-			</div>
-		</footer> -->
+		</section>
 
 		<footer id="site_footer">
 
 			<!-- <div class="flex-ctr footer-ctr"> -->
-	  			<div class="footer-logo-ctr">
-	  				<div class="hp-logo-footer"> 
-			 			<a href="/">
-				            <img src="images/logo_footer.png"/>
-				        </a>	
-			    	</div>
-	  			</div>
-	  			<div class="flex-ctr footer-ctr">
-	  			<div class="flex-child">
-	  				<p class="footer-list-header flh1 font-montserrat col-darkgrey txt-upper"> More Information</p>
-			    	<p class="footer-list" style="padding-top:10px;"><a class="font-montserrat col-darkgrey fs-12px" href="/faq" >FAQs</a></p>
-			    	<p class="footer-list"><a class="font-montserrat col-darkgrey fs-12px" href="/terms-and-privacy">Terms and Privacy</a></p>
-	  			</div>
-	  			<div class="flex-child">
-  					<p class="footer-list-header flh2 font-montserrat col-darkgrey txt-upper">Contact Us</p>
-		    		<p class="footer-list" style="padding-top:10px;"><a  class="font-montserrat col-darkgrey fs-12px" href="mailto:hello@homephilosophy.com.sg">hello@homephilosophy.com.sg</a></p>
-		    		<p class="footer-list font-montserrat col-darkgrey fs-12px"> +65 9272 6032</p>
-	  			</div>
-	  			<div class="flex-child">
-	  				<p class="footer-list-header flh3 font-montserrat col-darkgrey txt-upper"> Follow Us</p>
-			    	<p class="footer-list" style="padding-top:10px;"><a href="https://www.instagram.com/homephilosophysg/" target="_blank"><img src="images/instagram.png"/></a> &nbsp;&nbsp;<a href="https://www.pinterest.com/HPSingapore/"><img src="images/pinterest.png"/></a>&nbsp;
-			    		<a href="https://homephilosophysg.wixsite.com/blog/" target="_blank"><img src="images/blog.png" width="10%"/></a> </p>
-	  			</div>
-	  		</div>
-
+  			<div class="footer-logo-ctr">
+  				<div class="hp-logo-footer"> 
+		 			<a href="/">
+			            <img src="images/logo_footer.png"/>
+			        </a>	
+		    	</div>
+  			</div>
+  			<div class="flex-ctr footer-ctr">
+  			<div class="flex-child">
+  				<p class="footer-list-header flh1 font-montserrat col-darkgrey txt-upper"> More Information</p>
+		    	<p class="footer-list" style="padding-top:10px;"><a class="font-montserrat col-darkgrey fs-12px" href="/faq" >FAQs</a></p>
+		    	<p class="footer-list"><a class="font-montserrat col-darkgrey fs-12px" href="/terms-and-privacy">Terms and Privacy</a></p>
+  			</div>
+  			<div class="flex-child">
+					<p class="footer-list-header flh2 font-montserrat col-darkgrey txt-upper">Contact Us</p>
+	    		<p class="footer-list" style="padding-top:10px;"><a  class="font-montserrat col-darkgrey fs-12px" href="mailto:hello@homephilosophy.com.sg">hello@homephilosophy.com.sg</a></p>
+	    		<p class="footer-list font-montserrat col-darkgrey fs-12px"> +65 9272 6032</p>
+  			</div>
+  			<div class="flex-child">
+  				<p class="footer-list-header flh3 font-montserrat col-darkgrey txt-upper"> Follow Us</p>
+		    	<p class="footer-list" style="padding-top:10px;"><a href="https://www.instagram.com/homephilosophysg/" target="_blank"><img src="images/instagram.png"/></a> &nbsp;&nbsp;<a href="https://www.pinterest.com/HPSingapore/"><img src="images/pinterest.png"/></a>&nbsp;
+		    		<a href="https://homephilosophysg.wixsite.com/blog/" target="_blank"><img src="images/blog.png" width="10%"/></a> </p>
+  			</div>
+	  		<!-- </div> -->
 		</footer>
-		
 	</body>
 
 	<script>
@@ -199,6 +124,6 @@
 	  ga('create', 'UA-96228765-1', 'auto');
 	  ga('send', 'pageview');
 
-</script>
+	</script>
 
 </html>
