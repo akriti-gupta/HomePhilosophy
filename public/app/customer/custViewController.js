@@ -690,7 +690,7 @@ $scope.saveAppointment = function(item){
 					date.setMinutes(time[1]);
 					var apptDateTime = moment(date).format('YYYY-MM-DD HH:mm:ss');
 					isApptMade = 1;
-					apptData = {"customerId":customerId,"quizId":quizId,"address":$scope.address,
+					apptData = {"customerId":customerId,"quizId":quizId,"roomId":null,"address":$scope.address,
 							 "person":$scope.person,"contact":$scope.contact,"email":$scope.email,
 							 "apptDate":apptDateTime,"apptTime":apptDateTime,
 							 "floorPlanLoc":'',"floorPlanStatus":-1,
@@ -768,7 +768,7 @@ $scope.saveAppointment = function(item){
 						else {
 							files = uploadedFiles;
 						}
-						apptData = {"customerId":customerId,"quizId":quizId,"address":$scope.address,
+						apptData = {"customerId":customerId,"quizId":quizId,"roomId":null,"address":$scope.address,
 									 "person":$scope.person,"contact":$scope.contact,"email":$scope.email,
 									 "apptDate":apptDateTime,"apptTime":apptDateTime,
 									 "floorPlanLoc":files,"floorPlanStatus":0,

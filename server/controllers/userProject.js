@@ -665,17 +665,20 @@ exports.getCncptFeedback = function(req,res,next){
 }
 exports.saveAppointment = function(req,res,next){
 	var apptData = req.body.data;
-
+	var prevFP = false;
+	var prevAppt = false;
+	var updFPID = -1;
 	mysqlConn.getConnection(function(err,conn){
 		if(err){return next(err);}
 		
         if(conn){
         	var qry_usr_appt;
-        	if(apptData.apptStatus===0)
-        		qry_usr_appt = 'Select * from cust_appointment where quizId='+conn.escape(apptData.quizId);
-        	else
-        		qry_usr_appt = 'Select * from cust_appointment where quizId='+conn.escape(apptData.quizId)+' and roomId='+conn.escape(apptData.roomId);
+        	// if(apptData.apptStatus===0)
+        	// 	qry_usr_appt = 'Select * from cust_appointment where quizId='+conn.escape(apptData.quizId);
+        	// else
+        	// 	qry_usr_appt = 'Select * from cust_appointment where quizId='+conn.escape(apptData.quizId)+' and roomId='+conn.escape(apptData.roomId);
 
+        	qry_usr_appt = 'Select * from cust_appointment where quizId='+conn.escape(apptData.quizId);
         	var options = {sql:qry_usr_appt,nestTables: true};
 
     		conn.query(options, function(err, userAppt, fields){
@@ -685,8 +688,71 @@ exports.saveAppointment = function(req,res,next){
 					res.send({success: false, reason:err.toString()});
 				}
 				if(userAppt.length>0){
-					var apptId = userAppt[0].cust_appointment.id;
-					var usrApptUpdData =[
+					var apptId;
+					if(apptData.roomId!=null){
+						//Floor plan is uploaded now
+						for(var i=0;i<userAppt.length;i++){
+							//Check if Appt is scheduled previously or Floor plan is uploaded
+							if(userAppt[i].cust_appointment.roomId!=null && userAppt[i].cust_appointment.roomId === apptData.roomId){
+								updFPID = userAppt[i].cust_appointment.id;
+								prevFP = true;
+								break;
+							}
+						}
+						//FloorPlan not found, i.e., appt scheduled previously
+						if(!prevFP){
+							updFPID = userAppt[0].cust_appointment.id;	
+						}
+					}
+					else{
+						updFPID = userAppt[0].cust_appointment.id;	
+					}
+					if(updFPID === -1){
+						//Making an appointment now
+						var qry_del_exst_recs = 'delete from cust_appointment where quizId=?';
+
+						conn.query(qry_del_exst_recs,apptData.quizId, function(err, result, rows, fields) {
+							if(err){
+								console.log('Error in deleting user apptInfo '+err);
+								conn.release();
+								return res.send({success: false, reason:err.toString()});
+							}
+							else{
+		    					var usrApptData = {
+									quizId:apptData.quizId,
+									roomId:apptData.roomId,
+								   	roomName:'',
+								   	apptDate:apptData.apptDate,
+								   	apptTime: apptData.apptTime,
+								   	contactPerson: apptData.person,
+								   	contact: apptData.contact,
+								   	address:apptData.address,
+								   	email:apptData.email,
+								   	floorPlanStatus: apptData.floorPlanStatus,
+								   	floorPlanLoc: apptData.floorPlanLoc,
+								   	apptStatus: apptData.apptStatus,
+								   	created_at: userAppt[0].cust_appointment.created_at,
+								   	updated_at: new Date()
+									};
+
+								conn.query('insert into cust_appointment set ?', usrApptData, function(err, results, fields){
+									if(err){
+										console.log('Error in inserting user apptInfo '+err);
+										conn.release();
+										return res.send({success: false, reason:err.toString()});
+									}
+									else{
+										return res.send({success:true});	
+									}
+								});
+
+	    					}
+						});
+					}
+					else{
+						//Uploading floor plan now
+						var usrApptUpdData =[
+									apptData.roomId,
 									apptData.apptDate,
 								   	apptData.apptTime,
 								   	apptData.person,
@@ -696,27 +762,33 @@ exports.saveAppointment = function(req,res,next){
 								   	apptData.floorPlanStatus,
 								   	apptData.floorPlanLoc,
 								   	apptData.apptStatus,
-								   	apptData.quizId
+								   	new Date(),
+								   	updFPID
 									];
 
-					var qry_upd_appt = 'update cust_appointment set apptDate = ?, apptTime=?,'+
+						var qry_upd_appt = 'update cust_appointment set roomId=?, apptDate = ?, apptTime=?,'+
 									 'contactPerson=?, contact=?, address=?,email=?,floorPlanStatus=?,'+
-									 'floorPlanLoc=?, apptStatus=? where quizId=?';
+									 'floorPlanLoc=?, apptStatus=?,updated_at=? where id=?';
+
+						conn.query(qry_upd_appt,usrApptUpdData, function(err, result, rows, fields) {
+							if(err){
+								console.log('Error in updating user apptInfo '+err);
+								conn.release();
+								return res.send({success: false, reason:err.toString()});
+							}
+							else{
+		    					return res.send({success: true});
+	    					}
+						});
+					}
+
+
+					// var qry_upd_appt = 'update cust_appointment set apptDate = ?, apptTime=?,'+
+					// 				 'contactPerson=?, contact=?, address=?,email=?,floorPlanStatus=?,'+
+					// 				 'floorPlanLoc=?, apptStatus=? where quizId=?';
         			
-					conn.query(qry_upd_appt,usrApptUpdData, function(err, result, rows, fields) {
-						if(err){
-							console.log('Error in updating user apptInfo '+err);
-							conn.release();
-							return res.send({success: false, reason:err.toString()});
-						}
-						else{
-	    					return res.send({success: true});
-    					}
-					});
 				}
 				else{
-					console.log("No data in user Appt");
-					
 					//Add data
 					var usrApptData = {
 									quizId:apptData.quizId,
@@ -731,7 +803,8 @@ exports.saveAppointment = function(req,res,next){
 								   	floorPlanStatus: apptData.floorPlanStatus,
 								   	floorPlanLoc: apptData.floorPlanLoc,
 								   	apptStatus: apptData.apptStatus,
-								   	created_at: new Date()
+								   	created_at: new Date(),
+								   	updated_at: new Date()
 									};
 					conn.query('insert into cust_appointment set ?', usrApptData, function(err, results, fields){
 						if(err){
