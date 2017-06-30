@@ -23,7 +23,12 @@
 
 @media only screen and (max-width: 500px){
     .footer-logo-ctr{
-        width:90%;
+        width:30%;
+        padding: 0px;
+    }
+    .footer-ctr{
+        float: right;
+        width: 55%;
     }
 
 
