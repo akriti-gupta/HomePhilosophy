@@ -103,10 +103,11 @@ exports.sendEmail = function(req, res){
         attachments.push({filename: 'login_banner.png',path: '/root/HomePhilosophy/public/images/mails/login_banner.png',cid: 'loginbanner@homephilosophy.com'});
     }
 
-    else if(template==='appt'){
+    else if(template==='appt' || template==='floorPlan'){
         bccAddress = 'rashi@homephilosophy.com.sg';
         attachments.push({filename: 'measure1.png',path: '/root/HomePhilosophy/public/images/measure1.png',cid: 'meetmeasure@homephilosophy.com'});
         attachments.push({filename: 'appt_banner_1.png',path: '/root/HomePhilosophy/public/images/mails/appt_banner_1.png',cid: 'meetbanner@homephilosophy.com'});
+        mailData = {name:name,address:address,apptDate:apptDate};
     }
 
     else if(template==='firstLook'){

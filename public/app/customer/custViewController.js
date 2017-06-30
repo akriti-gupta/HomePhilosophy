@@ -740,9 +740,19 @@ $scope.saveAppointment = function(item){
 
 					mvCustView.saveAppointment(apptData).then(function(success){
 						if(success){
-							angular.element('#calendarModal').modal('hide');
-							window.location.reload(true);
-							//TODO: Send email
+							 angular.element('#calendarModal').modal('hide');
+							//window.location.reload(true);
+							var mailData = {'template':'floorPlan','to':mvIdentity.currentUser.username,'name':mvIdentity.currentUser.firstname};
+							mvEmail.sendEmail(mailData).then(function(success){
+				  				if(success)
+					  				mvNotifier.notify('Mail sent');
+					  			else
+					  				mvNotifier.notify('Mail not sent');
+					  			//angular.element('#calendarModal').modal('hide');
+						  	}, function(reason){
+					  			alert(reason);
+					  			mvNotifier.error(reason);
+					  		});
 						}
 					}, function(reason){
 						alert('Floor plans could not be uploaded. Please contact the site admin '+reason);

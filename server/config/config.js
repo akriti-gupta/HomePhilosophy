@@ -30,6 +30,7 @@ module.exports = {
     templateData:[
     				{template:'login', subject:'Welcome to Home Philosophy'},
     				{template:'appt', subject:'Your Meet and Measure appointment is scheduled'},
+    				{template:'floorPlan', subject:'Thank you for uploading your floorplan'},
     				{template:'firstLook', subject:'Your First Looks are ready!'},	
     				{template:'finalLook', subject:'Your Final Looks are ready!'},
     				{template:'shoppingList', subject:'Your Shopping List is ready!'},
