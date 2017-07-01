@@ -1109,10 +1109,12 @@ margin-bottom: 0px;
 .fb-tooltip{
   visibility: hidden;
   position: absolute;
-  width: 240px;
+  /*width: 240px;*/
+  width: 30%;
   text-align: center;
   top:25.5%;
-  left:55%;
+  /*left:55%;*/
+  left:53%;
   font-size: 10px;
   color:#000;
 }
