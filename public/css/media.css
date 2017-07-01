@@ -41,7 +41,16 @@
     .stp-main-subtxt1{
         padding-bottom: 20px;
     }
+    .ctr-login-btn{
+        width: 100%;
+    }
     
+}
+
+@media only screen and (max-width: 500px){
+    .btn-fb{
+        width: 80%;
+    }
 }
 
 @media only screen and (max-width : 990px) {
@@ -190,6 +199,10 @@
     .resprg-lbl-five{
       left: 84%;
     } 
+    .login-ctr{
+            width:85%;
+            top:5%;
+        }
 }
 
 @media only screen and (min-width:768px) and (max-width: 1160px){
@@ -772,9 +785,9 @@
         .hp-logo-luxury{
             width:60%;
         }
-        .btn-fb{
+       /* .btn-fb{
             padding: 12px 80px;
-        }
+        }*/
         .step-one{
           left:8.3%;
         }

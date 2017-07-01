@@ -1097,7 +1097,8 @@ margin-bottom: 0px;
   height:44px;
 }
 .btn-fb{
-  padding:12px 105px;
+  padding:12px 0px;
+  width: 65%;
   letter-spacing:1px;
   font-family: OpenSans-Regular;
   font-size:14px;
@@ -1118,8 +1119,17 @@ margin-bottom: 0px;
 .fb-area:hover .fb-tooltip{
   visibility: visible;
 }
+.ctr-login-btn{
+  clear:both;
+  text-align:center;
+  padding:30px 0px 40px;
+  width: 50%;
+  margin: 0 auto;
+}
 .btn-login{
-  padding:8px 95px;
+  /*padding:8px 95px;*/
+  padding:8px 0px;
+  width: 100%;
 }
 /*.btn-fb:before{
   content: "&#xf09a;";

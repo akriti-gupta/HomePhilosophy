@@ -59,11 +59,11 @@
 
       <div style="float:right" ng-hide="showName"><a href="#" class="font-sansRegular fs-16px col-lightcyan" ng-click="showRegister()">Sign Up </a></div>
       
-      <div style="clear:both;text-align:center;padding:30px 0px 40px;" ng-hide="showName">
+      <div class="ctr-login-btn" ng-hide="showName">
         <button type="submit" class="btn-start-quiz btn-login font-sansRegular txt-upper col-lightcyan fs-20px" ng-click = "signin(email,password)" ng-disabled="loginForm.$invalid">CONTINUE</button>
       </div>
 
-      <div style="clear:both;text-align:center;padding:30px 0px 40px;" ng-show="showName">
+      <div class="ctr-login-btn" ng-show="showName">
         <button type="submit" class="btn-start-quiz btn-login font-sansRegular txt-upper col-lightcyan fs-20px" ng-click = "signup()" ng-disabled="loginForm.$invalid">CONTINUE</button>
       </div>
 
