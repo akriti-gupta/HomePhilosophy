@@ -116,7 +116,7 @@ exports.sendEmail = function(req, res){
     }
     else if(template==='finalLook'){
         bccAddress = '';
-        attachments.push({filename: 'finalLook_banner_1.png',path:'/root/HomePhilosophy/public/images/mails/finalLook_banner_1.png',cid:'finalLookbanner@homephilosophy.com'});
+        attachments.push({filename: 'finalLook_banner1.png',path:'/root/HomePhilosophy/public/images/mails/finalLook_banner1.png',cid:'finalLookbanner@homephilosophy.com'});
     }
     
     else if(template==='contact'){
