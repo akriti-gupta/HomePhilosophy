@@ -112,7 +112,7 @@ exports.sendEmail = function(req, res){
 
     else if(template==='firstLook'){
         bccAddress = '';
-        attachments.push({filename: 'firstLook_banner.png',path:'/root/HomePhilosophy/public/images/mails/firstLook_banner.png',cid:'firstLookbanner@homephilosophy.com'});
+        attachments.push({filename: 'firstLook_banner2.png',path:'/root/HomePhilosophy/public/images/mails/firstLook_banner2.png',cid:'firstLookbanner@homephilosophy.com'});
     }
     else if(template==='finalLook'){
         bccAddress = '';

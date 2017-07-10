@@ -320,3 +320,6 @@ ADD COLUMN `file1` VARCHAR(500) NULL AFTER `concept_id`;
 
 ALTER TABLE `cust_appointment` 
 ADD COLUMN `email` VARCHAR(50) NULL AFTER `contact`;
+
+ALTER TABLE 'user'
+ADD COLUMN `email` VARCHAR(100) NULL AFTER `fbId`;

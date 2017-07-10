@@ -70,7 +70,97 @@
   </div>
 </header>
 
-<div ng-show="showTitle" class="divider" style="border-top:2px solid #e1e1e1;padding:0px;"></div>
+<div class="modal" id="shoppingListModal" tabindex="-1" role="dialog" aria-labelledby="shoppingListModal" >
+	<div class="modal-dialog modal-shpList" role="document" >
+	    <div class="modal-content">
+	      <div class="modal-header" style="border:none;"></div>
+	      <div class="modal-body">
+	        <div style="position:relative;width:99%;margin:0 auto;">
+	        
+	          <img src="images/sampleShpngList.png" width="100%">
+	        </div>
+	      </div>
+	      <div class="modal-footer" id="img-credit" style="border:none;"></div>
+	    </div>
+	</div>
+</div>
+
+<div class="modal" id="finalLookModal" tabindex="-1" role="dialog" aria-labelledby="finalLookModal" >
+	<div class="modal-dialog modal-shpList" role="document" >
+	    <div class="modal-content">
+	      <div class="modal-header" style="border:none;"></div>
+	      <div class="modal-body">
+	        <div style="position:relative;width:99%;margin:0 auto;">
+	        
+	          <img src="images/finalBoard.png" width="100%">
+	        </div>
+	      </div>
+	      <div class="modal-footer" id="img-credit" style="border:none;"></div>
+	    </div>
+	</div>
+</div>
+
+<div class="modal" id="furnLayoutModal" tabindex="-1" role="dialog" aria-labelledby="furnLayoutModal" >
+	<div class="modal-dialog modal-shpList" role="document" >
+	    <div class="modal-content">
+	      <div class="modal-header" style="border:none;"></div>
+	      <div class="modal-body">
+	        <div style="position:relative;width:99%;margin:0 auto;">
+	        
+	          <img src="images/furnLayout.png" width="100%">
+	        </div>
+	      </div>
+	      <div class="modal-footer" id="img-credit" style="border:none;"></div>
+	    </div>
+	</div>
+</div>
+
+
+	<script type="text/javascript">
+
+	$('.concept-center').slick({  
+	  lazyLoad: 'progressive',
+	  infinite: false,
+	  dots: false,
+	  // variableWidth: true,
+
+	  
+	  responsive: [
+	    {
+	      breakpoint: 1000,
+	      settings: {
+	        focusOnSelect: false
+	      }
+	    }
+	  ]
+	});
+
+
+	</script>
+
+	<div class="modal" id="firstLookModal" 
+						aria-labelledby="firstLookModal">
+		<!-- <div class="modal-dialog" style="max-width:690px;"> -->
+		<div class="modal-dialog">
+        	<div class="modal-content">
+				<div class="modal-body">
+					<div class="content">
+  						<div class="concept-center">
+    						<div>
+      							<div class="slide"><img data-lazy="images/conceptBoard1.png" width="100%"/></div>
+    						</div>
+
+    						<div>
+      							<div class="slide"><img data-lazy="images/conceptBoard2.png" width="100%"/></div>
+        					</div>
+						</div>
+    				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div ng-show="showTitle" class="divider" style="border-top:2px solid #e1e1e1;padding:0px;"></div>
 
 
 
@@ -125,9 +215,9 @@
 			  	<p class="pkg-title"> SIMPLE</p>
 			  	<p class="pkg-desc pkg-divider">for a breath of fresh air</p>
 			  	<p class="pkg-price pkg-divider"> 350<span class="price-dollar"><sup>$</sup></span></p>
-			  	<p class="pkg-item pkg-divider"><span style="font-size:22px;"> 2 </span>First look concept boards</p>
-			  	<p class="pkg-item pkg-divider">Final look 2-D room board</p>
-			  	<p class="pkg-item pkg-divider">Personalized shopping list</p>
+			  	<p class="pkg-item pkg-divider"><a href="#" data-toggle="modal" data-target="#firstLookModal"><span style="font-size:22px;"> 2 </span>First look concept boards</a></p>
+			  	<p class="pkg-item pkg-divider"><a href="#" data-toggle="modal" data-target="#finalLookModal">Final look 2-D room board</a></p>
+			  	<p class="pkg-item pkg-divider"><a href="#" data-toggle="modal" data-target="#shoppingListModal">Personalized shopping list</a></p>
 			  	<!-- <p class="pkg-item pkg-divider">Buy for Me option available</p> -->
 			  	<div style="padding-bottom:40px;"></div>
 		  		<p><a href="#" ng-click="savePayPkg(1)"><button type="submit" class="btn-select-pkg">SELECT</button></a></p>
@@ -138,10 +228,10 @@
 			  	<p class="pkg-title"> CLASSIC</p>
 			  	<p class="pkg-desc pkg-divider">for a notable transformation</p>
 			  	<p class="pkg-price pkg-divider">600<span class="price-dollar"><sup>$</sup></span></p>
-			  	<p class="pkg-item pkg-divider"><span style="font-size:22px;"> 2 </span>First look concept boards</p>
-			  	<p class="pkg-item pkg-divider">Final look 2-D room board</p>
-			  	<p class="pkg-item pkg-divider">Personalized shopping list</p>
-			  	<p class="pkg-item pkg-divider">Furniture layout plan</p>
+			  	<p class="pkg-item pkg-divider"><a href="#" data-toggle="modal" data-target="#firstLookModal"><span style="font-size:22px;"> 2 </span>First look concept boards</a></p>
+			  	<p class="pkg-item pkg-divider"><a href="#" data-toggle="modal" data-target="#finalLookModal">Final look 2-D room board</a></p>
+			  	<p class="pkg-item pkg-divider"><a href="#" data-toggle="modal" data-target="#shoppingListModal">Personalized shopping list</a></p>
+			  	<p class="pkg-item pkg-divider"><a href="#" data-toggle="modal" data-target="#furnLayoutModal">Furniture layout plan</a></p>
 			  	<p class="pkg-item pkg-divider">Paint and/or wallpaper <br/>selections</p>
 			  	<!-- <p class="pkg-item pkg-divider">Buy for Me option available</p> -->
 			  	
@@ -155,9 +245,9 @@
 			  	<p class="pkg-desc pkg-divider">for a complete overhaul</p>
 			  	<p class="pkg-price pkg-divider"> 1000<span class="price-dollar"><sup>$</sup></span></p>
 			  	<p class="pkg-item pkg-divider"><span style="font-size:22px;">3 </span>First look concept boards</p>
-			  	<p class="pkg-item pkg-divider">Final look 2-D room board</p>
-			  	<p class="pkg-item pkg-divider">Personalized shopping list</p>
-			  	<p class="pkg-item pkg-divider">Furniture layout plan</p>
+			  	<p class="pkg-item pkg-divider"><a href="#" data-toggle="modal" data-target="#finalLookModal">Final look 2-D room board</a></p>
+			  	<p class="pkg-item pkg-divider"><a href="#" data-toggle="modal" data-target="#shoppingListModal">Personalized shopping list</a></p>
+			  	<p class="pkg-item pkg-divider"><a href="#" data-toggle="modal" data-target="#furnLayoutModal">Furniture layout plan</a></p>
 			  	<p class="pkg-item pkg-divider">Paint and/or wallpaper selections</p>
 			  	<p class="pkg-item pkg-divider">Additional feedback session</p>
 			  	<p class="pkg-item pkg-divider">Accessories selections</p>
@@ -213,9 +303,9 @@
 	  	
 	  	<p class="pkg-desc pkg-divider">for a breath of fresh air</p>
 	  	<p class="pkg-price pkg-divider"> 350<span class="price-dollar"><sup>$</sup></span></p>
-	  	<p class="pkg-item pkg-divider"> <span style="font-size:22px;">2 </span>First look concept boards</p>
-	  	<p class="pkg-item pkg-divider"> Final look 2-D room board</p>
-	  	<p class="pkg-item pkg-divider">Personalized shopping list</p>
+	  	<p class="pkg-item pkg-divider"> <a href="#" data-toggle="modal" data-target="#firstLookModal"><span style="font-size:22px;"> 2 </span>First look concept boards</a></p>
+	  	<p class="pkg-item pkg-divider"> <a href="#" data-toggle="modal" data-target="#finalLookModal">Final look 2-D room board</a></p>
+	  	<p class="pkg-item pkg-divider"><a href="#" data-toggle="modal" data-target="#shoppingListModal">Personalized shopping list</a></p>
 	  	<!-- <p class="pkg-item pkg-divider">Buy for Me option available</p> -->
 	  	<div class="pkg-select-ctr"></div>
 	  	<p><a href="#" ng-click = "savePayPkg(1)"><button type="submit" class="btn-select-pkg">SELECT</button></a></p>
@@ -227,10 +317,10 @@
 	  	
 	  	<p class="pkg-desc pkg-divider">for a notable transformation</p>
 	  	<p class="pkg-price pkg-divider">600<span class="price-dollar"><sup>$</sup></span></p>
-	  	<p class="pkg-item pkg-divider"><span style="font-size:22px;"> 2 </span>First look concept boards</p>
-	  	<p class="pkg-item pkg-divider"> Final look 2-D room board</p>
-	  	<p class="pkg-item pkg-divider">Personalized shopping list</p>
-	  	<p class="pkg-item pkg-divider">Furniture layout plan</p>
+	  	<p class="pkg-item pkg-divider"><a href="#" data-toggle="modal" data-target="#firstLookModal"><span style="font-size:22px;"> 2 </span>First look concept boards</a></p>
+	  	<p class="pkg-item pkg-divider"> <a href="#" data-toggle="modal" data-target="#finalLookModal">Final look 2-D room board</a></p>
+	  	<p class="pkg-item pkg-divider"><a href="#" data-toggle="modal" data-target="#shoppingListModal">Personalized shopping list</a></p>
+	  	<p class="pkg-item pkg-divider"><a href="#" data-toggle="modal" data-target="#furnLayoutModal">Furniture layout plan</a></p>
 	  	<p class="pkg-item pkg-divider">Paint and/or wallpaper <br/>selections</p>
 	  	<!-- <p class="pkg-item pkg-divider">Buy for Me option available</p> -->
 	  	<div class="pkg-select-ctr"></div>
@@ -244,9 +334,9 @@
 	  	<p class="pkg-desc pkg-divider">for a complete overhaul</p>
 	  	<p class="pkg-price pkg-divider"> 1000<span class="price-dollar"><sup>$</sup></span></p>
 	  	<p class="pkg-item pkg-divider"> <span style="font-size:22px;"> 3 </span>First look concept boards</p>
-	  	<p class="pkg-item pkg-divider"> Final look 2-D room board</p>
-	  	<p class="pkg-item pkg-divider">Personalized shopping list</p>
-	  	<p class="pkg-item pkg-divider">Furniture layout plan</p>
+	  	<p class="pkg-item pkg-divider"> <a href="#" data-toggle="modal" data-target="#finalLookModal">Final look 2-D room board</a></p>
+	  	<p class="pkg-item pkg-divider"><a href="#" data-toggle="modal" data-target="#shoppingListModal">Personalized shopping list</a></p>
+	  	<p class="pkg-item pkg-divider"><a href="#" data-toggle="modal" data-target="#furnLayoutModal">Furniture layout plan</a></p>
 	  	<p class="pkg-item pkg-divider">Paint and/or wallpaper selections</p>
 	  	<p class="pkg-item pkg-divider">Additional feedback session</p>
 	  	<p class="pkg-item pkg-divider">Accessories selections</p>
