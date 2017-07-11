@@ -22,10 +22,11 @@ var transporter = nodemailer.createTransport({
 //   }
 // });
 
-var sendMail = function(fromAddress,toAddress, bccAddress,subject, content,attachments,next){
+var sendMail = function(fromAddress,toAddress,ccAddress,bccAddress,subject, content,attachments,next){
   var mailOptions = {
     from: fromAddress,
     to: toAddress,
+    cc: ccAddress,
     bcc: bccAddress,
     subject: subject,
     html: content,
@@ -44,6 +45,7 @@ exports.sendEmail = function(req, res){
     var templateData = config.mailer.templateData;
 
     var mailData = {};
+    var ccAddress = '';
     var name = '';
     var email='';
     var phone='';
@@ -68,6 +70,9 @@ exports.sendEmail = function(req, res){
 
     if (data.hasOwnProperty('to')){
         toAddress = data.to;
+    }
+    if (data.hasOwnProperty('cc')){
+        ccAddress = data.cc;
     }
     if (data.hasOwnProperty('from')){
         fromAddress = data.from;
@@ -100,7 +105,7 @@ exports.sendEmail = function(req, res){
         attachments.push({filename: 'measure1.png',path: '/root/HomePhilosophy/public/images/measure1.png',cid: 'loginmeasure@homephilosophy.com'});
         attachments.push({filename: 'design1.png',path: '/root/HomePhilosophy/public/images/designs1.png',cid: 'logindesign@homephilosophy.com'});
         attachments.push({filename: 'shoppingList.png',path: '/root/HomePhilosophy/public/images/shoppingList.png',cid: 'loginshopping@homephilosophy.com'});
-        attachments.push({filename: 'login_banner.png',path: '/root/HomePhilosophy/public/images/mails/login_banner.png',cid: 'loginbanner@homephilosophy.com'});
+        attachments.push({filename: 'login_banner1.png',path: '/root/HomePhilosophy/public/images/mails/login_banner1.png',cid: 'loginbanner@homephilosophy.com'});
     }
 
     else if(template==='appt' || template==='floorPlan'){
@@ -138,7 +143,7 @@ exports.sendEmail = function(req, res){
             console.log(err);
         }
         else{
-            sendMail(fromAddress,toAddress,bccAddress,subject, html, attachments,function(err, response){
+            sendMail(fromAddress,toAddress,ccAddress,bccAddress,subject, html, attachments,function(err, response){
             // sendMail(fromAddress,toAddress,bccAddress,subject, html,function(err, response){
                 if(err){
                     console.log('err in sending mail:');
