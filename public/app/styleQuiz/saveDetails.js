@@ -34,7 +34,8 @@ angular.module('app')
     'value':'Own my apartment'
   };
 
-  $scope.budget = [{value:'$3,000 - $4,000',selected:false},
+  $scope.budget = [{value:'Under $3000',selected:false},
+                {value:'$3,000 - $4,000',selected:false},
                 {value:'$4,000 - $5,000',selected:false},
                 {value:'$5,000 - $7,000',selected:false},
                 {value:'$7,000 - $10,000',selected:false},
