@@ -106,6 +106,7 @@ exports.sendEmail = function(req, res){
         attachments.push({filename: 'design1.png',path: '/root/HomePhilosophy/public/images/designs1.png',cid: 'logindesign@homephilosophy.com'});
         attachments.push({filename: 'shoppingList.png',path: '/root/HomePhilosophy/public/images/shoppingList.png',cid: 'loginshopping@homephilosophy.com'});
         attachments.push({filename: 'login_banner1.png',path: '/root/HomePhilosophy/public/images/mails/login_banner1.png',cid: 'loginbanner@homephilosophy.com'});
+        mailData = {name:name};
     }
 
     else if(template==='appt' || template==='floorPlan'){
