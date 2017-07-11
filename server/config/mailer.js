@@ -111,18 +111,18 @@ exports.sendEmail = function(req, res){
 
     else if(template==='appt' || template==='floorPlan'){
         bccAddress = 'rashi@homephilosophy.com.sg';
-        attachments.push({filename: 'measure1.png',path: '/root/HomePhilosophy/public/images/measure1.png',cid: 'meetmeasure@homephilosophy.com'});
+        // attachments.push({filename: 'measure1.png',path: '/root/HomePhilosophy/public/images/measure1.png',cid: 'meetmeasure@homephilosophy.com'});
         attachments.push({filename: 'appt_banner_1.png',path: '/root/HomePhilosophy/public/images/mails/appt_banner_1.png',cid: 'meetbanner@homephilosophy.com'});
         mailData = {name:name,address:address,apptDate:apptDate};
     }
 
     else if(template==='firstLook'){
         bccAddress = '';
-        attachments.push({filename: 'firstLook_banner2.png',path:'/root/HomePhilosophy/public/images/mails/firstLook_banner2.png',cid:'firstLookbanner@homephilosophy.com'});
+        attachments.push({filename: 'firstLook_banner3.png',path:'/root/HomePhilosophy/public/images/mails/firstLook_banner3.png',cid:'firstLookbanner@homephilosophy.com'});
     }
     else if(template==='finalLook'){
         bccAddress = '';
-        attachments.push({filename: 'finalLook_banner1.png',path:'/root/HomePhilosophy/public/images/mails/finalLook_banner1.png',cid:'finalLookbanner@homephilosophy.com'});
+        attachments.push({filename: 'finalLook_banner2.png',path:'/root/HomePhilosophy/public/images/mails/finalLook_banner2.png',cid:'finalLookbanner@homephilosophy.com'});
     }
     
     else if(template==='contact'){
