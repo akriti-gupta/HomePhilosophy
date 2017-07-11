@@ -38,7 +38,7 @@ angular.module("app")
 	  						}
 		  					}, function(reason){
 		  							mvNotifier.error(reason);
-		  							alert(reason);
+		  							//alert(reason);
 		  				});
 					}
 					else{
@@ -145,7 +145,7 @@ angular.module("app")
 		  				}, function(reason){
 		  					$scope.showWait = false;
 		  					mvNotifier.error(reason);
-		  					alert(reason);
+		  					// alert(reason);
 		  				});
 		  			}
 		  			else{
@@ -159,13 +159,13 @@ angular.module("app")
 				  				mvNotifier.notify('Mail not sent');
 
 			  		}, function(reason){
-			  			alert(reason);
+			  			//alert(reason);
 			  			mvNotifier.error(reason);
 			  		});
 
 		  		}, function(reason){
 		  			$scope.showWait = false;
-		  			alert(reason);
+		  			// alert(reason);
 		  			mvNotifier.error(reason);
 		  		});
 		  	}
@@ -189,7 +189,7 @@ angular.module("app")
 		  			mvNotifier.notify('User account created!');
 		  		}, function(reason){
 		  			mvNotifier.error(reason);
-		  			alert(reason);
+		  			// alert(reason);
 		  		});
 
 		  	}
