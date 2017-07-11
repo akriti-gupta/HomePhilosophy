@@ -700,7 +700,7 @@ $scope.saveAppointment = function(item){
 						if(success){
 							 angular.element('#calendarModal').modal('hide');
 							//window.location.reload(true);
-							var mailData = {'template':'appt','to':mvIdentity.currentUser.username,'name':mvIdentity.currentUser.firstname,'address':$scope.address,'apptDate':apptDateTime};
+							var mailData = {'template':'appt','to':mvIdentity.currentUser.username,'cc':$scope.email,'name':mvIdentity.currentUser.firstname,'address':$scope.address,'apptDate':apptDateTime};
 							mvEmail.sendEmail(mailData).then(function(success){
 				  				if(success)
 					  				mvNotifier.notify('Mail sent');
