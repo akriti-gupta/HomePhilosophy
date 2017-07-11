@@ -103,7 +103,7 @@ angular.module('app')
       }
     });
     if($scope.shareSpace.length===0){
-      alert('Please select option(s) for whom you share youe space with');
+      alert('Please select option(s) for whom you share your space with');
       return false;
     }
 
