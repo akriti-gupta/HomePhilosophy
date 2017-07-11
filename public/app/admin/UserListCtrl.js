@@ -525,7 +525,7 @@ $scope.saveAndUpload = function(){
 					template='finalLook';
 				}
 
-				var mailData = {'template':template,'to':userObj.username,'name':userObj.firstname};
+				var mailData = {'template':template,'to':userObj.username,'cc':userObj.email,'name':userObj.firstname};
 	  			mvEmail.sendEmail(mailData).then(function(success){
 		  				if(success)
 			  				mvNotifier.notify('Mail sent');
