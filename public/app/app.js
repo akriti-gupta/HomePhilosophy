@@ -18,7 +18,7 @@ angular.module('app')
 				$locationProvider.html5Mode(true);
 				$routeProvider
 					.when('/',{templateUrl: 'app/home/main.html', controller: 'MainController'})
-					
+					.when('/how-it-works',{templateUrl: 'app/home/aboutUs/howItWorks.html'})
 					.when('/about-us',{templateUrl: 'app/home/aboutUs/aboutUs.html'})
 					.when('/pricing',{templateUrl: 'app/home/payment/pricing.html', controller: 'PricingController'})
 					.when('/portfolio',{templateUrl: 'app/home/portfolio.html'})
