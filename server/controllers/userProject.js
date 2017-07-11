@@ -538,7 +538,7 @@ exports.getProjectListing = function(req,res,next){
 		if(err){return next(err);}
 		
         if(conn){
-        	var qry_usr_qz = 'SELECT u.id, u.username,u.firstname,u.address, u.phone,q.* FROM user u, cust_quiz q WHERE u.id=q.customerId and q.status='+status+ ' order by quizId desc';
+        	var qry_usr_qz = 'SELECT u.id, u.username,u.email, u.firstname,u.address, u.phone,q.* FROM user u, cust_quiz q WHERE u.id=q.customerId and q.status='+status+ ' order by quizId desc';
         	var options = {sql:qry_usr_qz,nestTables: true};
 
     		conn.query(options, function(err, projects, fields){
@@ -746,6 +746,23 @@ exports.saveAppointment = function(req,res,next){
 									}
 								});
 
+								console.log(req.user.username);
+
+								if(apptData.email.toLowerCase() != req.user.username.toLowerCase()){
+									var updUserData = [apptData.email, req.user.id];
+									conn.query('update user set email = ? where id= ?', updUserData, function(err, results, fields){
+									if(err){
+										console.log('Error in updating user email info '+err);
+										//conn.release();
+										//return res.send({success: false, reason:err.toString()});
+									}
+									// else{
+									// 	return res.send({success:true});	
+									// }
+								});
+
+								}
+
 	    					}
 						});
 					}
@@ -780,6 +797,25 @@ exports.saveAppointment = function(req,res,next){
 		    					return res.send({success: true});
 	    					}
 						});
+
+						console.log(req.user.username);
+
+								if(apptData.email.toLowerCase() != req.user.username.toLowerCase()){
+									var updUserData = [apptData.email, req.user.id];
+									conn.query('update user set email = ? where id= ?', updUserData, function(err, results, fields){
+									if(err){
+										console.log('Error in updating user email info '+err);
+										//conn.release();
+										//return res.send({success: false, reason:err.toString()});
+									}
+									// else{
+									// 	return res.send({success:true});	
+									// }
+								});
+
+								}
+
+
 					}
 
 
@@ -817,6 +853,22 @@ exports.saveAppointment = function(req,res,next){
 						}
 					
 					});
+					console.log(req.user.username);
+
+								if(apptData.email.toLowerCase() != req.user.username.toLowerCase()){
+									var updUserData = [apptData.email, req.user.id];
+									conn.query('update user set email = ? where id= ?', updUserData, function(err, results, fields){
+									if(err){
+										console.log('Error in updating user email info '+err);
+										//conn.release();
+										//return res.send({success: false, reason:err.toString()});
+									}
+									// else{
+									// 	return res.send({success:true});	
+									// }
+								});
+
+								}
 				}
 			});
     	}
