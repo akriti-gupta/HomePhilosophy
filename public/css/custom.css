@@ -1299,36 +1299,22 @@ margin-bottom: 0px;
 .slick-next:before{
   content: '>';
 }
-/* */
 
 .portfolio-information {
     padding: 0px 0px 25px;
-    /*max-width: 1100px;
-    width: 90%;*/
     margin: 0px auto;
-    /*display: flex;*/
-    /*height: 170px;*/
     background-color: #fff;
 }
-
-
 .portfolio-information .stats {
     border-right: solid 1px #1C2233;
     color: #1C2233;
-    /*display: flex;
-    flex-flow: column;
-    flex: 1 0 auto;
-    */font-family: OpenSans-Regular;
+    font-family: OpenSans-Regular;
     font-size: 16px;
     padding: 0px 20px;
     text-align: right;
     white-space: nowrap;
 }
 .portfolio-information .comment {
-    /*padding: 0px 30px;*/
-   /* display: flex;*/
-    /*align-items: center;
-    justify-content: center;*/
     font-family: OpenSans-Regular;
     font-size: 16px;
     position: relative;
@@ -1345,21 +1331,17 @@ padding:40px 0px 60px;font-size:22px;margin:0;font-family:PlayfairDisplay-Regula
 /* About Us */
 #about-banner{
   height:650px;
-  /*height:680px;*/
   background-image:url('/images/aboutBg.png');
   background-size: cover;
-  /*background-position: 0 -20px;*/
   position: relative;
   background-repeat:no-repeat;
 }
 .about-rect{
   position: relative;
-  /*top: 80px;*/
   top: 15%;
   margin: 0 auto;
   background-color: #fff;
   opacity: 0.85;
-  /*height: 80%;*/
   text-align: center;
   width: 70%;
   
@@ -1377,7 +1359,6 @@ padding:40px 0px 60px;font-size:22px;margin:0;font-family:PlayfairDisplay-Regula
   padding-right: 60px;
 }
 .about-maintext1{
-  /*font-size:28px;*/
   font-size:calc(100% + 1vw);
   padding-left:0px;
   padding-right: 0px;
@@ -1387,15 +1368,10 @@ padding:40px 0px 60px;font-size:22px;margin:0;font-family:PlayfairDisplay-Regula
   margin: 0 auto;
   padding-top:5%;
   padding-bottom: 5%;
-  /*padding-top: 60px;
-  padding-bottom: 60px;
-  max-width: 710px; */
 }
 .about-title{
-  /*font-size: 15px;*/
   font-size: 1.1vw;
   font-family: Montserrat-Regular;
-  /*padding-bottom: 20px;*/
   letter-spacing: 1px;
   margin-bottom:0px;
 }
@@ -1413,7 +1389,6 @@ padding:40px 0px 60px;font-size:22px;margin:0;font-family:PlayfairDisplay-Regula
   width:80%;
   margin: 0 auto;
   background-color: #fff;
-  /*height: 1600px;*/
   min-height: 920px;
 }
 

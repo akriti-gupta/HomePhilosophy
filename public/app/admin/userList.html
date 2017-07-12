@@ -6,24 +6,27 @@
       
       <li><a href="/style-quiz" id="start-quiz"><button type="button" class="btn-start-quiz btn-topnav  fs-14px">GET STARTED</button></a></li>
       
-      <li><a href="/about-us">How it works</a></li>
+      <li><a href="/how-it-works">How it works</a></li>
       <li><a href="/pricing">Pricing</a></li>
       <li><a href="/portfolio" id="portfolio-link">Portfolio</a></li>
-      <li><a href="/luxury-spaces">Luxury spaces</a></li>
+      <li><a href="/about-us">About Us</a></li>
       <li><a href="/faq">FAQ</a></li>
       <li><a href="/contact-us">Contact us</a></li>
       <li>
         <div ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
           <a href = "/login">SIGN IN</a>
         </div>
-    <div class="dropdown" ng-controller="LoginController" ng-show="identity.isAuthenticated()">
-          <a href="/admin/users" ng-if="identity.currentUser.role==='admin'">MY ACCOUNT</a>
-          <a href="/dashboard" ng-if="identity.currentUser.role!='admin'">MY ACCOUNT</a>
-      <span class="caret nav-dropdown"  data-toggle="dropdown"></span>
+      <div class="dropdown" ng-controller="LoginController" ng-show="identity.isAuthenticated()" >
+          <a href="#" data-toggle="dropdown">MY ACCOUNT
+          <span class="caret nav-dropdown"></span></a>
           <ul class="dropdown-menu" style="min-width:0px;">
-            <li style="padding:0px;margin:0;"><a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a></li>
+              <li style="padding:0px;margin:0;">
+                <a href="/admin/users" ng-if="identity.currentUser.role==='admin'" style="font-family:Montserrat-Regular;font-size:13px;">MY PROJECTS</a>
+                <a href="/dashboard" ng-if="identity.currentUser.role!='admin'" style="font-family:Montserrat-Regular;font-size:13px;">MY PROJECTS</a>
+              </li>
+              <li style="padding:0px;margin:0;"><a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a></li>
           </ul>
-        </div>
+      </div>
       </li>
 
       <li style="padding-top:8px;">

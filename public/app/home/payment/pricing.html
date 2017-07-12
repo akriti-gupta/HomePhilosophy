@@ -1,4 +1,4 @@
-<header id="site_header" ng-hide="showTitle">
+<header id="site_header">
   <a href="/"><div class="hp-logo"></div></a>
 
   <div id="hp-nav">
@@ -6,10 +6,10 @@
       
       <li><a href="/style-quiz" id="start-quiz"><button type="button" class="btn-start-quiz btn-topnav  fs-14px">GET STARTED</button></a></li>
       
-      <li><a href="/about-us">How it works</a></li>
+      <li><a href="/how-it-works">How it works</a></li>
       <li><a href="/pricing">Pricing</a></li>
       <li><a href="/portfolio" id="portfolio-link">Portfolio</a></li>
-      <li><a href="/luxury-spaces">Luxury spaces</a></li>
+      <li><a href="/about-us">About Us</a></li>
       <li><a href="/faq">FAQ</a></li>
       <li><a href="/contact-us">Contact us</a></li>
       <li>
@@ -34,8 +34,8 @@
       </li>
 
        <li style="padding-top:8px;">
-        <div ng-controller="LoginController" ng-show="identity.isAuthenticated()">
-          <a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a>
+       	<div ng-controller="LoginController" ng-show="identity.isAuthenticated()">
+        	<a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a>
         </div>
       </li>
 
@@ -60,7 +60,7 @@
           <li ng-controller="LoginController" ng-show="identity.isAuthenticated() && identity.currentUser.isAdmin()"><a href="/admin/users">My Account </a></li>
           <li ng-controller="LoginController" ng-show="identity.isAuthenticated() && !(identity.currentUser.isAdmin())"><a href="/dashboard">My Account </a></li>
 
-          <li ><a href="/about-us">How it works</a></li>
+          <li ><a href="/how-it-works">How it works</a></li>
           <li style="margin-bottom:35px;"><a href="/contact-us">Contact us</a></li>
           
         </ul>
@@ -115,100 +115,66 @@
 	</div>
 </div>
 
-
-	<script type="text/javascript">
-
-	$('.concept-center').slick({  
-	  lazyLoad: 'progressive',
-	  infinite: false,
-	  dots: false,
-	  // variableWidth: true,
-
-	  
-	  responsive: [
-	    {
-	      breakpoint: 1000,
-	      settings: {
-	        focusOnSelect: false
-	      }
-	    }
-	  ]
-	});
-
-
-	</script>
-
-	<div class="modal" id="firstLookModal" 
-						aria-labelledby="firstLookModal">
-		<!-- <div class="modal-dialog" style="max-width:690px;"> -->
-		<div class="modal-dialog">
-        	<div class="modal-content">
-				<div class="modal-body">
-					<div class="content">
-  						<div class="concept-center">
-    						<div>
-      							<div class="slide"><img data-lazy="images/conceptBoard1.png" width="100%"/></div>
-    						</div>
-
-    						<div>
-      							<div class="slide"><img data-lazy="images/conceptBoard2.png" width="100%"/></div>
-        					</div>
-						</div>
-    				</div>
+<div class="modal" id="firstLookModal" aria-labelledby="firstLookModal">
+	<div class="modal-dialog">
+    	<div class="modal-content">
+			<div class="modal-body">
+				<div class="content">
+					<div style="display:flex;">
+						<div style="margin:10px;"><img src="images/conceptBoard1.png" width="100%"/></div>
+						<div style="margin:10px;"><img src="images/conceptBoard2.png" width="100%"/></div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 
-	<div ng-show="showTitle" class="divider" style="border-top:2px solid #e1e1e1;padding:0px;"></div>
-
-
-
-<!-- <div style="background-color:#e0dfdf;"> -->	<!-- #d0cdcd -->
-	<div class="prg-dtl-ctr" ng-show="showTitle">
-		<div class="prg-wrp">
-			<div class="progress-result">
-			    <div class="resprg-one  no-color prg-stp-txt" ng-style="{'background': resPrgCol2}">1</div>
-			    <div class="resprg-two primary-color prg-stp-txt">2</div>
-			    <div class="resprg-three no-color prg-stp-txt" ng-style="{'background': resPrgCol2}">3</div>
-			    <div class="resprg-four no-color prg-stp-txt" ng-style="{'background': resPrgCol2}">4</div>
-			    <div class="resprg-five no-color prg-stp-txt" ng-style="{'background': resPrgCol2}">5</div>
-<!-- 
-			    <div class="step-one no-color">1</div>
-			    <div class="step-two primary-color">2</div>
-			    <div class="step-three no-color">3</div>
-			    <div class="step-four no-color">4</div>
-			    <div class="step-five no-color">5</div> -->
-
-			    <div class="row" style="width:100%;">
-			    	
-					    <div class="resprg-lbl-one">Style Quiz</div>
-					    <div class="resprg-lbl-two">Choose a Package</div>
-					    <div class="resprg-lbl-three">Payment</div>
-					    <div class="resprg-lbl-four">Tell Us More</div>
-					    <div class="resprg-lbl-five">Launch Project</div>
-					 
+<div class="modal" id="premConceptModal" aria-labelledby="premConceptModal">
+	<div class="modal-dialog">
+    	<div class="modal-content">
+			<div class="modal-body">
+				<div class="content">
+					<div style="display:flex;">
+						<div style="margin:10px;"><img src="images/conceptBoard1.png" width="100%"/></div>
+						<div style="margin:10px;"><img src="images/conceptBoard2.png" width="100%"/></div>
+					</div>
+					<div style="width:120px;height:120px;margin:0 auto;padding:20px 0px;background-color:grey;color:#fff;font-size:60px;text-align:center;">+</div>
 				</div>
-		  	</div>
+			</div>
 		</div>
 	</div>
-<!-- </div> -->
+</div>
+
+<div ng-show="showTitle" class="divider" style="border-top:2px solid #e1e1e1;padding:0px;">
+</div>
+<div class="prg-dtl-ctr" ng-show="showTitle">
+	<div class="prg-wrp">
+		<div class="progress-result">
+		    <div class="resprg-one  no-color prg-stp-txt" ng-style="{'background': resPrgCol2}">1</div>
+		    <div class="resprg-two primary-color prg-stp-txt">2</div>
+		    <div class="resprg-three no-color prg-stp-txt" ng-style="{'background': resPrgCol2}">3</div>
+		    <div class="resprg-four no-color prg-stp-txt" ng-style="{'background': resPrgCol2}">4</div>
+		    <div class="resprg-five no-color prg-stp-txt" ng-style="{'background': resPrgCol2}">5</div>
+
+		    <div class="row" style="width:100%;">
+			    <div class="resprg-lbl-one">Style Quiz</div>
+			    <div class="resprg-lbl-two">Choose a Package</div>
+			    <div class="resprg-lbl-three">Payment</div>
+			    <div class="resprg-lbl-four">Tell Us More</div>
+			    <div class="resprg-lbl-five">Launch Project</div>
+			</div>
+	  	</div>
+	</div>
+</div>
 
 <div id="pricing-section" bg-image ng-init="initPayment()">
-	
-	
-<!-- <div style="background-color: #f5f5f5;width:90%;margin:0 auto;"> -->
-<div>
-	<p style="padding-top: 50px;font-size: 28px;text-transform: uppercase;font-family:PlayfairDisplay-Regular;letter-spacing: 3px;" ng-show="showTitle">  Please select your Package </p>
+	<div>
+		<p style="padding-top: 50px;font-size: 28px;text-transform: uppercase;font-family:PlayfairDisplay-Regular;letter-spacing: 3px;" ng-show="showTitle">  Please select your Package </p>
 
-	 <div class=" pricing-footnote fs-16px font-sansBold" style="position:inherit;bottom:inherit;padding: 10px 5px 0px;" ng-show="showTitle">
-  		<p> All our designs are tailor-made to your space. Every package also includes complimentary consultation, measurement of your room/s and multiple feedback sessions with your designer.</p>
-  	</div>
-  
-
-
-
-
+		 <div class=" pricing-footnote fs-16px font-sansBold" style="position:inherit;bottom:inherit;padding: 10px 5px 0px;" ng-show="showTitle">
+	  		<p> All our designs are tailor-made to your space. Every package also includes complimentary consultation, measurement of your room/s and multiple feedback sessions with your designer.</p>
+	  	</div>
 		<p style ="padding-top:50px;" ng-show="!showTitle"></p>
 	  	<div class="flex-ctr pricing-ctr">
 	  		<div class="flex-child" style="background-color:#fff;height:35%;opacity:0.95;">
@@ -244,7 +210,7 @@
 			  	<p class="pkg-title"> PREMIUM</p>
 			  	<p class="pkg-desc pkg-divider">for a complete overhaul</p>
 			  	<p class="pkg-price pkg-divider"> 1000<span class="price-dollar"><sup>$</sup></span></p>
-			  	<p class="pkg-item pkg-divider"><span style="font-size:22px;">3 </span>First look concept boards</p>
+			  	<p class="pkg-item pkg-divider"><a href="#" data-toggle="modal" data-target="#premConceptModal"><span style="font-size:22px;">3 </span>First look concept boards</a></p>
 			  	<p class="pkg-item pkg-divider"><a href="#" data-toggle="modal" data-target="#finalLookModal">Final look 2-D room board</a></p>
 			  	<p class="pkg-item pkg-divider"><a href="#" data-toggle="modal" data-target="#shoppingListModal">Personalized shopping list</a></p>
 			  	<p class="pkg-item pkg-divider"><a href="#" data-toggle="modal" data-target="#furnLayoutModal">Furniture layout plan</a></p>
@@ -273,12 +239,11 @@
 			  	<p><a href="#" ng-click = "savePayPkg(4)"><button type="submit" class="btn-select-pkg">SELECT</button></a></p>
 			  	<div style="padding-bottom:30px;"></div>
 			</div>
-	  </div>
-	  
-	  <div class="pricing-footnote fs-16px font-sansBold" ng-show="!showTitle">
-	  
-	  	<p> All our designs are tailor-made to your space. Every package also includes complimentary consultation, measurement of your room/s and multiple feedback sessions with your designer.</p>
-	  </div>
+	  	</div>
+  
+		<div class="pricing-footnote fs-16px font-sansBold" ng-show="!showTitle">
+			<p> All our designs are tailor-made to your space. Every package also includes complimentary consultation, measurement of your room/s and multiple feedback sessions with your designer.</p>
+		</div>
 	</div>
 </div>
 
@@ -333,7 +298,7 @@
 	  	
 	  	<p class="pkg-desc pkg-divider">for a complete overhaul</p>
 	  	<p class="pkg-price pkg-divider"> 1000<span class="price-dollar"><sup>$</sup></span></p>
-	  	<p class="pkg-item pkg-divider"> <span style="font-size:22px;"> 3 </span>First look concept boards</p>
+	  	<p class="pkg-item pkg-divider"> <a href="#" data-toggle="modal" data-target="#premConceptModal"><span style="font-size:22px;"> 3 </span>First look concept boards</a></p>
 	  	<p class="pkg-item pkg-divider"> <a href="#" data-toggle="modal" data-target="#finalLookModal">Final look 2-D room board</a></p>
 	  	<p class="pkg-item pkg-divider"><a href="#" data-toggle="modal" data-target="#shoppingListModal">Personalized shopping list</a></p>
 	  	<p class="pkg-item pkg-divider"><a href="#" data-toggle="modal" data-target="#furnLayoutModal">Furniture layout plan</a></p>
