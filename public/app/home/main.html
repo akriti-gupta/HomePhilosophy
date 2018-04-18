@@ -1,0 +1,299 @@
+<header id="site_header">
+  <a href="/"><div class="hp-logo"></div></a>
+
+  <div id="hp-nav">
+    <ul class="topnav">
+      
+      <li><a href="/style-quiz" id="start-quiz"><button type="button" class="btn-start-quiz btn-topnav  fs-14px">GET STARTED</button></a></li>
+      
+      <li><a href="/how-it-works">How it works</a></li>
+      <li><a href="/pricing">Pricing</a></li>
+      <li><a href="/portfolio" id="portfolio-link">Portfolio</a></li>
+      <li><a href="/about-us">About Us</a></li>
+      <li><a href="/faq">FAQ</a></li>
+      <li><a href="/contact-us">Contact us</a></li>
+      <li>
+        <div ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
+          <a href = "/login">SIGN IN</a>
+        </div>
+	    <div class="dropdown" ng-controller="LoginController" ng-show="identity.isAuthenticated()" >
+	        <a href="#" data-toggle="dropdown">MY ACCOUNT
+	      	<span class="caret nav-dropdown"></span></a>
+	      	<ul class="dropdown-menu" style="min-width:0px;">
+	          	<li style="padding:0px;margin:0;">
+	          		<a href="/admin/users" ng-if="identity.currentUser.role==='admin'" style="font-family:Montserrat-Regular;font-size:13px;">MY PROJECTS</a>
+	          	 	<a href="/dashboard" ng-if="identity.currentUser.role!='admin'" style="font-family:Montserrat-Regular;font-size:13px;">MY PROJECTS</a>
+	          	</li>
+	            <li style="padding:0px;margin:0;"><a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a></li>
+	        </ul>
+	    </div>
+      </li>
+
+      <li style="padding-top:8px;">
+        <a href="/style-quiz" id="start-quiz"><button type="button" class="btn-start-quiz btn-topnav font-montserrat txt-upper col-lightcyan fs-14px">Get Started</button></a>
+      </li>
+
+       <li style="padding-top:8px;">
+       	<div ng-controller="LoginController" ng-show="identity.isAuthenticated()">
+        	<a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a>
+        </div>
+      </li>
+
+    </ul>
+
+    <div class="tab_icon">
+        <a href="javascript:void(0);" onclick="displayDropDown()">&#9776;</a>
+    </div>
+  </div>
+</header>
+
+
+<section id="hero">
+	<div class="hero-rect">
+		<div class="container-ctr-txt">
+			<p class="exp-maintext">
+				we create <span class="col-inspiring">inspiring </span>
+				customized living spaces
+			</p>
+			<p class="exp-subtext">Personalized interior design - anytime, anywhere.</p>
+		</div>
+
+		<div class="btn-container btn-getStarted">
+			<a href="/style-quiz" id="start-quiz">
+				<button type="button" class="btn-start-quiz font-montserrat txt-upper col-lightcyan btn-hero">Get Started</button>
+			</a>
+		</div> 
+	</div>
+</section>
+
+ <div class="modal" id="shoppingListModal" tabindex="-1" role="dialog" aria-labelledby="shoppingListModal" >
+
+      <div class="modal-dialog modal-shpList" role="document" >
+        <div class="modal-content">
+          <div class="modal-header" style="border:none;"></div>
+          <div class="modal-body">
+            <div style="position:relative;width:99%;margin:0 auto;">
+            
+              <img src="images/sampleShpngList.png" width="100%">
+            </div>
+          </div>
+          <div class="modal-footer" id="img-credit" style="border:none;"></div>
+        </div>
+      </div>
+    </div>
+
+
+	<script type="text/javascript">
+
+	$('.concept-center').slick({  
+	  lazyLoad: 'progressive',
+	  infinite: false,
+	  dots: false,
+	  // variableWidth: true,
+
+	  
+	  responsive: [
+	    {
+	      breakpoint: 1000,
+	      settings: {
+	        focusOnSelect: false
+	      }
+	    }
+	  ]
+	});
+
+
+	</script>
+
+	<div class="modal" id="firstLookModal" 
+						aria-labelledby="firstLookModal">
+		<div class="modal-dialog">
+        	<div class="modal-content">
+				<div class="modal-body">
+					<div class="content">
+  						<div class="concept-center">
+    						<div>
+      							<div class="slide"><img data-lazy="images/firstLooks/3.jpg" width="100%"/></div>
+    						</div>
+
+    						<div>
+      							<div class="slide"><img data-lazy="images/firstLooks/scandi.jpg" width="100%"/></div>
+        					</div>
+						</div>
+    				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+<section id="hp_experience">
+	<div>
+		<p class="stp-head-maintxt" style="padding-bottom:2px;color:rgb(70, 70, 70);">The Home Philosophy Experience</p>
+	</div>
+
+	<p class="stp-main-subtxt1">We make designing your home affordable, convenient and personal. </p>
+	<p class="stp-main-subtxt">With the best furniture from around town, we help you visualize and transform your space in just a few weeks.</p>
+	<p class="stp-media-subtxt1">We visualize and transform your space in just a few weeks with the best furniture from around town.</p>
+
+	<div class="step_wrapper">
+		<div class="hp_workflow font-montserrat col-lightcyan">
+			<div style="position:relative;top:-30px;">STEP 1</div>
+			<div id="step1" class="hp_workflow_content">
+				<div class="mask"></div>
+		  		<div class="step_icon">
+						<img src="images/like1.png" class="img-steps"/>
+				</div>
+				<div class="font-montserrat step-title-main">
+					Find your style effortlessly
+				</div>
+				<div class="step-txt-main">
+					<span style="font-size: 14px;color: rgb(85, 85, 85);font-style:italic;">with our</span>
+
+					<p style="padding-top:10px;"> <a href="/style-quiz" style="color:rgb(0, 134, 125);">Style Quiz</a></p>
+
+				</div>
+			</div>
+		</div>
+
+		<div class="hp_workflow font-montserrat col-lightcyan">
+			<div style="position:relative;top:-30px;">STEP 2</div>
+			<div id="step2" class="hp_workflow_content">
+				<div class="mask"></div>
+				<div class="step_icon">
+					<img src="images/measure1.png" class="img-steps" />
+				</div> 
+				<div class="font-montserrat step-title-main">
+					We meet, measure your space and design
+				</div>
+				<div class="step-txt-main">
+					<span style="font-size: 14px;color: rgb(85, 85, 85);font-style:italic;">with our</span>
+					<p style="padding-top:10px;"><a href="/style-quiz"  style="color:rgb(0, 134, 125);">Online Experience </a></p>
+				</div>
+			</div>
+		</div>
+		
+		<div class="hp_workflow font-montserrat col-lightcyan">
+			<div style="position:relative;top:-30px;">STEP 3</div>
+			<div id="step3" class="hp_workflow_content">
+				<div class="mask"></div>
+				<div class="step_icon">
+					<img src="images/designs1.png" class="img-steps" />
+				</div>  
+				<div class="font-montserrat step-title-main" style="width:240px;">
+					<!-- Receive your newly designed space -->
+					See your new space with real items that fit perfectly
+				</div>
+				<div class="step-txt-main">
+					<span style="font-size: 14px;color: rgb(85, 85, 85);font-style:italic;">with our </span>
+					<p style="padding-top:10px;"> <a href="#" data-toggle="modal" data-target="#firstLookModal"
+					style="color:rgb(0, 134, 125);">Concept Boards</a></p>
+				</div>
+			</div>
+		</div>
+	
+		<div class="hp_workflow font-montserrat col-lightcyan">
+			<div style="position:relative;top:-30px;">STEP 4</div>
+			<div id="step4" class="hp_workflow_content">
+				<div class="mask"></div>
+				<div class="step_icon">
+					<img src="images/shoppingList.png" class="img-steps" />
+				</div>  
+				<div class="font-montserrat step-title-main" style="width:240px;">
+					Receive your final look, layout and shop with ease
+				</div>
+				<div class="step-txt-main">
+					<span style="font-size: 14px;color: rgb(85, 85, 85);font-style:italic;">with our</span>
+					<p style="padding-top:10px;"> <a href="#" data-toggle="modal" data-target="#shoppingListModal"
+					style="color:rgb(0, 134, 125);">Shopping List</a></p>
+					
+				</div>
+			</div>
+		</div> 
+	</div>
+	<p class="fs-16px font-sansRegular txt-center" style="padding:0px 10px;color:rgb(85,85,85);">
+		Doing a full renovation? Let's chat over coffee for us to understand your ideas and provide a custom quote &nbsp;<a href="mailto:hello@homephilosophy.com.sg" style="padding-left:-3px;""><img src="images/email_home.png" style="margin-top:-4px;margin-left:-1px;"/></a>
+	</p>
+</section>
+
+<div class="section-divider"><span>Recent Designs</span></div>
+
+<section id = "recent-designs">
+	
+	 
+	<p class="col-lightgreen font-sansRegular fs-16px txt-center">We work with projects of all shapes and sizes.</p>
+	<p class="col-lightgreen font-sansRegular fs-16px txt-center">Why? Because our philosophy is that every home deserves to be beautifully designed.</p>
+
+	<div class="gallery">
+		<div class="design" data-img-id="6">
+		 	<a href="/portfolio">
+				<div class="text fs-20px">
+					<div>New Take on Classics</div>
+				</div>
+				<img ng-src="images/gallery1.png" width="100%" height="100%"/> 
+			</a>
+		</div>
+
+		<div class="design" data-img-id="3">
+			<a href="/portfolio">
+				<!-- <div class="text-border"></div> -->
+				<div class="text fs-20px">
+					<div>Layering with Textures</div>
+				</div>
+				<img ng-src="images/gallery2.png" width="100%" height="100%"/> 
+			</a>
+		</div>
+
+		<div class="design" data-img-id="1">
+			<a href="/portfolio">
+				<!-- 	<div class="text-border"></div> -->
+				<div class="text fs-20px">
+					<div>Floral Elegance</div>
+				</div>
+				<img ng-src="images/gallery3.png" width="100%" height="100%"/> 
+			</a>
+		</div>
+
+
+
+		<div class="design" data-img-id="0">
+			<a href="/portfolio">
+			<!-- 	<div class="text-border"></div> -->
+				<div class="text fs-20px">
+					<div>Contemporary Cool</div>
+				</div>
+				<img ng-src="images/gallery4.png" width="100%" height="100%"/> 
+			</a>
+		</div>
+
+		<div class="design" data-img-id="7">
+			<a href="/portfolio">
+				<!-- <div class="text-border"></div> -->
+				<div class="text fs-20px">
+					<div>Bright Crisp Neutrals</div>
+				</div>
+				<img ng-src="images/gallery5.png" width="100%" height="100%"/> 
+			</a>
+		</div>
+
+		<div class="design" data-img-id="4">
+			<a href="/portfolio">
+			<!-- 	<div class="text-border"></div> -->
+				<div class="text fs-20px">
+					<div>Modern Made Bold</div>
+				</div>
+				<img ng-src="images/gallery6.png" width="100%" height="100%"/> 
+			</a>
+		</div>
+
+		<p  class="font-sansRegular fs-20px txt-upper" style="padding-top:30px;">
+			<a id="view-gallery" href="/portfolio"> VIEW MORE WORK</a>
+		</p>
+	</div>
+</section>
+
+<div class="section-divider">
+		 <span><a href="/contact-us">Get In Touch!</a></span>
+</div>
+
+			

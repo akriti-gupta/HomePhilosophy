@@ -1,0 +1,220 @@
+<header id="site_header">
+  <a href="/"><div class="hp-logo"></div></a>
+
+  <div id="hp-nav">
+    <ul class="topnav">
+      
+      <li><a href="/style-quiz" id="start-quiz"><button type="button" class="btn-start-quiz btn-topnav  fs-14px">GET STARTED</button></a></li>
+      
+      <li><a href="/how-it-works">How it works</a></li>
+      <li><a href="/pricing">Pricing</a></li>
+      <li><a href="/portfolio" id="portfolio-link">Portfolio</a></li>
+      <li><a href="/about-us">About Us</a></li>
+      <li><a href="/faq">FAQ</a></li>
+      <li><a href="/contact-us">Contact us</a></li>
+      <li>
+        <div ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
+          <a href = "/login">SIGN IN</a>
+        </div>
+      <div class="dropdown" ng-controller="LoginController" ng-show="identity.isAuthenticated()" >
+          <a href="#" data-toggle="dropdown">MY ACCOUNT
+          <span class="caret nav-dropdown"></span></a>
+          <ul class="dropdown-menu" style="min-width:0px;">
+              <li style="padding:0px;margin:0;">
+                <a href="/admin/users" ng-if="identity.currentUser.role==='admin'" style="font-family:Montserrat-Regular;font-size:13px;">MY PROJECTS</a>
+                <a href="/dashboard" ng-if="identity.currentUser.role!='admin'" style="font-family:Montserrat-Regular;font-size:13px;">MY PROJECTS</a>
+              </li>
+              <li style="padding:0px;margin:0;"><a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a></li>
+          </ul>
+      </div>
+      </li>
+
+      <li style="padding-top:8px;">
+        <a href="/style-quiz" id="start-quiz"><button type="button" class="btn-start-quiz btn-topnav font-montserrat txt-upper col-lightcyan fs-14px">Get Started</button></a>
+      </li>
+
+       <li style="padding-top:8px;">
+        <div ng-controller="LoginController" ng-show="identity.isAuthenticated()">
+          <a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a>
+        </div>
+      </li>
+
+    </ul>
+
+    <div class="tab_icon">
+        <a href="javascript:void(0);" onclick="displayDropDown()">&#9776;</a>
+    </div>
+  </div>
+</header>
+
+<div class="modal" id="firstLookModal" 
+						aria-labelledby="firstLookModal">
+		<!-- <div class="modal-dialog" style="max-width:690px;"> -->
+		<div class="modal-dialog">
+        	<div class="modal-content">
+				<div class="modal-body">
+					<div class="content">
+  						<div class="concept-center">
+    						<div>
+      							<div class="slide"><img data-lazy="images/firstLooks/3.jpg" width="100%"/></div>
+    						</div>
+
+    						<div>
+      							<div class="slide"><img data-lazy="images/firstLooks/scandi.jpg" width="100%"/></div>
+        					</div>
+						</div>
+    				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<script>
+$('.concept-center').slick({  
+	  lazyLoad: 'progressive',
+	  infinite: false,
+	  
+	  dots: false,
+	  // variableWidth: true,
+
+	  
+	  responsive: [
+	    {
+	      breakpoint: 1000,
+	      settings: {
+	        focusOnSelect: false
+	      }
+	    }
+	  ]
+	});
+
+
+</script>
+
+<section style="background-color:#f9f9f9;">
+<div class="faq-ctr">
+  <div style="margin-bottom:20px;"><b><u>ABOUT THE EXPERIENCE</u></b></div>
+    <button class="accordion">What is a First look? What does a 2D Board look like?</button>
+    <div class="faq">
+      <span>A <a href="#">First Look</a> is a customized concept board with real life items that suit your space, style and fit your budget. It provides you a 2D insight into how the space will look with all individual items together, all measured to fit accurately into your home. You can view these boards at anytime via your account.<br/><a href="#" data-toggle="modal" data-target="#firstLookModal"><u>Here's what your 2D room board will look like!</u></a></span>
+    </div>
+    <button class="accordion">How long will my project take?</button>
+    <div class="faq">
+      <span>You can have your new place ready in as quick as 2 weeks! It all depends on how quickly and detailed your feedback to us is.<br/><br/>
+      We endeavor to propose items that are in stock, or available within a few weeks. However, if you have a time crunch- let us know in advance so we can tailor our solutions accordingly. <br/><br/>
+
+      The availability of products will be indicated on your Shopping List, so we suggest snapping them up quickly to avoid disappointment in case stock changes.<br/><br/>
+
+      If you have chosen the option of a Buy For Me, we will inform you the approximate delivery time we receive from vendors. Please do note delivery is dependant on individual vendors and completely outside of our control. </span>
+    </div>
+
+    <button class="accordion">Why do you only provide a shopping list?</button>
+    <div class="faq">
+      <span>We understand the importance of seeing furniture in real life, before buying; after all no two butts feel the same on a sofa! With our curated shopping list you simply go to the stores, make sure you love our picks, and buy only what you want.<br/><br/>No more confusing trips poring over your floor plans and the furniture measurements!</span>
+    </div>
+
+    <button class="accordion">How does the Meet and Measure work?</button>
+    <div class="faq">
+      <span>Through your account, once payment is made, we provide you a calendar option to schedule a meeting at your new place. During which, apart from taking measurements and making notes of your space, we also have a quick chat about any specific preferences you may have for the design of your space.<br/>Our meeting will typically be between 15-30 minutes depending on the size and number of rooms we are transforming! 
+      </span>
+    </div>
+
+  <button class="accordion">How does Buy For Me work?</button>
+  <div class="faq">
+    <span>We want designing your home to be a hassle-free experience! So if you are happy with our concept boards, simply click this option at checkout and leave the rest to us. For a small fee, we handle all the coordination of purchase, delivery and setup. 
+
+  <br/><br/>Time to celebrate your move-in ready home!</span>
+  </div>
+  </div>
+</section>
+
+<section style="background-color:#f9f9f9;padding-bottom:40px;">
+<div class="faq-ctr">
+  <div style="margin-bottom:20px;"><b><u>ABOUT THE SERVICE</u></b></div>
+  
+  <button class="accordion">Where do you buy my furniture from?</button>
+    <div class="faq">
+      <span>Home Philosophy does not work with preferred vendors- we source pieces from all over town. Right from Ikea to local shops and online retailers; we even get first dibs at awesome pieces during furniture fairs.<br/><br/>Our goal is to tirelessly scour the city for the best furniture to fit your style and budget.
+    </span>
+    </div>
+
+  <button class="accordion">Who is designing my home?</button>
+  <div class="faq">
+    <span>Home Philosophy is a team of talented interior designers who are professionally trained and with a combined experience of over 10 years. We believe that having a beautiful home shouldn’t be complicated- so we’ve simplified the process to make it stress-free without compromising on the personalization. <br/><br/>
+
+  We are excited to meet you before starting on your project, and always available via phone or email!
+  </span>
+  </div>
+
+  <button class="accordion">What does Accessories Selection include?</button>
+  <div class="faq">
+    <span>Accessories can totally make or break a space, so we spend a great deal of time finding little additions that complete your room. These could include a fabulous rug, cool shelves, lampshades, curtains, posters- basically the icing on the cake.
+  </span>
+  </div>
+
+  <button class="accordion"> Can you provide full renovation services?</button>
+  <div class="faq">
+    <span>Yes! We work with our certified contractors and do everything from space planning to furniture selection. Please choose the Custom package during checkout, and we will get back to you with some additional questions in order to provide you with a quote.
+  </span>
+  </div>
+
+  <button class="accordion"> I need a few extra tweaks to my place, can you help?</button>
+  <div class="faq">
+    <span>Of course! Drop us an email directly at anytime and we can add in any extras you may need. Everything from rewiring for new lighting to new curtains or simply saving a favourite chair by reupholstering- it can all be done :)</span>
+  </div>
+</div>
+</section>
+
+<section style="background-color:#f9f9f9;padding-bottom:40px;">
+<div class="faq-ctr"><div style="margin-bottom:20px;"><b><u>PAYMENT &amp; OTHERS</u></b></div>
+<button class="accordion">What will my project cost?</button>
+<div class="faq">
+  <span>We work within the budget you have indicated, but may propose additional items that we feel would make your place more amazing. For any extra works (electrical, plumbing etc) involving third party vendors, we would be happy to share details of our trusty contacts for you to liaise directly.
+<br/><br/>
+Our one-time flat design fee is fully transparent, so your budget is spent entirely on your home!
+</span>
+</div>
+
+<button class="accordion">How and when do I pay?</button>
+<div class="faq">
+  <span>All payments for the packages are made during checkout, once we have all the necessary details from you. You can simply pay via secure credit card payment online.
+</span>
+</div>
+
+
+
+
+
+<button class="accordion">I’m moving to Singapore soon, but don’t live there yet. Can I still have you design my home?
+</button>
+<div class="faq">
+  <span>Absolutely! The best thing about Home Philosophy is that we do almost all the work online- so you can approve everything virtually. We will coordinate the measurements of your new place using a to-scale floorplan.
+<br/><br/>
+For a hassle-free experience, choose ‘Buy For Me’ at checkout and your new place will be move-in ready as soon as you arrive. 
+</span>
+</div>
+
+<button class="accordion">  Do you work on rental homes?</button>
+<div class="faq">
+  <span>We know how amazing a home can look with just a few great furniture pieces and accessories to create warmth and style. Leave your new rental in our experienced hands to transform, and we promise a place to call home without the worry about expensive furniture and changes. <br/>
+  You can simply upload your floor plan or schedule a meet and measure with your property agent and us.
+</span>
+</div>
+
+<button class="accordion">What if I don't like any of the 'first looks'?</button>
+<div class="faq">
+  <span>We are sorry to hear this! In case you feel we didn’t quite understand you right the first time, please be extremely specific during the feedback session so we can find just what’s right for the final look. You should include details of colours, specific items, materials and reference images if possible. <br/><br/>
+
+While we are limited to items available to us locally, we will strive to find things you will love. <br/><br/>
+
+Please <a href="#">contact us</a> with any concerns and we would be more than happy to help!
+
+</span>
+</div>
+
+
+</div>
+</section>
+
+<div class="divider" style="border-top:2px solid rgb(47, 185, 175);"></div>
+      

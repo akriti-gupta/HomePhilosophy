@@ -1,0 +1,77 @@
+<header id="site_header">
+  <a href="/"><div class="hp-logo"></div></a> 
+  <div class="qz-mnu">
+    <ul>
+      <li style="padding-bottom:70px;"><a href="#"><img src="images/menuIcon.png" width="60%" height="auto"></a>
+        <ul class="qz-sub-list">
+          <li ng-controller="LoginController" ng-hide="identity.isAuthenticated()"><a href="/login">Sign In</a></li>
+          <li ng-controller="LoginController" ng-show="identity.isAuthenticated()"><a ng-click="signout()">SIGN OUT</a></li>
+          <!-- <li ng-controller="LoginController" ng-show="identity.isAuthenticated()"><a ng-click="signout()">Sign Out</a></li> -->
+
+          <li ng-controller="LoginController" ng-show="identity.isAuthenticated() && identity.currentUser.isAdmin()"><a href="/admin/users">My Account </a></li>
+          <li ng-controller="LoginController" ng-show="identity.isAuthenticated() && !(identity.currentUser.isAdmin())"><a href="/dashboard">My Account </a></li>
+
+          <li ><a href="/how-it-works">How it works</a></li>
+          <li style="margin-bottom:35px;"><a href="/contact-us">Contact us</a></li>
+          
+        </ul>
+      </li>
+    </ul>
+
+  </div>
+</header>
+
+<div class="divider" style="border-top:2px solid #e1e1e1;padding:15px;padding-top:0px;padding-bottom:0px;"></div>
+
+<section class='custom-pkg'>
+
+<div class="rect-custom">
+  <div style="width:90%;margin:0 auto;">
+    <div class="ctr-txt-custom">
+      <p class="custom-maintxt" style="margin-bottom:0px;"> YOU'RE A CLICK AWAY</p>
+    </div>
+    <div class="custom-divider"><span style="display:inline-block;">FROM YOUR DREAM HOME</span></div>
+    <p class="exp-subtext custom-subtext">Leave us your contact details and we will get in touch with you</p>
+    <p class="exp-subtext custom-subtext">We can't wait to work together</p>
+  </div>
+</div>
+
+<div class="custom-dtls">
+   <form name='customForm'>
+        <ul class="custom-list">
+          <li >
+            <label for="contact_name" style="color:#f5f5f5;">NAME *</label>
+            <div>
+              <input name="contact_name" id="contact_name" ng-model="name" type="text" tabindex="1"  class="form-control" ng-required="true">
+            </div>
+          </li>
+
+          <li>
+            <label for="contact_email" style="color:#f5f5f5;">EMAIL *</label>
+            <div>
+              <input name="contact_email" id="contact_email" ng-model="email" type="email" tabindex="2" class="form-control" ng-required="true">
+            </div>
+          </li>
+
+          <li>
+            <label for="contact_phone" style="color:#f5f5f5;">PHONE </label>
+            <div>
+              <input name="contact_phone" id="contact_phone" ng-model="phone" type="number" tabindex="3" class="form-control" >
+            </div>
+          </li>
+
+        </ul>
+        <div class="custom-btns">
+        <div style="float:left;"><span style="text-align: left;"><a href="#" ng-click="gotoPricing()">Back</a></span></div>
+              <div style="float:right;"><span><button type="submit" ng-click="submitReqCustom()" style="background:transparent;border:none;">Submit</button></span></div>
+            </div>
+        </div>
+    </form>
+  </div>
+
+</section>
+<div id="spinner" ng-show="showWait" style="position: fixed;top: 20%;left: 50%;">
+  <img src="images/spinner.gif">
+</div>
+
+<div class="divider" style="border-top:2px solid rgb(47, 185, 175);"></div>

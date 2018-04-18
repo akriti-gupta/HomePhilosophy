@@ -1,0 +1,954 @@
+/*==========  Mobile First Method  ==========*/
+
+    /* Custom, iPhone Retina */ 
+
+
+/*@media screen and (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {
+  html {
+    transform: rotate(-90deg);
+    transform-origin: left top;
+    width: 100vh;
+    overflow-x: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
+}*/
+
+@media only screen and (min-width : 500px) and (max-width: 935px){
+    .footer-ctr{
+        width: 10%;
+    }
+}
+
+@media only screen and (max-width: 500px){
+    /*.footer-logo-ctr{
+        width:30%;
+        padding: 0px;
+    }*/
+    .footer-ctr{
+        float: right;
+        width: 70%;
+    }
+    .resprg-lbl-one,.resprg-lbl-two,.resprg-lbl-three, .resprg-lbl-four, .resprg-lbl-five{
+        max-width:18%;
+        text-align: center;
+    }
+}
+
+
+@media only screen and (max-width: 685px){
+    .stp-main-subtxt1{
+        padding-bottom: 20px;
+    }
+    .ctr-login-btn{
+        width: 100%;
+    }
+    
+}
+
+@media only screen and (max-width: 500px){
+    .btn-fb{
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width : 990px) {
+    .about-maintext1{
+        font-size: calc(100% + 0.8vw);
+    }
+    .about-title{
+        font-size: 10px;
+    }
+}
+
+@media only screen and (max-width : 1000px) {
+    .portfolio-carousel .slick-prev{
+         left:20px;
+    }
+    .portfolio-carousel .slick-next{
+        right:20px;
+    }
+    .portfolio-carousel .slick-prev:before,.portfolio-carousel .slick-next:before  {
+        font-size:22px;
+    }
+    .about-maintext{
+            font-size: 16px;
+            padding-left:0px;
+            padding-right: 0px;
+        }
+
+}
+
+@media only screen and (min-width : 480px) and (max-width: 769px){
+ .text-dsg{
+            display: none;
+        }
+ .exp-maintext, .col-inspiring{
+    font-size:25px;
+ }
+}
+
+@media only screen and (min-width : 1000px) and (max-width: 1165px){
+    .text-dsg div{
+            margin-top: 20%;
+            padding: 0px;
+        }
+}
+
+@media only screen and (min-width : 800px) and (max-width: 1080px){
+    .thumbnail .caption{
+        padding: 10px 10px 0px;
+        font-size: 9px;
+    }  
+}
+
+@media only screen and (min-width : 800px) and (max-width: 900px) {
+    .qz-row-room{
+        width:75%;
+    }
+}
+
+@media only screen and (min-width : 1080px) and (max-width: 1125px){
+    .thumbnail .caption{
+        font-size: 14px;
+    }  
+}
+
+@media only screen and (min-width : 800px) and (max-width: 1260px){
+    .about-rect{
+        width:80%;
+    }
+      
+}  
+
+@media only screen and (min-width : 770px) and (max-width:900px){
+.resprg-lbl-four{
+        left:65%;
+    }
+.login-ctr{
+    width: 70%;
+}
+}
+
+@media only screen and (min-width : 770px) and (max-width:799px){
+     .rect-custom{
+        width:85%;
+    } 
+    .custom-dtls{
+        width:85%;
+    }
+}
+@media only screen and (min-width : 500px) and (max-width: 940px){
+    .custom-subtext{
+        font-size:16px;
+    }
+      
+    .custom-maintxt{
+        font-size: 40px;
+    } 
+}
+@media only screen and (min-width : 500px) and (max-width:655px){
+     .custom-maintxt{
+        font-size: 30px;
+    }  
+    .luxury-title{
+        font-size:14px;
+    }
+}
+
+@media only screen and (min-width : 1100px) and (max-width: 1320px){
+     .rect-custom{
+        width:60%;
+    } 
+    .custom-dtls{
+        width:60%;
+    }
+}
+
+@media only screen and (min-width : 800px) and (max-width: 1099px){
+     .rect-custom{
+        width:70%;
+    } 
+    .custom-dtls{
+        width:70%;
+    }
+}
+
+
+@media only screen and (min-width : 485px) and (max-width: 760px){
+    .resprg-lbl-one,.resprg-lbl-two,.resprg-lbl-three, .resprg-lbl-four, .resprg-lbl-five{
+        font-size: 10px;
+        text-transform: capitalize;
+        width:20%
+    }
+       
+    .resprg-lbl-one{
+      left:3%;
+    }
+    .resprg-lbl-two{
+      left:24%;
+    }
+    .resprg-lbl-three{
+      left:45%;
+    }
+    .resprg-lbl-four{
+      left:68%;
+      width:10%;
+    } 
+    .resprg-lbl-five{
+      left: 84%;
+    } 
+    .login-ctr{
+            width:85%;
+            top:5%;
+        }
+}
+
+@media only screen and (min-width:768px) and (max-width: 1160px){
+    #pricing-section{
+        display: none;
+    }
+
+    #pricing-section-media{
+        display: inline-block;
+
+    }
+}
+
+@media only screen and  (min-width: 800px) and (max-width: 1410px){
+   .step_wrapper{
+    width:70%;
+    margin:0 auto;
+   }
+}
+
+    /*@media only screen and (min-width : 320px) and (max-width: 480px) {*/
+    @media only screen and (min-width : 320px) and (max-width: 500px) {
+         .stp-main-subtxt1{
+        display: none;
+    }
+    .stp-main-subtxt{
+        display: none;
+    }
+    .stp-media-subtxt1{
+        display: inline-block;
+    }
+
+        .icon-mail-home{
+            width:20px;
+        }
+        .fs-responsive-lg{
+            font-size: 22px;
+        }
+        .fs-responsive-med{
+            font-size:16px;
+        }
+        .fs-responsive-sml{
+            font-size: 12px;
+        }
+        .hp-logo{
+            width:30%;
+            background-image:url('/images/logo-head-sml1.png');
+            margin:0px;
+            background-size: 60%;
+        }
+        .hp-logo-luxury{
+            width:80%;
+        }
+
+        /*Home page*/
+        #hero{
+            background-image:url('/images/hero_sml.jpg');
+            background-position: -90px;
+        }
+
+        .hero-rect{
+            width:65%;
+            height:45%;
+        }
+        .exp-maintext,.col-inspiring{
+            font-size:22px;
+        }
+        .exp-subtext{
+            font-size: 12px;
+        }
+        .custom-divider:before,.custom-divider:after{
+            width: calc(50% - 100px);
+            top:20px;
+        }
+        .custom-maintxt{
+            font-size: 20px;
+        }
+        .custom-divider{
+            font-size:15px;
+        }
+        .custom-subtext{
+             font-size: 14px;
+        }
+        .custom-dtls{
+            top:10%;width:85%;
+        }
+        .custom-btns{
+            width: 90%;
+        }
+        .btn-container{
+            left: calc(50% - 70px);
+        }
+        .btn-hero{
+            padding: 10px;
+            font-size: 16px;
+        }
+        #hp_experience{
+            margin: 30px 0px;
+        }
+        .stp-head-maintxt{
+            font-size: 22px;
+        }
+        .stp-head-subtxt{
+            padding: 0px 15px 20px;
+        }
+        .section-divider > span{
+            width:200px;
+            font-size:14px;
+        }
+        .section-divider:before, .section-divider:after {
+            width: calc(50% - 100px);
+        }
+        #recent-designs{
+            margin:0px 10px 60px;
+        }
+        .design{
+            width:47%;
+        }
+        .progress{
+            height: 5px;
+        }
+        .one, .two, .three, .four, .five, .six {
+            margin-top: -2px;
+            width:8px;
+            height: 8px;
+        }
+        .lbl-one, .lbl-two, .lbl-three, .lbl-four, .lbl-five, .lbl-six {
+            margin-top: 10px;
+            font-size: 10px;
+        }
+        .col-sm-6, .col-md-4{
+            padding:5px 5px 0px;
+        }
+        .qz-row-room{
+            padding-bottom: 0px;
+        }
+        .qz-row-dsg, .qz-row{
+            width:95%;
+            padding-bottom:2px;
+        }
+        .thumbnail .caption{
+            font-size: 9px;            
+        }
+        .ctr-oth-styl{
+            padding:25px 6px;
+        }
+        .txt-renovate{
+            font-size: 11px;
+        }
+
+        .cap-prf-styl{
+            font-size: 10px;
+        }
+
+        .text-dsg{
+            display: none;
+        }
+        .btn-qz{
+            font-size:12px;
+            margin-top:10px;
+        }
+        .icon-prev{
+            width: 92%;
+            padding-top: 10px;
+        }
+
+        .pinboard-comment-litem{
+            width: 45px;
+            font-size:9px;
+            height:30px;
+        }
+        .pin-heart{
+             right:15%;
+        }
+        
+        .grid-pos{
+            width:95%;
+        }
+        .image-status{
+            /*font-size:initial;*/
+            font-size: 35px;
+            width: 15px;
+            right:15%;
+        }
+        .pin-comment{
+            right:5%;
+            width:15%;
+            padding-top: 40px;
+        }
+        .btn-comment{
+            margin-left:50%;
+        }
+
+        .login-ctr{
+            width:95%;
+            top:5%;
+        }
+
+        .btn-login{
+            padding: 8px 69px;
+        }
+
+        .btn-fb{
+            padding: 12px 8px;
+        }
+
+        #site_footer .flex-ctr{
+            display: initial;
+        }
+       
+        .hp-logo-footer,.footer-logo-ctr{
+            /*padding: 0 10px 0 20px;*/
+            width: 30%;
+            padding:0px 20px;
+        }
+        .hp-logo-footer a img,.footer-logo-ctr a img{
+            width:80%;
+        }
+        .detailForm{
+            width: 100%;
+            padding: 100px 25px 0px 25px;
+        }
+        .prg-dtl-ctr{
+            width:95%
+        }
+        .prg-stp-txt{
+            font-size: 8px;
+        }
+
+        .txtarea-dtl{
+            width:100%;
+        }
+        .hp-form-input{
+              width:100%;
+        }
+        div[dropzone], div[dropzone1]{
+            width: 100%;
+        }
+
+        .resprg-one, .resprg-two, .resprg-three, .resprg-four, .resprg-five, .resprg-six{
+            margin-top:-6px;
+            height:15px;
+            width:15px;
+        }
+        .resprg-lbl-one,.resprg-lbl-two,.resprg-lbl-three, .resprg-lbl-four, .resprg-lbl-five{
+            font-size: 10px;
+            text-transform: capitalize;
+            width:20%
+        }
+       
+        .step-one, .step-two, .step-three, .step-four, .step-five{
+            font-size:10px;
+            margin-top:-6px;
+        }
+        .step-one{
+          left:8.5%;
+        }
+        .step-two{
+          left:29.5%;
+        }
+        .step-three{
+          left:50.5%;
+        }
+        .step-four{
+          left:72%;
+        }
+        .step-five{
+          left:91.5%;
+        }
+        .resprg-lbl-one{
+          left:3%;
+        }
+        .resprg-lbl-two{
+          left:24%;
+        }
+        .resprg-lbl-three{
+          left:45%;
+        }
+        .resprg-lbl-four{
+          left:68%;
+          width:10%;
+        } 
+        .resprg-lbl-five{
+          left: 88%;
+        } 
+        .square{
+            width:25px;
+            height:25px;
+        }
+        .upload-btn{
+            margin-left:4px;
+        }
+        .portfolio-txt{
+            font-size:13px;
+        }
+        .portfolio-information {
+            display: none;
+        }
+        .portfolio-information .stats {
+            border-right: none;
+            padding: 0px 20px;
+            text-align: center;
+            width:70%;
+            margin: 0px auto;
+        }
+        .portfolio-information .comment {
+            padding: 10px 30px;
+            font-size: 12px;              
+        }
+
+
+        .portfolio-carousel .slide img {
+            border: 10px solid #fff;
+        }
+        .about-maintext{
+            font-size: 13px;
+        }
+        /* LUXURY SPACES*/
+        .luxury-title{
+            font-size: 11px;
+        }
+        .lux-main-text{
+            padding-top:5px;
+            font-size:10px;
+        }
+        .lux-contact-ctr{
+            margin-top:5px;
+        }
+        .lux-contact-text{
+            padding-top:10%;
+            font-size:10px;
+        }
+        .lux-button{
+            padding-top: 0px;
+        }
+        
+        .ctr2{
+          flex:0.43;    
+          padding-left:5px;
+        }
+        .lux-panel2-img-ctr{
+            padding-top: 5px;
+        }
+        .lux-opt-text{
+            display: none;
+        }
+        .lux-pad{
+             padding-left:5px;
+        }
+        .btn-lux-contact{
+            font-size: 10px;
+            padding:initial;
+        }
+        .lux-panel3{
+            padding-top: 5px;
+        }
+
+        #contactus{
+            background-position: -100px -20px;
+            height: 910px;
+        }
+        .contact-msg-title{
+            padding-left: 0px;
+        }
+        .contact-msg-box{
+            width: 99%;
+        }
+        .contact-subtxt {
+            font-size:14px;
+            padding: 0px 10px 0px 10px;
+        }
+        .contact-text .form-control{
+            height: initial;
+        }
+        .contact-text textarea{
+            height:150px;
+        }
+        
+        .qz-mnu li ul{
+            right:0px;
+            left:inherit;
+        }
+
+        /*Login page*/
+        .qz-mnu li .qz-sub-list-contact{
+            width: 255px;
+        }
+        .fdbk-pnl1{
+            padding:80px 15px 0px
+        }
+        .fdbk-pnl2{
+            padding:20px 15px 80px
+        }
+        .custom-list{
+            width: 100%;
+            display: inline-block;
+        }
+        .custom-list li{
+            display: list-item;
+        }
+        .custom-list li:nth-child(1),.custom-list li:nth-child(2){
+            padding-right: 0px;
+        }
+        .flex-child-pay2{
+            flex-basis: initial;
+            order:-1;
+            -webkit-order:-1;
+            -ms-flex-order: -1;
+            width:90%;
+        }
+        .table{
+            width:95%;
+        }
+        .row-dashboard{
+            width: 95%;
+        }
+        .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+            padding: 2px;
+        }
+        .table img{
+          width:100%;
+          height: auto;
+        }
+        .center .slick-prev{
+            left:0px;
+            top:65%;
+        }
+        .center  .slick-next{
+            right:0px;
+            top:65%;
+        }
+    }
+
+    /* Extra Small Devices, Phones */ 
+    @media only screen and (min-width : 480px) {
+        
+    }
+    @media only screen and (min-width : 320px) and (max-width: 990px) {
+        .edsg-flex-child{ /* Used in About Us */
+            margin-top: 0px;
+        }
+         #edesign-divider{ /* Used in About Us */
+            display: none;
+        }
+        .edsg-last-spacer{
+             padding-bottom: 50px;
+        }
+        .about-panel2{
+            padding-top:0px;
+        }
+    }
+    @media only screen and (min-width : 320px) and (max-width: 768px) {
+         .qz-mnu{
+            /*padding: 46px 0px;*/
+            margin:0px;
+        }
+        .qz-mnu li ul{
+            width:300px;
+        }
+        .pin-comment-txt-ctr{
+            width:55%;
+        }
+        .pin-comment-txt-ctr textarea{
+            height:107px;
+            padding-left:0px;
+        }
+        .pin-comment-img-ctr{
+            padding-left: 0px;
+        }
+
+         .portfolio-carousel .slick-slide:not(.slick-center) {
+            transform: scale(0.8,1);  
+        }
+       
+        .portfolio-carousel .slick-prev:before, .portfolio-carousel .slick-next:before {
+            font-size:25px;
+        }
+        .slide img{
+            border: 10px solid white;
+        }
+        .portfolio-title{
+            padding:10px 0px;
+            font-size:15px;
+        }
+        .container-about-txt{
+            padding-top:8%;
+            padding-bottom: 8%;
+        }
+        .about-rect{
+            width: 80%;
+            top:11%;
+           /* height: 75%;*/
+        }
+        .about-maintext{
+            font-size: 13px;
+            padding: 0px 10px;
+        }
+        .pricing-footnote{
+            padding: 5px;
+            font-size: 10px;
+        }
+        .pkg-price{
+            font-size: 65px;
+        }
+        .price-dollar{
+            font-size:50px;  
+        }
+        .pkg-item{
+            font-size:12px;
+        }
+        .pkg-desc{
+            font-size: 14px;
+        }
+        .price-dollar{
+            font-size:50px;  
+        }
+        .pkg-select-ctr{
+            padding-bottom:20px;
+        }
+
+        .price-pkg-end{
+            padding-bottom:10px;
+        }
+
+        .contact-title{
+            width: 80%;
+            font-size:20px;
+        }
+        .contact-text{
+            width: 80%;
+        }
+        .contact-main-text{
+            font-size: 18px;
+        }
+        .contactus-list li{
+            width:90%;
+            margin:0 15px;
+        }
+        .lux-ctr-inner{
+            width:95%;
+            padding: 10px;
+        }
+       
+        #pricing-section{
+            display: none;
+        }
+
+        #pricing-section-media{
+            display: inline-block;
+        }
+        .rect-custom{
+            width: 85%;
+            top:10%;
+        }
+        .custom-dtls{
+            width: 85%;
+            top:12%;
+        }
+        .result-title{
+            font-size:16px;
+        }
+        .result-desc{
+            padding:5px 0px 30px;
+            font-size: 12px;
+        }
+        .result-style-name{
+             font-size:16px;
+        }
+        
+        .retake-text{
+             font-size:12px;
+        }
+        .btn-fdbk{
+            font-size:12px;
+        }
+        .pay-area{
+            width:90%;
+            padding-top:50px;
+        }
+        .row-dashboard{
+            width:95%;
+        }
+    }
+    /* Small Devices, Tablets */
+    @media only screen and (min-width : 768px) and (max-width: 800px) {
+        .hp-logo{
+            width:55%;
+        }
+        .hp-logo-luxury{
+            width:60%;
+        }
+       /* .btn-fb{
+            padding: 12px 80px;
+        }*/
+        .step-one{
+          left:8.3%;
+        }
+        .step-two{
+          left:29.6%;
+        }
+        .step-three{
+          left:50.2%;
+        }
+        .step-four{
+          left:71.8%;
+        }
+        .step-five{
+            left:91.4%;
+        }
+        .qz-row-room{
+            width: 95%;
+        }
+        .thumbnail{
+            padding: 50px 10px 0px;
+        }
+        .thumbnail .caption{
+            font-size: 11px;
+        }
+        .pin-comment-txt-ctr textarea{
+            height:235px;
+        }
+        .about-maintext{
+            font-size: 16px;
+        }
+        .ctr1{
+            flex:1;
+        }
+        .lux-contact-ctr{
+            margin-top:5px;
+            padding-top:40%;
+        }
+        .lux-contact-text{
+            padding-top:10%;
+            font-size:10px;
+        }
+        .lux-button{
+            padding-top: 0px;
+        }
+        .lux-panel2-img-ctr{
+            padding-top: 5px;
+        }
+        .lux-opt-text{
+            display: none;
+        }
+        .lux-pad{
+             padding-left:5px;
+        }
+        .btn-lux-contact{
+            font-size: 10px;
+            padding:initial;
+        }
+        .lux-panel3{
+            padding-top: 5px;
+        }
+        .login-ctr{
+            width: 70%;
+            top:10%;
+        }
+        .fdbk-pnl1{
+            padding:100px 20px 0px;
+        }
+        .fdbk-pnl2{
+            padding:50px 25px 50px;
+        }
+        .resprg-lbl-one{
+          left:1%;
+        } 
+        .resprg-lbl-two{
+          left:21%;
+        }  
+        .resprg-lbl-three{
+          left:45%;
+        }
+        .resprg-lbl-four{
+          left:64%;
+        } 
+        .resprg-lbl-five{
+          left: 88%;
+        } 
+         .center .slick-prev{
+            left:0px;
+            top:45%;
+        }
+        .center  .slick-next{
+            right:0px;
+            top:45%;
+        }
+    }
+
+    /* Medium Devices, Desktops */
+    @media only screen and (min-width : 990px) and (max-width : 1200px){    
+        .edsg-flex-child{
+            width:270px;
+        }
+
+    }
+
+    /* Large Devices, Wide Screens */
+    @media only screen and (min-width : 1200px) {
+
+    }
+
+
+
+
+    /*==========  Non-Mobile First Method  ==========*/
+
+    /* Large Devices, Wide Screens */
+    @media only screen and (max-width : 1200px) {
+
+    }
+
+    /* Medium Devices, Desktops */
+    @media only screen and (max-width : 992px) {
+
+    }
+
+    /* Small Devices, Tablets */
+    @media only screen and (max-width : 768px) {
+        
+    }
+
+    /* Extra Small Devices, Phones */ 
+    @media only screen and (max-width : 480px) {
+       
+       /*.mask{
+        left:93px;
+       } */
+    }
+
+    /* Custom, iPhone Retina */ 
+    @media only screen and (max-width : 320px) {
+        .hp_workflow_content{
+            height:320px;
+        }
+        .mask{
+            left:4em;
+        }
+        .step-text{
+            width:165px;
+        }
+        .btn-qz{
+            padding: 12px 40px;
+        }
+        .hp-logo-footer,.footer-logo-ctr{
+            width:32%;
+        }
+
+    }   

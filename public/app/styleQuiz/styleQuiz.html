@@ -1,0 +1,548 @@
+<header id="site_header">
+  <a href="/"><div class="hp-logo"></div></a> 
+  <div class="qz-mnu">
+    <ul>
+      <li style="padding-bottom:70px;"><a href="#"><img src="images/menuIcon.png" width="60%" height="auto"></a>
+        <ul class="qz-sub-list">
+          <li ng-controller="LoginController" ng-hide="identity.isAuthenticated()"><a href="/login">Sign In</a></li>
+          <li ng-controller="LoginController" ng-show="identity.isAuthenticated()"><a ng-click="signout()">SIGN OUT</a></li>
+          <!-- <li ng-controller="LoginController" ng-show="identity.isAuthenticated()"><a ng-click="signout()">Sign Out</a></li> -->
+
+          <li ng-controller="LoginController" ng-show="identity.isAuthenticated() && identity.currentUser.isAdmin()"><a href="/admin/users">My Account </a></li>
+          <li ng-controller="LoginController" ng-show="identity.isAuthenticated() && !(identity.currentUser.isAdmin())"><a href="/dashboard">My Account </a></li>
+
+          <li ><a href="/how-it-works">How it works</a></li>
+          <li style="margin-bottom:35px;"><a href="/contact-us">Contact us</a></li>
+          
+        </ul>
+      </li>
+    </ul>
+
+  </div>
+</header>
+
+
+<div class="divider" style="border-top:2px solid #e1e1e1;padding:15px;"></div>
+ 
+<div class="qz-container" ng-init="checkProjects()">
+
+  <div class="modal" id="quizModal" tabindex="-1" role="dialog" aria-labelledby="quizModalLabel" >
+      <div class="modal-dialog" role="document" >
+        <div class="modal-content">
+          <div class="modal-header" style="border:none;">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="padding-left">&times;</span></button>
+          </div>
+          
+          <div class="modal-body comment-modal-body">
+            <div class="font-playfair fs-responsive-med" > 
+              <p style="padding-bottom:40px;">What is your design style?</p>
+    
+              <div style="position:relative; width:65%; margin:auto;">
+                <div class="fs-22px" style="display:inline-block;"> Not sure? Take our</div>
+                <div  class="fs-22px" style="float:right;">
+                  <button type="button" class="take-qz-btn" ng-click="nextPage();" style="padding-left:23px;padding-right:23px;" >STYLE QUIZ</button>
+                </div>
+
+                <div style="clear:both; padding-bottom:40px;"></div>
+                <div class="fs-22px" style="display:inline-block;"> 
+                  I already know!
+                </div>
+                <div  class="fs-22px" style="float:right;">
+                  <button type="button" class="take-qz-btn" ng-click="quiz(1)">SELECT STYLE</button>
+                </div>
+              </div>
+            </div>
+            <div style="clear:both; padding-bottom:70px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div id="stylePageMain" ng-show="pagenum===1"> 
+    <p  class="font-playfair fs-responsive-med">What would you like Home Philosophy to design?</p>
+    <p class="font-sansRegular fs-11px" style="padding-bottom:50px;">[Choose multiple rooms for an entire apartment design]</p>
+    
+    <div class="row qz-row-room">
+      <div class="col-sm-4 col-md-4">
+        <div class="thumbnail">
+          <img src="images/rooms/master.png" data-room-id="1" alt="master bedroom">
+          <a href="#" ng-click="saveSelection(1,'master','Master Room')"><span class="tag"></span></a>
+          <div class="caption txt-center">
+            <p class="font-montserrat txt-upper">Master Bedroom</p>
+            </div>
+
+            <div class="txt-center">
+             <p class="font-sansRegular" style="padding-top:20px;color:rgb(161, 161, 161);font-size:9px;">
+            select number of rooms</p>
+            
+          <div class="font-sansRegular fs-10px" style="padding-bottom:12px;position:relative;color:rgb(161, 161, 161);margin-top:-26px;">
+
+          
+            <span style="padding-left:86%;">
+            
+              <select ng-model="master" ng-options="opt.label for opt in units track by opt.value" class="num-rooms" ng-change="roomNumChanged(1,'master','Master Room')">
+                </select>
+            </span>
+          </div>
+          </div>
+          
+          
+          
+        </div>
+      </div>
+
+      <div class="col-sm-4 col-md-4">
+        <div class="thumbnail">
+          <img src="images/rooms/living.png" alt="living room">
+          <a href="#" ng-click="saveSelection(2,'living','Living Room')"><span class="tag"></span></a>
+          <div class="caption txt-center">
+            <p class="font-montserrat txt-upper">Living Room</p>
+          </div>
+          <div class="txt-center">
+             <p class="font-sansRegular" style="padding-top:20px;color:rgb(161, 161, 161);font-size:9px;">
+            select number of rooms</p>
+            
+          <div class="font-sansRegular fs-10px" style="padding-bottom:12px;position:relative;color:rgb(161, 161, 161);margin-top:-26px;">
+
+          
+            <span style="padding-left:86%;">
+            
+              <select ng-model="living" ng-options="opt.label for opt in units track by opt.value" class="num-rooms" ng-change="roomNumChanged(2,'living','Living Room')">
+                </select>
+            </span>
+          </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-sm-4 col-md-4">
+        <div class="thumbnail">
+          <img src="images/rooms/kids.png" alt="kids room">
+          <a href="#" ng-click="saveSelection(3,'kids','Kids Room')"><span class="tag"></span></a>
+          <div class="caption txt-center">
+            <p class="font-montserrat txt-upper">Kids Room</p>
+          </div>
+
+          <div class="txt-center">
+             <p class="font-sansRegular" style="padding-top:20px;color:rgb(161, 161, 161);font-size:9px;">
+            select number of rooms</p>
+            
+          <div class="font-sansRegular fs-10px" style="padding-bottom:12px;position:relative;color:rgb(161, 161, 161);margin-top:-26px;">
+
+          
+            <span style="padding-left:86%;">
+            
+              <select ng-model="kids" ng-options="opt.label for opt in units track by opt.value" class="num-rooms" ng-change="roomNumChanged(3,'kids','Kids Room')">
+                </select>
+            </span>
+          </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div> <!-- End of row 1  -->
+
+
+
+
+
+    <div class="row qz-row-room">
+      <div class="col-sm-4 col-md-4">
+        <div class="thumbnail">
+          <a href="#" ng-click="saveSelection(4,'office','Home Office')"><span class="tag"></span></a>
+          <img src="images/rooms/homeOffice.png" alt="Home Office">
+          <div class="caption txt-center">
+            <p class="font-montserrat txt-upper">Home Office</p>
+          </div>
+              <!-- <p class="font-sansRegular fs-10px" style="text-align:right;padding-top:20px;color:rgb(161, 161, 161);">
+            <span>
+              <select ng-model="office" ng-options="opt.label for opt in units track by opt.value" class="num-rooms" ng-change="roomNumChanged(4,'office','Home Office')">
+                </select>
+            </span>
+          </p> -->
+
+           <div class="txt-center">
+             <p class="font-sansRegular" style="padding-top:20px;color:rgb(161, 161, 161);font-size:9px;">
+            select number of rooms</p>
+            
+          <div class="font-sansRegular fs-10px" style="padding-bottom:12px;position:relative;color:rgb(161, 161, 161);margin-top:-26px;">
+
+          
+            <span style="padding-left:86%;">
+            
+              <select ng-model="office" ng-options="opt.label for opt in units track by opt.value" class="num-rooms" ng-change="roomNumChanged(4,'office','Home Office')">
+                </select>
+            </span>
+          </div>
+          </div>
+
+          </div>
+        </div>
+      
+      
+      <div class="col-sm-4 col-md-4">
+        <div class="thumbnail">
+          <a href="#" ng-click="saveSelection(5,'dining','Dining Room')"><span class="tag"></span></a>
+          <img src="images/rooms/dining.png" alt="dining room">
+          <div class="caption txt-center">
+            <p class="font-montserrat txt-upper">Dining Room</p>
+          </div>
+              <!-- <p class="font-sansRegular fs-10px" style="text-align:right;padding-top:20px;color:rgb(161, 161, 161);">
+            <span>
+              <select ng-model="dining" ng-options="opt.label for opt in units track by opt.value" class="num-rooms" ng-change="roomNumChanged(5,'dining','Dining Room')">
+                </select>
+            </span>
+          </p> -->
+
+          <div class="txt-center">
+             <p class="font-sansRegular" style="padding-top:20px;color:rgb(161, 161, 161);font-size:9px;">
+            select number of rooms</p>
+            
+          <div class="font-sansRegular fs-10px" style="padding-bottom:12px;position:relative;color:rgb(161, 161, 161);margin-top:-26px;">
+
+          
+            <span style="padding-left:86%;">
+            
+               <select ng-model="dining" ng-options="opt.label for opt in units track by opt.value" class="num-rooms" ng-change="roomNumChanged(5,'dining','Dining Room')">
+                </select>
+            </span>
+          </div>
+          </div>
+
+          </div>
+        </div>
+      
+      
+      <div class="col-sm-4 col-md-4">
+        <div class="thumbnail">
+          <a href="#" ng-click="saveSelection(6,'bedroom','Bedroom')"><span class="tag"></span></a>
+          <img src="images/rooms/bedroom.png" alt="bedroom">
+         <div class="caption txt-center">
+            <p class="font-montserrat txt-upper">Bedroom</p>
+          </div>
+             <!-- <p class="font-sansRegular fs-10px" style="text-align:right;padding-top:20px;color:rgb(161, 161, 161);">
+            <span>
+              <select ng-model="bedroom" ng-options="opt.label for opt in units track by opt.value" class="num-rooms" ng-change="roomNumChanged(6,'bedroom','Bedroom')">
+                </select>
+            </span>
+          </p> -->
+
+          <div class="txt-center">
+             <p class="font-sansRegular" style="padding-top:20px;color:rgb(161, 161, 161);font-size:9px;">
+            select number of rooms</p>
+            
+          <div class="font-sansRegular fs-10px" style="padding-bottom:12px;position:relative;color:rgb(161, 161, 161);margin-top:-26px;">
+
+          
+            <span style="padding-left:86%;">
+            
+               <select ng-model="bedroom" ng-options="opt.label for opt in units track by opt.value" class="num-rooms" ng-change="roomNumChanged(6,'bedroom','Bedroom')">
+                </select>
+            </span>
+          </div>
+          </div>
+
+
+          </div>
+        </div>
+
+      
+
+         <div class="ctr-oth-styl">
+        <span class="font-montserrat fs-14px" style="color:rgb(112,112,112);">
+         OTHER:&nbsp; <input type="text" style="border:1px solid #ddd;border-radius: 0px;"/>
+          
+        </span>
+      </div>
+    </div> <!--End of row 2 -->
+      
+    <div class="font-playfair txt-renovate" style="text-align:center;">
+      <!-- <p class="font-playfair txt-renovate"> -->
+        Renovating your Kitchen or Bathroom? <u><a href="mailto:hello@homephilosophy.com.sg">Get a custom quote</a></u>
+          <a href="mailto:hello@homephilosophy.com.sg" style="padding:12px;"><img src="images/email.png" class="icon-mail-home"/></a>
+      <!-- </p> -->
+    </div>
+  </div> 
+  
+  <!--Progress bar -->
+  <div ng-show="progress" class="progress-wrapper">
+    <div class="progress">
+     <div class="progress-bar" style="width: {{progressRate}}%"></div>
+      <div class="one primary-color"></div>
+      <div class="two" ng-style="pagenum>2 ? { 'background-color':'#00a99d'} : { 'background-color': '#cccccc' }"></div>
+
+     
+      <div class="three" ng-style="pagenum>3 ? { 'background-color':'#00a99d'} : { 'background-color': '#cccccc' }"></div>
+      <div class="four no-color" ng-style="pagenum>4 ? { 'background-color':'#00a99d'} : { 'background-color': '#cccccc' }"></div>
+      <div class="five no-color" ng-style="pagenum>5 ? { 'background-color':'#00a99d'} : { 'background-color': '#cccccc' }"></div>
+      <div class="six no-color" ng-style="pagenum>6 ? { 'background-color':'#00a99d'} : { 'background-color': '#cccccc' }"></div>
+     
+
+      <div class="lbl-one one">1</div>
+      <div class="lbl-two two" ng-show="pagenum>2">2</div>
+      <div class="lbl-three three" ng-show="pagenum>3">3</div>
+      <div class="lbl-four four" ng-show="pagenum>4">4</div>
+      <div class="lbl-five five" ng-show="pagenum>5">5</div>
+      <div class="lbl-six six" ng-show="pagenum>6">6</div>
+    </div>
+  </div>
+  <!-- Progress bar ends -->
+
+
+  <div ng-show="showDesignStyle" class="font-playfair fs-responsive-med" > 
+    <p style="padding-bottom:50px;">What is your design style?</p>
+     <div ng-repeat="styles in stylePref track by $index">
+      <div class="row qz-row-dsg">
+        <div class="col-md-4 col-xs-4" ng-repeat="style in styles">
+          <a href="#" data-room-type="1" ng-click="saveKnownStylImg(style)">
+            <div class="text-dsg fs-16px">
+              <div>{{style.image_desc}}</div>
+            </div>
+            <figure>
+              <img class="center-block" ng-src="{{style.image_style}}"  style="width:100%;height:auto;">
+              <figcaption class="font-sansRegular txt-center txt-upper cap-prf-styl">{{style.image_name}}</figcaption>
+            </figure>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="fs-22px" style="padding:40px 0px 0px;"> 
+       <p style="margin:0px;">Not sure? Take our 
+         <button type="button" class="take-qz-btn" ng-click="nextPage();">STYLE QUIZ</button>
+
+       </p>
+    </div>
+  </div>
+
+  <div ng-show="pagenum===2" class="font-playfair fs-responsive-med" > 
+    <p style="padding-bottom:50px;">Which living room do you want to relax in?</p>
+    <div ng-repeat="styles in styleQuest1 track by $index">
+      <div class="row qz-row">
+        <div class="col-md-4 col-xs-4" ng-repeat="style in styles">
+          <a href="#" ng-click="saveSelection(style.image_id)">
+            <img class="img-responsive center-block" ng-src="{{style.image_style}}"  style="width:100%;height:auto;">
+          </a>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div ng-show="pagenum===3" class="font-playfair fs-responsive-med"> 
+    <p style="padding-bottom:50px;">Which bedroom do you like best?</p>
+    <div ng-repeat="styles in styleQuest2 track by $index">
+      <div class="row qz-row">
+        <div class="col-md-4 col-xs-4" ng-repeat="style in styles">
+          <a href="#" ng-click="saveSelection(style.image_id)">
+            <img class="img-responsive center-block" ng-src="{{style.image_style}}"  style="width:100%;height:auto;">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div ng-show="pagenum===4" class="font-playfair fs-responsive-med"> 
+    <p style="padding-bottom:50px;">Which dining room do you want to entertain in?</p>
+    <div ng-repeat="styles in styleQuest3 track by $index">
+      <div class="row qz-row">
+        <div class="col-md-4 col-xs-4" ng-repeat="style in styles">
+          <a href="#" ng-click="saveSelection(style.image_id)">
+            <img class="img-responsive center-block" ng-src="{{style.image_style}}"  style="width:100%;height:auto;">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div ng-show="pagenum===5" class="font-playfair fs-responsive-med"> 
+    <p style="padding-bottom:50px;">Which kitchen do you want to cook in?</p>
+    <div ng-repeat="styles in styleQuest4 track by $index">
+      <div class="row qz-row">
+        <div class="col-md-4 col-xs-4" ng-repeat="style in styles">
+          <a href="#"  ng-click="saveSelection(style.image_id)" data-room-type="1">
+            <img class="img-responsive center-block" ng-src="{{style.image_style}}"  style="width:100%;height:auto;">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div ng-show="pagenum===6" class="font-playfair fs-responsive-med"> 
+    <p style="padding-bottom:50px;">What texture is your favourite?</p>
+    <div ng-repeat="styles in styleQuest5 track by $index">
+      <div class="row qz-row">
+        <div class="col-md-4 col-xs-4" ng-repeat="style in styles">
+          <a href="#"  ng-click="saveSelection(style.image_id)" data-room-type="1">
+            <img class="img-responsive center-block" ng-src="{{style.image_style}}"  style="width:100%;height:auto;">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div ng-show="pagenum===7" class="font-playfair fs-responsive-med"> 
+    <p style="padding-bottom:50px;">If you had to choose a colour palette it would be...</p>
+    <div ng-repeat="styles in styleColor track by $index">
+      <div class="row qz-row-dsg">
+        <div class="col-md-4 col-xs-4" ng-repeat="style in styles">
+          <a href="#"  ng-click="saveSelection(style.image_id)" data-room-type="1">
+            <figure>
+              <img class="img-responsive center-block" ng-src="{{style.image_style}}"  style="width:100%;height:auto;"/>
+              <figcaption class="font-sansRegular txt-center txt-upper cap-prf-styl">{{style.image_name}}</figcaption>
+            </figure>
+          </a>
+        </div>
+      </div>
+      <div style="text-align:center;"><button type="button" class="btn-qz btn-nxt"ng-disabled="disable" ng-click="nextPage()">Show me my Design Inspiration</button></div>
+    </div>
+  </div>
+
+
+<!--Pinterest Board -->
+  <div ng-show="pagenum===8" data-title="Picture Selection">
+
+    <!--MOdal code begins -->
+     <div class="modal" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel" >
+      <div class="modal-dialog" role="document" >
+        <div class="modal-content">
+          <div class="modal-header" style="border:none;">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="padding-left">&times;</span></button>
+          </div>
+          
+          <div class="modal-body comment-modal-body">
+            <div style="position:relative;width:90%;margin:0 auto;text-align:center;" ng-show="selRoomNamesArr.length>1">
+              
+              <ul class="comment-room-list" style="margin-bottom:20px;" >
+                <li ng-repeat="selRoom in selRoomNamesArr track by $index" class="pinboard-comment-litem" ng-class="isActive($index)" data-room-id="{{$index}}" data-qz-room-id="{{selRoom.room_id}}"><a href="#"  ng-click="saveCmtsOnTabClick1($index,false)">{{selRoom.room_name}}</a></li>
+                <!-- saveCmtsOnTabClick($index) -->
+              </ul>
+            
+            </div>
+
+            <div class="pin-comment-img-ctr">
+              <img src="" class="img-comment-box1" style="width:100%;height:auto;"/> 
+            </div>
+            <div class="pin-comment-txt-ctr">
+              <textarea rows="9" cols="35" class="font-sansRegular fs-16px"  placeholder=" Add a comment" ng-model="room_comments"></textarea>
+
+            <!-- <button type="button" class="btn-start-quiz btn-comment font-sansRegular fs-16px" data-img-id="" data-room-id="" data-img-loc="" data-qz-room-id="" class="close" data-dismiss="modal" ng-click="submitComments1($event)">Submit</button> -->
+            <button type="button" class="btn-start-quiz btn-comment font-sansRegular fs-16px" class="close" data-dismiss="modal" ng-click="submitComments1()">Submit</button>
+            
+          </div>
+          </div>
+        </div>
+      </div>
+    </div> <!--Comment Modal code ends -->
+
+    <div class="modal" id="zoomModal" tabindex="-1" role="dialog" aria-labelledby="zoomModalLabel" >
+      <div class="modal-dialog" role="document" >
+        <div class="modal-content">
+          <div class="modal-header" style="border:none;">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body">
+            <div style="position:relative;width:99%;margin:0 auto;">
+              <img src="" class="img-zoom-box" style="width:100%"/> 
+            </div>
+          </div>
+          <div class="modal-footer" id="img-credit" style="border:none;">
+            
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+
+
+    <div id="pin-text">
+      <p class="font-playfair-bold fs-22px txt-upper">Design Inspiration </p>
+      <p style="padding-top:10px;" class="font-sansRegular fs-16px image-like-selected"><!-- Choose your favourite <span class="font-sansBold">3 images</span> for our designer to use as reference. --> 
+     <span class="glyphicon glyphicon-heart" style="font-size:20px;"></span> up to 3 of your favourite images below for our designer to use as a reference
+      </p>
+      <p style="padding-top:10px;margin-bottom:0px;color:rgb(77,77,77);" class="font-sansRegular fs-14px">Love the colours of a living room image and want us to use it when we design your bedroom?</p>
+      <p class="font-sansRegular fs-14px image-like-selected" style="color:rgb(77,77,77);">Add a comment to your <span class="glyphicon glyphicon-heart" style="font-size:20px;"></span> images and we will ensure to incorporate it.</p>
+      <p style="padding-bottom:40px;color:rgb(77,77,77);"><a href="#" ng-click="saveSelection(-1);" style="border-bottom:1px solid;"> Skip and sign up to see your results.</a></p>
+    </div>
+
+    <ul  class="dynamic-grid txt-center grid-pos" angular-grid="board" ag-options="angularGridOptions"  ag-id="gallerypin" ag-refresh-on-img-load="true"  >
+    
+      <li data-ng-repeat="pic in board track by $index" class="grid">
+        <a href="#" class="zoom" data-toggle="modal" data-target="#zoomModal">
+           <img ng-src="{{pic.isrc}}" class="grid-img" data-actual-width = "{{pic.actualWidth}}"  data-actual-height="{{pic.actualHeight}}" data-img-credit="{{pic.imgCredit}}" src="{{pic.isrc}}"/>
+        </a>
+          
+        <a href="#" class="comment" data-image="{{pic.isrc}}" data-image-id={{$index}} data-toggle="modal" ng-click="loadComments1($index,0,pic.isrc);">
+          <img src="images/styles/styleBoards/comment.png" id="icon_comment"  class="image-status pin-comment" data-swap="images/styles/styleBoards/sel_comment.png">
+        </a>     
+
+        <a href="#" class="image-like" ng-click="imageLiked(pic.isrc)" data-ordinal="0" data-image-id={{$index}}>  
+          <span class="glyphicon glyphicon-heart-empty image-status"></span>   
+        </a> 
+      </li>
+    </ul>
+
+    <div style="clear:both; padding-bottom:120px; padding-top:30px" class="txt-center">
+      
+      <button type="button" class="pin-submit btn-start-quiz font-sansRegular txt-upper btn-hero" style="border:0px;" ng-click="nextPage()" ng-show="usrLoggedIn">Sign up to see your results</button>
+
+      <button type="button" class="pin-submit btn-start-quiz font-sansRegular txt-upper btn-hero" style="border:0px;" ng-click="nextPage()" ng-show="!usrLoggedIn">See your results</button>
+    </div>
+  </div>
+
+
+
+  <div ng-show="pagenum===9">
+    <div class="prg-dtl-ctr" style="background-color:#fff;">
+      <div class="prg-wrp">
+      <div class="progress-result">
+          <div class="resprg-one  primary-color prg-stp-txt" ng-style="{'background': resPrgCol2}">1</div>
+          <div class="resprg-two no-color prg-stp-txt">2</div>
+          <div class="resprg-three no-color prg-stp-txt" ng-style="{'background': resPrgCol2}">3</div>
+          <div class="resprg-four no-color prg-stp-txt" ng-style="{'background': resPrgCol2}">4</div>
+          <div class="resprg-five no-color prg-stp-txt" ng-style="{'background': resPrgCol2}">5</div>
+          <div class="row" style="width:100%;">
+             <div class="resprg-lbl-one">Style Quiz</div>
+            <div class="resprg-lbl-two">Choose a Package</div>
+            <div class="resprg-lbl-three">Payment</div>
+            <div class="resprg-lbl-four">Tell Us More</div>
+            <div class="resprg-lbl-five">Launch Project</div>
+        </div>
+        </div>
+    </div>
+    </div>
+
+    <div style="width:73%;margin:0 auto;">
+      <div  style="padding:40px 0px 40px;">
+        <p class="font-playfair result-title">{{userStyle[0].title}} <span class="txt-upper fs-22px font-sansRegular">{{userStyle[0].style}}</span></p>
+        <p class="font-sansRegular result-desc"> {{userStyle[0].desc}}</p>
+          <img ng-src="{{userStyle[0].image}}" style="width:100%;"/>
+        <p  class="font-playfair retake-text" style="text-align:right;color:rgb(77, 77, 77);">Not really your style? Re-take the <a href="/style-quiz" id="start-quiz" ng-click="retakeQuiz()"><u>Style Quiz</u></a></p>
+      </div>
+    </div>
+  </div> <!--pagenum==9 -->
+
+    
+<div class="icon-prev" ng-show="pagenum!=1 && pagenum!=8 && pagenum!=9"><a href="#" ng-click="prev();"> &lt;&lt; </a></div>
+
+  <!-- Buttons -->
+  <div style="text-align:center;padding:80px 0px 100px;clear:both;" ng-show="pagenum!=1 && pagenum!=8">
+    <button type="button" class="btn-qz btn-nxt" ng-show="pagenum===9" ng-disabled="disable" ng-click="nextPage()">Next</button>
+  </div>
+
+  <div style="text-align:center;padding:80px 0px 100px;clear:both;" ng-show="pagenum===1" >
+  <!-- && pageRequester===' '" -->    
+    <a href="#" data-toggle="modal" data-target="#quizModal">
+      <button type="button" class="btn-qz btn-nxt" ng-disabled="disable">Next</button>
+    </a>
+  </div>
+</div> <!--Main Div QuizController -->
+
+<div class="divider" style="border-top:2px solid rgb(47, 185, 175);"></div>
+      

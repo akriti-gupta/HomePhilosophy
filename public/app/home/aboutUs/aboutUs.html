@@ -1,0 +1,254 @@
+<header id="site_header">
+  <a href="/"><div class="hp-logo"></div></a>
+
+  <div id="hp-nav">
+    <ul class="topnav">
+      
+      <li><a href="/style-quiz" id="start-quiz"><button type="button" class="btn-start-quiz btn-topnav  fs-14px">GET STARTED</button></a></li>
+      
+      <li><a href="/how-it-works">How it works</a></li>
+      <li><a href="/pricing">Pricing</a></li>
+      <li><a href="/portfolio" id="portfolio-link">Portfolio</a></li>
+      <li><a href="/about-us">About Us</a></li>
+      <li><a href="/faq">FAQ</a></li>
+      <li><a href="/contact-us">Contact us</a></li>
+      <li>
+        <div ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
+          <a href = "/login">SIGN IN</a>
+        </div>
+	    <div class="dropdown" ng-controller="LoginController" ng-show="identity.isAuthenticated()" >
+	        <a href="#" data-toggle="dropdown">MY ACCOUNT
+	      	<span class="caret nav-dropdown"></span></a>
+	      	<ul class="dropdown-menu" style="min-width:0px;">
+	          	<li style="padding:0px;margin:0;">
+	          		<a href="/admin/users" ng-if="identity.currentUser.role==='admin'" style="font-family:Montserrat-Regular;font-size:13px;">MY PROJECTS</a>
+	          	 	<a href="/dashboard" ng-if="identity.currentUser.role!='admin'" style="font-family:Montserrat-Regular;font-size:13px;">MY PROJECTS</a>
+	          	</li>
+	            <li style="padding:0px;margin:0;"><a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a></li>
+	        </ul>
+	    </div>
+      </li>
+
+      <li style="padding-top:8px;">
+        <a href="/style-quiz" id="start-quiz"><button type="button" class="btn-start-quiz btn-topnav font-montserrat txt-upper col-lightcyan fs-14px">Get Started</button></a>
+      </li>
+
+       <li style="padding-top:8px;">
+       	<div ng-controller="LoginController" ng-show="identity.isAuthenticated()">
+        	<a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a>
+        </div>
+      </li>
+
+    </ul>
+
+    <div class="tab_icon">
+        <a href="javascript:void(0);" onclick="displayDropDown()">&#9776;</a>
+    </div>
+  </div>
+</header>
+
+
+<section id="about-banner">
+	 <div class="about-rect">
+		<div class="container-about-txt">
+			<p class="about-title" style="margin-bottom:0px;"> OUR PHILOSOPHY</p>
+			<div style="position:relative;width:80%;margin:0 auto;">
+				<p class="about-maintext1">Designing a beautiful home should be easy.
+				</p>
+				<p class="about-maintext">
+					You don't need expensive renovations to transform your space. It's the unique touches, the curated furniture, the perfect wall colour that creates a home you love. No one wants their entire home from the same store, but furniture shopping is physically taxing, emotionally draining and downright confusing!
+				</p>
+				<br/><br/>
+
+				<p class="about-title" style="margin-bottom:0px;"> OUR PROMISE</p>
+				<p class="about-maintext">
+					We create original and inspiring rooms so designing your home can finally be affordable and quick without compromising the personal.
+ 
+				</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- <section id="hp_experience">
+	<div>
+		<p class="stp-head-maintxt" style="padding-bottom:2px;color:rgb(70, 70, 70);">The Home Philosophy Experience</p>
+	</div>
+
+	<p class="stp-main-subtxt1">We make designing your home affordable, convenient and personal. </p>
+	<p class="stp-main-subtxt">With the best furniture from around town, we help you visualize and transform your space in just a few weeks.</p>
+
+	<p class="stp-media-subtxt1">We visualize and transform your space in just a few weeks with the best furniture from around town.</p>
+
+
+	<div class="step_wrapper">
+		<div class="hp_workflow font-montserrat col-lightcyan">
+			<div style="position:relative;top:-30px;">1</div>
+			<div id="step1" class="hp_workflow_content">
+				<div class="mask"></div>
+		  		<div class="step_icon">
+						<img src="images/like1.png" class="img-steps"/>
+				</div>
+				<div class="font-montserrat step-title">
+					Find your style
+				</div>
+				<div class="step-text font-sansRegular">
+					With a plethora of styles out there, let us make it simple to find yours! Our effortless <a href="/style-quiz" style="color:rgb(0, 134, 125);"><b>Style Quiz</b></a> helps you identify the best look for your space. As your design partner, we eliminate hours of confusion by showing you amazing room inspirations. 
+				</div>
+			</div>
+		</div>
+
+		<div class="hp_workflow font-montserrat col-lightcyan">
+			<div style="position:relative;top:-30px;">2</div>
+			<div id="step2" class="hp_workflow_content">
+				<div class="mask"></div>
+				<div class="step_icon">
+					<img src="images/measure1.png" class="img-steps" />
+				</div> 
+				<div class="font-montserrat step-title">
+					We get to know you and your space
+				</div>
+				<div class="step-text font-sansRegular">
+					Through our fun and <a href="/style-quiz"  style="color:rgb(0, 134, 125);"><b>Collaborative Online Process </b></a>we design your dream space! Share all the details you want in advance, your budget, and schedule a meet and measure with us (Yes! We are real people and we want to meet you).
+				</div>
+			</div>
+		</div>
+		
+		<div class="hp_workflow font-montserrat col-lightcyan">
+			<div style="position:relative;top:-30px;">3</div>
+			<div id="step3" class="hp_workflow_content">
+				<div class="mask"></div>
+				<div class="step_icon">
+					<img src="images/designs1.png" class="img-steps" />
+				</div>  
+				<div class="font-montserrat step-title">
+					Receive your newly designed space
+				</div>
+				<div class="step-text font-sansRegular">
+					You get several custom <a href="#" data-toggle="modal" data-target="#firstLookModal"
+					style="color:rgb(0, 134, 125);"><b>Concept Boards </b></a>to review at your own convenience. Once you have decided what you love and don’t, we’ll refine it. We work together to complete the look so that the design is exactly what you had in mind.
+				</div>
+			</div>
+		</div>
+	
+		<div class="hp_workflow font-montserrat col-lightcyan">
+			<div style="position:relative;top:-30px;">4</div>
+			<div id="step4" class="hp_workflow_content">
+				<div class="mask"></div>
+				<div class="step_icon">
+					<img src="images/shoppingList.png" class="img-steps" />
+				</div>  
+				<div class="font-montserrat step-title">
+					Approve your final look and shop with ease
+				</div>
+				<div class="step-text font-sansRegular">
+					Receive your Final Look, layout plan and complete <a href="#" data-toggle="modal" data-target="#shoppingListModal"
+					style="color:rgb(0, 134, 125);"><b>Shopping List</b></a> - giving you the flexibility to view the items before buying. Or simply click our 'Buy for me' option at checkout to have us buy and deliver for you.
+				</div>
+			</div>
+		</div> 
+	</div>
+	<p class="fs-16px font-sansRegular txt-center" style="color:rgb(0, 169, 157);padding:0px 10px;">
+		Doing a full renovation? Let's chat over coffee for us to understand your ideas and provide a custom quote &nbsp;<a href="mailto:hello@homephilosophy.com.sg" style="padding-left:-3px;"><img src="images/email_home.png" style="margin-top:-4px;margin-left:-1px;"/></a>
+	</p>
+</section>
+
+<section id="edesign" style="text-align:center;">
+	<div class="edesign-ctr">
+		<div style="padding-top:100px;padding-bottom:80px;">
+		<p class="font-noto fs-25px" style="color: rgb(70, 70, 70);padding-bottom:10px;"><u>Easy with E-Design</u></p>
+		<p class="font-sansRegular fs-16px" style="color: rgb(37, 37, 37);padding:0px 10px;">Home Philosophy makes designing your home simple, convenient and (dare we say) fun!</p>
+		<p class="font-sansRegular fs-16px">We are your design partners and we promise a home that is amazing.</p>
+		</div>
+
+		<div class="flex-ctr">
+		<div class="edsg-flex-child">
+			<div class="edsg-last-spacer">
+				<p><img src="images/aboutus/consult.png"></p>
+				<p class="font-playfair fs-22px">FREE CONSULTATION</p>
+				<p class="font-sansRegular fs-14px">Nothing can replace personal touch — we get that. That’s why we want to meet you before starting the project, so we can design a space that is uniquely you.</p>
+			</div>
+			<div class="edsg-last-spacer">
+				<p><img src="images/aboutus/costEffective.png"></p>
+				<p class="font-playfair fs-22px">COST EFFECTIVE</p>
+				<p class="font-sansRegular fs-14px">We promise all the perks of personalized interior design experience without the hefty hourly rates. Our flat fee model ensures absolute transparency; no hidden commission- only buy what you love.</p>
+			</div>
+			<div class="edsg-last-spacer">
+				<p><img src="images/aboutus/stressless.png"></p>
+				<p class="font-playfair fs-22px">STRESS-LESS SHOPPING</p>
+				<p class="font-sansRegular fs-14px">Know exactly what to buy with our curated shopping list. Finally shopping without multiple frustrating trips to furniture stores! Prefer a hassle free experience? We've got you covered with Buy for Me.</p>
+			</div>
+		</div>
+		<div id="edesign-divider" class="edsg-flex-child" style="padding-top:120px;padding-left:60px;width:180px;">
+			<div class="circle1"><div class="small-circle"></div></div>
+			<div class="circle1"><div class="small-circle"></div></div>
+			<div class="circle1"><div class="small-circle"></div></div>
+			<div class="circle1"><div class="small-circle"></div></div>
+			<div class="circle1"><div class="small-circle"></div></div>
+			<div class="circle"><div class="small-circle"></div></div>
+
+		</div>
+		
+		<div class="edsg-flex-child about-panel2">
+		<div class="edsg-last-spacer">
+				<p><img src="images/aboutus/time.png"></p>
+				<p class="font-playfair fs-22px">IT’S QUICK!</p>
+				<p class="font-sansRegular fs-14px">Time pressure to move in? Finally changing your old bedroom? You can achieve your dream place in just a few weeks because our online process gathers all the essentials without wasting your time.</p>
+			</div>
+			<div class="edsg-last-spacer">
+				<p><img src="images/aboutus/tailormade.png"></p>
+				<p class="font-playfair fs-22px">TAILOR MADE</p>
+				<p class="font-sansRegular fs-14px">Confused if the sofa and coffee table go together? Is the length right for your room? Our solutions are all tailor-made to your space, so everything fits perfectly. No more guessing games!</p>
+			</div>
+			<div class="edsg-last-spacer">
+				<p><img src="images/aboutus/available1.png"></p>
+				<p class="font-playfair fs-22px">ALWAYS AVAILABLE</p>
+				<p class="font-sansRegular fs-14px">Working online means you can always make changes before you commit. Our collaborative process ensures you can access your designs round the clock and give us comments anytime. </p>
+			</div>
+		</div>
+		</div>
+	
+	</div>
+<div id="edesign" style="min-height:20px;"></div>
+</section>
+<div style="clear:both;"></div> -->
+
+<section id="hp_experience" style="margin-top:60px;">
+	<div style="width:70%;margin:0 auto;">
+	<div style="float:left;width:20%;">
+		<img src="/images/rashi.png" width="100%" height="auto">
+	</div>
+	
+	<div class="container-about-txt" style="padding-top:2%;float:right;width:80%;">
+			<p class="about-title" style="margin-bottom:0px;"> OUR STORY</p>
+			<div style="position:relative;width:80%;margin:0 auto;padding-top:20px;font-family:PlayfairDisplay-Regular;font-size:14px;">
+				<p>
+					We wanted great design to be affordable.<br/><br/>Rashi, a design graduate from Parsons New York, was frustrated by seeing expensive prices from interior firms without transparency on how much room designs would cost. So she set out to create a hub where great design could be affordable, accessible and customized, of course.
+					<br><br>
+					Luckily, she didn't have to look too far for the perfect partner who shared this philosophy. Seema, a interior design veteran with over 15 years of expertise, knows the same principles that make luxury homes so amazing can be applied across any space without high price tags. And with that, Home Philosophy was born. 
+				</p>
+				<br/><br/>
+				<p class="about-title" style="font-size:0.8vw;">FIND OUT MORE ABOUT HOME PHILOSOPHY<a href="/luxury-spaces" target="_blank"> LUXURY SPACES</a></p>
+			</div>
+		</div>
+	</div>
+</section>
+<div style="clear:both;"></div>
+
+<section id="edesign" style="text-align:center;">
+	<div class="edesign-ctr" style="min-height:inherit;">
+		<div style="padding-top:100px;padding-bottom:80px;">
+		<p class="about-title">OUR INSPIRATION</p>
+
+		<div style="width:58%; margin: 0 auto;padding-top:50px;">
+			<iframe src="https://snapwidget.com/embed/405054" class="snapwidget-widget" allowTransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden; width:100%; height:436px"></iframe>
+		</div>
+	</div>
+	<div id="edesign" style="min-height:20px;"></div>
+</section>
+<div style="clear:both;"></div>
+<div style="padding-bottom:60px;"></div>
+<!-- <div class="divider" style="border-top:2px solid rgb(47, 185, 175);"></div> -->
+
+
+	

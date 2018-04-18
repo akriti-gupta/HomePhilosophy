@@ -1,0 +1,104 @@
+<header id="site_header">
+  <a href="/"><div class="hp-logo"></div></a>
+
+  <div id="hp-nav">
+    <ul class="topnav">
+      
+      <li><a href="/style-quiz" id="start-quiz"><button type="button" class="btn-start-quiz btn-topnav  fs-14px">GET STARTED</button></a></li>
+      
+      <li><a href="/how-it-works">How it works</a></li>
+      <li><a href="/pricing">Pricing</a></li>
+      <li><a href="/portfolio" id="portfolio-link">Portfolio</a></li>
+      <li><a href="/about-us">About Us</a></li>
+      <li><a href="/faq">FAQ</a></li>
+      <li><a href="/contact-us">Contact us</a></li>
+      <li>
+        <div ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
+          <a href = "/login">SIGN IN</a>
+        </div>
+	    <div class="dropdown" ng-controller="LoginController" ng-show="identity.isAuthenticated()" >
+	        <a href="#" data-toggle="dropdown">MY ACCOUNT
+	      	<span class="caret nav-dropdown"></span></a>
+	      	<ul class="dropdown-menu" style="min-width:0px;">
+	          	<li style="padding:0px;margin:0;">
+	          		<a href="/admin/users" ng-if="identity.currentUser.role==='admin'" style="font-family:Montserrat-Regular;font-size:13px;">MY PROJECTS</a>
+	          	 	<a href="/dashboard" ng-if="identity.currentUser.role!='admin'" style="font-family:Montserrat-Regular;font-size:13px;">MY PROJECTS</a>
+	          	</li>
+	            <li style="padding:0px;margin:0;"><a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a></li>
+	        </ul>
+	    </div>
+      </li>
+
+      <li style="padding-top:8px;">
+        <a href="/style-quiz" id="start-quiz"><button type="button" class="btn-start-quiz btn-topnav font-montserrat txt-upper col-lightcyan fs-14px">Get Started</button></a>
+      </li>
+
+       <li style="padding-top:8px;">
+       	<div ng-controller="LoginController" ng-show="identity.isAuthenticated()">
+        	<a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a>
+        </div>
+      </li>
+
+    </ul>
+
+    <div class="tab_icon">
+        <a href="javascript:void(0);" onclick="displayDropDown()">&#9776;</a>
+    </div>
+  </div>
+</header>
+
+<!-- <div class="divider" style="border-top:2px solid #e1e1e1;padding:15px;"></div> -->
+ 
+<section id="contactus">
+	 <div class="contact-title">
+			<p class="font-sansRegular" style="padding:10px 0px;">
+				We'd love to hear from you
+			</p>
+	</div>
+
+	<div class="contact-text">
+		<p class="contact-main-text" style="padding:10px 0px;color:rgb(70, 70, 70);">Get in touch</p>
+
+		<p class="contact-subtxt" style="padding-bottom:0px;">
+		We're always available on +65 92726032, or you can leave us a message below and we'll get right back to you.</p>
+
+		
+		<div style="width:100%;margin:0 auto;">
+			<form name="contactUsForm">
+				<ul class="contactus-list">
+					<li>
+						<label for="contact_name">NAME *</label>
+						<div>
+							<input name="contact_name" id="contact_name" type="text" tabindex="1"  class="form-control" ng-required="true" ng-model="contact_name">
+						</div>
+					</li>
+
+					<li>
+						<label for="contact_email">EMAIL *</label>
+						<div>
+							<input name="contact_email" id="contact_email" type="email" tabindex="2" class="form-control" ng-required="true" ng-model="contact_email">
+						</div>
+					</li>
+
+					<li>
+						<label for="contact_phone">PHONE </label>
+						<div>
+							<input name="contact_phone" id="contact_phone" ng-model="contact_phone" type="number" tabindex="3" class="form-control" ng-model="contact_phone">
+						</div>
+					</li>
+				</ul>
+
+				<div style="margin-top:20px;padding:20px 15px 0px;border-top:1px dashed black;">
+					<p class="contact-msg-title">MESSAGE *</p>
+					<textarea rows="9" cols="50" class="form-info font-sansRegular fs-16px contact-msg-box"  id="contactUsMsg" name="contactUsMsg" ng-model="contact_msg" ng-required="true" tabindex="4"></textarea>
+	  			</div>
+
+				<div style="padding:5px 0px 10px 15px;text-align:center;">
+					<button type="submit" class="btn-start-quiz btn-qz font-sansRegular col-lightcyan fs-20px" ng-click="contactUs()" style="padding:10px 20px 10px;" tabindex="5">SUBMIT</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</section>
+
+<div style="padding-bottom:60px;"></div>

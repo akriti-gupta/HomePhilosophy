@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>Home Philosophy - Interior Design Portal, Singapore</title>
+		<meta name="description" content="Home Philosophy is a pioneering online interior design portal, based in Singapore.">
+		<meta name="keywords" content="Interior design, Singapore interior design, Renovation, Home, Affordable, Furniture, Cheap, Best design firm, Reliable Design service, Modern home, Quick renovation, Top rated interior design, Recommended interior designer, Quality, Good pricing renovation, Expat interior design, Innovative designer, Best review, ID singapore Customized home design, Home and decor Singapore, Small budget renovation, Home furnishing singapore">
+		<meta name="robots" content="index, follow">
+		
+		<script src="/vendor/jquery/jquery.js"></script>
+		<script src="/vendor/jquery/slick.min.js"></script>
+		<script src="/vendor/angular/angular.js"></script>
+		<script src="/vendor/angular/angular-route.js"></script>
+		<script src="/vendor/angular/angular-resource.js"></script>
+		<script src="/vendor/angular/angulargrid.min.js"></script>
+		<script src="/vendor/moment.js"></script>
+
+		<!-- Uncomment later after DB implementation -->
+		<script src="/vendor/angular-ui/ui-bootstrap-tpls-2.5.0.min.js"></script>
+	
+
+
+		<script src="/vendor/angular/ng-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
+		<script src="/vendor/angular/ng-file-upload.min.js"></script>
+		<script src="/vendor/toastr/toastr.js"></script>
+		<script src="/vendor/bootstrap/bootstrap.min.js"></script>
+		<script src="/app/app.js"></script>
+		<script src="/app/common/common.js"></script>
+		<script src="/app/common/mvCommon.js"></script>
+		<script src="/app/common/mvUpload.js"></script>
+		<script src="/app/home/mainController.js"></script>
+		<script src="/app/styleQuiz/quizController.js"></script>
+		<script src="/app/account/loginController.js"></script>
+		<script src="/app/home/payment/pricingController.js"></script>
+		<script src="/app/home/payment/paymentController.js"></script>
+
+		<script src="/app/contact/contactController.js"></script>
+		<script src="/app/customer/custViewController.js"></script>
+		<script src="/app/customer/dashboard.js"></script>
+		<script src="/app/customer/mvCustView.js"></script>
+		<script src="/app/customer/svcCustView.js"></script>
+		<script src="/app/styleQuiz/svcQuizResult.js"></script>
+		<script src="/app/styleQuiz/quiz.js"></script>
+		<script src="/app/account/mvIdentity.js"></script>
+		<script src="/app/account/mvAuth.js"></script>
+		<script src="/app/account/mvUser.js"></script>
+		<script src="/app/styleQuiz/mvUserQuiz.js"></script>
+		<script src="/app/home/payment/svcPayment.js"></script>
+		<script src="/app/home/payment/mvPayment.js"></script>
+		<script src="/app/common/mvNotifier.js"></script>
+		<script src="/app/common/mvEmail.js"></script>
+		<script src="/app/styleQuiz/saveDetails.js"></script>
+		<script src="/app/admin/UserListCtrl.js"></script>
+		<script src="/app/admin/mvAdminView.js"></script>
+
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script> 
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/sha1.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/hmac-sha1.min.js"></script> -->
+
+		<script src="/vendor/crypto-js/3.1.9-1/crypto-js.js"></script>
+		<script src="/vendor/crypto-js/3.1.9-1/sha1.min.js"></script>
+		<script src="/vendor/crypto-js/3.1.9-1/hmac-sha1.min.js"></script>
+		<link rel="stylesheet" href="/css/slick.css"/>
+		<link rel="stylesheet" href="/css/slick-theme.css"/>
+		<link rel="stylesheet" href="/css/font-awesome.min.css"/>
+		<link rel="stylesheet" href="/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="/css/quizStyle.css"/>
+		<link rel="stylesheet" href="/css/custom.css"/>
+		<link rel="stylesheet" href="/css/media.css"/>
+		<base href="/">
+	</head>
+
+	<body ng-app="app">	
+		<section id="content-wrapper">
+			<% if(!!bootstrappedUser){%>  
+				<script type="text/javascript">
+					window.bootstrappedUserObject = <%- JSON.stringify(bootstrappedUser)%>
+				</script>
+			<%}%>
+			
+		
+			<div ng-view></div>
+		</section>
+
+		<footer id="site_footer">
+
+			<!-- <div class="flex-ctr footer-ctr"> -->
+  			<div class="footer-logo-ctr">
+  				<!-- <div class="hp-logo-footer">  -->
+		 			<a href="/">
+			            <img src="images/logo_footer.png"/>
+			        </a>	
+		    	<!-- </div> -->
+  			</div>
+  			<div class="flex-ctr footer-ctr">
+  			<div class="flex-child">
+  				<p class="footer-list-header flh1 font-montserrat col-darkgrey txt-upper"> More Information</p>
+		    	<p class="footer-list" style="padding-top:10px;"><a class="font-montserrat col-darkgrey fs-12px" href="/faq" >FAQs</a></p>
+		    	<p class="footer-list"><a class="font-montserrat col-darkgrey fs-12px" href="/terms-and-privacy">Terms and Privacy</a></p>
+  			</div>
+  			<div class="flex-child">
+					<p class="footer-list-header flh2 font-montserrat col-darkgrey txt-upper">Contact Us</p>
+	    		<p class="footer-list" style="padding-top:10px;"><a  class="font-montserrat col-darkgrey fs-12px" href="mailto:hello@homephilosophy.com.sg">hello@homephilosophy.com.sg</a></p>
+	    		<p class="footer-list font-montserrat col-darkgrey fs-12px"> +65 9272 6032</p>
+  			</div>
+  			<div class="flex-child">
+  				<p class="footer-list-header flh3 font-montserrat col-darkgrey txt-upper"> Follow Us</p>
+		    	<p class="footer-list" style="padding-top:10px;"><a href="https://www.instagram.com/homephilosophysg/" target="_blank"><img src="images/instagram.png"/></a> &nbsp;&nbsp;<a href="https://www.pinterest.com/HPSingapore/"><img src="images/pinterest.png"/></a>&nbsp;
+		    		<a href="https://homephilosophysg.wixsite.com/blog/" target="_blank"><img src="images/blog.png"/></a> </p>
+  			</div>
+	  		<!-- </div> -->
+		</footer>
+	</body>
+
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-96228765-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+</html>

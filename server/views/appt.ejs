@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<style type="text/css">
+			p{
+				text-align: center;
+				padding:10px 0px;
+				color: black;
+			}
+			a{
+				text-decoration: none;
+			}
+			.email-title{
+			 	background-color:#000;
+				padding:15px 0px;
+			  	margin:0;color:rgb(248,248,248);
+			  	font-family:PlayfairDisplay-Regular;
+			  	font-size:20px;
+			}
+
+		</style>
+	</head>
+	<body style="width:80%;margin:0 auto;font-family:PlayfairDisplay-Regular;
+				font-size: 16px;padding-top:50px;">
+		<section id="hp-logo">
+			<div style="width:30%;margin:0 auto;padding:15px;">
+				<img src="cid:hplogocustom@homephilosophy.com" width="100%" height="auto">
+			</div>
+		</section>
+
+		<section id="content">
+			<p class="email-title">YOU'RE ALL SET</p>
+			<div style="align-items:center;border:1px solid #ebeced;">
+				<div style="width:70%;margin:0 auto;">
+					<p> Hi <%=mailData.name%> ,</p>
+					<p style="padding-top:10px;">Our Meet and Measure appointment is confirmed!</p>
+					<p style="font-size:20px;padding-top:10px;">See you at <%=mailData.address%> on <%=mailData.apptDate%></p>
+					<p style="padding-top:50px;">Need to make changes to your appointment?</p>
+					<p>Just <a href="http://homephilosophy.com.sg/login" style="color:#64c6be;">LOG IN </a>and edit upto 24 hours in advance.</p>
+					<p style="padding-top:10px;">We look forward to meeting you soon!</p>
+					<p style="padding-top:10px;">Home Philosophy Team</p>
+				</div>
+			</div>
+			<div style="clear:both;"></div>
+			
+			<div style="height:350px;padding-top:50px;margin:0 auto;">  
+				<div style="max-height:0;max-width:0;overflow: visible;">
+        			<div style="width: 715px;display:inline-block;text-align:center;">
+            			<img src="cid:meetbanner@homephilosophy.com" width="100%" height="auto">
+        			</div>
+    			</div>
+
+    			<div style="max-height:0;max-width:0;overflow: visible;">
+        			<div style="width: 715px;height:110px;margin-top: 100px;display:inline-block;text-align:center;background-color:#fff;opacity:0.9;">
+            			<p style="margin:0px;padding-bottom:10px;padding-top:15px;font-size:20px;font-family: serif;">SIT BACK AND RELAX.</p>
+						<p style="color: #009999;font-size: 45px;margin:0px;font-weight:bold;font-family: serif;">It's going to be amazing.</p>
+        			</div>
+    			</div>
+    		</div>
+
+		</section>
+
+		<section id="footer" style="text-align:center;">
+		 	<ul style="list-style:none;padding:0px;">
+		 		<li style="display:inline-block;width:auto;padding:10px 20px;"><a href="http://homephilosophy.com.sg/about-us" style="color:#666666;">HOW IT WORKS</a></li>
+		 		<li style="display:inline-block;width:auto;padding:10px 20px;"><a href="http://homephilosophy.com.sg/pricing" style="color:#666666;">PRICING</a></li>
+		 		<li style="display:inline-block;width:auto;padding:10px 20px;"><a href="http://homephilosophy.com.sg/portfolio" style="color:#666666;">PORTFOLIO</a></li>
+		 		<li style="display:inline-block;width:auto;padding:10px 20px;"><a href="http://homephilosophy.com.sg/faq" style="color:#666666;">FAQ</a></li>
+		 		<li style="display:inline-block;width:auto;padding:10px 20px;"><a href="http://homephilosophy.com.sg/contact-us" style="color:#666666;">CONTACT US</a></li>
+		 	</ul>
+		</section>
+
+
+	</body>
+</html>

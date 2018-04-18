@@ -1,0 +1,340 @@
+<header id="site_header">
+  <a href="/"><div class="hp-logo"></div></a> 
+  <div class="qz-mnu">
+    <ul>
+      <li style="padding-bottom:55px;"><a href="#"><img src="images/menuIcon.png" width="60%" height="auto"></a>
+        <ul class="qz-sub-list">
+          <li ng-controller="LoginController" ng-hide="identity.isAuthenticated()"><a href="/login">Sign In</a></li>
+          <li ng-controller="LoginController" ng-show="identity.isAuthenticated()"><a ng-click="signout()">SIGN OUT</a></li>
+          <!-- <li ng-controller="LoginController" ng-show="identity.isAuthenticated()"><a ng-click="signout()">Sign Out</a></li> -->
+
+          <li ng-controller="LoginController" ng-show="identity.isAuthenticated() && identity.currentUser.isAdmin()"><a href="/admin/users">My Account </a></li>
+          <li ng-controller="LoginController" ng-show="identity.isAuthenticated() && !(identity.currentUser.isAdmin())"><a href="/dashboard" di-href="/dashboard/">My Account </a></li>
+
+          <li ><a href="/how-it-works">How it works</a></li>
+          <li style="margin-bottom:35px;"><a href="/contact-us">Contact us</a></li>
+          
+        </ul>
+      </li>
+    </ul>
+
+  </div>
+</header>
+
+<div class="modal" id="launchedModal" tabindex="-1" role="dialog" aria-labelledby="launchedModalLabel" >
+	<div class="modal-dialog" role="document" >
+		<div class="modal-content">
+			<div class="modal-body comment-modal-body fs-20px" style="background-color:#fff;padding:15px;">
+				<div style="float:right;">
+					<button type="button" aria-label="Close" data-dismiss="modal" style="background:transparent;border:none;"><span>&times;</span></button>
+				</div>
+
+			<div style="padding:20px;padding-top:40px;background-color:rgb(235,235,235);font-family:PlayfairDisplay-Regular;">
+				<p>Your project has been launched!<br/><br/> Please schedule your Meet and Measure or upload your floorplan.</p>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal" id="firstFeedModal" tabindex="-1" role="dialog" aria-labelledby="firstFeedModalLabel" >
+	<div class="modal-dialog" role="document" >
+		<div class="modal-content">
+			<div class="modal-body comment-modal-body fs-20px" style="background-color:#fff;padding:15px;">
+				<div style="float:right;">
+					<button type="button" aria-label="Close" data-dismiss="modal" style="background:transparent;border:none;"><span>&times;</span></button>
+				</div>
+
+			<div style="padding:20px;padding-top:40px;background-color:rgb(235,235,235);font-family:PlayfairDisplay-Regular;">
+				<p>Thank you for your feedback. <br/><br/> We will get back to you with some amazing Final Looks soon!</p>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal" id="finalFeedModal" tabindex="-1" role="dialog" aria-labelledby="finalFeedModalLabel" >
+	<div class="modal-dialog" role="document" >
+		<div class="modal-content">
+			<div class="modal-body comment-modal-body fs-20px" style="background-color:#fff;padding:15px;">
+				<div style="float:right;">
+					<button type="button" aria-label="Close" data-dismiss="modal" style="background:transparent;border:none;"><span>&times;</span></button>
+				</div>
+
+			<div style="padding:20px;padding-top:40px;background-color:rgb(235,235,235);font-family:PlayfairDisplay-Regular;">
+				<p>Thank you for your feedback. <br/><br/> We'll get right to perfecting your Final Look!
+</p>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal" id="msgBuyModal" tabindex="-1" role="dialog" aria-labelledby="msgBuyModalLabel" >
+	<div class="modal-dialog" role="document" >
+		<div class="modal-content">
+			<div class="modal-body comment-modal-body fs-20px" style="background-color:#fff;padding:15px;">
+				<div style="float:right;">
+					<button type="button" aria-label="Close" data-dismiss="modal" style="background:transparent;border:none;"><span>&times;</span></button>
+				</div>
+
+			<div style="padding:20px;padding-top:40px;background-color:rgb(235,235,235);">
+				<p>Thank you for your payment! We will contact you shortly to schedule the delivery of your items.</p>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="divider" style="border-top:2px solid #e1e1e1;padding:0px;"></div>
+<div style="clear:both;"></div>
+
+
+
+ <section id="dashboard" ng-show="showMain" ng-init="getProjectData()" style="padding-top:15px;">
+ 	<div class="modal" id="calendarModal" tabindex="-1" role="dialog" aria-labelledby="calendarModalLabel" >
+  		<div class="modal-dialog" role="document" >
+    		<div class="modal-content">
+      			<div class="modal-header" style="border:none;">
+        			<button type="button" class="close"  aria-label="Close" data-dismiss="modal"><span aria-hidden="true" style="padding-left">&times;</span></button>
+      			</div>
+      
+      			<div class="modal-body comment-modal-body">
+        			<div>
+            			<div style="float:left">
+						    <div style="display:inline-block; min-height:290px;">
+						      <div datepickerPopup uib-datepicker ng-model="apptDate" class="well well-sm" datepicker-options="dateOptions"></div>
+						    </div>
+						</div>
+
+						<div style="float:right;padding-top:10px;">
+							<label for="inputTime">Pick a time between 9:00AM-6:00PM:</label>
+   								<div uib-timepicker datepickerPopup ng-model="apptTime" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian">
+   								</div>
+						</div>
+
+						<button type="button" class="btn-start-quiz btn-qz btn-nxt font-sansRegular col-lightcyan fs-12px" ng-click="clear()"  style="padding:10px 10px 10px; float:right;margin-right:95px;" >Clear Selection</button>
+						
+					</div>
+					<div style="clear:both;"></div>
+
+					<div>
+						<form name="custMtngDetails" enctype="multipart/form-data" style="width:100%;margin:0 auto;" class="font-noto fs-16px" ng-disabled="custMtngDetails.$invalid" >
+							<div class="form-horizontal">
+  								<div class="form-group form-meet-dtls" style="margin:10px 0px;">
+			    					<label for="inputAddress" class="col-sm-4 control-label" style="text-align:left;">Address:</label>
+			    					<div class="col-sm-8">
+			    						<input type="text" class="form-control" id="inputAddress" ng-model="address" ng-required="true">
+			    					</div>
+		  						</div>
+
+		  						<div class="form-group"  style="margin:10px 0px;">
+		    						<label for="inputName" class="col-sm-4 control-label" style="text-align:left;">Contact Person:</label>
+		    						<div class="col-sm-8">
+		      							<input type="text" class="form-control" id="inputName" ng-model="person" ng-required="true">
+		    						</div>
+								</div>
+
+								<div class="form-group"  style="margin:10px 0px;">
+		    						<label for="inputPhone" class="col-sm-4 control-label" style="text-align:left;">Contact Number:</label>
+		    						<div class="col-sm-8">
+		      							<input type="number" class="form-control" id="inputPhone" ng-model="contact" ng-required="true">
+		    						</div>
+								</div>
+
+								<div class="form-group"  style="margin:10px 0px;">
+	    							<label for="inputEmail" class="col-sm-4 control-label" style="text-align:left;">Email:</label>
+	    							<div class="col-sm-8">
+	      								<input type="email" class="form-control" id="inputEmail" ng-model="email" ng-required="true">
+	    							</div>
+								</div>
+
+								<div class="form-group"  style="margin:10px 0px;">
+	    							<div style="padding-bottom:60px;">
+		    							<label for="inputFloorPlan" class="col-sm-11 control-label" style="text-align:left;">Meet and Measure not possible? Upload your floorplan with scale here:
+		    							</label>
+		    						</div>
+
+	        						<div style="width:93%;margin-left:20px;" dropzone1 file-dropzone="[image/png, image/jpeg]" data-max-file-size="5">Drop Files Here
+	        						</div>
+						         	<div style="width:93%;margin-left:20px;">
+										<div ng-repeat="file in pendingDropFiles track by $index">
+										  <div style="margin-bottom:10px;width:90%;float:left;background-color:#00a99d;color:#fff;">{{file.name}} ({{file.size}}) </div>
+										  <div style="width:10%;float:right;background-color:#00a99d;color:#fff;">
+										  	<a href="#" ng-click="removeFileFromQ($index,1)">x</a>
+										  </div>
+										</div>
+									</div>
+        						</div>
+        	
+								<div id="file-name" style="width:50%;">
+									<div ng-repeat="file in pendingFilesArr track by $index">
+				  						<div style="margin-bottom:10px;width:90%;float:left;background-color:#00a99d;color:#fff;">{{file.name}} ({{file.size}}) </div>
+				  						<div style="width:10%;float:right;background-color:#00a99d;color:#fff;">
+				  						<a href="#" ng-click="removeFileFromQ($index)">x</a>
+				  						</div>
+									</div>
+								</div>
+							</div>
+							<div style="text-align:center;padding:30px 0px 40px;">
+    							<button id="form-calendar" type="submit" class="btn-start-quiz btn-qz btn-nxt font-sansRegular txt-upper col-lightcyan fs-20px" ng-click="saveAppointment($event)" data-row-id="" style="padding:10px 20px 10px; float:right;" >SUBMIT</button>
+    							 <!-- data-dismiss="modal" -->
+  							</div>
+						</form>
+					</div> 
+      			</div> 
+    		</div>
+  		</div>
+	</div>
+
+	<p style="font-family:PlayfairDisplay-Regular;font-size:22px;padding-top:50px;"> {{firstName}}'s Personalized Room Design</p>
+	<div class="data-dashboard" >
+		<table class="table table-bordered">
+			<thead>
+			    <tr>
+			      <th style="text-align:center;">ROOM</th>
+			      <th style="text-align:center;">STYLE</th>
+			      <th style="text-align:center;">PACKAGE</th>
+			      <th style="text-align:center;">STATUS</th>
+			      <th style="text-align:center;">DELETE</th>
+			    </tr>
+		  	</thead>
+		  	<tbody>
+		    	<tr ng-repeat="item in projectArr track by $index">
+			      	<th scope="row" style="text-align:center;vertical-align:middle;">
+			      	 	<figure>
+			            	<img class="center-block" ng-src={{roomImage[item.roomData]}}>
+			        	</figure>
+			      	</th>
+				      <td style="text-align:center;vertical-align:middle;">{{styleName[item.resultData[0].styleId]}}</td>
+				      <td style="text-align:center;vertical-align:middle;">
+				      	<div  ng-if="!item.pkgData|| item.pkgData.length===0"><a href="#" ng-click="selectPkg($index)">Finalize a Package at Payment</a></div>
+						<div ng-if="packageName[item.pkgData.pkgId]!=' '">{{packageName[item.pkgData.pkgId]}}</div>
+					 	</div>
+				      </td>
+				      <td  style="text-align:center;vertical-align:middle;">
+				      	<div ng-if="item.status.linkPage===' ' && item.status.modal===' '">{{item.status.statusText}}<br/></div>
+
+				    	<div  ng-if="item.status.linkPage!=' ' && item.status.stage!='payment' && item.status.stage!='quizDetails'" ><a href="#" ng-click="getFirstLook($index,item.roomObj.id)" style="color:#64c6be;">{{item.status.statusText}}</a></div>
+
+				    	<div ng-if="item.status.linkPage!=' ' &&  item.status.stage==='payment'" ><a href="#" ng-click="pricing($index)" style="color:#64c6be;">{{item.status.statusText}}</a></div>
+
+						<div  ng-if="item.status.linkPage!=' ' && item.status.stage==='quizDetails'" style="color:#64c6be;" ><a href="#" ng-click="getQuizDetail($index)">{{item.status.statusText}}</a></div>
+
+		 				<div id="cal_popup"  ng-if="item.status.modal!=' '"><a href="#" ng-click="loadMtngData($index)" data-toggle="modal" data-target="#calendarModal" data-id="{{$index}}" style="color:#64c6be;">{{item.status.statusText}}</a></div>
+
+				    </td>
+			      	<td  style="text-align:center;vertical-align:middle;">
+			      		<div  ng-if="item.quizData.status===-1"><a href="#" ng-click="removeRoom($index)"><span class="glyphicon glyphicon-trash" style="font-size:12px;"></span></a></div>
+
+ 						<div  ng-if="item.quizData.status!=-1">&nbsp;</div>
+			      	</td>
+		    	</tr>
+		 	</tbody>
+		</table>
+
+
+		<div class="row-dashboard" style="padding:20px 0px;" ng-if="hasActiveProject">
+		<a href="#" ng-click="addRoom()"><button type="submit" class="btn-start-quiz btn-nxt " style="padding:10px; float:right;" >Start a New Project</button></a>
+		</div>
+
+		<div style="padding-bottom:40px;"></div>
+		<div class="divider" style="border-top:2px solid rgb(47, 185, 175);"></div>
+	</div>
+</section>
+
+
+<div id="feedback" ng-show="showFeedback" >
+
+	<div class='fdbk-pnl1'>
+	
+	<div ng-repeat="item in images track by $index" style="padding-bottom: 50px;text-align:center;">
+		<a href="#" ng-click="zoomImg($index)" ng-if="item.indexOf('.pdf')===-1">
+			<img src={{item}} width="100%">
+		</a>
+		<p ng-show="!isFinalPage">Option {{$index+1}}</p>
+	</div>
+	<div style="text-align:center;" ng-show="!isFinalPage">
+		<button type="submit" class="btn-start-quiz btn-fdbk" ng-click="submitFeedback(0)">SUBMIT FEEDBACK</button>
+	</div>
+
+	
+	</div>
+
+	<div class="fdbk-pnl2">
+		
+		<!-- <div style="flex:1.5;padding:30px;border-left:4px solid #e1e1e1;"> -->
+		<p class="stp-head-maintxt" style="padding-bottom:10px;">{{lookText}}</p>
+
+		<p><img src="{{zoomImgSrc}}" width="100%"></p>
+		<p style="font-family:Montserrat-Regular;padding-top:40px;font-size:16px;" ng-if="designerNotes!=null && designerNotes!=' '">DESIGNER COMMENTS : <span style="font-family:PlayfairDisplay-Regular;">{{designerNotes}}</span></p>
+
+		<div ng-show="isFinalPage" style="font-family:PlayfairDisplay-Regular;font-size:22px;padding-top:15px;">
+			<p>
+				<a target="_self" href="/downloadFile/{{shoppingList}}" class="dwnld-shp-txt" ng-if="item.indexOf('.pdf')!=-1">Download Your Shopping List</a>
+			</p>
+		
+			<div ng-show="showBuy">
+				<p style="padding-top:50px;">Want hassle-free delivery to your home?&nbsp;&nbsp;
+				<a href="#" ng-click="buyForMe()"><button type="submit" class="btn-start-quiz btn-nxt">BUY FOR ME</button></a>
+				</p>
+			</div>
+		</div>
+
+		<div style="padding-top:20px;display:block;text-align:center;" ng-show="!isFinalPage">
+			<form name="feedbackForm" enctype="multipart/form-data">
+				<textarea rows="9" cols="50" class="form-info font-sansRegular fs-16px" style="resize:none;border:1px solid #acacac;width:89%;" id="feedbackComment" name="feedbackComment" ng-model="feedbackComment" placeholder="Tell us what you like and don’t about your new space! We can incorporate all the things you like across the moodboards into the final look- so give us as many details of what we should keep, change, and if you want something specific added"></textarea>
+
+				<div style="padding-top:20px;width:90%;margin:0 auto;text-align:left;">
+					<label>
+	            		<input type="file" multiple ngf-pattern="'image/*'" accept="image/*" ngf-max-size="10MB" style="display:none;" onchange="angular.element(this).scope().addFileToUploadQ(this)"/>
+	            		<u>Click to send us your inspiration images</u>
+	            	</label>
+
+	            	<div style="width:60%;" style="padding-top:40px;">
+	                	<div ng-repeat="file in pendingFilesArr track by $index">
+			             	<div style="margin-bottom:10px;width:90%;float:left;background-color:#00a99d;color:#fff;padding-left:20px;">{{file.name}} ({{file.size}}) </div>
+			              	<div style="width:10%;float:right;background-color:#00a99d;color:#fff;">
+			                	<a href="#" ng-click="removeFileFromQ($index,1)">x</a>
+			              	</div>
+			            </div>
+		            </div>
+				</div>
+
+				<div style="text-align:right;width:90%;margin:0 auto;padding-top:20px;">
+					<button type="submit" class="btn-start-quiz fs-20px" ng-click="submitFeedback(-1)" style="padding:10px 20px 10px;" >SAVE</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	<div class="divider" style="clear:both;"></div>
+
+</div>
+
+
+<div style="width:80%;margin:0 auto;position:relative;text-align:center;padding-bottom:100px;">
+		<form ng-form-commit  action="https://secure.smoovpay.com/access" method="post" name="buyShpngForm">
+			<input type="hidden" name="action" value="pay" />
+			<input type="hidden" name="currency" value="SGD" />
+			<input type="hidden" name="version" value="2.0" />
+			<input type="hidden" name="item_name_1" value="Buy For Me" />
+			<input type="hidden" name="item_description_1" value="Get your items delivered">
+			<input type="hidden" name="item_quantity_1" value="1" />
+			<input type="hidden" name="item_amount_1" value="250.00" />
+			
+			<input type="hidden" name="merchant" value="rashi@homephilosophy.com.sg" />
+			<input type="hidden" name="ref_id" value="{{ref_id}}" />
+			<input type="hidden" name="delivery_charge" value="0.00" />
+			<input type="hidden" name="tax_amount" value="0.00" />
+			<input type="hidden" name="tax_percentage" value="0.00" />
+			<input type="hidden" name="total_amount" value="250.00" />
+			<input type="hidden" name="success_url" value="http://homephilosophy.com.sg/dashboard" />
+			<!-- <input type="hidden" name="success_url" value="http://localhost:8006/dashboard" /> -->
+			<!-- <input type="hidden" name="cancel_url" value="http://homephilosophy.com.sg/dashboard" /> -->
+			<input type="hidden" name="cancel_url" value="http://homephilosophy.com.sg/dashboard" />
+			<input type="hidden" name="signature" value="{{signature}}" />
+			<input type="hidden" name="signature_algorithm" value="sha1" />
+			<input type="hidden" name="skip_success_page" value="1" />
+		</form>
+		</div>

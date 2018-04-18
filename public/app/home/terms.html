@@ -1,0 +1,117 @@
+<header id="site_header">
+  <a href="/"><div class="hp-logo"></div></a>
+
+  <div id="hp-nav">
+    <ul class="topnav">
+      
+      <li><a href="/style-quiz" id="start-quiz"><button type="button" class="btn-start-quiz btn-topnav  fs-14px">GET STARTED</button></a></li>
+      
+      <li><a href="/how-it-works">How it works</a></li>
+      <li><a href="/pricing">Pricing</a></li>
+      <li><a href="/portfolio" id="portfolio-link">Portfolio</a></li>
+      <li><a href="/about-us">About Us</a></li>
+      <li><a href="/faq">FAQ</a></li>
+      <li><a href="/contact-us">Contact us</a></li>
+      <li>
+        <div ng-controller="LoginController" ng-hide="identity.isAuthenticated()">
+          <a href = "/login">SIGN IN</a>
+        </div>
+      <div class="dropdown" ng-controller="LoginController" ng-show="identity.isAuthenticated()" >
+          <a href="#" data-toggle="dropdown">MY ACCOUNT
+          <span class="caret nav-dropdown"></span></a>
+          <ul class="dropdown-menu" style="min-width:0px;">
+              <li style="padding:0px;margin:0;">
+                <a href="/admin/users" ng-if="identity.currentUser.role==='admin'" style="font-family:Montserrat-Regular;font-size:13px;">MY PROJECTS</a>
+                <a href="/dashboard" ng-if="identity.currentUser.role!='admin'" style="font-family:Montserrat-Regular;font-size:13px;">MY PROJECTS</a>
+              </li>
+              <li style="padding:0px;margin:0;"><a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a></li>
+          </ul>
+      </div>
+      </li>
+
+      <li style="padding-top:8px;">
+        <a href="/style-quiz" id="start-quiz"><button type="button" class="btn-start-quiz btn-topnav font-montserrat txt-upper col-lightcyan fs-14px">Get Started</button></a>
+      </li>
+
+       <li style="padding-top:8px;">
+        <div ng-controller="LoginController" ng-show="identity.isAuthenticated()">
+          <a style="font-family:Montserrat-Regular;font-size:13px;" ng-click="signout()">SIGN OUT</a>
+        </div>
+      </li>
+
+    </ul>
+
+    <div class="tab_icon">
+        <a href="javascript:void(0);" onclick="displayDropDown()">&#9776;</a>
+    </div>
+  </div>
+</header>
+
+<section id="terms" style="width:80%;margin:0 auto;padding:50px 0px 100px;">
+	<span style="font-family:OpenSans-Bold;"><u>HOME PHILOSOPHY PRIVACY AND T&amp;C POLICY</b></u></span><br/><br/>
+	<span>Home Philosophy Private Limited ("us", "we", or "our") operates the www.homephilosophy.com.sg website (the "Service"). Home Philosophy is committed to protecting the privacy of visitors to this site (the "Site"). This Terms and Privacy Policy applies to the Site. This Terms and Privacy Policy does not apply to other web sites to which we link. </span><br/><br/>
+	<span>You agree that your use of the Site signifies your assent to this Terms and Privacy Policy. If you do not agree with this Terms and Privacy Policy, please do not use the Site.</span><br/><br/>
+	<span>We will not use or share your information with anyone except as described in this Policy. We use your Personal Information for providing and improving the Service. By using the Service, you agree to the collection and use of information in accordance with this policy. </span><br/><br/>
+	<span>We reserve the right at any time, with or without cause, to:</span>
+	<ul>
+		<li>change the terms and conditions of this Agreement;</li>
+		<li>change the Website, including eliminating or discontinuing any Information or Services or other feature of the Website; or</li>
+		<li>deny or terminate your use of and/or access to the Website.</li>
+	</ul>
+	<br/><br/>
+	<span style="font-family:OpenSans-Bold;">Information Collection And Use</span><br/><br/>
+	<span>While using our Service, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you. Personally identifiable information may include, but is not limited to, your name, phone number, email address, residential address ("Personal Information").</span><br/>
+	<br/><span>We do not knowingly collect personal information from children under the age of 13. If you are under the age of 13, please do not use the Home Philosophy site or services.<br/><br/>
+	
+	<span style="font-family:OpenSans-Bold;">Log Data</span><br/><br/>
+	We collect information that your browser sends whenever you visit our Service ("Log Data"). This Log Data may include information such as your computer's Internet Protocol ("IP") address, browser type, browser version, the pages of our Service that you visit, the time and date of your visit, the time spent on those pages and other statistics.<br/><br/>
+	Access to certain functionalities of the Website will require you to register with and/or provide certain information to Home Philosophy. We reserve the right to decline to provide Services to any person for any or no reason. If and when you register with or provide information to Home Philosophy, you agree to (a) provide accurate, current and complete information about yourself as prompted (including your email address) and (b) maintain and update your information (including your email address) to keep it accurate, current and complete. You acknowledge that, if any information provided by you is untrue, inaccurate, not current or incomplete, we reserve the right to terminate this Agreement and your use of the Website, Services, and/or Information.
+<br/><br/>
+
+<span style="font-family:OpenSans-Bold;">Cookies</span><br/><br/>
+Cookies are files with small amount of data, which may include an anonymous unique identifier. Cookies are sent to your browser from a web site and stored on your computer's hard drive.<br/>
+We use "cookies" to collect information. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to use some portions of our Service.<br/><br/>
+
+<span style="font-family:OpenSans-Bold;">Service Providers</span><br/><br/>
+We may employ third party companies and individuals to facilitate our Service, to provide the Service on our behalf, to perform Service-related services or to assist us in analyzing how our Service is used.
+These third parties have access to your Personal Information only to perform these tasks on our behalf and are obligated not to disclose or use it for any other purpose.<br/><br/>
+
+<span style="font-family:OpenSans-Bold;">Links To Other Sites</span><br/><br/>
+We do not sell or rent your personal information to third parties for their marketing purposes without your explicit consent. However, please take note:<br/><br/>
+Our Service may contain links to other sites that are not operated by us; alternatively we may provide links to websites operated by companies other than Home Philosophy that we believe may be of interest to you. Except as set forth above, we do not disclose your personal information to the operators of such third-party websites without obtaining your consent.<br/><br/>
+If you click on a third party link, you will be directed to that third party's site. We strongly advise you to review the Privacy Policy of every site you visit.
+We have no control over, and assume no responsibility for the content, privacy policies or practices of any third party sites or services.<br/><br/>
+The fact that we offer such links does not indicate any approval or endorsement by us of any linked website or any material contained on any linked website, and we disclaim any such approval or endorsement.<br/><br/><br/>
+
+<span style="font-family:OpenSans-Bold;">Payment</span><br/><br/>
+Our services use the payment platform provided by SmoovPay. SmoovPay includes the following security protection when making a payment via their payment gateway:<br/><br/>
+“Once logged into your Account, all internet communication is secured using Secure Socket Layer (SSL) technology with high security 128bit encryption, certified by Verisign Secured. However, this high level of protection can only be effective if you follow certain security practices yourself. You must never share your Account or login details with anyone. If you are concerned that any of your login details have been compromised, you can change them any time you like once you are logged on, however you should immediately contact Customer Services and tell us why you think your login details have been compromised.” 
+<br/><br/>
+Please read SmoovPay’s Account Terms of Use for further information on how to keep your SmoovPay Account safe.<br/><br/>
+
+<span style="font-family:OpenSans-Bold;">Images Use and Ownership</span><br/><br/>
+The contents of all material available on this website are our own and copyrighted unless otherwise indicated; images may be obtained from sources in line with ‘fair use’ policies.  If you own rights to any of the images, and do not wish them to appear here, please contact us and they will be promptly removed. All rights are reserved and content may not be reproduced, downloaded, disseminated, published, or transferred in any form or by any means, except with the prior written permission of Home Philosophy Private Limited. 
+<br/><br/>
+
+<span style="font-family:OpenSans-Bold;">Security</span><br/><br/>
+To prevent unauthorized access, promote data security, and encourage appropriate use of information, we use a variety of tools to assist in the protection of your personal information. <br/><br/>
+The security of your Personal Information is important to us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your Personal Information, we cannot guarantee its absolute security.
+<br/><br/>
+
+<span style="font-family:OpenSans-Bold;">Children's Privacy</span><br/><br/>
+Our Service does not address anyone under the age of 13 ("Children").<br/>
+We do not knowingly collect personally identifiable information from children under 13. If you are a parent or guardian and you are aware that your Children has provided us with Personal Information, please contact us. If we discover that a Children under 13 has provided us with Personal Information, we will delete such information from our servers immediately.<br/><br/>
+
+
+<span style="font-family:OpenSans-Bold;">Changes To This Policy</span><br/><br/>
+We may update our Terms and Privacy Policy from time to time. We will notify you of any changes by posting the new Policy on this page.<br/>
+You are advised to review this Terms and Privacy Policy periodically for any changes. Changes to this Policy are effective when they are posted on this page.<br/><br/>
+
+<span style="font-family:OpenSans-Bold;">Governing Law</span><br/><br/>
+These Terms of Service and any separate agreements whereby we provide you Services shall be governed by and construed in accordance with the laws of The Republic of Singapore. The Courts at Singapore shall have exclusive jurisdiction in any proceedings arising out of this agreement.<br/><br/>
+
+<span style="font-family:OpenSans-Bold;">Contact Us</span><br/><br/>
+If you have any questions about this Terms and Privacy Policy, please contact us at rashi@homephilosophy.com.sg or +65 92726032. 
+
+</section>
+<div class="divider" style="border-top:2px solid rgb(47, 185, 175);"></div>

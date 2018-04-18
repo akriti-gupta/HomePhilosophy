@@ -1,0 +1,5 @@
+.DS_Store
+Documents/*
+public/images.zip
+bower_components/*
+public/uploads/*
