@@ -1,3 +1,4 @@
+require('dotenv').config();
 var path = require('path');
 var rootPath = path.normalize(__dirname + '/../..');
 
@@ -21,8 +22,8 @@ module.exports = {
 	},
 	mailer: {
     	auth: {
-      		user: 'hello@homephilosophy.com.sg',
-      		pass: 'erushierushi'
+      		user: process.env.ADMIN_USER,
+      		pass: process.env.ADMIN_KEY
     	},
     defaultAddress: 'Home Philosophy <hello@homephilosophy.com.sg>',
     // defaultAddress: 'Home Philosophy <guptaakriti83@gmail.com>',

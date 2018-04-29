@@ -6,7 +6,6 @@ var multer = require('multer'),
 	userQuiz = require('../controllers/userQuiz'),
 	passport = require('passport'),
 	payment = require('../controllers/payment'),
-	// filesys = require('fs'),
 	userProject = require('../controllers/userProject'),
 	common = require('../controllers/common');
 

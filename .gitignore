@@ -3,3 +3,5 @@ Documents/*
 public/images.zip
 bower_components/*
 public/uploads/*
+.env
+node_modules/*

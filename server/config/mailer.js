@@ -14,14 +14,6 @@ var transporter = nodemailer.createTransport({
     }
 });
 
-// var transporter = nodemailer.createTransport({
-//   service: 'Gmail',
-//   auth: {
-//     user: 'guptaakriti83@gmail.com',
-//     pass: 'Schmooz@14'
-//   }
-// });
-
 var sendMail = function(fromAddress,toAddress,ccAddress,bccAddress,subject, content,attachments,next){
   var mailOptions = {
     from: fromAddress,
@@ -54,6 +46,8 @@ exports.sendEmail = function(req, res){
     var apptDate='';
     var bccAddress='';
     var quizId =-1;
+
+    //Array to hold images for different email templates
     var attachments = [{filename: 'logo_header.png',
                         path: '/root/HomePhilosophy/public/images/logo_header.png',
                         // path: './public/images/logo_header.png',
@@ -100,7 +94,7 @@ exports.sendEmail = function(req, res){
     }
 
     if(template==='login'){
-        attachments.push({filename: 'login_banner_top.png',path: '/root/HomePhilosophy/public/images/mails/login_banner_top.png',cid: 'logintopbanner@homephilosophy.com'});   
+        attachments.push({filename: 'login_banner_top.png',path: './public/images/mails/login_banner_top.png',cid: 'logintopbanner@homephilosophy.com'});   
         attachments.push({filename: 'like1.png',path: '/root/HomePhilosophy/public/images/like1.png',cid: 'loginlike@homephilosophy.com'});
         attachments.push({filename: 'measure1.png',path: '/root/HomePhilosophy/public/images/measure1.png',cid: 'loginmeasure@homephilosophy.com'});
         attachments.push({filename: 'design1.png',path: '/root/HomePhilosophy/public/images/designs1.png',cid: 'logindesign@homephilosophy.com'});
@@ -139,23 +133,22 @@ exports.sendEmail = function(req, res){
     }
 
     ejs.renderFile('/root/HomePhilosophy/server/views/'+template+'.ejs',{mailData},function(err,html){
-    // ejs.renderFile(process.cwd() +'/server/views/'+template+'.ejs',{mailData},function(err,html){
+    //  ejs.renderFile(process.cwd() +'/server/views/'+template+'.ejs',{mailData},function(err,html){
         if(err){
             console.log(err);
         }
         else{
-            sendMail(fromAddress,toAddress,ccAddress,bccAddress,subject, html, attachments,function(err, response){
-            // sendMail(fromAddress,toAddress,bccAddress,subject, html,function(err, response){
+            sendMail(fromAddress,toAddress,ccAddress,bccAddress,subject, 
+            html, attachments,
+            function(err, response){
+             //sendMail(fromAddress,toAddress,bccAddress,subject, html,function(err, response){
                 if(err){
-                    console.log('err in sending mail:');
-                    console.log(err);
-                  return res.send({success:false,error:err});
+                    return res.send({success:false,error:err});
                 }
                 else{
-                    console.log('Mail success');
                     return res.send({success:true});
                 }
-              }); 
+            }); 
         }
     });
 };

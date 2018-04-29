@@ -8,33 +8,35 @@ var passport = require('passport'),
 
 module.exports = function(){
     passport.use(new LocalStrategy(
-        function(username, password, done){
-            mysqlConn.getConnection(function(err,conn){
-                if(err){
-                    console.log('Err in getting mysql conn: '+err);
-                    return(err, false);
-                }
-                if(conn){
-                    conn.query('Select * from user where username = '+conn.escape(username), function(err, results, fields){
-                        if(results && results.length > 0){
-                            if(User.authenticate(password,results[0].salt,results[0].password)){
-                                conn.release();
-                                return done(null,results[0]);
-                            }
-                            else{
-                                conn.release();
-                                return done(null, false);
-                            }
+      function(username, password, done){
+        mysqlConn.getConnection(function(err,conn){
+            if(err){
+                //console.log('Err in getting mysql conn: '+err);
+                return(err, false);
+            }
+            if(conn){
+                conn.query('Select * from user where username = '+ 
+                  conn.escape(username), 
+                  function(err, results, fields){
+                    if(results && results.length > 0){
+                        if(User.authenticate(password,results[0].salt,
+                        results[0].password)){
+                            conn.release();
+                            return done(null,results[0]);
                         }
                         else{
                             conn.release();
-                            return done(null,false);
+                            return done(null, false);
                         }
-
-                    });
-                }
-            });
-        }
+                    }
+                    else{
+                        conn.release();
+                        return done(null,false);
+                    }
+                });
+            }
+        });
+      }
     ));
 
 
@@ -46,12 +48,7 @@ module.exports = function(){
         clientID        : '1123799114413407',
         clientSecret    : 'bd3dea47fe556f93f9a8895acd34763c',   
         callbackURL     : 'http://homephilosophy.com.sg/auth/facebook/callback',
-
-        // clientID        : '118647685254312',
-        // clientSecret    : '00b53f5364ad582f67c1ba5d7e269acd',   
-        // callbackURL     : 'http://localhost:8006/auth/facebook/callback',
         profileFields: ['id', 'displayName', 'email'],
-       // passReqToCallback : true,
         enableProof: true,
         session: false,
 
@@ -61,40 +58,41 @@ module.exports = function(){
     function(token, refreshToken, profile, done) {
         // asynchronous
         process.nextTick(function() {
-            console.log('abc : '+profile);
-            console.log(profile);
-
-            // find the user in the database based on their facebook id
+            // Find the user in the database based on their facebook id
                mysqlConn.getConnection(function(err,conn){
                 if(err){
                     console.log('Err in getting mysql conn: '+err);
                     return done(err, false);
                 }
+                //User exists.
                 else if(conn && typeof profile !='undefined'){
-                    conn.query('Select * from user where fbId = '+conn.escape(profile.id), function(err, results, fields){
+                    conn.query('Select * from user where fbId = '+
+                      conn.escape(profile.id),
+                      function(err, results, fields){
                         if(err){
-                           conn.release();
+                            conn.release();
                             return done(err, false); 
                         }
                         if(results && results.length > 0){
                             conn.release();
-                            console.log('Found');
                             return done(null,results[0]);
                         }
-                         else {
-                            console.log('Create a new user for: ');
-                            console.log(profile);
-                            var userData = {fbId:profile.id, firstname: profile.displayName,username:profile.emails[0].value}
+                        else {
+                            // New user login through FB. Save in DB.
+                            var userData = {fbId:profile.id, 
+                                            firstname: profile.displayName,
+                                            username:profile.emails[0].value}
                            
-                            conn.query('insert into user set ?',userData, function(err, results, fields){
+                            conn.query('insert into user set ?',userData, 
+                              function(err, results, fields){
                                 if(err){
-                                    console.log('Error in inserting user data from fb '+err);
                                     conn.release();
                                     return done(err,false);
                                 }
                                 else{
-                                    console.log(results);
-                                    conn.query('Select * from user where id='+results.insertId, function(err,res,fields){
+                                    conn.query('Select * from user where id='
+                                      +results.insertId, 
+                                      function(err,res,fields){
                                         if(err){
                                             return done(err,false);
                                         }
@@ -102,25 +100,17 @@ module.exports = function(){
                                             return done(null,res[0]);        
                                         }
                                     });
-                                    
                                 }
                             });
                          } 
-                       
                     });
                 }
                 else{
-                    var err1 = new Error('Facebook Profile not found');
-                    console.log('Profile is undefined');
-                    return done(err1,false);
+                    var err = new Error('Facebook Profile not found');
+                    return done(err,false);
                 }
-
-              
-
             });
         });
-        console.log('In FB auth end');
-
     }));
 
 	passport.serializeUser(function(user,done){
@@ -132,9 +122,10 @@ module.exports = function(){
     passport.deserializeUser(function(id,done){
         mysqlConn.getConnection(function(err,conn){
             if(conn){
-                conn.query('Select * from user where id = '+conn.escape(id), function(err, results, fields){
+                conn.query('Select * from user where id = '
+                  +conn.escape(id), 
+                  function(err, results, fields){
                     if(err){
-                        console.log('Err in deserializeUser: '+err);
                         conn.release();
                         return done(null, false);
                     }
