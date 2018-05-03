@@ -10,7 +10,6 @@ var multer = require('multer'),
 	common = require('../controllers/common');
 
 
-
 var storage =   multer.diskStorage({
   destination: function (req, file, callback) {
     // callback(null, './public/uploads/');

@@ -11,9 +11,7 @@ angular.module("app")
 				if($scope.identity.isAuthenticated() && !isFBLoggedIn){
 					$location.path('/');
 				}
-				// else if(quizResult.getStyle().length>1){
-
-				// }
+				
 				if(isFBLoggedIn){
 					var result = JSON.parse(window.localStorage.getItem('result'));
 					var userSelectionInfo = JSON.parse(window.localStorage.getItem('userSelectionInfo'));
@@ -56,29 +54,20 @@ angular.module("app")
 		  					$location.path('/admin/users');
 		  				}
 		  				else{
-			  		// 		mvUserQuiz.getExistingPrjs().then(function(projects){
-							// 	if(projects){
-							// 		$location.path('/dashboard');
-							// 	}
-							// });
-
-			  				if(quizResult.getStyle().length>=1){
+					  		if(quizResult.getStyle().length>=1){
 			  					var result = quizResult.getStyle();
 			  					var userSelectionInfo = quizResult.getCustSelections();
-			  					// mvUserQuiz.saveUserData(userSelectionInfo, result).then(function(userQuiz){
 			  					mvUserQuiz.saveUserData(userSelectionInfo, result, false,quizResult.getUserCurrQuiz()).then(function(userQuiz){
 			  						quizResult.setUserCurrQuiz(userQuiz[0].quizId);
 			  						quizResult.setInsertedRooms(userQuiz[1].data.results.roomData);
 			  						mvNotifier.notify('Login success!');
 			  						if(userSelectionInfo.quizImgSelected.length===1){
-			  							// $location.path('/tell-us-more');
 			  							$location.path('/pricing');
 			  						}
 			  						$location.path('/style-quiz');
 			  					}, function(reason){
 			  							$scope.showWait = false;
 			  							mvNotifier.error(reason);
-			  							//alert(reason);
 			  					});
 			  				}
 			  				else{
@@ -136,7 +125,6 @@ angular.module("app")
 		  			if(quizResult.getStyle().length>=1){
 		  				var userSelectionInfo = quizResult.getCustSelections();
 		  				var result = quizResult.getStyle();
-		  				// mvUserQuiz.saveUserData(userSelectionInfo,result).then(function(userQuiz){
 		  				mvUserQuiz.saveUserData(userSelectionInfo, result, false,quizResult.getUserCurrQuiz()).then(function(userQuiz){
 		  					quizResult.setUserCurrQuiz(userQuiz[0].quizId);
 		  					quizResult.setInsertedRooms(userQuiz[1].data.results.roomData);
@@ -145,7 +133,6 @@ angular.module("app")
 		  				}, function(reason){
 		  					$scope.showWait = false;
 		  					mvNotifier.error(reason);
-		  					// alert(reason);
 		  				});
 		  			}
 		  			else{
@@ -184,12 +171,10 @@ angular.module("app")
 				var roomArr = cust_selections.roomSelected;	
         		var imgArr = cust_selections.quizImgSelected;
 
-				// mvUserQuiz.saveUserData(result).then(function(){
 				mvUserQuiz.saveUserData(userSelectionInfo,result,false,quizResult.getUserCurrQuiz()).then(function(userQuiz){
 		  			mvNotifier.notify('User account created!');
 		  		}, function(reason){
 		  			mvNotifier.error(reason);
-		  			// alert(reason);
 		  		});
 
 		  	}
