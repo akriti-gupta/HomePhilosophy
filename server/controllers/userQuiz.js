@@ -2,6 +2,7 @@ var mysqlConn = require('../config/mysqlConn'),
 	async = require('async');
 	userProject = {};
 
+//API to create a new quiz or update an existing one.
 exports.createUserQuiz = function(req,res,next){
 	var customerId = req.body.customerId;
 	var status = req.body.status;
@@ -56,7 +57,7 @@ exports.createUserQuiz = function(req,res,next){
 	});
 }
 
-
+// Function to create or update existing Quiz Result for a input Quiz ID 
 function updQzResult(conn,quizId,data,cb){
 
 	conn.query('delete from cust_quiz_result where quizId = ?',quizId, 
@@ -78,17 +79,16 @@ function updQzResult(conn,quizId,data,cb){
 	});
 }
 
+// Function to create or update existing Rooms selected for a input Quiz ID
 function updQzRoom(conn,quizId,data,cb){
 
 	conn.query('delete from cust_room_selection where quizId = ?',quizId, function(err, results, fields){
 		if(err){
-			console.log('Error while deleting prev room selection info '+err);
 			cb(err,null);
 		}
 		else{
 			conn.query('insert into cust_room_selection(quizId,roomId,roomName,numRoom) values ?',[data], function(err, results, fields){
 				if(err){
-					console.log('Error in saving room selection data'+err);
 					cb(err,null);
 				}
 				conn.query('select * from cust_room_selection where quizId=?',quizId, function(err, results, fields){
@@ -103,15 +103,14 @@ function updQzRoom(conn,quizId,data,cb){
 	});
 }
 
+// Function to create or update style images selected for a input Quiz ID
 function updQzImg(conn,quizId,data,cb){
 
 	conn.query('delete from cust_img_selection where quizId =? ',quizId, function(err, results, fields){
 		if(err){
-			console.log('Error while deleting prev img selection info '+err);
 			cb(err,null);
 		}
 		else{
-			console.log('Deleted prev img selections');
 			conn.query('insert into cust_img_selection(quizId,questionId,selectedImgId) values ? ',[data], function(err, results, fields){
 				if(err){
 					console.log('Error in saving img selection data'+err);
@@ -123,7 +122,7 @@ function updQzImg(conn,quizId,data,cb){
 		
 	});
 }
-
+// Function to create or update existing images selected from Inspiration board for a input Quiz ID
 function updQzPinImgs(conn,quizId,data,cb){
 
 	if(!isEmpty(data)){
@@ -155,6 +154,8 @@ function updQzPinImgs(conn,quizId,data,cb){
 		cb(null,true);
 	}
 }
+
+// API to save comments for images selected from Inspiration board
 function updPinComments(conn,quizId,commentData,cb){
 	conn.query('insert into pin_comments(pin_img_id,room_id,comments) values ?',[commentData],function(err,results,fields){
 		if(err){
@@ -185,16 +186,16 @@ exports.saveUserQuizDtls = function(req,res,next){
 	var userImgData = [];
 	var usrPinImgData = [];
 	var usrPinComments = [];
-	
 
-//console.log(quizDtls);
-
+	// Set Result data in array. Values: QuizId, StyleId, PercentValue
 	if(quizDtls.length>0){
 		for(var i =0; i<quizDtls.length;i++){
 			var currResultArr = [quizId,quizDtls[i].value,quizDtls[i].id];
 			userQuizResult.push(currResultArr);
 		} 
 	}
+
+	// Set array with selected room information.
 	if(userSelectionData!=null && userSelectionData.roomSelected!=null
 								 && userSelectionData.roomSelected.length>0){
 		for(var i =0; i<userSelectionData.roomSelected.length;i++){
@@ -213,6 +214,8 @@ exports.saveUserQuizDtls = function(req,res,next){
 			
 		} 
 	}
+
+	// Set objects to save images data
 	if(userSelectionData!=null && userSelectionData.quizImgSelected!=null
 								 && userSelectionData.quizImgSelected.length>0){
 		var qid;
@@ -222,7 +225,6 @@ exports.saveUserQuizDtls = function(req,res,next){
 		else{
 			qid = 1;
 		}
-		//TODO: Save Pinterest Images in Another Array.
 		for(var i=0;i<userSelectionData.quizImgSelected.length;i++,qid++){
 			var currImgData = [quizId, qid,userSelectionData.quizImgSelected[i]];
 			userImgData.push(currImgData);
@@ -237,8 +239,8 @@ exports.saveUserQuizDtls = function(req,res,next){
 		}
 	}
 	
-
-	if(status===-1){
+	
+	if(status===-1){ //Unpaid 
 		mysqlConn.getConnection(function(err,conn){
 			if(err){return next(err);}
 	        if(conn){
@@ -257,7 +259,8 @@ exports.saveUserQuizDtls = function(req,res,next){
 			                	userProject.roomData = result[1];
 			                	userProject.imgData = result[2];
 			                	userProject.pinImgData = result[3];
-						     	
+								 
+								//Getting comments entered on images for each room.
 						     	if(userSelectionData!=null && userSelectionData.pinComments!=null
 								 && userSelectionData.pinComments.length>0){
 									for(var i=0;i<userSelectionData.pinComments.length;i++){
