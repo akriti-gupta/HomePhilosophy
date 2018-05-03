@@ -5,24 +5,32 @@ var mysqlConn = require('../config/mysqlConn'),
 exports.createUserQuiz = function(req,res,next){
 	var customerId = req.body.customerId;
 	var status = req.body.status;
+
+	// if quiz has been retaken, overwrite previous quiz details.
 	var retake = req.body.retake;
+
+	//quizID = -1 for new quiz.
 	var quizId = req.body.quizId;
 	
 	mysqlConn.getConnection(function(err,conn){
-		
 		if(err){return next(err);}
 		
         if(conn){
+			// Fresh quiz. Create a new quiz in DB and save details.
         	if(!retake){
-				var userQuizData = {customerId: customerId, status:status,created_at:new Date(),updated_at:new Date()};
-				conn.query('insert into cust_quiz set ?', userQuizData, function(err, results, fields){
+				var userQuizData = {customerId: customerId, 
+									status:status,
+									created_at:new Date(),
+									updated_at:new Date()};
+				conn.query('insert into cust_quiz set ?', userQuizData, 
+				 function(err, results, fields){
 					if(err){
-						console.log('Error in creating new record in cust_quiz: '+err);
 						conn.release();
 						return res.send({success:false,reason:err.toString()});
 					}
 					else{
-						conn.query('select * from cust_quiz where quizId = ?',results.insertId, 
+						conn.query('select * from cust_quiz where quizId = ?',
+						  results.insertId, 
 						function(err, quiz, fields){
 							if(err){conn.release();return next(err);}
 							else{
@@ -33,6 +41,7 @@ exports.createUserQuiz = function(req,res,next){
 					}
 				});	
 			}
+			// Retaking a quiz. Update existing quiz details.
 			else{
 				conn.query('select * from cust_quiz where quizId = ?',quizId, 
 						function(err, quiz, fields){
@@ -53,11 +62,10 @@ function updQzResult(conn,quizId,data,cb){
 	conn.query('delete from cust_quiz_result where quizId = ?',quizId, 
 	function(err, results, fields){
 		if(err){
-			console.log('Error while deleting existing quiz result: '+err);
+			//console.log('Error while deleting existing quiz result: '+err);
 			cb(err,null);
 		}
 		else{
-			console.log('Deleted old unpaid quiz selected data');
 			conn.query('insert into cust_quiz_result (quizId, stylePercent, styleId) values ?',[data],
 			function(err, results, fields){
 				if(err){
@@ -78,7 +86,6 @@ function updQzRoom(conn,quizId,data,cb){
 			cb(err,null);
 		}
 		else{
-			console.log('Deleted prev room selections');
 			conn.query('insert into cust_room_selection(quizId,roomId,roomName,numRoom) values ?',[data], function(err, results, fields){
 				if(err){
 					console.log('Error in saving room selection data'+err);
@@ -180,7 +187,7 @@ exports.saveUserQuizDtls = function(req,res,next){
 	var usrPinComments = [];
 	
 
-console.log(quizDtls);
+//console.log(quizDtls);
 
 	if(quizDtls.length>0){
 		for(var i =0; i<quizDtls.length;i++){
@@ -290,61 +297,8 @@ console.log(quizDtls);
 
 						     	
 						     }
-						    // userProject.resultData = result[0];
-			       //          userProject.roomData = result[1];
-			       //          userProject.imgData = result[2];
-			       //          conn.release();
-			       //          return res.send({'success':true,'results':userProject});
 						});
-
-
-				/*conn.query('delete from cust_quiz_result where quizId = '+conn.escape(quizId), function(err, results, fields){
-					if(err){
-						console.log('Error while deleting existing quiz result: '+err);
-						res.send({reason:err.toString()});
 					}
-					console.log('Deleted old unpaid quiz selected data');
-					conn.query('insert into cust_quiz_result (quizId, stylePercent, styleId) values ?',[userQuizResult], function(err, results, fields){
-						if(err){
-							console.log('Error in saving result data'+err);
-							res.send({response:err.toString()});
-						}
-						console.log('Result saved');
-					});
-				});
-
-				conn.query('delete from cust_room_selection where quizId = '+conn.escape(quizId), function(err, results, fields){
-					if(err){
-						console.log('Error while deleting prev room selection info '+err);
-						res.send({reason:err.toString()});
-					}
-					console.log('Deleted prev room selections');
-					conn.query('insert into cust_room_selection(quizId,roomId,roomName,numRoom) values ?',[userRoomData], function(err, results, fields){
-						if(err){
-							console.log('Error in saving room selection data'+err);
-							res.send({response:err.toString()});
-						}
-						console.log('Room Info saved');
-					});
-				});
-
-				conn.query('delete from cust_img_selection where quizId = '+conn.escape(quizId), function(err, results, fields){
-					if(err){
-						console.log('Error while deleting prev img selection info '+err);
-						res.send({reason:err.toString()});
-					}
-					console.log('Deleted prev img selections');
-					conn.query('insert into cust_img_selection(quizId,questionId,selectedImgId) values ? ',[userImgData], function(err, results, fields){
-						if(err){
-							console.log('Error in saving img selection data'+err);
-							res.send({response:err.toString()});
-						}
-						console.log('Img Info saved');
-						res.send(true);
-						res.end();
-					});
-				});*/
-			}
 		});
 	}
 }

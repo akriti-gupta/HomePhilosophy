@@ -1,7 +1,7 @@
 var mysqlConn = require('../config/mysqlConn'),
 	encryption = require('../utilities/encryption');
 	
-
+// Fetching all users. 
 exports.getUsers = function(req,res){
 	mysqlConn.getConnection(function(err,conn){
 		if(conn){
@@ -13,13 +13,17 @@ exports.getUsers = function(req,res){
 	});
 }
 
-
+//Creating a new user. Input - email, password
 exports.createUser = function(req,res,next){
 	var userData = req.body;
+	
+	//Encrypt password by hashing using salt, SHA1.
 	userData.salt = encryption.createSalt();
 	userData.password = encryption.hashPswd(req.body.password,userData.salt);
+	
 	mysqlConn.getConnection(function(err,conn){
 		if(conn){
+			//Inserting in 'user'
 			conn.query('insert into user set ?', userData, function(err, results, fields){
 				if(err){
 					if(err.toString().indexOf('ER_DUP_ENTRY')>-1){

@@ -30,7 +30,10 @@ var sendMail = function(fromAddress,toAddress,ccAddress,bccAddress,subject, cont
 
 exports.sendEmail = function(req, res){
     var data = req.body.data;
+
+    //email template
     var template = data.template;
+    
     var toAddress = config.mailer.defaultAddress;
     var fromAddress = config.mailer.defaultAddress;
     var subject='Notification from Home Philosophy';

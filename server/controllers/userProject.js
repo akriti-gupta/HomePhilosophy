@@ -3,6 +3,7 @@ var async = require('async');
 var userProjects = {};
 var projectList = [];
 
+// API to find a username. Input: User ID.
 function getUser(conn,userId,cb){
 	var userData = [];
 	var qry_user = 'select u.username,u.firstname from user u where u.id='+userId;
@@ -21,7 +22,8 @@ function getUser(conn,userId,cb){
 		cb(null,userData);
 	});
 }
-
+//API to return quiz information. Input: Array of quizIDs. 
+// Usage: Example - To find quiz information of all quizzes related to a user.
 function getQuiz(conn,quizIds,cb){
 	var quizData = [];
 	var qry_qz = 'select q.* from cust_quiz q where q.quizId in ('+quizIds+')';
@@ -29,7 +31,6 @@ function getQuiz(conn,quizIds,cb){
 
 	conn.query(options, function(err, quizInfo, fields){
 		if(err){
-			console.log('Error in fetching quiz info in getQuiz'+err);
 			cb(err,null);
 		}
 		else if(quizInfo.length>0){
@@ -41,7 +42,8 @@ function getQuiz(conn,quizIds,cb){
 	});
 }
 
-
+// API to get the detailed survey result for each project. 
+// Input : array of quiz Ids.
 function getCustQuizDtls(conn,quizIds,cb){
 	var quizData = [];
 	var qry_qz = 'select q.* from cust_quiz_detail q where q.quizId in ('+quizIds+')';
@@ -61,6 +63,7 @@ function getCustQuizDtls(conn,quizIds,cb){
 	});
 }
 
+//API to get the style quiz result of given quiz Ids.
 function getResult(conn,quizIds,cb){
 	var resultData = [];
 	var qry_qz_result = 'select r.* from cust_quiz q, cust_quiz_result r '+
@@ -81,6 +84,7 @@ function getResult(conn,quizIds,cb){
 	});
 }
 
+//API to get all the images preferred by the user in the survey.
 function getImages(conn,quizIds,cb){
 	var imgData = [];
 	var qry_qz_img = 'select i.*,qi.imageLocation from cust_quiz q, cust_img_selection i, quiz_images qi '+
@@ -104,6 +108,7 @@ function getImages(conn,quizIds,cb){
 	});
 }
 
+// API to get the images selected by user from the Image board.
 function getPinImages(conn,quizIds,cb){
 	var pinImgData = [];
 	var qry_qz_img = 'select i.* from cust_quiz q, pin_images i  where q.quizId = i.quizId '+
@@ -120,6 +125,8 @@ function getPinImages(conn,quizIds,cb){
 			for(var i =0; i<imgInfo.length;i++){
 				pinImgData.push(imgInfo[i]);
 			}
+
+			// Get comments, if any, for the selected images.
 			getPinComments(conn,pinImgData,function(err,result){
 				cb(null, result);
 			});
@@ -130,6 +137,7 @@ function getPinImages(conn,quizIds,cb){
 	});
 }
 
+// API to fetch comments for images.
 function getPinComments(conn,pinImgData,cb){
 	var pinCommentData = [];
 
@@ -246,8 +254,6 @@ function getAppt(conn,quizIds,cb){
 	var qry_qz_appt = 'select a.* from cust_quiz q left outer join cust_appointment a on q.quizId = a.quizId '+ 
 									 'where q.quizId in ('+quizIds+')';
 
-	// var qry_qz_appt = "select a.*, convert_tz(a.apptDate,@@session.time_zone,'+00:00')  apptDate1 from cust_quiz q left outer join cust_appointment a on q.quizId = a.quizId "+ 
-	//  								 "where q.quizId in ("+quizIds+")";
 	var options = {sql:qry_qz_appt,nestTables: true};
 
 
@@ -259,11 +265,7 @@ function getAppt(conn,quizIds,cb){
 		else if(apptInfo.length>0){
 			for(var i =0; i<apptInfo.length;i++){
 				if(apptInfo[i].a.id!=null){
-				// if(apptInfo[i].id!=null){
 					apptData.push(apptInfo[i].a);
-
-					// apptInfo[i].apptDate = apptInfo[i].apptDate1;
-					// apptData.push(apptInfo[i]);
 				}
 			}
 		}
@@ -475,8 +477,6 @@ exports.getCustProjectInfo = function(req,res,next){
 						for(var i =0; i<userQuiz.length;i++){
 							quizData.push(userQuiz[i].cust_quiz);
 						}
-						// console.log('quizData is: ');
-						// console.log(quizData);
 					}
 
 					if(quizData.length>0){
@@ -487,10 +487,7 @@ exports.getCustProjectInfo = function(req,res,next){
 							quizIdArr.push(quizData[i].quizId);
 						}
 						quizIds = quizIdArr.join();
-
 						
-						// async.apply(getRooms,conn,quizIds);
-
 						async.parallel([
 							async.apply(getResult,conn,quizIds),
 						    async.apply(getRooms,conn,quizIds),
@@ -507,9 +504,8 @@ exports.getCustProjectInfo = function(req,res,next){
 						     	console.log(err);
 						     	res.send({success: false, reason:err.toString()});
 						     }
-						      // console.log('Final Prll');
-						      // console.log(result);
-			                userProjects.resultData = result[0];
+						  
+							userProjects.resultData = result[0];
 			                userProjects.roomData = result[1];
 			                userProjects.pkgData = result[2];
 			                userProjects.apptData = result[3];
@@ -533,7 +529,7 @@ exports.getCustProjectInfo = function(req,res,next){
 exports.getProjectListing = function(req,res,next){
 	
 	var status = req.params.status;
-	// if(projectList.length>0){projectList.length=0;}
+
 	mysqlConn.getConnection(function(err,conn){
 		if(err){return next(err);}
 		
@@ -585,7 +581,6 @@ exports.getUserQuizCount = function(req,res,next){
 							
 						    // Call an asynchronous function, often a save() to DB
 						    var quizId = project.quizId;
-						    //item.someAsyncCall(function (){
 
 						    async.parallel([
 								async.apply(getResult,conn,quizId),
@@ -673,12 +668,8 @@ exports.saveAppointment = function(req,res,next){
 		
         if(conn){
         	var qry_usr_appt;
-        	// if(apptData.apptStatus===0)
-        	// 	qry_usr_appt = 'Select * from cust_appointment where quizId='+conn.escape(apptData.quizId);
-        	// else
-        	// 	qry_usr_appt = 'Select * from cust_appointment where quizId='+conn.escape(apptData.quizId)+' and roomId='+conn.escape(apptData.roomId);
-
-        	qry_usr_appt = 'Select * from cust_appointment where quizId='+conn.escape(apptData.quizId);
+			
+			qry_usr_appt = 'Select * from cust_appointment where quizId='+conn.escape(apptData.quizId);
         	var options = {sql:qry_usr_appt,nestTables: true};
 
     		conn.query(options, function(err, userAppt, fields){
@@ -751,14 +742,6 @@ exports.saveAppointment = function(req,res,next){
 								if(apptData.email.toLowerCase() != req.user.username.toLowerCase()){
 									var updUserData = [apptData.email, req.user.id];
 									conn.query('update user set email = ? where id= ?', updUserData, function(err, results, fields){
-									if(err){
-										console.log('Error in updating user email info '+err);
-										//conn.release();
-										//return res.send({success: false, reason:err.toString()});
-									}
-									// else{
-									// 	return res.send({success:true});	
-									// }
 								});
 
 								}
@@ -798,31 +781,13 @@ exports.saveAppointment = function(req,res,next){
 	    					}
 						});
 
-						console.log(req.user.username);
-
-								if(apptData.email.toLowerCase() != req.user.username.toLowerCase()){
-									var updUserData = [apptData.email, req.user.id];
-									conn.query('update user set email = ? where id= ?', updUserData, function(err, results, fields){
-									if(err){
-										console.log('Error in updating user email info '+err);
-										//conn.release();
-										//return res.send({success: false, reason:err.toString()});
-									}
-									// else{
-									// 	return res.send({success:true});	
-									// }
-								});
-
-								}
-
+						if(apptData.email.toLowerCase() != req.user.username.toLowerCase()){
+							var updUserData = [apptData.email, req.user.id];
+							conn.query('update user set email = ? where id= ?', updUserData, function(err, results, fields){
+						});
 
 					}
-
-
-					// var qry_upd_appt = 'update cust_appointment set apptDate = ?, apptTime=?,'+
-					// 				 'contactPerson=?, contact=?, address=?,email=?,floorPlanStatus=?,'+
-					// 				 'floorPlanLoc=?, apptStatus=? where quizId=?';
-        			
+				}
 				}
 				else{
 					//Add data
@@ -985,11 +950,9 @@ exports.submitFeedback = function(req,res,next){
 	var ins_qry;
 
 	if(concept_type===1){
-		// qry = 'INSERT INTO concept_board_feedback set ? ON DUPLICATE KEY UPDATE status = ?, comments=?';
 		qry = 'INSERT INTO concept_board_feedback(status,comments,created_at,updated_at,concept_id,file1) VALUES ? ON DUPLICATE KEY UPDATE status = VALUES(status), comments=VALUES(comments), updated_at=VALUES(updated_at)';
 	}
 	else if(concept_type===2){
-		//qry = 'INSERT INTO final_look_feedback set ? ON DUPLICATE KEY UPDATE status = ?, comments=?';
 		qry = 'INSERT INTO final_look_feedback(status,comments,created_at,updated_at,concept_id,file1) VALUES ? ON DUPLICATE KEY UPDATE status = VALUES(status), comments=VALUES(comments), updated_at=VALUES(updated_at)';
 		
 	}
@@ -1003,7 +966,6 @@ exports.submitFeedback = function(req,res,next){
 					res.status(400);
 					return res.send({success: false, reason:'Error in inserting concept board feedback for filetype: '+concept_type});
 				}
-				// conn.release();
 				return res.send({success: true});
 			});
         }

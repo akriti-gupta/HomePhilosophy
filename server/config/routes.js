@@ -10,6 +10,7 @@ var multer = require('multer'),
 	common = require('../controllers/common');
 
 
+// For file uploads.
 var storage =   multer.diskStorage({
   destination: function (req, file, callback) {
     // callback(null, './public/uploads/');
@@ -17,7 +18,8 @@ var storage =   multer.diskStorage({
   },
   filename: function (req, file, callback) {
   	var fileName = file.originalname.substr(0,file.originalname.indexOf('.'));
-  	var ext = file.originalname.substr(file.originalname.indexOf('.'));
+	var ext = file.originalname.substr(file.originalname.indexOf('.'));
+	//append date to file names.  
     callback(null, fileName + '-' + Date.now() +ext);
   }
 });
@@ -29,7 +31,8 @@ module.exports = function(app){
 	app.post('/sendEmail',mailer.sendEmail);
 	app.post('/postContactDtls',common.postContactDtls);
 
-	app.get('/api/users',auth.requiresRole('admin'),users.getUsers);
+	//app.get('/api/users',auth.requiresRole('admin'),users.getUsers);
+	
 	//Gets called on Sign in, while $save of user resource	
 	app.post('/api/users',users.createUser);
 	app.post('/signin',auth.authenticate);

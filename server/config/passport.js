@@ -11,7 +11,6 @@ module.exports = function(){
       function(username, password, done){
         mysqlConn.getConnection(function(err,conn){
             if(err){
-                //console.log('Err in getting mysql conn: '+err);
                 return(err, false);
             }
             if(conn){
